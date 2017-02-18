@@ -1,3 +1,5 @@
+package traverse
+
 
 import cats.implicits._
 
