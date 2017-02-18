@@ -3,6 +3,9 @@ package kleisli
 import cats.data.Kleisli
 import cats.implicits._
 
+/**
+  * First example from cats docs: http://typelevel.org/cats/datatypes/kleisli.html
+  */
 object KleisliExamples extends App {
   val twice: Int => Int = _ * 2
   val countCats: Int => String = x => if(x ==1) "1 cat" else s"$x cats"
