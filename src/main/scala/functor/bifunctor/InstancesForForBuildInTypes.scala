@@ -2,7 +2,7 @@ package functor.bifunctor
 
 import cats.functor.Bifunctor
 
-/* Translated into Scala examples ilustrating BiFunctor from fun, clear explanation by:
+/* Translated into Scala examples illustrating BiFunctor from fun, clear explanation by:
   George Wilson - The Extended Functor Family: https://www.youtube.com/watch?v=JUVMiRRq6wU
 
   - BiFunctor allow you to perform two different operations
@@ -29,7 +29,7 @@ object InstancesForForBuildInTypes {
     bimap :: (a -> b) -> (x -> y) -> (a,x) -> (b,y)
     bimap f g (a,x) = (f, a g x)
    */
-  val tuple2BifunctorBifunctor[Tuple2] = new Bifunctor[Tuple2] {
+  val tuple2Bifunctor: Bifunctor[Tuple2] = new Bifunctor[Tuple2] {
     override def bimap[A, B, C, D](fab: (A, B))(f: A => C, g: B => D): (C, D) = (f(fab._1), g(fab._2))
   }
 
