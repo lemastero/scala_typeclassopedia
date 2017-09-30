@@ -37,6 +37,13 @@ contramap f . contramap g = contramap (g . g)
 
 (Covariant) Functor is full of A's
 Contravarian (Functor) needs A's
+
+Divisible is contravariant for Applicative:
+ https://hackage.haskell.org/package/contravariant-1.4/docs/Data-Functor-Contravariant-Divisible.html
+ https://stackoverflow.com/questions/32059754/are-there-useful-applications-for-the-divisible-type-class
+Decidable is contravariant for Alternative:
+ https://hackage.haskell.org/package/contravariant-1.4/docs/Data-Functor-Contravariant-Divisible.html#t:Decidable
+ https://www.reddit.com/r/haskell/comments/38o0f7/a_mixture_of_applicative_and_divisible/
 */
 
 object InstancesForContravariantFunctor {
