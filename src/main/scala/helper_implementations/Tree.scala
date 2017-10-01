@@ -28,22 +28,29 @@ object Tree {
 
   /** Number each node (replace current value) - using monads
 
-  number :: Num n => Tree t -> n -> (Tree n, n)
-  number (Leaf a) s = (Leaf s, s+1)
-  number (Branch l r) s =
-    let  (l1, s1) = number l s
-         (r2, s2) = number r s1
-    in (Branch l1 r2, s2)
+    tick s = (s, s+1)
+
+    replaceByIndex2 (Leaf a) = tick >>>= \s -> return2 (Leaf s)
+    replaceByIndex2 (Branch l r) =
+      replaceByIndex2 l >>>= \l1 ->
+      replaceByIndex2 r >>>= \r1 ->
+      return2 (Branch l1 r1)
     */
-  def number2[A](tree: Tree[A])(n: Int): (Tree[Int], Int) = {
-    tree match {
-      case Leaf(_) => (Leaf(n), n+1)
+  def number2[A]: Tree[A] => Int => (Tree[Int], Int) = {
+    import monad.IntState.instance._
+
+    tree: Tree[A] => tree match {
       case Branch(left, right) =>
-        val (numberedLeft,  newN)   = number2(left)(n)
-        val (numberedRight, newerN) = number2(right)(newN)
-        ( Branch(numberedLeft, numberedRight), newerN )
+        flatMap(number2(left)){ numberedLeft =>
+          flatMap(number2(right)){ numberedRight =>
+            pure( Branch(numberedLeft, numberedRight) )
+          }
+        }
+      case Leaf(_) => flatMap(tick){ i => pure( Leaf(i) ) }
     }
   }
+
+  val tick: Int => (Int, Int) = s => (s, s+1)
 
   /** Merge two Tree's if they have the same structure
 
