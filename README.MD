@@ -7,12 +7,10 @@ My playground for learning FP in Scala: examples from blogs.
 - George Wilson - The Extended Functor Family: https://www.youtube.com/watch?v=JUVMiRRq6wU
 - John Hughes - Monads and all that: https://www.cs.uoregon.edu/research/summerschool/summer12/curriculum.html
 
-# Inside there are some examples from talks, papers, blogs. But they are way better explained in original sources:
-- Free Monads in Cats docs: http://typelevel.org/cats/datatypes/freemonad.html
-- Kleisli Arrow in Cats docs: http://typelevel.org/cats/datatypes/kleisli.html
-- Learning Scalaz - Arrow: http://eed3si9n.com/learning-scalaz/Arrow.html
-- How Haskell is Changing my Brain - Yay Yoneda: https://vimeo.com/96639840
-- Scalaz State Monad: https://www.youtube.com/watch?v=Jg3Uv_YWJqI&t=41s
-- Explorations in Variance: https://www.youtube.com/watch?v=VZWLRepyNvo&t=1977s
-- http://blog.higher-order.com/blog/archives/
-- Efficient Nanopass Compilers using Cats and Matryoshka - Greg Pfeil: https://www.youtube.com/watch?v=TQIHRBXM75E
+# TODO translate Haskell to Scala
+- Theorems for free!, Philip Wadler: http://ttic.uchicago.edu/~dreyer/course/papers/wadler.pdf
+- The free theorem for fmap, Edward Kmett: https://www.schoolofhaskell.com/user/edwardk/snippets/fmap (require: Theorems for free!)
+- all School of Haskell articles by Edward Kmett: https://www.schoolofhaskell.com/user/edwardk
+- https://icfp17.sigplan.org/event/icfp-2017-papers-generic-functional-parallel-algorithms-scan-and-fft
+- https://icfp17.sigplan.org/program/program-icfp-2017?
+- https://www.youtube.com/watch?v=Qam6t9EN5SQ
