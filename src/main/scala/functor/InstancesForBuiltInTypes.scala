@@ -72,4 +72,16 @@ object InstancesForBuiltInTypes {
       case Right(v) => Right(v)
     }
   }
+
+  implicit val oneArgFunctionsFromInt: Functor[Int => ?] =
+    new Functor[Int => ?] {
+      override def map[A, B](g: Int => A)(h: A => B): Int => B =
+        g andThen h
+    }
+
+  implicit def oneArgFunctionsFromX[Input]: Functor[Input => ?] =
+    new Functor[Input => ?] {
+      override def map[A, B](fun: Input => A)(g: A => B): Input => B =
+        fun andThen g
+    }
 }
