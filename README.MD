@@ -4,21 +4,53 @@
   * [Functional Programming in Scala - Paul Chiusano and Runar Bjarnason]((https://www.manning.com/books/functional-programming-in-scala)) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): videos explaining [implementation of Monad, Traversable etc](https://github.com/mpilquist/Structures) with usage information
   * eed3si9n series of blog posts with clear explanations and examples: [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/)
-  * [scalaz usage examples](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example)
+  * [docs for scalaz](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example)
   * [docs for Cats](https://typelevel.org/cats/) (runnable online version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
 
 ## Abstract Algebra
 
-### Monoid
-* Brent Yorgey: Monoids - theme and variations 
-[(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw)
-[(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
-* On Monoids - Runar: https://apocalisp.wordpress.com/2010/06/14/on-monoids/
-* * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monoid.scala)
-
 ### Semigroup
-* Resources
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Semigroup.scala)
+Abstract over associative operation (`combine` with alias `|+|`) on some proper type A.
+```scala
+trait Semigroup[A] {
+  def combine(x: A, y: => A): A // |+|
+}
+```
+* Semigroup Law:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+* Derived methods
+```scala
+def combineN(a: A, n: Int): A
+def combineAllOption(as: TraversableOnce[A]): Option[A]
+def combineAllOption[A](as: TraversableOnce[A])(implicit ev: S[A]): Option[A]
+```
+* Semigroup can be defined for List (with list concatenation), Vector, Nel, Int with +, Strings with string concatenation 
+* Resources:
+   * herding cats - Semigroup [(blog post)](http://eed3si9n.com/herding-cats/Semigroup.html)
+   * Cats [(docs)](https://typelevel.org/cats/typeclasses/semigroup.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semigroup.scala)
+   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Semigroup.scala)
+
+### Monoid
+Abstract over associative operation (`combine`) that have default value on some proper type A.
+```scala
+trait Monoid[A] extends Semigroup[A] {
+  def empty: A
+}
+```
+* Laws
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. combine right identity: `(x |+| empty) == x`
+  3. combine left identity: `(empty |+| x) == x`
+* Derived methods:
+* Monoid can be defined for List (with list concatenation, Nil), Vector, Int with +, Strings with string concatenation. NEL is Semigrou but not a Monoid, same with non empty Strings :)
+* We can create Monoid for any Semigroup by wrapping it in Option (None is empty value) same with Map 
+
+* Resources:
+   * Brent Yorgey: Monoids - theme and variations [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
+   * On Monoids - Runar: https://apocalisp.wordpress.com/2010/06/14/on-monoids/
+   * herding cats - Monoid [(blog post)](http://eed3si9n.com/herding-cats/Monoid.html)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monoid.scala)
+   * Cats [(docs)](https://typelevel.org/cats/typeclasses/monoid.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Monoid.scala)
 
 ## Cathegory Theory
 
@@ -107,11 +139,11 @@ def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 ```
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 * Resources
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
+  * cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
   * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
-  * [examples of usage in scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala)
-  * cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
+  * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
 
 ### Profunctor
 * (Haskell) Fun with Profunctors - Phil Freeman: https://www.youtube.com/watch?v=OJtGECfksds
@@ -172,7 +204,7 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
 ### Apply
 
 * Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
+  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
 
 ### Monad
 We add to Apply ability `flatMap` that can joint two computation and use the output from previous computations to decide what computations to run next.
@@ -248,7 +280,7 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
 ### Kleisli
 * Resources
   * cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
-  * scalaz [docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
 
 ### Yoneda, Coyoneda
 * Resources
