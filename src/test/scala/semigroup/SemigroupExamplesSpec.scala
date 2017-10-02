@@ -83,4 +83,18 @@ class SemigroupExamplesSpec
       List(1, 2, 3).foldLeft(0)(_ |+| _) mustBe 6
     }
   }
+
+  describe("combineN") {
+    it("can invoke combine multiple given number of times") {
+      import cats.kernel.Semigroup
+      import cats.syntax.semigroup._
+      import cats.instances.option._
+      import cats.implicits.catsKernelStdGroupForInt
+
+      val o1: Option[Int] = Some(1)
+      o1.combineN(3) mustBe Option(3)
+
+      Semigroup[Option[Int]].combineN(Some(3),4) mustBe Option(12)
+    }
+  }
 }
