@@ -35,16 +35,16 @@ trait Functor[F[_]] {
 }
 ```
 * Functor Laws:
-  1. identify: `xs.map(identity) = xs` map identify function does nothing
-  2. composition: `xs.map(f).map(g) = xs.map(x => g(f(x))` you can map using f and then using g or map once using composition
+1. identify: `xs.map(identity) == xs` map identify function does nothing
+2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))` you can map using f and then using g or map once using composition
 If Functor satisfy fist law then it also satisfy second law: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md) if we don't include bottom values [(Haskell) contexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243)
 * Instances can be [implemented](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala) for: List, Option, Either, Validated, Tuple1, Tuple2, [Function varying return type](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075)
 * Functor must preserve structure, so Set is not a Functor (map constant function).
 * Functors can be composed
 * Derived methods of Functor: [(examples)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala)
 ```scala
-def lift[A, B](f: A => B): F[A] => F[B] // lift regular function to function inside container/under effect
-def fproduct[A, B](fa: F[A])(f: A => B): F[(A, B)] // zip every element with result of executing functiion f on it
+def lift[A, B](f: A => B): F[A] => F[B] // lift regular function to function inside container
+def fproduct[A, B](fa: F[A])(f: A => B): F[(A, B)] // zip elements with result after applying f
 def as[A, B](fa: F[A], b: B): F[B] // replace every element with b
 def void[A](fa: F[A]): F[Unit] // clear preserving structure
 def tupleLeft[A, B](fa: F[A], b: B): F[(B, A)]
@@ -65,7 +65,8 @@ trait Contravariant[F[_]] {
 }
 ```
 * Resources
-  ** scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
+  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
 
 ### Exponential Functor (Invariant Functor)
 ```scala
@@ -82,8 +83,8 @@ trait Bifunctor[F[_, _]] {
 }
 ```
 * Bifunctor Laws
-  1. identity `xs.bimap(identity, identity) = xs` bimap with two identify function does nothing
-  2. composition `xs.bimap(f, h).bimap(g,i) = xs.bimap(x => g(f(x), x => h(i(x))`  you can bimap using f and h and then bimap using g and i or bimap once using composition
+1. identity `xs.bimap(identity, identity) == xs` bimap with two identify function does nothing
+2. composition `xs.bimap(f, h).bimap(g,i) == xs.bimap(x => g(f(x), x => h(i(x))`  you can bimap using f and h and then bimap using g and i or bimap once using composition
 Second law is automatically fulfilled if the first law holds.
 * Alternatively can be specified by providing
 ```scala
@@ -91,10 +92,10 @@ def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
 def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
 ```
 In that case identity law must hold for both functions:
-  1.1. identity `xs.leftMap(identity) = xs` leftMap with identify function does nothing
-  1.2. identity `xs.rightMap(identity) = xs` rightMap with identify function does nothing
+3. identity `xs.leftMap(identity) == xs` leftMap with identify function does nothing
+4. identity `xs.rightMap(identity) == xs` rightMap with identify function does nothing
 If leftMap and rightMap and bimap are specified then additional lwa must be fullfilled:
-  3. `xs.bimap(f, g) = xs.leftMap(f).rightMap(g)`
+5. `xs.bimap(f, g) == xs.leftMap(f).rightMap(g)`
 * Derived methods
 ```scala
 def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
@@ -104,7 +105,7 @@ def rightFunctor[X]: Functor[F[X, ?]]
 def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
 def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 ```
-* Instancec can be defined for: Tuple2, Either, Validated. For Function1 it can't because it is contravariant in input type.
+* Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 * Resources
   * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
@@ -131,8 +132,11 @@ trait Applicative[F[_]] extends Functor[F] {
   def apply[A, B](fa: F[A])(ff: F[A => B]): F[B]
 }
 ```
-* Laws:
-
+* Applicative Laws:
+1. identify: `xs.apply(pure(identity)) == xs` apply identify function lifted inside effect does nothing
+2. homomorphism: `pure(a).apply(pure(f)) == pure(f(a))` lifting value a and applying lifted function f is the same as apply function to this value and then lift result
+3. interchange: `pure(a).apply(ff) == ff.apply(pure(f => f(a)))` where `ff: F[A => B]`
+4. map: `fa.map(f) == fa.apply(pure(f))`
 * Derived methods:
 ```scala
 def apply [A, B]   (fa: F[A])          (ff: F[A => B]):     F[B]
@@ -147,7 +151,9 @@ def tuple3[A, B, C](fa: F[A], fb: F[B], fc: F[C]): F[(A, B, C)]
 def flip[A, B](ff: F[A => B]): F[A] => F[B]
 ```
 * Applicatives can be composed
-* Alternatively Applicative could be defined using: map2 and pure or apply and pure.
+* Minimal set of methods to implement Applicative (other methods can be derived from them):
+  * map2, pure
+  * apply, pure
 * Resources:
   * herding cats - Applicative: [blog post](http://eed3si9n.com/herding-cats/Applicative.html)
   * FSiS 2 - Applicative type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=tD_EyIKqqCk)
@@ -169,6 +175,14 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
 
 ### Monad
+We add to Apply ability `flatMap` that can joint two computation and use the output from previous computations to decide what computations to run next.
+* Minimal set of methods to implement Monad (others can be derived):
+  * pure, flatMap
+  * pure, compose
+  * pure, flatten, map
+  * pure, flatten, apply
+  * pure, flatten, map2
+
 
 ```scala
 trait Monad[F[_]] extends Apply[F] { self =>
@@ -178,8 +192,8 @@ trait Monad[F[_]] extends Apply[F] { self =>
 ```
 * [Monads do not compose -  Tony Morris](http://blog.tmorris.net/posts/monads-do-not-compose/index.html)
 * Monad Laws
-  1.
-  2.
+1.
+2.
   
 * Derived methods:
 ```scala
