@@ -1,7 +1,7 @@
 # Scala typeclassopedia
 
 * Resources covering all topis about FP in greater details in way better and more approachable form:
-  * [Functional Programming in Scala - Paul Chiusano and Runar Bjarnason]((https://www.manning.com/books/functional-programming-in-scala)) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
+  * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason]((https://www.manning.com/books/functional-programming-in-scala)) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): videos explaining [implementation of Monad, Traversable etc](https://github.com/mpilquist/Structures) with usage information
   * eed3si9n series of blog posts with clear explanations and examples: [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/)
   * [docs for scalaz](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example)
@@ -20,7 +20,7 @@ trait Semigroup[A] {
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
 * Derived methods
 ```scala
-def combineN(a: A, n: Int): A
+def combineN(a: A, n: Int): A // multiply1
 def combineAllOption(as: TraversableOnce[A]): Option[A]
 def combineAllOption[A](as: TraversableOnce[A])(implicit ev: S[A]): Option[A]
 ```
@@ -42,15 +42,18 @@ trait Monoid[A] extends Semigroup[A] {
   2. combine right identity: `(x |+| empty) == x`
   3. combine left identity: `(empty |+| x) == x`
 * Derived methods:
+```scala
+def combineAll(as: TraversableOnce[A]): A
+```
 * Monoid can be defined for List (with list concatenation, Nil), Vector, Int with +, Strings with string concatenation. NEL is Semigrou but not a Monoid, same with non empty Strings :)
 * We can create Monoid for any Semigroup by wrapping it in Option (None is empty value) same with Map 
-
 * Resources:
-   * Brent Yorgey: Monoids - theme and variations [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
-   * On Monoids - Runar: https://apocalisp.wordpress.com/2010/06/14/on-monoids/
+   * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 23:02](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=1381)
    * herding cats - Monoid [(blog post)](http://eed3si9n.com/herding-cats/Monoid.html)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monoid.scala)
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/monoid.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Monoid.scala)
+   * (Haskell) Monoids, theme and variations - Brent Yorgey [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
+   * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
 
 ## Cathegory Theory
 
@@ -239,6 +242,7 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
 
 * Resources
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
+  * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
 
 ### State monad
 * Resources
@@ -260,15 +264,19 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
 ### Free Monoid, Free Monad, Free Applicative
 * Resources
   * Free Monads in Cats docs: http://typelevel.org/cats/datatypes/freemonad.html
-  * Free Monoids and Free Monads - Runar: http://blog.higher-order.com/blog/2013/08/20/free-monads-and-free-monoids/
   * Why the free Monad isn’t free - Kelley Robinson: https://www.youtube.com/watch?v=wvNgoeZza2g
   * Beyond Free Monads - John DeGoes: https://www.youtube.com/watch?v=A-lmrvsUi2Y
   * Free as in Monads - Daniel Spiewak: https://www.youtube.com/watch?v=aKUQUIHRGec
   * Move Over Free Monads: Make Way for Free Applicatives! - John deGoes: https://www.youtube.com/watch?v=H28QqxO7Ihc
+  * Free Monoids and Free Monads - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/08/20/free-monads-and-free-monoids/)
   * (Haskell) Free Monoids in Haskell - Dan Doel [(blog post)](http://comonad.com/reader/2015/free-monoids-in-haskell/)
   * (Haskell) Many Roads to Free Monads - Dan Doel [(blog post)](https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads)
 
 ### Foldable
+
+* Laws: no
+* Resources:
+   * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 55:38](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=3337)
 
 ### Traverse
 * Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/traverse/ListPermutationsUsingFilterM.scala)
