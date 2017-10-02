@@ -2,6 +2,8 @@ package functor
 
 import cats.Functor
 
+import scala.concurrent.Future
+
 /* Translated into Scala examples ilustrating Functor from fun, clear explanation by:
   George Wilson - The Extended Functor Family: https://www.youtube.com/watch?v=JUVMiRRq6wU
 
@@ -83,5 +85,14 @@ object InstancesForBuiltInTypes {
     new Functor[Input => ?] {
       override def map[A, B](fun: Input => A)(g: A => B): Input => B =
         fun andThen g
+    }
+
+
+  implicit val futureFunctor: Functor[Future] =
+    new Functor[Future] {
+      import scala.concurrent.ExecutionContext.Implicits.global
+
+      def map[A, B](future: Future[A])(g: A => B): Future[B] =
+        future.map(g)
     }
 }

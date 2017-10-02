@@ -1,9 +1,11 @@
 # Scala typeclassopedia
 
 * Resources covering all topis about FP in greater details in way better and more approachable form:
-  * Functional Programming in Scala - Paul Chiusano and Runar Bjarnason [(best book about FP in Scala (I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.))](https://www.manning.com/books/functional-programming-in-scala)
-  * Functional Structures in Scala - Michael Pilquist: [videos explaining concepts, implementations and usage](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0)
-  * herding cats - eed3si9n: [blog posts](http://eed3si9n.com/herding-cats/)
+  * [Functional Programming in Scala - Paul Chiusano and Runar Bjarnason]((https://www.manning.com/books/functional-programming-in-scala)) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
+  * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): videos explaining [implementation of Monad, Traversable etc](https://github.com/mpilquist/Structures) with usage information
+  * eed3si9n series of blog posts with clear explanations and examples: [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/)
+  * [scalaz usage examples](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example)
+  * [docs for Cats](https://typelevel.org/cats/) (runnable online version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
 
 ## Abstract Algebra
 
@@ -20,7 +22,7 @@
 
 ## Cathegory Theory
 
-### Functor
+### (Covariant) Functor
 
 Abstraction for type constructor (type with "hole", type parameter) that can be mapped over.
 
@@ -36,7 +38,7 @@ trait Functor[F[_]] {
   1. identify: `xs.map(identity) = xs` map identify function does nothing
   2. composition: `xs.map(f).map(g) = xs.map(x => g(f(x))` you can map using f and then using g or map once using composition
 If Functor satisfy fist law then it also satisfy second law: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md) if we don't include bottom values [(Haskell) contexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243)
-* Examples: Instancec can be [implemented](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala) for: List, Option, Either, Validated, Tuple1, Tuple2, [Function varying return type](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075)
+* Instances can be [implemented](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala) for: List, Option, Either, Validated, Tuple1, Tuple2, [Function varying return type](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075)
 * Functor must preserve structure, so Set is not a Functor (map constant function).
 * Functors can be composed
 * Derived methods of Functor: [(examples)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala)
@@ -48,24 +50,67 @@ def void[A](fa: F[A]): F[Unit] // clear preserving structure
 def tupleLeft[A, B](fa: F[A], b: B): F[(B, A)]
 def tupleRight[A, B](fa: F[A], b: B): F[(A, B)]
 def widen[A, B >: A](fa: F[A]): F[B]
-def compose[G[_]](other: Functor[G]): Functor[Lambda[X => F[G[X]]]] // compose with other functor G
 ```
 * Resources:
   * herding cats - Functor: [blog post](http://eed3si9n.com/herding-cats/Functor.html)
-  * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist: [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
-  * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU)
-  * Cats : [docs](https://typelevel.org/cats/typeclasses/functor.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala)
-  * scalaz : [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
+  * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
+  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU)
+  * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala)
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
 
-### Contravariant (Contravariant Functor)
-
-Contravariant Functor
+### Contravariant (Functor)
+```scala
+trait Contravariant[F[_]] {
+  def contramap[A, B](f: B => A): F[A] => F[B]
+}
+```
 * Resources
   ** scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
 
+### Exponential Functor (Invariant Functor)
+```scala
+trait Exponential[F[_]] {
+  def xmap[A, B](f: (A => B, B => A)): F[A] => F[B]
+}
+```
+
 ### Bifunctor
+Abstracts over type constructor with 2 "holes". Represents two independent functors:
+```scala
+trait Bifunctor[F[_, _]] {
+  def bimap[A, B, C, D](fab: F[A, B])(f: A => C, g: B => D): F[C, D]
+}
+```
+* Bifunctor Laws
+  1. identity `xs.bimap(identity, identity) = xs` bimap with two identify function does nothing
+  2. composition `xs.bimap(f, h).bimap(g,i) = xs.bimap(x => g(f(x), x => h(i(x))`  you can bimap using f and h and then bimap using g and i or bimap once using composition
+Second law is automatically fulfilled if the first law holds.
+* Alternatively can be specified by providing
+```scala
+def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
+def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
+```
+In that case identity law must hold for both functions:
+  1.1. identity `xs.leftMap(identity) = xs` leftMap with identify function does nothing
+  1.2. identity `xs.rightMap(identity) = xs` rightMap with identify function does nothing
+If leftMap and rightMap and bimap are specified then additional lwa must be fullfilled:
+  3. `xs.bimap(f, g) = xs.leftMap(f).rightMap(g)`
+* Derived methods
+```scala
+def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
+def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
+def leftFunctor[X]: Functor[F[?, X]]
+def rightFunctor[X]: Functor[F[X, ?]]
+def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
+def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
+```
+* Instancec can be defined for: Tuple2, Either, Validated. For Function1 it can't because it is contravariant in input type.
 * Resources
+  * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
+  * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
+  * [examples of usage in scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala)
+  * cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
 
 ### Profunctor
 * (Haskell) Fun with Profunctors - Phil Freeman: https://www.youtube.com/watch?v=OJtGECfksds
@@ -75,7 +120,7 @@ Contravariant Functor
 * Resources
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala)
 
-### Applicative
+### Applicative (Functor)
 
 Applicative Functor is a Functor that can:
 - put value into container (lift into effect)
@@ -110,6 +155,8 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
   * scalaz: [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala)
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
+    * The Essence of the Iterator Pattern - Eric Torreborre [blog post](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
+    * Lifting - Tony Morris: [blog post](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
@@ -129,7 +176,7 @@ trait Monad[F[_]] extends Apply[F] { self =>
   def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B]
 }
 ```
-
+* [Monads do not compose -  Tony Morris](http://blog.tmorris.net/posts/monads-do-not-compose/index.html)
 * Monad Laws
   1.
   2.
@@ -139,7 +186,7 @@ trait Monad[F[_]] extends Apply[F] { self =>
 def flatten[A](ffa: F[F[A]]): F[A]
 def sequence[G[_], A](as: G[F[A]])(implicit G: Traverse[G]): F[G[A]]
 def traverse[A, G[_], B](value: G[A])(f: A => F[B])(implicit G: Traverse[G]): F[G[B]]
-def replicateA[A](n: Int, fa: F[A]): F[List[A]] // fill list with A
+def replicateA[A](n: Int, fa: F[A]): F[List[A]]
 def unit: F[Unit] // put under effect ()
 def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
 ```
@@ -148,12 +195,17 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
 
 ### State monad
-* Scalaz State Monad - Michael Pilquist: https://www.youtube.com/watch?v=Jg3Uv_YWJqI
+* Resources
+  * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
+  * Scalaz State Monad - Michael Pilquist: https://www.youtube.com/watch?v=Jg3Uv_YWJqI
+
 
 ### Reader monad
-* The Reader Monad for Dependency Injection - Json Arhart: https://www.youtube.com/watch?v=xPlsVVaMoB0
+* Resources
+  * The Reader Monad for Dependency Injection - Json Arhart: https://www.youtube.com/watch?v=xPlsVVaMoB0
 
 ### Writer Monad
+* The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
 
 ### IO monad
 
@@ -191,9 +243,16 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
   * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
 
 ### Comonad, Cofree
-* (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
-* Streams for (Co)Free! - John DeGoes: https://www.youtube.com/watch?v=R_nYc4FItcI 
-* scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala) [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
+```scala
+trait Comonad[F[_]] {
+  def extract[A]: F[A] => A
+  def coflatMap[A, B](f: F[A] => B): F[A] => F[B]
+}
+```
+* Resources
+  * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
+  * Streams for (Co)Free! - John DeGoes: https://www.youtube.com/watch?v=R_nYc4FItcI 
+  * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala) [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
 
 ### Adjunctions
 * Resources:
@@ -210,10 +269,10 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
 
 ### ... and beyond
 * Resources
+  * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   * (Haskell) Free Monads for Less (Part 1 of 3): Codensity - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less/)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)
-  * (Haskell)  [(blog post)]()
   * (Haskell) Monads from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monads-from-comonads/)
   * (Haskell) Monad Transformers from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monad-transformers-from-comonads/)
   * (Haskell) More on Comonads as Monad Transformers - Edward Kmett [(blog post)](http://comonad.com/reader/2011/more-on-comonads-as-monad-transformers/)
@@ -231,9 +290,7 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
   * (Haskell) Time for Chronomorphisms - Edward Kmett [(blog post)](http://comonad.com/reader/2008/time-for-chronomorphisms/)
   * (Haskell) Unnatural Transformations - Edward Kmett [(blog post)](http://comonad.com/reader/2008/unnatural-transformations/)
   * (Haskell) Dynamorphisms as Chronomorphisms - Edward Kmett [(blog post)](http://comonad.com/reader/2008/dynamorphisms-as-chronomorphisms/)
-  * (Haskell) Elgot (Co)Algebras - Edward Kmett [(blog post)](http://comonad.com/reader/2008/elgot-coalgebras/)
-  * (Haskell)  - Edward Kmett [(blog post)]()
- 
+  * (Haskell) Elgot (Co)Algebras - Edward Kmett [(blog post)](http://comonad.com/reader/2008/elgot-coalgebras/) 
   
 ### Cathamorphism
 * (Haskell) - Catamorphisms - Edward Kmett: [(article)](https://www.schoolofhaskell.com/user/edwardk/recursion-schemes/catamorphisms)
