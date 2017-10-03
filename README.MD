@@ -54,6 +54,15 @@ def combineAll(as: TraversableOnce[A]): A
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/monoid.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Monoid.scala)
    * (Haskell) Monoids, theme and variations - Brent Yorgey [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
+   
+## ... and beyond
+* Resources
+  * docs typelevel/algebra [(docs)](https://typelevel.github.io/algebra/)
+  * docs twitter/algebird [(docs)](https://twitter.github.io/algebird/)
+  * Life After Monoids - Tom Switzer: Group, Ring, Vector Space [(video)](https://www.youtube.com/watch?v=xO9AoZNSOH4)
+  * [(cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala)
+  * Semilattice [(cats src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala) [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
+  * Propagators - Edward Kmett: [(video theory)](https://www.youtube.com/watch?v=acZkF6Q2XKs) 
 
 ## Cathegory Theory
 
@@ -273,10 +282,48 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
   * (Haskell) Many Roads to Free Monads - Dan Doel [(blog post)](https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads)
 
 ### Foldable
-
+Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
+```scala
+trait Foldable[F[_]]  {
+  def foldLeft[A, B](fa: F[A], b: B)(f: (B, A) => B): B
+  def foldRight[A, B](fa: F[A], z: => B)(f: (A, => B) => B): B
+}
+```
 * Laws: no
+* Derived methods (they differe significantly between cats and scalaz):
+```scala
+def foldMap[A, B](fa: F[A])(f: A => B)(implicit B: Monoid[B]): B
+def reduceLeftToOption[A, B](fa: F[A])(f: A => B)(g: (B, A) => B): Option[B]
+def reduceLeftOption[A](fa: F[A])(f: (A, A) => A): Option[A]
+def size[A](fa: F[A]): Long
+def get[A](fa: F[A])(idx: Long): Option[A]
+def fold[A](fa: F[A])(implicit A: Monoid[A]): A
+def foldM    [G[_], A, B](fa: F[A], z: B)(f: (B, A) => G[B])(implicit G: Monad[G]): G[B] // foldRightM 
+def foldLeftM[G[_], A, B](fa: F[A], z: B)(f: (B, A) => G[B])(implicit G: Monad[G]): G[B]
+def find[A](fa: F[A])(f: A => Boolean): Option[A]
+def exists[A](fa: F[A])(p: A => Boolean): Boolean
+def forall[A](fa: F[A])(p: A => Boolean): Boolean
+def toList[A](fa: F[A]): List[A]
+def filter_[A](fa: F[A])(p: A => Boolean): List[A]
+def takeWhile_[A](fa: F[A])(p: A => Boolean): List[A]
+def dropWhile_[A](fa: F[A])(p: A => Boolean): List[A]
+def isEmpty[A](fa: F[A]): Boolean
+def nonEmpty[A](fa: F[A]): Boolean
+def intercalate[A](fa: F[A], a: A)(implicit A: Monoid[A]): A 
+def existsM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean]
+def forallM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean]
+def foldMapM[G[_], A, B](fa: F[A])(f: A => G[B])(implicit G: Monad[G], B: Monoid[B]): G[B]
+def traverse_[G[_], A, B](fa: F[A])(f: A => G[B])(implicit G: Applicative[G]): G[Unit]
+def sequence_[G[_]: Applicative, A](fga: F[G[A]]): G[Unit]
+def foldK[G[_], A](fga: F[G[A]])(implicit G: MonoidK[G]): G[A]
+```
+* Can be composed
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 55:38](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=3337)
+   * cats [(docs)](https://typelevel.org/cats/typeclasses/foldable.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala)
+   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
+   * scalaz  Foldable1 [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
+   * Bifoldable: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
 
 ### Traverse
 * Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/traverse/ListPermutationsUsingFilterM.scala)
