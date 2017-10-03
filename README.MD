@@ -12,43 +12,54 @@
 ## Abstract Algebra
 
 ### Semigroup
-Abstract over associative operation (`combine` with alias `|+|`) on some proper type A.
+Abstract over associative operation `combine` on some proper type A.
 ```scala
 trait Semigroup[A] {
   def combine(x: A, y: => A): A // |+|
 }
 ```
-* Semigroup Law:
-  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
-* Derived methods
+
+* Semigroup Law - associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+
+* Derived methods:
 ```scala
 def combineN(a: A, n: Int): A // multiply1
 def combineAllOption(as: TraversableOnce[A]): Option[A]
-def combineAllOption[A](as: TraversableOnce[A])(implicit ev: S[A]): Option[A]
 ```
-* Semigroup can be defined for List (with list concatenation), Vector, Nel, Int with +, Strings with string concatenation 
+
+* Semigroup can be defined for List (with list concatenation), Vector, Nel, Short/Int/Long with +, Strings with string concatenation
+
+* Examples how to define alterntive Semigroup instances [for Option, Int with *](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monoid/AlternativeMonoidInstances.scala) and [usage](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/monoid/AlternativeMonoidInstancesSpec.scala).
+Examples for usage of derived methods and combine [(src)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/semigroup/SemigroupExamplesSpec.scala)  
+
 * Resources:
    * herding cats - Semigroup [(blog post)](http://eed3si9n.com/herding-cats/Semigroup.html)
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/semigroup.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semigroup.scala)
    * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Semigroup.scala)
 
 ### Monoid
-Abstract over associative operation (`combine`) that have default value on some proper type A.
+
+Abstract over associative operation (`combine`) that have default value.
 ```scala
 trait Monoid[A] extends Semigroup[A] {
   def empty: A
 }
 ```
-* Laws
+
+* Monoid Laws
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
   2. combine right identity: `(x |+| empty) == x`
   3. combine left identity: `(empty |+| x) == x`
+
 * Derived methods:
 ```scala
 def combineAll(as: TraversableOnce[A]): A
 ```
+
 * Monoid can be defined for List (with list concatenation, Nil), Vector, Int with +, Strings with string concatenation. NEL is Semigrou but not a Monoid, same with non empty Strings :)
+
 * We can create Monoid for any Semigroup by wrapping it in Option (None is empty value) same with Map 
+
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 23:02](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=1381)
    * herding cats - Monoid [(blog post)](http://eed3si9n.com/herding-cats/Monoid.html)
@@ -58,10 +69,11 @@ def combineAll(as: TraversableOnce[A]): A
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
    
 ## ... and beyond
+
 * Resources
   * docs typelevel/algebra [(docs)](https://typelevel.github.io/algebra/)
   * docs twitter/algebird [(docs)](https://twitter.github.io/algebird/)
-  * Life After Monoids - Tom Switzer: Group, Ring, Vector Space [(video)](https://www.youtube.com/watch?v=xO9AoZNSOH4)
+  * Life After Monoids - Tom Switzer talks about Group, Ring, Vector Space [(video)](https://www.youtube.com/watch?v=xO9AoZNSOH4)
   * [(cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala)
   * Semilattice [(cats src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala) [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
   * Propagators - Edward Kmett: [(video theory)](https://www.youtube.com/watch?v=acZkF6Q2XKs) 
@@ -81,13 +93,17 @@ trait Functor[F[_]] {
 }
 ```
 * Functor Laws:
-1. identify: `xs.map(identity) == xs` map identify function does nothing
-2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))` you can map using f and then using g or map once using composition
-If Functor satisfy fist law then it also satisfy second law: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md) if we don't include bottom values [(Haskell) contexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243)
-* Instances can be [implemented](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala) for: List, Option, Either, Validated, Tuple1, Tuple2, [Function varying return type](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075)
-* Functor must preserve structure, so Set is not a Functor (map constant function).
-* Functors can be composed
-* Derived methods of Functor: [(examples)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala)
+1. identify: `xs.map(identity) == xs`
+2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))`
+
+If Functor satisfy fist law then it also satisfy second law: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md)
+if we don't include bottom values - [(Haskell) contrexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243).
+
+* Instances can be implemented for: List, Vecotr, Option, Either, Validated, Tuple1, Tuple2, Function
+
+* Functor must preserve structure, so Set is not a Functor (map constant function would change the structure).
+
+* Derived methods of Functor:
 ```scala
 def lift[A, B](f: A => B): F[A] => F[B] // lift regular function to function inside container
 def fproduct[A, B](fa: F[A])(f: A => B): F[(A, B)] // zip elements with result after applying f
@@ -97,6 +113,9 @@ def tupleLeft[A, B](fa: F[A], b: B): F[(B, A)]
 def tupleRight[A, B](fa: F[A], b: B): F[(A, B)]
 def widen[A, B >: A](fa: F[A]): F[B]
 ```
+
+* Functors can be composed
+
 * Resources:
   * herding cats - Functor: [blog post](http://eed3si9n.com/herding-cats/Functor.html)
   * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
@@ -104,44 +123,10 @@ def widen[A, B >: A](fa: F[A]): F[B]
   * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala)
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
 
-### Bifunctor
-
-Abstracts over type constructor with 2 "holes". Represents two independent functors:
-```scala
-trait Bifunctor[F[_, _]] {
-  def bimap[A, B, C, D](fab: F[A, B])(f: A => C, g: B => D): F[C, D]
-}
-```
-* Bifunctor Laws
-1. identity `xs.bimap(identity, identity) == xs` bimap with two identify function does nothing
-2. composition `xs.bimap(f, h).bimap(g,i) == xs.bimap(x => g(f(x), x => h(i(x))`  you can bimap using f and h and then bimap using g and i or bimap once using composition
-Second law is automatically fulfilled if the first law holds.
-* Alternatively can be specified by providing
-```scala
-def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
-def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
-```
-In that case identity law must hold for both functions:
-3. identity `xs.leftMap(identity) == xs` leftMap with identify function does nothing
-4. identity `xs.rightMap(identity) == xs` rightMap with identify function does nothing
-If leftMap and rightMap and bimap are specified then additional lwa must be fullfilled:
-5. `xs.bimap(f, g) == xs.leftMap(f).rightMap(g)`
-* Derived methods
-```scala
-def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
-def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
-def leftFunctor[X]: Functor[F[?, X]]
-def rightFunctor[X]: Functor[F[X, ?]]
-def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
-def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
-```
-* Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
-* Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
-  * cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
-  * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
-  * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
-  * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
+* Examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
+[function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
+and [custom Tree type](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/TreeFunctor.scala).
+Examples for [usage of map, derived methods, compose](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala).
 
 ### Apply
 
@@ -200,6 +185,7 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
 * Resources:
   * herding cats - Applicative: [blog post](http://eed3si9n.com/herding-cats/Applicative.html)
   * FSiS 2 - Applicative type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=tD_EyIKqqCk)
+  * FSiS 3 - Monad type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=VWCtLhH815M)
   * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala)
   * scalaz: [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala)
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
@@ -210,15 +196,69 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
 
-### Invariant (Invariant Functor, Exponential Functor)
-Functor that can create covariant functor (by passing identity as g) or contravariant functor (by passing identity to f)
+
+### Monad
+We add to Apply ability `flatMap` that can join two computations
+and use the output from previous computations to decide what computations to run next.
+
 ```scala
-trait Invariant[F[_]] {
-  def imap[A, B](fa: F[A])(f: A => B)(g: B => A): F[B]
+trait Monad[F[_]] extends Apply[F] { self =>
+  def pure[A](value: A): F[A]
+  def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B]
 }
 ```
-* cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
-* scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
+
+* Monad Laws:
+  1. flatmap associativity: `fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))`
+  2. left identity: `pure(a).flatMap(f) == f(a)`
+  3. right identity: `fa.flatMap(a => pure(a)) == fa`
+
+* Minimal set of methods to implement Monad (others can be derived using them):
+  * pure, flatMap
+  * pure, flatten, map
+  * pure, flatten, apply
+  * pure, flatten, map2
+
+* Derived methods:
+```scala
+def flatten[A](ffa: F[F[A]]): F[A]
+def sequence[G[_], A](as: G[F[A]])(implicit G: Traverse[G]): F[G[A]]
+def traverse[A, G[_], B](value: G[A])(f: A => F[B])(implicit G: Traverse[G]): F[G[B]]
+def replicateA[A](n: Int, fa: F[A]): F[List[A]]
+def unit: F[Unit] // put under effect ()
+def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
+```
+
+* Monads do not compose [Tony Morris blog post](http://blog.tmorris.net/posts/monads-do-not-compose/index.html).
+You can use Monad Transformer that know what monad is inside (OptionT, EitherT, ListT) or Free Monads or Eff Monad.
+
+* Monads can't be filtered. You can use Moand Filter for that.
+
+* Example (translated from John Huges mind blowing workshop: Monads and all that) [instance for custom Tree](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/TreeMonad.scala) 
+and [usage of flatMap to implement functions zip and number](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/helper_implementations/Tree.scala) 
+(using [State Int](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/IntState.scala)).
+
+* Resources
+  * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
+  * herding cats - Monad [blog post](http://eed3si9n.com/herding-cats/Monad.html)
+  * cats [(docs)](https://typelevel.org/cats/typeclasses/monad.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala)
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
+  * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
+
+### State monad
+* Resources
+  * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
+  * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
+
+
+### Reader monad
+* Resources
+  * The Reader Monad for Dependency Injection - Json Arhart: https://www.youtube.com/watch?v=xPlsVVaMoB0
+
+### Writer Monad
+* The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
+
+### IO monad
 
 ### Contravariant (Functor)
 ```scala
@@ -268,6 +308,55 @@ trait Divisible[F[_]] extends Divide[F] {
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divisible.scala)
   * (Haskell) [contravariant Divisible.hs](https://github.com/ekmett/contravariant/blob/master/src/Data/Functor/Contravariant/Divisible.hs)
 
+### Bifunctor
+
+Abstracts over type constructor with 2 "holes". Represents two independent functors:
+```scala
+trait Bifunctor[F[_, _]] {
+  def bimap[A, B, C, D](fab: F[A, B])(f: A => C, g: B => D): F[C, D]
+}
+```
+* Bifunctor Laws
+1. identity `xs.bimap(identity, identity) == xs` bimap with two identify function does nothing
+2. composition `xs.bimap(f, h).bimap(g,i) == xs.bimap(x => g(f(x), x => h(i(x))`  you can bimap using f and h and then bimap using g and i or bimap once using composition
+Second law is automatically fulfilled if the first law holds.
+* Alternatively can be specified by providing
+```scala
+def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
+def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
+```
+In that case identity law must hold for both functions:
+3. identity `xs.leftMap(identity) == xs` leftMap with identify function does nothing
+4. identity `xs.rightMap(identity) == xs` rightMap with identify function does nothing
+If leftMap and rightMap and bimap are specified then additional lwa must be fullfilled:
+5. `xs.bimap(f, g) == xs.leftMap(f).rightMap(g)`
+* Derived methods
+```scala
+def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
+def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
+def leftFunctor[X]: Functor[F[?, X]]
+def rightFunctor[X]: Functor[F[X, ?]]
+def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
+def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
+```
+* Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
+* Resources
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
+  * cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
+  * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
+  * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
+  * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
+
+### Invariant (Invariant Functor, Exponential Functor)
+Functor that can create covariant functor (by passing identity as g) or contravariant functor (by passing identity to f)
+```scala
+trait Invariant[F[_]] {
+  def imap[A, B](fa: F[A])(f: A => B)(g: B => A): F[B]
+}
+```
+* cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
+* scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
+
 ### Profunctor
 Contravariant on first and Functor on the second argument.
 ```scala
@@ -285,56 +374,6 @@ def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
    * cats [src](https://github.com/typelevel/cats/blob/0.7.x/core/src/main/scala/cats/functor/Profunctor.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
    * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
-
-### Monad
-We add to Apply ability `flatMap` that can joint two computation and use the output from previous computations to decide what computations to run next.
-* Minimal set of methods to implement Monad (others can be derived):
-  * pure, flatMap
-  * pure, compose
-  * pure, flatten, map
-  * pure, flatten, apply
-  * pure, flatten, map2
-
-
-```scala
-trait Monad[F[_]] extends Apply[F] { self =>
-  def pure[A](value: A): F[A]
-  def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B]
-}
-```
-* [Monads do not compose -  Tony Morris](http://blog.tmorris.net/posts/monads-do-not-compose/index.html)
-* Monad Laws
-1.
-2.
-  
-* Derived methods:
-```scala
-def flatten[A](ffa: F[F[A]]): F[A]
-def sequence[G[_], A](as: G[F[A]])(implicit G: Traverse[G]): F[G[A]]
-def traverse[A, G[_], B](value: G[A])(f: A => F[B])(implicit G: Traverse[G]): F[G[B]]
-def replicateA[A](n: Int, fa: F[A]): F[List[A]]
-def unit: F[Unit] // put under effect ()
-def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
-```
-
-* Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
-  * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
-
-### State monad
-* Resources
-  * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
-  * Scalaz State Monad - Michael Pilquist: https://www.youtube.com/watch?v=Jg3Uv_YWJqI
-
-
-### Reader monad
-* Resources
-  * The Reader Monad for Dependency Injection - Json Arhart: https://www.youtube.com/watch?v=xPlsVVaMoB0
-
-### Writer Monad
-* The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
-
-### IO monad
 
 ### Foldable
 Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
