@@ -3,8 +3,8 @@
 * Resources covering all topis about FP in greater details in way better and more approachable form:
   * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason](https://www.manning.com/books/functional-programming-in-scala) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): workshop on [implementating FP constructions](https://github.com/mpilquist/Structures) with usage examples and great insights about Scala and FP.
-  * Series of blog posts by Eugene Yokota - @eed3si9n: [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many references from Haskell functional pearls and literature.
-  * [Documentation for scalaz](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example)
+  * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
+  * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
   * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
   * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
   * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) another implementation of FP constructions
