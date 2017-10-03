@@ -85,7 +85,7 @@ class SemigroupExamplesSpec
   }
 
   describe("combineN") {
-    it("can invoke combine multiple given number of times") {
+    it("invokes combine given number of times") {
       import cats.Semigroup
       import cats.syntax.semigroup._
       import cats.instances.option._
