@@ -135,6 +135,6 @@ class TreeSpec
     }
 
     def testZip[T1, T2](tree1: Tree[T1], tree2: Tree[T2], expected: Option[Tree[(T1, T2)]]) =
-      Tree.zip2(tree1, tree2) mustBe expected
+      Tree.zipUsingMonads(tree1, tree2) mustBe expected
   }
 }
