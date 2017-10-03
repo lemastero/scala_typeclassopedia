@@ -1,12 +1,16 @@
 package helper_implementations
 
+import cats.Monad
+import cats.instances.option.catsStdInstancesForOption
+import cats.syntax.option._
+import monad.IntState.instance._
+
 /** data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving (Eq, Show) */
 sealed trait Tree[+T]
 final case class Leaf[T](value: T) extends Tree[T]
 final case class Branch[T](left: Tree[T], right: Tree[T]) extends Tree[T]
 
 object Tree {
-  import monad.IntState.instance._
 
   /** Number each node (replace current value)
 
@@ -29,24 +33,19 @@ object Tree {
     replaceByIndex2 r >>>= \r1 ->
     return2 (Branch l1 r1)
     */
-  def number[A](tree: Tree[A], n: Int): (Tree[Int], Int) = {
+  def number1[A](tree: Tree[A], n: Int): (Tree[Int], Int) = {
     tree match {
       case Leaf(_) => (Leaf(n), n+1)
       case Branch(left, right) =>
-        val (numberedLeft,  newN)   = number(left, n)
-        val (numberedRight, newerN) = number(right, newN)
+        val (numberedLeft,  newN)   = number1(left, n)
+        val (numberedRight, newerN) = number1(right, newN)
         ( Branch(numberedLeft, numberedRight), newerN )
     }
   }
 
-  def numberUsingMonads[A]: Tree[A] => Int => (Tree[Int], Int) = {
-    case Branch(left, right) =>
-      flatMap(numberUsingMonads(left)) { numberedLeft =>
-        flatMap(numberUsingMonads(right)) { numberedRight =>
-          pure(Branch(numberedLeft, numberedRight))
-        }
-      }
-    case Leaf(_) => flatMap(tick) { i => pure(Leaf(i)) }
+  def number[A]: Tree[A] => Int => (Tree[Int], Int) = {
+    case Branch(l, r) => map2(number(l), number(r))(Branch.apply)
+    case Leaf(_)      => map(tick)(Leaf.apply)
   }
 
   val tick: Int => (Int, Int) = s => (s, s+1)
@@ -78,27 +77,22 @@ object Tree {
       return (Branch leftJoined rightJoined)
     zipTree _ _ = Nothing
     */
-  def zip[A, B]: (Tree[A], Tree[B]) => Option[Tree[(A, B)]] = {
-    case (Leaf(a), Leaf(b)) => Some( Leaf( (a, b) ) )
+  def zip1[A, B]: (Tree[A], Tree[B]) => Option[Tree[(A, B)]] = {
+    case (Leaf(a), Leaf(b)) => Leaf((a, b)).some
     case (Branch(fstLeft, fstRight), Branch(sndLeft, sndRight)) =>
-      zip(fstLeft, sndLeft) match {
+      zip1(fstLeft, sndLeft) match {
         case None => None
-        case Some( leftResult ) => zip(fstRight, sndRight) match {
+        case Some( leftResult ) => zip1(fstRight, sndRight) match {
           case None => None
-          case Some(rightResult) => Some( Branch(leftResult, rightResult) )
+          case Some(rightResult) => Branch(leftResult, rightResult).some
         }
       }
     case (_, _) => None
   }
 
-  def zipUsingMonads[A, B]: (Tree[A], Tree[B]) => Option[Tree[(A, B)]] = {
-    case (Leaf(a), Leaf(b)) => Some( Leaf( (a, b) ) )
-    case (Branch(fstLeft, fstRight), Branch(sndLeft, sndRight)) =>
-      zip(fstLeft, sndLeft).flatMap { leftJoined =>
-        zip(fstRight, sndRight).flatMap { rightJoined =>
-          Some( Branch(leftJoined, rightJoined) )
-        }
-      }
-    case (_, _) => None
+  def zip[A, B]: (Tree[A], Tree[B]) => Option[Tree[(A, B)]] = {
+    case (Leaf(a), Leaf(b))               => Leaf((a, b)).some
+    case (Branch(l1, r1), Branch(l2, r2)) => Monad[Option].map2(zip(l1,l2), zip(r1,r2))(Branch.apply) // is it lazy?
+    case (_, _)                           => None
   }
 }
