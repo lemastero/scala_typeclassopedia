@@ -1,4 +1,4 @@
-# Scala typeclassopedia with Optics, Recurion schemas and Functional Data Structures
+# Scala typeclassopedia
 
 * Resources covering all topis about FP in greater details in way better and more approachable form:
   * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason]((https://www.manning.com/books/functional-programming-in-scala)) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
@@ -6,8 +6,8 @@
   * eed3si9n series of blog posts with clear explanations and examples based on Haskell literature: [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/)
   * [docs for scalaz](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example)
   * [docs for Cats](https://typelevel.org/cats/) (runnable online version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
-  * (Haskell) [Typeclassopedia] https://wiki.haskell.org/Typeclassopedia
-  * [channingwalton/typeclassopedia]((https://github.com/channingwalton/typeclassopedia)) implementation of Haskell typeclassopedia
+  * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
+  * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) implementation of Haskell typeclassopedia (like scalaz and cats)
 
 ## Abstract Algebra
 
