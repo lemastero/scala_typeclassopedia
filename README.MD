@@ -1,11 +1,13 @@
-# Scala typeclassopedia
+# Scala typeclassopedia with Optics, Recurion schemas and Functional Data Structures
 
 * Resources covering all topis about FP in greater details in way better and more approachable form:
   * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason]((https://www.manning.com/books/functional-programming-in-scala)) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): videos explaining [implementation of Monad, Traversable etc](https://github.com/mpilquist/Structures) with usage information
-  * eed3si9n series of blog posts with clear explanations and examples: [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/)
+  * eed3si9n series of blog posts with clear explanations and examples based on Haskell literature: [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/)
   * [docs for scalaz](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example)
   * [docs for Cats](https://typelevel.org/cats/) (runnable online version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
+  * (Haskell) [Typeclassopedia] https://wiki.haskell.org/Typeclassopedia
+  * [channingwalton/typeclassopedia]((https://github.com/channingwalton/typeclassopedia)) implementation of Haskell typeclassopedia
 
 ## Abstract Algebra
 
@@ -102,23 +104,6 @@ def widen[A, B >: A](fa: F[A]): F[B]
   * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala)
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
 
-### Contravariant (Functor)
-```scala
-trait Contravariant[F[_]] {
-  def contramap[A, B](f: B => A): F[A] => F[B]
-}
-```
-* Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
-  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
-
-### Exponential Functor (Invariant Functor)
-```scala
-trait Exponential[F[_]] {
-  def xmap[A, B](f: (A => B, B => A)): F[A] => F[B]
-}
-```
-
 ### Bifunctor
 Abstracts over type constructor with 2 "holes". Represents two independent functors:
 ```scala
@@ -156,14 +141,6 @@ def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
   * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
   * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
-
-### Profunctor
-* (Haskell) Fun with Profunctors - Phil Freeman: https://www.youtube.com/watch?v=OJtGECfksds
-  
-### Divide (Contravariant Apply)
-
-* Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala)
 
 ### Applicative (Functor)
 
@@ -211,12 +188,38 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
 
-### Divisible (Contravariant Applicative)
-
 ### Apply
 
 * Resources
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
+  * Cartesian: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
+
+### Exponential Functor (Invariant Functor)
+```scala
+trait Exponential[F[_]] {
+  def xmap[A, B](f: (A => B, B => A)): F[A] => F[B]
+}
+```
+
+### Contravariant (Functor)
+```scala
+trait Contravariant[F[_]] {
+  def contramap[A, B](f: B => A): F[A] => F[B]
+}
+```
+* Resources
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
+  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
+
+### Divisible (Contravariant Applicative)  
+  
+### Divide (Contravariant Apply)
+
+### Profunctor
+* (Haskell) Fun with Profunctors - Phil Freeman: https://www.youtube.com/watch?v=OJtGECfksds
+
+* Resources
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala)
 
 ### Monad
 We add to Apply ability `flatMap` that can joint two computation and use the output from previous computations to decide what computations to run next.
@@ -268,6 +271,94 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
 
 ### IO monad
 
+### Foldable
+Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
+```scala
+trait Foldable[F[_]]  {
+  def foldLeft[A, B](fa: F[A], b: B)(f: (B, A) => B): B
+  def foldRight[A, B](fa: F[A], z: => B)(f: (A, => B) => B): B
+}
+```
+* Laws: no. You can define condition that foldLeft and foldRight must be consistent.
+* Derived methods (are different for scalaz and cats):
+```scala
+def foldMap[A, B](fa: F[A])(f: A => B)(implicit B: Monoid[B]): B
+def foldM    [G[_], A, B](fa: F[A], z: B)(f: (B, A) => G[B])(implicit G: Monad[G]): G[B] // foldRightM
+def foldLeftM[G[_], A, B](fa: F[A], z: B)(f: (B, A) => G[B])(implicit G: Monad[G]): G[B]
+def find[A](fa: F[A])(f: A => Boolean): Option[A] // findLeft findRight
+def forall[A](fa: F[A])(p: A => Boolean): Boolean // all
+def exists[A](fa: F[A])(p: A => Boolean): Boolean // any
+def isEmpty[A](fa: F[A]): Boolean // empty
+def get[A](fa: F[A])(idx: Long): Option[A] // index
+def size[A](fa: F[A]): Long // length
+def toList[A](fa: F[A]): List[A]
+def intercalate[A](fa: F[A], a: A)(implicit A: Monoid[A]): A
+def existsM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean] // anyM
+def forallM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean] // allM
+
+// cats specific
+def filter_[A](fa: F[A])(p: A => Boolean): List[A]
+def takeWhile_[A](fa: F[A])(p: A => Boolean): List[A]
+def dropWhile_[A](fa: F[A])(p: A => Boolean): List[A]
+def nonEmpty[A](fa: F[A]): Boolean
+def foldMapM[G[_], A, B](fa: F[A])(f: A => G[B])(implicit G: Monad[G], B: Monoid[B]): G[B]
+def traverse_[G[_], A, B](fa: F[A])(f: A => G[B])(implicit G: Applicative[G]): G[Unit]
+def sequence_[G[_]: Applicative, A](fga: F[G[A]]): G[Unit]
+def foldK[G[_], A](fga: F[G[A]])(implicit G: MonoidK[G]): G[A]
+
+// scalaz specific
+def filterLength[A](fa: F[A])(f: A => Boolean): Int
+def maximum[A: Order](fa: F[A]): Option[A]
+def maximumOf[A, B: Order](fa: F[A])(f: A => B): Option[B]
+def minimum[A: Order](fa: F[A]): Option[A]
+def minimumOf[A, B: Order](fa: F[A])(f: A => B): Option[B]
+def splitWith[A](fa: F[A])(p: A => Boolean): List[NonEmptyList[A]]
+def splitBy[A, B: Equal](fa: F[A])(f: A => B): IList[(B, NonEmptyList[A])]
+def selectSplit[A](fa: F[A])(p: A => Boolean): List[NonEmptyList[A]]
+def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
+```
+* Can be composed
+* Resources:
+   * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 55:38](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=3337)
+   * cats [(docs)](https://typelevel.org/cats/typeclasses/foldable.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala)
+   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
+   * scalaz  Foldable1 [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
+   * Bifoldable: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
+
+### Traverse
+
+Functor with method traverse and folding functions from Foldable.
+```scala
+trait Traverse[F[_]] extends Functor[F] with Foldable[F] {
+  def traverse[G[_]: Applicative, A, B](fa: F[A])(f: A => G[B]): G[F[B]]
+}
+```
+* Laws:
+ [cats Traverse laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/TraverseLaws.scala)
+ (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia#Laws_7)
+* Derived methods
+```scala
+def sequence[G[_]:Applicative,A](fga: F[G[A]]): G[F[A]]
+def zipWithIndex[A](fa: F[A]): F[(A, Int)] // indexed
+// ... other helper functions are different for scalaz and cats
+```
+* Traverse are composable Distributive (scalaz [src](https://github.com/scalaz/scalaz/blob/scalaz-seven/core/src/main/scala/scalaz/Distributive.scala))
+it require only Functor (and Traverse require Applicative)
+```scala
+trait Distributive[F[_]] extends Functor[F] {
+   def distribute[G[_]:Functor,A,B](fa: G[A])(f: A => F[B]): F[G[B]]
+   def cosequence[G[_]:Functor,A](fa: G[F[A]]): F[G[A]]
+}
+```
+* Resources
+   * FSiS 5 - Parametricity and the Traverse type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=D0Fnzr15BAU)
+   * Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/traverse/ListPermutationsUsingFilterM.scala) 
+   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
+   * cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
+   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala)
+   * Bitraverse [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala)
+   * Traverse1 [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse1.scala)
+
 ### MonadPlus
 
 ### Free Monoid, Free Monad, Free Applicative
@@ -280,53 +371,6 @@ def factor[A, B](ma: F[A], mb: F[B]): F[(A, B)]
   * Free Monoids and Free Monads - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/08/20/free-monads-and-free-monoids/)
   * (Haskell) Free Monoids in Haskell - Dan Doel [(blog post)](http://comonad.com/reader/2015/free-monoids-in-haskell/)
   * (Haskell) Many Roads to Free Monads - Dan Doel [(blog post)](https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads)
-
-### Foldable
-Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
-```scala
-trait Foldable[F[_]]  {
-  def foldLeft[A, B](fa: F[A], b: B)(f: (B, A) => B): B
-  def foldRight[A, B](fa: F[A], z: => B)(f: (A, => B) => B): B
-}
-```
-* Laws: no
-* Derived methods (they differe significantly between cats and scalaz):
-```scala
-def foldMap[A, B](fa: F[A])(f: A => B)(implicit B: Monoid[B]): B
-def reduceLeftToOption[A, B](fa: F[A])(f: A => B)(g: (B, A) => B): Option[B]
-def reduceLeftOption[A](fa: F[A])(f: (A, A) => A): Option[A]
-def size[A](fa: F[A]): Long
-def get[A](fa: F[A])(idx: Long): Option[A]
-def fold[A](fa: F[A])(implicit A: Monoid[A]): A
-def foldM    [G[_], A, B](fa: F[A], z: B)(f: (B, A) => G[B])(implicit G: Monad[G]): G[B] // foldRightM 
-def foldLeftM[G[_], A, B](fa: F[A], z: B)(f: (B, A) => G[B])(implicit G: Monad[G]): G[B]
-def find[A](fa: F[A])(f: A => Boolean): Option[A]
-def exists[A](fa: F[A])(p: A => Boolean): Boolean
-def forall[A](fa: F[A])(p: A => Boolean): Boolean
-def toList[A](fa: F[A]): List[A]
-def filter_[A](fa: F[A])(p: A => Boolean): List[A]
-def takeWhile_[A](fa: F[A])(p: A => Boolean): List[A]
-def dropWhile_[A](fa: F[A])(p: A => Boolean): List[A]
-def isEmpty[A](fa: F[A]): Boolean
-def nonEmpty[A](fa: F[A]): Boolean
-def intercalate[A](fa: F[A], a: A)(implicit A: Monoid[A]): A 
-def existsM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean]
-def forallM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean]
-def foldMapM[G[_], A, B](fa: F[A])(f: A => G[B])(implicit G: Monad[G], B: Monoid[B]): G[B]
-def traverse_[G[_], A, B](fa: F[A])(f: A => G[B])(implicit G: Applicative[G]): G[Unit]
-def sequence_[G[_]: Applicative, A](fga: F[G[A]]): G[Unit]
-def foldK[G[_], A](fga: F[G[A]])(implicit G: MonoidK[G]): G[A]
-```
-* Can be composed
-* Resources:
-   * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 55:38](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=3337)
-   * cats [(docs)](https://typelevel.org/cats/typeclasses/foldable.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala)
-   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
-   * scalaz  Foldable1 [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
-   * Bifoldable: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
-
-### Traverse
-* Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/traverse/ListPermutationsUsingFilterM.scala)
 
 ### Arrow
 * Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
@@ -358,7 +402,7 @@ trait Comonad[F[_]] {
 ### Adjunctions
 * Resources:
   * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [(vide Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
+  * scalaz [(docs}](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
   * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
 
 ### Kan extensions
