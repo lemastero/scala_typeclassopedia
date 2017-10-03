@@ -38,6 +38,16 @@ class FunctorExamplesSpec
         val functor = Functor[List] compose Functor[Option]
         functor.map(List(Some(42), Some(15), None))(isOdd) mustBe List(Some(false), Some(true), None)
       }
+
+      it("can chain multiple map 2") {
+        import cats.Functor
+        import cats.implicits.catsStdInstancesForList
+        import cats.implicits.catsStdInstancesForOption
+
+        val listOption = Functor[List] compose Functor[Option]
+        import listOption.map
+        map(List(Some(42), Some(15), None))(isOdd) mustBe List(Some(false), Some(true), None)
+      }
     }
   }
 }
