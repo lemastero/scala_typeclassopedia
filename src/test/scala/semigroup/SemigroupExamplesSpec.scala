@@ -86,7 +86,7 @@ class SemigroupExamplesSpec
 
   describe("combineN") {
     it("can invoke combine multiple given number of times") {
-      import cats.kernel.Semigroup
+      import cats.Semigroup
       import cats.syntax.semigroup._
       import cats.instances.option._
       import cats.implicits.catsKernelStdGroupForInt
@@ -94,7 +94,17 @@ class SemigroupExamplesSpec
       val o1: Option[Int] = Some(1)
       o1.combineN(3) mustBe Option(3)
 
-      Semigroup[Option[Int]].combineN(Some(3),4) mustBe Option(12)
+      Semigroup[Option[Int]].combineN(Some(3), 4) mustBe Option(12)
+    }
+  }
+
+  describe("combineAllOption") {
+    it("can wrap Semigroup with Option and combine all elements") {
+      import cats.Semigroup
+      import cats.implicits._
+
+      Semigroup[Int].combineAllOption(Nil) mustBe None
+      Semigroup[Int].combineAllOption(List(1, 2, 3)) mustBe Some(6)
     }
   }
 }
