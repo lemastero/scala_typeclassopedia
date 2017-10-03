@@ -105,6 +105,7 @@ def widen[A, B >: A](fa: F[A]): F[B]
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
 
 ### Bifunctor
+
 Abstracts over type constructor with 2 "holes". Represents two independent functors:
 ```scala
 trait Bifunctor[F[_, _]] {
@@ -142,13 +143,34 @@ def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
   * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
 
+### Apply
+
+```scala
+trait Apply[F[_]] extends Functor[F] {
+  def ap[A, B](ff: F[A => B])(fa: F[A]): F[B]
+}
+```
+
+* Derived methods
+```scala
+def product[A,B](fa: F[A], fb: F[B]): F[(A, B)]
+def ap2[A,B,C]  (fa: => F[A], fb: => F[B])             (f: F[(A,B) => C]): F[C]
+def ap3[A,B,C,D](fa: => F[A], fb: => F[B], fc: => F[C])(f: F[(A,B,C) => D]): F[D]
+// ...
+def map2[A, B, Z](fa: F[A], fb: F[B])(f: (A, B) => Z): F[Z]
+```
+* Can compose
+* Resources
+  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
+  * Cartesian: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
+
 ### Applicative (Functor)
 
 Applicative Functor is a Functor that can:
 - put value into container (lift into effect)
 - apply function already inside container to container
 ```scala
-trait Applicative[F[_]] extends Functor[F] {
+trait Applicative[F[_]] extends Apply[F] {
   def pure[A](value: A): F[A]  
   def apply[A, B](fa: F[A])(ff: F[A => B]): F[B]
 }
@@ -188,18 +210,15 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
 
-### Apply
-
-* Resources
-  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
-  * Cartesian: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
-
-### Exponential Functor (Invariant Functor)
+### Invariant (Invariant Functor, Exponential Functor)
+Functor that can create covariant functor (by passing identity as g) or contravariant functor (by passing identity to f)
 ```scala
-trait Exponential[F[_]] {
-  def xmap[A, B](f: (A => B, B => A)): F[A] => F[B]
+trait Invariant[F[_]] {
+  def imap[A, B](fa: F[A])(f: A => B)(g: B => A): F[B]
 }
 ```
+* cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
+* scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
 
 ### Contravariant (Functor)
 ```scala
@@ -211,15 +230,61 @@ trait Contravariant[F[_]] {
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
   * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
 
-### Divisible (Contravariant Applicative)  
-  
 ### Divide (Contravariant Apply)
+```scala
+trait Divide[F[_]] extends Contravariant[F] {
+  def divide[A, B, C](fa: F[A], fb: F[B])(f: C => (A, B)): F[C]
+}
+```
+* Laws: let `def delta[A]: A => (A, A) = a => (a, a)`
+   1. composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+* Derived methods:
+```scala
+def divide1[A1, Z]    (a1: F[A1])           (f: Z => A1): F[Z] // contramap
+def divide2[A1, A2, Z](a1: F[A1], a2: F[A2])(f: Z => (A1, A2)): F[Z]
+// ...
+def tuple2[A1, A2]    (a1: F[A1], a2: F[A2]):            F[(A1, A2)]
+def tuple3[A1, A2, A3](a1: F[A1], a2: F[A2], a3: F[A3]): F[(A1, A2, A3)]
+// ...
+def deriving2[A1, A2, Z](f: Z => (A1, A2))(implicit a1: F[A1], a2: F[A2]): F[Z]
+def deriving3[A1, A2, A3, Z](f: Z => (A1, A2, A3))(implicit a1: F[A1], a2: F[A2], a3: F[A3]): F[Z]
+// ...
+```
+* Resources
+  * Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I)
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala)
+  
+### Divisible (Contravariant Applicative)  
+```scala
+trait Divisible[F[_]] extends Divide[F] {
+  def conquer[A]: F[A]
+}
+```
+* Laws: let `def delta[A]: A => (A, A) = a => (a, a)`
+   1. composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+   2. right identity: `divide(fa, conquer)(delta) == fa`
+   3. left identity:  `divide(conquer, fa)(delta) == fa`
+* Resources
+  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divisible.scala)
+  * (Haskell) [contravariant Divisible.hs](https://github.com/ekmett/contravariant/blob/master/src/Data/Functor/Contravariant/Divisible.hs)
 
 ### Profunctor
-* (Haskell) Fun with Profunctors - Phil Freeman: https://www.youtube.com/watch?v=OJtGECfksds
-
+Contravariant on first and Functor on the second argument.
+```scala
+trait Profunctor[F[_, _]] {
+  def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
+}
+```
+* Laws: [cats src](https://github.com/typelevel/cats/blob/0.7.x/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
+* Derived methods:
+```scala
+def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
+def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
+```
 * Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala)
+   * cats [src](https://github.com/typelevel/cats/blob/0.7.x/core/src/main/scala/cats/functor/Profunctor.scala)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
+   * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
 
 ### Monad
 We add to Apply ability `flatMap` that can joint two computation and use the output from previous computations to decide what computations to run next.
@@ -397,11 +462,12 @@ trait Comonad[F[_]] {
 * Resources
   * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
   * Streams for (Co)Free! - John DeGoes: https://www.youtube.com/watch?v=R_nYc4FItcI 
-  * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala) [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
+  * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
+  * scalaz [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
 
 ### Adjunctions
 * Resources:
-  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [(vide Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
+  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
   * scalaz [(docs}](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
   * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
 
@@ -473,7 +539,7 @@ trait Comonad[F[_]] {
 
 ## WIP Collections of interesting papers mostly in (Haskell)
 * [Functional pearls](https://wiki.haskell.org/Research_papers/Functional_pearls) (Haskell some in OCaml)
-* [School of Haskell article](https://www.schoolofhaskell.com/) 
+* [School of Haskell articles](https://www.schoolofhaskell.com/) 
 * [The Comonad.Reader](http://comonad.com/reader/)
 * [Monads and all that](https://www.cs.uoregon.edu/research/summerschool/summer12/curriculum.html) - John Hughes
 * [The Monad.Reader](https://themonadreader.wordpress.com/)
