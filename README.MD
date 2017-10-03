@@ -5,7 +5,7 @@
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): workshop on [implementating FP constructions](https://github.com/mpilquist/Structures) with usage examples and great insights about Scala and FP.
   * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
   * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
-  * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
+  * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
   * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
   * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) another implementation of FP constructions
 
@@ -74,8 +74,8 @@ def combineAll(as: TraversableOnce[A]): A
   * docs typelevel/algebra [(docs)](https://typelevel.github.io/algebra/)
   * docs twitter/algebird [(docs)](https://twitter.github.io/algebird/)
   * Life After Monoids - Tom Switzer talks about Group, Ring, Vector Space [(video)](https://www.youtube.com/watch?v=xO9AoZNSOH4)
-  * [(cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala)
-  * Semilattice [(cats src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala) [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
+  * [(Cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala)
+  * Semilattice [(Cats src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala) [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
   * Propagators - Edward Kmett: [(video theory)](https://www.youtube.com/watch?v=acZkF6Q2XKs) 
 
 ## Cathegory Theory
@@ -147,7 +147,7 @@ def map2[A, B, Z](fa: F[A], fb: F[B])(f: (A, B) => Z): F[Z]
 * Can compose
 * Resources
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
-  * Cartesian: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
+  * Cartesian: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
 
 ### Applicative (Functor)
 
@@ -241,8 +241,9 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
 * Resources
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
   * herding cats - Monad [blog post](http://eed3si9n.com/herding-cats/Monad.html)
-  * cats [(docs)](https://typelevel.org/cats/typeclasses/monad.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala)
+  * Cats [(docs)](https://typelevel.org/cats/typeclasses/monad.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala)
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
+  * (Haskell) Monads for functional programming - Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf)
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
 
 ### State monad
@@ -342,7 +343,7 @@ def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 * Resources
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
-  * cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
+  * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
   * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
   * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
@@ -354,7 +355,7 @@ trait Invariant[F[_]] {
   def imap[A, B](fa: F[A])(f: A => B)(g: B => A): F[B]
 }
 ```
-* cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
+* Cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
 * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
 
 ### Profunctor
@@ -364,14 +365,14 @@ trait Profunctor[F[_, _]] {
   def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
 }
 ```
-* Laws: [cats src](https://github.com/typelevel/cats/blob/0.7.x/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
+* Laws: [Cats src](https://github.com/typelevel/cats/blob/0.7.x/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
 * Derived methods:
 ```scala
 def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
 def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
 ```
 * Resources
-   * cats [src](https://github.com/typelevel/cats/blob/0.7.x/core/src/main/scala/cats/functor/Profunctor.scala)
+   * Cats [src](https://github.com/typelevel/cats/blob/0.7.x/core/src/main/scala/cats/functor/Profunctor.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
    * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
 
@@ -384,7 +385,7 @@ trait Foldable[F[_]]  {
 }
 ```
 * Laws: no. You can define condition that foldLeft and foldRight must be consistent.
-* Derived methods (are different for scalaz and cats):
+* Derived methods (are different for scalaz and Cats):
 ```scala
 def foldMap[A, B](fa: F[A])(f: A => B)(implicit B: Monoid[B]): B
 def foldM    [G[_], A, B](fa: F[A], z: B)(f: (B, A) => G[B])(implicit G: Monad[G]): G[B] // foldRightM
@@ -400,7 +401,7 @@ def intercalate[A](fa: F[A], a: A)(implicit A: Monoid[A]): A
 def existsM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean] // anyM
 def forallM[G[_], A](fa: F[A])(p: A => G[Boolean])(implicit G: Monad[G]): G[Boolean] // allM
 
-// cats specific
+// Cats specific
 def filter_[A](fa: F[A])(p: A => Boolean): List[A]
 def takeWhile_[A](fa: F[A])(p: A => Boolean): List[A]
 def dropWhile_[A](fa: F[A])(p: A => Boolean): List[A]
@@ -424,10 +425,10 @@ def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
 * Can be composed
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 55:38](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=3337)
-   * cats [(docs)](https://typelevel.org/cats/typeclasses/foldable.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala)
+   * Cats [(docs)](https://typelevel.org/cats/typeclasses/foldable.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala)
    * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
    * scalaz  Foldable1 [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
-   * Bifoldable: cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
+   * Bifoldable: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
 
 ### Traverse
 
@@ -438,7 +439,7 @@ trait Traverse[F[_]] extends Functor[F] with Foldable[F] {
 }
 ```
 * Laws:
- [cats Traverse laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/TraverseLaws.scala)
+ [Cats Traverse laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/TraverseLaws.scala)
  (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia#Laws_7)
 * Derived methods
 ```scala
@@ -458,12 +459,46 @@ trait Distributive[F[_]] extends Functor[F] {
    * FSiS 5 - Parametricity and the Traverse type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=D0Fnzr15BAU)
    * Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/traverse/ListPermutationsUsingFilterM.scala) 
    * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
-   * cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
+   * Cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
    * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala)
    * Bitraverse [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala)
    * Traverse1 [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse1.scala)
 
-### MonadPlus
+### SemigroupK (Plus)
+
+Semigroup that abstracts over type constructor F. Fo any proper type A can produce Semigroup for F[A]. 
+
+```scala
+trait SemigroupK[F[_]] {
+  def combineK[A](x: F[A], y: F[A]): F[A]  // plus
+  def algebra[A]: Semigroup[F[A]] //  semigroup
+}
+```
+
+* SemigroupK can compose
+
+* Resources:
+  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Plus.scala)
+  * Cats [docs](https://typelevel.org/cats/typeclasses/semigroupk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/SemigroupK.scala)
+  * FSiS 6 - SemigroupK, MonoidK, MonadFilter, MonadCombine - Michael Pilquist [(video)](https://www.youtube.com/watch?v=f26aSrkFKa4)
+  
+### MonoidK (PlusEmpty)
+
+Monoid that abstract over type constructor F. Fo any proper type A can produce Monoid for F[A]. 
+
+```scala
+trait MonoidK[F[_]] extends SemigroupK[F] {
+  def empty[A]: F[A]
+  override def algebra[A]: Monoid[F[A]] // monoid
+}
+```
+
+* MonoidK can compose
+
+* Resources:
+  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/PlusEmpty.scala)
+  * Cats [docs](https://typelevel.org/cats/typeclasses/monoidk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/MonoidK.scala)
+  * FSiS 6 - SemigroupK, MonoidK, MonadFilter, MonadCombine - Michael Pilquist [(video 21:15)](https://www.youtube.com/watch?v=f26aSrkFKa4&t=1275)
 
 ### Free Monoid, Free Monad, Free Applicative
 * Resources
@@ -482,7 +517,7 @@ trait Distributive[F[_]] extends Functor[F] {
 
 ### Kleisli
 * Resources
-  * cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+  * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
 
 ### Yoneda, Coyoneda
