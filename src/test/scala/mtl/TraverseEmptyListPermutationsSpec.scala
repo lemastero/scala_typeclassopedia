@@ -31,7 +31,8 @@ class TraverseEmptyListPermutationsSpec
         List(3),
         Nil
       )
-      List(1, 2, 3).filterA(_ => List(true, false)) contains theSameElementsAs(allPermutations)
+      val result: List[List[Int]] = List(1, 2, 3).filterA(_ => List(true, false))
+      result contains theSameElementsAs (allPermutations)
     }
   }
 }
