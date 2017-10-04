@@ -4,9 +4,12 @@ version := "0.0.1"
 
 scalaVersion := "2.12.3"
 
+val catsVersion = "1.0.0-MF"
+
 libraryDependencies ++= Seq(
-  "org.typelevel" %% "cats-core" % "0.9.0"  withSources() withJavadoc(),
-  "org.typelevel" %% "cats-free" % "0.9.0"  withSources() withJavadoc(),
+  "org.typelevel" %% "cats-core" % catsVersion withSources() withJavadoc(),
+  "org.typelevel" %% "cats-free" % catsVersion withSources() withJavadoc(),
+  "org.typelevel" %% "cats-mtl-core" % "0.0.2" withSources() withJavadoc(),
   "org.scalatest" %% "scalatest" % "3.0.4" % Test
 )
 
