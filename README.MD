@@ -247,9 +247,27 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
 
 ### Reader
+
+Wrapper around function from given type.
+Input type can be seen as some configuration required to produce result.  
+
+```scala
+case class Reader[-In, +R](run: In => R) {
+  def apply(x: In): R = run(x)
+  def map[R2](f: R => R2): Reader[In, R2] =
+    Reader(run andThen f)
+  def flatMap[R2, In2 <: In](f: R => Reader[In2, R2]): Reader[In2, R2] =
+    Reader(x => map(f)(x)(x))
+}
+```
+
+* Reader can be used to implement dependency injection.
+* Monad instance can be defined for Reaer.
+
 * Resources
   * The Reader Monad for Dependency Injection - Json Arhart [(video)](https://www.youtube.com/watch?v=xPlsVVaMoB0)
   * FSiS 9 - Reader, ReaderT, Id  - Michael Pilquist [(video)](https://www.youtube.com/watch?v=H3CCvXx4GvI)
+  * https://gist.github.com/Mortimerp9/5384467
 
 ### Writer
 * The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
