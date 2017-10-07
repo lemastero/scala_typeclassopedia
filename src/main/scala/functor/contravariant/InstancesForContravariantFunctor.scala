@@ -10,15 +10,14 @@ import cats.functor.Contravariant
  from talk:
 George Wilson - The Extended Functor Family: https://www.youtube.com/watch?v=JUVMiRRq6wU
 
-
 Type in type signature can be in positive position or negative position.
 
-In defintion of constant is in positive position:
+In definition of val, type is in positive position:
 
 val x: Int = 42
 val snacks: List[Banana] = ???
 
-In function definition result type is in positive position (Int, Rome)
+In function definition, result type is in positive position (Int, Rome)
 and input type is in negative position (List[A], Romulus, Remus):
 
 def length(xs: List[A]): Int = ???
