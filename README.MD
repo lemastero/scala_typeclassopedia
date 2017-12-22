@@ -58,7 +58,11 @@ def combineAll(as: TraversableOnce[A]): A
 
 * Monoid can be defined for List (with list concatenation, Nil), Vector, Int with +, Strings with string concatenation. NEL is Semigrou but not a Monoid, same with non empty Strings :)
 
-* We can create Monoid for any Semigroup by wrapping it in Option (None is empty value) same with Map 
+* We can create Monoid for any Semigroup by wrapping it in Option (None is empty value) same with Map
+
+* It is possible to provide additional structure to Monoid (but not as much as in Group).
+Such monoids (ReductiveMonoid, CancellativeMonoid, GCDMonoid) are implemented
+in [monoid-subclasses in Haskell](https://hackage.haskell.org/package/monoid-subclasses) described in paper [Adding Structure to Monoids by Mario Blaževic](https://github.com/blamario/monoid-subclasses/wiki/Files/HaskellSymposium2013.pdf)
 
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 23:02](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=1381)
