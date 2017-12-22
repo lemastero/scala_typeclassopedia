@@ -84,6 +84,7 @@ For example size and Monoid - list with concatenation and integers with addition
    * (Haskell) http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
    * (Haskell) https://apfelmus.nfshost.com/articles/monoid-fingertree.html
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
+   * http://r6.ca/blog/20110808T035622Z.html
    
 ## ... and beyond
 
