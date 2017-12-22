@@ -12,10 +12,10 @@
 ## Abstract Algebra
 
 ### Semigroup
-Abstract over associative operation `combine` on some proper type A.
+Abstract over associative operation `combine` (mappend in Haskell)  on some proper type A.
 ```scala
 trait Semigroup[A] {
-  def combine(x: A, y: => A): A // |+|
+  def combine(x: A, y: => A): A // |+| mappend
 }
 ```
 
@@ -39,10 +39,11 @@ Examples for usage of derived methods and combine [(src)](https://github.com/lem
 
 ### Monoid
 
-Abstract over associative operation (`combine`) that have default value.
+Abstract over associative operation `combine` that have default value `empty` (mempty in Haskell).
 ```scala
 trait Monoid[A] extends Semigroup[A] {
-  def empty: A
+  def combine(x: A, y: => A): A // |+| mappend
+  def empty: A // mempty
 }
 ```
 
@@ -64,12 +65,24 @@ def combineAll(as: TraversableOnce[A]): A
 Such monoids (ReductiveMonoid, CancellativeMonoid, GCDMonoid) are implemented
 in [monoid-subclasses in Haskell](https://hackage.haskell.org/package/monoid-subclasses) described in paper [Adding Structure to Monoids by Mario Blaževic](https://github.com/blamario/monoid-subclasses/wiki/Files/HaskellSymposium2013.pdf)
 
+* We can joint two monoids into tuple of monoids.
+
+* **Monoid homomorphisms**
+Function f between two monoids A, B that preserve the structure of monoid:
+  1. `f(A.empty) == B.empty`
+  2. `f(A.combine(a1,a2)) == B.compine( f(a1), f(a2) )`
+
+For example size and Monoid - list with concatenation and integers with addition.
+
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 23:02](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=1381)
    * herding cats - Monoid [(blog post)](http://eed3si9n.com/herding-cats/Monoid.html)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monoid.scala)
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/monoid.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Monoid.scala)
    * (Haskell) Monoids, theme and variations - Brent Yorgey [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
+   * (Haskell) https://byorgey.wordpress.com/2011/04/18/monoids-for-maybe/
+   * (Haskell) http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
+   * (Haskell) https://apfelmus.nfshost.com/articles/monoid-fingertree.html
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
    
 ## ... and beyond
@@ -251,9 +264,27 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
 
 ### Reader
+
+Wrapper around function from given type.
+Input type can be seen as some configuration required to produce result.  
+
+```scala
+case class Reader[-In, +R](run: In => R) {
+  def map[R2](f: R => R2): Reader[In, R2] =
+    Reader(run andThen f)
+
+  def flatMap[R2, In2 <: In](f: R => Reader[In2, R2]): Reader[In2, R2] =
+    Reader(x => f(run(x)).run(x))
+}
+```
+
+* Reader can be used to implement dependency injection.
+* Monad instance can be defined for Reaer.
+
 * Resources
   * The Reader Monad for Dependency Injection - Json Arhart [(video)](https://www.youtube.com/watch?v=xPlsVVaMoB0)
   * FSiS 9 - Reader, ReaderT, Id  - Michael Pilquist [(video)](https://www.youtube.com/watch?v=H3CCvXx4GvI)
+  * https://gist.github.com/Mortimerp9/5384467
 
 ### Writer
 * The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
@@ -359,8 +390,10 @@ trait Invariant[F[_]] {
   def imap[A, B](fa: F[A])(f: A => B)(g: B => A): F[B]
 }
 ```
-* Cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
-* scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
+* Resources
+  * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
+  * Cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
 
 ### Profunctor
 Contravariant on first and Functor on the second argument.
@@ -378,6 +411,7 @@ def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
 * Resources
    * Cats [src](https://github.com/typelevel/cats/blob/0.7.x/core/src/main/scala/cats/functor/Profunctor.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
+   * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
    * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
 
 ### Foldable
@@ -460,8 +494,7 @@ trait Distributive[F[_]] extends Functor[F] {
 }
 ```
 * Resources
-   * FSiS 5 - Parametricity and the Traverse type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=D0Fnzr15BAU)
-   * Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/mtl/TraverseEmptyListPermutationsSpec) 
+   * FSiS 5 - Parametricity and the Traverse type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=D0Fnzr15BAU) 
    * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
    * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala)
@@ -504,13 +537,14 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * Cats [docs](https://typelevel.org/cats/typeclasses/monoidk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/MonoidK.scala)
   * FSiS 6 - SemigroupK, MonoidK, MonadFilter, MonadCombine - Michael Pilquist [(video 21:15)](https://www.youtube.com/watch?v=f26aSrkFKa4&t=1275)
 
-### MonadFilter
+### TraverseEmpty
+
+* Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/mtl/TraverseEmptyListPermutationsSpec.scala)
 
 ### Monad Transformers
 * Resources
   * FSiS 7 - OptionT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=ZNUTMabdgzo)
   * FSiS 8 - EitherT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=z7rCBQ_vTRg)
-  
 
 ### Free Monoid, Free Monad, Free Applicative
 * Resources
@@ -604,9 +638,6 @@ trait Comonad[F[_]] {
 * Resources:
   * Beyond Scala Lenses - Julien Truffaut: [(video)](https://www.youtube.com/watch?v=6nyGVgGEKdA&t=1694)
   * scalaz [Lens src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Lens.scala) [(PLens src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/PLens.scala)
-
-## Effects
-* The Eff monad, one monad to rule them all - Eric Torreborre: https://www.youtube.com/watch?v=KGJLeHhsZBo
 
 ## Functional data structures
 
