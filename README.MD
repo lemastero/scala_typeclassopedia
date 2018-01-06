@@ -98,7 +98,7 @@ For example size and Monoid - list with concatenation and integers with addition
 
 ## Cathegory Theory
 
-### (Covariant) Functor
+### Functor (Covariant Functor)
 
 Abstraction for type constructor (type with "hole", type parameter) that can be mapped over.
 
@@ -167,7 +167,7 @@ def map2[A, B, Z](fa: F[A], fb: F[B])(f: (A, B) => Z): F[Z]
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
   * Cartesian: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
 
-### Applicative (Functor)
+### Applicative (Applicative Functor)
 
 Applicative Functor is a Functor that can:
 - put value into container (lift into effect)
@@ -297,14 +297,15 @@ case class Reader[-In, +R](run: In => R) {
 
 ### IO
 
-### Contravariant (Functor)
+### Contravariant (Contravariant Functor)
 ```scala
 trait Contravariant[F[_]] {
   def contramap[A, B](f: B => A): F[A] => F[B]
 }
 ```
 * Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
+  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
+  * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala)
   * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
 
 ### Divide (Contravariant Apply)
@@ -379,7 +380,7 @@ def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 * Resources
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
-  * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/functor/Bifunctor.scala)
+  * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala)
   * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
   * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
@@ -410,7 +411,7 @@ def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
 def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
 ```
 * Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/0.7.x/core/src/main/scala/cats/functor/Profunctor.scala)
+   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
    * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
    * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)

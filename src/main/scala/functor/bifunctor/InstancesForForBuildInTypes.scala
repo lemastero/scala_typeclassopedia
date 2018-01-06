@@ -1,6 +1,6 @@
 package functor.bifunctor
 
-import cats.functor.Bifunctor
+import cats.Bifunctor
 
 /* Translated into Scala examples illustrating BiFunctor from fun, clear explanation by:
   George Wilson - The Extended Functor Family: https://www.youtube.com/watch?v=JUVMiRRq6wU
