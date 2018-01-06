@@ -1,6 +1,6 @@
 package functor.contravariant
 
-import cats.functor.Contravariant
+import cats.Contravariant
 
 /* Translated into Scala explanation about:
  - polarity, negative and positive position of type

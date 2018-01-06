@@ -1,7 +1,7 @@
 package profunctor
 
 import cats.data.Kleisli
-import cats.functor.Profunctor
+import cats.arrow.Profunctor
 
 object InstanceForProfunctor {
 
