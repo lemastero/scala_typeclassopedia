@@ -288,7 +288,9 @@ case class Reader[-In, +R](run: In => R) {
   * https://gist.github.com/Mortimerp9/5384467
 
 ### Writer
-* The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
+* Resources
+  * Monadic Logging and You - Martin Snyder [(video)](https://www.youtube.com/watch?v=t-YX55ZF4g0)
+  * The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
 
 ### State
 * Resources
@@ -568,29 +570,133 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
 
+### Comonad
+
+Abstraction for type with one hole that allows:
+- map over (extends Functor)
+- get current value
+- duplicate one layer of abstraction
+It is dual to Monad (Monad allow to put value in and collapse one layer).
+
+```scala
+trait Comonad[C[_]] extends Functor[C] {
+  def extract[A](ca: C[A]): A // counit
+  def duplicate[A](ca: C[A]): C[C[A]] // coflatten
+  def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coflatMap, cobind
+}
+```
+
+* Coflatmap / Cobind: ability to extend is sometimes defined in separate trait (extending Functor): [(Cats CoflatMap src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [(Scalaz Cobind src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala)
+ 
+If we define extract and extend:
+1. `fa.extend(_.extract) == fa`
+2. `fa.extend(f).extract == f(fa)`
+3. `fa.extend(f).extend(g) == fa.extend(a => g(a.extend(f)))`
+
+If we define comonad using map, extract and duplicate:
+3. `fa.duplicate.extract == fa`
+4. `fa.duplicate.map(_.extract) == fa`
+5. `fa.duplicate.duplicate == fa.duplicate.map(_.duplicate)`
+
+And if we provide implementation for both duplicate and extend:
+6. `fa.extend(f) == fa.duplicate.map(f)`
+7. `fa.duplicate == fa.extend(identity)`
+8. `fa.map(h) == fa.extend(faInner => h(faInner.extract))`
+
+The definitions of laws in [Cats src Comonad](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComonadLaws.scala)
+, [Cats src Coflatmap](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CoflatMapLaws.scala)
+and [Haskell Control.Comonad](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html).
+ 
+* Derived methods:
+```scala
+ def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coFlatMap
+```
+Method extend can be use to chain oparations on comonads - this is called coKleisli composition.
+
+* Implementations of comonad can be done for: None empty list, Rose tree, Identity
+
+* Resources
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
+  * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
+  * Streams for (Co)Free! - John DeGoes: [(video)](https://www.youtube.com/watch?v=R_nYc4FItcI)
+  * scalaz [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
+  * (Haskell) [(src Control.Comonad)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html)
+
+### Coreader (Env comonad, Product comonad)
+
+Wrap value of type A with some context R.
+
+```scala
+case class CoReader[R, A](extract: A, ask: R) {
+  def map[B](f: A => B): CoReader[R, B] = CoReader(f(extract), ask)
+  def duplicate: CoReader[R, CoReader[R, A]] = CoReader(this, ask)
+}
+```
+
+* Resources
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * (Haskell) [(src Control-Comonad-Env)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad-Env.html)
+
+### Cowriter
+
+It is like Writer monad, combines all logs (using Monid) when they are ready.
+
+```scala
+case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
+  def extract: A = tell(m.empty)
+  def duplicate: Cowriter[W, Cowriter[W, A]] = Cowriter( w1 =>
+    Cowriter( w2 =>
+      tell(m.append(w1, w2))
+    )
+  )
+  def map[B](f: A => B) = Cowriter(tell andThen f)
+}
+```
+
+* Resources
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  
+### Cofree
+
+Create comonad for any given type A. It is based on rose tree (multiple nodes, value in each node)
+where List is replaced with any Functor F. Functor F dedicdes how Cofree comonad is branching.
+
+```scala
+case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: Functor[F]) {
+  def map[B](f: A => B): Cofree[B, F] = Cofree(f(extract), functor.map(sub)(_.map(f)))
+  def duplicate: Cofree[Cofree[A, F], F] = Cofree(this, functor.map(sub)(_.duplicate))
+  def extend[B](f: Cofree[A, F] => B): Cofree[B, F] = duplicate.map(f) // coKleisi composition
+}
+```
+* Resources
+  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
+  * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
+
 ### Yoneda, Coyoneda
 * Resources
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
 
-### Comonad, Cofree
+### Adjunctions
+
+Adjunction[F,B] spacify relation between two Functors (There is natural transformation between composition of those two functors and identity.)
+We say that F is left adjoint to G.
+
 ```scala
-trait Comonad[F[_]] {
-  def extract[A]: F[A] => A
-  def coflatMap[A, B](f: F[A] => B): F[A] => F[B]
+trait Adjunction[F[_], G[_]] {
+  def left[A, B](f: F[A] => B): A => G[B]
+  def right[A, B](f: A => G[B]): F[A] => B
 }
 ```
-* Resources
-  * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
-  * Streams for (Co)Free! - John DeGoes: https://www.youtube.com/watch?v=R_nYc4FItcI 
-  * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
-  * scalaz [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
 
-### Adjunctions
+Adjunction can be defined between Reader monad and Coreader comonad.
+
 * Resources:
+  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
-  * scalaz [(docs}](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
+  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
   * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
 
 ### Kan extensions
