@@ -302,10 +302,9 @@ case class Reader[-In, +R](run: In => R) {
 
 ### Continuation Monad
 * Resources
-  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
-  * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala)
-  * (Haskell)  - George Wilson [(blog post)](http://www.haskellforall.com/2012/12/the-continuation-monad.html
-)
+  * Continuation monad in Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/continuation-monad-in-scala/index.html)
+  * (Haskell) School of Haskell - The Mother of all Monads - Dan Piponi [(blog post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/the-mother-of-all-monads)
+  * (Haskell) Haskell for all - The Continuation Monad - Gabriel Gonzalez [(blog post)](http://www.haskellforall.com/2012/12/the-continuation-monad.html)
 
 ### Monoidal Categories, Monoid Object
 * Resources
