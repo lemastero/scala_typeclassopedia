@@ -757,15 +757,15 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
 * Resources
   * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala)
 
-### Free constructions
+## Free constructions
 
-| abstraction | free construction |
-| ----------- | ----------------- |
-| Monoid      | List              | 
-| Functor     | Coyoneda          |
-| Applicative | FreeApplicative   |
-| Monad       | Free              |
-| Comonad     | CoFree            |
+| abstraction | free construction     |
+| ----------- | --------------------- |
+| Monoid      | List                  | 
+| Functor     | [Coyoneda](#coyoneda) |
+| Applicative | [FreeApplicative](#free-applicative)     |
+| Monad       | [Free Monads](#free-monads)                |
+| Comonad     | [CoFree(#cofree)]              |
 
 ### Free Applicative
 * Resources
@@ -781,6 +781,7 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * Free Monoids and Free Monads - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/08/20/free-monads-and-free-monoids/)
   * (Haskell) Free Monoids in Haskell - Dan Doel [(blog post)](http://comonad.com/reader/2015/free-monoids-in-haskell/)
   * (Haskell) Many Roads to Free Monads - Dan Doel [(blog post)](https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads)
+  * (Theory) [nLab](https://ncatlab.org/nlab/show/free+monad)
 
 ### Cofree
 
@@ -807,6 +808,7 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
+  * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
 
 ![](arrows.svg)
 
