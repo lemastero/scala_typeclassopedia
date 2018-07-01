@@ -762,10 +762,10 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
 | abstraction | free construction     |
 | ----------- | --------------------- |
 | Monoid      | List                  | 
-| Functor     | [Coyoneda](#coyoneda) |
-| Applicative | [FreeApplicative](#free-applicative)     |
-| Monad       | [Free Monads](#free-monads)                |
-| Comonad     | [CoFree(#cofree)]              |
+| Functor     | [Coyoneda](#coyoneda)                |
+| Applicative | [FreeApplicative](#free-applicative) |
+| Monad       | [Free Monads](#free-monads)          |
+| Comonad     | [CoFree](#cofree)                    |
 
 ### Free Applicative
 * Resources
