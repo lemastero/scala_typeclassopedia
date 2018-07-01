@@ -762,7 +762,7 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
 | abstraction | free construction     |
 | ----------- | --------------------- |
 | Monoid      | List                  | 
-| Functor     | [Coyoneda](#coyoneda)                |
+| Functor     | [Coyoneda](#yoneda-and-coyoneda)     |
 | Applicative | [FreeApplicative](#free-applicative) |
 | Monad       | [Free Monads](#free-monads)          |
 | Comonad     | [CoFree](#cofree)                    |
@@ -809,6 +809,8 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
+
+## Arrows
 
 ![](arrows.svg)
 
@@ -866,6 +868,8 @@ trait Category[F[_, _]] extends Compose[F] {
   * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
   * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+
+## Adjunctions & Kan Extension
 
 ### Adjunctions
 
