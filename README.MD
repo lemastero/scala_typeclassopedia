@@ -123,17 +123,23 @@ For example size and Monoid - list with concatenation and integers with addition
    * (Haskell) https://apfelmus.nfshost.com/articles/monoid-fingertree.html
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
 
+### Commutative Monoid
+* [Cats](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeMonoid.scala)
+
 ### Group:
 * Resources:
    * [(Cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala)
    * twitter/algebird Group [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Group.scala) [docs](https://twitter.github.io/algebird/typeclasses/group.html)
+
+### Abelian Group (Commutative Group)
+* [Cats](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeGroup.scala)
 
 ### Band (Idempotent semigroup)
 
 * bands with additional structure:
 
 | band variation     | additional structure              |
-|----               :|                             -----:| 
+| ------------------ | --------------------------------- | 
 | left zero band     | x * y = x                         |
 | right zero band    | x * y = y                         |
 | rectangular band   | x * y * x = x                     |
@@ -156,6 +162,7 @@ For example size and Monoid - list with concatenation and integers with addition
 ### Bounded Semilattice
 
 * Resources:
+   * [Cats](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/BoundedSemilattice.scala)
    * [typelevel/algebra Bounded Join Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/BoundedJoinSemilattice.scala)
    * [typelevel/algebra Bounded Meet Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/BoundedMeetSemilattice.scala)
 
@@ -194,7 +201,10 @@ For example size and Monoid - list with concatenation and integers with addition
 * Resources
    * twitter/algebird [src](https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/VectorSpace.scala)
    * Life After Monoids - Tom Switzer talks about Group, Ring, Vector Space [(video)](https://www.youtube.com/watch?v=xO9AoZNSOH4)
-  
+
+### StarRig
+* StarRig [non/irreg](https://github.com/non/irreg/blob/master/src/main/scala/irreg/StarRig.scala)
+
 ### Kleene algebra
 * Resources: (Haskell) A Very General Method of Computing Shortest Paths [(article)](http://r6.ca/blog/20110808T035622Z.html)
 
@@ -204,6 +214,8 @@ For example size and Monoid - list with concatenation and integers with addition
   * Propagators - Edward Kmett: [(video theory)](https://www.youtube.com/watch?v=acZkF6Q2XKs) 
 
 ## Cathegory Theory
+
+![](covariant_contravariant_functors.svg)
 
 ### Functor (Covariant Functor)
 
@@ -515,24 +527,116 @@ trait Invariant[F[_]] {
   * Cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
 
-### Profunctor
-Contravariant on first and Functor on the second argument.
+### Comonad
+
+Abstraction for type with one hole that allows:
+- map over (extends Functor)
+- get current value
+- duplicate one layer of abstraction
+It is dual to Monad (Monad allow to put value in and collapse one layer).
+
 ```scala
-trait Profunctor[F[_, _]] {
-  def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
+trait Comonad[C[_]] extends Functor[C] {
+  def extract[A](ca: C[A]): A // counit
+  def duplicate[A](ca: C[A]): C[C[A]] // coflatten
+  def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coflatMap, cobind
 }
 ```
-* Laws: [Cats src](https://github.com/typelevel/cats/blob/0.7.x/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
+
+* Coflatmap / Cobind: ability to extend is sometimes defined in separate trait (extending Functor): [(Cats CoflatMap src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [(Scalaz Cobind src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala)
+ 
+If we define extract and extend:
+1. `fa.extend(_.extract) == fa`
+2. `fa.extend(f).extract == f(fa)`
+3. `fa.extend(f).extend(g) == fa.extend(a => g(a.extend(f)))`
+
+If we define comonad using map, extract and duplicate:
+3. `fa.duplicate.extract == fa`
+4. `fa.duplicate.map(_.extract) == fa`
+5. `fa.duplicate.duplicate == fa.duplicate.map(_.duplicate)`
+
+And if we provide implementation for both duplicate and extend:
+6. `fa.extend(f) == fa.duplicate.map(f)`
+7. `fa.duplicate == fa.extend(identity)`
+8. `fa.map(h) == fa.extend(faInner => h(faInner.extract))`
+
+The definitions of laws in [Cats src Comonad](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComonadLaws.scala)
+, [Cats src Coflatmap](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CoflatMapLaws.scala)
+and [Haskell Control.Comonad](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html).
+ 
 * Derived methods:
 ```scala
-def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
-def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
+ def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coFlatMap
+```
+Method extend can be use to chain oparations on comonads - this is called coKleisli composition.
+
+* Implementations of comonad can be done for: None empty list, Rose tree, Identity
+
+* Resources
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
+  * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
+  * Streams for (Co)Free! - John DeGoes: [(video)](https://www.youtube.com/watch?v=R_nYc4FItcI)
+  * scalaz [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
+  * (Haskell) [(src Control.Comonad)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html)
+  * (Haskell) Monads from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monads-from-comonads/)
+  * (Haskell) Monad Transformers from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monad-transformers-from-comonads/)
+  * (Haskell) More on Comonads as Monad Transformers - Edward Kmett [(blog post)](http://comonad.com/reader/2011/more-on-comonads-as-monad-transformers/)
+  * (Haskell) The Cofree Comonad and the Expression Problem - Edward Kmett [(blog post)](http://comonad.com/reader/2008/the-cofree-comonad-and-the-expression-problem/)
+  * (Haskell) Comonads as Spaces - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
+
+### Coreader (Env comonad, Product comonad)
+
+Wrap value of type A with some context R.
+
+```scala
+case class CoReader[R, A](extract: A, ask: R) {
+  def map[B](f: A => B): CoReader[R, B] = CoReader(f(extract), ask)
+  def duplicate: CoReader[R, CoReader[R, A]] = CoReader(this, ask)
+}
+```
+
+* Resources
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * (Haskell) [(src Control-Comonad-Env)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad-Env.html)
+
+### Cowriter
+
+It is like Writer monad, combines all logs (using Monid) when they are ready.
+
+```scala
+case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
+  def extract: A = tell(m.empty)
+  def duplicate: Cowriter[W, Cowriter[W, A]] = Cowriter( w1 =>
+    Cowriter( w2 =>
+      tell(m.append(w1, w2))
+    )
+  )
+  def map[B](f: A => B) = Cowriter(tell andThen f)
+}
+```
+
+* Resources
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  
+### Cofree
+
+Create comonad for any given type A. It is based on rose tree (multiple nodes, value in each node)
+where List is replaced with any Functor F. Functor F dedicdes how Cofree comonad is branching.
+
+```scala
+case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: Functor[F]) {
+  def map[B](f: A => B): Cofree[B, F] = Cofree(f(extract), functor.map(sub)(_.map(f)))
+  def duplicate: Cofree[Cofree[A, F], F] = Cofree(this, functor.map(sub)(_.duplicate))
+  def extend[B](f: Cofree[A, F] => B): Cofree[B, F] = duplicate.map(f) // coKleisi composition
+}
 ```
 * Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala)
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
-   * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
-   * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
+  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
+  * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
+
+
+![](traversable_foldable.svg)
 
 ### Foldable
 Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
@@ -681,6 +785,27 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * (Haskell) Free Monoids in Haskell - Dan Doel [(blog post)](http://comonad.com/reader/2015/free-monoids-in-haskell/)
   * (Haskell) Many Roads to Free Monads - Dan Doel [(blog post)](https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads)
 
+![](arrows.svg)
+
+### Profunctor
+Contravariant on first and Functor on the second argument.
+```scala
+trait Profunctor[F[_, _]] {
+  def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
+}
+```
+* Laws: [Cats src](https://github.com/typelevel/cats/blob/0.7.x/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
+* Derived methods:
+```scala
+def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
+def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
+```
+* Resources
+   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
+   * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
+   * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
+
 ### Category
 
 Abstraction for operations that can be composed and that provide no-op (id).
@@ -716,114 +841,6 @@ trait Category[F[_, _]] extends Compose[F] {
   * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
   * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
-
-### Comonad
-
-Abstraction for type with one hole that allows:
-- map over (extends Functor)
-- get current value
-- duplicate one layer of abstraction
-It is dual to Monad (Monad allow to put value in and collapse one layer).
-
-```scala
-trait Comonad[C[_]] extends Functor[C] {
-  def extract[A](ca: C[A]): A // counit
-  def duplicate[A](ca: C[A]): C[C[A]] // coflatten
-  def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coflatMap, cobind
-}
-```
-
-* Coflatmap / Cobind: ability to extend is sometimes defined in separate trait (extending Functor): [(Cats CoflatMap src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [(Scalaz Cobind src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala)
- 
-If we define extract and extend:
-1. `fa.extend(_.extract) == fa`
-2. `fa.extend(f).extract == f(fa)`
-3. `fa.extend(f).extend(g) == fa.extend(a => g(a.extend(f)))`
-
-If we define comonad using map, extract and duplicate:
-3. `fa.duplicate.extract == fa`
-4. `fa.duplicate.map(_.extract) == fa`
-5. `fa.duplicate.duplicate == fa.duplicate.map(_.duplicate)`
-
-And if we provide implementation for both duplicate and extend:
-6. `fa.extend(f) == fa.duplicate.map(f)`
-7. `fa.duplicate == fa.extend(identity)`
-8. `fa.map(h) == fa.extend(faInner => h(faInner.extract))`
-
-The definitions of laws in [Cats src Comonad](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComonadLaws.scala)
-, [Cats src Coflatmap](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CoflatMapLaws.scala)
-and [Haskell Control.Comonad](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html).
- 
-* Derived methods:
-```scala
- def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coFlatMap
-```
-Method extend can be use to chain oparations on comonads - this is called coKleisli composition.
-
-* Implementations of comonad can be done for: None empty list, Rose tree, Identity
-
-* Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
-  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
-  * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
-  * Streams for (Co)Free! - John DeGoes: [(video)](https://www.youtube.com/watch?v=R_nYc4FItcI)
-  * scalaz [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
-  * (Haskell) [(src Control.Comonad)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html)
-  * (Haskell) Monads from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monads-from-comonads/)
-  * (Haskell) Monad Transformers from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monad-transformers-from-comonads/)
-  * (Haskell) More on Comonads as Monad Transformers - Edward Kmett [(blog post)](http://comonad.com/reader/2011/more-on-comonads-as-monad-transformers/)
-  * (Haskell) The Cofree Comonad and the Expression Problem - Edward Kmett [(blog post)](http://comonad.com/reader/2008/the-cofree-comonad-and-the-expression-problem/)
-  * (Haskell) Comonads as Spaces - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
-
-### Coreader (Env comonad, Product comonad)
-
-Wrap value of type A with some context R.
-
-```scala
-case class CoReader[R, A](extract: A, ask: R) {
-  def map[B](f: A => B): CoReader[R, B] = CoReader(f(extract), ask)
-  def duplicate: CoReader[R, CoReader[R, A]] = CoReader(this, ask)
-}
-```
-
-* Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
-  * (Haskell) [(src Control-Comonad-Env)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad-Env.html)
-
-### Cowriter
-
-It is like Writer monad, combines all logs (using Monid) when they are ready.
-
-```scala
-case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
-  def extract: A = tell(m.empty)
-  def duplicate: Cowriter[W, Cowriter[W, A]] = Cowriter( w1 =>
-    Cowriter( w2 =>
-      tell(m.append(w1, w2))
-    )
-  )
-  def map[B](f: A => B) = Cowriter(tell andThen f)
-}
-```
-
-* Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
-  
-### Cofree
-
-Create comonad for any given type A. It is based on rose tree (multiple nodes, value in each node)
-where List is replaced with any Functor F. Functor F dedicdes how Cofree comonad is branching.
-
-```scala
-case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: Functor[F]) {
-  def map[B](f: A => B): Cofree[B, F] = Cofree(f(extract), functor.map(sub)(_.map(f)))
-  def duplicate: Cofree[Cofree[A, F], F] = Cofree(this, functor.map(sub)(_.duplicate))
-  def extend[B](f: Cofree[A, F] => B): Cofree[B, F] = duplicate.map(f) // coKleisi composition
-}
-```
-* Resources
-  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
-  * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
 
 ### Adjunctions
 
