@@ -37,7 +37,7 @@ that are total (so they form a Magma).
 Properties of operation
 
 | property           | definition                |
-|----               :|                     -----:| 
+| -----------------  | ------------------------- | 
 | closure (totality) | x * y belongs to S        |
 | associativity      | x * (y * z) = (x * y) * z |
 | identity           | x * id = id * x = x       |
