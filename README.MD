@@ -1,6 +1,6 @@
 # Scala typeclassopedia
 
-* Resources covering all topis about FP in greater details in way better and more approachable form:
+* Resources covering topis about FP and category theory in great details and very approachable form:
   * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason](https://www.manning.com/books/functional-programming-in-scala) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): workshop on [implementating FP constructions](https://github.com/mpilquist/Structures) with usage examples and great insights about Scala and FP.
   * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) and [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
@@ -11,6 +11,39 @@
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   
 ## Abstract Algebra
+
+### Summary of structures with one operation
+
+![](single_op_abstract_algebra.svg)
+
+Summary of structures in abstract algebra consisting of:
+ - a Set S 
+ - binary operation *
+that are total (so they form a Magma).
+
+| Algebraic structure   | associativity | identity | invertibility | commutativity | idempotency |
+|----           :|         -----:|      ---:|           ---:|           ---:|         ---:|
+| Semigroup             | associativity |          |               |               |             |
+| Commutative semigroup | associativity |          |               | commutativity |             |
+| Inverse semigroup     | associativity |          | invertibility |               |             |
+| Monoid                | associativity | identity |               |               |             |
+| Commutative Monoid    | associativity | identity |               | commutativity |             |
+| Group                 | associativity | identity | invertibility |               |             |
+| Abelian Group         | associativity | identity | invertibility | commutativity |             |
+| Band                  | associativity |          |               |               | idempotency |
+| Semilattice           | associativity |          |               | commutativity | idempotency |
+| Bounded semilattice   | associativity | identity |               | commutativity | idempotency |
+
+Properties of operation
+
+| property           | definition                |
+|----               :|                     -----:| 
+| closure (totality) | x * y belongs to S        |
+| associativity      | x * (y * z) = (x * y) * z |
+| identity           | x * id = id * x = x       |
+| invertibility      | x * x' = x' * x = id      |
+| commutativity      | x * y = y * x             |
+| idempotency        | x * x = x                 |
 
 ### Semigroup
 Abstract over associative operation `combine` (mappend in Haskell)  on some proper type A.
@@ -37,6 +70,8 @@ Examples for usage of derived methods and combine [(src)](https://github.com/lem
    * herding cats - Semigroup [(blog post)](http://eed3si9n.com/herding-cats/Semigroup.html)
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/semigroup.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semigroup.scala)
    * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Semigroup.scala)
+   * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Semigroup.scala)
+   * (Haskell) [base/Data-Semigroup](http://hackage.haskell.org/package/base/docs/Data-Semigroup.html)
 
 ### Monoid
 
@@ -80,21 +115,92 @@ For example size and Monoid - list with concatenation and integers with addition
    * herding cats - Monoid [(blog post)](http://eed3si9n.com/herding-cats/Monoid.html)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monoid.scala)
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/monoid.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Monoid.scala)
+   * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Monoid.scala) [docs](https://twitter.github.io/algebird/typeclasses/monoid.html)
+   * (Haskell) [base/Data-Monoid](http://hackage.haskell.org/package/base/docs/Data-Monoid.html)
    * (Haskell) Monoids, theme and variations - Brent Yorgey [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
    * (Haskell) https://byorgey.wordpress.com/2011/04/18/monoids-for-maybe/
    * (Haskell) http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
    * (Haskell) https://apfelmus.nfshost.com/articles/monoid-fingertree.html
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
-   * (semirings etc.) (Haskell) http://r6.ca/blog/20110808T035622Z.html
-   
-## ... and beyond
+
+### Group:
+* Resources:
+   * [(Cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala)
+   * twitter/algebird Group [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Group.scala) [docs](https://twitter.github.io/algebird/typeclasses/group.html)
+
+### Band (Idempotent semigroup)
+
+* bands with additional structure:
+
+| band variation     | additional structure              |
+|----               :|                             -----:| 
+| left zero band     | x * y = x                         |
+| right zero band    | x * y = y                         |
+| rectangular band   | x * y * x = x                     |
+| normal band        | z * x * y * z = z * y * x * z     |
+| left-regular band  | x * y * x = x * y                 |
+| right-regular band | x * y * x = y * x                 |
+| regular bands      | z * x * z * y * z = z * x * y * z |
+
+* Resources:
+   * cats [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Band.scala) [(laws)](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/BandLaws.scala)
+
+### Semilattice
+
+* Resources:
+   * [(Cats src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala)
+   * [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
+   * [Meet Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/MeetSemilattice.scala) 
+   * [Join Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/JoinSemilattice.scala)
+
+### Bounded Semilattice
+
+* Resources:
+   * [typelevel/algebra Bounded Join Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/BoundedJoinSemilattice.scala)
+   * [typelevel/algebra Bounded Meet Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/BoundedMeetSemilattice.scala)
+
+# Algebraic structures with two operations
+
+### Lattice
+
+* [typelevel/algebra Lattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/Lattice.scala)
+
+### Distributive Lattice
+
+* [typelevel/algebra Distributive Lattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/DistributiveLattice.scala)
+
+### Bounded Distributive Lattice
+
+* [typelevel/algebra Bounded Distributive Lattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/BoundedDistributiveLattice.scala)
+
+### Boolean algebras
+
+* [typelevel/algebra Bool](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/Bool.scala)
+
+### Heyting algebras
+
+* [typelevel/algebra Heyting](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/Heyting.scala)
+
+### Ring
+
+* twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
+
+### Tropical semi-ring (Min-Plus algebra)
+
+* twitter/algebird [src](https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/MinPlus.scala)
+
+### Vector Space
 
 * Resources
-  * docs typelevel/algebra [(docs)](https://typelevel.github.io/algebra/)
-  * docs twitter/algebird [(docs)](https://twitter.github.io/algebird/)
-  * Life After Monoids - Tom Switzer talks about Group, Ring, Vector Space [(video)](https://www.youtube.com/watch?v=xO9AoZNSOH4)
-  * [(Cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala)
-  * Semilattice [(Cats src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala) [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
+   * twitter/algebird [src](https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/VectorSpace.scala)
+   * Life After Monoids - Tom Switzer talks about Group, Ring, Vector Space [(video)](https://www.youtube.com/watch?v=xO9AoZNSOH4)
+  
+### Kleene algebra
+* Resources: (Haskell) A Very General Method of Computing Shortest Paths [(article)](http://r6.ca/blog/20110808T035622Z.html)
+
+### Propagators
+
+* Resources
   * Propagators - Edward Kmett: [(video theory)](https://www.youtube.com/watch?v=acZkF6Q2XKs) 
 
 ## Cathegory Theory
@@ -213,8 +319,6 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
     * Lifting - Tony Morris: [blog post](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
-  * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
-
 
 ### Monad
 We add to Apply ability `flatMap` that can join two computations
@@ -551,6 +655,10 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * FSiS 7 - OptionT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=ZNUTMabdgzo)
   * FSiS 8 - EitherT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=z7rCBQ_vTRg)
 
+### Natural transformation (FunctionK)
+* Resources
+  * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala)
+
 ### Free Monoid, Free Monad, Free Applicative
 * Resources
   * Free Monads in Cats docs: http://typelevel.org/cats/datatypes/freemonad.html
@@ -568,6 +676,8 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
 
 ### Kleisli
 * Resources
+  * (C++) Category Theory 3.2: Kleisli category - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
+  * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
   * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
 
@@ -702,8 +812,9 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/) 
   * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
 
-### Yoneda
+### Yoneda and Coyoneda
 * Resources
+  * https://vimeo.com/122708005
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
@@ -755,11 +866,32 @@ there is unique natural transformation d: M -> R.
   * (Haskell) Kan Extensions II: Adjunctions, Composition, Lifting - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions-ii/)
   * (Haskell) Unnatural Transformations and Quantifiers - Edward Kmett [blog post](http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/)
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Codensity.scala)
+  * scalaz [example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/CodensityUsage.scala)
 
 
 ### Representable
-* TODO
 
+```scala
+// TODO Haskell extends Distrivutive, Scalaz require F to be Functor
+trait Representable[F[_], Rep] {
+  def tabulate[X](f: Rep => X): F[X]
+  def index[X](fx: F[X])(f: Rep): X
+}
+```
+
+* Resources:
+  * (Haskell) Data.Functor.Rep: [(src Haskell)](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
+  * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
+  * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
+  * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
+  * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
+  * https://adelbertc.github.io/posts/2017-08-09-representable-functors.html
+  * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
+  * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
+  * https://stackoverflow.com/a/46502280
+  * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
+  
 ## Recursive schemas
 
 * Resources:
