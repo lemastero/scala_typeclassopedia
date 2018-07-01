@@ -404,6 +404,17 @@ case class Reader[-In, +R](run: In => R) {
 
 ### IO
 
+### Continuation Monad
+* Resources
+  * Continuation monad in Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/continuation-monad-in-scala/index.html)
+  * (Haskell) School of Haskell - The Mother of all Monads - Dan Piponi [(blog post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/the-mother-of-all-monads)
+  * (Haskell) Haskell for all - The Continuation Monad - Gabriel Gonzalez [(blog post)](http://www.haskellforall.com/2012/12/the-continuation-monad.html)
+
+### Monoidal Categories, Monoid Object
+* Resources
+  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373)
+  * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
+
 ### Contravariant (Contravariant Functor)
 ```scala
 trait Contravariant[F[_]] {
@@ -630,7 +641,7 @@ trait SemigroupK[F[_]] {
   
 ### MonoidK (PlusEmpty)
 
-Monoid that abstract over type constructor F. Fo any proper type A can produce Monoid for F[A]. 
+Monoid that abstract over type constructor ```F```. For any proper type ```A``` can produce Monoid for ```F[A]```. 
 
 ```scala
 trait MonoidK[F[_]] extends SemigroupK[F] {
@@ -669,6 +680,31 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * Free Monoids and Free Monads - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/08/20/free-monads-and-free-monoids/)
   * (Haskell) Free Monoids in Haskell - Dan Doel [(blog post)](http://comonad.com/reader/2015/free-monoids-in-haskell/)
   * (Haskell) Many Roads to Free Monads - Dan Doel [(blog post)](https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads)
+
+### Category
+
+Abstraction for operations that can be composed and that provide no-op (id).
+
+```scala
+trait Compose[F[_, _]] {
+  def compose[A, B, C](f: F[B, C], g: F[A, B]): F[A, C] // alias <<<
+}
+
+trait Category[F[_, _]] extends Compose[F] {
+  def id[A]: F[A, A]
+}
+```
+
+* Category laws
+ * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`
+ * left `f.compose(id) == id.compose(f) == f`
+
+* Resources
+  * (Category Theory) Category Theory 1.2: What is a category? - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
+  * Cats [src Category](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala)
+  * Cats [src Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala)
+  * Cats [src Compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala)
+  * Cats [src Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala)
 
 ### Arrow
 * Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
@@ -855,6 +891,20 @@ there is unique natural transformation d: M -> R.
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)  
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
+
+
+### Day Convolution
+
+* Haskell
+
+```haskell
+data Day f g a where
+  Day :: (x -> y -> a) -> f x -> g y -> Day f g a
+```
+
+* Resources
+  * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
+  * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
 
 ### Codensity
 
