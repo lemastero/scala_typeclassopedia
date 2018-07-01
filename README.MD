@@ -22,7 +22,7 @@ Summary of structures in abstract algebra consisting of:
 that are total (so they form a Magma).
 
 | Algebraic structure   | associativity | identity | invertibility | commutativity | idempotency |
-|----           :|         -----:|      ---:|           ---:|           ---:|         ---:|
+| ---------------- | -------------- | --------- | -------------- | -------------- | ------------ |
 | Semigroup             | associativity |          |               |               |             |
 | Commutative semigroup | associativity |          |               | commutativity |             |
 | Inverse semigroup     | associativity |          | invertibility |               |             |
