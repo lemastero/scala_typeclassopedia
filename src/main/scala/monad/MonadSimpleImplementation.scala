@@ -1,6 +1,8 @@
 package monad
 
-class SimpleImplementation {
+import scala.language.higherKinds
+
+object MonadSimpleImplementation {
 
   /**
     * Simple implementation of Monads shown in:
@@ -34,6 +36,6 @@ class SimpleImplementation {
 
   trait Monad[M[_]] extends Functor[M] {
     def unit[A](a: A): M[A]
-    def join[A](mma: M[M[A]]): M[A]
+    def flatMap[A, B](mma: M[A])(f: A => M[B]): M[B]
   }
 }
