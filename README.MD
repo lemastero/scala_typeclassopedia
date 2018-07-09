@@ -762,7 +762,7 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
 | abstraction | free construction     |
 | ----------- | --------------------- |
 | Monoid      | List                  | 
-| Functor     | [Coyoneda](#yoneda-and-coyoneda)     |
+| Functor     | [Coyoneda](#coyoneda)     |
 | Applicative | [FreeApplicative](#free-applicative) |
 | Monad       | [Free Monads](#free-monads)          |
 | Comonad     | [CoFree](#cofree)                    |
@@ -800,7 +800,50 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
 
-### Yoneda and Coyoneda
+### Yoneda
+
+Something that satisfy:
+
+```scala
+trait Yoneda[F[_], A] {
+  def run[R](f: A => R): F[R]
+}
+```
+
+* we can define functor for it:
+```scala
+def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
+  new Functor[Yoneda[F, ?]] {
+    def map[A, B](fa: Yoneda[F, A])(f: A => B): Yoneda[F, B] =
+      new Yoneda[F, B] {
+        def run[C](f2: B => C): F[C] = fa.run(f andThen f2)
+      }
+  }
+```
+* we need Functor instance for F to create instance of Yoned for F
+```scala
+def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
+  new Yoneda[F, A] {
+    def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
+  }
+```
+* we don't need the fact that F is a Functor to go back to F
+```scala
+def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
+```
+
+* Yoneda effectively stack computations. 
+
+* Resources
+  * https://vimeo.com/122708005
+  * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
+  * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
+  * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
+  * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
+  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
+  * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
+
+### Coyoneda
 * Resources
   * https://vimeo.com/122708005
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
