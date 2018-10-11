@@ -984,7 +984,7 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
 
 ```haskell
 data Day f g a where
-  Day :: (x -> y -> a) -> f x -> g y -> Day f g a
+  Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
 ```
 
 * Resources
