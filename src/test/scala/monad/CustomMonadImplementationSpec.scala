@@ -1,25 +1,16 @@
 package monad
 
+import monad.MonadSimpleImplementation.Monad
 import org.scalatest.{FunSpec, MustMatchers}
 
 class CustomMonadImplementationSpec
   extends FunSpec
   with MustMatchers {
 
-  trait Functor[F[_]] {
-    def map[A, B](x: F[A])(f: A => B): F[B]
-  }
-
-  trait Monad[M[_]] extends Functor[M] {
-    def pure[A](a: A): M[A]
-    def flatten[A](mma: M[M[A]]): M[A]
-    def flatMap[A, B](ma: M[A])(f: A => M[B]): M[B] = flatten(map(ma)(f))
-  }
-
   val listMonad: Monad[List] = new Monad[List] {
     def pure[A](a: A): List[A] = List(a)
     def map[A, B](x: List[A])(f: A => B): List[B] = x.map(f)
-    def flatten[A](mma: List[List[A]]): List[A] = mma.flatten
+   override def flatten[A](mma: List[List[A]]): List[A] = mma.flatten
   }
 
   val radiusList: List[Int] = (1 to 3).toList

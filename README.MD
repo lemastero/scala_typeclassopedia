@@ -937,7 +937,7 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/) 
   * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
 
-### Ran (Right Kan extension)
+### Right Kan extension
 
 ```scala
 trait Ran[G[_], H[_], A] {
@@ -978,7 +978,35 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
 
 
+### Left Kan Extension
+
+```scala
+trait Lan[F[_], H[_], A] {
+  type B
+  val hb: H[B]
+  def f: F[B] => A
+}
+```
+
+* we can define Functor for it
+```scala
+def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, ?]] = new Functor[Lan[F, H, ?]]() {
+  def map[A, X](x: Lan[F, H, A])(fax: A => X): Lan[F, H, X] = {
+    new Lan[F, H, X] {
+      type B = x.B
+      val hb: H[B] = x.hb
+      def f: F[B] => X = x.f andThen fax
+    }
+  }
+}
+```
+
 ### Day Convolution
+
+Monads are monoids in a monoidal category of endofunctors.
+Applicative functors are also monoids in a monoidal category of endofunctors but as a tensor is used Day convolution.
+
+There is nice intuition for Day convolution as generalization of one of Applicative Functor methods. 
 
 * Haskell
 
@@ -987,7 +1015,42 @@ data Day f g a where
   Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
 ```
 
+```scala
+trait DayConvolution[F[_], G[_], A] {
+  type X
+  type Y
+  val fx: F[X]
+  val gy: G[Y]
+  def xya: X => Y => A
+}
+
+/* creating Day Convolution */
+def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): DayConvolution[F, G, B] = new DayConvolution[F, G, B] {
+  type X = A=>B
+  type Y = A
+  val fx: F[X] = fab
+  val gy: G[Y] = ga
+  def xya: X => Y => B = identity[A => B]
+}
+```
+
+we can define Functor instance:
+```scala
+def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
+  def map[C, D](d: DayConvolution[F, G, C])(f: C => D): DayConvolution[F, G, D] =
+    new DayConvolution[F, G, D] {
+      type X = d.X
+      type Y = d.Y
+      val fx: F[X] = d.fx
+      val gy: G[Y] = d.gy
+
+      def xya: X => Y => D = x => y => f(d.xya(x)(y))
+    }
+}
+```
+
 * Resources
+  * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
   * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
   * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
 

@@ -1,5 +1,7 @@
 package monad
 
+import functor.FunctorSimpleImpl.Functor
+
 import scala.language.higherKinds
 
 object MonadSimpleImplementation {
@@ -10,11 +12,6 @@ object MonadSimpleImplementation {
     * A Scala Comonad Tutorial, Part 1
     * http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/
     */
-
-  // law: Functor[F].map(x)(identity) == x
-  trait Functor[F[_]] {
-    def map[A, B](x: F[A])(f: A => B): F[B]
-  }
 
   /* laws:
 
@@ -35,7 +32,8 @@ object MonadSimpleImplementation {
   */
 
   trait Monad[M[_]] extends Functor[M] {
-    def unit[A](a: A): M[A]
-    def flatMap[A, B](mma: M[A])(f: A => M[B]): M[B]
+    def pure[A](a: A): M[A]
+    def flatten[A](mma: M[M[A]]): M[A] = flatMap(mma)(identity)
+    def flatMap[A, B](ma: M[A])(f: A => M[B]): M[B] = flatten(map(ma)(f))
   }
 }

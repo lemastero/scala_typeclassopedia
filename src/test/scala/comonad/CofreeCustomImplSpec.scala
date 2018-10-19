@@ -1,20 +1,14 @@
 package comonad
 
+import comonad.ComonadSimpleImpl.Comonad
+import functor.FunctorSimpleImpl.Functor
 import org.scalatest.{FunSpec, MustMatchers}
+
+import scala.language.higherKinds
 
 class CofreeCustomImplSpec
   extends FunSpec
   with MustMatchers {
-
-  trait Functor[F[_]] {
-    def map[A, B](x: F[A])(f: A => B): F[B]
-  }
-
-  trait Comonad[W[_]] extends Functor[W] {
-    def extract[A](w: W[A]): A
-    def duplicate[A](wa: W[A]): W[W[A]]
-    def extend[A, B](w: W[A])(f: W[A] => B): W[B] = map(duplicate(w))(f) // coKleisi composition
-  }
 
   case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: Functor[F]) {
     def map[B](f: A => B): Cofree[B, F] = Cofree(f(extract), functor.map(sub)(_.map(f)))

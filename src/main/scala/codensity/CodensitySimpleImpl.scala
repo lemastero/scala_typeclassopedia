@@ -17,12 +17,12 @@ object CodensitySimpleImpl {
           def run[C](f2: B => G[C]): G[C] = fa.run(f andThen f2)
         }
 
-      def unit[A](a: A): Codensity[G, A] =
+      def pure[A](a: A): Codensity[G, A] =
         new Codensity[G, A] {
           def run[B](f: A => G[B]): G[B] = f(a)
         }
 
-      def flatMap[A, B](c: Codensity[G, A])(f: A => Codensity[G, B]): Codensity[G, B] =
+      override def flatMap[A, B](c: Codensity[G, A])(f: A => Codensity[G, B]): Codensity[G, B] =
         new Codensity[G, B] {
           def run[C](f2: B => G[C]): G[C] = c.run(a => f(a).run(f2))
         }
