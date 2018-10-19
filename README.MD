@@ -937,7 +937,7 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/) 
   * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
 
-### Ran (Right Kan extension)
+### Right Kan extension
 
 ```scala
 trait Ran[G[_], H[_], A] {
@@ -978,7 +978,35 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
 
 
+### Left Kan Extension
+
+```scala
+trait Lan[F[_], H[_], A] {
+  type B
+  val hb: H[B]
+  def f: F[B] => A
+}
+```
+
+* we can define Functor for it
+```scala
+def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, ?]] = new Functor[Lan[F, H, ?]]() {
+  def map[A, X](x: Lan[F, H, A])(fax: A => X): Lan[F, H, X] = {
+    new Lan[F, H, X] {
+      type B = x.B
+      val hb: H[B] = x.hb
+      def f: F[B] => X = x.f andThen fax
+    }
+  }
+}
+```
+
 ### Day Convolution
+
+Monads are monoids in a monoidal category of endofunctors.
+Applicative functors are also monoids in a monoidal category of endofunctors but as a tensor is used Day convolution.
+
+There is nice intuition for Day convolution as generalization of one of Applicative Functor methods. 
 
 * Haskell
 
@@ -1022,6 +1050,7 @@ def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayCo
 ```
 
 * Resources
+  * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
   * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
   * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
 
