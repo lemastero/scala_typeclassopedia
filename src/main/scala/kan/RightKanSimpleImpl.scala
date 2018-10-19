@@ -1,8 +1,8 @@
 package kan
 
 import scala.language.higherKinds
-import monad.MonadSimpleImplementation.Functor
 import codensity.CodensitySimpleImpl.Codensity
+import functor.FunctorSimpleImpl.Functor
 
 /**
   * Right Kan Extension (Ran G H) of h along g

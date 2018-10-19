@@ -1,14 +1,13 @@
 package comonad
 
+import functor.FunctorSimpleImpl.Functor
 import org.scalatest.{FunSpec, MustMatchers}
+
+import scala.language.higherKinds
 
 class ComonadCustomImplSpec
   extends FunSpec
     with MustMatchers {
-
-  trait Functor[F[_]] {
-    def map[A, B](x: F[A])(f: A => B): F[B]
-  }
 
   /* Comonads are dual to Monads
    ------------------------------------------

@@ -1,6 +1,6 @@
 package yoneda
 
-import monad.MonadSimpleImplementation.Functor
+import functor.FunctorSimpleImpl.Functor
 
 import scala.language.higherKinds
 
