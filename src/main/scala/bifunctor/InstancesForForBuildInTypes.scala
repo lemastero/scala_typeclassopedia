@@ -1,4 +1,4 @@
-package functor.bifunctor
+package bifunctor
 
 import cats.Bifunctor
 
