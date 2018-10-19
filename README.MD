@@ -987,6 +987,40 @@ data Day f g a where
   Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
 ```
 
+```scala
+trait DayConvolution[F[_], G[_], A] {
+  type X
+  type Y
+  val fx: F[X]
+  val gy: G[Y]
+  def xya: X => Y => A
+}
+
+/* creating Day Convolution */
+def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): DayConvolution[F, G, B] = new DayConvolution[F, G, B] {
+  type X = A=>B
+  type Y = A
+  val fx: F[X] = fab
+  val gy: G[Y] = ga
+  def xya: X => Y => B = identity[A => B]
+}
+```
+
+we can define Functor instance:
+```scala
+def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
+  def map[C, D](d: DayConvolution[F, G, C])(f: C => D): DayConvolution[F, G, D] =
+    new DayConvolution[F, G, D] {
+      type X = d.X
+      type Y = d.Y
+      val fx: F[X] = d.fx
+      val gy: G[Y] = d.gy
+
+      def xya: X => Y => D = x => y => f(d.xya(x)(y))
+    }
+}
+```
+
 * Resources
   * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
   * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
