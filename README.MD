@@ -267,6 +267,10 @@ Examples for [usage of map, derived methods, compose](https://github.com/lemaste
 
 ### Apply
 
+Apply is a Functor that can apply function already inside container to container of arguments.
+
+Apply is a weaker version of Applicative that cannot put value inside effetc F.
+
 ```scala
 trait Apply[F[_]] extends Functor[F] {
   def ap[A, B](ff: F[A => B])(fa: F[A]): F[B]
@@ -275,11 +279,20 @@ trait Apply[F[_]] extends Functor[F] {
 
 * Derived methods
 ```scala
-def product[A,B](fa: F[A], fb: F[B]): F[(A, B)]
-def ap2[A,B,C]  (fa: => F[A], fb: => F[B])             (f: F[(A,B) => C]): F[C]
-def ap3[A,B,C,D](fa: => F[A], fb: => F[B], fc: => F[C])(f: F[(A,B,C) => D]): F[D]
+def apply2[A, B, Z]   (fa: F[A], fb: F[B])          (ff: F[(A,B) => Z]): F[Z]
+def apply3[A, B, C, Z](fa: F[A], fb: F[B], fc: F[C])(ff: F[(A,B,C) => Z]): F[Z]
 // ...
-def map2[A, B, Z](fa: F[A], fb: F[B])(f: (A, B) => Z): F[Z]
+
+def map2[A , B, Z]  (fa: F[A], fb: F[B])          (f: (A, B) => Z):    F[Z]
+def map3[A, B, C, Z](fa: F[A], fb: F[B], fc: F[C])(f: (A, B, C) => Z): F[Z]
+// ...
+
+def tuple2[A, B]   (fa: F[A], fb: F[B]):           F[(A, B)]
+def tuple3[A, B, C](fa: F[A], fb: F[B], fc: F[C]): F[(A, B, C)]
+// ...
+
+def product[A,B](fa: F[A], fb: F[B]): F[(A, B)]
+def flip[A, B](ff: F[A => B]): F[A] => F[B]
 ```
 * Can compose
 * Resources
@@ -289,12 +302,11 @@ def map2[A, B, Z](fa: F[A], fb: F[B])(f: (A, B) => Z): F[Z]
 ### Applicative (Applicative Functor)
 
 Applicative Functor is a Functor that can:
+- apply function already inside container to container of arguments (so it is Apply)
 - put value into container (lift into effect)
-- apply function already inside container to container
 ```scala
 trait Applicative[F[_]] extends Apply[F] {
-  def pure[A](value: A): F[A]  
-  def apply[A, B](fa: F[A])(ff: F[A => B]): F[B]
+  def pure[A](value: A): F[A]
 }
 ```
 * Applicative Laws:
@@ -302,19 +314,7 @@ trait Applicative[F[_]] extends Apply[F] {
 2. homomorphism: `pure(a).apply(pure(f)) == pure(f(a))` lifting value a and applying lifted function f is the same as apply function to this value and then lift result
 3. interchange: `pure(a).apply(ff) == ff.apply(pure(f => f(a)))` where `ff: F[A => B]`
 4. map: `fa.map(f) == fa.apply(pure(f))`
-* Derived methods:
-```scala
-def apply [A, B]   (fa: F[A])          (ff: F[A => B]):     F[B]
-def apply2[A, B, Z](fa: F[A], fb: F[B])(ff: F[(A,B) => Z]): F[Z]
-// ...
-def map2[A , B, Z]  (fa: F[A], fb: F[B])          (f: (A, B) => Z):    F[Z]
-def map3[A, B, C, Z](fa: F[A], fb: F[B], fc: F[C])(f: (A, B, C) => Z): F[Z]
-// ...
-def tuple2[A, B]   (fa: F[A], fb: F[B]):           F[(A, B)]
-def tuple3[A, B, C](fa: F[A], fb: F[B], fc: F[C]): F[(A, B, C)]
-// ...
-def flip[A, B](ff: F[A => B]): F[A] => F[B]
-```
+* Derived methods - see Apply
 * Applicatives can be composed
 * Minimal set of methods to implement Applicative (other methods can be derived from them):
   * map2, pure
@@ -1014,6 +1014,7 @@ There is nice intuition for Day convolution as generalization of one of Applicat
 data Day f g a where
   Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
 ```
+* Scala
 
 ```scala
 trait DayConvolution[F[_], G[_], A] {
@@ -1034,7 +1035,8 @@ def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): DayConvolution[F, G, B] = n
 }
 ```
 
-we can define Functor instance:
+* we can define Functor instance:
+
 ```scala
 def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
   def map[C, D](d: DayConvolution[F, G, C])(f: C => D): DayConvolution[F, G, D] =
