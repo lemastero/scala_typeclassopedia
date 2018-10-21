@@ -4,12 +4,16 @@ import functor.FunctorSimpleImpl.Functor
 
 import scala.language.higherKinds
 
-// newtype Yoneda f a = Yoneda (forall r. (a -> r) -> f r)
-trait Yoneda[F[_], A] {
-  def run[R](f: A => R): F[R]
-}
+object YonedaSimpleImpl {
 
-object Yoneda {
+  /** Yoneda lemma
+    *
+    * http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Yoneda.html
+    * newtype Yoneda f a = Yoneda (forall r. (a -> r) -> f r)
+    */
+  trait Yoneda[F[_], A] {
+    def run[R](f: A => R): F[R]
+  }
 
   /*
     instance Functor (Yoneda f) where
