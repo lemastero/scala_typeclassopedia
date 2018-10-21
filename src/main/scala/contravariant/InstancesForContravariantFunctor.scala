@@ -1,4 +1,4 @@
-package functor.contravariant
+package contravariant
 
 import cats.Contravariant
 
