@@ -754,6 +754,15 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * FSiS 8 - EitherT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=z7rCBQ_vTRg)
 
 ### Natural transformation (FunctionK)
+
+Represent mappings between two functors.
+
+```scala
+  trait NaturalTransf[F[_], G[_]] {
+    def apply[A](fa: F[A]): G[A]
+  }
+```
+
 * Resources
   * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala)
 
@@ -1022,20 +1031,33 @@ trait DayConvolution[F[_], G[_], A] {
   type Y
   val fx: F[X]
   val gy: G[Y]
-  def xya: X => Y => A
-}
-
-/* creating Day Convolution */
-def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): DayConvolution[F, G, B] = new DayConvolution[F, G, B] {
-  type X = A=>B
-  type Y = A
-  val fx: F[X] = fab
-  val gy: G[Y] = ga
-  def xya: X => Y => B = identity[A => B]
+  def xya: (X, Y) => A
 }
 ```
 
-* we can define Functor instance:
+* There is various ways to create Day Convolution:
+```scala
+def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): Day[F, G, B]
+def intro1[F[_], A](fa: F[A]): Day[Id, F, A]
+def intro2[F[_], A](fa: F[A]): Day[F, Id, A]
+```
+
+* Day convolution can be transformed by mapping over last argument, applying natural transformation to one of type constructors, or swapping them
+```scala
+def map[B](f: A => B): Day[F, G, B]
+def trans1[H[_]](nat: NaturalTransf[F, H]): Day[H, G, A]
+def trans2[H[_]](nat: NaturalTransf[G, H]): Day[F, H, A]
+def swapped: Day[G, F, A] = new Day[G, F, A]
+```
+
+* There is various ways to collapse Day convolution into value in type constructor:
+```scala
+def elim1[F[_], A](d: Day[Id, F, A])(implicit FunF: Functor[F]): F[A]
+def elim2[F[_], A](d: Day[F, Id, A])(implicit FunF: Functor[F]): F[A]
+def dap[F[_], A](d: Day[F, F, A])(implicit AF: Applicative[F]): F[A]
+```
+
+* We can define Functor instance without any conditions on type constructors (so it forms Functor for free like Coyoneda):
 
 ```scala
 def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
@@ -1051,10 +1073,14 @@ def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayCo
 }
 ```
 
+* If both type constructor are Applicative then whoe Day Convolution is applicative.
+Similarly it is Comonad if both type constructors are Comonads.
+
 * Resources
   * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
   * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
   * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
+  * [(Haskell implementation)](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html)
 
 ### Codensity
 
