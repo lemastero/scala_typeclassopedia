@@ -1,6 +1,7 @@
 package comonad
 
 import functor.FunctorSimpleImpl.Functor
+import simple.Id
 import org.scalatest.{FunSpec, MustMatchers}
 
 import scala.language.higherKinds
@@ -35,8 +36,6 @@ class ComonadCustomImplSpec
   }
 
   describe("Comonad") {
-
-    case class Id[A](value: A)
 
     val idComonad = new Comonad[Id] {
       def map[A, B](x: Id[A])(f: A => B): Id[B] = Id(f(x.value))
