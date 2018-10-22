@@ -12,5 +12,6 @@ object ApplicativeSimpleImpl {
 
   trait Applicative[F[_]] extends Apply[F] {
     def pure[A](value: A): F[A]
+    def liftA2[A, B, Z](abc: (A, B) => Z)(fa: F[A], fb: F[B]): F[Z] = apply(map(fa)(abc.curried))(fb)
   }
 }
