@@ -758,9 +758,9 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
 Represent mappings between two functors.
 
 ```scala
-  trait NaturalTransf[F[_], G[_]] {
-    def apply[A](fa: F[A]): G[A]
-  }
+trait NaturalTransf[F[_], G[_]] {
+  def apply[A](fa: F[A]): G[A]
+}
 ```
 
 * Resources
