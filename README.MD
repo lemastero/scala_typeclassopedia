@@ -1,6 +1,6 @@
 # Scala typeclassopedia
 
-* Resources covering topis about FP and category theory in great details and very approachable form:
+* Resources covering topics about FP and category theory in great details and very approachable form:
   * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason](https://www.manning.com/books/functional-programming-in-scala) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): workshop on [implementating FP constructions](https://github.com/mpilquist/Structures) with usage examples and great insights about Scala and FP.
   * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) and [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
@@ -9,7 +9,8 @@
   * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
   * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) another implementation of FP constructions
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
-  
+  * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
+
 ## Abstract Algebra
 
 ### Summary of structures with one operation
@@ -192,7 +193,7 @@ For example size and Monoid - list with concatenation and integers with addition
 
 * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
 
-### Tropical semi-ring (Min-Plus algebra)
+### Tropical semiring (Min-Plus algebra)
 
 * twitter/algebird [src](https://github.com/twitter/algebird/blob/develop/algebird-core/src/main/scala/com/twitter/algebird/MinPlus.scala)
 
@@ -337,7 +338,7 @@ We add to Apply ability `flatMap` that can join two computations
 and use the output from previous computations to decide what computations to run next.
 
 ```scala
-trait Monad[F[_]] extends Apply[F] { self =>
+trait Monad[F[_]] extends Apply[F] {
   def pure[A](value: A): F[A]
   def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B]
 }
@@ -985,6 +986,7 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)  
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
+  * Purescript implementation of [Kan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs)
 
 
 ### Left Kan Extension
@@ -1081,6 +1083,8 @@ Similarly it is Comonad if both type constructors are Comonads.
   * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
   * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
   * [(Haskell implementation)](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html)
+  * [(Purescritp implementation)](https://github.com/paf31/purescript-day/blob/master/src/Data/Functor/Day.purs)
+  * (Purescript) extensible coeffect system built out of comonads and Day convolution library [(library)](https://github.com/paf31/purescript-smash)
 
 ### Codensity
 
@@ -1139,7 +1143,7 @@ trait Representable[F[_], Rep] {
   * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
   * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
-  * https://adelbertc.github.io/posts/2017-08-09-representable-functors.html
+  * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
   * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
   * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
   * https://stackoverflow.com/a/46502280
@@ -1172,6 +1176,11 @@ trait Representable[F[_], Rep] {
 * Resources:
   * Beyond Scala Lenses - Julien Truffaut: [(video)](https://www.youtube.com/watch?v=6nyGVgGEKdA&t=1694)
   * scalaz [Lens src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Lens.scala) [(PLens src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/PLens.scala)
+
+### Profunctor Optics
+* Resources:
+  * Bartosz Milewski - Profunctor Optics: The Categorical Approach [(video)](https://www.youtube.com/watch?v=l1FCXUi6Vlw)
+  * Jeremy Gibbons - Profunctor Optics Modular Data Accessors [(video)](https://www.youtube.com/watch?v=sfWzUMViP0M)
 
 ## Functional data structures
 
