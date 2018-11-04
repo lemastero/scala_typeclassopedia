@@ -538,9 +538,48 @@ def without(a: A, b: A): A = and(a, complement(b))
 
 * [typelevel/algebra Bool](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/Bool.scala)
 
+## Rig
+ * https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rig.scala
+
+## Rng
+
+* https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rng.scala
+
+## Semiring
+
+* https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Semiring.scala
+
 ## Ring
 
-* twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
+Abelian group with a second binary operation that is associative, is distributive over the abelian group operation, and has an identity element.
+
+```scala
+trait Ring[T] extends Group[T] {
+  def zero: T // empty mempty 
+  def plus(l: T, r: T): T // combine mappend <> |+|
+  def negate(v: T): T // inverse
+  def one: T
+  def times(l: T, r: T): T
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. identity: `(x |+| zero) == x == (zero |+| x)`
+  4. inverse: `(x |+| -x) == (-x |+| x) == zero`
+  5. commutativity: `(x |+| y) == (x |+| y)`
+  6. associativity: `((x * y) * z) == (x * (y * z))`
+  7. right identity: `(x * one) == x`
+  8. left identity: `(one * x) == x`
+  9. distributive: `a * (b |+| c) == (a * b) |+| (a * c)` 
+
+* Resources
+   * typelevel/algebra [src](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Ring.scala) [laws](https://github.com/typelevel/algebra/blob/master/laws/src/main/scala/algebra/laws/RingLaws.scala)
+   * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
+
+## Field
+
+* https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Field.scala
 
 ## Tropical semiring (Min-Plus algebra)
 
