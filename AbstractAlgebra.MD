@@ -39,7 +39,7 @@ Abstract over associative operation `combine` on some proper type A.
 
 ```scala
 trait Semigroup[A] {
-  def combine(x: A, y: => A): A // |+| mappend
+  def combine(x: A, y: => A): A // |+| mappend <>
 }
 ```
 
@@ -51,7 +51,10 @@ def combineN(a: A, n: Int): A // multiply1
 def combineAllOption(as: TraversableOnce[A]): Option[A]
 ```
 
-* Semigroup can be defined for List (with list concatenation), Vector, Nel, Short/Int/Long with +, Strings with string concatenation
+* Semigroup can be defined for:
+  - containers like List, Vector, Nel with concatenation
+  - numeric types like Short/Int/Long/BigInteger with + or *
+  - Strings with string concatenation
 
 * Examples how to define alternative Semigroup instances [for Option, Int with *](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monoid/AlternativeMonoidInstances.scala) and [usage](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/monoid/AlternativeMonoidInstancesSpec.scala).
 Examples for usage of derived methods and combine [(src)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/semigroup/SemigroupExamplesSpec.scala)  
@@ -148,13 +151,53 @@ trait CommutativeMonoid[A] extends Monoid[A] with CommutativeSemigroup[A] {
 * Resources 
   * [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeMonoid.scala) [(laws)](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/CommutativeMonoidLaws.scala)
 
+## RegularSemigroup
+
+Semigroup where element with it's inverse don't produce neutral element but produce sth that
+behaves like one. 
+
+```scala
+trait RegularSemigroup[A] extends Monoid[A] {
+  def combine(x: A, y: => A): A // |+| mappend <>
+  def inverse(a: A): A
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. pseudoinverse 1: `x |+| -x |+| x ==  x`
+  3. pseudoinverse 2: `-x |+| x |+| -x == -x`
+  
+* there could be multiple inverse elements (in group there is only one inverse)
+* x |+| -x is idempotent, because
+ (x |+| -x) |+| (x |+| -x) == (x |+| -x |+| x) |+| -x == x |+| -x
+  
+## InverseSemigroup
+
+Semigroup (or regular semigroup) in which every element has unique inverse.
+Other definition: Semigroup in which every element has at least one inverse and
+all indempotent elements commute.you
+
+```scala
+trait InverseSemigroup[A] extends RegularSemigroup[A] {
+  def combine(x: A, y: => A): A // |+| mappend <>
+  def inverse(a: A): A
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. pseudoinverse 1: `x |+| -x |+| x ==  x`
+  3. pseudoinverse 2: `-x |+| x |+| -x == -x`
+  4. pseudoinverse is unique
+
 ## Group
 
 Monoid where each element has an inverse
 
 ```scala
 trait Group[A] extends Monoid[A] {
-  def combine(x: A, y: => A): A // |+| mappend
+  def combine(x: A, y: => A): A // |+| mappend <>
   def empty: A // mempty
   def inverse(a: A): A
 }
@@ -516,8 +559,3 @@ def without(a: A, b: A): A = and(a, complement(b))
 * Resources:
   * Erik Osheim - Regexes, Kleene Algebras, and Real Ultimate Power! [(video)](https://vimeo.com/96644096)
   * (Haskell) A Very General Method of Computing Shortest Paths [(article)](http://r6.ca/blog/20110808T035622Z.html)
-
-## Propagators
-
-* Resources
-  * Propagators - Edward Kmett: [(video theory)](https://www.youtube.com/watch?v=acZkF6Q2XKs) 
