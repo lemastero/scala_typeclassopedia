@@ -11,7 +11,7 @@
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
 
-## [Abstract Algebra](../AbstractAlgebra.MD)
+## [Abstract Algebra](./AbstractAlgebra.MD)
 
 ## Category Theory
 
