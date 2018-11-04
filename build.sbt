@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % catsVersion withSources() withJavadoc(),
   "org.typelevel" %% "cats-free" % catsVersion withSources() withJavadoc(),
   "org.typelevel" %% "cats-mtl-core" % "0.3.0" withSources() withJavadoc(),
+  "org.scalaz" %% "scalaz-core" % "7.3.0-M25",
   "org.scalatest" %% "scalatest" % "3.0.5" % Test
 )
 
