@@ -171,7 +171,10 @@ trait RegularSemigroup[A] extends Monoid[A] {
 * there could be multiple inverse elements (in group there is only one inverse)
 * x |+| -x is idempotent, because
  (x |+| -x) |+| (x |+| -x) == (x |+| -x |+| x) |+| -x == x |+| -x
-  
+
+* Resources:
+   * Haskell Live-Coding, Session 4.1, Regular and Inverse Semigroups - Edward Kmett [video](https://www.youtube.com/watch?v=d7JPz3Vq9YI)
+ 
 ## InverseSemigroup
 
 Semigroup (or regular semigroup) in which every element has unique inverse.
@@ -190,6 +193,9 @@ trait InverseSemigroup[A] extends RegularSemigroup[A] {
   2. pseudoinverse 1: `x |+| -x |+| x ==  x`
   3. pseudoinverse 2: `-x |+| x |+| -x == -x`
   4. pseudoinverse is unique
+
+* Resources:
+   * Haskell Live-Coding, Session 4.1, Regular and Inverse Semigroups - Edward Kmett [video](https://www.youtube.com/watch?v=d7JPz3Vq9YI)
 
 ## Group
 
