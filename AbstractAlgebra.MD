@@ -39,7 +39,7 @@ Abstract over associative operation `combine` on some proper type A.
 
 ```scala
 trait Semigroup[A] {
-  def combine(x: A, y: => A): A // |+| mappend
+  def combine(x: A, y: => A): A // |+| mappend <>
 }
 ```
 
@@ -51,7 +51,10 @@ def combineN(a: A, n: Int): A // multiply1
 def combineAllOption(as: TraversableOnce[A]): Option[A]
 ```
 
-* Semigroup can be defined for List (with list concatenation), Vector, Nel, Short/Int/Long with +, Strings with string concatenation
+* Semigroup can be defined for:
+  - containers like List, Vector, Nel with concatenation
+  - numeric types like Short/Int/Long/BigInteger with + or *
+  - Strings with string concatenation
 
 * Examples how to define alternative Semigroup instances [for Option, Int with *](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monoid/AlternativeMonoidInstances.scala) and [usage](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/monoid/AlternativeMonoidInstancesSpec.scala).
 Examples for usage of derived methods and combine [(src)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/semigroup/SemigroupExamplesSpec.scala)  
@@ -148,13 +151,59 @@ trait CommutativeMonoid[A] extends Monoid[A] with CommutativeSemigroup[A] {
 * Resources 
   * [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeMonoid.scala) [(laws)](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/CommutativeMonoidLaws.scala)
 
+## RegularSemigroup
+
+Semigroup where element with it's inverse don't produce neutral element but produce sth that
+behaves like one. 
+
+```scala
+trait RegularSemigroup[A] extends Monoid[A] {
+  def combine(x: A, y: => A): A // |+| mappend <>
+  def inverse(a: A): A
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. pseudoinverse 1: `x |+| -x |+| x ==  x`
+  3. pseudoinverse 2: `-x |+| x |+| -x == -x`
+  
+* there could be multiple inverse elements (in group there is only one inverse)
+* x |+| -x is idempotent, because
+ (x |+| -x) |+| (x |+| -x) == (x |+| -x |+| x) |+| -x == x |+| -x
+
+* Resources:
+   * Haskell Live-Coding, Session 4.1, Regular and Inverse Semigroups - Edward Kmett [video](https://www.youtube.com/watch?v=d7JPz3Vq9YI)
+ 
+## InverseSemigroup
+
+Semigroup (or regular semigroup) in which every element has unique inverse.
+Other definition: Semigroup in which every element has at least one inverse and
+all indempotent elements commute.you
+
+```scala
+trait InverseSemigroup[A] extends RegularSemigroup[A] {
+  def combine(x: A, y: => A): A // |+| mappend <>
+  def inverse(a: A): A
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. pseudoinverse 1: `x |+| -x |+| x ==  x`
+  3. pseudoinverse 2: `-x |+| x |+| -x == -x`
+  4. pseudoinverse is unique
+
+* Resources:
+   * Haskell Live-Coding, Session 4.1, Regular and Inverse Semigroups - Edward Kmett [video](https://www.youtube.com/watch?v=d7JPz3Vq9YI)
+
 ## Group
 
 Monoid where each element has an inverse
 
 ```scala
 trait Group[A] extends Monoid[A] {
-  def combine(x: A, y: => A): A // |+| mappend
+  def combine(x: A, y: => A): A // |+| mappend <>
   def empty: A // mempty
   def inverse(a: A): A
 }
@@ -495,9 +544,48 @@ def without(a: A, b: A): A = and(a, complement(b))
 
 * [typelevel/algebra Bool](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/Bool.scala)
 
+## Rig
+ * https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rig.scala
+
+## Rng
+
+* https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rng.scala
+
+## Semiring
+
+* https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Semiring.scala
+
 ## Ring
 
-* twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
+Abelian group with a second binary operation that is associative, is distributive over the abelian group operation, and has an identity element.
+
+```scala
+trait Ring[T] extends Group[T] {
+  def zero: T // empty mempty 
+  def plus(l: T, r: T): T // combine mappend <> |+|
+  def negate(v: T): T // inverse
+  def one: T
+  def times(l: T, r: T): T
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. identity: `(x |+| zero) == x == (zero |+| x)`
+  4. inverse: `(x |+| -x) == (-x |+| x) == zero`
+  5. commutativity: `(x |+| y) == (x |+| y)`
+  6. associativity: `((x * y) * z) == (x * (y * z))`
+  7. right identity: `(x * one) == x`
+  8. left identity: `(one * x) == x`
+  9. distributive: `a * (b |+| c) == (a * b) |+| (a * c)` 
+
+* Resources
+   * typelevel/algebra [src](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Ring.scala) [laws](https://github.com/typelevel/algebra/blob/master/laws/src/main/scala/algebra/laws/RingLaws.scala)
+   * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
+
+## Field
+
+* https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Field.scala
 
 ## Tropical semiring (Min-Plus algebra)
 
@@ -516,8 +604,3 @@ def without(a: A, b: A): A = and(a, complement(b))
 * Resources:
   * Erik Osheim - Regexes, Kleene Algebras, and Real Ultimate Power! [(video)](https://vimeo.com/96644096)
   * (Haskell) A Very General Method of Computing Shortest Paths [(article)](http://r6.ca/blog/20110808T035622Z.html)
-
-## Propagators
-
-* Resources
-  * Propagators - Edward Kmett: [(video theory)](https://www.youtube.com/watch?v=acZkF6Q2XKs) 
