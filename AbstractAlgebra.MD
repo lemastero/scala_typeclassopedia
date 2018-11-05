@@ -223,6 +223,7 @@ def remove(a: A, b: A): A = combine(a, inverse(b))
 * Resources:
    * [(Cats Group src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Group.scala) [(laws)](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/GroupLaws.scala)
    * twitter/algebird Group [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Group.scala) [docs](https://twitter.github.io/algebird/typeclasses/group.html)
+   * (Haskell) [monoids Data.Group](http://hackage.haskell.org/package/algebra/docs/Numeric-Additive-Group.html#t:Group)
 
 ## Abelian Group (Commutative Group)
 
@@ -243,7 +244,9 @@ trait CommutativeGroup[A] extends Group[A] with CommutativeMonoid[A] {
   4. inverse: `(x |+| -x) == (-x |+| x) == empty`
   5. commutativity: `(x |+| y) == (x |+| y)`
 
-* [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeGroup.scala) [laws](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/CommutativeGroupLaws.scala)
+* Resources:
+   * [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeGroup.scala) [laws](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/CommutativeGroupLaws.scala)
+   * (Haskell) [algebra/Numeric.Additive Abelian](http://hackage.haskell.org/package/algebra/docs/Numeric-Additive-Class.html#t:Abelian)
 
 ## Band (Idempotent semigroup)
 
@@ -311,10 +314,10 @@ trait JoinSemilattice[A] {
 ```
 
 + Resources:
-   * [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala) [laws](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/SemilatticeLaws.scala)
-   * [scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
-   * [Meet Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/MeetSemilattice.scala) 
-   * [Join Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/JoinSemilattice.scala)
+   * [Cats Semilattice src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semilattice.scala) [laws](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/SemilatticeLaws.scala)
+   * [scalaz Semilattice src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/SemiLattice.scala)
+   * [typelevel/algebra Meet Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/MeetSemilattice.scala) 
+   * [typelevel/algebra Join Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/JoinSemilattice.scala)
 
 ## Bounded Semilattice
 
@@ -353,7 +356,7 @@ trait BoundedMeetSemilattice[A] extends MeetSemilattice[A] {
 ```
 
 * Resources:
-   * [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/BoundedSemilattice.scala) [laws](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/BoundedSemilatticeLaws.scala)
+   * [typelevel/cats BoundedSemilattice src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/BoundedSemilattice.scala) [laws](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/BoundedSemilatticeLaws.scala)
    * [typelevel/algebra Bounded Join Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/BoundedJoinSemilattice.scala)
    * [typelevel/algebra Bounded Meet Semilattice](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/BoundedMeetSemilattice.scala)
 
@@ -535,21 +538,66 @@ def without(a: A, b: A): A = and(a, complement(b))
   11. identity of one: `a meet one == a`
   12. complement law: `a meet -a == 0`
   13. implication laws:
-    `a -> a == 1`
-    `a ∧ (a -> b) == a meet b`
-    `b ∧ (a -> b) == b`
-    `a -> (b meet c) == (a -> b) meet (a -> c)`
-  14. excluded middle law:
-    `(a join (a -> 0)) == 1` 
+    - `a -> a == 1`
+    - `a ∧ (a -> b) == a meet b`
+    - `b ∧ (a -> b) == b`
+    - `a -> (b meet c) == (a -> b) meet (a -> c)`
+  14. excluded middle law: `(a join (a -> 0)) == 1` 
 
 * [typelevel/algebra Bool](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/lattice/Bool.scala)
 
 ## Rig
- * https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rig.scala
 
-## Rng
+Ring without (n)egation
 
-* https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rng.scala
+```scala
+trait Ring[T] extends CommutativeGroup[T] {
+  def zero: T // empty mempty 
+  def plus(l: T, r: T): T // combine mappend <> |+|
+  def negate(v: T): T // inverse
+  def one: T
+  def times(l: T, r: T): T
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. identity: `(x |+| zero) == x == (zero |+| x)`
+  4. inverse: `(x |+| -x) == (-x |+| x) == zero`
+  5. commutativity: `(x |+| y) == (x |+| y)`
+  6. associativity: `((x * y) * z) == (x * (y * z))`
+  7. right identity: `(x * one) == x`
+  8. left identity: `(one * x) == x`
+  9. distributive: `a * (b |+| c) == (a * b) |+| (a * c)` 
+
+* Resources
+   * [typelevel/algebra Rng](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rig.scala)
+   * (Haskell) [algebra/Numeric.Rig](http://hackage.haskell.org/package/algebra/docs/Numeric-Rig-Class.html)
+
+## Rng (Semiring)
+
+Ring without an identity
+
+```scala
+trait Rng[T] extends CommutativeGroup[T] {
+  def zero: T // empty mempty 
+  def plus(l: T, r: T): T // combine mappend <> |+|
+  def negate(v: T): T // inverse
+  def times(l: T, r: T): T
+}
+```
+
+* laws:
+  1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
+  2. identity: `(x |+| zero) == x == (zero |+| x)`
+  4. inverse: `(x |+| -x) == (-x |+| x) == zero`
+  5. commutativity: `(x |+| y) == (x |+| y)`
+  6. associativity: `((x * y) * z) == (x * (y * z))`
+  9. distributive: `a * (b |+| c) == (a * b) |+| (a * c)` 
+
+* Resources
+   * [typelevel/algebra Rng](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Rng.scala)
+   * (Haskell) [algebra/Numeric.Rng](http://hackage.haskell.org/package/algebra/docs/Numeric-Rng-Class.html#t:Rng)
 
 ## Semiring
 
@@ -560,7 +608,7 @@ def without(a: A, b: A): A = and(a, complement(b))
 Abelian group with a second binary operation that is associative, is distributive over the abelian group operation, and has an identity element.
 
 ```scala
-trait Ring[T] extends Group[T] {
+trait Ring[T] extends CommutativeGroup[T] {
   def zero: T // empty mempty 
   def plus(l: T, r: T): T // combine mappend <> |+|
   def negate(v: T): T // inverse
