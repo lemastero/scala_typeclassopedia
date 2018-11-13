@@ -180,6 +180,8 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
   * (Haskell) Monads for functional programming - Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf)
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
+  * [wiki.haskell - Blow your mind - Monad magic](https://wiki.haskell.org/Blow_your_mind#Monad_magic)
+  * https://www.quora.com/What-are-some-crazy-things-one-can-do-with-monads-in-Haskell
 
 ### Reader
 
@@ -222,6 +224,29 @@ case class Reader[-In, +R](run: In => R) {
   * Continuation monad in Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/continuation-monad-in-scala/index.html)
   * (Haskell) School of Haskell - The Mother of all Monads - Dan Piponi [(blog post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/the-mother-of-all-monads)
   * (Haskell) Haskell for all - The Continuation Monad - Gabriel Gonzalez [(blog post)](http://www.haskellforall.com/2012/12/the-continuation-monad.html)
+
+### Reverse State Monad
+
+* Resources
+  * https://stackoverflow.com/questions/43712476/real-life-and-useful-examples-of-reverse-state-monad
+  * The Curious Time-Traveling Reverse State Monad [(blog post)](https://tech-blog.capital-match.com/posts/5-the-reverse-state-monad.html)
+  * https://kseo.github.io/posts/2017-01-21-writer-monad.html
+  * https://pavkin.ru/reverse-state-monad-in-scala-is-it-possible/
+
+### Tardis (Bidirectional State Monad)
+
+* https://www.pusher.com/sessions/meetup/london-functional-programmers/interview-pro-tip-travel-through-time
+* https://rosettacode.org/wiki/Water_collected_between_towers
+* http://landcareweb.com/questions/33409/haskellde-ni-xiang-xing-cong-tardisdao-revstate
+* http://hackage.haskell.org/package/tardis/docs/Control-Monad-Tardis.html
+* https://kcsongor.github.io/time-travel-in-haskell-for-dummies/
+* https://www.reddit.com/r/haskell/comments/199po0/can_the_tardis_monad_be_used_in_an_efficient_way/
+* https://repl.it/@Ouroboros2/Haskell-Tardis-1
+* http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
+
+### F-Algebra
+
+* https://lukepalmer.wordpress.com/2013/03/12/constructions-on-typeclasses-part-1-f-algebras/
 
 ### Monoidal Categories, Monoid Object
 * Resources
@@ -681,14 +706,17 @@ def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
 def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
 ```
 * Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala)
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
+   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala) [laws](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45)
    * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
    * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
+   * Monadic profunctors for bidirectional programming [(post)](https://blog.poisson.chat/posts/2017-01-01-monadic-profunctors.html), [(blog Lysxia)](https://blog.poisson.chat/), repo [Lysxia/profunctor-monad](https://github.com/Lysxia/profunctor-monad)
+   * Analog of free monads for Profunctors [(post SO)](https://stackoverflow.com/questions/39241262/analog-of-free-monads-for-profunctors)
+   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
 
 ### Strong
 
-Profunctor with additional metho first
+Profunctor with additional method first, that wrap both types with Tuple.
 
 ```scala
 trait Strong[P[_, _]] extends Profunctor[P] {
@@ -701,9 +729,16 @@ trait Strong[P[_, _]] extends Profunctor[P] {
 def second[A,B,C](pab: P[A, B]): P[(C, A), (C, B)]
 ```
 
-* http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html
+* Resources
+   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala)
+   * Haskell [Data.Profunctor.Strong](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
+   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
+   
 
 ### Choice
+
+Profunctor with additional method left that wrap both types inside Either.
 
 ```scala
 trait Choice[P[_, _]] extends Profunctor[P] {
@@ -716,7 +751,11 @@ trait Choice[P[_, _]] extends Profunctor[P] {
 def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
 ```
 
-* http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html
+* Resources
+   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ChoiceLaws.scala)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
+   * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
+   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
 
 ### Category
 
