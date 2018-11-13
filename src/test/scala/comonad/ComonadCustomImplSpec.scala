@@ -3,6 +3,7 @@ package comonad
 import functor.FunctorSimpleImpl.Functor
 import simple.Id
 import org.scalatest.{FunSpec, MustMatchers}
+import semigroup.MonoidSimpleImpl.Monoid
 
 import scala.language.higherKinds
 
@@ -28,11 +29,6 @@ class ComonadCustomImplSpec
     def extract[A](w: W[A]): A
     def duplicate[A](wa: W[A]): W[W[A]]
     def extend[A, B](w: W[A])(f: W[A] => B): W[B] = map(duplicate(w))(f) // coKleisi composition
-  }
-
-  trait Monoid[M] {
-    def empty: M
-    def append(lhs: M, rhs: M): M
   }
 
   describe("Comonad") {
