@@ -1,6 +1,8 @@
 package yoneda
 
 import functor.FunctorSimpleImpl.Functor
+import kan.Ran
+import simple.Id
 
 import scala.language.higherKinds
 
@@ -13,28 +15,39 @@ object YonedaSimpleImpl {
     */
   trait Yoneda[F[_], A] {
     def run[R](f: A => R): F[R]
+
+    // derived method
+    def lowerYoneda(): F[A] = run(identity[A])
+
+    /* Yoneda[F] is a right Kan extension of F along the Identity Functor */
+    def yonedaToRan: Ran[Id,F,A] = new Ran[Id,F,A] {
+      def runRan[B](f: A => Id[B]): F[B] = run(a => f(a).value)
+    }
   }
 
-  /*
-    instance Functor (Yoneda f) where
-    fmap f (Yoneda m) = Yoneda (\k -> m (k . f))
-  */
-  def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
-    new Functor[Yoneda[F, ?]] {
-      def map[A, B](fa: Yoneda[F, A])(f: A => B): Yoneda[F, B] =
-        new Yoneda[F, B] {
-          def run[C](f2: B => C): F[C] = fa.run(f andThen f2)
-        }
+  object Yoneda {
+
+    def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
+      new Yoneda[F, A] {
+        def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
+      }
+
+    def ranToYoneda[F[_],A](r: Ran[Id,F,A]): Yoneda[F, A] = new Yoneda[F,A] {
+      def run[R](f: A => R): F[R] = r.runRan(a => Id(f(a)))
     }
 
-  //liftYoneda :: Functor f => f a -> Yoneda f a
-  //liftYoneda a = Yoneda (\f -> fmap f a)
-  def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
-    new Yoneda[F, A] {
-      def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
-    }
-
-  //lowerYoneda :: Yoneda f a -> f a
-  //lowerYoneda (Yoneda f) = f id
-  def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
+    /**
+      * Yoneda is a Funcor for free
+      *
+      * It is kind of Free Functor as we need Functor when we create Yoneda.
+      * But we don't use it to define Functor.
+      */
+    def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
+      new Functor[Yoneda[F, ?]] {
+        def map[A, B](fa: Yoneda[F, A])(f: A => B): Yoneda[F, B] =
+          new Yoneda[F, B] {
+            def run[C](f2: B => C): F[C] = fa.run(f andThen f2)
+          }
+      }
+  }
 }
