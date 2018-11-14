@@ -596,11 +596,11 @@ trait NaturalTransf[F[_], G[_]] {
 
 | abstraction | free construction     |
 | ----------- | --------------------- |
-| Monoid      | List                  | 
-| Functor     | [Coyoneda](#coyoneda)     |
+| Monoid      | List, Vector          | 
+| Functor     | [Coyoneda](#coyoneda), [Density](#density-comonad), [Left Kan Extension](#left-kan-extension) |
 | Applicative | [FreeApplicative](#free-applicative) |
 | Monad       | [Free Monads](#free-monads)          |
-| Comonad     | [CoFree](#cofree)                    |
+| Comonad     | [CoFree](#cofree), [Density](#density-comonad) |
 
 ### Free Applicative
 * Resources
@@ -702,6 +702,7 @@ def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
 ![](arrows.svg)
 
 ### Profunctor
+
 Contravariant on first and Functor on the second argument.
 ```scala
 trait Profunctor[F[_, _]] {
@@ -723,34 +724,58 @@ def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
    * Analog of free monads for Profunctors [(post SO)](https://stackoverflow.com/questions/39241262/analog-of-free-monads-for-profunctors)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
 
-### Strong
+### Strong Profunctor
 
 Profunctor with additional method first, that wrap both types with Tuple.
 
 ```scala
-trait Strong[P[_, _]] extends Profunctor[P] {
-  def first[A,B,C](pab: P[A, B]): P[(A, C), (B, C)]
+trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
+  def first[X,Y,Z](pab: P[X, Y]): P[(X, Z), (Y, Z)]
 }
 ```
 
+* Laws in [Haskell implementation of Strong Profunctor](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
+  1) `first == dimap(swap, swap) andThen second`
+  2) `lmap(_.1) == rmap(_.1) andThen first`
+  3) `lmap(second f) andThen first == rmap(second f) andThen first`
+  4) `first . first ≡ dimap assoc unassoc . first`
+  5) `second ≡ dimap swap swap . first`
+  6) `lmap snd ≡ rmap snd . second`
+  7) `lmap (first f) . second ≡ rmap (first f) . second`
+  8) `second . second ≡ dimap unassoc assoc . second`
+    
+where
+```haskell
+assoc ((a,b),c) = (a,(b,c))
+unassoc (a,(b,c)) = ((a,b),c)
+```
+  
+In [Notions of Computation as Monoids by Exequiel Rivas and Mauro Jaskelioff](https://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf) in 7.1 there are following laws:
+1) `dimap identity pi (first a) = dimap pi id a`
+2) `first (first a) = dimap alphaInv alpha (first a)`
+3) `dimap (id × f) id (first a) = dimap id (id × f) (first a)`
+
+    
 * Derived methods:
 ```scala
-def second[A,B,C](pab: P[A, B]): P[(C, A), (C, B)]
+def second[X,Y,Z](pab: P[X, Y]): P[(Z, X), (Z, Y)]
+def uncurryStrong[P[_,_],A,B,C](pa: P[A, B => C])(S: Strong[P]): P[(A,B),C]
 ```
+In [Purescript implementation of Strong](https://pursuit.purescript.org/packages/purescript-profunctor/docs/Data.Profunctor.Strong) there are some more helper methods that use Category constraint for P
 
 * Resources
    * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala)
    * Haskell [Data.Profunctor.Strong](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
-   
+   * usage of Strong in [paf31/purescript-sdom](https://github.com/paf31/purescript-sdom/blob/master/src/SDOM.purs#L197-L205)
 
-### Choice
+### Choice Profunctor
 
 Profunctor with additional method left that wrap both types inside Either.
 
 ```scala
-trait Choice[P[_, _]] extends Profunctor[P] {
+trait ProChoice[P[_, _]] extends Profunctor[P] {
   def left[A,B,C](pab: P[A, B]):  P[Either[A, C], Either[B, C]]
 }
 ```
@@ -761,7 +786,6 @@ def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
 ```
 
 * Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ChoiceLaws.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
    * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
