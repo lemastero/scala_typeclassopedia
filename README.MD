@@ -726,7 +726,9 @@ def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
 
 ### Strong Profunctor
 
-Profunctor with additional method first, that wrap both types with Tuple.
+Profunctor with additional method `first` that lift profunctor so it can run on first element of tuple.
+
+For Profunctor of functions from A to B this operation just apply function to first element of tuple.
 
 ```scala
 trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
@@ -761,7 +763,7 @@ In [Notions of Computation as Monoids by Exequiel Rivas and Mauro Jaskelioff](ht
 def second[X,Y,Z](pab: P[X, Y]): P[(Z, X), (Z, Y)]
 def uncurryStrong[P[_,_],A,B,C](pa: P[A, B => C])(S: Strong[P]): P[(A,B),C]
 ```
-In [Purescript implementation of Strong](https://pursuit.purescript.org/packages/purescript-profunctor/docs/Data.Profunctor.Strong) there are some more helper methods that use Category constraint for P
+In [Purescript implementation of Strong](https://pursuit.purescript.org/packages/purescript-profunctor/docs/Data.Profunctor.Strong) there are some more helper methods that use Category constraint for P.
 
 * Resources
    * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
