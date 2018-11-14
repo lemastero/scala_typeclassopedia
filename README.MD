@@ -594,12 +594,12 @@ trait NaturalTransf[F[_], G[_]] {
 
 ## Free constructions
 
-| abstraction | free construction     |
+| abstraction | free construction |
 | ----------- | --------------------- |
-| Monoid      | List, Vector          | 
-| Functor     | [Coyoneda](#coyoneda), [Density](#density-comonad), [Left Kan Extension](#left-kan-extension) |
+| Monoid      | List, Vector | 
+| Functor     | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
 | Applicative | [FreeApplicative](#free-applicative) |
-| Monad       | [Free Monads](#free-monads)          |
+| Monad       | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
 | Comonad     | [CoFree](#cofree), [Density](#density-comonad) |
 
 ### Free Applicative
@@ -646,7 +646,7 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
 
 ### Yoneda
 
-Something that satisfy:
+Construction that abstract over type constructor and allow to effectively stack computations.
 
 ```scala
 trait Yoneda[F[_], A] {
@@ -654,7 +654,20 @@ trait Yoneda[F[_], A] {
 }
 ```
 
-* we can define functor for it:
+* we need Functor instance for F to create instance of Yoned for F
+```scala
+def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
+  new Yoneda[F, A] {
+    def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
+  }
+```
+
+* we don't need the fact that F is a Functor to go back to F
+```scala
+def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
+```
+
+* we can define Functor instance without any requirement on F:
 ```scala
 def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
   new Functor[Yoneda[F, ?]] {
@@ -663,17 +676,6 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
         def run[C](f2: B => C): F[C] = fa.run(f andThen f2)
       }
   }
-```
-* we need Functor instance for F to create instance of Yoned for F
-```scala
-def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
-  new Yoneda[F, A] {
-    def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
-  }
-```
-* we don't need the fact that F is a Functor to go back to F
-```scala
-def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
 ```
 
 * Yoneda effectively stack computations. 
@@ -684,17 +686,19 @@ def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
+  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
+  * Purescript [](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda)
 
 ### Coyoneda
+
 * Resources
   * https://vimeo.com/122708005
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
+  * scalaz [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
 
 ## Arrows
