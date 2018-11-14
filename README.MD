@@ -594,13 +594,13 @@ trait NaturalTransf[F[_], G[_]] {
 
 ## Free constructions
 
-| abstraction | free construction     |
+| abstraction | free construction |
 | ----------- | --------------------- |
-| Monoid      | List                  | 
-| Functor     | [Coyoneda](#coyoneda)     |
+| Monoid      | List, Vector | 
+| Functor     | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
 | Applicative | [FreeApplicative](#free-applicative) |
-| Monad       | [Free Monads](#free-monads)          |
-| Comonad     | [CoFree](#cofree)                    |
+| Monad       | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
+| Comonad     | [CoFree](#cofree), [Density](#density-comonad) |
 
 ### Free Applicative
 * Resources
@@ -646,7 +646,7 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
 
 ### Yoneda
 
-Something that satisfy:
+Construction that abstract over type constructor and allow to effectively stack computations.
 
 ```scala
 trait Yoneda[F[_], A] {
@@ -654,7 +654,20 @@ trait Yoneda[F[_], A] {
 }
 ```
 
-* we can define functor for it:
+* we need Functor instance for F to create instance of Yoned for F
+```scala
+def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
+  new Yoneda[F, A] {
+    def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
+  }
+```
+
+* we don't need the fact that F is a Functor to go back to F
+```scala
+def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
+```
+
+* we can define Functor instance without any requirement on F:
 ```scala
 def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
   new Functor[Yoneda[F, ?]] {
@@ -663,17 +676,6 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
         def run[C](f2: B => C): F[C] = fa.run(f andThen f2)
       }
   }
-```
-* we need Functor instance for F to create instance of Yoned for F
-```scala
-def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
-  new Yoneda[F, A] {
-    def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
-  }
-```
-* we don't need the fact that F is a Functor to go back to F
-```scala
-def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
 ```
 
 * Yoneda effectively stack computations. 
@@ -684,17 +686,19 @@ def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
+  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
+  * Purescript [](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda)
 
 ### Coyoneda
+
 * Resources
   * https://vimeo.com/122708005
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala) [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
+  * scalaz [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
 
 ## Arrows
@@ -702,6 +706,7 @@ def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
 ![](arrows.svg)
 
 ### Profunctor
+
 Contravariant on first and Functor on the second argument.
 ```scala
 trait Profunctor[F[_, _]] {
@@ -723,34 +728,60 @@ def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
    * Analog of free monads for Profunctors [(post SO)](https://stackoverflow.com/questions/39241262/analog-of-free-monads-for-profunctors)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
 
-### Strong
+### Strong Profunctor
 
-Profunctor with additional method first, that wrap both types with Tuple.
+Profunctor with additional method `first` that lift profunctor so it can run on first element of tuple.
+
+For Profunctor of functions from A to B this operation just apply function to first element of tuple.
 
 ```scala
-trait Strong[P[_, _]] extends Profunctor[P] {
-  def first[A,B,C](pab: P[A, B]): P[(A, C), (B, C)]
+trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
+  def first[X,Y,Z](pab: P[X, Y]): P[(X, Z), (Y, Z)]
 }
 ```
 
+* Laws in [Haskell implementation of Strong Profunctor](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
+  1) `first == dimap(swap, swap) andThen second`
+  2) `lmap(_.1) == rmap(_.1) andThen first`
+  3) `lmap(second f) andThen first == rmap(second f) andThen first`
+  4) `first . first ≡ dimap assoc unassoc . first`
+  5) `second ≡ dimap swap swap . first`
+  6) `lmap snd ≡ rmap snd . second`
+  7) `lmap (first f) . second ≡ rmap (first f) . second`
+  8) `second . second ≡ dimap unassoc assoc . second`
+    
+where
+```haskell
+assoc ((a,b),c) = (a,(b,c))
+unassoc (a,(b,c)) = ((a,b),c)
+```
+  
+In [Notions of Computation as Monoids by Exequiel Rivas and Mauro Jaskelioff](https://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf) in 7.1 there are following laws:
+1) `dimap identity pi (first a) = dimap pi id a`
+2) `first (first a) = dimap alphaInv alpha (first a)`
+3) `dimap (id × f) id (first a) = dimap id (id × f) (first a)`
+
+    
 * Derived methods:
 ```scala
-def second[A,B,C](pab: P[A, B]): P[(C, A), (C, B)]
+def second[X,Y,Z](pab: P[X, Y]): P[(Z, X), (Z, Y)]
+def uncurryStrong[P[_,_],A,B,C](pa: P[A, B => C])(S: Strong[P]): P[(A,B),C]
 ```
+In [Purescript implementation of Strong](https://pursuit.purescript.org/packages/purescript-profunctor/docs/Data.Profunctor.Strong) there are some more helper methods that use Category constraint for P.
 
 * Resources
    * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala)
    * Haskell [Data.Profunctor.Strong](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
-   
+   * usage of Strong in [paf31/purescript-sdom](https://github.com/paf31/purescript-sdom/blob/master/src/SDOM.purs#L197-L205)
 
-### Choice
+### Choice Profunctor
 
 Profunctor with additional method left that wrap both types inside Either.
 
 ```scala
-trait Choice[P[_, _]] extends Profunctor[P] {
+trait ProChoice[P[_, _]] extends Profunctor[P] {
   def left[A,B,C](pab: P[A, B]):  P[Either[A, C], Either[B, C]]
 }
 ```
@@ -761,7 +792,6 @@ def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
 ```
 
 * Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ChoiceLaws.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
    * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)

@@ -2,6 +2,7 @@ package yoneda
 
 import functor.FunctorSimpleImpl.Functor
 import kan.Ran
+import natural_transformation.NaturalTransf.{NaturalTransf, ~>}
 import simple.Id
 
 import scala.language.higherKinds
@@ -13,7 +14,7 @@ object YonedaSimpleImpl {
     * http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Yoneda.html
     * newtype Yoneda f a = Yoneda (forall r. (a -> r) -> f r)
     */
-  trait Yoneda[F[_], A] {
+  trait Yoneda[F[_], A] { self =>
     def run[R](f: A => R): F[R]
 
     // derived method
@@ -22,6 +23,10 @@ object YonedaSimpleImpl {
     /* Yoneda[F] is a right Kan extension of F along the Identity Functor */
     def yonedaToRan: Ran[Id,F,A] = new Ran[Id,F,A] {
       def runRan[B](f: A => Id[B]): F[B] = run(a => f(a).value)
+    }
+
+    def hoistYoneda[G[_]](fg: NaturalTransf[F,G]): Yoneda[G,A] = new Yoneda[G,A] {
+      def run[R](f: A => R): G[R] = fg(self.run(f))
     }
   }
 

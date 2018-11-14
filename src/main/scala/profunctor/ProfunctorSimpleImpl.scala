@@ -8,17 +8,58 @@ import scala.language.higherKinds
 object ProfunctorSimpleImpl {
 
   trait Profunctor[P[_, _]] {
-    def dimap[A,B,C,D](ab: A => B, cd: C => D): P[B, C] => P[A, D]
+    def dimap[X,Y,Z,W](ab: X => Y, cd: Z => W): P[Y, Z] => P[X, W]
+
+    // derived methods
+    def lmap[A,B,C](f: A => B): P[B,C] => P[A,C] = dimap[A,B,C,C](f,identity[C])
+    def rmap[A,B,C](f: B => C): P[A,B] => P[A,C] = dimap[A,A,B,C](identity[A], f)
+  }
+
+  trait ProfunctorYoneda[P[_,_],A,B] {
+    def runYoneda[X,Y](f: X => A, g: B => Y): P[X,Y]
+
+    def extractYoneda: P[A,B] = runYoneda(identity[A], identity[B])
   }
 
   trait Strong[P[_, _]] extends Profunctor[P] {
-    def first[A,B,C](pab: P[A, B]): P[(A, C), (B, C)]
+    def first[X,Y,Z](pab: P[X, Y]): P[(X, Z), (Y, Z)]
 
-    def second[A,B,C](pab: P[A, B]): P[(C, A), (C, B)] = {
-      val v1: P[(A, C), (B, C)] = first(pab)
-      val v2: P[(A, C), (B, C)] => P[(C, A), (C, B)] = dimap(_.swap, _.swap)
-      v2(v1)
+    def second[X,Y,Z](pab: P[X, Y]): P[(Z, X), (Z, Y)] = {
+      val ds: P[(X, Z), (Y, Z)] => P[(Z, X), (Z, Y)] = dimap(_.swap, _.swap)
+      ds(first(pab): P[(X, Z), (Y, Z)])
     }
+  }
+
+  object Strong {
+    def uncurryStrong[P[_,_],A,B,C](pa: P[A, B => C])(S: Strong[P]): P[(A,B),C] = {
+      S.rmap{bc:(B => C, B) => bc._1(bc._2)}(S.first(pa))
+    }
+  }
+
+  trait StrongLaws[P[_,_]] extends Strong[P] {
+    def firstIsSwappedSecond[X, Y, Z](a: P[X, Y]): Boolean = {
+      first(a) == dimap((xz: (X, Z)) => xz.swap, (zy: (Z, Y)) => zy.swap)(second(a))
+    }
+
+    // lmap fst ≡ rmap fst . first'
+    // lmap (second f) . first' ≡ rmap (second f) . first
+    // first' . first' ≡ dimap assoc unassoc . first' where
+    //   assoc ((a,b),c) = (a,(b,c))
+    //   unassoc (a,(b,c)) = ((a,b),c)
+
+    def rightAlignedWithDimapFirst[X, Y, Z](a: P[X, Y]): Boolean = {
+      second(a) == dimap((xz: (Z, X)) => xz.swap, (zy: (Y, Z)) => zy.swap)(first(a))
+    }
+
+    // lmap snd ≡ rmap snd . second'
+    // lmap (first f) . second' ≡ rmap (first f) . second'
+    // second' . second' ≡ dimap unassoc assoc . second' where
+    //    assoc ((a,b),c) = (a,(b,c))
+    //    unassoc (a,(b,c)) = ((a,b),c)
+  }
+
+  trait Tambara[P[_,_],A,B]{
+    def runTambara[C]: P[(A,C),(B,C)]
   }
 
   trait Choice[P[_, _]] extends Profunctor[P] { // http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html
