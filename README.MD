@@ -798,7 +798,6 @@ In [Notions of Computation as Monoids by Exequiel Rivas and Mauro Jaskelioff](ht
 1) `dimap identity pi (first a) = dimap pi id a`
 2) `first (first a) = dimap alphaInv alpha (first a)`
 3) `dimap (id × f) id (first a) = dimap id (id × f) (first a)`
-C
     
 * Derived methods:
 ```scala
