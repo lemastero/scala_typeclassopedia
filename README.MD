@@ -603,6 +603,7 @@ trait NaturalTransf[F[_], G[_]] {
 | Comonad     | [CoFree](#cofree), [Density](#density-comonad) |
 
 ### Free Applicative
+
 * Resources
   * [Cats docs](https://typelevel.org/cats/datatypes/freeapplicative.html)
   * Move Over Free Monads: Make Way for Free Applicatives! - John deGoes: https://www.youtube.com/watch?v=H28QqxO7Ihc
@@ -692,6 +693,43 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
 
 ### Coyoneda
 
+```scala
+trait Coyoneda[F[_], A] {
+  type B
+  def f: B => A
+  def fb: F[B]
+}
+```
+
+Any type constructor F can be lifted to Coyoneda
+```scala
+def liftCoyoneda[F[_], A](fa: F[A]): Coyoneda[F, A]
+```
+we can map over lifted constructor F, because Coyoneda is a Functor without any requirements on F:
+```scala
+implicit def coyoFunctor[F[_]]: Functor[Coyoneda[F, ?]] = new Functor[Coyoneda[F, ?]] {
+  def map[A, AA](fa: Coyoneda[F, A])(ff: A => AA): Coyoneda[F, AA] = new Coyoneda[F, AA] {
+    type B = fa.B
+    def f: B => AA = fa.f andThen ff
+    def fb: F[B] = fa.fb
+  }
+}
+```
+or even change the oryginal type of F
+```scala
+def hoistCoyoneda[F[_], G[_], A, C](fab : NaturalTransf[F,G])(coyo: Coyoneda[F, A]): Coyoneda[G, A] =
+  new Coyoneda[G, A] {
+    type B = coyo.B
+    def f: B => A = coyo.f
+    def fb: G[B] = fab(coyo.fb)
+  }
+```
+
+Finally to get back to F, we need a proof that it is a Functor:
+```scala
+def lowerCoyoneda(implicit fun: Functor[F]): F[A]
+```
+
 * Resources
   * https://vimeo.com/122708005
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
@@ -760,7 +798,7 @@ In [Notions of Computation as Monoids by Exequiel Rivas and Mauro Jaskelioff](ht
 1) `dimap identity pi (first a) = dimap pi id a`
 2) `first (first a) = dimap alphaInv alpha (first a)`
 3) `dimap (id × f) id (first a) = dimap id (id × f) (first a)`
-
+C
     
 * Derived methods:
 ```scala
