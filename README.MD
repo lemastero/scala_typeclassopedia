@@ -266,9 +266,14 @@ case class Reader[-In, +R](run: In => R) {
 
 ### F-Algebra
 
-* https://lukepalmer.wordpress.com/2013/03/12/constructions-on-typeclasses-part-1-f-algebras/
+* Resources
+   * https://lukepalmer.wordpress.com/2013/03/12/constructions-on-typeclasses-part-1-f-algebras/
+   * loop/recur F-Algebras Part 1 [(video)](https://vimeo.com/122715366)
+   * loop/recur F-Algebras Part 2 [(video)](https://vimeo.com/122716014)
+   * loop/recur F-Algebras Part 3 [(video)](https://vimeo.com/122716071)
 
 ### Monoidal Categories, Monoid Object
+
 * Resources
   * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373)
   * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
@@ -727,6 +732,13 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
 
 ### Coyoneda
 
+Rúnar in [Free Monads and the Yoneda Lemma](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
+describe this type as a proof that: "if we have a type B, a function of type (B => A) for some type A, and a value of type F[B] for some functor F, then we certainly have a value of type F[A]"
+
+This result from Category Theory allow us to perform `Coyoneda Trick`:
+
+If we have following type:
+
 ```scala
 trait Coyoneda[F[_], A] {
   type B
@@ -735,11 +747,14 @@ trait Coyoneda[F[_], A] {
 }
 ```
 
-Any type constructor F can be lifted to Coyoneda
+then type constructor F can be lifted to Coyoneda
+
 ```scala
 def liftCoyoneda[F[_], A](fa: F[A]): Coyoneda[F, A]
 ```
-we can map over lifted constructor F, because Coyoneda is a Functor without any requirements on F:
+
+we can map over lifted constructor F without any requirements on F. So Coyoneda is a Free Functor:
+
 ```scala
 implicit def coyoFunctor[F[_]]: Functor[Coyoneda[F, ?]] = new Functor[Coyoneda[F, ?]] {
   def map[A, AA](fa: Coyoneda[F, A])(ff: A => AA): Coyoneda[F, AA] = new Coyoneda[F, AA] {
@@ -749,7 +764,9 @@ implicit def coyoFunctor[F[_]]: Functor[Coyoneda[F, ?]] = new Functor[Coyoneda[F
   }
 }
 ```
-or even change the oryginal type of F
+
+We even can change the oryginal type of F
+
 ```scala
 def hoistCoyoneda[F[_], G[_], A, C](fab : NaturalTransf[F,G])(coyo: Coyoneda[F, A]): Coyoneda[G, A] =
   new Coyoneda[G, A] {
@@ -759,13 +776,14 @@ def hoistCoyoneda[F[_], G[_], A, C](fab : NaturalTransf[F,G])(coyo: Coyoneda[F, 
   }
 ```
 
-Finally to get back to F, we need a proof that it is a Functor:
+Finally to get back from Coyoneda fantazy land to reality of F, we need a proof that it is a Functor:
+
 ```scala
 def lowerCoyoneda(implicit fun: Functor[F]): F[A]
 ```
 
 * Resources
-  * https://vimeo.com/122708005
+  * loop/recur Coyoneda [(video)](https://vimeo.com/122708005)
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
