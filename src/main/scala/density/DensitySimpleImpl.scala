@@ -1,6 +1,7 @@
 package density
 
 import comonad.ComonadSimpleImpl.Comonad
+import coyoneda.Coyoneda
 import functor.FunctorSimpleImpl.Functor
 import kan.LeftKanExtensionSimpleImpl.Lan
 
@@ -22,11 +23,9 @@ object DensitySimpleImpl {
     def map[A](fab: Y => A): Density[F, A] =
       Density[F,A,X](f andThen fab, fb)
 
-    def densityToLan: Lan[F,F,Y] = new Lan[F,F,Y] {
-      type B = X
-      val hb: F[B] = fb
-      def f: F[B] => Y = self.f
-    }
+    def densityToLan: Lan[F,F,Y] = Lan[F,F,Y,X](fb, self.f)
+
+    def densityToCoyoneda: Coyoneda[F,X] = Coyoneda[F,X,X](identity[X],fb) // TODO is it lawfull Coyoneda ?
   }
 
   object Density {
