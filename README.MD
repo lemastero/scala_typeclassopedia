@@ -218,7 +218,20 @@ case class Reader[-In, +R](run: In => R) {
 
 ### IO
 
-### Continuation Monad
+### RWS Monad
+* (Haskell) [mtl/Control.Monad.RWS](http://hackage.haskell.org/package/mtl/docs/Control-Monad-RWS.html)
+
+### Logic Monad, Prompt Monad, Failure Monad
+* [Adventures in Three Monads - Edward Z. Yang](http://web.mit.edu/~ezyang/Public/threemonads.pdf)
+* [LogicT - backtracking monad transformer with fair operations and pruning](http://okmij.org/ftp/Computation/monads.html#LogicT)
+
+### Type-Indexed Monads
+
+ * indexed RWS monad [iravid/irwst IRWS](https://github.com/iravid/irwst/blob/rws/irwst/src/main/scala/com/iravid/irwst/IRWS.scala)
+ * [Monad Factory: Type-Indexed Monads, Mark Snyder, Perry Alexander](https://www.researchgate.net/publication/221335580_Monad_Factory_Type-Indexed_Monads)
+ * [Indexed Monads - Kwang's Haskell Blog](https://kseo.github.io/posts/2017-01-12-indexed-monads.html)
+
+### ContT (Continuation Monad)
 
 * Applications:
   * [Is there a real-world applicability for the continuation monad outside of academic use?](https://stackoverflow.com/questions/41202721/is-there-a-real-world-applicability-for-the-continuation-monad-outside-of-academ)
@@ -239,7 +252,7 @@ case class Reader[-In, +R](run: In => R) {
   * [Rabbit: A Compiler for Scheme/Chapter 8 D. Conversion to Continuation-Passing Style](https://en.wikisource.org/wiki/Rabbit:_A_Compiler_for_Scheme/Chapter_8)
 
 * Resources
-  * [PR to Cats with ContT](https://github.com/typelevel/cats/pull/2506)
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/ContT.scala)
   * gist by xuwei-k (https://gist.github.com/xuwei-k/19c9bb8c3afd08175762957880c57500)
   * Continuation monad in Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/continuation-monad-in-scala/index.html)
   * (Haskell) School of Haskell - The Mother of all Monads - Dan Piponi [(blog post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/the-mother-of-all-monads)
@@ -263,14 +276,6 @@ case class Reader[-In, +R](run: In => R) {
 * https://www.reddit.com/r/haskell/comments/199po0/can_the_tardis_monad_be_used_in_an_efficient_way/
 * https://repl.it/@Ouroboros2/Haskell-Tardis-1
 * http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
-
-### F-Algebra
-
-* Resources
-   * https://lukepalmer.wordpress.com/2013/03/12/constructions-on-typeclasses-part-1-f-algebras/
-   * loop/recur F-Algebras Part 1 [(video)](https://vimeo.com/122715366)
-   * loop/recur F-Algebras Part 2 [(video)](https://vimeo.com/122716014)
-   * loop/recur F-Algebras Part 3 [(video)](https://vimeo.com/122716071)
 
 ### Monoidal Categories, Monoid Object
 
@@ -440,6 +445,7 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
   * (Haskell) More on Comonads as Monad Transformers - Edward Kmett [(blog post)](http://comonad.com/reader/2011/more-on-comonads-as-monad-transformers/)
   * (Haskell) The Cofree Comonad and the Expression Problem - Edward Kmett [(blog post)](http://comonad.com/reader/2008/the-cofree-comonad-and-the-expression-problem/)
   * (Haskell) Comonads as Spaces - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
+  * (Haskell) Cofun with cofree comonads - Dave Laing [(slides, video, code)](http://dlaing.org/cofun/)
 
 ### Coreader (Env comonad, Product comonad)
 
@@ -557,13 +563,15 @@ trait Distributive[F[_]] extends Functor[F] {
 }
 ```
 * Resources
+   * Bitraverse [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala)
+   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala)
+   * [PR for Cats](https://github.com/typelevel/cats/pull/2424)
    * FSiS 5 - Parametricity and the Traverse type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=D0Fnzr15BAU) 
    * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
-   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala)
-   * Bitraverse [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala)
    * Traverse1 [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse1.scala)
-
+   * usage of Distributive in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+   
 ### SemigroupK (Plus)
 
 Semigroup that abstracts over type constructor F. Fo any proper type A can produce Semigroup for F[A]. 
@@ -933,7 +941,7 @@ trait Category[F[_, _]] extends Compose[F] {
 
 ## Adjunctions & Kan Extension
 
-### Adjunctions
+### Adjunction
 
 Adjunction[F,B] spacify relation between two Functors (There is natural transformation between composition of those two functors and identity.)
 We say that F is left adjoint to G.
@@ -952,10 +960,12 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
   * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
   * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
+  * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
   * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
   * (Haskell) Zapping Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/zapping-strong-adjunctions/)
   * (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/) 
   * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
+  * State monad using Adjunctions [kaifransson/adjoint-stacks](https://github.com/kaifransson/adjoint-stacks)
 
 ### Right Kan extension
 
@@ -1103,10 +1113,12 @@ Similarly it is Comonad if both type constructors are Comonads.
   * (Purescritp) implementation [paf31/purescript-day)](https://pursuit.purescript.org/packages/purescript-day/10.0.0/docs/Data.Functor.Day)
   * (Purescript) extensible coeffect system built out of comonads and Day convolution [paf31/purescript-smash](https://github.com/paf31/purescript-smash/blob/master/src/Data/Smash.purs)
   * (Purescript) [paf31/purescript-react-explore](https://github.com/paf31/purescript-react-explore/blob/master/src/React/Explore/List.purs)
+  * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
 
 ### Density Comonad
 
-Density is a Comonad that is simpler that Left Kan Extension. More precisely it is comonad formed by left Kan extension of a Functor along itself.)
+Density is a Comonad that is simpler that Left Kan Extension.
+More precisely it is comonad formed by left Kan extension of a Functor along itself.)
 
 ```scala
 trait Density[F[_], Y] { self =>
@@ -1152,10 +1164,16 @@ def comonadInstance[K[_]]: Comonad[Density[K, ?]] = new Comonad[Density[K, ?]] {
 * Density is also left adjoint to Comonad formed by Adjunction.
 
 * Resources
-  * Partial implementation by kenji yoshida [(gist)](https://gist.github.com/xuwei-k/7937745)
+  * Partial implementation by Kenji Yoshida [(gist)](https://gist.github.com/xuwei-k/7937745)
   * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
+  * (Haskell) A Product of an Imperfect Union - Edward Kmett [(blog post)](http://comonad.com/reader/2011/a-product-of-an-imperfect-union/)
+  * [Comonads from Monads, and a new way do the reverse - u/King_of_the_Homeless](https://www.reddit.com/r/haskell/comments/8hgub9/comonads_from_monads_and_a_new_way_do_the_reverse/)
+  * (Haskell) kan-extensions/Control.Monad.Co [diter](http://hackage.haskell.org/package/kan-extensions-5.2/docs/Control-Monad-Co.html#v:diter) [dctrlM](http://hackage.haskell.org/package/kan-extensions/docs/Control-Monad-Co.html#v:dctrlM)
+  * small note in: Adjoint folds and unfolds—An extended study - Ralf Hinze [(paper)](https://www.cs.ox.ac.uk/ralf.hinze/publications/SCP-78-11.pdf)
+    and in Generic Programming with Adjunctions - Ralf Hinze [(paper)](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
   * (Purescript) [rightfold/purescript-density-codensity Density](https://github.com/rightfold/purescript-density-codensity/blob/master/src/Control/Comonad/Density.purs)
   * (Haskell) [ekmett/kan-extensions Density](https://hackage.haskell.org/package/kan-extensions/docs/Control-Comonad-Density.html)
+  * [Edward Kmett mentions it in Origami.hs](https://github.com/ekmett/ekmett.github.com/blob/8d3abab5b66db631e148e1d046d18909bece5893/haskell/Origami.hs#L225-L226)
 
 ### Codensity
 
@@ -1209,19 +1227,105 @@ trait Representable[F[_], Rep] {
 ```
 
 * Resources:
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala)
   * (Haskell) Data.Functor.Rep: [(src Haskell)](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
   * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
   * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
   * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
   * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
   * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
   * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
   * https://stackoverflow.com/a/46502280
   * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
+  * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+
+### Align
+  * [PR for Cats](https://github.com/typelevel/cats/pull/1755)
+  * (Haskell) [these/Data.Align](https://hackage.haskell.org/package/these/docs/Data-Align.html)
+
+### These
+  * [these/Data-These](https://hackage.haskell.org/package/these/docs/Data-These.html)
+
+### Chronicle Monad
+  * [these/Control-Monad-Chronicle](https://hackage.haskell.org/package/these/docs/Control-Monad-Chronicle.html)
+
+### Unfoldable
+  * [PR for Cats](https://github.com/typelevel/cats/pull/1132)
   
-## Recursive schemas
+## Encoding of [Category Theory by Sjoerd Visscher](http://hackage.haskell.org/package/data-category)
+
+* [Category](http://hackage.haskell.org/package/data-category/docs/Data-Category.html#t:Category)
+* [Functor](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#t:Functor)
+* [Domain (source category)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#t:Dom)
+* [Codomain (target category)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#t:Cod)
+* [Diagonal functor for products](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#t:DiagProd)
+* [Codiagonal functor for coproducts](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Coproduct.html#t:CodiagCoprod)
+* [Void Category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Void.html#t:Void)
+* [Adjunction](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Adjunction.html#t:Adjunction)
+* [Constant Functor](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#t:Const)
+* [Identity Functor](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#t:Id)
+* [Hom Functor Hom(--,--)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#t:Hom)
+* [Covariant functor Hom(X,--)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#v:homX_)
+* [Contravariant functor Hom(--,X)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#v:hom_X)
+* [Star](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#t:Star)
+* [Costar](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Functor.html#t:Costar)
+* [Directed coproduct category of categories c1 and c2](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Coproduct.html#t::-62--62-:)
+
+* [Exponential](http://hackage.haskell.org/package/data-category/docs/Data-Category-CartesianClosed.html#t:Exponential)
+* [Cartesian Closed Category](http://hackage.haskell.org/package/data-category/docs/Data-Category-CartesianClosed.html)
+
+* [Natural transformation](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Nat)
+* [Component of Natural transformation](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Component)
+* [Category of endofunctors](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Endo)
+* [Category of Presheaves](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Presheaves)
+* [Cateory of Profunctors](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Profunctors)
+* [Functor composition](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:FunctorCompose)
+* [Composition of endofunctors](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:EndoFunctorCompose)
+* [Apply Bifunctor](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Apply)
+* [Postcompose](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Postcompose)
+* [Precompose](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-NaturalTransformation.html#t:Precompose)
+
+* [Representable](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-RepresentableFunctor.html#t:Representable)
+* [Initial universal property](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-RepresentableFunctor.html#t:InitialUniversal)
+* [Terminal universal property](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-RepresentableFunctor.html#t:TerminalUniversal)
+
+* [MonoidObject](http://hackage.haskell.org/package/data-category/docs/Data-Category-Monoidal.html#t:MonoidObject)
+* [ComonoidObject](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Monoidal.html#t:ComonoidObject)
+* [Monad](http://hackage.haskell.org/package/data-category/docs/Data-Category-Monoidal.html#t:Monad)
+* [Comonad](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Monoidal.html#t:Comonad)
+* [Tensor Product](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Monoidal.html#t:TensorProduct)
+* [Unit](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Monoidal.html#t:Unit)
+
+* [Comma Category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Comma.html)
+
+* [Limit](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#t:Limit)
+* [Colimit](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#t:Colimit)
+* [Initial Object](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#t:HasInitialObject)
+* [Terminal Object](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#t:TerminalObject)
+* [Binary Product](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Limit.html#t:BinaryProduct)
+* [Binary Coproduct](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Limit.html#t:BinaryCoproduct)
+* [Cone](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Limit.html#t:Cone)
+
+* [Fixed point category](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Fix.html#t:Fix)
+* [Omega category](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Fix.html#t:Omega)
+
+* [2-categoy (Boolean category)](http://hackage.haskell.org/package/data-category/docs/Data-Category-Boolean.html)
+
+* [category of (F,G)-dialgebras and (F,G)-homomorphisms](http://hackage.haskell.org/package/data-category/docs/Data-Category-Dialg.html)
+* [(F,G)-dialgebra](http://hackage.haskell.org/package/data-category/docs/Data-Category-Dialg.html#t:Dialgebra)
+* [(F,G)-homomorphism](http://hackage.haskell.org/package/data-category/docs/Data-Category-Dialg.html#t:Dialg)
+* [Initial F-algebra (initial object in the category of F-algebras)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:InitialFAlgebra)
+* [Terminal F-coalgebra (terminal object in the category of F-coalgebras)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:TerminalFAlgebra)
+* [Catamorphism of an F-algebra (arrow to it from the initial F-algebra)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:Cata)
+* [Anamorphism of an F-coalgebra (arrow from it to the terminal F-coalgebra)](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:Ana)
+* [Free algebra of the Monad](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:FreeAlg)
+* [Forgetful functor algebra](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:ForgetAlg)
+* [Eilenberg–Moore](http://hackage.haskell.org/package/data-category/docs/Data-Category-Dialg.html#t:eilenbergMooreAdj)
+
+
+## F-Algebra, Recursive schema, Fix Point
 
 * Resources:
   * (Haskell) Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire - Erik Meijer, Maarten Fokkinga, Ross Paterson: [(paper Haskell)](https://maartenfokkinga.github.io/utwente/mmf91m.pdf)
@@ -1232,6 +1336,14 @@ trait Representable[F[_], Rep] {
   * (Haskell) Unnatural Transformations - Edward Kmett [(blog post)](http://comonad.com/reader/2008/unnatural-transformations/)
   * (Haskell) Dynamorphisms as Chronomorphisms - Edward Kmett [(blog post)](http://comonad.com/reader/2008/dynamorphisms-as-chronomorphisms/)
   * (Haskell) Elgot (Co)Algebras - Edward Kmett [(blog post)](http://comonad.com/reader/2008/elgot-coalgebras/) 
+
+### F-Algebra
+
+* Resources
+   * https://lukepalmer.wordpress.com/2013/03/12/constructions-on-typeclasses-part-1-f-algebras/
+   * loop/recur F-Algebras Part 1 [(video)](https://vimeo.com/122715366)
+   * loop/recur F-Algebras Part 2 [(video)](https://vimeo.com/122716014)
+   * loop/recur F-Algebras Part 3 [(video)](https://vimeo.com/122716071)
   
 ### Cathamorphism
 * (Haskell) - Catamorphisms - Edward Kmett: [(article)](https://www.schoolofhaskell.com/user/edwardk/recursion-schemes/catamorphisms)
@@ -1249,10 +1361,15 @@ trait Representable[F[_], Rep] {
   * Beyond Scala Lenses - Julien Truffaut: [(video)](https://www.youtube.com/watch?v=6nyGVgGEKdA&t=1694)
   * scalaz [Lens src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Lens.scala) [(PLens src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/PLens.scala)
 
+### Van Laarhoven Optics
+
+* [Monocle Learning Resources](https://julien-truffaut.github.io/Monocle/learning_resources.html)
+* [Twan van Laarhoven: CPS based functional references](https://www.twanvl.nl/blog/haskell/cps-functional-references)
+* [Functor Optics](http://oleg.fi/gists/posts/2017-12-23-functor-optics.html) 
+
 ### Profunctor Optics
 
 Optics (Iso, Lens, Prism, etc) can be implemented using different Profunctors.
-
 If we have following Profunctor hierarchy:
 
 ```scala
