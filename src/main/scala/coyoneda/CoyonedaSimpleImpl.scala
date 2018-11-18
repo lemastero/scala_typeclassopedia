@@ -19,7 +19,7 @@ trait Coyoneda[F[_], A] {
   def fb: F[B]
 
 
-  /* If we have proof that type constructor F is a Functor - instance for Functor[F] then we can create F[A].
+  /* If we have proof that type constructor F is a Functor then we can create F[A].
   So we lower Coyoneda to Functor F. */
   def lowerCoyoneda(implicit fun: Functor[F]): F[A] = fun.map(fb)(f)
 
