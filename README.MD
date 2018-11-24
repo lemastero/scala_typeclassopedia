@@ -213,8 +213,9 @@ case class Reader[-In, +R](run: In => R) {
 
 ### State
 * Resources
-  * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
   * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
+  * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
+  * Monads to Machine Code - Stephen Diehl: [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
 
 ### IO
 
@@ -1253,7 +1254,10 @@ trait Representable[F[_], Rep] {
 
 ### Unfoldable
   * [PR for Cats](https://github.com/typelevel/cats/pull/1132)
-  
+
+## Encoding of Category Theory by Stephen Dhal
+* Monads Made Difficult - Stephen Diehl [(blog post)](http://www.stephendiehl.com/posts/monads.html) Category as first class concept, Functors between them, up to Monads, Kleisli Category, IO and List Monad
+
 ## Encoding of [Category Theory by Sjoerd Visscher](http://hackage.haskell.org/package/data-category)
 
 * [Category](http://hackage.haskell.org/package/data-category/docs/Data-Category.html#t:Category)
