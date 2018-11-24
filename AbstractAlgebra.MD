@@ -33,6 +33,11 @@ Properties of operation
 | commutativity      | x * y = y * x             |
 | idempotency        | x * x = x                 |
 
+## Magma
+
+* [PR for Cats](https://github.com/typelevel/cats/pull/2197)
+* [Medial Magma](https://en.wikipedia.org/wiki/Medial_magma)
+
 ## Semigroup
 
 Abstract over associative operation `combine` on some proper type A.
