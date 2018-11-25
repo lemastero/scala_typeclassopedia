@@ -9,6 +9,7 @@
   * (Haskell) Unnatural Transformations - Edward Kmett [(blog post)](http://comonad.com/reader/2008/unnatural-transformations/)
   * (Haskell) Dynamorphisms as Chronomorphisms - Edward Kmett [(blog post)](http://comonad.com/reader/2008/dynamorphisms-as-chronomorphisms/)
   * (Haskell) Elgot (Co)Algebras - Edward Kmett [(blog post)](http://comonad.com/reader/2008/elgot-coalgebras/)
+  * [Histo- and Dynamorphisms Revisited- Ralf Hinze, Nicolas Wu](http://www.cs.ox.ac.uk/ralf.hinze/publications/WGP13.pdf)
 
 ## F-Algebra
 
