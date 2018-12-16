@@ -1053,7 +1053,24 @@ trait ProfunctorComonad[T[_]] extends ProfunctorFunctor[T] {
 
 ### Profunctor Yoneda
 
-  
+```scala
+trait ProfunctorYoneda[P[_,_],A,B] {
+  def runYoneda[X,Y](f: X => A, g: B => Y): P[X,Y]
+}
+```
+
+
+### Profunctor CoYoneda
+
+```scala
+trait ProfunctorCoyoneda[P[_,_],A,B] {
+  type X
+  type Y
+  def f1: A => X
+  def f2: Y => B
+  def pxy: P[X,Y]
+}
+```
 
 ### Procompose
 
