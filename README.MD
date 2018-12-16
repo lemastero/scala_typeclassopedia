@@ -807,18 +807,65 @@ def lowerCoyoneda(implicit fun: Functor[F]): F[A]
 
 ### Profunctor
 
-Contravariant on first and Functor on the second argument.
+Profunctor abstract over
+- type constructor with two holes `P[_,_]`
+- operation `def dimap(preA: NewA => A, postB: B => NewB): P[A, B] => P[NewA, NewB]` 
+that given `P[A,B]` and two functions 
+- apply first `preA` before first type of `P` (ast as contravariant functor)
+- apply second `postB` after second type of `P` (act as functor)
+
+Alternatively we can define Profunctor not using dimap but using two separate functions:
+ * def lmap(f: AA => A): P[A,C] => P[AA,C] = dimap(f,identity[C])
+ * def rmap(f: B => BB): P[A,B] => P[A,BB] = dimap(identity[A], f)
+
+Profunctors in Haskell were explored by sifpe at blog A Neighborhood of Infinity in post [Profunctors in Haskell](http://blog.sigfpe.com/2011/07/profunctors-in-haskell.html)
+Implemented in Haskell: [ekmett/profunctors](https://github.com/ekmett/profunctors)
+
 ```scala
 trait Profunctor[F[_, _]] {
   def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
 }
 ```
-* Laws: [Cats src](https://github.com/typelevel/cats/blob/0.7.x/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
-* Derived methods:
+
+* Alternatively we can define functor using:
 ```scala
 def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
 def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
 ```
+
+* Most popular is instance for Function with 1 argument:
+
+```scala
+Profunctor[Function1] {
+  def lmap[A,B,C](f: A => B): (B => C) => (A => C) = f andThen
+  def rmap[A,B,C](f: B => C): (A => B) => (A => C) = f compose
+}
+```
+
+Becasue Profunctors can be used as base to define Arrows therefore there are instances for Arrow like constructions like `Kleisli`
+
+* In Category Theroy:
+When we have Category `C` and `D` and `D'` the opposite category to D,
+then a Profunctor `P` is a Functor  `D' x C -> Set` We write `D -> C`
+In category of types and functions we use only one category, so Profunctor P is `C' x C => C`
+  
+* Laws:
+- if we define Profunctor using dimap:
+  * `dimap id id == id`
+  * `dimap (f . g) (h . i) == dimap g h . dimap f i`
+Second law we get for free by parametricity.
+
+- if specify lmap or rmap
+  * `lmap id == id`
+  * `rmap id == id`
+  * `lmap (f . g) == lmap g . lmap f`
+  * `rmap (f . g) == rmap f . rmap g`
+  
+Last two laws we get for free by parametricity.
+
+- if specify both (in addition to law for dimap and laws for lmap:
+  * `dimap f g == lmap f . rmap g`
+
 * Resources
    * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala) [laws](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45)
@@ -829,6 +876,48 @@ def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
    * Monadic profunctors for bidirectional programming [(post)](https://blog.poisson.chat/posts/2017-01-01-monadic-profunctors.html), [(blog Lysxia)](https://blog.poisson.chat/), repo [Lysxia/profunctor-monad](https://github.com/Lysxia/profunctor-monad)
    * Analog of free monads for Profunctors [(post SO)](https://stackoverflow.com/questions/39241262/analog-of-free-monads-for-profunctors)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
+
+### Star 
+
+Lift Functor into Profunctor "forward"
+
+```scala
+case class Star[F[_],D,C](runStar: D => F[C])
+```
+
+If `F` is a Functor then `Star[F, ?, ?]` is a Profunctor:
+
+```scala
+def profunctor[F[_]](implicit FF: Functor[F]): Profunctor[Star[F, ?,?]] = new Profunctor[Star[F, ?, ?]] {
+  def dimap[X, Y, Z, W](ab: X => Y, cd: Z => W): Star[F, Y, Z] => Star[F, X, W] = bfc =>
+    Star[F,X, W]{ x =>
+      val f: Y => F[Z] = bfc.runStar
+      val fz: F[Z] = f(ab(x))
+      FF.map(fz)(cd)
+    }
+}
+```
+
+### CoStar
+
+Lift Functor into Profunctor "backwards"
+
+```scala
+case class Costar[F[_],D,C](runCostar: F[D] => C)
+```
+
+If `F` is a Functor then `Costar[F, ?, ?]` is a Profunctor
+
+```scala
+def profunctor[F[_]](FF: Functor[F]): Profunctor[Costar[F, ?, ?]] = new Profunctor[Costar[F, ?, ?]] {
+  def dimap[A, B, C, D](ab: A => B, cd: C => D): Costar[F, B, C] => Costar[F, A, D] = fbc =>
+    Costar{ fa =>
+      val v: F[B] = FF.map(fa)(ab)
+      val c: C = fbc.runCostar(v)
+      cd(c)
+    }
+}
+```
 
 ### Strong Profunctor
 
@@ -870,6 +959,16 @@ def uncurryStrong[P[_,_],A,B,C](pa: P[A, B => C])(S: Strong[P]): P[(A,B),C]
 ```
 In [Purescript implementation of Strong](https://pursuit.purescript.org/packages/purescript-profunctor/docs/Data.Profunctor.Strong) there are some more helper methods that use Category constraint for P.
 
+* Most common instance is Function with one argument:
+
+```scala
+val Function1Strong = new Strong[Function1] with Function1Profunctor {
+  def first[X, Y, Z](f: Function1[X, Y]): Function1[(X,Z), (Y, Z)] = { case (x,z) => (f(x), z) }
+}
+```
+
+it is possible to define instance for Kleisli arrow
+
 * Resources
    * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala)
@@ -896,6 +995,78 @@ def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
    * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
+
+### Dinatural Transformation
+
+Dinatural Transformation is a function that change one Profunctor P into another one Q without modifying the content.
+It is equivalent to Natural Transformation between two Functors (but for Profunctors).
+
+```scala
+trait DinaturalTransformation[P[_,_],Q[_,_]]{
+  def dinat[A,B](p: P[A,B]): Q[A,B]
+}
+```
+
+* Laws:
+  * `rmap f . dinat . lmap f == lmap f . dinat . rmap f`
+
+### Profunctor Functor
+
+```scala
+trait ProfunctorFunctor[T[_]] {
+  type TH[P[_,_],A,B] = T[P[A,B]]
+  def promap[P[_,_], Q[_,_]](dt: DinaturalTransformation[P,Q])(implicit PP: Profunctor[P]): DinaturalTransformation[TH[P,?,?], TH[Q,?,?]]
+}
+```
+
+### Profunctor Monad
+
+```scala
+trait ProfunctorMonad[T[_]] extends ProfunctorFunctor[T] {
+  type TTH[P[_,_],A,B] = T[T[P[A,B]]]
+  def proreturn[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[P, TH[P,?,?]]
+  def projoin[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[TTH[P,?,?], TH[P,?,?]]
+}
+```
+
+* Laws:
+  * `promap f . proreturn == proreturn . f`
+  * `projoin . proreturn == id`
+  * `projoin . promap proreturn == id`
+  * `projoin . projoin == projoin . promap projoin`
+
+### Profunctor Comonad
+
+```scala
+trait ProfunctorComonad[T[_]] extends ProfunctorFunctor[T] {
+  type TTH[P[_,_],A,B] = T[T[P[A,B]]]
+  def proextract[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[TH[P,?,?], P]
+  def produplicate[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[TH[P,?,?], TTH[P,?,?]]
+}
+```
+
+* Laws
+  * `proextract . promap f == f . proextract`
+  * `proextract . produplicate == id`
+  * `promap proextract . produplicate == id`
+  * `produplicate . produplicate == promap produplicate . produplicate`
+
+### Profunctor Yoneda
+
+  
+
+### Procompose
+
+In general Profunctors should have straightforward way to compose them as we have the same category in definition.
+But to be faithfull with Category Theory definition, Profunctor Composition is defined using exitential types:
+
+```scala
+trait Procompose[P[_,_],Q[_,_],D,C] {
+  type X
+  val p: P[X,C]
+  val q: Q[D,X]
+}
+```
 
 ### Category
 
