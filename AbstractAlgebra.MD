@@ -636,6 +636,16 @@ trait Ring[T] extends CommutativeGroup[T] {
    * typelevel/algebra [src](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Ring.scala) [laws](https://github.com/typelevel/algebra/blob/master/laws/src/main/scala/algebra/laws/RingLaws.scala)
    * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
 
+## United monoid
+
+"Consider two monoids (S, +, 0) and (S, ⋅, 1), which operate on the same set S,
+such that + is commutative and ⋅ distributes over +.
+
+We call these monoids united if 0 = 1."
+
+* Resources
+   * https://blogs.ncl.ac.uk/andreymokhov/united-monoids/
+  
 ## Field
 
 * https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Field.scala

@@ -278,30 +278,6 @@ case class Reader[-In, +R](run: In => R) {
 * https://repl.it/@Ouroboros2/Haskell-Tardis-1
 * http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
 
-
-### Functor Functor (FFunctor)
-
-Functor that works on natural transformations rather than on regular types
-
-```scala
-trait FFunctor[FF[_]] {
-  def ffmap[F[_],G[_]](nat: NaturalTransf[F,G]): FF[F] => FF[G]
-}
-```
-
-* Laws:
-  * identity: `ffmap id == id`
-  * composition: `ffmap (eta . phi) = ffmap eta . ffmap phi`
-
-* Resources
-  * (Haskell) Functor Functors - Benjamin [(blog post)](https://www.benjamin.pizza/posts/2017-12-15-functor-functors.html)
-
-### Monoidal Categories, Monoid Object
-
-* Resources
-  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
-  * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
-
 ### Contravariant (Contravariant Functor)
 ```scala
 trait Contravariant[F[_]] {
@@ -722,6 +698,64 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
   * [Haskell free/Control.Alternative.Free](http://hackage.haskell.org/package/free/docs/Control-Alternative-Free.html)
   * [Structurally enforced Free Alternative, without left distributivity - SO](https://stackoverflow.com/questions/45647253/structurally-enforced-free-alternative-without-left-distributivity)
 
+
+## Representable & Adjunctions
+
+### Representable
+
+```scala
+// TODO Haskell extends Distrivutive, Scalaz require F to be Functor
+trait Representable[F[_], Rep] {
+  def tabulate[X](f: Rep => X): F[X]
+  def index[X](fx: F[X])(f: Rep): X
+}
+```
+
+* Resources:
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala)
+  * (Haskell) Data.Functor.Rep: [(src Haskell)](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
+  * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
+  * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
+  * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
+  * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
+  * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
+  * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
+  * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
+  * https://stackoverflow.com/a/46502280
+  * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
+  * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+
+### Adjunction
+
+Adjunction[F,B] spacify relation between two Functors (There is natural transformation between composition of those two functors and identity.)
+We say that F is left adjoint to G.
+
+```scala
+trait Adjunction[F[_], G[_]] {
+  def left[A, B](f: F[A] => B): A => G[B]
+  def right[A, B](f: A => G[B]): F[A] => B
+}
+```
+
+Adjunction can be defined between Reader monad and Coreader comonad.
+
+* Resources:
+  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
+  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
+  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
+  * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
+  * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
+  * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
+  * (Haskell) Zapping Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/zapping-strong-adjunctions/)
+  * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
+  * State monad using Adjunctions [kaifransson/adjoint-stacks](https://github.com/kaifransson/adjoint-stacks)
+  * [Adjunctions - M.M. Fokkinga, Lambert Meertens](https://research.utwente.nl/en/publications/adjunctions)
+  * [Generic Programming with Adjunctions - Ralf Hinze](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
+  * [Relational Algebra by Way of Adjunctions - Jeremy Gibbons, Fritz, Henglein, Ralf Hinze, Nicolas Wu](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/reladj.pdf)
+
+## (Co)Yoneda & (Co)Density & Kan Extensions
+
 ### Yoneda
 
 Construction that abstract over type constructor and allow to effectively stack computations.
@@ -828,6 +862,307 @@ def lowerCoyoneda(implicit fun: Functor[F]): F[A]
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * scalaz [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
+
+
+### Right Kan extension
+
+```scala
+trait Ran[G[_], H[_], A] {
+  def runRan[B](f: A => G[B]): H[B]
+}
+```
+
+* We can create functor for Ran without any requirements on G, H
+```scala
+def ranFunctor[G[_], H[_]]: Functor[Ran[G, H, ?]] =
+    new Functor[Ran[G, H, ?]] {
+
+      def map[A, B](fa: Ran[G, H, A])(f: A => B): Ran[G, H, B] =
+        new Ran[G, H, B] {
+          def runRan[C](f2: B => G[C]): H[C] =
+            fa.runRan(f andThen f2)
+        }
+    }
+```
+
+* We can define Monad for Ran without any requirements on G, H. Monad
+generated by Ran is Codensity.
+```scala
+def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
+  new Codensity[F, A] {
+    def run[B](f: A => F[B]): F[B] = ran.runRan(f)
+  }
+```
+
+* Resources
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
+  * Purescript implementation of [Kan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs)
+  * [Haskell libraries using Kan extensions](https://packdeps.haskellers.com/reverse/kan-extensions)
+  * (Haskell, Category Theory) Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
+  * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
+  * (Haskell) Kan Extensions II: Adjunctions, Composition, Lifting - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions-ii/)
+  * (Haskell) Kan Extensions III: As Ends and Coends - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extension-iii/)
+  * (Haskell) Free Monads for Less (Part 1 of 3): Codensity - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less/)
+  * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
+  * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)
+  * (Haskell) [Kan Extensions for Program Optimisation Or: Art and Dan Explain an Old Trick - Ralf Hinze](https://www.cs.ox.ac.uk/ralf.hinze/publications/MPC12.pdf)
+
+### Left Kan Extension
+
+```scala
+trait Lan[F[_], H[_], A] {
+  type B
+  val hb: H[B]
+  def f: F[B] => A
+}
+```
+
+* we can define Functor for it
+```scala
+def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, ?]] = new Functor[Lan[F, H, ?]]() {
+  def map[A, X](x: Lan[F, H, A])(fax: A => X): Lan[F, H, X] = {
+    new Lan[F, H, X] {
+      type B = x.B
+      val hb: H[B] = x.hb
+      def f: F[B] => X = x.f andThen fax
+    }
+  }
+}
+```
+
+* Resources
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
+  * Purescript implementation of [Lan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
+  * [Haskell libraries using Kan extensions](https://packdeps.haskellers.com/reverse/kan-extensions)
+  * (Haskell, Category Theory) Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
+
+### Density Comonad
+
+Density is a Comonad that is simpler that Left Kan Extension.
+More precisely it is comonad formed by left Kan extension of a Functor along itself.)
+
+```scala
+trait Density[F[_], Y] { self =>
+  type X
+  val fb: F[X]
+  def f: F[X] => Y
+  
+  def densityToLan: Lan[F,F,Y] = new Lan[F,F,Y] {
+   type B = X
+   val hb: F[B] = fb
+   def f: F[B] => Y = self.f
+  }
+}
+
+object Density {
+  def apply[F[_], A, B](kba: F[B] => A, kb: F[B]): Density[F, A] = new Density[F, A] {
+    type X = B
+    val fb: F[X] = kb
+    def f: F[X] => A = kba
+  }
+}
+```
+
+Density form a Functor without any conditions of F so it is a Free Functor. Similar like Lan.
+
+```scala
+def functorInstance[K[_]]: Functor[Density[K, ?]] = new Functor[Density[K, ?]] {
+  def map[A, B](x: Density[K, A])(fab: A => B): Density[K, B] = Density[K,B,x.X](x.f andThen fab, x.fb)
+}
+```
+
+Density is a Comonad without any conditions of F so it is a Free Comonad.
+
+```scala
+def comonadInstance[K[_]]: Comonad[Density[K, ?]] = new Comonad[Density[K, ?]] {
+  def extract[A](w: Density[K, A]): A = w.f(w.fb)
+  def duplicate[A](wa: Density[K, A]): Density[K, Density[K, A]] =
+    Density[K, Density[K, A], wa.X](kx => Density[K, A, wa.X](wa.f, kx), wa.fb)
+  def map[A, B](x: Density[K, A])(f: A => B): Density[K, B] = x.map(f)
+}
+```
+
+* Density is also left adjoint to Comonad formed by Adjunction.
+
+* Resources
+  * Partial implementation by Kenji Yoshida [(gist)](https://gist.github.com/xuwei-k/7937745)
+  * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
+  * (Haskell) A Product of an Imperfect Union - Edward Kmett [(blog post)](http://comonad.com/reader/2011/a-product-of-an-imperfect-union/)
+  * [Comonads from Monads, and a new way do the reverse - u/King_of_the_Homeless](https://www.reddit.com/r/haskell/comments/8hgub9/comonads_from_monads_and_a_new_way_do_the_reverse/)
+  * (Haskell) kan-extensions/Control.Monad.Co [diter](http://hackage.haskell.org/package/kan-extensions-5.2/docs/Control-Monad-Co.html#v:diter) [dctrlM](http://hackage.haskell.org/package/kan-extensions/docs/Control-Monad-Co.html#v:dctrlM)
+  * small note in: Adjoint folds and unfolds—An extended study - Ralf Hinze [(paper)](https://www.cs.ox.ac.uk/ralf.hinze/publications/SCP-78-11.pdf)
+    and in Generic Programming with Adjunctions - Ralf Hinze [(paper)](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
+  * (Purescript) [rightfold/purescript-density-codensity Density](https://github.com/rightfold/purescript-density-codensity/blob/master/src/Control/Comonad/Density.purs)
+  * (Haskell) [ekmett/kan-extensions Density](https://hackage.haskell.org/package/kan-extensions/docs/Control-Comonad-Density.html)
+  * [Edward Kmett mentions it in Origami.hs](https://github.com/ekmett/ekmett.github.com/blob/8d3abab5b66db631e148e1d046d18909bece5893/haskell/Origami.hs#L225-L226)
+
+### Codensity
+
+Interface with flatMap'ish method:
+```scala
+trait Codensity[F[_], A] {
+  def run[B](f: A => F[B]): F[B]
+}
+```
+that gives us monad (without any requirement on F):
+```scala
+implicit def codensityMonad[G[_]]: Monad[Codensity[G, ?]] =
+  new Monad[Codensity[G, ?]] {
+    def map[A, B](fa: Codensity[G, A])(f: A => B): Codensity[G, B] =
+      new Codensity[G, B] {
+        def run[C](f2: B => G[C]): G[C] = fa.run(f andThen f2)
+      }
+
+    def unit[A](a: A): Codensity[G, A] =
+      new Codensity[G, A] {
+        def run[B](f: A => G[B]): G[B] = f(a)
+      }
+
+    def flatMap[A, B](c: Codensity[G, A])(f: A => Codensity[G, B]): Codensity[G, B] =
+      new Codensity[G, B] {
+        def run[C](f2: B => G[C]): G[C] = c.run(a => f(a).run(f2))
+      }
+  }
+```
+
+* Resources
+  * Difference Lists and the Codensity Monad - Mio Alter [(video, slides, blog post)](https://begriffs.com/posts/2016-02-04-difference-lists-and-codennsity.html)
+  * The Free and The Furious: And by 'Furious' I mean Codensity - raichoo [(video)]()https://www.youtube.com/watch?v=EiIZlX_k89Y)
+  * (Haskell) Free Monads for Less (Part 1 of 3): Codensity - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less/)
+  * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
+  * (Haskell) Kan Extensions II: Adjunctions, Composition, Lifting - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions-ii/)
+  * (Haskell) Kan Extensions III: As Ends and Coends - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extension-iii/)
+  * (Haskell) Unnatural Transformations and Quantifiers - Edward Kmett [blog post](http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/)
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Codensity.scala)
+  * scalaz [example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/CodensityUsage.scala)
+
+### Functor Functor (FFunctor)
+
+Functor that works on natural transformations rather than on regular types
+
+```scala
+trait FFunctor[FF[_]] {
+  def ffmap[F[_],G[_]](nat: NaturalTransf[F,G]): FF[F] => FF[G]
+}
+```
+
+* Laws:
+  * identity: `ffmap id == id`
+  * composition: `ffmap (eta . phi) = ffmap eta . ffmap phi`
+
+* Resources
+  * (Haskell) Functor Functors - Benjamin [(blog post)](https://www.benjamin.pizza/posts/2017-12-15-functor-functors.html)
+
+### Monoidal Categories, Monoid Object
+
+In Category Theory a Monoidal Category is a Category with a Bifuctor and morphisms that satisfy some laws (see gist for details).
+
+```scala
+trait MonoidalCategory[M[_, _], I] {
+  val tensor: Bifunctor[M]
+  val mcId: I
+
+  def rho[A]    (mai: M[A,I]): A
+  def rho_inv[A](a:   A):      M[A, I]
+
+  def lambda[A]      (mia: M[I,A]): A
+  def lambda_inv[A,B](a: A):        M[I, A]
+
+  def alpha[A,B,C](    mabc: M[M[A,B], C]): M[A, M[B,C]]
+  def alpha_inv[A,B,C](mabc: M[A, M[B,C]]): M[M[A,B], C]
+}
+```
+
+We can create monoidal category where product (Tuple) is a bifunctor or an coproduct (Either).
+
+Monoidal Categories are usefull if we consider category of endofunctors. If we develop concept of Monoid Object then it is possible to define
+Monads as Monoid Object in Monoidal Category of Endofunctors with Product as Bifunctor
+Applicative as Monoid Object in Monoidal Category of Endofunctors with Day convolution as Bifunctor
+
+In category of Profunctors with Profunctor Product as Bifunctor the Monoid Ojbect is Arrow.
+
+* Resources
+  * lemastero/MonoidalCategories.scala [(Gist)](https://gist.github.com/lemastero/cb50818fc40361ffb309701cffa651c9)
+  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
+  * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
+
+
+### Day Convolution
+
+Monads are monoids in a monoidal category of endofunctors.
+Applicative functors are also monoids in a monoidal category of endofunctors but as a tensor is used Day convolution.
+
+There is nice intuition for Day convolution as generalization of one of Applicative Functor methods. 
+
+* Haskell
+
+```haskell
+data Day f g a where
+  Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
+```
+* Scala
+
+```scala
+trait DayConvolution[F[_], G[_], A] {
+  type X
+  type Y
+  val fx: F[X]
+  val gy: G[Y]
+  def xya: (X, Y) => A
+}
+```
+
+* There is various ways to create Day Convolution:
+```scala
+def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): Day[F, G, B]
+def intro1[F[_], A](fa: F[A]): Day[Id, F, A]
+def intro2[F[_], A](fa: F[A]): Day[F, Id, A]
+```
+
+* Day convolution can be transformed by mapping over last argument, applying natural transformation to one of type constructors, or swapping them
+```scala
+def map[B](f: A => B): Day[F, G, B]
+def trans1[H[_]](nat: NaturalTransf[F, H]): Day[H, G, A]
+def trans2[H[_]](nat: NaturalTransf[G, H]): Day[F, H, A]
+def swapped: Day[G, F, A] = new Day[G, F, A]
+```
+
+* There is various ways to collapse Day convolution into value in type constructor:
+```scala
+def elim1[F[_], A](d: Day[Id, F, A])(implicit FunF: Functor[F]): F[A]
+def elim2[F[_], A](d: Day[F, Id, A])(implicit FunF: Functor[F]): F[A]
+def dap[F[_], A](d: Day[F, F, A])(implicit AF: Applicative[F]): F[A]
+```
+
+* We can define Functor instance without any conditions on type constructors (so it forms Functor for free like Coyoneda):
+
+```scala
+def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
+  def map[C, D](d: DayConvolution[F, G, C])(f: C => D): DayConvolution[F, G, D] =
+    new DayConvolution[F, G, D] {
+      type X = d.X
+      type Y = d.Y
+      val fx: F[X] = d.fx
+      val gy: G[Y] = d.gy
+
+      def xya: X => Y => D = x => y => f(d.xya(x)(y))
+    }
+}
+```
+
+* If both type constructor are Applicative then whoe Day Convolution is applicative.
+Similarly it is Comonad if both type constructors are Comonads.
+
+* Resources
+  * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
+  * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
+  * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
+  * (Haskell) implementation [kan-extensions/Data.Functor.Day)](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html)
+  * (Purescritp) implementation [paf31/purescript-day)](https://pursuit.purescript.org/packages/purescript-day/10.0.0/docs/Data.Functor.Day)
+  * (Purescript) extensible coeffect system built out of comonads and Day convolution [paf31/purescript-smash](https://github.com/paf31/purescript-smash/blob/master/src/Data/Smash.purs)
+  * (Purescript) [paf31/purescript-react-explore](https://github.com/paf31/purescript-react-explore/blob/master/src/React/Explore/List.purs)
+  * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
+
 
 ## Arrows
 
@@ -1240,310 +1575,6 @@ trait Category[F[_, _]] extends Compose[F] {
   * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
   * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
-
-## Adjunctions & Kan Extension
-
-### Adjunction
-
-Adjunction[F,B] spacify relation between two Functors (There is natural transformation between composition of those two functors and identity.)
-We say that F is left adjoint to G.
-
-```scala
-trait Adjunction[F[_], G[_]] {
-  def left[A, B](f: F[A] => B): A => G[B]
-  def right[A, B](f: A => G[B]): F[A] => B
-}
-```
-
-Adjunction can be defined between Reader monad and Coreader comonad.
-
-* Resources:
-  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
-  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
-  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
-  * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
-  * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
-  * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
-  * (Haskell) Zapping Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/zapping-strong-adjunctions/)
-  * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
-  * State monad using Adjunctions [kaifransson/adjoint-stacks](https://github.com/kaifransson/adjoint-stacks)
-  * [Adjunctions - M.M. Fokkinga, Lambert Meertens](https://research.utwente.nl/en/publications/adjunctions)
-  * [Generic Programming with Adjunctions - Ralf Hinze](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
-  * [Relational Algebra by Way of Adjunctions - Jeremy Gibbons, Fritz, Henglein, Ralf Hinze, Nicolas Wu](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/reladj.pdf)
-
-### Right Kan extension
-
-```scala
-trait Ran[G[_], H[_], A] {
-  def runRan[B](f: A => G[B]): H[B]
-}
-```
-
-* We can create functor for Ran without any requirements on G, H
-```scala
-def ranFunctor[G[_], H[_]]: Functor[Ran[G, H, ?]] =
-    new Functor[Ran[G, H, ?]] {
-
-      def map[A, B](fa: Ran[G, H, A])(f: A => B): Ran[G, H, B] =
-        new Ran[G, H, B] {
-          def runRan[C](f2: B => G[C]): H[C] =
-            fa.runRan(f andThen f2)
-        }
-    }
-```
-
-* We can define Monad for Ran without any requirements on G, H. Monad
-generated by Ran is Codensity.
-```scala
-def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
-  new Codensity[F, A] {
-    def run[B](f: A => F[B]): F[B] = ran.runRan(f)
-  }
-```
-
-* Resources
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
-  * Purescript implementation of [Kan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs)
-  * [Haskell libraries using Kan extensions](https://packdeps.haskellers.com/reverse/kan-extensions)
-  * (Haskell, Category Theory) Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
-  * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
-  * (Haskell) Kan Extensions II: Adjunctions, Composition, Lifting - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions-ii/)
-  * (Haskell) Kan Extensions III: As Ends and Coends - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extension-iii/)
-  * (Haskell) Free Monads for Less (Part 1 of 3): Codensity - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less/)
-  * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)
-  * (Haskell) [Kan Extensions for Program Optimisation Or: Art and Dan Explain an Old Trick - Ralf Hinze](https://www.cs.ox.ac.uk/ralf.hinze/publications/MPC12.pdf)
-
-### Left Kan Extension
-
-```scala
-trait Lan[F[_], H[_], A] {
-  type B
-  val hb: H[B]
-  def f: F[B] => A
-}
-```
-
-* we can define Functor for it
-```scala
-def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, ?]] = new Functor[Lan[F, H, ?]]() {
-  def map[A, X](x: Lan[F, H, A])(fax: A => X): Lan[F, H, X] = {
-    new Lan[F, H, X] {
-      type B = x.B
-      val hb: H[B] = x.hb
-      def f: F[B] => X = x.f andThen fax
-    }
-  }
-}
-```
-
-* Resources
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
-  * Purescript implementation of [Lan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
-  * [Haskell libraries using Kan extensions](https://packdeps.haskellers.com/reverse/kan-extensions)
-  * (Haskell, Category Theory) Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
-    
-### Day Convolution
-
-Monads are monoids in a monoidal category of endofunctors.
-Applicative functors are also monoids in a monoidal category of endofunctors but as a tensor is used Day convolution.
-
-There is nice intuition for Day convolution as generalization of one of Applicative Functor methods. 
-
-* Haskell
-
-```haskell
-data Day f g a where
-  Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
-```
-* Scala
-
-```scala
-trait DayConvolution[F[_], G[_], A] {
-  type X
-  type Y
-  val fx: F[X]
-  val gy: G[Y]
-  def xya: (X, Y) => A
-}
-```
-
-* There is various ways to create Day Convolution:
-```scala
-def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): Day[F, G, B]
-def intro1[F[_], A](fa: F[A]): Day[Id, F, A]
-def intro2[F[_], A](fa: F[A]): Day[F, Id, A]
-```
-
-* Day convolution can be transformed by mapping over last argument, applying natural transformation to one of type constructors, or swapping them
-```scala
-def map[B](f: A => B): Day[F, G, B]
-def trans1[H[_]](nat: NaturalTransf[F, H]): Day[H, G, A]
-def trans2[H[_]](nat: NaturalTransf[G, H]): Day[F, H, A]
-def swapped: Day[G, F, A] = new Day[G, F, A]
-```
-
-* There is various ways to collapse Day convolution into value in type constructor:
-```scala
-def elim1[F[_], A](d: Day[Id, F, A])(implicit FunF: Functor[F]): F[A]
-def elim2[F[_], A](d: Day[F, Id, A])(implicit FunF: Functor[F]): F[A]
-def dap[F[_], A](d: Day[F, F, A])(implicit AF: Applicative[F]): F[A]
-```
-
-* We can define Functor instance without any conditions on type constructors (so it forms Functor for free like Coyoneda):
-
-```scala
-def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
-  def map[C, D](d: DayConvolution[F, G, C])(f: C => D): DayConvolution[F, G, D] =
-    new DayConvolution[F, G, D] {
-      type X = d.X
-      type Y = d.Y
-      val fx: F[X] = d.fx
-      val gy: G[Y] = d.gy
-
-      def xya: X => Y => D = x => y => f(d.xya(x)(y))
-    }
-}
-```
-
-* If both type constructor are Applicative then whoe Day Convolution is applicative.
-Similarly it is Comonad if both type constructors are Comonads.
-
-* Resources
-  * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
-  * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
-  * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
-  * (Haskell) implementation [kan-extensions/Data.Functor.Day)](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html)
-  * (Purescritp) implementation [paf31/purescript-day)](https://pursuit.purescript.org/packages/purescript-day/10.0.0/docs/Data.Functor.Day)
-  * (Purescript) extensible coeffect system built out of comonads and Day convolution [paf31/purescript-smash](https://github.com/paf31/purescript-smash/blob/master/src/Data/Smash.purs)
-  * (Purescript) [paf31/purescript-react-explore](https://github.com/paf31/purescript-react-explore/blob/master/src/React/Explore/List.purs)
-  * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
-
-### Density Comonad
-
-Density is a Comonad that is simpler that Left Kan Extension.
-More precisely it is comonad formed by left Kan extension of a Functor along itself.)
-
-```scala
-trait Density[F[_], Y] { self =>
-  type X
-  val fb: F[X]
-  def f: F[X] => Y
-  
-  def densityToLan: Lan[F,F,Y] = new Lan[F,F,Y] {
-   type B = X
-   val hb: F[B] = fb
-   def f: F[B] => Y = self.f
-  }
-}
-
-object Density {
-  def apply[F[_], A, B](kba: F[B] => A, kb: F[B]): Density[F, A] = new Density[F, A] {
-    type X = B
-    val fb: F[X] = kb
-    def f: F[X] => A = kba
-  }
-}
-```
-
-Density form a Functor without any conditions of F so it is a Free Functor. Similar like Lan.
-
-```scala
-def functorInstance[K[_]]: Functor[Density[K, ?]] = new Functor[Density[K, ?]] {
-  def map[A, B](x: Density[K, A])(fab: A => B): Density[K, B] = Density[K,B,x.X](x.f andThen fab, x.fb)
-}
-```
-
-Density is a Comonad without any conditions of F so it is a Free Comonad.
-
-```scala
-def comonadInstance[K[_]]: Comonad[Density[K, ?]] = new Comonad[Density[K, ?]] {
-  def extract[A](w: Density[K, A]): A = w.f(w.fb)
-  def duplicate[A](wa: Density[K, A]): Density[K, Density[K, A]] =
-    Density[K, Density[K, A], wa.X](kx => Density[K, A, wa.X](wa.f, kx), wa.fb)
-  def map[A, B](x: Density[K, A])(f: A => B): Density[K, B] = x.map(f)
-}
-```
-
-* Density is also left adjoint to Comonad formed by Adjunction.
-
-* Resources
-  * Partial implementation by Kenji Yoshida [(gist)](https://gist.github.com/xuwei-k/7937745)
-  * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
-  * (Haskell) A Product of an Imperfect Union - Edward Kmett [(blog post)](http://comonad.com/reader/2011/a-product-of-an-imperfect-union/)
-  * [Comonads from Monads, and a new way do the reverse - u/King_of_the_Homeless](https://www.reddit.com/r/haskell/comments/8hgub9/comonads_from_monads_and_a_new_way_do_the_reverse/)
-  * (Haskell) kan-extensions/Control.Monad.Co [diter](http://hackage.haskell.org/package/kan-extensions-5.2/docs/Control-Monad-Co.html#v:diter) [dctrlM](http://hackage.haskell.org/package/kan-extensions/docs/Control-Monad-Co.html#v:dctrlM)
-  * small note in: Adjoint folds and unfolds—An extended study - Ralf Hinze [(paper)](https://www.cs.ox.ac.uk/ralf.hinze/publications/SCP-78-11.pdf)
-    and in Generic Programming with Adjunctions - Ralf Hinze [(paper)](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
-  * (Purescript) [rightfold/purescript-density-codensity Density](https://github.com/rightfold/purescript-density-codensity/blob/master/src/Control/Comonad/Density.purs)
-  * (Haskell) [ekmett/kan-extensions Density](https://hackage.haskell.org/package/kan-extensions/docs/Control-Comonad-Density.html)
-  * [Edward Kmett mentions it in Origami.hs](https://github.com/ekmett/ekmett.github.com/blob/8d3abab5b66db631e148e1d046d18909bece5893/haskell/Origami.hs#L225-L226)
-
-### Codensity
-
-Interface with flatMap'ish method:
-```scala
-trait Codensity[F[_], A] {
-  def run[B](f: A => F[B]): F[B]
-}
-```
-that gives us monad (without any requirement on F):
-```scala
-implicit def codensityMonad[G[_]]: Monad[Codensity[G, ?]] =
-  new Monad[Codensity[G, ?]] {
-    def map[A, B](fa: Codensity[G, A])(f: A => B): Codensity[G, B] =
-      new Codensity[G, B] {
-        def run[C](f2: B => G[C]): G[C] = fa.run(f andThen f2)
-      }
-
-    def unit[A](a: A): Codensity[G, A] =
-      new Codensity[G, A] {
-        def run[B](f: A => G[B]): G[B] = f(a)
-      }
-
-    def flatMap[A, B](c: Codensity[G, A])(f: A => Codensity[G, B]): Codensity[G, B] =
-      new Codensity[G, B] {
-        def run[C](f2: B => G[C]): G[C] = c.run(a => f(a).run(f2))
-      }
-  }
-```
-
-* Resources
-  * Difference Lists and the Codensity Monad - Mio Alter [(video, slides, blog post)](https://begriffs.com/posts/2016-02-04-difference-lists-and-codennsity.html)
-  * The Free and The Furious: And by 'Furious' I mean Codensity - raichoo [(video)]()https://www.youtube.com/watch?v=EiIZlX_k89Y)
-  * (Haskell) Free Monads for Less (Part 1 of 3): Codensity - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less/)
-  * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
-  * (Haskell) Kan Extensions II: Adjunctions, Composition, Lifting - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions-ii/)
-  * (Haskell) Kan Extensions III: As Ends and Coends - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extension-iii/)
-  * (Haskell) Unnatural Transformations and Quantifiers - Edward Kmett [blog post](http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/)
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Codensity.scala)
-  * scalaz [example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/CodensityUsage.scala)
-
-
-### Representable
-
-```scala
-// TODO Haskell extends Distrivutive, Scalaz require F to be Functor
-trait Representable[F[_], Rep] {
-  def tabulate[X](f: Rep => X): F[X]
-  def index[X](fx: F[X])(f: Rep): X
-}
-```
-
-* Resources:
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
-  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala)
-  * (Haskell) Data.Functor.Rep: [(src Haskell)](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
-  * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
-  * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
-  * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
-  * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
-  * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
-  * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
-  * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
-  * https://stackoverflow.com/a/46502280
-  * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
-  * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
 
 ### Adjoint Triples
 
