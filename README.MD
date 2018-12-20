@@ -278,6 +278,24 @@ case class Reader[-In, +R](run: In => R) {
 * https://repl.it/@Ouroboros2/Haskell-Tardis-1
 * http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
 
+
+### Functor Functor (FFunctor)
+
+Functor that works on natural transformations rather than on regular types
+
+```scala
+trait FFunctor[FF[_]] {
+  def ffmap[F[_],G[_]](nat: NaturalTransf[F,G]): FF[F] => FF[G]
+}
+```
+
+* Laws:
+  * identity: `ffmap id == id`
+  * composition: `ffmap (eta . phi) = ffmap eta . ffmap phi`
+
+* Resources
+  * (Haskell) Functor Functors - Benjamin [(blog post)](https://www.benjamin.pizza/posts/2017-12-15-functor-functors.html)
+
 ### Monoidal Categories, Monoid Object
 
 * Resources
@@ -633,15 +651,25 @@ trait NaturalTransf[F[_], G[_]] {
 
 ## Free constructions
 
-| abstraction | free construction |
-| ----------- | --------------------- |
-| Monoid      | List, Vector | 
-| Functor     | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
-| Applicative | [FreeApplicative](#free-applicative) |
-| Alternative | [Free Alternative](#free-alternative)
-| Monad       | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
-| Comonad     | [CoFree](#cofree), [Density](#density-comonad) |
-| Arrow       | [Free Arrow](#free-arrow) |
+| abstraction         | free construction     |
+| ------------------- | --------------------- |
+| Monoid              | List, Vector | 
+| Functor             | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
+| Applicative         | [FreeApplicative](#free-applicative) |
+| Alternative         | [Free Alternative](#free-alternative)
+| Monad               | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
+| Comonad             | [CoFree](#cofree), [Density](#density-comonad) |
+| Profunctor          | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), Tambara, Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing, Traversing |
+| ProfunctorFunctor   | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), Tambara, Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing |
+| ProfunctorMonad     |          Pastro,            Copastro,             PastroSum,               CopastroSum,          Environment,                   FreeTraversing |
+| ProfunctorComonad   | Tambara,         Cotambara,           TambaraSum,           CotambaraSum,               Closure,              CofreeTraversing |
+| Strong              | Tambara, Pastro,                                                                       Traversing |
+| Costrong            |                  Cotambara, Copastro |
+| Choice              |                                       TambaraSum, PastroSum |
+| Cochoice            |                                                             CotambaraSum, CopastroSum, Traversing |
+| Closed              | Closure, Environment |
+| Traversing          | CofreeTraversing, FreeTraversing |
+| Arrow               | [Free Arrow](#free-arrow) |
 
 * [Usage of Free construction in Haskell](https://packdeps.haskellers.com/reverse/free)
 
@@ -976,6 +1004,49 @@ it is possible to define instance for Kleisli arrow
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
    * usage of Strong in [paf31/purescript-sdom](https://github.com/paf31/purescript-sdom/blob/master/src/SDOM.purs#L197-L205)
 
+### Tambara
+
+```scala
+trait Tambara[P[_,_],A,B]{
+  def runTambara[C]: P[(A,C),(B,C)]
+}
+```
+
+Tambara is a Profunctor:
+
+```scala
+trait Profunctor[Tambara[P, ?, ?]] {
+  def PP: Profunctor[P]
+
+  def dimap[X, Y, Z, W](f: X => Y, g: Z => W): Tambara[P, Y, Z] => Tambara[P, X, W] = (tp : Tambara[P, Y, Z]) => new Tambara[P, X, W]{
+   
+    def runTambara[C]: P[(X, C), (W, C)] = {
+      val fp: P[(Y,C),(Z,C)] => P[(X, C), (W, C)] = PP.dimap(
+        Function1Strong.first[X, Y, C](f),
+        Function1Strong.first[Z, W, C](g)
+      )
+      val p: P[(Y,C),(Z,C)] = tp.runTambara[C]
+      fp(p)
+    }
+  }
+}
+```
+
+It is also FunctorProfunctor:
+
+```scala
+def promap[P[_, _], Q[_, _]](f: DinaturalTransformation[P, Q])(implicit PP: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => Tambara[P, A, B]], Lambda[(A,B) => Tambara[Q, A, B]]] = {
+  new DinaturalTransformation[Lambda[(A,B) => Tambara[P, A, B]], Lambda[(A,B) => Tambara[Q, A, B]]] {
+    def dinat[X, Y](ppp: Tambara[P, X, Y]): Tambara[Q, X, Y] = new Tambara[Q, X, Y] {
+      def runTambara[C]: Q[(X, C), (Y, C)] = {
+        val p: P[(X,C), (Y,C)] = ppp.runTambara
+        f.dinat[(X,C), (Y,C)](ppp.runTambara)
+      }
+    }
+  }
+}
+```
+
 ### Choice Profunctor
 
 Profunctor with additional method left that wrap both types inside Either.
@@ -1012,10 +1083,23 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
 
 ### Profunctor Functor
 
+Functor (endofunctor) between two Profunctors.
+
+It is different than regualar Functor:
+Functor lifts regular function to function working on type constructor: def map[A, B](f: A => B): F[A] => F[B]
+Profunctor lifts two regular functions to work on type constructor with two holed.
+
+And ProfunctorFunctor lifts dinatural transformation of two Profunctors P[_,_] => Q[_,_]
+ 
+operates on type constructor with one hole (F[A] => F[B])
+and ProfunctorFunctor and ProfunctorFunctor map P[A,B] => Q[A,B]
+
+ in Scala 2.12 we cannot express type constructor that have hole with shape
+that is not sepcified)
+
 ```scala
 trait ProfunctorFunctor[T[_]] {
-  type TH[P[_,_],A,B] = T[P[A,B]]
-  def promap[P[_,_], Q[_,_]](dt: DinaturalTransformation[P,Q])(implicit PP: Profunctor[P]): DinaturalTransformation[TH[P,?,?], TH[Q,?,?]]
+  def promap[P[_,_], Q[_,_]](dt: DinaturalTransformation[P,Q])(implicit PP: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], Lambda[(A,B) => T[Q[A,B]]]]
 }
 ```
 
@@ -1023,9 +1107,8 @@ trait ProfunctorFunctor[T[_]] {
 
 ```scala
 trait ProfunctorMonad[T[_]] extends ProfunctorFunctor[T] {
-  type TTH[P[_,_],A,B] = T[T[P[A,B]]]
-  def proreturn[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[P, TH[P,?,?]]
-  def projoin[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[TTH[P,?,?], TH[P,?,?]]
+  def proreturn[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[P, Lambda[(A,B) => T[P[A,B]]]]
+  def projoin[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[T[P[A,B]]]], Lambda[(A,B) => T[P[A,B]]]]
 }
 ```
 
@@ -1039,9 +1122,8 @@ trait ProfunctorMonad[T[_]] extends ProfunctorFunctor[T] {
 
 ```scala
 trait ProfunctorComonad[T[_]] extends ProfunctorFunctor[T] {
-  type TTH[P[_,_],A,B] = T[T[P[A,B]]]
-  def proextract[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[TH[P,?,?], P]
-  def produplicate[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[TH[P,?,?], TTH[P,?,?]]
+  def proextract[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], P]
+  def produplicate[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], Lambda[(A,B) => T[T[P[A,B]]]]]
 }
 ```
 
@@ -1059,6 +1141,17 @@ trait ProfunctorYoneda[P[_,_],A,B] {
 }
 ```
 
+is a Profunctor for free, because we can define:
+```scala
+def dimap[AA, BB](l: AA => A, r: B => BB): ProfunctorYoneda[P, AA, BB] = new ProfunctorYoneda[P, AA, BB] {
+  def runYoneda[X, Y](l2: X => AA, r2: BB => Y): P[X, Y] = {
+    val f1: X => A = l compose l2
+    val f2: B => Y = r2 compose r
+    self.runYoneda(f1, f2)
+  }
+}
+```
+
 
 ### Profunctor CoYoneda
 
@@ -1070,6 +1163,25 @@ trait ProfunctorCoyoneda[P[_,_],A,B] {
   def f2: Y => B
   def pxy: P[X,Y]
 }
+```
+
+helper constructor:
+
+```scala
+def apply[XX,YY,P[_,_],A,B](ax: A => XX, yb: YY => B, p: P[XX,YY]): ProfunctorCoyoneda[P,A,B] = new ProfunctorCoyoneda[P,A,B] {
+  type X = XX
+  type Y = YY
+  def f1: A => X = ax
+  def f2: Y => B = yb
+  def pxy: P[X,Y] = p
+}
+```
+
+ProfunctorCoyoneda is a Profunctor for free:
+
+```scala
+def dimap[C, W](l: C => A, r: B => W): ProfunctorCoyoneda[P, C, W] =
+  ProfunctorCoyoneda[X, Y, P, C, W](f1 compose l, r compose f2, pxy)
 ```
 
 ### Procompose
