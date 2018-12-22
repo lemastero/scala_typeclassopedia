@@ -58,7 +58,9 @@ def widen[A, B >: A](fa: F[A]): F[B]
   * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
   * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU)
   * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala)
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
+  * Scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
+  * (Idris) [Prelude/Functor](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr)
+  * (Java) [Mojang/DataFixerUpper Functor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
 
 * Examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
 [function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
@@ -98,6 +100,7 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
 * Resources
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
   * Cartesian: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
+  * Java [Mojang/DataFixerUpper Apply](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Apply.java)
 
 ### Applicative (Applicative Functor)
 
@@ -125,12 +128,14 @@ trait Applicative[F[_]] extends Apply[F] {
   * FSiS 3 - Monad type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=VWCtLhH815M)
   * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala)
   * scalaz: [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala)
+  * (Idris) [Prelude/Applicative](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr)
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
     * The Essence of the Iterator Pattern - Eric Torreborre [blog post](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
     * Lifting - Tony Morris: [blog post](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
+  * (Java) [Mojang/DataFixerUpper Applicative](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
 ### Monad
 We add to Apply ability `flatMap` that can join two computations
@@ -177,11 +182,13 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
   * herding cats - Monad [blog post](http://eed3si9n.com/herding-cats/Monad.html)
   * Cats [(docs)](https://typelevel.org/cats/typeclasses/monad.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala)
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
+  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
+  * (Idris) [Prelude/Monad Monad](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr)
   * (Haskell) Monads for functional programming - Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf)
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
   * [wiki.haskell - Blow your mind - Monad magic](https://wiki.haskell.org/Blow_your_mind#Monad_magic)
   * https://www.quora.com/What-are-some-crazy-things-one-can-do-with-monads-in-Haskell
+  * (Category Theory) Monads - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=9fohXBj2UEI&list=PL0E91279846EC843E)
 
 ### Reader
 
@@ -531,6 +538,8 @@ def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
    * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
    * scalaz  Foldable1 [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
    * Bifoldable: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
+   * (Idris) [Prelude/Foldable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Foldable.idr)
+   * (Java) [Mojang/DataFixerUpper Fold](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Fold.java)
 
 ### Traverse
 
@@ -566,6 +575,8 @@ trait Distributive[F[_]] extends Functor[F] {
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
    * Traverse1 [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse1.scala)
    * usage of Distributive in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+   * (Idris) [idris-lang/Idris-dev Traversable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Traversable.idr)
+   * (Java) [Mojang/DataFixerUpper Traversable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Traversable.java)
    
 ### SemigroupK (Plus)
 
@@ -623,7 +634,10 @@ trait NaturalTransf[F[_], G[_]] {
 ```
 
 * Resources
+  * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala)
   * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala)
+  * [Haskell natural-transformation/Control-Natural](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html)
+  * Natural transformations - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=FZSUwqWjHCU&list=PLA28A5C9D19465C92)
 
 ## Free constructions
 
@@ -725,6 +739,7 @@ trait Representable[F[_], Rep] {
   * https://stackoverflow.com/a/46502280
   * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
   * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+  * Java [Mojang/DataFixerUpper Representable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Representable.java)
 
 ### Adjunction
 
@@ -1199,7 +1214,7 @@ def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
 * Most popular is instance for Function with 1 argument:
 
 ```scala
-Profunctor[Function1] {
+trait Profunctor[Function1] {
   def lmap[A,B,C](f: A => B): (B => C) => (A => C) = f andThen
   def rmap[A,B,C](f: B => C): (A => B) => (A => C) = f compose
 }
@@ -1232,13 +1247,17 @@ Last two laws we get for free by parametricity.
 * Resources
    * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
    * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala) [laws](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45)
+   * (Java) [Mojang/DataFixerUpper Profunctor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
+   * (Purescript) [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
+   * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
+   * I love profunctors. They're so easy - Liyang HU [(post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/profunctors)
    * [Haskell libraries using Profunctors](https://packdeps.haskellers.com/reverse/profunctors)
    * [Tom Ellis: 24 Days of Hackage: profunctors](https://ocharles.org.uk/guest-posts/2013-12-22-24-days-of-hackage-profunctors.html)
    * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
-   * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
    * Monadic profunctors for bidirectional programming [(post)](https://blog.poisson.chat/posts/2017-01-01-monadic-profunctors.html), [(blog Lysxia)](https://blog.poisson.chat/), repo [Lysxia/profunctor-monad](https://github.com/Lysxia/profunctor-monad)
    * Analog of free monads for Profunctors [(post SO)](https://stackoverflow.com/questions/39241262/analog-of-free-monads-for-profunctors)
-   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
+   * Category Theory III 6.1, Profunctors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=XJgfrF3O6iE)
+   * [How to abstract over a “back and forth” transformation? - SO](https://stackoverflow.com/questions/15222013/how-to-abstract-over-a-back-and-forth-transformation/15235409#15235409)
 
 ### Star 
 
@@ -1402,19 +1421,17 @@ def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
    * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
    * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
 
-### Dinatural Transformation
-
-Dinatural Transformation is a function that change one Profunctor P into another one Q without modifying the content.
-It is equivalent to Natural Transformation between two Functors (but for Profunctors).
+### Extranatural Transformation
 
 ```scala
-trait DinaturalTransformation[P[_,_],Q[_,_]]{
-  def dinat[A,B](p: P[A,B]): Q[A,B]
+trait ExtranaturalTransformation[P[_,_],Q[_,_]]{
+  def exnat[A,B](p: P[A,B]): Q[A,B]
 }
 ```
+ 
+* Resources
+   * [Haskell profunctors/ Data.Profunctor.Types :->](https://hackage.haskell.org/package/profunctors-5.3/docs/Data-Profunctor-Types.html#t::-45--62-)
 
-* Laws:
-  * `rmap f . dinat . lmap f == lmap f . dinat . rmap f`
 
 ### Profunctor Functor
 
@@ -1579,6 +1596,32 @@ trait Category[F[_, _]] extends Compose[F] {
 ### Adjoint Triples
 
 * (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/)
+
+### Dinatural Transformation
+
+Dinatural Transformation is a function that change one Profunctor P into another one Q without modifying the content.
+It is equivalent to Natural Transformation between two Functors (but for Profunctors).
+
+```scala
+trait DinaturalTransformation[P[_,_],Q[_,_]]{
+  def dinat[A](p: P[A,A]): Q[A,A]
+}
+```
+
+* Laws:
+  * `rmap f . dinat . lmap f == lmap f . dinat . rmap f`
+
+* Resources
+   * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala#L87-L89)
+   * [nlab/Extranatural Transformation](https://ncatlab.org/nlab/show/extranatural+transformation)
+
+### Ends & Coends
+
+* Resources
+  * This is the (co)end, my only (co)friend - Fosco Loregian [(paper)](https://arxiv.org/tb/1501.02503)
+  * (Haskell) [Dinatural Transformations and Coends - A Neighborhood of Infinity - Dan Piponi](http://blog.sigfpe.com/2009/03/dinatural-transformations-and-coends.html)
+  * Category Theory III 6.2, Ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=TAPxt26YyEI)
+  * Ends - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=mxI9ba6Rexc&list=PLg-WC4aaB3JuUXyuc337P8UYQSQVTjyP6)
 
 ### Align
   * [PR for Cats](https://github.com/typelevel/cats/pull/1755)
