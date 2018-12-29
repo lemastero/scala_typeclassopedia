@@ -47,7 +47,9 @@ def widen[A, B >: A](fa: F[A]): F[B]
   * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
   * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU)
   * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala)
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
+  * Scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
+  * (Idris) [Prelude/Functor](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr)
+  * (Java) [Mojang/DataFixerUpper Functor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
 
 * Examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
 [function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
@@ -87,6 +89,7 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
 * Resources
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
   * Cartesian: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
+  * Java [Mojang/DataFixerUpper Apply](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Apply.java)
 
 ### Applicative (Applicative Functor)
 
@@ -114,12 +117,14 @@ trait Applicative[F[_]] extends Apply[F] {
   * FSiS 3 - Monad type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=VWCtLhH815M)
   * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala)
   * scalaz: [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala)
+  * (Idris) [Prelude/Applicative](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr)
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
     * The Essence of the Iterator Pattern - Eric Torreborre [blog post](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
     * Lifting - Tony Morris: [blog post](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
+  * (Java) [Mojang/DataFixerUpper Applicative](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
 ### Monad
 We add to Apply ability `flatMap` that can join two computations
@@ -166,11 +171,13 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
   * herding cats - Monad [blog post](http://eed3si9n.com/herding-cats/Monad.html)
   * Cats [(docs)](https://typelevel.org/cats/typeclasses/monad.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala)
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
+  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
+  * (Idris) [Prelude/Monad Monad](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr)
   * (Haskell) Monads for functional programming - Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf)
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
   * [wiki.haskell - Blow your mind - Monad magic](https://wiki.haskell.org/Blow_your_mind#Monad_magic)
   * https://www.quora.com/What-are-some-crazy-things-one-can-do-with-monads-in-Haskell
+  * (Category Theory) Monads - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=9fohXBj2UEI&list=PL0E91279846EC843E)
 
 ### Reader
 
@@ -266,12 +273,6 @@ case class Reader[-In, +R](run: In => R) {
 * https://www.reddit.com/r/haskell/comments/199po0/can_the_tardis_monad_be_used_in_an_efficient_way/
 * https://repl.it/@Ouroboros2/Haskell-Tardis-1
 * http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
-
-### Monoidal Categories, Monoid Object
-
-* Resources
-  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373)
-  * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
 
 ### Contravariant (Contravariant Functor)
 ```scala
@@ -540,6 +541,8 @@ def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
    * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
    * scalaz  Foldable1 [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
    * Bifoldable: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
+   * (Idris) [Prelude/Foldable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Foldable.idr)
+   * (Java) [Mojang/DataFixerUpper Fold](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Fold.java)
 
 ### Traverse
 
@@ -575,6 +578,8 @@ trait Distributive[F[_]] extends Functor[F] {
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
    * Traverse1 [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse1.scala)
    * usage of Distributive in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+   * (Idris) [idris-lang/Idris-dev Traversable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Traversable.idr)
+   * (Java) [Mojang/DataFixerUpper Traversable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Traversable.java)
    
 ### SemigroupK (Plus)
 
@@ -632,19 +637,32 @@ trait NaturalTransf[F[_], G[_]] {
 ```
 
 * Resources
+  * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala)
   * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala)
+  * [Haskell natural-transformation/Control-Natural](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html)
+  * Natural transformations - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=FZSUwqWjHCU&list=PLA28A5C9D19465C92)
 
 ## Free constructions
 
-| abstraction | free construction |
-| ----------- | --------------------- |
-| Monoid      | List, Vector | 
-| Functor     | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
-| Applicative | [FreeApplicative](#free-applicative) |
-| Alternative | [Free Alternative](#free-alternative)
-| Monad       | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
-| Comonad     | [CoFree](#cofree), [Density](#density-comonad) |
-| Arrow       | [Free Arrow](#free-arrow) |
+| abstraction         | free construction     |
+| ------------------- | --------------------- |
+| Monoid              | List, Vector | 
+| Functor             | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
+| Applicative         | [FreeApplicative](#free-applicative) |
+| Alternative         | [Free Alternative](#free-alternative)
+| Monad               | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
+| Comonad             | [CoFree](#cofree), [Density](#density-comonad) |
+| Profunctor          | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), Tambara, Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing, Traversing |
+| ProfunctorFunctor   | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), Tambara, Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing |
+| ProfunctorMonad     |          Pastro,            Copastro,             PastroSum,               CopastroSum,          Environment,                   FreeTraversing |
+| ProfunctorComonad   | Tambara,         Cotambara,           TambaraSum,           CotambaraSum,               Closure,              CofreeTraversing |
+| Strong              | Tambara, Pastro,                                                                       Traversing |
+| Costrong            |                  Cotambara, Copastro |
+| Choice              |                                       TambaraSum, PastroSum |
+| Cochoice            |                                                             CotambaraSum, CopastroSum, Traversing |
+| Closed              | Closure, Environment |
+| Traversing          | CofreeTraversing, FreeTraversing |
+| Arrow               | [Free Arrow](#free-arrow) |
 
 * [Usage of Free construction in Haskell](https://packdeps.haskellers.com/reverse/free)
 
@@ -695,6 +713,66 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
 
 * Resources
   * [Haskell free/Control.Alternative.Free](http://hackage.haskell.org/package/free/docs/Control-Alternative-Free.html)
+  * [Structurally enforced Free Alternative, without left distributivity - SO](https://stackoverflow.com/questions/45647253/structurally-enforced-free-alternative-without-left-distributivity)
+
+
+## Representable & Adjunctions
+
+### Representable
+
+```scala
+// TODO Haskell extends Distrivutive, Scalaz require F to be Functor
+trait Representable[F[_], Rep] {
+  def tabulate[X](f: Rep => X): F[X]
+  def index[X](fx: F[X])(f: Rep): X
+}
+```
+
+* Resources:
+  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala)
+  * (Haskell) Data.Functor.Rep: [(src Haskell)](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
+  * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
+  * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
+  * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
+  * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
+  * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
+  * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
+  * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
+  * https://stackoverflow.com/a/46502280
+  * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
+  * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+  * Java [Mojang/DataFixerUpper Representable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Representable.java)
+
+### Adjunction
+
+Adjunction[F,B] spacify relation between two Functors (There is natural transformation between composition of those two functors and identity.)
+We say that F is left adjoint to G.
+
+```scala
+trait Adjunction[F[_], G[_]] {
+  def left[A, B](f: F[A] => B): A => G[B]
+  def right[A, B](f: A => G[B]): F[A] => B
+}
+```
+
+Adjunction can be defined between Reader monad and Coreader comonad.
+
+* Resources:
+  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
+  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
+  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
+  * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
+  * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
+  * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
+  * (Haskell) Zapping Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/zapping-strong-adjunctions/)
+  * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
+  * State monad using Adjunctions [kaifransson/adjoint-stacks](https://github.com/kaifransson/adjoint-stacks)
+  * [Adjunctions - M.M. Fokkinga, Lambert Meertens](https://research.utwente.nl/en/publications/adjunctions)
+  * [Generic Programming with Adjunctions - Ralf Hinze](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
+  * [Relational Algebra by Way of Adjunctions - Jeremy Gibbons, Fritz, Henglein, Ralf Hinze, Nicolas Wu](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/reladj.pdf)
+
+## (Co)Yoneda & (Co)Density & Kan Extensions
 
 ### Yoneda
 
@@ -803,172 +881,6 @@ def lowerCoyoneda(implicit fun: Functor[F]): F[A]
   * scalaz [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
 
-## Arrows
-
-![](arrows.svg)
-
-### Profunctor
-
-Contravariant on first and Functor on the second argument.
-```scala
-trait Profunctor[F[_, _]] {
-  def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
-}
-```
-* Laws: [Cats src](https://github.com/typelevel/cats/blob/0.7.x/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
-* Derived methods:
-```scala
-def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
-def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
-```
-* Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala) [laws](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45)
-   * [Haskell libraries using Profunctors](https://packdeps.haskellers.com/reverse/profunctors)
-   * [Tom Ellis: 24 Days of Hackage: profunctors](https://ocharles.org.uk/guest-posts/2013-12-22-24-days-of-hackage-profunctors.html)
-   * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
-   * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
-   * Monadic profunctors for bidirectional programming [(post)](https://blog.poisson.chat/posts/2017-01-01-monadic-profunctors.html), [(blog Lysxia)](https://blog.poisson.chat/), repo [Lysxia/profunctor-monad](https://github.com/Lysxia/profunctor-monad)
-   * Analog of free monads for Profunctors [(post SO)](https://stackoverflow.com/questions/39241262/analog-of-free-monads-for-profunctors)
-   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
-
-### Strong Profunctor
-
-Profunctor with additional method `first` that lift profunctor so it can run on first element of tuple.
-
-For Profunctor of functions from A to B this operation just apply function to first element of tuple.
-
-```scala
-trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
-  def first[X,Y,Z](pab: P[X, Y]): P[(X, Z), (Y, Z)]
-}
-```
-
-* Laws in [Haskell implementation of Strong Profunctor](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
-  1) `first == dimap(swap, swap) andThen second`
-  2) `lmap(_.1) == rmap(_.1) andThen first`
-  3) `lmap(second f) andThen first == rmap(second f) andThen first`
-  4) `first . first ≡ dimap assoc unassoc . first`
-  5) `second ≡ dimap swap swap . first`
-  6) `lmap snd ≡ rmap snd . second`
-  7) `lmap (first f) . second ≡ rmap (first f) . second`
-  8) `second . second ≡ dimap unassoc assoc . second`
-    
-where
-```haskell
-assoc ((a,b),c) = (a,(b,c))
-unassoc (a,(b,c)) = ((a,b),c)
-```
-  
-In [Notions of Computation as Monoids by Exequiel Rivas and Mauro Jaskelioff](https://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf) in 7.1 there are following laws:
-1) `dimap identity pi (first a) = dimap pi id a`
-2) `first (first a) = dimap alphaInv alpha (first a)`
-3) `dimap (id × f) id (first a) = dimap id (id × f) (first a)`
-    
-* Derived methods:
-```scala
-def second[X,Y,Z](pab: P[X, Y]): P[(Z, X), (Z, Y)]
-def uncurryStrong[P[_,_],A,B,C](pa: P[A, B => C])(S: Strong[P]): P[(A,B),C]
-```
-In [Purescript implementation of Strong](https://pursuit.purescript.org/packages/purescript-profunctor/docs/Data.Profunctor.Strong) there are some more helper methods that use Category constraint for P.
-
-* Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala)
-   * Haskell [Data.Profunctor.Strong](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
-   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
-   * usage of Strong in [paf31/purescript-sdom](https://github.com/paf31/purescript-sdom/blob/master/src/SDOM.purs#L197-L205)
-
-### Choice Profunctor
-
-Profunctor with additional method left that wrap both types inside Either.
-
-```scala
-trait ProChoice[P[_, _]] extends Profunctor[P] {
-  def left[A,B,C](pab: P[A, B]):  P[Either[A, C], Either[B, C]]
-}
-```
-
-* derived method
-```scala
-def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
-```
-
-* Resources
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
-   * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
-   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
-
-### Category
-
-Abstraction for operations that can be composed and that provide no-op (id).
-
-```scala
-trait Compose[F[_, _]] {
-  def compose[A, B, C](f: F[B, C], g: F[A, B]): F[A, C] // alias <<<
-}
-
-trait Category[F[_, _]] extends Compose[F] {
-  def id[A]: F[A, A]
-}
-```
-
-* Category laws
- * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`
- * left `f.compose(id) == id.compose(f) == f`
-
-* Resources
-  * (Category Theory) Category Theory 1.2: What is a category? - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
-  * Cats [src Category](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala)
-  * Cats [src Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala)
-  * Cats [src Compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala)
-  * Cats [src Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala)
-
-### Arrow
-
-* Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
-* [Tom Ellis: 24 Days of GHC Extensions: Arrows](https://ocharles.org.uk/guest-posts/2014-12-21-arrows.html)
-* FixxBuzz using arrows [(blog post) (Haskell)](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
-
-### Free Arrow
-
-* Resources
-  * Do it with (free?) arrows! – Julien Richard Foy [video](https://www.youtube.com/watch?v=PWBTOhMemxQ)
-
-### Kleisli
-
-* Resources
-  * (C++) Category Theory 3.2: Kleisli category - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
-  * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
-  * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
-  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
-
-## Adjunctions & Kan Extension
-
-### Adjunction
-
-Adjunction[F,B] spacify relation between two Functors (There is natural transformation between composition of those two functors and identity.)
-We say that F is left adjoint to G.
-
-```scala
-trait Adjunction[F[_], G[_]] {
-  def left[A, B](f: F[A] => B): A => G[B]
-  def right[A, B](f: A => G[B]): F[A] => B
-}
-```
-
-Adjunction can be defined between Reader monad and Coreader comonad.
-
-* Resources:
-  * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
-  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
-  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
-  * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
-  * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
-  * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
-  * (Haskell) Zapping Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/zapping-strong-adjunctions/)
-  * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
-  * State monad using Adjunctions [kaifransson/adjoint-stacks](https://github.com/kaifransson/adjoint-stacks)
 
 ### Right Kan extension
 
@@ -1010,8 +922,8 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
   * (Haskell) Kan Extensions III: As Ends and Coends - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extension-iii/)
   * (Haskell) Free Monads for Less (Part 1 of 3): Codensity - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less/)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)  
-
+  * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)
+  * (Haskell) [Kan Extensions for Program Optimisation Or: Art and Dan Explain an Old Trick - Ralf Hinze](https://www.cs.ox.ac.uk/ralf.hinze/publications/MPC12.pdf)
 
 ### Left Kan Extension
 
@@ -1041,82 +953,6 @@ def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, ?]] = new Functor[Lan[F, H, ?]]() 
   * Purescript implementation of [Lan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
   * [Haskell libraries using Kan extensions](https://packdeps.haskellers.com/reverse/kan-extensions)
   * (Haskell, Category Theory) Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
-    
-### Day Convolution
-
-Monads are monoids in a monoidal category of endofunctors.
-Applicative functors are also monoids in a monoidal category of endofunctors but as a tensor is used Day convolution.
-
-There is nice intuition for Day convolution as generalization of one of Applicative Functor methods. 
-
-* Haskell
-
-```haskell
-data Day f g a where
-  Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
-```
-* Scala
-
-```scala
-trait DayConvolution[F[_], G[_], A] {
-  type X
-  type Y
-  val fx: F[X]
-  val gy: G[Y]
-  def xya: (X, Y) => A
-}
-```
-
-* There is various ways to create Day Convolution:
-```scala
-def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): Day[F, G, B]
-def intro1[F[_], A](fa: F[A]): Day[Id, F, A]
-def intro2[F[_], A](fa: F[A]): Day[F, Id, A]
-```
-
-* Day convolution can be transformed by mapping over last argument, applying natural transformation to one of type constructors, or swapping them
-```scala
-def map[B](f: A => B): Day[F, G, B]
-def trans1[H[_]](nat: NaturalTransf[F, H]): Day[H, G, A]
-def trans2[H[_]](nat: NaturalTransf[G, H]): Day[F, H, A]
-def swapped: Day[G, F, A] = new Day[G, F, A]
-```
-
-* There is various ways to collapse Day convolution into value in type constructor:
-```scala
-def elim1[F[_], A](d: Day[Id, F, A])(implicit FunF: Functor[F]): F[A]
-def elim2[F[_], A](d: Day[F, Id, A])(implicit FunF: Functor[F]): F[A]
-def dap[F[_], A](d: Day[F, F, A])(implicit AF: Applicative[F]): F[A]
-```
-
-* We can define Functor instance without any conditions on type constructors (so it forms Functor for free like Coyoneda):
-
-```scala
-def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
-  def map[C, D](d: DayConvolution[F, G, C])(f: C => D): DayConvolution[F, G, D] =
-    new DayConvolution[F, G, D] {
-      type X = d.X
-      type Y = d.Y
-      val fx: F[X] = d.fx
-      val gy: G[Y] = d.gy
-
-      def xya: X => Y => D = x => y => f(d.xya(x)(y))
-    }
-}
-```
-
-* If both type constructor are Applicative then whoe Day Convolution is applicative.
-Similarly it is Comonad if both type constructors are Comonads.
-
-* Resources
-  * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
-  * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
-  * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
-  * (Haskell) implementation [kan-extensions/Data.Functor.Day)](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html)
-  * (Purescritp) implementation [paf31/purescript-day)](https://pursuit.purescript.org/packages/purescript-day/10.0.0/docs/Data.Functor.Day)
-  * (Purescript) extensible coeffect system built out of comonads and Day convolution [paf31/purescript-smash](https://github.com/paf31/purescript-smash/blob/master/src/Data/Smash.purs)
-  * (Purescript) [paf31/purescript-react-explore](https://github.com/paf31/purescript-react-explore/blob/master/src/React/Explore/List.purs)
-  * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
 
 ### Density Comonad
 
@@ -1218,31 +1054,547 @@ implicit def codensityMonad[G[_]]: Monad[Codensity[G, ?]] =
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Codensity.scala)
   * scalaz [example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/CodensityUsage.scala)
 
+### Functor Functor (FFunctor)
 
-### Representable
+Functor that works on natural transformations rather than on regular types
 
 ```scala
-// TODO Haskell extends Distrivutive, Scalaz require F to be Functor
-trait Representable[F[_], Rep] {
-  def tabulate[X](f: Rep => X): F[X]
-  def index[X](fx: F[X])(f: Rep): X
+trait FFunctor[FF[_]] {
+  def ffmap[F[_],G[_]](nat: NaturalTransf[F,G]): FF[F] => FF[G]
 }
 ```
 
-* Resources:
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
-  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala)
-  * (Haskell) Data.Functor.Rep: [(src Haskell)](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
-  * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
-  * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
-  * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
-  * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
-  * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
-  * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
-  * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
-  * https://stackoverflow.com/a/46502280
-  * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
-  * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+* Laws:
+  * identity: `ffmap id == id`
+  * composition: `ffmap (eta . phi) = ffmap eta . ffmap phi`
+
+* Resources
+  * (Haskell) Functor Functors - Benjamin [(blog post)](https://www.benjamin.pizza/posts/2017-12-15-functor-functors.html)
+
+### Monoidal Categories, Monoid Object
+
+In Category Theory a Monoidal Category is a Category with a Bifuctor and morphisms that satisfy some laws (see gist for details).
+
+```scala
+trait MonoidalCategory[M[_, _], I] {
+  val tensor: Bifunctor[M]
+  val mcId: I
+
+  def rho[A]    (mai: M[A,I]): A
+  def rho_inv[A](a:   A):      M[A, I]
+
+  def lambda[A]      (mia: M[I,A]): A
+  def lambda_inv[A,B](a: A):        M[I, A]
+
+  def alpha[A,B,C](    mabc: M[M[A,B], C]): M[A, M[B,C]]
+  def alpha_inv[A,B,C](mabc: M[A, M[B,C]]): M[M[A,B], C]
+}
+```
+
+We can create monoidal category where product (Tuple) is a bifunctor or an coproduct (Either).
+
+Monoidal Categories are usefull if we consider category of endofunctors. If we develop concept of Monoid Object then it is possible to define
+Monads as Monoid Object in Monoidal Category of Endofunctors with Product as Bifunctor
+Applicative as Monoid Object in Monoidal Category of Endofunctors with Day convolution as Bifunctor
+
+In category of Profunctors with Profunctor Product as Bifunctor the Monoid Ojbect is Arrow.
+
+* Resources
+  * lemastero/MonoidalCategories.scala [(Gist)](https://gist.github.com/lemastero/cb50818fc40361ffb309701cffa651c9)
+  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
+  * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
+
+
+### Day Convolution
+
+Monads are monoids in a monoidal category of endofunctors.
+Applicative functors are also monoids in a monoidal category of endofunctors but as a tensor is used Day convolution.
+
+There is nice intuition for Day convolution as generalization of one of Applicative Functor methods. 
+
+* Haskell
+
+```haskell
+data Day f g a where
+  Day :: forall x y. (x -> y -> a) -> f x -> g y -> Day f g a
+```
+* Scala
+
+```scala
+trait DayConvolution[F[_], G[_], A] {
+  type X
+  type Y
+  val fx: F[X]
+  val gy: G[Y]
+  def xya: (X, Y) => A
+}
+```
+
+* There is various ways to create Day Convolution:
+```scala
+def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): Day[F, G, B]
+def intro1[F[_], A](fa: F[A]): Day[Id, F, A]
+def intro2[F[_], A](fa: F[A]): Day[F, Id, A]
+```
+
+* Day convolution can be transformed by mapping over last argument, applying natural transformation to one of type constructors, or swapping them
+```scala
+def map[B](f: A => B): Day[F, G, B]
+def trans1[H[_]](nat: NaturalTransf[F, H]): Day[H, G, A]
+def trans2[H[_]](nat: NaturalTransf[G, H]): Day[F, H, A]
+def swapped: Day[G, F, A] = new Day[G, F, A]
+```
+
+* There is various ways to collapse Day convolution into value in type constructor:
+```scala
+def elim1[F[_], A](d: Day[Id, F, A])(implicit FunF: Functor[F]): F[A]
+def elim2[F[_], A](d: Day[F, Id, A])(implicit FunF: Functor[F]): F[A]
+def dap[F[_], A](d: Day[F, F, A])(implicit AF: Applicative[F]): F[A]
+```
+
+* We can define Functor instance without any conditions on type constructors (so it forms Functor for free like Coyoneda):
+
+```scala
+def functorDay[F[_], G[_]]: Functor[DayConvolution[F, G, ?]] = new Functor[DayConvolution[F, G, ?]] {
+  def map[C, D](d: DayConvolution[F, G, C])(f: C => D): DayConvolution[F, G, D] =
+    new DayConvolution[F, G, D] {
+      type X = d.X
+      type Y = d.Y
+      val fx: F[X] = d.fx
+      val gy: G[Y] = d.gy
+
+      def xya: X => Y => D = x => y => f(d.xya(x)(y))
+    }
+}
+```
+
+* If both type constructor are Applicative then whoe Day Convolution is applicative.
+Similarly it is Comonad if both type constructors are Comonads.
+
+* Resources
+  * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
+  * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
+  * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
+  * (Haskell) implementation [kan-extensions/Data.Functor.Day)](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html)
+  * (Purescritp) implementation [paf31/purescript-day)](https://pursuit.purescript.org/packages/purescript-day/10.0.0/docs/Data.Functor.Day)
+  * (Purescript) extensible coeffect system built out of comonads and Day convolution [paf31/purescript-smash](https://github.com/paf31/purescript-smash/blob/master/src/Data/Smash.purs)
+  * (Purescript) [paf31/purescript-react-explore](https://github.com/paf31/purescript-react-explore/blob/master/src/React/Explore/List.purs)
+  * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
+
+
+## Arrows
+
+![](arrows.svg)
+
+### Profunctor
+
+Profunctor abstract over
+- type constructor with two holes `P[_,_]`
+- operation `def dimap(preA: NewA => A, postB: B => NewB): P[A, B] => P[NewA, NewB]` 
+that given `P[A,B]` and two functions 
+- apply first `preA` before first type of `P` (ast as contravariant functor)
+- apply second `postB` after second type of `P` (act as functor)
+
+Alternatively we can define Profunctor not using dimap but using two separate functions:
+ * def lmap(f: AA => A): P[A,C] => P[AA,C] = dimap(f,identity[C])
+ * def rmap(f: B => BB): P[A,B] => P[A,BB] = dimap(identity[A], f)
+
+Profunctors in Haskell were explored by sifpe at blog A Neighborhood of Infinity in post [Profunctors in Haskell](http://blog.sigfpe.com/2011/07/profunctors-in-haskell.html)
+Implemented in Haskell: [ekmett/profunctors](https://github.com/ekmett/profunctors)
+
+```scala
+trait Profunctor[F[_, _]] {
+  def dimap[A, B, C, D](fab: F[A, B])(f: C => A)(g: B => D): F[C, D]
+}
+```
+
+* Alternatively we can define functor using:
+```scala
+def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
+def rmap[A, B, C](fab: F[A, B])(f: B => C): F[A, C]
+```
+
+* Most popular is instance for Function with 1 argument:
+
+```scala
+trait Profunctor[Function1] {
+  def lmap[A,B,C](f: A => B): (B => C) => (A => C) = f andThen
+  def rmap[A,B,C](f: B => C): (A => B) => (A => C) = f compose
+}
+```
+
+Becasue Profunctors can be used as base to define Arrows therefore there are instances for Arrow like constructions like `Kleisli`
+
+* In Category Theroy:
+When we have Category `C` and `D` and `D'` the opposite category to D,
+then a Profunctor `P` is a Functor  `D' x C -> Set` We write `D -> C`
+In category of types and functions we use only one category, so Profunctor P is `C' x C => C`
+  
+* Laws:
+- if we define Profunctor using dimap:
+  * `dimap id id == id`
+  * `dimap (f . g) (h . i) == dimap g h . dimap f i`
+Second law we get for free by parametricity.
+
+- if specify lmap or rmap
+  * `lmap id == id`
+  * `rmap id == id`
+  * `lmap (f . g) == lmap g . lmap f`
+  * `rmap (f . g) == rmap f . rmap g`
+  
+Last two laws we get for free by parametricity.
+
+- if specify both (in addition to law for dimap and laws for lmap:
+  * `dimap f g == lmap f . rmap g`
+
+* Resources
+   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala) [laws](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45)
+   * (Java) [Mojang/DataFixerUpper Profunctor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
+   * (Purescript) [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
+   * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
+   * I love profunctors. They're so easy - Liyang HU [(post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/profunctors)
+   * [Haskell libraries using Profunctors](https://packdeps.haskellers.com/reverse/profunctors)
+   * [Tom Ellis: 24 Days of Hackage: profunctors](https://ocharles.org.uk/guest-posts/2013-12-22-24-days-of-hackage-profunctors.html)
+   * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
+   * Monadic profunctors for bidirectional programming [(post)](https://blog.poisson.chat/posts/2017-01-01-monadic-profunctors.html), [(blog Lysxia)](https://blog.poisson.chat/), repo [Lysxia/profunctor-monad](https://github.com/Lysxia/profunctor-monad)
+   * Analog of free monads for Profunctors [(post SO)](https://stackoverflow.com/questions/39241262/analog-of-free-monads-for-profunctors)
+   * Category Theory III 6.1, Profunctors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=XJgfrF3O6iE)
+   * [How to abstract over a “back and forth” transformation? - SO](https://stackoverflow.com/questions/15222013/how-to-abstract-over-a-back-and-forth-transformation/15235409#15235409)
+
+### Star 
+
+Lift Functor into Profunctor "forward"
+
+```scala
+case class Star[F[_],D,C](runStar: D => F[C])
+```
+
+If `F` is a Functor then `Star[F, ?, ?]` is a Profunctor:
+
+```scala
+def profunctor[F[_]](implicit FF: Functor[F]): Profunctor[Star[F, ?,?]] = new Profunctor[Star[F, ?, ?]] {
+  def dimap[X, Y, Z, W](ab: X => Y, cd: Z => W): Star[F, Y, Z] => Star[F, X, W] = bfc =>
+    Star[F,X, W]{ x =>
+      val f: Y => F[Z] = bfc.runStar
+      val fz: F[Z] = f(ab(x))
+      FF.map(fz)(cd)
+    }
+}
+```
+
+### CoStar
+
+Lift Functor into Profunctor "backwards"
+
+```scala
+case class Costar[F[_],D,C](runCostar: F[D] => C)
+```
+
+If `F` is a Functor then `Costar[F, ?, ?]` is a Profunctor
+
+```scala
+def profunctor[F[_]](FF: Functor[F]): Profunctor[Costar[F, ?, ?]] = new Profunctor[Costar[F, ?, ?]] {
+  def dimap[A, B, C, D](ab: A => B, cd: C => D): Costar[F, B, C] => Costar[F, A, D] = fbc =>
+    Costar{ fa =>
+      val v: F[B] = FF.map(fa)(ab)
+      val c: C = fbc.runCostar(v)
+      cd(c)
+    }
+}
+```
+
+### Strong Profunctor
+
+Profunctor with additional method `first` that lift profunctor so it can run on first element of tuple.
+
+For Profunctor of functions from A to B this operation just apply function to first element of tuple.
+
+```scala
+trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
+  def first[X,Y,Z](pab: P[X, Y]): P[(X, Z), (Y, Z)]
+}
+```
+
+* Laws in [Haskell implementation of Strong Profunctor](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
+  1) `first == dimap(swap, swap) andThen second`
+  2) `lmap(_.1) == rmap(_.1) andThen first`
+  3) `lmap(second f) andThen first == rmap(second f) andThen first`
+  4) `first . first ≡ dimap assoc unassoc . first`
+  5) `second ≡ dimap swap swap . first`
+  6) `lmap snd ≡ rmap snd . second`
+  7) `lmap (first f) . second ≡ rmap (first f) . second`
+  8) `second . second ≡ dimap unassoc assoc . second`
+    
+where
+```haskell
+assoc ((a,b),c) = (a,(b,c))
+unassoc (a,(b,c)) = ((a,b),c)
+```
+  
+In [Notions of Computation as Monoids by Exequiel Rivas and Mauro Jaskelioff](https://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf) in 7.1 there are following laws:
+1) `dimap identity pi (first a) = dimap pi id a`
+2) `first (first a) = dimap alphaInv alpha (first a)`
+3) `dimap (id × f) id (first a) = dimap id (id × f) (first a)`
+    
+* Derived methods:
+```scala
+def second[X,Y,Z](pab: P[X, Y]): P[(Z, X), (Z, Y)]
+def uncurryStrong[P[_,_],A,B,C](pa: P[A, B => C])(S: Strong[P]): P[(A,B),C]
+```
+In [Purescript implementation of Strong](https://pursuit.purescript.org/packages/purescript-profunctor/docs/Data.Profunctor.Strong) there are some more helper methods that use Category constraint for P.
+
+* Most common instance is Function with one argument:
+
+```scala
+val Function1Strong = new Strong[Function1] with Function1Profunctor {
+  def first[X, Y, Z](f: Function1[X, Y]): Function1[(X,Z), (Y, Z)] = { case (x,z) => (f(x), z) }
+}
+```
+
+it is possible to define instance for Kleisli arrow
+
+* Resources
+   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala)
+   * Haskell [Data.Profunctor.Strong](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
+   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
+   * usage of Strong in [paf31/purescript-sdom](https://github.com/paf31/purescript-sdom/blob/master/src/SDOM.purs#L197-L205)
+
+### Tambara
+
+```scala
+trait Tambara[P[_,_],A,B]{
+  def runTambara[C]: P[(A,C),(B,C)]
+}
+```
+
+Tambara is a Profunctor:
+
+```scala
+trait Profunctor[Tambara[P, ?, ?]] {
+  def PP: Profunctor[P]
+
+  def dimap[X, Y, Z, W](f: X => Y, g: Z => W): Tambara[P, Y, Z] => Tambara[P, X, W] = (tp : Tambara[P, Y, Z]) => new Tambara[P, X, W]{
+   
+    def runTambara[C]: P[(X, C), (W, C)] = {
+      val fp: P[(Y,C),(Z,C)] => P[(X, C), (W, C)] = PP.dimap(
+        Function1Strong.first[X, Y, C](f),
+        Function1Strong.first[Z, W, C](g)
+      )
+      val p: P[(Y,C),(Z,C)] = tp.runTambara[C]
+      fp(p)
+    }
+  }
+}
+```
+
+It is also FunctorProfunctor:
+
+```scala
+def promap[P[_, _], Q[_, _]](f: DinaturalTransformation[P, Q])(implicit PP: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => Tambara[P, A, B]], Lambda[(A,B) => Tambara[Q, A, B]]] = {
+  new DinaturalTransformation[Lambda[(A,B) => Tambara[P, A, B]], Lambda[(A,B) => Tambara[Q, A, B]]] {
+    def dinat[X, Y](ppp: Tambara[P, X, Y]): Tambara[Q, X, Y] = new Tambara[Q, X, Y] {
+      def runTambara[C]: Q[(X, C), (Y, C)] = {
+        val p: P[(X,C), (Y,C)] = ppp.runTambara
+        f.dinat[(X,C), (Y,C)](ppp.runTambara)
+      }
+    }
+  }
+}
+```
+
+### Choice Profunctor
+
+Profunctor with additional method left that wrap both types inside Either.
+
+```scala
+trait ProChoice[P[_, _]] extends Profunctor[P] {
+  def left[A,B,C](pab: P[A, B]):  P[Either[A, C], Either[B, C]]
+}
+```
+
+* derived method
+```scala
+def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
+```
+
+* Resources
+   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
+   * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
+   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
+
+### Extranatural Transformation
+
+```scala
+trait ExtranaturalTransformation[P[_,_],Q[_,_]]{
+  def exnat[A,B](p: P[A,B]): Q[A,B]
+}
+```
+ 
+* Resources
+   * [Haskell profunctors/ Data.Profunctor.Types :->](https://hackage.haskell.org/package/profunctors-5.3/docs/Data-Profunctor-Types.html#t::-45--62-)
+
+
+### Profunctor Functor
+
+Functor (endofunctor) between two Profunctors.
+
+It is different than regualar Functor:
+Functor lifts regular function to function working on type constructor: def map[A, B](f: A => B): F[A] => F[B]
+Profunctor lifts two regular functions to work on type constructor with two holed.
+
+And ProfunctorFunctor lifts dinatural transformation of two Profunctors P[_,_] => Q[_,_]
+ 
+operates on type constructor with one hole (F[A] => F[B])
+and ProfunctorFunctor and ProfunctorFunctor map P[A,B] => Q[A,B]
+
+ in Scala 2.12 we cannot express type constructor that have hole with shape
+that is not sepcified)
+
+```scala
+trait ProfunctorFunctor[T[_]] {
+  def promap[P[_,_], Q[_,_]](dt: DinaturalTransformation[P,Q])(implicit PP: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], Lambda[(A,B) => T[Q[A,B]]]]
+}
+```
+
+### Profunctor Monad
+
+```scala
+trait ProfunctorMonad[T[_]] extends ProfunctorFunctor[T] {
+  def proreturn[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[P, Lambda[(A,B) => T[P[A,B]]]]
+  def projoin[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[T[P[A,B]]]], Lambda[(A,B) => T[P[A,B]]]]
+}
+```
+
+* Laws:
+  * `promap f . proreturn == proreturn . f`
+  * `projoin . proreturn == id`
+  * `projoin . promap proreturn == id`
+  * `projoin . projoin == projoin . promap projoin`
+
+### Profunctor Comonad
+
+```scala
+trait ProfunctorComonad[T[_]] extends ProfunctorFunctor[T] {
+  def proextract[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], P]
+  def produplicate[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], Lambda[(A,B) => T[T[P[A,B]]]]]
+}
+```
+
+* Laws
+  * `proextract . promap f == f . proextract`
+  * `proextract . produplicate == id`
+  * `promap proextract . produplicate == id`
+  * `produplicate . produplicate == promap produplicate . produplicate`
+
+### Profunctor Yoneda
+
+```scala
+trait ProfunctorYoneda[P[_,_],A,B] {
+  def runYoneda[X,Y](f: X => A, g: B => Y): P[X,Y]
+}
+```
+
+is a Profunctor for free, because we can define:
+```scala
+def dimap[AA, BB](l: AA => A, r: B => BB): ProfunctorYoneda[P, AA, BB] = new ProfunctorYoneda[P, AA, BB] {
+  def runYoneda[X, Y](l2: X => AA, r2: BB => Y): P[X, Y] = {
+    val f1: X => A = l compose l2
+    val f2: B => Y = r2 compose r
+    self.runYoneda(f1, f2)
+  }
+}
+```
+
+
+### Profunctor CoYoneda
+
+```scala
+trait ProfunctorCoyoneda[P[_,_],A,B] {
+  type X
+  type Y
+  def f1: A => X
+  def f2: Y => B
+  def pxy: P[X,Y]
+}
+```
+
+helper constructor:
+
+```scala
+def apply[XX,YY,P[_,_],A,B](ax: A => XX, yb: YY => B, p: P[XX,YY]): ProfunctorCoyoneda[P,A,B] = new ProfunctorCoyoneda[P,A,B] {
+  type X = XX
+  type Y = YY
+  def f1: A => X = ax
+  def f2: Y => B = yb
+  def pxy: P[X,Y] = p
+}
+```
+
+ProfunctorCoyoneda is a Profunctor for free:
+
+```scala
+def dimap[C, W](l: C => A, r: B => W): ProfunctorCoyoneda[P, C, W] =
+  ProfunctorCoyoneda[X, Y, P, C, W](f1 compose l, r compose f2, pxy)
+```
+
+### Procompose
+
+In general Profunctors should have straightforward way to compose them as we have the same category in definition.
+But to be faithfull with Category Theory definition, Profunctor Composition is defined using exitential types:
+
+```scala
+trait Procompose[P[_,_],Q[_,_],D,C] {
+  type X
+  val p: P[X,C]
+  val q: Q[D,X]
+}
+```
+
+### Category
+
+Abstraction for operations that can be composed and that provide no-op (id).
+
+```scala
+trait Compose[F[_, _]] {
+  def compose[A, B, C](f: F[B, C], g: F[A, B]): F[A, C] // alias <<<
+}
+
+trait Category[F[_, _]] extends Compose[F] {
+  def id[A]: F[A, A]
+}
+```
+
+* Category laws
+ * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`
+ * left `f.compose(id) == id.compose(f) == f`
+
+* Resources
+  * (Category Theory) Category Theory 1.2: What is a category? - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
+  * Cats [src Category](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala)
+  * Cats [src Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala)
+  * Cats [src Compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala)
+  * Cats [src Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala)
+
+### Arrow
+
+* Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
+* [Tom Ellis: 24 Days of GHC Extensions: Arrows](https://ocharles.org.uk/guest-posts/2014-12-21-arrows.html)
+* FixxBuzz using arrows [(blog post) (Haskell)](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
+
+### Free Arrow
+
+* Resources
+  * Do it with (free?) arrows! – Julien Richard Foy [video](https://www.youtube.com/watch?v=PWBTOhMemxQ)
+
+### Kleisli
+
+* Resources
+  * (C++) Category Theory 3.2: Kleisli category - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
+  * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
+  * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
 
 ### Adjoint Triples
 
@@ -1252,6 +1604,32 @@ trait Representable[F[_], Rep] {
   * [Adjoint functors and triples - Samuel Eilenberg and John C. Moore](https://projecteuclid.org/euclid.ijm/1256068141)
   * [Fancy Algebra (Graduate Topics Course) - Drew Armstrong](http://www.math.miami.edu/~armstrong/FA.php)
   * [nLab adjoint triple](https://ncatlab.org/nlab/show/adjoint+triple)
+
+### Dinatural Transformation
+
+Dinatural Transformation is a function that change one Profunctor P into another one Q without modifying the content.
+It is equivalent to Natural Transformation between two Functors (but for Profunctors).
+
+```scala
+trait DinaturalTransformation[P[_,_],Q[_,_]]{
+  def dinat[A](p: P[A,A]): Q[A,A]
+}
+```
+
+* Laws:
+  * `rmap f . dinat . lmap f == lmap f . dinat . rmap f`
+
+* Resources
+   * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala#L87-L89)
+   * [nlab/Extranatural Transformation](https://ncatlab.org/nlab/show/extranatural+transformation)
+
+### Ends & Coends
+
+* Resources
+  * This is the (co)end, my only (co)friend - Fosco Loregian [(paper)](https://arxiv.org/tb/1501.02503)
+  * (Haskell) [Dinatural Transformations and Coends - A Neighborhood of Infinity - Dan Piponi](http://blog.sigfpe.com/2009/03/dinatural-transformations-and-coends.html)
+  * Category Theory III 6.2, Ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=TAPxt26YyEI)
+  * Ends - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=mxI9ba6Rexc&list=PLg-WC4aaB3JuUXyuc337P8UYQSQVTjyP6)
 
 ### Align
   * [PR for Cats](https://github.com/typelevel/cats/pull/1755)

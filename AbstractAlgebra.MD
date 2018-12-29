@@ -69,8 +69,9 @@ Examples for usage of derived methods and combine [(src)](https://github.com/lem
    * Cats [(docs)](https://typelevel.org/cats/typeclasses/semigroup.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semigroup.scala)
    * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Semigroup.scala)
    * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Semigroup.scala)
-   * (Haskell) [base/Data-Semigroup](http://hackage.haskell.org/package/base/docs/Data-Semigroup.html)
-
+   * Haskell [base/Data-Semigroup](http://hackage.haskell.org/package/base/docs/Data-Semigroup.html)
+   * Java [(functionaljava/fj/Semigroup )](http://www.functionaljava.org/javadoc/4.8.1/functionaljava/fj/Semigroup.html)
+   
 ## Commutative Semigroup
 
 Semigroup where operation is commutative
@@ -133,6 +134,7 @@ Function f between two monoids A, B that preserve the structure of monoid:
    * (Haskell) https://apfelmus.nfshost.com/articles/monoid-fingertree.html
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
    * Rúnar Óli Bjarnason - Composing Programs [(video)](https://youtu.be/h8aPc8sji9Q?t=783)
+   * Java [functionaljava/fj/Monoid](http://www.functionaljava.org/javadoc/4.8.1/functionaljava/fj/Monoid.html) [Mojang/DataFixerUpper Monoid](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Monoid.java)
 
 For example size and Monoid - list with concatenation and integers with addition.
 
@@ -636,6 +638,16 @@ trait Ring[T] extends CommutativeGroup[T] {
    * typelevel/algebra [src](https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Ring.scala) [laws](https://github.com/typelevel/algebra/blob/master/laws/src/main/scala/algebra/laws/RingLaws.scala)
    * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Ring.scala) [docs](https://twitter.github.io/algebird/typeclasses/ring.html)
 
+## United monoid
+
+"Consider two monoids (S, +, 0) and (S, ⋅, 1), which operate on the same set S,
+such that + is commutative and ⋅ distributes over +.
+
+We call these monoids united if 0 = 1."
+
+* Resources
+   * https://blogs.ncl.ac.uk/andreymokhov/united-monoids/
+  
 ## Field
 
 * https://github.com/typelevel/algebra/blob/master/core/src/main/scala/algebra/ring/Field.scala
