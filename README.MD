@@ -1,16 +1,5 @@
 # Scala typeclassopedia
 
-* Resources covering topics about FP and category theory in great details and very approachable form:
-  * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason](https://www.manning.com/books/functional-programming-in-scala) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
-  * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): workshop on [implementating FP constructions](https://github.com/mpilquist/Structures) with usage examples and great insights about Scala and FP.
-  * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) and [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
-  * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
-  * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
-  * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
-  * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) another implementation of FP constructions
-  * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
-  * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
-
 ## [Abstract Algebra](./AbstractAlgebra.MD)
 
 ## Category Theory
@@ -484,6 +473,20 @@ case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
 
 ![](traversable_foldable.svg)
+
+### Bimonad
+
+Combine power of Monad and Comonad with additiona laws that tie together Monad and Comonad methods
+
+```scala
+trait Bimonad[T] extends Monad[T] with Comonad[T]
+```
+
+* They simplify resolution of implicits for things that are Monad and Comonad
+
+Resources:
+  * [Bimonads and Hopf monads on categories - Bachuki Mesablishvili, Robert Wisbauer ](https://arxiv.org/pdf/0710.1163v3.pdf)
+  * [PR with Bimonad to Cats](https://github.com/typelevel/cats/issues/30)
 
 ### Foldable
 Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
@@ -1576,15 +1579,17 @@ trait Category[F[_, _]] extends Compose[F] {
 
 ### Arrow
 
-* Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
-* [Tom Ellis: 24 Days of GHC Extensions: Arrows](https://ocharles.org.uk/guest-posts/2014-12-21-arrows.html)
-* FixxBuzz using arrows [(blog post) (Haskell)](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
+* Resources
+  * (Haskell) The arrow calculus - Sam Lindley, Philip Wadler, and Jeremy Yalloop [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-jfp/arrows-jfp.pdf)
+  * (Haskell) Idioms are oblivious, arrows are meticulous, monads are promiscuous - Sam Lindley, Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-and-idioms/arrows-and-idioms.pdf)
+  * Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
+  * [Tom Ellis: 24 Days of GHC Extensions: Arrows](https://ocharles.org.uk/guest-posts/2014-12-21-arrows.html)
+  * (Haskell) FixxBuzz using arrows [(blog post)](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
+  * Do it with (free?) arrows! – Julien Richard Foy [(video)](https://www.youtube.com/watch?v=PWBTOhMemxQ)
+  * Functional programming with arrows [video](https://www.youtube.com/watch?v=ZfAgvAIoUEY)
 
 ### Free Arrow
-
-* Resources
-  * Do it with (free?) arrows! – Julien Richard Foy [video](https://www.youtube.com/watch?v=PWBTOhMemxQ)
-
+  
 ### Kleisli
 
 * Resources
@@ -1595,7 +1600,12 @@ trait Category[F[_, _]] extends Compose[F] {
 
 ### Adjoint Triples
 
-* (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/)
+* Resources:
+  * (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/)
+  * (Haskell) [adjunctions/Control.Comonad.Trans.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Trans-Adjoint.html#t:AdjointT)
+  * [Adjoint functors and triples - Samuel Eilenberg and John C. Moore](https://projecteuclid.org/euclid.ijm/1256068141)
+  * [Fancy Algebra (Graduate Topics Course) - Drew Armstrong](http://www.math.miami.edu/~armstrong/FA.php)
+  * [nLab adjoint triple](https://ncatlab.org/nlab/show/adjoint+triple)
 
 ### Dinatural Transformation
 
@@ -1628,6 +1638,23 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
   * (Haskell) [these/Data.Align](https://hackage.haskell.org/package/these/docs/Data-Align.html)
 
 ### These
+
+Data type that represents both sum and product (Non exclusive two values):
+
+Tuple(a,b) => a * b
+Eiter(a,b) => a + b
+These(a,b) => (a + b) + a*b
+
+```scala
+sealed trait These[A,B]
+case class This[A, B](a: A) extends These[A,B]
+case class That[A,B](b: B) extends These[A,B]
+case class Those[A,B](a: A, b: B) extends These[A,B]
+```
+
+* There is many abstractions that can be implemented for this data type
+
+Resources:
   * [these/Data-These](https://hackage.haskell.org/package/these/docs/Data-These.html)
 
 ### Chronicle Monad
@@ -1641,3 +1668,19 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
 ## [Optics](./Optics.MD)
 
 ## [Functional data structures](./FunctionalDataStructures.MD)
+
+## Resource About Category Theory
+
+* Resources covering topics about FP and category theory in great details:
+  * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason](https://www.manning.com/books/functional-programming-in-scala) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
+  * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): workshop on [implementating FP constructions](https://github.com/mpilquist/Structures) with usage examples and great insights about Scala and FP.
+  * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) and [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
+  * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
+  * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
+  * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
+  * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) another implementation of FP constructions
+  * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
+  * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
+  
+## Advanced Category Theory(./AdvancedCategoryTheory.MD)
+
