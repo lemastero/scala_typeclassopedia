@@ -174,6 +174,7 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
   * (Idris) [Prelude/Monad Monad](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr)
   * (Haskell) Monads for functional programming - Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf)
+  * (Haskell) Monads are Trees with Grafting - A Neighborhood of Infinity - Dan Piponi [(paper)](https://github.com/dpiponi/grafting3/blob/master/monads.pdf)
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
   * [wiki.haskell - Blow your mind - Monad magic](https://wiki.haskell.org/Blow_your_mind#Monad_magic)
   * https://www.quora.com/What-are-some-crazy-things-one-can-do-with-monads-in-Haskell
@@ -778,6 +779,20 @@ Adjunction can be defined between Reader monad and Coreader comonad.
 
 Construction that abstract over type constructor and allow to effectively stack computations.
 
+In Category Theory
+
+Yoneda Lemma states that:
+`[C,Set](C(a,-),F) ~ Fa`
+Set of natural transformations from `C` to `Set` of the Hom functor `C(a,-)` to Functor `F: C -> Set`
+is isomorphic to `Fa`
+
+It is possible to formulate Yoneda Lemma in terms of Ends, and we get Ninja Yoneda Lemma:
+&int; `Set(C(a,x),F(x)) ~ Fa`
+
+That corresponds to:
+
+`def yoneda[R](cax: A => X, fx F[X]) ~ F[A]`
+
 ```scala
 trait Yoneda[F[_], A] {
   def run[R](f: A => R): F[R]
@@ -819,7 +834,9 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
   * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
   * Purescript [](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda)
-
+  * [nlab Yoneda lemma](https://ncatlab.org/nlab/show/Yoneda+lemma)
+  * Category Theory III 7.1, Natural transformations as ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=DseY4qIGZV4)
+  
 ### Coyoneda
 
 Rúnar in [Free Monads and the Yoneda Lemma](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
@@ -1507,7 +1524,6 @@ def dimap[AA, BB](l: AA => A, r: B => BB): ProfunctorYoneda[P, AA, BB] = new Pro
 }
 ```
 
-
 ### Profunctor CoYoneda
 
 ```scala
@@ -1576,10 +1592,14 @@ trait Category[F[_, _]] extends Compose[F] {
   * Cats [src Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala)
   * Cats [src Compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala)
   * Cats [src Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala)
+  * (Haskell) [base/Control-Category](https://hackage.haskell.org/package/base/docs/Control-Category.html)
 
 ### Arrow
 
 * Resources
+  * Scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Arrow.scala) [examples](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ArrowUsage.scala)
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Arrow.scala)
+  * (Haskell) [base/Control-Arrow](http://hackage.haskell.org/package/base/docs/Control-Arrow.html)
   * (Haskell) The arrow calculus - Sam Lindley, Philip Wadler, and Jeremy Yalloop [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-jfp/arrows-jfp.pdf)
   * (Haskell) Idioms are oblivious, arrows are meticulous, monads are promiscuous - Sam Lindley, Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-and-idioms/arrows-and-idioms.pdf)
   * Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
@@ -1588,15 +1608,22 @@ trait Category[F[_, _]] extends Compose[F] {
   * Do it with (free?) arrows! – Julien Richard Foy [(video)](https://www.youtube.com/watch?v=PWBTOhMemxQ)
   * Functional programming with arrows [video](https://www.youtube.com/watch?v=ZfAgvAIoUEY)
 
+### Arrow Loop
+
 ### Free Arrow
-  
+
 ### Kleisli
 
 * Resources
   * (C++) Category Theory 3.2: Kleisli category - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
   * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
-  * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+  * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+
+### Cokleisli
+
+* Cats
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Cokleisli.scala)
 
 ### Adjoint Triples
 
@@ -1627,10 +1654,30 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
 
 ### Ends & Coends
 
+Ends can be seen as infinite product.
+End corresponds to forall so polymorphic function:
+
+```scala
+// P is Profunctor
+
+trait End[P[_,_]] {
+  def run[A]: P[A,A]
+}
+```
+
+Coend can be seen as infinite coproduct (sum).
+Coends corresponds to exists
+
+```Haskell
+data Coend p = forall x. Coend p x x
+```
+
 * Resources
   * This is the (co)end, my only (co)friend - Fosco Loregian [(paper)](https://arxiv.org/tb/1501.02503)
   * (Haskell) [Dinatural Transformations and Coends - A Neighborhood of Infinity - Dan Piponi](http://blog.sigfpe.com/2009/03/dinatural-transformations-and-coends.html)
   * Category Theory III 6.2, Ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=TAPxt26YyEI)
+  * Category Theory III 7.1, Natural transformations as ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=DseY4qIGZV4)
+  * Category Theory III 7.2, Coends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=jQUebw8uac0)
   * Ends - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=mxI9ba6Rexc&list=PLg-WC4aaB3JuUXyuc337P8UYQSQVTjyP6)
 
 ### Align
