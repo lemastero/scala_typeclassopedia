@@ -665,6 +665,7 @@ John A De Goes
 
 * Resources
   * No More Transformers: High-Performance Effects in Scalaz 8 - John A De Goes [(blog post)](http://degoes.net/articles/effects-without-transformers)
+  * (Haskell) [Typeclassopedia Monad transformers](https://wiki.haskell.org/Typeclassopedia#Monad_transformers)
   * FSiS 7 - OptionT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=ZNUTMabdgzo)
   * FSiS 8 - EitherT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=z7rCBQ_vTRg)
   * (Haskell) The ReaderT Design Pattern - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
@@ -1162,6 +1163,8 @@ In category of Profunctors with Profunctor Product as Bifunctor the Monoid Ojbec
   * lemastero/MonoidalCategories.scala [(Gist)](https://gist.github.com/lemastero/cb50818fc40361ffb309701cffa651c9)
   * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
   * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
+  * (Haskell) Monoidal Category [data-category/Data.Category.Monoidal](https://hackage.haskell.org/package/data-category/docs/Data-Category-Monoidal.html), [categories/Control.Category.Monoidal](https://hackage.haskell.org/package/categories/docs/Control-Category-Monoidal.html)
+  * (Haskell) (Cartesian Closed Category) | [data-category/Data.Category.CartesianClosed](https://hackage.haskell.org/package/data-category/docs/Data-Category-CartesianClosed.html)
 
 
 ### Day Convolution
@@ -1641,6 +1644,9 @@ trait Category[F[_, _]] extends Compose[F] {
 * Resources
   * Scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Arrow.scala) [examples](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ArrowUsage.scala)
   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Arrow.scala), [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ArrowLaws.scala)
+  * [traneio/arrows](https://github.com/traneio/arrows)
+  * [Understanding arrows - Haskell wiki](https://en.wikibooks.org/wiki/Haskell/Understanding_arrows)
+  * [When does one consider using Arrows? - reddit](https://www.reddit.com/r/haskell/comments/4fkkzo/when_does_one_consider_using_arrows/)
   * (Haskell) [base/Control-Arrow](http://hackage.haskell.org/package/base/docs/Control-Arrow.html)
   * (Haskell) The arrow calculus - Sam Lindley, Philip Wadler, and Jeremy Yalloop [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-jfp/arrows-jfp.pdf)
   * (Haskell) Idioms are oblivious, arrows are meticulous, monads are promiscuous - Sam Lindley, Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-and-idioms/arrows-and-idioms.pdf)
@@ -1655,7 +1661,33 @@ trait Category[F[_, _]] extends Compose[F] {
 * Resources
   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/CommutativeArrow.scala), [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CommutativeArrowLaws.scala)
 
+### Arrow Choice
+
+* Resources
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/ArrowChoice.scala)
+  * [channingwalton/typeclassopedia ArrowChoice](https://github.com/channingwalton/typeclassopedia/blob/master/src/main/scala/org/typeclassopedia/ArrowChoice.scala)
+  * (Haskell) [Typeclassopedia ArrowChoice](https://wiki.haskell.org/Typeclassopedia#ArrowChoice)
+
+### Arrow Apply, Arrow Monad
+
+* Resources
+  * [channingwalton/typeclassopedia ArrowApply](https://github.com/channingwalton/typeclassopedia/blob/master/src/main/scala/org/typeclassopedia/ArrowApply.scala)
+  * (Haskell) [Typeclassopedia ArrowApply](https://wiki.haskell.org/Typeclassopedia#ArrowApply)
+  * (Haskell) [base/Control-Arrow ArrowApply](https://hackage.haskell.org/package/base/docs/Control-Arrow.html#t:ArrowApply)
+  * (Haskell) [base/Control-Arrow ArrowMonad](https://hackage.haskell.org/package/base/docs/Control-Arrow.html#t:ArrowMonad)
+
 ### Arrow Loop
+
+* Resources
+  * (Haskell) [base/Control-Arrow ArrowLoop](https://hackage.haskell.org/package/base/docs/Control-Arrow.html#t:ArrowLoop)
+  * (Haskell) [Typeclassopedia ArrowLoop](https://wiki.haskell.org/Typeclassopedia#ArrowLoop)
+
+### Arrow Zero
+
+* Resources
+  * [channingwalton/typeclassopedia ArrowZero](https://github.com/channingwalton/typeclassopedia/blob/master/src/main/scala/org/typeclassopedia/ArrowZero.scala)
+  * (Haskell) [base/Control-Arrow ArrowZero](https://hackage.haskell.org/package/base/docs/Control-Arrow.html#t:ArrowZero)
+
 
 ### Free Arrow
 
@@ -1773,9 +1805,8 @@ Resources:
   * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
   * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
   * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
-  * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) another implementation of FP constructions
+  * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) implementation of Haskell Typeclassopedia by Channing Walton, [(blog post)](The Road to the Typeclassopedia)
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
   
 ## Advanced Category Theory(./AdvancedCategoryTheory.MD)
-
