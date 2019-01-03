@@ -179,6 +179,7 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * [wiki.haskell - Blow your mind - Monad magic](https://wiki.haskell.org/Blow_your_mind#Monad_magic)
   * https://www.quora.com/What-are-some-crazy-things-one-can-do-with-monads-in-Haskell
   * (Category Theory) Monads - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=9fohXBj2UEI&list=PL0E91279846EC843E)
+  * Tail Call Elimination in Scala Monads [(blog post)] (https://apocalisp.wordpress.com/2011/10/26/tail-call-elimination-in-scala-monads/)
 
 ### Reader
 
@@ -204,17 +205,51 @@ case class Reader[-In, +R](run: In => R) {
   * https://gist.github.com/Mortimerp9/5384467
 
 ### Writer
+
 * Resources
   * Monadic Logging and You - Martin Snyder [(video)](https://www.youtube.com/watch?v=t-YX55ZF4g0)
   * The Writer Monad using Scala (example) - Tony Morris: [blog post](http://blog.tmorris.net/posts/the-writer-monad-using-scala-example/index.html)
 
 ### State
+
 * Resources
+  * Towards an Effect System in Scala, Part 1: ST Monad [(blog post)](https://apocalisp.wordpress.com/2011/03/20/towards-an-effect-system-in-scala-part-1/)
   * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
   * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
   * Monads to Machine Code - Stephen Diehl: [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
 
-### IO
+## IO, ZIO, Bifunctor IO (BIO), RIO (Reader + IO), Trifunctor IO (TRIO)
+
+* Resources
+  * The Making of an IO - Daniel Spiewak [(video)](https://www.youtube.com/watch?v=g_jP47HFpWA)
+  * Towards an Effect System in Scala, Part 2: IO Monad - (https://apocalisp.wordpress.com/2011/12/19/towards-an-effect-system-in-scala-part-2-io-monad/)
+  * An IO monad for cats - Daniel Spiewak [(blog post)](https://typelevel.org/blog/2017/05/02/io-monad-for-cats.html)
+  * [typelevel/cats-effect](https://github.com/typelevel/cats-effect)
+  * [Tutorial Monix Task 2.x](https://monix.io/docs/2x/eval/task.html)
+  * There Can Be Only One...IO Monad - John A De Goes [(blog post)](http://degoes.net/articles/only-one-io)
+
+### Bifunctor IO (BIO, ZIO)
+
+* Resources
+  * Bifunctor IO: A Step Away from Dynamically-Typed Error Handling - John A De Goes [(blog post)](http://degoes.net/articles/bifunctor-io)
+  * On Bifunctor IO and Java's Checked Exceptions - @alexelcu [(blog post)](https://alexn.org/blog/2018/05/06/bifunctor-io.html), [twitter](https://twitter.com/alexelcu/status/993154465518837760)
+  * [LukaJCB/cats-bio](https://github.com/LukaJCB/cats-bio), [PR to move into cats-effect](https://github.com/typelevel/cats-effect/issues/189)
+  * (Idris) [base/Control/IOExcept](https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Control/IOExcept.idr)
+  * Using ZIO with Tagless-Final - John A De Goes [(blog post)](http://degoes.net/articles/polymorphic-bifunctors)
+  * Scalaz ZIO [overwiev](https://scalaz.github.io/scalaz-zio/overview/) [scalaz/scalaz-zio](https://github.com/scalaz/scalaz-zio)
+
+### RIO (Reader + IO)
+
+* Resources
+  * The RIO Monad - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/07/the-rio-monad), [snoyberg/rio](https://github.com/snoyberg/rio), [reddit](https://www.reddit.com/r/haskell/comments/6p6p4b/the_rio_monad/)
+  * [http4s-tracer motivation](https://gvolpe.github.io/http4s-tracer/motivations.html)
+
+
+### TRIO (Reader + Bifunctor IO)
+
+* Resources
+  * [snoyberg/trio](https://github.com/snoyberg/trio)
+
 
 ### RWS Monad
 * (Haskell) [mtl/Control.Monad.RWS](http://hackage.haskell.org/package/mtl/docs/Control-Monad-RWS.html)
@@ -361,9 +396,10 @@ def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
   * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala)
   * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
-  * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
-  * [Haskell libraries using Bifunctors](https://packdeps.haskellers.com/reverse/bifunctors)
   * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
+  * [Haskell libraries using Bifunctors](https://packdeps.haskellers.com/reverse/bifunctors)
+  * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
+  * (Haskell) Parametricity for Bifunctor - Brent Yorgey [(blog post)](https://byorgey.wordpress.com/2018/03/30/parametricity-for-bifunctor/)
 
 ### Invariant (Invariant Functor, Exponential Functor)
 
@@ -622,10 +658,16 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
 
 * Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/mtl/TraverseEmptyListPermutationsSpec.scala)
 
-### Monad Transformers
+### Monad Transformers (OptionT EitherT ReaderT)
+
+"Monad transformers just aren’t practical in Scala."
+John A De Goes
+
 * Resources
+  * No More Transformers: High-Performance Effects in Scalaz 8 - John A De Goes [(blog post)](http://degoes.net/articles/effects-without-transformers)
   * FSiS 7 - OptionT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=ZNUTMabdgzo)
   * FSiS 8 - EitherT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=z7rCBQ_vTRg)
+  * (Haskell) The ReaderT Design Pattern - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
 
 ### Natural transformation (FunctionK)
 
@@ -1598,7 +1640,7 @@ trait Category[F[_, _]] extends Compose[F] {
 
 * Resources
   * Scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Arrow.scala) [examples](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ArrowUsage.scala)
-  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Arrow.scala)
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Arrow.scala), [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ArrowLaws.scala)
   * (Haskell) [base/Control-Arrow](http://hackage.haskell.org/package/base/docs/Control-Arrow.html)
   * (Haskell) The arrow calculus - Sam Lindley, Philip Wadler, and Jeremy Yalloop [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-jfp/arrows-jfp.pdf)
   * (Haskell) Idioms are oblivious, arrows are meticulous, monads are promiscuous - Sam Lindley, Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/arrows-and-idioms/arrows-and-idioms.pdf)
@@ -1607,6 +1649,11 @@ trait Category[F[_, _]] extends Compose[F] {
   * (Haskell) FixxBuzz using arrows [(blog post)](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
   * Do it with (free?) arrows! – Julien Richard Foy [(video)](https://www.youtube.com/watch?v=PWBTOhMemxQ)
   * Functional programming with arrows [video](https://www.youtube.com/watch?v=ZfAgvAIoUEY)
+
+### CommutativeArrow
+
+* Resources
+  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/CommutativeArrow.scala), [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CommutativeArrowLaws.scala)
 
 ### Arrow Loop
 
@@ -1721,6 +1768,7 @@ Resources:
 * Resources covering topics about FP and category theory in great details:
   * [Functional Programming in Scala - Paul Chiusano and Rúnar Bjarnason](https://www.manning.com/books/functional-programming-in-scala) Best book about FP in Scala. I have bought it for myself and higly recommend it. Worth reading, doing exercises and re-reading.
   * [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0): workshop on [implementating FP constructions](https://github.com/mpilquist/Structures) with usage examples and great insights about Scala and FP.
+  * [Applied functional type theory - Sergei Winitzki](https://www.youtube.com/watch?v=0Ld79Lnzx_o&list=PLcoadSpY7rHXJWbUkjQ3P9MXBbXxLP8kV)
   * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) and [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
   * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
   * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
