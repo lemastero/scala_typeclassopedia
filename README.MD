@@ -218,7 +218,7 @@ case class Reader[-In, +R](run: In => R) {
   * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
   * Monads to Machine Code - Stephen Diehl: [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
 
-## IO, ZIO, Bifunctor IO (BIO), RIO (Reader + IO), Trifunctor IO (TRIO)
+## IO, Bifunctor IO (BIO), RIO (Reader + IO), Trifunctor IO (TRIO)
 
 * Resources
   * The Making of an IO - Daniel Spiewak [(video)](https://www.youtube.com/watch?v=g_jP47HFpWA)
@@ -228,24 +228,26 @@ case class Reader[-In, +R](run: In => R) {
   * [Tutorial Monix Task 2.x](https://monix.io/docs/2x/eval/task.html)
   * There Can Be Only One...IO Monad - John A De Goes [(blog post)](http://degoes.net/articles/only-one-io)
 
-### Bifunctor IO (BIO, ZIO)
+### Bifunctor IO (BIO)
 
 * Resources
-  * Bifunctor IO: A Step Away from Dynamically-Typed Error Handling - John A De Goes [(blog post)](http://degoes.net/articles/bifunctor-io)
+  * Bifunctor IO: A Step Away from Dynamically-Typed Error Handling - John A De Goes [(blog post)](http://degoes.net/articles/bifunctor-io), [reddit](https://www.reddit.com/r/scala/comments/8ifwkl/bifunctor_io_a_step_away_from_dynamicallytyped/)
   * On Bifunctor IO and Java's Checked Exceptions - @alexelcu [(blog post)](https://alexn.org/blog/2018/05/06/bifunctor-io.html), [twitter](https://twitter.com/alexelcu/status/993154465518837760)
   * [LukaJCB/cats-bio](https://github.com/LukaJCB/cats-bio), [PR to move into cats-effect](https://github.com/typelevel/cats-effect/issues/189)
   * (Idris) [base/Control/IOExcept](https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Control/IOExcept.idr)
   * Using ZIO with Tagless-Final - John A De Goes [(blog post)](http://degoes.net/articles/polymorphic-bifunctors)
-  * Scalaz ZIO [overwiev](https://scalaz.github.io/scalaz-zio/overview/) [scalaz/scalaz-zio](https://github.com/scalaz/scalaz-zio)
+  * scalaz/scalaz-zio IO [docs](https://scalaz.github.io/scalaz-zio/datatypes/io.html) [src](https://github.com/scalaz/scalaz-zio/blob/master/core/shared/src/main/scala/scalaz/zio/IO.scala)
+  * (Haskell) Combining errors with Bifunctor - Daniel Díaz Carrete (https://medium.com/@danidiaz/combining-errors-with-bifunctor-e7a40970fda9)
 
-### RIO (Reader + IO)
+
+## RIO Monad (Reader + IO)
 
 * Resources
   * The RIO Monad - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/07/the-rio-monad), [snoyberg/rio](https://github.com/snoyberg/rio), [reddit](https://www.reddit.com/r/haskell/comments/6p6p4b/the_rio_monad/)
   * [http4s-tracer motivation](https://gvolpe.github.io/http4s-tracer/motivations.html)
 
 
-### TRIO (Reader + Bifunctor IO)
+### TRIO (RIO Monad + Bifunctor IO)
 
 * Resources
   * [snoyberg/trio](https://github.com/snoyberg/trio)
