@@ -15,16 +15,16 @@
 
 * [IO related monads](#io-related-monads)
   * [IO](#io-monad)
-  * Bifunctor IO (BIO)
-  * RIO Monad (Reader + IO)
-  * TRIO (RIO Monad + Bifunctor IO)
+  * [Bifunctor IO (BIO)](#bifunctor-io-bio)
+  * [RIO Monad (Reader + IO)](#rio-monad-reader--io)
+  * [TRIO (RIO Monad + Bifunctor IO)](#trio-rio-monad--bifunctor-io)
 
 * less known monads
   * [Logic Monad, Prompt Monad, Failure Monad](#logic-monad-prompt-monad-failure-monad)
   * [Type-Indexed Monads](#type-indexed-monads)
-  * ContT (Continuation Monad)
+  * [ContT (Continuation Monad)](#contt-continuation-monad)
   * [Reverse State Monad](#reverse-state-monad)
-  * Tardis (Bidirectional State Monad)
+  * [Tardis (Bidirectional State Monad)](#tardis-bidirectional-state-monad)
   * [Chronicle Monad](#chronicle-monad)
 
 * [Contravariant](#contravariant-contravariant-functor)
@@ -57,13 +57,14 @@
   * [Free Monads](#free-monads)
   * [Cofree](#cofree)
   * [Free Alternative](#free-alternative)
+  * [Free Arrow](#free-arrow)
  
-* Representable & Adjunctions
+* [Representable & Adjunctions](#representable--adjunctions)
   * [Representable](#representable)
   * [Adjunction](#adjunction)
   * [Adjoint Triples](#adjoint-triples)
 
-* (Co)Yoneda & (Co)Density & Kan Extensions
+* [(Co)Yoneda & (Co)Density & Kan Extensions](#coyoneda--codensity--kan-extensions)
   * [Yoneda](#yoneda)
   * [Coyoneda](#coyoneda)
   * [Right Kan extension](#right-kan-extension)
@@ -92,7 +93,7 @@
   * [Profunctor CoYoneda](#profunctor-coyoneda)
   * [Procompose](#procompose)
 
-* Arrows
+* [Arrows](#arrows)
   * [Category](#category)
   * [Arrow](#arrow)
   * [CommutativeArrow](#commutativearrow)
