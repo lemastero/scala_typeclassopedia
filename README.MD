@@ -14,7 +14,7 @@
   * [RWS Monad](#rws-monad)
 
 * [IO related monads](#io-related-monads)
-  * [IO](#io)
+  * [IO](#io-monad)
   * Bifunctor IO (BIO)
   * RIO Monad (Reader + IO)
   * TRIO (RIO Monad + Bifunctor IO)
@@ -60,7 +60,7 @@
  
 * Representable & Adjunctions
   * [Representable](#representable)
-  * [Adjunction](#djunction)
+  * [Adjunction](#adjunction)
   * [Adjoint Triples](#adjoint-triples)
 
 * (Co)Yoneda & (Co)Density & Kan Extensions
@@ -84,7 +84,7 @@
   * [Strong Profunctor](#strong-profunctor)
   * [Tambara](#tambara)
   * [Choice Profunctor](#choice-profunctor)
-  * [Extranatural Transformation](#cxtranatural-transformation)
+  * [Extranatural Transformation](#extranatural-transformation)
   * [Profunctor Functor](#profunctor-functor)
   * [Profunctor Monad](#profunctor-monad)
   * [Profunctor Comonad](#profunctor-comonad)
@@ -336,6 +336,8 @@ case class Reader[-In, +R](run: In => R) {
   * Monads to Machine Code - Stephen Diehl: [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
 
 ## IO related monads
+
+### IO Monad
 
 * Resources
   * The Making of an IO - Daniel Spiewak [(video)](https://www.youtube.com/watch?v=g_jP47HFpWA)
@@ -1928,4 +1930,4 @@ Resources:
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
   
-## Advanced Category Theory(./AdvancedCategoryTheory.MD)
+## [Advanced Category Theory](./AdvancedCategoryTheory.MD)
