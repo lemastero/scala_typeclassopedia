@@ -143,7 +143,7 @@ trait Functor[F[_]] {
 If Functor satisfy fist law then it also satisfy second law: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md)
 if we don't include bottom values - [(Haskell) contrexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243).
 
-* Instances can be implemented for: List, Vecotr, Option, Either, Validated, Tuple1, Tuple2, Function
+* Instances can be implemented for: List, Vector, Option, Either, Validated, Tuple1, Tuple2, Function
 
 * Functor must preserve structure, so Set is not a Functor (map constant function would change the structure).
 
