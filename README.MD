@@ -1,6 +1,123 @@
 # Scala typeclassopedia
 
-## [Abstract Algebra](./AbstractAlgebra.MD)
+[Abstract Algebra](./AbstractAlgebra.MD)
+
+[Category Theory](#category-theory)
+* [Functor](#functor-covariant-functor)
+* [Apply](#apply)
+* [Applicative](#applicative-applicative-functor)
+
+* [Monad](#monad)
+  * [Reader](#reader)
+  * [Writer](#writer)
+  * [State](#state)
+  * [RWS Monad](#rws-monad)
+
+* [IO related monads](#io-related-monads)
+  * [IO](#io)
+  * Bifunctor IO (BIO)
+  * RIO Monad (Reader + IO)
+  * TRIO (RIO Monad + Bifunctor IO)
+
+* less known monads
+  * [Logic Monad, Prompt Monad, Failure Monad](#logic-monad-prompt-monad-failure-monad)
+  * [Type-Indexed Monads](#type-indexed-monads)
+  * ContT (Continuation Monad)
+  * [Reverse State Monad](#reverse-state-monad)
+  * Tardis (Bidirectional State Monad)
+  * [Chronicle Monad](#chronicle-monad)
+
+* [Contravariant](#contravariant-contravariant-functor)
+  * [Divide (Contravariant Apply)](#divide-contravariant-apply)
+  * [Divisible (Contravariant Applicative)](#divisible-contravariant-applicative)
+
+* [Invariant (Invariant Functor, Exponential Functor)](#invariant-invariant-functor-exponential-functor)
+
+* [Bifunctor](#bifunctor)
+
+* [Comonad](#comonad)
+  * [Coreader (Env comonad, Product comonad)](#coreader-env-comonad-product-comonad)
+  * [Cowriter](#cowriter)
+
+* [Bimonad](#bimonad)
+
+* [Foldable](#foldable)
+* [Traverse](#traverse)
+
+* [SemigroupK (Plus)](#semigroupk-plus)
+* [MonoidK (PlusEmpty)](#monoidk-plusempty)
+* [TraverseEmpty](#traverseempty)
+
+* [Monad Transformers](#monad-transformers-optiont-eithert-readert)
+
+* [Natural transformation (FunctionK)](#natural-transformation-functionk)
+
+* [Free constructions](#free-constructions)
+  * [Free Applicative](#free-applicative)
+  * [Free Monads](#free-monads)
+  * [Cofree](#cofree)
+  * [Free Alternative](#free-alternative)
+ 
+* Representable & Adjunctions
+  * [Representable](#representable)
+  * [Adjunction](#djunction)
+  * [Adjoint Triples](#adjoint-triples)
+
+* (Co)Yoneda & (Co)Density & Kan Extensions
+  * [Yoneda](#yoneda)
+  * [Coyoneda](#coyoneda)
+  * [Right Kan extension](#right-kan-extension)
+  * [Left Kan Extension](#left-kan-extension)
+  * [Density Comonad](#density-comonad)
+  * [Codensity](#codensity)
+
+* [Functor Functor (FFunctor)](#functor-functor-ffunctor)
+
+* Monoidal Categories, Monoid Object
+  * [Monoidal Category, Monoid Object](#monoidal-categories-monoid-object)
+  * [Day Convolution](#day-convolution)
+
+* Profunctors
+  * [Profunctor](#profunctor)
+  * [Star](#star)
+  * [CoStar](#costar)
+  * [Strong Profunctor](#strong-profunctor)
+  * [Tambara](#tambara)
+  * [Choice Profunctor](#choice-profunctor)
+  * [Extranatural Transformation](#cxtranatural-transformation)
+  * [Profunctor Functor](#profunctor-functor)
+  * [Profunctor Monad](#profunctor-monad)
+  * [Profunctor Comonad](#profunctor-comonad)
+  * [Profunctor Yoneda](#profunctor-yoneda)
+  * [Profunctor CoYoneda](#profunctor-coyoneda)
+  * [Procompose](#procompose)
+
+* Arrows
+  * [Category](#category)
+  * [Arrow](#arrow)
+  * [CommutativeArrow](#commutativearrow)
+  * [Arrow Choice](#arrow-choice)
+  * [Arrow Apply, Arrow Monad](#arrow-apply-arrow-monad)
+  * [Arrow Loop](#arrow-loop)
+  * [Arrow Zero](#arrow-zero)
+  * [Free Arrow](#free-arrow)
+  * [Kleisli](#kleisli)
+  * [Cokleisli](#cokleisli)
+
+* [Dinatural Transformation](#dinatural-transformation)
+
+* [Ends & Coends](#ends--coends)
+
+* [Align](#align)
+
+* Sum (Coproduct), Product, These
+  * Product
+  * Sum (Coproduct)
+  * [These](#These)
+
+* [Unfoldable](#unfoldable)
+
+* [Resource About Category Theory](#resource-about-category-theory)
 
 ## Category Theory
 
@@ -218,7 +335,7 @@ case class Reader[-In, +R](run: In => R) {
   * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
   * Monads to Machine Code - Stephen Diehl: [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
 
-## IO, Bifunctor IO (BIO), RIO (Reader + IO), Trifunctor IO (TRIO)
+## IO related monads
 
 * Resources
   * The Making of an IO - Daniel Spiewak [(video)](https://www.youtube.com/watch?v=g_jP47HFpWA)
@@ -1246,10 +1363,6 @@ Similarly it is Comonad if both type constructors are Comonads.
   * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
 
 
-## Arrows
-
-![](arrows.svg)
-
 ### Profunctor
 
 Profunctor abstract over
@@ -1614,6 +1727,10 @@ trait Procompose[P[_,_],Q[_,_],D,C] {
   val q: Q[D,X]
 }
 ```
+
+## Arrows
+
+![](arrows.svg)
 
 ### Category
 
