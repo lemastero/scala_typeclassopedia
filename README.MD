@@ -6,26 +6,26 @@
 * [Functor](#functor-covariant-functor)
 * [Apply](#apply)
 * [Applicative](#applicative-applicative-functor)
+* [Selective](#selective-selective-applicative-functors)
 
 * [Monad](#monad)
   * [Reader](#reader)
   * [Writer](#writer)
   * [State](#state)
   * [RWS Monad](#rws-monad)
-
-* [IO related monads](#io-related-monads)
-  * [IO](#io-monad)
-  * [Bifunctor IO (BIO)](#bifunctor-io-bio)
-  * [RIO Monad (Reader + IO)](#rio-monad-reader--io)
-  * [TRIO (RIO Monad + Bifunctor IO)](#trio-rio-monad--bifunctor-io)
-
-* less known monads
+  * [Update Monad](#update-monad)
   * [Logic Monad, Prompt Monad, Failure Monad](#logic-monad-prompt-monad-failure-monad)
   * [Type-Indexed Monads](#type-indexed-monads)
   * [ContT (Continuation Monad)](#contt-continuation-monad)
   * [Reverse State Monad](#reverse-state-monad)
   * [Tardis (Bidirectional State Monad)](#tardis-bidirectional-state-monad)
   * [Chronicle Monad](#chronicle-monad)
+
+* [IO related monads](#io-related-monads)
+  * [IO](#io-monad)
+  * [Bifunctor IO (BIO)](#bifunctor-io-bio)
+  * [RIO Monad (Reader + IO)](#rio-monad-reader--io)
+  * [TRIO (RIO Monad + Bifunctor IO)](#trio-rio-monad--bifunctor-io)
 
 * [Contravariant](#contravariant-contravariant-functor)
   * [Divide (Contravariant Apply)](#divide-contravariant-apply)
@@ -38,6 +38,7 @@
 * [Comonad](#comonad)
   * [Coreader (Env comonad, Product comonad)](#coreader-env-comonad-product-comonad)
   * [Cowriter](#cowriter)
+  * [Cofree](#cofree)
 
 * [Bimonad](#bimonad)
 
@@ -111,6 +112,8 @@
 
 * [Align](#align)
 
+* [Task](#task)
+
 * Sum (Coproduct), Product, These
   * Product
   * Sum (Coproduct)
@@ -119,6 +122,11 @@
 * [Unfoldable](#unfoldable)
 
 * [Resource About Category Theory](#resource-about-category-theory)
+* [Recursion schemas](./RecursionSchemasFAlgebraFix.MD)
+* [Optics](./Optics.MD)
+* [Functional data structures](./FunctionalDataStructures.MD)
+* [Advanced Category Theory](./AdvancedCategoryTheory.MD)
+
 
 ## Category Theory
 
@@ -238,13 +246,33 @@ trait Applicative[F[_]] extends Apply[F] {
   * (Idris) [Prelude/Applicative](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr)
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
-    * The Essence of the Iterator Pattern - Eric Torreborre [blog post](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
+    * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
     * Lifting - Tony Morris: [blog post](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
   * (Java) [Mojang/DataFixerUpper Applicative](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
+### Selective (Selective applicative functors)
+
+"Extend the Applicative type class with a single method
+that makes it possible to be selective about effects."
+
+"handle is a selective function application:
+you apply a handler function of type A => B when given a value of type Left(a),
+but can skip the handler (along with its effects) in the case of Right(b)."
+
+Andrey Mokhov
+
+```haskell
+class Applicative f => Selective f where
+    handle :: f (Either a b) -> f (a -> b) -> f b
+```
+
+* Resources:
+  * Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/)
+
 ### Monad
+
 We add to Apply ability `flatMap` that can join two computations
 and use the output from previous computations to decide what computations to run next.
 
@@ -334,47 +362,19 @@ case class Reader[-In, +R](run: In => R) {
   * Towards an Effect System in Scala, Part 1: ST Monad [(blog post)](https://apocalisp.wordpress.com/2011/03/20/towards-an-effect-system-in-scala-part-1/)
   * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
   * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
-  * Monads to Machine Code - Stephen Diehl: [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
-
-## IO related monads
-
-### IO Monad
-
-* Resources
-  * The Making of an IO - Daniel Spiewak [(video)](https://www.youtube.com/watch?v=g_jP47HFpWA)
-  * Towards an Effect System in Scala, Part 2: IO Monad - (https://apocalisp.wordpress.com/2011/12/19/towards-an-effect-system-in-scala-part-2-io-monad/)
-  * An IO monad for cats - Daniel Spiewak [(blog post)](https://typelevel.org/blog/2017/05/02/io-monad-for-cats.html)
-  * [typelevel/cats-effect](https://github.com/typelevel/cats-effect)
-  * [Tutorial Monix Task 2.x](https://monix.io/docs/2x/eval/task.html)
-  * There Can Be Only One...IO Monad - John A De Goes [(blog post)](http://degoes.net/articles/only-one-io)
-
-### Bifunctor IO (BIO)
-
-* Resources
-  * Bifunctor IO: A Step Away from Dynamically-Typed Error Handling - John A De Goes [(blog post)](http://degoes.net/articles/bifunctor-io), [reddit](https://www.reddit.com/r/scala/comments/8ifwkl/bifunctor_io_a_step_away_from_dynamicallytyped/)
-  * On Bifunctor IO and Java's Checked Exceptions - @alexelcu [(blog post)](https://alexn.org/blog/2018/05/06/bifunctor-io.html), [twitter](https://twitter.com/alexelcu/status/993154465518837760)
-  * [LukaJCB/cats-bio](https://github.com/LukaJCB/cats-bio), [PR to move into cats-effect](https://github.com/typelevel/cats-effect/issues/189)
-  * (Idris) [base/Control/IOExcept](https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Control/IOExcept.idr)
-  * Using ZIO with Tagless-Final - John A De Goes [(blog post)](http://degoes.net/articles/polymorphic-bifunctors)
-  * scalaz/scalaz-zio IO [docs](https://scalaz.github.io/scalaz-zio/datatypes/io.html) [src](https://github.com/scalaz/scalaz-zio/blob/master/core/shared/src/main/scala/scalaz/zio/IO.scala)
-  * (Haskell) Combining errors with Bifunctor - Daniel Díaz Carrete (https://medium.com/@danidiaz/combining-errors-with-bifunctor-e7a40970fda9)
-
-
-## RIO Monad (Reader + IO)
-
-* Resources
-  * The RIO Monad - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/07/the-rio-monad), [snoyberg/rio](https://github.com/snoyberg/rio), [reddit](https://www.reddit.com/r/haskell/comments/6p6p4b/the_rio_monad/)
-  * [http4s-tracer motivation](https://gvolpe.github.io/http4s-tracer/motivations.html)
-
-
-### TRIO (RIO Monad + Bifunctor IO)
-
-* Resources
-  * [snoyberg/trio](https://github.com/snoyberg/trio)
-
+  * Monads to Machine Code - Stephen Diehl [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
 
 ### RWS Monad
-* (Haskell) [mtl/Control.Monad.RWS](http://hackage.haskell.org/package/mtl/docs/Control-Monad-RWS.html)
+
+* Resources
+  * (Haskell) Life after monads - robinp [(blog post)](https://www.schoolofhaskell.com/user/robinp/life-after-monads)
+  * (Haskell) Tying the knot, redux - Dan Rosen [(blog post)](http://mergeconflict.com/tying-the-knot-redux/) [(reddit)](https://www.reddit.com/r/haskell/comments/w0haf/tying_the_knot_using_the_rws_monad/)
+  * (Haskell) [mtl/Control.Monad.RWS](http://hackage.haskell.org/package/mtl/docs/Control-Monad-RWS.html)
+
+### Update Monad
+
+* Resources
+  * (Haskell) Update Monads: Variation On State Monads - Chris Penner [(blog post)](https://chrispenner.ca/posts/update-monad)
 
 ### Logic Monad, Prompt Monad, Failure Monad
 * [Adventures in Three Monads - Edward Z. Yang](http://web.mit.edu/~ezyang/Public/threemonads.pdf)
@@ -432,12 +432,54 @@ case class Reader[-In, +R](run: In => R) {
 * https://repl.it/@Ouroboros2/Haskell-Tardis-1
 * http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
 
+## IO related monads
+
+### IO Monad
+
+* Resources
+  * The Making of an IO - Daniel Spiewak [(video)](https://www.youtube.com/watch?v=g_jP47HFpWA)
+  * Towards an Effect System in Scala, Part 2: IO Monad - (https://apocalisp.wordpress.com/2011/12/19/towards-an-effect-system-in-scala-part-2-io-monad/)
+  * An IO monad for cats - Daniel Spiewak [(blog post)](https://typelevel.org/blog/2017/05/02/io-monad-for-cats.html)
+  * [typelevel/cats-effect](https://github.com/typelevel/cats-effect)
+  * [Tutorial Monix Task 2.x](https://monix.io/docs/2x/eval/task.html)
+  * There Can Be Only One...IO Monad - John A De Goes [(blog post)](http://degoes.net/articles/only-one-io)
+
+### Bifunctor IO (BIO)
+
+* Resources
+  * Bifunctor IO: A Step Away from Dynamically-Typed Error Handling - John A De Goes [(blog post)](http://degoes.net/articles/bifunctor-io), [reddit](https://www.reddit.com/r/scala/comments/8ifwkl/bifunctor_io_a_step_away_from_dynamicallytyped/)
+  * On Bifunctor IO and Java's Checked Exceptions - @alexelcu [(blog post)](https://alexn.org/blog/2018/05/06/bifunctor-io.html), [twitter](https://twitter.com/alexelcu/status/993154465518837760)
+  * [LukaJCB/cats-bio](https://github.com/LukaJCB/cats-bio), [PR to move into cats-effect](https://github.com/typelevel/cats-effect/issues/189)
+  * (Idris) [base/Control/IOExcept](https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Control/IOExcept.idr)
+  * Using ZIO with Tagless-Final - John A De Goes [(blog post)](http://degoes.net/articles/polymorphic-bifunctors)
+  * scalaz/scalaz-zio IO [docs](https://scalaz.github.io/scalaz-zio/datatypes/io.html) [src](https://github.com/scalaz/scalaz-zio/blob/master/core/shared/src/main/scala/scalaz/zio/IO.scala)
+  * (Haskell) Combining errors with Bifunctor - Daniel Díaz Carrete (https://medium.com/@danidiaz/combining-errors-with-bifunctor-e7a40970fda9)
+
+
+## RIO Monad (Reader + IO)
+
+* Resources
+  * The RIO Monad - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/07/the-rio-monad), [snoyberg/rio](https://github.com/snoyberg/rio), [reddit](https://www.reddit.com/r/haskell/comments/6p6p4b/the_rio_monad/)
+  * [http4s-tracer motivation](https://gvolpe.github.io/http4s-tracer/motivations.html)
+
+
+### TRIO (RIO Monad + Bifunctor IO)
+
+* Resources
+  * [snoyberg/trio](https://github.com/snoyberg/trio)
+
+
 ### Contravariant (Contravariant Functor)
+
 ```scala
 trait Contravariant[F[_]] {
   def contramap[A, B](f: B => A): F[A] => F[B]
 }
 ```
+
+* Contravariant is not called Cofunctor (like Monad -> Comonad, Appy -> Coapply) because when we inverse arrows
+in Functor definition we just get Functor definition (with A, B swapped). [More on this on SO](https://stackoverflow.com/questions/34732571/why-there-is-no-cofunctor-typeclass-in-haskell).
+
 * Resources
   * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
   * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala)
@@ -468,7 +510,8 @@ def deriving3[A1, A2, A3, Z](f: Z => (A1, A2, A3))(implicit a1: F[A1], a2: F[A2]
   * Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I)
   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala)
   
-### Divisible (Contravariant Applicative)  
+### Divisible (Contravariant Applicative)
+
 ```scala
 trait Divisible[F[_]] extends Divide[F] {
   def conquer[A]: F[A]
@@ -584,8 +627,10 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
-  * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner: https://www.youtube.com/watch?v=F7F-BzOB670
   * Streams for (Co)Free! - John DeGoes: [(video)](https://www.youtube.com/watch?v=R_nYc4FItcI)
+  * Life Is A Comonad - Elias Jordan [(video)](https://www.youtube.com/watch?v=6eiS2QTQKPE) [(blog post)](https://eli-jordan.github.io/2018/02/16/life-is-a-comonad/) [(reddit)](https://www.reddit.com/r/scala/comments/7ydyjr/life_is_a_comonad/)
+  * Conway's Game Of Life Using Representable And Comonads - Chris Penner [(blog post)](https://chrispenner.ca/posts/conways-game-of-life.html)
+  * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner [(video)](https://www.youtube.com/watch?v=F7F-BzOB670)
   * scalaz [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
   * [Haskell libraries using Comonads](https://packdeps.haskellers.com/reverse/comonad)
   * (Haskell) [(src Control.Comonad)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html)
@@ -595,6 +640,7 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
   * (Haskell) More on Comonads as Monad Transformers - Edward Kmett [(blog post)](http://comonad.com/reader/2011/more-on-comonads-as-monad-transformers/)
   * (Haskell) The Cofree Comonad and the Expression Problem - Edward Kmett [(blog post)](http://comonad.com/reader/2008/the-cofree-comonad-and-the-expression-problem/)
   * (Haskell) Comonads as Spaces - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
+  * (Purescript) PS Unscripted - Comonads for UIs - Phil Freeman [(video)](https://www.youtube.com/watch?v=EoJ9xnzG76M)
   * (Haskell) Cofun with cofree comonads - Dave Laing [(slides, video, code)](http://dlaing.org/cofun/)
 
 ### Coreader (Env comonad, Product comonad)
@@ -702,6 +748,10 @@ def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
    * Bifoldable: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
    * (Idris) [Prelude/Foldable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Foldable.idr)
    * (Java) [Mojang/DataFixerUpper Fold](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Fold.java)
+   * A tutorial on the universality and expressiveness of fold - Graham Hutton [(paper)](http://www.cs.nott.ac.uk/~pszgmh/fold.pdf)
+   * (Haskell) Monoidal Sorting - Chris Penner [(blog post)](https://chrispenner.ca/posts/monoid-sort) (`Monoids` and `foldMap` used for sorting)
+   * Beautiful folds are practical, too - Gabriel Gonzalez [(video)](https://www.youtube.com/watch?v=6a5Ti0r8Q2s) [slides repo](https://github.com/Gabriel439/slides/blob/master/munihac/foldmap.md) [Hacker News](https://news.ycombinator.com/item?id=16478744)
+   * Beautiful folds in Scala - Adam Warski [(blog post)](https://softwaremill.com/beautiful-folds-in-scala/)
 
 ### Traverse
 
@@ -856,6 +906,8 @@ case class Suspend[F[_],A](s: F[Free[F,A]]) extends Free[F,A]
   * Free Monoids and Free Monads - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/08/20/free-monads-and-free-monoids/)
   * (Haskell) Free Monoids in Haskell - Dan Doel [(blog post)](http://comonad.com/reader/2015/free-monoids-in-haskell/)
   * (Haskell) Many Roads to Free Monads - Dan Doel [(blog post)](https://www.schoolofhaskell.com/user/dolio/many-roads-to-free-monads)
+  * (Haskell) Meta-programming with the Free Monad - John Wiegley [(blog post)](http://newartisans.com/2012/08/meta-programming-with-the-free-monad/)
+  * (Haskell) Notes on Free monads - John Wiegley [(blog post)](http://newartisans.com/2013/09/notes-on-free-monads/)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/free+monad)
 
 ### Cofree
@@ -880,7 +932,7 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
 * Resources
   * [Haskell free/Control.Alternative.Free](http://hackage.haskell.org/package/free/docs/Control-Alternative-Free.html)
   * [Structurally enforced Free Alternative, without left distributivity - SO](https://stackoverflow.com/questions/45647253/structurally-enforced-free-alternative-without-left-distributivity)
-
+  * Routing With Cofree Comonad - Marcin Szamotulski [(video)](https://www.youtube.com/watch?v=O78UOsKAXsc) [(slides)](https://coot.github.io/routing-with-cofree-comonad/#/) [(repo)](https://github.com/coot/routing-with-cofree-comonad)
 
 ## Representable & Adjunctions
 
@@ -903,12 +955,14 @@ trait Representable[F[_], Rep] {
   * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
   * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
   * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
+  * (Haskell) Radix Sort, Trie Trees, And Maps From Representable Functors - Chris Penner [(blog post)](https://chrispenner.ca/posts/representable-discrimination)
   * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
   * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
   * https://stackoverflow.com/a/46502280
   * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
   * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
   * Java [Mojang/DataFixerUpper Representable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Representable.java)
+  
 
 ### Adjunction
 
@@ -925,6 +979,7 @@ trait Adjunction[F[_], G[_]] {
 Adjunction can be defined between Reader monad and Coreader comonad.
 
 * Resources:
+  * Adjunctions And Battleship - Chris Penner [(blog post)](https://chrispenner.ca/posts/adjunction-battleship)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
   * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
@@ -932,8 +987,9 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
   * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
   * (Haskell) Zapping Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/zapping-strong-adjunctions/)
-  * TheCatsters - Adjunctions [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
+  * Adjunctions - TheCatsters [(vide playlist)](https://www.youtube.com/watch?v=loOJxIOmShE&list=PL54B49729E5102248)
   * State monad using Adjunctions [kaifransson/adjoint-stacks](https://github.com/kaifransson/adjoint-stacks)
+  * (Haskell) Free And Forgetful Functors - Chris Penner [(blog post)](https://chrispenner.ca/posts/free-forgetful-functors)
   * [Adjunctions - M.M. Fokkinga, Lambert Meertens](https://research.utwente.nl/en/publications/adjunctions)
   * [Generic Programming with Adjunctions - Ralf Hinze](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
   * [Relational Algebra by Way of Adjunctions - Jeremy Gibbons, Fritz, Henglein, Ralf Hinze, Nicolas Wu](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/reladj.pdf)
@@ -1911,12 +1967,6 @@ Resources:
 ### Unfoldable
   * [PR for Cats](https://github.com/typelevel/cats/pull/1132)
 
-## [F-Algebra, Recursive schema, Fix Point](./RecursionSchemasFAlgebraFix.MD)
-
-## [Optics](./Optics.MD)
-
-## [Functional data structures](./FunctionalDataStructures.MD)
-
 ## Resource About Category Theory
 
 * Resources covering topics about FP and category theory in great details:
@@ -1930,5 +1980,9 @@ Resources:
   * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) implementation of Haskell Typeclassopedia by Channing Walton, [(blog post)](The Road to the Typeclassopedia)
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
-  
-## [Advanced Category Theory](./AdvancedCategoryTheory.MD)
+
+
+# Andrey Mokhov Task
+
+Resources:
+  * The Task abstraction - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/the-task-abstraction/)
