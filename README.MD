@@ -263,9 +263,11 @@ but can skip the handler (along with its effects) in the case of Right(b)."
 
 Andrey Mokhov
 
-```haskell
-class Applicative f => Selective f where
-    handle :: f (Either a b) -> f (a -> b) -> f b
+```scala
+trait Selective[F[_]] extends Applicative[F] {
+  def handle[A, B](fab: F[Either[A, B]], ff: F[A => B]): F[B]
+  def select[A, B, C](fab: F[Either[A, B]], fac: F[A => C], fbc: F[B => C]): F[C]
+}
 ```
 
 * Resources:
