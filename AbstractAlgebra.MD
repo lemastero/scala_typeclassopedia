@@ -646,7 +646,7 @@ such that + is commutative and ⋅ distributes over +.
 We call these monoids united if 0 = 1."
 
 * Resources
-   * https://blogs.ncl.ac.uk/andreymokhov/united-monoids/
+   * United Monoids - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/united-monoids/)
   
 ## Field
 
