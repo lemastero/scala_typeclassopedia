@@ -11,4 +11,7 @@
 * [John_Hughes](https://www.researchgate.net/profile/John_Hughes13)
 * [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal)
 
-  
+# HoTT
+
+* Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
+* Kerodon (book about categorical homotopy theory)  [(book)](https://kerodon.net/kerodon.pdf) [(links)](https://kerodon.net/bibliography)
