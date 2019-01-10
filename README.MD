@@ -34,6 +34,17 @@
 * [Invariant (Invariant Functor, Exponential Functor)](#invariant-invariant-functor-exponential-functor)
 
 * [Bifunctor](#bifunctor)
+  * [Bifunctor Join](#bifunctor-join)
+  * [Bifunctor Wrap](#bifunctor-wrap)
+  * [Bifunctor Flip](#bifunctor-flip)
+  * [Bifunctor Joker](#bifunctor-joker)
+  * [Bifunctor Clown](#bifunctor-clown)
+  * [Bifunctor Product](#bifunctor-product)
+  * [Bifunctor Sum](#bifunctor-sum)
+  * [Bifunctor Tannen](#bifunctor-tannen)
+  * [Bifunctor Biff](#bifunctor-biff)
+  * [Bitraverse](#bitraverse)
+  * [Bifoldable](#bifoldable)
 
 * Comonads
   * [Distributive](#distributive)
@@ -740,11 +751,13 @@ trait Distributive[F[_]] extends Functor[F] {
 
 * Resources
    * Scalaz issue about difference between Haskell/Purescript vs Scala impl [issue](https://github.com/scalaz/scalaz/issues/2034)
+   * The essence of dataflow programming - 	Tarmo Uustalu, 	Varmo Vene [paper short][http://cs.ioc.ee/~tarmo/papers/aplas05.pdf] [long](http://cs.ioc.ee/~tarmo/papers/cefp05.pdf) [slides](http://www.cs.ox.ac.uk/ralf.hinze/WG2.8/22/slides/varmo.pdf)) (parsing using Monads, Distributive, Comonads) 
    * (Haskell) Moore for Less - Edward Kmett [(blog post)](https://www.schoolofhaskell.com/user/edwardk/moore/for-less)
    * (Haskell) Zippers Using Representable And Cofree - Chris Penner (https://chrispenner.ca/posts/representable-cofree-zippers)
    * (Haskell) A law for Distributive? [(reddit)](https://www.reddit.com/r/haskell/comments/4cmjeg/a_law_for_distributive/)
    * (Haskell) How to write a Representable instance using only Distributive properties? [(SO)](https://stackoverflow.com/questions/49497241/how-to-write-a-representable-instance-using-only-distributive-properties)
    * (Haskell) usage of Distributive in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+   * [Is there a concept of something like co-applicative functors sitting between comonads and functors?](https://cstheory.stackexchange.com/questions/16241/is-there-a-concept-of-something-like-co-applicative-functors-sitting-between-com)
 
 
 ### Comonad
