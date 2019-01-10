@@ -35,10 +35,12 @@
 
 * [Bifunctor](#bifunctor)
 
-* [Comonad](#comonad)
-  * [Coreader (Env comonad, Product comonad)](#coreader-env-comonad-product-comonad)
-  * [Cowriter](#cowriter)
-  * [Cofree](#cofree)
+* Comonads
+  * [Distributive](#distributive)
+  * [Comonad](#comonad)
+    * [Coreader (Env comonad, Product comonad)](#coreader-env-comonad-product-comonad)
+    * [Cowriter](#cowriter)
+    * [Cofree](#cofree)
 
 * [Bimonad](#bimonad)
 
@@ -73,12 +75,6 @@
   * [Density Comonad](#density-comonad)
   * [Codensity](#codensity)
 
-* [Functor Functor (FFunctor)](#functor-functor-ffunctor)
-
-* Monoidal Categories, Monoid Object
-  * [Monoidal Category, Monoid Object](#monoidal-categories-monoid-object)
-  * [Day Convolution](#day-convolution)
-
 * Profunctors
   * [Profunctor](#profunctor)
   * [Star](#star)
@@ -106,26 +102,28 @@
   * [Kleisli](#kleisli)
   * [Cokleisli](#cokleisli)
 
-* [Dinatural Transformation](#dinatural-transformation)
-
-* [Ends & Coends](#ends--coends)
-
-* [Align](#align)
-
-* [Task](#task)
-
-* Sum (Coproduct), Product, These
-  * Product
-  * Sum (Coproduct)
+* [ADT (Algebra of types)](#adt--algebra-of-types)
+  * [Unit](#unit)
+  * [Void](#void)
+  * [Product](#product)
+  * [Sum (Coproduct)](#sum--coproduct)
   * [These](#These)
 
-* [Unfoldable](#unfoldable)
+* Higher kinded & exotic abstractions
+  * [Monoidal Category, Monoid Object](#monoidal-categories-monoid-object)
+  * [Day Convolution](#day-convolution)
+  * [Functor Functor (FFunctor)](#functor-functor-ffunctor)
+  * [Dinatural Transformation](#dinatural-transformation)
+  * [Ends & Coends](#ends--coends)
+  * [Align](#align)
+  * [Task](#task)
+  * [Unfoldable](#unfoldable)
 
-* [Resource About Category Theory](#resource-about-category-theory)
 * [Recursion schemas](./RecursionSchemasFAlgebraFix.MD)
 * [Optics](./Optics.MD)
 * [Functional data structures](./FunctionalDataStructures.MD)
 * [Advanced Category Theory](./AdvancedCategoryTheory.MD)
+* [Resource About Category Theory](#resource-about-category-theory)
 
 
 ## Category Theory
@@ -168,19 +166,19 @@ def widen[A, B >: A](fa: F[A]): F[B]
 
 * Functors can be composed
 
-* Resources:
-  * herding cats - Functor: [blog post](http://eed3si9n.com/herding-cats/Functor.html)
-  * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
-  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU)
-  * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala)
-  * Scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala)
-  * (Idris) [Prelude/Functor](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr)
-  * (Java) [Mojang/DataFixerUpper Functor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+* Implementations [Scalaz Functor](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala) [Cats Functorc](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala) [Idris Prelude/Functor](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [purescript-prelude/Data.Functor](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base/Data.Functor](http://hackage.haskell.org/package/base/docs/Data-Functor.html) [Java Mojang/DataFixerUpper Functor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
 
 * Examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
 [function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
 and [custom Tree type](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/TreeFunctor.scala).
 Examples for [usage of map, derived methods, compose](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala).
+
+* Resources:
+  * herding cats - Functor: [blog post](http://eed3si9n.com/herding-cats/Functor.html)
+  * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
+  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU)
+  * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html)
+  * Functional Patterns in C++, 1. Functors - Bartosz Milewski [video](https://www.youtube.com/watch?v=ph7qt0pkPkc)
 
 ### Apply
 
@@ -237,20 +235,21 @@ trait Applicative[F[_]] extends Apply[F] {
 * Minimal set of methods to implement Applicative (other methods can be derived from them):
   * map2, pure
   * apply, pure
+
+* Implementations [Cats Applicative](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz Applicative](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Idris Prelude/Applicative](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java Mojang/DataFixerUpper Applicative](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
+
 * Resources:
   * herding cats - Applicative: [blog post](http://eed3si9n.com/herding-cats/Applicative.html)
   * FSiS 2 - Applicative type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=tD_EyIKqqCk)
   * FSiS 3 - Monad type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=VWCtLhH815M)
-  * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala)
-  * scalaz: [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala)
-  * (Idris) [Prelude/Applicative](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr)
+  * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) 
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
     * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
     * Lifting - Tony Morris: [blog post](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
-  * (Java) [Mojang/DataFixerUpper Applicative](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
+  * Functional Patterns in C++, 2. Currying, Applicative - Bartosz Milewski [video](https://www.youtube.com/watch?v=Hx9jojeBj6w)
 
 ### Selective (Selective applicative functors)
 
@@ -315,19 +314,21 @@ You can use Monad Transformer that know what monad is inside (OptionT, EitherT, 
 and [usage of flatMap to implement functions zip and number](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/helper_implementations/Tree.scala) 
 (using [State Int](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/IntState.scala)).
 
+* Implementations [Scalaz Monad](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala) [Cats Monad](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala) [Idris Prelude/Monad Monad](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr) [purescript-prelude/Control.Monad](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad)
+
 * Resources
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
   * herding cats - Monad [blog post](http://eed3si9n.com/herding-cats/Monad.html)
-  * Cats [(docs)](https://typelevel.org/cats/typeclasses/monad.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala)
-  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala)
-  * (Idris) [Prelude/Monad Monad](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr)
+  * [Cats docs](https://typelevel.org/cats/typeclasses/monad.html)
   * (Haskell) Monads for functional programming - Philip Wadler [(paper)](http://homepages.inf.ed.ac.uk/wadler/papers/marktoberdorf/baastad.pdf)
   * (Haskell) Monads are Trees with Grafting - A Neighborhood of Infinity - Dan Piponi [(paper)](https://github.com/dpiponi/grafting3/blob/master/monads.pdf)
   * More on Monoids and Monads - [(blog post)](https://apocalisp.wordpress.com/2010/07/21/more-on-monoids-and-monads/)
   * [wiki.haskell - Blow your mind - Monad magic](https://wiki.haskell.org/Blow_your_mind#Monad_magic)
   * https://www.quora.com/What-are-some-crazy-things-one-can-do-with-monads-in-Haskell
   * (Category Theory) Monads - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=9fohXBj2UEI&list=PL0E91279846EC843E)
-  * Tail Call Elimination in Scala Monads [(blog post)] (https://apocalisp.wordpress.com/2011/10/26/tail-call-elimination-in-scala-monads/)
+  * Tail Call Elimination in Scala Monads [(blog post)](https://apocalisp.wordpress.com/2011/10/26/tail-call-elimination-in-scala-monads/)
+  * MonadMask vs MonadBracket - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2017/02/monadmask-vs-monadbracket)
+  * Functional Patterns in C++, 3. Async API, Monoid, Monad - Bartosz Milewski [video](https://www.youtube.com/watch?v=ozN6XxsAF84)
 
 ### Reader
 
@@ -365,6 +366,7 @@ case class Reader[-In, +R](run: In => R) {
   * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
   * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
   * Monads to Machine Code - Stephen Diehl [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
+  * Immutability, Docker, and Haskell's ST type - Michael Snoyman (https://www.fpcomplete.com/blog/2017/02/immutability-docker-haskells-st-type)
 
 ### RWS Monad
 
@@ -486,6 +488,7 @@ in Functor definition we just get Functor definition (with A, B swapped). [More 
   * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
   * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala)
   * [Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
+  * (Haskell) Covariance and Contravariance - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2016/11/covariance-contravariance) (Show as contravariant, discuss Profunctors, bivariance of phantom types)
   * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
 
 ### Divide (Contravariant Apply)
@@ -558,15 +561,155 @@ def rightFunctor[X]: Functor[F[X, ?]]
 def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
 def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 ```
+
+* Implementations [Scalaz Bifunctor](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [Cats Bifunctor](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala) [Purescript purescript-bifunctors/Data.Bifunctor](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor) [Idris-Bifunctors/Data.Bifunctor](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr)
+
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
+
 * Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
-  * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala)
+  * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/BifunctorUsage.scala)
+  * [Cats docs](https://typelevel.org/cats/typeclasses/bifunctor.html)
   * Funky Scala Bifunctor - Tony Morris [(blog post)](http://blog.tmorris.net/posts/funky-scala-bifunctor/index.html)
   * herding cats — Datatype-generic programming with Bifunctor [(blog post (understand Free monads first))](http://eed3si9n.com/herding-cats/datatype-generic-programming.html)
   * [Haskell libraries using Bifunctors](https://packdeps.haskellers.com/reverse/bifunctors)
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
   * (Haskell) Parametricity for Bifunctor - Brent Yorgey [(blog post)](https://byorgey.wordpress.com/2018/03/30/parametricity-for-bifunctor/)
+
+### Bifunctor Join
+
+Turn a Bifunctor with both arguments with the same type into Functor.
+
+```haskell
+newtype Join p a = Join { runJoin :: p a a }
+
+-- instance
+-- Bifunctor p => Functor (Join p)
+```
+
+* Implementations [Haskell bifunctors/Data.Bifunctor.Join](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Join.html) [japesinator/Idris-Bifunctors Data/Bifunctor.Join](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor/Join.idr) [purescript-bifunctors/Data.Bifunctor.Join](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor.Join)
+
+### Bifunctor Wrap
+
+Functor over second argument of a Bifunctor
+
+```haskell
+newtype WrappedBifunctor p a b = WrapBifunctor { unwrapBifunctor :: p a b }
+
+-- instance
+-- Bifunctor p => Functor (WrappedBifunctor p a)
+```
+
+* Implementations [Haskell bifunctors/Data.Bifunctor.Wrapped](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Wrapped.html) [purescript-bifunctors/Data.Bifunctor.Wrap](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor.Wrap)
+
+### Bifunctor Flip
+
+Swap arguments of Bifunctor
+
+```haskell
+newtype Flip p a b = Flip { runFlip :: p b a }
+
+-- instance
+-- Bifunctor p => Bifunctor (Flip p)
+```
+
+* Implementations [Haskell bifunctors/Data.Bifunctor.Flip](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Flip.html) [purescript-bifunctors/Data.Bifunctor.Flip](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor.Flip)
+
+### Bifunctor Joker
+
+Functor over second argument of Bifunctor
+
+```haskell
+newtype Joker g a b = Joker { runJoker :: g b }
+
+-- instance
+-- Functor g => Bifunctor (Joker g :: * -> * -> *)
+-- Functor g => Functor (Joker g a)
+```
+
+* Implementations [Haskell bifunctors/Data.Bifunctor.Joker](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Joker.html)
+
+* Resources
+  * Clowns to the Left of me, Jokers to the Right Dissecting Data Structures - Conor McBride [(paper)](http://strictlypositive.org/CJ.pdf)
+
+### Bifunctor Clown
+
+Functor over second argument of Bifunctor
+
+```haskell
+newtype Clown f a b = Clown { runClown :: f a }
+
+-- instances
+-- Functor (Clown f a :: * -> *)
+-- Functor f => Bifunctor (Clown f :: * -> * -> *)
+```
+
+* Implementations [Haskell bifunctors/Data.Bifunctor.Clown](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Clown.html)
+
+* Resources
+  * Clowns to the Left of me, Jokers to the Right Dissecting Data Structures - Conor McBride [(paper)](http://strictlypositive.org/CJ.pdf)
+
+
+### Bifunctor Product
+
+Product of two Bifunctors
+
+```haskell
+data Product f g a b = Pair (f a b) (g a b)
+
+-- instance
+-- (Bifunctor f, Bifunctor g) => Bifunctor (Product f g)
+```
+
+* Implementations  [Haskell bifunctors/Data.Bifunctor.Product](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Product.html) [purescript-bifunctors/Data.Bifunctor.Product](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor.Product)
+
+### Bifunctor Sum
+
+Sum of two Bifunctors
+
+```haskell
+data Sum p q a b = L2 (p a b) | R2 (q a b)
+
+-- instance
+-- (Functor f, Bifunctor p) => Functor (Tannen f p a)
+```
+
+* Implementations  [Haskell bifunctors/Data.Bifunctor.Sum](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Sum.html)
+
+
+### Bifunctor Tannen
+
+Compose Functor on the outside.
+
+```haskell
+newtype Tannen f p a b = Tannen { runTannen :: f (p a b) }
+
+-- instances
+-- (Functor f, Bifunctor p) => Bifunctor (Tannen f p)
+-- (Functor f, Bifunctor p) => Functor (Tannen f p a)
+```
+
+* Implementations [Haskell bifunctors/Data.Bifunctor.Tannen](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Tannen.html)
+
+### Bifunctor Biff
+
+Compose two Functors inside Bifunctor
+
+```haskell
+newtype Biff p f g a b = Biff { runBiff :: p (f a) (g b) }
+
+-- instance
+-- (Bifunctor p, Functor f, Functor g) => Bifunctor (Biff p f g)
+```
+
+* Implementations: [Haskell bifunctors/Data.Bifunctor.Biff](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Biff.html)
+
+### Bitraverse
+
+* Implementations: [Scalaz Bitraverse](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala) [Cats Bitraverse](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bitraverse.scala) [Purescript purescript-foldable-traversable/Data.Bitraversable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bitraversable) [Haskell bifunctors/Data.Biapplicative](https://hackage.haskell.org/package/bifunctors/docs/Data-Biapplicative.html)
+
+### Bifoldable
+
+* Implementations: [(Scalaz Bifoldable)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala) [Cats Bifoldable](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) [Purescript purescript-foldable-traversable/Data.Bifoldable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bifoldable)
 
 ### Invariant (Invariant Functor, Exponential Functor)
 
@@ -581,6 +724,29 @@ trait Invariant[F[_]] {
   * Cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
 
+
+### Distributive
+
+Traverse are composable Distributive it require only Functor (and Traverse require Applicative
+
+```scala
+trait Distributive[F[_]] extends Functor[F] {
+  def collect[G[_]:Functor,A,B](fa: G[A])(f: A => F[B]): F[G[B]]
+  def distribute[G[_]:Functor,A](fa: G[F[A]]): F[G[A]]
+}
+```
+
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/scalaz-seven/core/src/main/scala/scalaz/Distributive.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Distributive.scala) [Haskell distributive/Data.Distributive](http://hackage.haskell.org/package/distributive/docs/Data-Distributive.html) [Purescript purescript-distributive/Data.Distributive](https://pursuit.purescript.org/packages/purescript-distributive/docs/Data.Distributive)
+
+* Resources
+   * Scalaz issue about difference between Haskell/Purescript vs Scala impl [issue](https://github.com/scalaz/scalaz/issues/2034)
+   * (Haskell) Moore for Less - Edward Kmett [(blog post)](https://www.schoolofhaskell.com/user/edwardk/moore/for-less)
+   * (Haskell) Zippers Using Representable And Cofree - Chris Penner (https://chrispenner.ca/posts/representable-cofree-zippers)
+   * (Haskell) A law for Distributive? [(reddit)](https://www.reddit.com/r/haskell/comments/4cmjeg/a_law_for_distributive/)
+   * (Haskell) How to write a Representable instance using only Distributive properties? [(SO)](https://stackoverflow.com/questions/49497241/how-to-write-a-representable-instance-using-only-distributive-properties)
+   * (Haskell) usage of Distributive in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
+
+
 ### Comonad
 
 Abstraction for type with one hole that allows:
@@ -590,14 +756,16 @@ Abstraction for type with one hole that allows:
 It is dual to Monad (Monad allow to put value in and collapse one layer).
 
 ```scala
-trait Comonad[C[_]] extends Functor[C] {
+trait CoflatMap[F[_]] extends Functor[F] {
+  def coflatMap[A, B](fa: F[A])(f: F[A] => B): F[B]
+}
+
+trait Comonad[C[_]] extends CoflatMap[C] {
   def extract[A](ca: C[A]): A // counit
   def duplicate[A](ca: C[A]): C[C[A]] // coflatten
   def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coflatMap, cobind
 }
 ```
-
-* Coflatmap / Cobind: ability to extend is sometimes defined in separate trait (extending Functor): [(Cats CoflatMap src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [(Scalaz Cobind src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala)
  
 If we define extract and extend:
 1. `fa.extend(_.extract) == fa`
@@ -626,6 +794,8 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
 
 * Implementations of comonad can be done for: None empty list, Rose tree, Identity
 
+* Implementations [Cats CoflatMap](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [Cats Comonad](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala) [Scalaz Cobind](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala) [Scalaz Comonad](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala) [Haskell Control.Comonad](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html) [Purescript Control.Comonad](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
+
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
@@ -633,10 +803,7 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
   * Life Is A Comonad - Elias Jordan [(video)](https://www.youtube.com/watch?v=6eiS2QTQKPE) [(blog post)](https://eli-jordan.github.io/2018/02/16/life-is-a-comonad/) [(reddit)](https://www.reddit.com/r/scala/comments/7ydyjr/life_is_a_comonad/)
   * Conway's Game Of Life Using Representable And Comonads - Chris Penner [(blog post)](https://chrispenner.ca/posts/conways-game-of-life.html)
   * (Haskell) Getting a Quick Fix on Comonads - Kenneth Foner [(video)](https://www.youtube.com/watch?v=F7F-BzOB670)
-  * scalaz [(src Comonad)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala)
   * [Haskell libraries using Comonads](https://packdeps.haskellers.com/reverse/comonad)
-  * (Haskell) [(src Control.Comonad)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html)
-  * [Purescript Control.Comonad](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
   * (Haskell) Monads from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monads-from-comonads/)
   * (Haskell) Monad Transformers from Comonads - Edward Kmett [(blog post)](http://comonad.com/reader/2011/monad-transformers-from-comonads/)
   * (Haskell) More on Comonads as Monad Transformers - Edward Kmett [(blog post)](http://comonad.com/reader/2011/more-on-comonads-as-monad-transformers/)
@@ -696,6 +863,7 @@ Resources:
   * [PR with Bimonad to Cats](https://github.com/typelevel/cats/issues/30)
 
 ### Foldable
+
 Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
 ```scala
 trait Foldable[F[_]]  {
@@ -742,15 +910,18 @@ def selectSplit[A](fa: F[A])(p: A => Boolean): List[NonEmptyList[A]]
 def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
 ```
 * Can be composed
+
+* Implementations: [Cats Foldable](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala) [Scalaz Foldable](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [Idris Prelude/Foldable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Foldable.idr) [Java Mojang/DataFixerUpper Fold](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Fold.java) [Java vavr Foldable](https://github.com/vavr-io/vavr/blob/master/vavr/src/main/java/io/vavr/collection/Foldable.java)
+
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 55:38](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=3337)
-   * Cats [(docs)](https://typelevel.org/cats/typeclasses/foldable.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala)
-   * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
-   * scalaz  Foldable1 [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
-   * Bifoldable: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala)
-   * (Idris) [Prelude/Foldable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Foldable.idr)
-   * (Java) [Mojang/DataFixerUpper Fold](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Fold.java)
+   * [Cats docs](https://typelevel.org/cats/typeclasses/foldable.html)
+   * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FoldableUsage.scala)
+   * [scalaz Foldable1 src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable1.scala) [example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/Foldable1Usage.scala)
+   * [Purescript purescript-foldable-traversable/Data.FoldableWithIndex](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.FoldableWithIndex)
+   * [Purescript purescript-foldable-traversable/Data.Semigroup.Foldable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Semigroup.Foldable)
    * A tutorial on the universality and expressiveness of fold - Graham Hutton [(paper)](http://www.cs.nott.ac.uk/~pszgmh/fold.pdf)
+   * (Haskell) Conquering Folds - Edward Kmett [blog post](https://www.schoolofhaskell.com/user/edwardk/conquering-folds)
    * (Haskell) Monoidal Sorting - Chris Penner [(blog post)](https://chrispenner.ca/posts/monoid-sort) (`Monoids` and `foldMap` used for sorting)
    * Beautiful folds are practical, too - Gabriel Gonzalez [(video)](https://www.youtube.com/watch?v=6a5Ti0r8Q2s) [slides repo](https://github.com/Gabriel439/slides/blob/master/munihac/foldmap.md) [Hacker News](https://news.ycombinator.com/item?id=16478744)
    * Beautiful folds in Scala - Adam Warski [(blog post)](https://softwaremill.com/beautiful-folds-in-scala/)
@@ -772,25 +943,18 @@ def sequence[G[_]:Applicative,A](fga: F[G[A]]): G[F[A]]
 def zipWithIndex[A](fa: F[A]): F[(A, Int)] // indexed
 // ... other helper functions are different for scalaz and cats
 ```
-* Traverse are composable Distributive (scalaz [src](https://github.com/scalaz/scalaz/blob/scalaz-seven/core/src/main/scala/scalaz/Distributive.scala))
-it require only Functor (and Traverse require Applicative)
-```scala
-trait Distributive[F[_]] extends Functor[F] {
-   def distribute[G[_]:Functor,A,B](fa: G[A])(f: A => F[B]): F[G[B]]
-   def cosequence[G[_]:Functor,A](fa: G[F[A]]): F[G[A]]
-}
-```
+
+* Implementations: [Scalaz Traverse](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala) [Cats Traverse](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala) [Idris idris-lang/Idris-dev Traversable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Traversable.idr) [purescript-foldable-traversable/Data.Traversable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Traversable) [Java Mojang/DataFixerUpper Traversable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Traversable.java) [Java vavr-io/Traversable](https://github.com/vavr-io/vavr/blob/master/vavr/src/main/java/io/vavr/collection/Traversable.java)
+
 * Resources
-   * Bitraverse [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala)
-   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala)
+   * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) 
+   * [Cats docs](https://typelevel.org/cats/typeclasses/traverse.html) 
    * [PR for Cats](https://github.com/typelevel/cats/pull/2424)
+   * [scalaz Traverse1](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse1.scala)
+   * [purescript-foldable-traversable/Data.TraversableWithIndex](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.TraversableWithIndex)
    * FSiS 5 - Parametricity and the Traverse type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=D0Fnzr15BAU) 
    * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
-   * Cats [(docs)](https://typelevel.org/cats/typeclasses/traverse.html) [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala)
-   * Traverse1 [(scalaz src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse1.scala)
-   * usage of Distributive in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
-   * (Idris) [idris-lang/Idris-dev Traversable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Traversable.idr)
-   * (Java) [Mojang/DataFixerUpper Traversable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Traversable.java)
+   * An Investigation of the Laws of Traversals - Mauro Jaskelioff, Ondrej Rypacek [(paper)](https://www.fceia.unr.edu.ar/~mauro/pubs/TraverseLaws.pdf)
    
 ### SemigroupK (Plus)
 
@@ -843,6 +1007,7 @@ John A De Goes
   * FSiS 7 - OptionT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=ZNUTMabdgzo)
   * FSiS 8 - EitherT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=z7rCBQ_vTRg)
   * (Haskell) The ReaderT Design Pattern - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
+  * (Haskell) Announcing: monad-unlift - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2015/04/announcing-monad-unlift)
 
 ### Natural transformation (FunctionK)
 
@@ -1943,9 +2108,53 @@ data Coend p = forall x. Coend p x x
   * [PR for Cats](https://github.com/typelevel/cats/pull/1755)
   * (Haskell) [these/Data.Align](https://hackage.haskell.org/package/these/docs/Data-Align.html)
 
+
+## ADT (Algebra of types)
+
+* Resources
+  * [Haskell wiki ADT](https://wiki.haskell.org/Algebraic_data_type)
+  * Simple Algebraic Data Types - Bartosz Milewski [blog post](https://bartoszmilewski.com/2015/01/13/simple-algebraic-data-types/)
+  * Category Theory 5.2: Algebraic data types - Bartosz Milewski [video](https://www.youtube.com/watch?v=w1WMykh7AxA)
+  * Counting type inhabitants - Alexander Konovalov [blog post](https://alexknvl.com/posts/counting-type-inhabitants.html)
+
+### Unit
+
+Type that has only one element
+
+* Implementations [scala.Unit](https://www.scala-lang.org/api/2.11.12/#scala.Unit) [purescript-prelude/Data.Unit](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Unit)
+
+* Resources
+  * Category Theory 4.1: Terminal and initial objects [video](https://www.youtube.com/watch?v=zer1aFgj4aU&feature=youtu.be&t=615) [Scala translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.2-limits-and-colimits.md)
+  * (Category Theory) Limits and colimits - TheCatsters [video playlist](https://www.youtube.com/playlist?list=PLE337D7DEA972E632)
+
+### Void
+
+Type that has no elements.
+In Category Theory - Initial Object
+
+* Implementations [scala.Nothing](https://www.scala-lang.org/api/2.11.12/#scala.Nothing) [purescript-prelude/Data.Void](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Void) [Idris prelude/Prelude/Uninhabited](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Uninhabited.idr)
+
+* Resources
+  * Category Theory 4.1: Terminal and initial objects [video](https://www.youtube.com/watch?v=zer1aFgj4aU&feature=youtu.be&t=615) [Scala translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.2-limits-and-colimits.md)
+  * (Category Theory) Limits and colimits - TheCatsters [video playlist](https://www.youtube.com/playlist?list=PLE337D7DEA972E632)
+
+## Sum (Coproduct)
+
+Type represents either one or another element.
+In set theory: disjoint union in Category theory: coproduct (sum).
+
+* Implementations [scala.util.Either](https://www.scala-lang.org/api/2.11.12/index.html#scala.util.Either) [purescript-either/Data.Either](https://pursuit.purescript.org/packages/purescript-either/docs/Data.Either)
+
+## Product
+
+Type represents combination of two types.
+In Set theory cartesian product, in Category Theory product.
+
+* Implementations [scala.Product2](https://www.scala-lang.org/api/2.11.12/index.html#scala.Product2) [scala.Tuple2](https://www.scala-lang.org/api/2.11.12/#scala.Tuple2) [purescript-tuples/Data.Tuple](https://pursuit.purescript.org/packages/purescript-tuples/docs/Data.Tuple)
+
 ### These
 
-Data type that represents both sum and product (Non exclusive two values):
+Type that represents both sum and product (Non exclusive two values):
 
 Tuple(a,b) => a * b
 Eiter(a,b) => a + b
