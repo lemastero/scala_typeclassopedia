@@ -102,11 +102,11 @@
   * [Kleisli](#kleisli)
   * [Cokleisli](#cokleisli)
 
-* [ADT (Algebra of types)](#adt--algebra-of-types)
+* [ADT (Algebra of types)](#adt-algebra-of-types)
   * [Unit](#unit)
   * [Void](#void)
   * [Product](#product)
-  * [Sum (Coproduct)](#sum--coproduct)
+  * [Sum (Coproduct)](#sum-coproduct)
   * [These](#These)
 
 * Higher kinded & exotic abstractions
