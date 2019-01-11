@@ -3,10 +3,12 @@
 [Abstract Algebra](./AbstractAlgebra.MD)
 
 [Category Theory](#category-theory)
-* [Functor](#functor-covariant-functor)
-* [Apply](#apply)
-* [Applicative](#applicative-applicative-functor)
-* [Selective](#selective-selective-applicative-functors)
+
+* Functors
+  * [Functor](#functor-covariant-functor)
+  * [Apply](#apply)
+  * [Applicative](#applicative-applicative-functor)
+  * [Selective](#selective-selective-applicative-functors)
 
 * [Monad](#monad)
   * [Reader](#reader)
@@ -33,7 +35,8 @@
 
 * [Invariant (Invariant Functor, Exponential Functor)](#invariant-invariant-functor-exponential-functor)
 
-* [Bifunctor](#bifunctor)
+* Bifunctors
+  * [Bifunctor](#bifunctor)
   * [Bifunctor Join](#bifunctor-join)
   * [Bifunctor Wrap](#bifunctor-wrap)
   * [Bifunctor Flip](#bifunctor-flip)
@@ -55,16 +58,20 @@
 
 * [Bimonad](#bimonad)
 
-* [Foldable](#foldable)
-* [Traverse](#traverse)
+* Traversing Folding Filtering
+  * [Monoid](./AbstractAlgebra.MD#monoid)
+  * [Foldable](#foldable)
+  * [Traverse](#traverse)
+  * [Bitraverse](#bitraverse)
+  * [Bifoldable](#bifoldable)
+  * [FunctorFilter](#functorfilter)
+  * [TraverseFilter](#traversefilter)
 
-* [SemigroupK (Plus)](#semigroupk-plus)
-* [MonoidK (PlusEmpty)](#monoidk-plusempty)
-* [TraverseEmpty](#traverseempty)
-
-* [Monad Transformers](#monad-transformers-optiont-eithert-readert)
-
-* [Natural transformation (FunctionK)](#natural-transformation-functionk)
+* Monads not compose - solutions
+  * [Monad Transformers](#monad-transformers-optiont-eithert-readert)
+  * [Free Monads](#free-monads)
+  * Tagless Final
+  * [Extensible effects](#extensible-effects)
 
 * [Free constructions](#free-constructions)
   * [Free Applicative](#free-applicative)
@@ -121,9 +128,14 @@
   * [These](#These)
 
 * Higher kinded & exotic abstractions
+  * [Natural transformation (FunctionK)](#natural-transformation-functionk)
   * [Monoidal Category, Monoid Object](#monoidal-categories-monoid-object)
   * [Day Convolution](#day-convolution)
   * [Functor Functor (FFunctor)](#functor-functor-ffunctor)
+  * [Monad morphisms](#monad-morphisms)
+  * [higher kinded category theory](#higher-kinded-category-theory)
+  * [SemigroupK (Plus)](#semigroupk-plus)
+  * [MonoidK (PlusEmpty)](#monoidk-plusempty)
   * [Dinatural Transformation](#dinatural-transformation)
   * [Ends & Coends](#ends--coends)
   * [Align](#align)
@@ -131,11 +143,16 @@
   * [Unfoldable](#unfoldable)
 
 * [Recursion schemas](./RecursionSchemasFAlgebraFix.MD)
+
 * [Optics](./Optics.MD)
-* [Functional data structures](./FunctionalDataStructures.MD)
+
+* [Functor Oriented Programming](#functor-oriented-programming)
+
 * [Advanced Category Theory](./AdvancedCategoryTheory.MD)
+
 * [Resource About Category Theory](#resource-about-category-theory)
 
+* [Functional data structures](./FunctionalDataStructures.MD)
 
 ## Category Theory
 
@@ -971,7 +988,7 @@ def zipWithIndex[A](fa: F[A]): F[(A, Int)] // indexed
    
 ### SemigroupK (Plus)
 
-Semigroup that abstracts over type constructor F. Fo any proper type A can produce Semigroup for F[A]. 
+Semigroup that abstracts over type constructor F. For any proper type A can produce Semigroup for F[A]. 
 
 ```scala
 trait SemigroupK[F[_]] {
@@ -1005,9 +1022,22 @@ trait MonoidK[F[_]] extends SemigroupK[F] {
   * Cats [docs](https://typelevel.org/cats/typeclasses/monoidk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/MonoidK.scala)
   * FSiS 6 - SemigroupK, MonoidK, MonadFilter, MonadCombine - Michael Pilquist [(video 21:15)](https://www.youtube.com/watch?v=f26aSrkFKa4&t=1275)
 
-### TraverseEmpty
+### FunctorFilter
 
-* Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/mtl/TraverseEmptyListPermutationsSpec.scala)
+* Implementations [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/FunctorFilter.scala)
+
+* Resources
+  * Finding all permutations of list: [(blog post haskell)](https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/) [(translation to Scala using Cats)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/mtl/TraverseEmptyListPermutationsSpec.scala)
+
+### TraverseFilter
+
+* Implementations
+  * [Cats TraverseFilter](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/TraverseFilter.scala) [Haskell witherable/Data.Witherable](https://hackage.haskell.org/package/witherable/docs/Data-Witherable.html)
+ 
+## Monads not compose - solutions
+ 
+* Resources
+  * [Documentation.Layers.Overview](https://hackage.haskell.org/package/layers-0.1/docs/Documentation-Layers-Overview.html) (nice overwiev of alternative approaches in Haskell)
 
 ### Monad Transformers (OptionT EitherT ReaderT)
 
@@ -1022,7 +1052,17 @@ John A De Goes
   * (Haskell) The ReaderT Design Pattern - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
   * (Haskell) Announcing: monad-unlift - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2015/04/announcing-monad-unlift)
 
-### Natural transformation (FunctionK)
+### Extensible effects
+
+* Resources
+  * Eff monad for cats atnos-org/eff [github](https://github.com/atnos-org/eff)
+  * b-studios/scala-effekt [github](https://github.com/b-studios/scala-effekt)
+  * extensible-effects [hackage](https://hackage.haskell.org/package/extensible-effects)
+  * [Extensible Effects: an alternative to Monad Transformers - Oleg Kiselyov](http://okmij.org/ftp/Haskell/extensible/)
+  * [Idris Effect](https://www.idris-lang.org/documentation/effects/)
+  * [bibliography of work related to the theory and practice of computational effects](https://github.com/yallop/effects-bibliography)
+
+## Natural transformation (FunctionK)
 
 Represent mappings between two functors.
 
@@ -1488,6 +1528,22 @@ trait FFunctor[FF[_]] {
 
 * Resources
   * (Haskell) Functor Functors - Benjamin [(blog post)](https://www.benjamin.pizza/posts/2017-12-15-functor-functors.html)
+
+### Monad morphisms
+
+* Resources
+  * (Haskell) [monad morphisms](http://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html)
+  * (Haskell) [MFunctor](http://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html#t:MFunctor) [used to be in pipes](https://hackage.haskell.org/package/pipes-3.1.0/docs/Control-MFunctor.html)
+  * (Haskell) Q: What is not an MFunctor? [reddit](https://www.reddit.com/r/haskell/comments/2c87m8/q_what_is_not_an_mfunctor/)
+  * (Haskell) [MMonad](http://hackage.haskell.org/package/mmorph-1.1.2/docs/Control-Monad-Morph.html#t:MMonad)
+  * (Haskell) [Github issue with code with MCoyoneda](https://github.com/Gabriel439/Haskell-MMorph-Library/issues/33)
+  * (Haskell) [Tutorial - Gabriel Gonzalez](http://hackage.haskell.org/package/mmorp-1.1.2/docs/Control-Monad-Morph.html#g:3)
+  * (Haskell) mmorph-1.0.0: Monad morphisms - Gabriel Gonzalez [blog post](http://www.haskellforall.com/2013/03/mmorph-100-monad-morphisms.html)
+
+### higher kinded category theory
+  * [hask](https://github.com/ekmett/hask)
+  * [cokin](http://hackage.haskell.org/package/conkin/docs/Conkin.html)
+  * [rank2classes](http://hackage.haskell.org/package/rank2classes)
 
 ### Monoidal Categories, Monoid Object
 
@@ -2191,6 +2247,11 @@ Resources:
 ### Unfoldable
   * [PR for Cats](https://github.com/typelevel/cats/pull/1132)
 
+# Andrey Mokhov Task
+
+Resources:
+  * The Task abstraction - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/the-task-abstraction/)
+
 ## Resource About Category Theory
 
 * Resources covering topics about FP and category theory in great details:
@@ -2206,7 +2267,7 @@ Resources:
   * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
 
 
-# Andrey Mokhov Task
+## Functor Oriented Programming
 
 Resources:
-  * The Task abstraction - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/the-task-abstraction/)
+  * Functor-Oriented Programming [blog post](http://r6.ca/blog/20171010T001746Z.html) [hacker news](https://news.ycombinator.com/item?id=15440108)
