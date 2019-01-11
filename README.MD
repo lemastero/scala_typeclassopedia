@@ -3,10 +3,12 @@
 [Abstract Algebra](./AbstractAlgebra.MD)
 
 [Category Theory](#category-theory)
-* [Functor](#functor-covariant-functor)
-* [Apply](#apply)
-* [Applicative](#applicative-applicative-functor)
-* [Selective](#selective-selective-applicative-functors)
+
+* Functors
+  * [Functor](#functor-covariant-functor)
+  * [Apply](#apply)
+  * [Applicative](#applicative-applicative-functor)
+  * [Selective](#selective-selective-applicative-functors)
 
 * [Monad](#monad)
   * [Reader](#reader)
@@ -56,7 +58,8 @@
 
 * [Bimonad](#bimonad)
 
-Traversing Folding Filtering
+* Traversing Folding Filtering
+  * [Monoid](./AbstractAlgebra.MD#monoid)
   * [Foldable](#foldable)
   * [Traverse](#traverse)
   * [Bitraverse](#bitraverse)
@@ -65,10 +68,10 @@ Traversing Folding Filtering
   * [TraverseFilter](#traversefilter)
 
 * Monads not compose - solutions
- * [Monad Transformers](#monad-transformers-optiont-eithert-readert)
- * [Free Monads](#free-monads)
- * Tagless Final
- * [Extensible effects](#extensible-effects)
+  * [Monad Transformers](#monad-transformers-optiont-eithert-readert)
+  * [Free Monads](#free-monads)
+  * Tagless Final
+  * [Extensible effects](#extensible-effects)
 
 * [Free constructions](#free-constructions)
   * [Free Applicative](#free-applicative)
@@ -142,6 +145,8 @@ Traversing Folding Filtering
 * [Recursion schemas](./RecursionSchemasFAlgebraFix.MD)
 
 * [Optics](./Optics.MD)
+
+* [Functor Oriented Programming](#functor-oriented-programming)
 
 * [Advanced Category Theory](./AdvancedCategoryTheory.MD)
 
@@ -2262,7 +2267,7 @@ Resources:
   * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
 
 
-## Functor-Oriented Programming
+## Functor Oriented Programming
 
 Resources:
   * Functor-Oriented Programming [blog post](http://r6.ca/blog/20171010T001746Z.html) [hacker news](https://news.ycombinator.com/item?id=15440108)
