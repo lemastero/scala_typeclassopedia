@@ -106,7 +106,7 @@ trait Monoid[A] extends Semigroup[A] {
 def combineAll(as: TraversableOnce[A]): A
 ```
 
-* Monoid can be defined for List (with list concatenation, Nil), Vector, Int with +, Strings with string concatenation. NEL is Semigrou but not a Monoid, same with non empty Strings :)
+* Monoid can be defined for List (with list concatenation, Nil), Vector, Int with +, Strings with string concatenation. NEL is Semigroup but not a Monoid, same with non empty Strings :)
 
 * We can create Monoid for any Semigroup by wrapping it in Option (None is empty value) same with Map
 
