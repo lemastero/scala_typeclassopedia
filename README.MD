@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lemastero/scala_typeclassopedia.svg?branch=master)](https://travis-ci.org/lemastero/scala_typeclassopedia)
+
 # Scala typeclassopedia
 
 [Abstract Algebra](./AbstractAlgebra.MD)
