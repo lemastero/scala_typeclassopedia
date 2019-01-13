@@ -1,6 +1,7 @@
 # F-Algebra, Recursive schema, Fix Point
 
 * Resources:
+  * [Resources for learning and using recursion schemes - Pascal Hartig](https://github.com/passy/awesome-recursion-schemes)
   * (Haskell) Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire - Erik Meijer, Maarten Fokkinga, Ross Paterson: [(paper Haskell)](https://maartenfokkinga.github.io/utwente/mmf91m.pdf)
   * (Haskell) Recursion Schemes: A Field Guide (Redux) - Edward Kmett: [(blog Haskell)](http://comonad.com/reader/2009/recursion-schemes/)
   * (Haskell) Rotten Bananas - Edward Kmett: http://comonad.com/reader/2008/rotten-bananas/
@@ -10,6 +11,7 @@
   * (Haskell) Dynamorphisms as Chronomorphisms - Edward Kmett [(blog post)](http://comonad.com/reader/2008/dynamorphisms-as-chronomorphisms/)
   * (Haskell) Elgot (Co)Algebras - Edward Kmett [(blog post)](http://comonad.com/reader/2008/elgot-coalgebras/)
   * [Histo- and Dynamorphisms Revisited- Ralf Hinze, Nicolas Wu](http://www.cs.ox.ac.uk/ralf.hinze/publications/WGP13.pdf)
+  * (Haskell) Program Reduction: A Win for Recursion Schemes - John Wiegley [(blog post)](http://newartisans.com/2018/04/win-for-recursion-schemes/)
 
 ## F-Algebra
 

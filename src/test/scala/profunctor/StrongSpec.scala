@@ -1,7 +1,7 @@
 package profunctor
 
 import org.scalatest.{FunSpec, MustMatchers}
-import profunctor.ProfunctorSimpleImpl.{Profunctor, Strong}
+import profunctor.strong.Strong
 
 case class DoubleFun[X,Y](fun: (X,X) => (Y,Y))
 

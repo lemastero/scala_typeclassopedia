@@ -1878,6 +1878,15 @@ def promap[P[_, _], Q[_, _]](f: DinaturalTransformation[P, Q])(implicit PP: Prof
 }
 ```
 
+# Profunctor Costrong
+
+```scala
+trait Costrong[F[_,_]] extends Profunctor[F] {
+  def unfirst[A,B,D](fa: F[(A,D), (B, D)]): F[A,B]
+  def unsecond[A,B,D](fa: F[(D,A),(D,B)]): F[A,B]
+}
+```
+
 ### Choice Profunctor
 
 Profunctor with additional method left that wrap both types inside Either.
@@ -2262,14 +2271,15 @@ Resources:
   * [Applied functional type theory - Sergei Winitzki](https://www.youtube.com/watch?v=0Ld79Lnzx_o&list=PLcoadSpY7rHXJWbUkjQ3P9MXBbXxLP8kV)
   * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) and [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
   * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
-  * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats/semigroup))
-  * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
+  * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats))
   * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) implementation of Haskell Typeclassopedia by Channing Walton, [(blog post)](The Road to the Typeclassopedia)
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
-  * [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
+  * [Summary of types in Cats documentation](https://typelevel.org/cats/nomenclature.html)
+  * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
+  * (Kotlin) [Patterns from Category Theory in Kotlin](https://arrow-kt.io/docs/)
 
 
 ## Functor Oriented Programming
 
 Resources:
-  * Functor-Oriented Programming [blog post](http://r6.ca/blog/20171010T001746Z.html) [hacker news](https://news.ycombinator.com/item?id=15440108)
+  * Functor-Oriented Programming - Russell O’Connor [blog post](http://r6.ca/blog/20171010T001746Z.html) [hacker news](https://news.ycombinator.com/item?id=15440108) [reddit](https://www.reddit.com/r/haskell/comments/75fo8k/functor_oriented_programming/)

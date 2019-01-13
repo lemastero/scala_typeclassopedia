@@ -1,7 +1,7 @@
 package profunctor_optics
 
 import functor.FunctorSimpleImpl.Functor
-import profunctor.ProfunctorSimpleImpl.Profunctor
+import profunctor.Profunctor
 import traverse.TraverseSimpleImpl.Traverse
 
 import scala.language.higherKinds
