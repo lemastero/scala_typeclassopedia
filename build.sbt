@@ -4,15 +4,22 @@ version := "0.0.1"
 
 scalaVersion := "2.12.6"
 
-val catsVersion = "1.5.0"
-
 mainClass := Some("coyoneda.SimpleImpl")
 
+val catsVersion = "1.5.0"
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % catsVersion withSources() withJavadoc(),
   "org.typelevel" %% "cats-free" % catsVersion withSources() withJavadoc(),
+  "org.typelevel" %% "cats-laws" % catsVersion withSources() withJavadoc(),
+  "org.typelevel" %% "alleycats-core" % catsVersion withSources() withJavadoc(),
+
   "org.typelevel" %% "cats-mtl-core" % "0.4.0" withSources() withJavadoc(),
-  "org.scalaz" %% "scalaz-core" % "7.3.0-M25",
+  "org.typelevel" %% "cats-mtl-laws" % "0.4.0" withSources() withJavadoc(),
+
+  "org.typelevel" %% "cats-effect" % "1.1.0" withSources() withJavadoc(),
+
+  "org.scalaz"    %% "scalaz-core" % "7.3.0-M25" withSources() withJavadoc(),
+
   "org.scalatest" %% "scalatest" % "3.0.5" % Test
 )
 
