@@ -2272,4 +2272,4 @@ Resources:
 ## Functor Oriented Programming
 
 Resources:
-  * Functor-Oriented Programming [blog post](http://r6.ca/blog/20171010T001746Z.html) [hacker news](https://news.ycombinator.com/item?id=15440108)
+  * Functor-Oriented Programming - Russell O’Connor [blog post](http://r6.ca/blog/20171010T001746Z.html) [hacker news](https://news.ycombinator.com/item?id=15440108) [reddit](https://www.reddit.com/r/haskell/comments/75fo8k/functor_oriented_programming/)
