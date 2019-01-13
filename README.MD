@@ -158,7 +158,7 @@
 
 ## Category Theory
 
-![](covariant_contravariant_functors.svg)
+![](img/covariant_contravariant_functors.svg)
 
 ### Functor (Covariant Functor)
 
@@ -878,7 +878,7 @@ case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
 
-![](traversable_foldable.svg)
+![](img/traversable_foldable.svg)
 
 ### Bimonad
 
@@ -2036,7 +2036,7 @@ trait Procompose[P[_,_],Q[_,_],D,C] {
 
 ## Arrows
 
-![](arrows.svg)
+![](img/arrows.svg)
 
 ### Category
 

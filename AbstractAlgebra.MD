@@ -2,7 +2,7 @@
 
 ## Summary of structures with one operation
 
-![](single_op_abstract_algebra.svg)
+![](img/single_op_abstract_algebra.svg)
 
 Summary of structures in abstract algebra consisting of:
  - a Set S 
