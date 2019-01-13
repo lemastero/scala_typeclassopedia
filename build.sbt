@@ -4,7 +4,7 @@ version := "0.0.1"
 
 scalaVersion := "2.12.6"
 
-val catsVersion = "1.1.0"
+val catsVersion = "1.5.0"
 
 mainClass := Some("coyoneda.SimpleImpl")
 
