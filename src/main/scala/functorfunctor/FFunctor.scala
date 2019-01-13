@@ -14,9 +14,9 @@ import natural_transformation.NaturalTransf.NaturalTransf
   * -- composition
   * ffmap (eta . phi) = ffmap eta . ffmap phi
   */
-trait FFunctor[FF[_]] {
-  def ffmap[F[_],G[_]](nat: NaturalTransf[F,G]): FF[F] => FF[G]
-}
+//trait FFunctor[FF[_]] {
+//  def ffmap[F[_],G[_]](nat: NaturalTransf[F,G]): FF[F] => FF[G]
+//}
 
 
 object FFunctorExample {
