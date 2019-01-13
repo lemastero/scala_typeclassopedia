@@ -17,9 +17,8 @@ class TraverseEmptyListPermutationsSpec
 
   describe("filterA") {
     it("compute all permutations of the lit if given List(true, false)") {
-      import cats.mtl.syntax.empty._
-      import cats.mtl.instances.empty.listTraverseEmpty
-      import cats.implicits.catsStdInstancesForList
+      import cats._
+      import cats.implicits._
 
       val allPermutations = List(
         List(1, 2, 3),
