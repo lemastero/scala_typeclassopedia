@@ -181,7 +181,10 @@ if we don't include bottom values - [(Haskell) contrexample using undefined](htt
 
 * Instances can be implemented for: List, Vector, Option, Either, Validated, Tuple1, Tuple2, Function
 
-* Functor must preserve structure, so Set is not a Functor (map constant function would change the structure).
+* Counterexamples
+1. Set: [Twitter discussion](https://twitter.com/MikeMKH/status/1073950622301503488) Explanation by Mark Seemann [Set is not a functor](http://blog.ploeh.dk/2018/12/03/set-is-not-a-functor/). [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/set.scala)
+2. Map: [Cats Issue 1831](https://github.com/typelevel/cats/issues/1831)
+3. Try: [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/try.scala)
 
 * Derived methods of Functor:
 ```scala
