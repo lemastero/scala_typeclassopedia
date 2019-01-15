@@ -133,10 +133,18 @@ Function f between two monoids A, B that preserve the structure of monoid:
    * (Haskell) http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
    * (Haskell) https://apfelmus.nfshost.com/articles/monoid-fingertree.html
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
-   * Rúnar Óli Bjarnason - Composing Programs [(video)](https://youtu.be/h8aPc8sji9Q?t=783)
    * Java [functionaljava/fj/Monoid](http://www.functionaljava.org/javadoc/4.8.1/functionaljava/fj/Monoid.html) [Mojang/DataFixerUpper Monoid](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Monoid.java)
 
+### Monoid homomorphisms
+Function f between two monoids A, B that preserve the structure of monoid:
+  1. `f(A.empty) == B.empty`
+  2. `f(A.combine(a1,a2)) == B.compine( f(a1), f(a2) )`
+
 For example size and Monoid - list with concatenation and integers with addition.
+
+* Resources:
+   * Rúnar Óli Bjarnason - Composing Programs [(video)](https://youtu.be/h8aPc8sji9Q?t=783)
+   * (Haskell) Monoids, theme and variations - Brent Yorgey [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
 
 ## Commutative Monoid
 
