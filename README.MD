@@ -362,6 +362,8 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * Tail Call Elimination in Scala Monads [(blog post)](https://apocalisp.wordpress.com/2011/10/26/tail-call-elimination-in-scala-monads/)
   * MonadMask vs MonadBracket - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2017/02/monadmask-vs-monadbracket)
   * Functional Patterns in C++, 3. Async API, Monoid, Monad - Bartosz Milewski [video](https://www.youtube.com/watch?v=ozN6XxsAF84)
+  * (Haskell) Trivial Monad solutions - @geophf [(blog post 1)](http://logicaltypes.blogspot.com/2008/05/trivial-monad-solutions.html) [(blog post 2)](http://logicaltypes.blogspot.com/2008/05/trivial-monad-solutions-cont.html)
+  * Monads in Java - @geophf [(blog post)](http://logicaltypes.blogspot.com/2011/09/monads-in-java.html)
 
 ### Reader
 
@@ -846,6 +848,9 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
   * (Haskell) Comonads as Spaces - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
   * (Purescript) PS Unscripted - Comonads for UIs - Phil Freeman [(video)](https://www.youtube.com/watch?v=EoJ9xnzG76M)
   * (Haskell) Cofun with cofree comonads - Dave Laing [(slides, video, code)](http://dlaing.org/cofun/)
+  * (Haskell) matchingSub is Comonadic (obviously!) - geophf [blog post](http://logicaltypes.blogspot.com/2014/06/matchingsub-is-comonadic-obviously.html)
+  * (Haskell) Realized Constants are Comonadic - geophf [blog post](http://logicaltypes.blogspot.com/2009/06/realized-constants-are-comonadic.html)
+  
 
 ### Coreader (Env comonad, Product comonad)
 
@@ -861,6 +866,7 @@ case class CoReader[R, A](extract: A, ask: R) {
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
   * (Haskell) [(src Control-Comonad-Env)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad-Env.html)
+  * (Haskell) CoReader x CoState == Silver Bullet - @geophf [(blog post)](http://logicaltypes.blogspot.com/2012/11/coreader-x-costate-silver-bullet.html)
 
 ### Cowriter
 
@@ -1055,7 +1061,8 @@ John A De Goes
   * FSiS 7 - OptionT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=ZNUTMabdgzo)
   * FSiS 8 - EitherT transformer - Michael Pilquist [(video)](https://www.youtube.com/watch?v=z7rCBQ_vTRg)
   * (Haskell) The ReaderT Design Pattern - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
-  * (Haskell) Announcing: monad-unlift - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2015/04/announcing-monad-unlift)
+  * (Haskell) Announcing: monad-unlift - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2015/04/announcing-monad-unlift)
+  * (Haskell) Scanner-parsers II: State Monad Transformers - geophf [(blog post)](http://logicaltypes.blogspot.com/2008/08/scanner-parsers-ii-state-monad.html)
 
 ### Extensible effects
 
@@ -2083,6 +2090,7 @@ trait Category[F[_, _]] extends Compose[F] {
   * (Haskell) FixxBuzz using arrows [(blog post)](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
   * Do it with (free?) arrows! – Julien Richard Foy [(video)](https://www.youtube.com/watch?v=PWBTOhMemxQ)
   * Functional programming with arrows [video](https://www.youtube.com/watch?v=ZfAgvAIoUEY)
+  * (Haskell) 'Arrow' is spelt 'fizz-buzz' - @geophf [blog post](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
 
 ### CommutativeArrow
 
@@ -2126,6 +2134,7 @@ trait Category[F[_, _]] extends Compose[F] {
   * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
   * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Kleisli.scala)
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+  * (Java) Thoughts on Kleisli Arrows in Java (WIP) - geophf [blog post](http://logicaltypes.blogspot.com/2013/06/thoughts-on-kleisli-arrows-in-java-wip.html)
 
 ### Cokleisli
 
