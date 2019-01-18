@@ -122,6 +122,11 @@
   * [Kleisli](#kleisli)
   * [Cokleisli](#cokleisli)
 
+* [Cayley representations](#cayley-representations)
+  * [Difference Lists](#difference-lists)
+  * [Codensity](#codensity)
+  * [Double Cayley Representation](#double-cayley-representation)
+
 * [ADT (Algebra of types)](#adt-algebra-of-types)
   * [Unit](#unit)
   * [Void](#void)
@@ -224,6 +229,9 @@ trait Apply[F[_]] extends Functor[F] {
   def ap[A, B](ff: F[A => B])(fa: F[A]): F[B]
 }
 ```
+
+* Explanation by John DeGoes why `ap` is usefull from Haskell perspective,
+but in Scala better would be to use `product` (named `zip`) [(reddit)](https://www.reddit.com/r/scala/comments/afor0h/scalaz_8_timeline/eeac71m/)
 
 * Derived methods
 ```scala
@@ -748,17 +756,24 @@ newtype Biff p f g a b = Biff { runBiff :: p (f a) (g b) }
 
 ### Invariant (Invariant Functor, Exponential Functor)
 
-Functor that can create covariant functor (by passing identity as g) or contravariant functor (by passing identity to f)
+Functor that can create covariant functor (by passing identity as g) or contravariant functor (by passing identity to f).
+It represent situation when given type constructor
+contains type on both positive and negative position (like function A => A).
+
 ```scala
 trait Invariant[F[_]] {
   def imap[A, B](fa: F[A])(f: A => B)(g: B => A): F[B]
 }
 ```
+
+* Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala) [Haskell](https://hackage.haskell.org/package/category-extras/docs/Control-Functor-Exponential.html) 
+
 * Resources
   * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
-  * Cats [docs](https://typelevel.org/cats/typeclasses/invariant.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala)
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) 
-
+  * Cats [docs](https://typelevel.org/cats/typeclasses/invariant.html)
+  * Exponential on Functor level [tweeter Oleg Grenrus](https://twitter.com/phadej/status/1085342927591784451)
+  * (Haskell) Rotten Bananas - Edward Kmett [(blog post)](http://comonad.com/reader/2008/rotten-bananas/) (There is nice example, beware: a lot of recursion schemas)
+  * Category Theory 8.1: Function objects, exponentials [(video)](https://www.youtube.com/watch?v=REqRzMI26Nw)
 
 ### Distributive
 
@@ -2275,6 +2290,61 @@ Resources:
 Resources:
   * The Task abstraction - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/the-task-abstraction/)
 
+##  Cayley representations
+
+"The Cayley representation theorem (CRT):
+every group is isomorphic to a group of permutations"
+Can be extended to monoids and defined monoidal category of endofunctor
+
+In FP the CRT is optimisation by change of representation:
+- CRT for List monoid - difference lists
+- CRT for monads - Codensity monad
+- CRT for applicatives - [NoCaM 5.4](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
+- CRT for arrows - ???
+
+Resources:
+  * Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
+
+### Difference lists
+
+* List with concatenation and empty list is monoid. W optimize list concatenation (that is slow) by representing
+list as function (difference list):
+
+```scala
+type Elist[A] = List[A] => List[A]
+```
+
+EList is isomorphic to List:
+
+```scala
+def rep[A](xs: List[A]): Elist[A] = ys => xs ++ ys
+def abs[A](xs: Elist[A]): List[A] = xs(Nil)
+```
+
+We can concatenate EList's effectively and at the end get to the List back.
+
+* Cayley Theorem can be define for general Monoid:
+
+```scala
+trait CayleyTheoremForMonoid[M[_]] extends MonoidK[M] {
+  type MonoidEndomorphism[A] = M[A] => M[A]
+  def rep[A](xs: M[A]): MonoidEndomorphism[A] = ys => combineK(xs, ys)
+  def abs[A](xs: MonoidEndomorphism[A]): M[A] = xs(empty)
+}
+```
+
+Resources:
+  * (Haskell) Using Difference Lists - geophf [blog post](http://logicaltypes.blogspot.com/2008/08/using-difference-lists.html)
+  * (Haskell) keepEquals with Difference Lists - geophf [blog post](http://logicaltypes.blogspot.com/2014/06/keepequals-with-difference-lists.html)
+  * (Haskell) A novel representation of lists and its application to the function "reverse" - John Hughes
+
+### Double Cayley Representation
+
+"optimises both left-nested sums and left-nested products"
+
+Resources:
+  * A Unified View of Monadic and Applicative Non-determinism - Exequiel Rivas, Mauro Jaskeliof, Tom Schrijvers [(paper)](https://www.fceia.unr.edu.ar/~mauro/pubs/UnifiedND.pdf)
+  
 ## Resource About Category Theory
 
 * Resources covering topics about FP and category theory in great details:
