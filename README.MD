@@ -253,7 +253,7 @@ def flip[A, B](ff: F[A => B]): F[A] => F[B]
 * Can compose
 * Resources
   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
-  * Cartesian: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Cartesian.scala)
+  * Semigroupal: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Semigroupal.scala)
   * Java [Mojang/DataFixerUpper Apply](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Apply.java)
 
 ### Applicative (Applicative Functor)
