@@ -2276,8 +2276,7 @@ case class Those[A,B](a: A, b: B) extends These[A,B]
 
 * There is many abstractions that can be implemented for this data type
 
-Resources:
-  * [these/Data-These](https://hackage.haskell.org/package/these/docs/Data-These.html)
+Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/These.scala) [Haskell](https://hackage.haskell.org/package/these/docs/Data-These.html)
 
 ### Chronicle Monad
   * [these/Control-Monad-Chronicle](https://hackage.haskell.org/package/these/docs/Control-Monad-Chronicle.html)
