@@ -187,7 +187,7 @@ if we don't include bottom values - [(Haskell) contrexample using undefined](htt
 * Instances can be implemented for: List, Vector, Option, Either, Validated, Tuple1, Tuple2, Function
 
 * Counterexamples
-1. Set: [Twitter discussion](https://twitter.com/MikeMKH/status/1073950622301503488) Explanation by Mark Seemann [Set is not a functor](http://blog.ploeh.dk/2018/12/03/set-is-not-a-functor/). [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/set.scala)
+1. Set: [Twitter discussion](https://twitter.com/MikeMKH/status/1073950622301503488) Explanation by Mark Seemann [Set is not a functor](http://blog.ploeh.dk/2018/12/03/set-is-not-a-functor/). [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/set.scala). [PR in Scalaz explaining why Set is not Functor yet is Foldable](https://github.com/scalaz/scalaz/pull/276)
 2. Map: [Cats Issue 1831](https://github.com/typelevel/cats/issues/1831)
 3. Try: [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/try.scala)
 
@@ -287,7 +287,7 @@ trait Applicative[F[_]] extends Apply[F] {
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
     * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
-    * Lifting - Tony Morris: [blog post](http://blog.tmorris.net/posts/lifting/index.html)
+    * Lifting - Tony Morris [(blog post)](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
   * Functional Patterns in C++, 2. Currying, Applicative - Bartosz Milewski [video](https://www.youtube.com/watch?v=Hx9jojeBj6w)
