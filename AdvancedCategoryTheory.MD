@@ -21,3 +21,8 @@
 
 * Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
 * Kerodon (book about categorical homotopy theory)  [(book)](https://kerodon.net/kerodon.pdf) [(links)](https://kerodon.net/bibliography)
+
+# PLT
+
+* [Programming Language Theory - Steven Shaw](https://steshaw.org/plt/)
+* [cohomolo-gy/haskell-resources - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
