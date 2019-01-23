@@ -20,6 +20,8 @@ libraryDependencies ++= Seq(
 
   "org.scalaz"    %% "scalaz-core" % "7.3.0-M27" withSources() withJavadoc(),
 
+  "com.slamdata" %% "matryoshka-core" % "0.18.3" withSources() withJavadoc(),
+
   "org.scalatest" %% "scalatest" % "3.0.5" % Test
 )
 
