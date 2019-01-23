@@ -7,6 +7,7 @@
 
 # Publications
 
+* Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html) [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 * [Jeremy Gibbons](https://dblp.uni-trier.de/pers/hd/g/Gibbons:Jeremy?q=Jeremy%20Gibbons)
 * [Ralf Hinze](https://dblp.uni-trier.de/pers/hd/h/Hinze:Ralf)
 * [John Hughes](https://www.researchgate.net/profile/John_Hughes13)
