@@ -1,5 +1,10 @@
 
-* Implementations: Scala - Cats: [andyscott/droste](https://github.com/andyscott/droste) Scala - Scalaz [slamdata/matryoshka](https://github.com/slamdata/matryoshka) [Haskell ekmett/recursion-schemes](http://hackage.haskell.org/package/recursion-schemes)  Idris [vmchale/recursion_schemes](https://github.com/vmchale/recursion_schemes) 
+* Implementations:  
+   Scala for Cats: [andyscott/droste](https://github.com/andyscott/droste) for Scalaz: [slamdata/matryoshka](https://github.com/slamdata/matryoshka)  
+   Haskell [ekmett/recursion-schemes](http://hackage.haskell.org/package/recursion-schemes) [vmchale/recursion](http://hackage.haskell.org/package/recursion/docs/Control-Recursion.html)  
+   Idris [vmchale/recursion_schemes](https://github.com/vmchale/recursion_schemes)  
+   Purescript [slamdata/purescript-matryoshka](https://github.com/slamdata/purescript-matryoshka)  
+   Kotlin [aedans/Katalyst](https://github.com/aedans/Katalyst)  
 
 * Resources:
   * [slamdata/matryoshka](https://github.com/slamdata/matryoshka) main page contains very good overwie, [PDF with summary of Recursion schemes](https://github.com/slamdata/matryoshka/blob/master/resources/recursion-schemes.pdf)
@@ -119,6 +124,8 @@ case class Fix[F[_]](unFix: F[Fix[F]])
 * Resources:
    * (Haskell) Recursion Schemes: A Field Guide (Redux) - Edward Kmett: [(blog post)](http://comonad.com/reader/2009/recursion-schemes/)
    * (Haskell) Generalized Hylomorphisms - Edward Kmett [(blog post)](http://comonad.com/reader/2008/generalized-hylomorphisms/)
+   * Stalking a Hylomorphism in the Wild - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/12/29/stalking-a-hylomorphism-in-the-wild/)
+   * Open Season on Hylomorphisms - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2018/12/20/open-season-on-hylomorphisms/)
 
 ## Chronomorphism
 
