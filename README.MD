@@ -149,7 +149,7 @@
   * [Task](#task)
   * [Unfoldable](#unfoldable)
 
-* [Recursion schemas](./RecursionSchemasFAlgebraFix.MD)
+* [Recursion schemas](RecursionSchemas.MD)
 
 * [Optics](./Optics.MD)
 
@@ -2284,7 +2284,7 @@ Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core
 ### Unfoldable
   * [PR for Cats](https://github.com/typelevel/cats/pull/1132)
 
-# Andrey Mokhov Task
+## Andrey Mokhov Task
 
 Resources:
   * The Task abstraction - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/the-task-abstraction/)
