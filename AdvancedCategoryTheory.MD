@@ -9,7 +9,7 @@
 
 * [Jeremy Gibbons](https://dblp.uni-trier.de/pers/hd/g/Gibbons:Jeremy?q=Jeremy%20Gibbons)
 * [Ralf Hinze](https://dblp.uni-trier.de/pers/hd/h/Hinze:Ralf)
-* [John_Hughes](https://www.researchgate.net/profile/John_Hughes13)
+* [John Hughes](https://www.researchgate.net/profile/John_Hughes13)
 * [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal)
 * [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/)
 * [Exequiel Rivas](https://dblp.org/pers/hd/r/Rivas:Exequiel)
