@@ -524,13 +524,20 @@ trait Contravariant[F[_]] {
 }
 ```
 
+* Applications
+
+Common appliation of Contravariant is to model function with fixed output type. Predicate, function `A => Boolean` is an [example of contravariant functor](https://github.com/lemastero/scala_typeclassopedia/blob/master/src/main/scala/contravariant/InstancesForContravariantFunctor.scala#L61-L65). Edward Kmett used Contravariant functor hierarchy to [model sorting](https://github.com/ekmett/discrimination/search?q=contramap).
+
+Other example is Encoder in [scodec/scodec-cats](https://github.com/scodec/scodec-cats/blob/master/shared/src/main/scala/scodec/interop/cats/CatsInstances.scala#L121-L123)
+
+[Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
+
 * Contravariant is not called Cofunctor (like Monad -> Comonad, Appy -> Coapply) because when we inverse arrows
 in Functor definition we just get Functor definition (with A, B swapped). [More on this on SO](https://stackoverflow.com/questions/34732571/why-there-is-no-cofunctor-typeclass-in-haskell).
 
+* Implementations:  [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala) [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)
+
 * Resources
-  * Scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala)
-  * Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala)
-  * [Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
   * (Haskell) Covariance and Contravariance - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2016/11/covariance-contravariance) (Show as contravariant, discuss Profunctors, bivariance of phantom types)
   * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
 
