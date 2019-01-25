@@ -194,7 +194,7 @@ trait RegularSemigroup[A] extends Monoid[A] {
 
 Semigroup (or regular semigroup) in which every element has unique inverse.
 Other definition: Semigroup in which every element has at least one inverse and
-all indempotent elements commute.you
+all indempotent elements commute.
 
 ```scala
 trait InverseSemigroup[A] extends RegularSemigroup[A] {
