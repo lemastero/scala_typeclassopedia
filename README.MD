@@ -134,8 +134,9 @@
   * [Sum (Coproduct)](#sum-coproduct)
   * [These](#These)
 
+* [Natural transformation (FunctionK)](#natural-transformation-functionk)
+
 * Higher kinded & exotic abstractions
-  * [Natural transformation (FunctionK)](#natural-transformation-functionk)
   * [Monoidal Category, Monoid Object](#monoidal-categories-monoid-object)
   * [Day Convolution](#day-convolution)
   * [Functor Functor (FFunctor)](#functor-functor-ffunctor)
@@ -147,9 +148,10 @@
   * [Ends & Coends](#ends--coends)
   * [Align](#align)
   * [Task](#task)
-  * [Unfoldable](#unfoldable)
+  * [Transducers](#transducers)
 
 * [Recursion schemas](RecursionSchemas.MD)
+  * [Unfoldable](#unfoldable)
 
 * [Optics](./Optics.MD)
 
@@ -2351,7 +2353,7 @@ Resources:
 Resources:
   * A Unified View of Monadic and Applicative Non-determinism - Exequiel Rivas, Mauro Jaskeliof, Tom Schrijvers [(paper)](https://www.fceia.unr.edu.ar/~mauro/pubs/UnifiedND.pdf)
 
-### Transd
+### Transducers
 
 Clojure transducers expressed using types.
 
