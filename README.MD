@@ -2350,7 +2350,21 @@ Resources:
 
 Resources:
   * A Unified View of Monadic and Applicative Non-determinism - Exequiel Rivas, Mauro Jaskeliof, Tom Schrijvers [(paper)](https://www.fceia.unr.edu.ar/~mauro/pubs/UnifiedND.pdf)
-  
+
+### Transd
+
+Clojure transducers expressed using types.
+
+```Haskell
+type Reducer a r = r -> a -> r
+type Transducer a b = forall r . Reducer a r -> Reducer b r
+```
+
+Resources:
+  * (Haskell) Understanding Clojure transducers through types - Franklin Chen [(blog post)](https://conscientiousprogrammer.com/blog/2014/08/07/understanding-cloure-transducers-through-types/)
+  * (Haskell) Transducers are monoid homomorphisms - Oleksandr Manzyuk [(blog post)](https://oleksandrmanzyuk.wordpress.com/2014/08/09/transducers-are-monoid-homomorphisms/)
+  * (Haskell) Transducers, Mappers and Reducers - giuliohome [(blog post)](https://giuliohome.wordpress.com/2017/05/22/transducers-mappers-and-reducers/)
+
 ## Resource About Category Theory
 
 * Resources covering topics about FP and category theory in great details:
