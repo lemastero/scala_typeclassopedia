@@ -473,7 +473,7 @@ trait BoundedDistributiveLattice[A] extends BoundedLattice[A] with DistributiveL
 
 ## Heyting algebras
 
-Heyting algebra is bounded distributive lattices equipped with operation `imp` ()written as ->)
+Heyting algebra is bounded distributive lattices equipped with operation `imp` (written as ->)
 and `complement` operation (written as -a)
 
 ```scala
