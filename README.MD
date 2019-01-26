@@ -6,7 +6,7 @@
 
 [Category Theory](#category-theory)
 
-* Functors
+* Covariant Functors
   * [Functor](#functor-covariant-functor)
   * [Apply](#apply)
   * [Applicative](#applicative-applicative-functor)
@@ -31,11 +31,14 @@
   * [RIO Monad (Reader + IO)](#rio-monad-reader--io)
   * [TRIO (RIO Monad + Bifunctor IO)](#trio-rio-monad--bifunctor-io)
 
-* [Contravariant](#contravariant-contravariant-functor)
+* Contravariant functors
+  * [Contravariant](#contravariant-contravariant-functor)
   * [Divide (Contravariant Apply)](#divide-contravariant-apply)
   * [Divisible (Contravariant Applicative)](#divisible-contravariant-applicative)
 
 * [Invariant (Invariant Functor, Exponential Functor)](#invariant-invariant-functor-exponential-functor)
+
+* [Natural transformation (FunctionK)](#natural-transformation-functionk)
 
 * Bifunctors
   * [Bifunctor](#bifunctor)
@@ -134,8 +137,6 @@
   * [Sum (Coproduct)](#sum-coproduct)
   * [These](#These)
 
-* [Natural transformation (FunctionK)](#natural-transformation-functionk)
-
 * Higher kinded & exotic abstractions
   * [Monoidal Category, Monoid Object](#monoidal-categories-monoid-object)
   * [Day Convolution](#day-convolution)
@@ -174,11 +175,13 @@ Abstraction for type constructor (type with "hole", type parameter) that can be 
 Containers (List, Tree, Option) can apply given function to every element in the collection.
 Computation effects (Option - may not have value, List - may have multiple values,
  Either/Validated - may contain value or error) can apply function to a value inside this effect without changing the effect.
+
 ```scala
 trait Functor[F[_]] {
   def map[A,B](a: F[A])(f: A => B): F[B]
 }
 ```
+
 * Functor Laws:
 1. identify: `xs.map(identity) == xs`
 2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))`
@@ -206,7 +209,7 @@ def widen[A, B >: A](fa: F[A]): F[B]
 
 * Functors can be composed
 
-* Implementations [Scalaz Functor](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala) [Cats Functorc](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala) [Idris Prelude/Functor](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [purescript-prelude/Data.Functor](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base/Data.Functor](http://hackage.haskell.org/package/base/docs/Data-Functor.html) [Java Mojang/DataFixerUpper Functor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html) [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2) [Java DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
 
 * Examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
 [function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
