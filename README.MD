@@ -2301,8 +2301,15 @@ Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core
 
 ## Andrey Mokhov Task
 
+"computes the value of a key k, in a side-effect-free way, using a callback of type k → f v to find the values of its dependencies"
+
+```Haskell
+type Task c k v = forall f. c f => (k -> f v) -> k -> Maybe (f v)
+```
+
 Resources:
   * The Task abstraction - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/the-task-abstraction/)
+  * [usage in snowleopard/build](https://github.com/snowleopard/build/search?q=Task&unscoped_q=Task)
 
 ##  Cayley representations
 
