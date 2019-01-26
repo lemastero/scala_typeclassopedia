@@ -526,13 +526,11 @@ trait Contravariant[F[_]] {
 }
 ```
 
-* Applications
-
-Common appliation of Contravariant is to model function with fixed output type. Predicate, function `A => Boolean` is an [example of contravariant functor](https://github.com/lemastero/scala_typeclassopedia/blob/master/src/main/scala/contravariant/InstancesForContravariantFunctor.scala#L61-L65). Edward Kmett used Contravariant functor hierarchy to [model sorting](https://github.com/ekmett/discrimination/search?q=contramap).
-
-Other example is Encoder in [scodec/scodec-cats](https://github.com/scodec/scodec-cats/blob/master/shared/src/main/scala/scodec/interop/cats/CatsInstances.scala#L121-L123)
-
-[Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
+* Applications:
+  * model function with fixed output type, like [Predicate - function `A => Boolean`](https://github.com/lemastero/scala_typeclassopedia/blob/master/src/main/scala/contravariant/InstancesForContravariantFunctor.scala#L61-L65). Edward Kmett used Contravariant functor hierarchy to [model sorting](https://github.com/ekmett/discrimination/search?q=contramap).
+  * Encoder in [scodec/scodec-cats](https://github.com/scodec/scodec-cats/blob/master/shared/src/main/scala/scodec/interop/cats/CatsInstances.scala#L121-L123)
+  * [jberryman/simple-actors](https://github.com/jberryman/simple-actors/search?q=contramap&unscoped_q=contramap) model [Behavior of actor](https://github.com/jberryman/simple-actors/blob/master/Control/Concurrent/Actors.lhs#L336-L346)
+  * [List of Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
 
 * Contravariant is not called Cofunctor (like Monad -> Comonad, Appy -> Coapply) because when we inverse arrows
 in Functor definition we just get Functor definition (with A, B swapped). [More on this on SO](https://stackoverflow.com/questions/34732571/why-there-is-no-cofunctor-typeclass-in-haskell).
@@ -540,8 +538,13 @@ in Functor definition we just get Functor definition (with A, B swapped). [More 
 * Implementations:  [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala) [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)
 
 * Resources
-  * (Haskell) Covariance and Contravariance - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2016/11/covariance-contravariance) (Show as contravariant, discuss Profunctors, bivariance of phantom types)
-  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
+  * (Haskell) 24 Days of Hackage: contravariant - Tom Ellis [(blog post)](https://ocharles.org.uk/blog/guest-posts/2013-12-21-24-days-of-hackage-contravariant.html) (all classic examples: Predicate, Op but alos Behaviors of actor, nice laws explanation)
+  * (Haskell) Covariance and Contravariance - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2016/11/covariance-contravariance) (Show as contravariant, discuss Profunctors, bivariance of phantom types, good explanation of positive and negative positions)
+  * (Haskell) I love profunctors. They're so easy. - Liyang HU [(blog post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/profunctors) (Const, Predicate, Op instances for Contravariant)
+  * (Haskell) The Extended Functor Family - George Wilson [(video)](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=450)
+  * (Haskell) Contravariant Functors: The Other Side of the Coin - George Wilson [(video)](https://www.youtube.com/watch?v=IJ_bVVsQhvc)
+  * [What is a contravariant functor? - SO](https://stackoverflow.com/questions/38034077/what-is-a-contravariant-functor)
+  * [What's up with Contravariant? - r/haskell](https://www.reddit.com/r/haskell/comments/1vc0mp/whats_up_with_contravariant/)
 
 ### Divide (Contravariant Apply)
 ```scala
