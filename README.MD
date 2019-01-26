@@ -148,7 +148,7 @@
   * [Dinatural Transformation](#dinatural-transformation)
   * [Ends & Coends](#ends--coends)
   * [Align](#align)
-  * [Task](#task)
+  * [Task](#andrey-mokhov-task)
   * [Transducers](#transducers)
 
 * [Recursion schemas](RecursionSchemas.MD)
