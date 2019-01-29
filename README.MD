@@ -2296,9 +2296,16 @@ Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core
   * [these/Control-Monad-Chronicle](https://hackage.haskell.org/package/these/docs/Control-Monad-Chronicle.html)
 
 ### Unfoldable
+
+Implementations:  
+  * Unfoldable1: [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/unfoldable1.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-unfoldable/docs/Data.Unfoldable1)  
+  * Unfoldable: [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/unfoldable.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-unfoldable/docs/Data.Unfoldable) [Haskell](http://hackage.haskell.org/package/unfoldable/docs/Data-Unfoldable.html)  
+  * Bifoldable: [Haskell](http://hackage.haskell.org/package/unfoldable/docs/Data-Biunfoldable.html)
+
+Resources:
   * [PR for Cats](https://github.com/typelevel/cats/pull/1132)
 
-## Andrey Mokhov Task
+### Andrey Mokhov Task
 
 "computes the value of a key k, in a side-effect-free way, using a callback of type k → f v to find the values of its dependencies"
 
