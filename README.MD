@@ -31,6 +31,9 @@
   * [RIO Monad (Reader + IO)](#rio-monad-reader--io)
   * [TRIO (RIO Monad + Bifunctor IO)](#trio-rio-monad--bifunctor-io)
 
+* [Commutative](#commutative)
+  * [CommutativeArrow](#commutativearrow)
+
 * Contravariant functors
   * [Contravariant](#contravariant-contravariant-functor)
   * [Divide (Contravariant Apply)](#divide-contravariant-apply)
@@ -60,6 +63,7 @@
     * [Coreader (Env comonad, Product comonad)](#coreader-env-comonad-product-comonad)
     * [Cowriter](#cowriter)
     * [Cofree](#cofree)
+    * [Cokleisli](#cokleisli)
 
 * [Bimonad](#bimonad)
 
@@ -172,11 +176,21 @@
 
 ### Functor (Covariant Functor)
 
-Abstraction for type constructor (type with "hole", type parameter) that can be mapped over.
+Type constructor `F[_]` that require single type with function `map` - ability to transform it's content, without changing it structure.
 
-Containers (List, Tree, Option) can apply given function to every element in the collection.
-Computation effects (Option - may not have value, List - may have multiple values,
- Either/Validated - may contain value or error) can apply function to a value inside this effect without changing the effect.
+You can think of Functor using following intuitions:
+- containers (Id, List, Tree, Option) can apply given function to every element in the collection
+- computation effects - `map` applies function to a value inside this effect, without changing the effect
+    - Id - no effects
+    - Option - may not have value,
+    - List/Vector - may have multiple values,
+    - Either/ValidatedNel/Try - may contain value or errors 
+    - Reader - require some context to be computed
+    - Writer - while computing value, generate some description
+    - State - computing change some state
+    - Monix Task/Future/Twitter Future/Scalaz Task - needs time to be computed
+    - JSON - has given format
+    - Map - is indexed with other type (see Controversies about Map)
 
 ```scala
 trait Functor[F[_]] {
@@ -184,21 +198,27 @@ trait Functor[F[_]] {
 }
 ```
 
-* Functor Laws:
-1. identify: `xs.map(identity) == xs`
-2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))`
+* Functor Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html) [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2) [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+
+* Functor Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/FunctorLaws.scala), [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L98-L107) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Functor.html#t:Functor)):
+  1. identify: `xs.map(identity) == xs`
+  2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))`
+
+![](img/functor_laws.svg)
 
 If Functor satisfy fist law then it also satisfy second law: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md)
 if we don't include bottom values - [(Haskell) contrexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243).
 
-* Instances can be implemented for: List, Vector, Option, Either, Validated, Tuple1, Tuple2, Function
+* In Category Theory, functor is mapping of:
+   * objects (`F[_]` maps types e.g. `Int` to `List[Int]`)
+   * morphisms (if `f` is mapping between `A` and `B` then we can think of `map(f)` as mapping between `F[A]` and `F[B]`)
+   * preserve composition and identity - this is ensured by Functor Laws
 
-* Counterexamples
-1. Set: [Twitter discussion](https://twitter.com/MikeMKH/status/1073950622301503488) Explanation by Mark Seemann [Set is not a functor](http://blog.ploeh.dk/2018/12/03/set-is-not-a-functor/). [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/set.scala). [PR in Scalaz explaining why Set is not Functor yet is Foldable](https://github.com/scalaz/scalaz/pull/276)
-2. Map: [Cats Issue 1831](https://github.com/typelevel/cats/issues/1831)
-3. Try: [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/try.scala)
+But in general, functor maps two arbitrary categories. Functor that maps the same category to itself is called `endo functor`.
+So strictly speaking Functor in programming is Endofunctor in Category theory.
 
 * Derived methods of Functor:
+
 ```scala
 def lift[A, B](f: A => B): F[A] => F[B] // lift regular function to function inside container
 def fproduct[A, B](fa: F[A])(f: A => B): F[(A, B)] // zip elements with result after applying f
@@ -209,27 +229,39 @@ def tupleRight[A, B](fa: F[A], b: B): F[(A, B)]
 def widen[A, B >: A](fa: F[A]): F[B]
 ```
 
-* Functors can be composed
-
-* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html) [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2) [Java DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+* Functor can compose (Cats [ComposedFunctor](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Composed.scala#L20-L26) [compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala#L147-L151), )
 
 * Examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
 [function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
 and [custom Tree type](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/TreeFunctor.scala).
 Examples for [usage of map, derived methods, compose](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala).
 
+Functor definition does not require any conditions on type constructor `F` or any other operations (like Applicative, Monad do).
+Therefore pretty much everything is a Functor. Notable exceptions are:
+  1. function input arguments (they are in `negative position`) or any input like type - see [Contravariant](#contravariant-contravariant-functor) We can define Functor only for return type - because type is in `positive position`.
+  2. abstractions where type can be both input and output, see [Invariant](#invariant-invariant-functor-exponential-functor) and blog post [Rotten Bananas by Edward Kmett](http://comonad.com/reader/2008/rotten-bananas/)
+  3. abstractions that behave like a Functor but not there are some controversies:
+
+* Controversies:
+  1. Set: [Twitter discussion](https://twitter.com/MikeMKH/status/1073950622301503488) Explanation by Mark Seemann [Set is not a functor](http://blog.ploeh.dk/2018/12/03/set-is-not-a-functor/). [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/set.scala). [PR in Scalaz explaining why Set is not Functor yet is Foldable](https://github.com/scalaz/scalaz/pull/276)
+  2. Map: [Cats Issue 1831](https://github.com/typelevel/cats/issues/1831)
+  3. Try: [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/try.scala)
+
+* Many abstractions have enough structure so we can define `map` that obey the laws - like `Monad` defined using `pure` and `flatMap`.
+Notable is `Coyoneda` that wrap any type constructor and allows to use `map` on it. Functor instance is neccessary only when we want to extract end result.
+See [Free constructions](#free-constructions) for `Free functors`. 
+
 * Resources:
-  * herding cats - Functor: [blog post](http://eed3si9n.com/herding-cats/Functor.html)
-  * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [video](https://www.youtube.com/watch?v=Dsd4pc99FSY)
-  * (Haskell) The Extended Functor Family - George Wilson [video](https://www.youtube.com/watch?v=JUVMiRRq6wU)
-  * Cats [docs](https://typelevel.org/cats/typeclasses/functor.html)
-  * Functional Patterns in C++, 1. Functors - Bartosz Milewski [video](https://www.youtube.com/watch?v=ph7qt0pkPkc)
+  * herding cats - Functor - @eed3si9n [(blog post)](http://eed3si9n.com/herding-cats/Functor.html)
+  * FSiS 1, Type Constructors, Functors, and Kind Projector - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Dsd4pc99FSY)
+  * [Cats docs](https://typelevel.org/cats/typeclasses/functor.html)
+  * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala)
+  * (Haskell) The Extended Functor Family - George Wilson [(video)](https://www.youtube.com/watch?v=JUVMiRRq6wU)
+  * Functional Patterns in C++, 1. Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=ph7qt0pkPkc)
 
 ### Apply
 
-Apply is a Functor that can apply function already inside container to container of arguments.
-
-Apply is a weaker version of Applicative that cannot put value inside effetc F.
+Apply is a Functor with superpower to apply function already inside container to container of arguments.
 
 ```scala
 trait Apply[F[_]] extends Functor[F] {
@@ -237,10 +269,43 @@ trait Apply[F[_]] extends Functor[F] {
 }
 ```
 
-* Explanation by John DeGoes why `ap` is usefull from Haskell perspective,
-but in Scala better would be to use `product` (named `zip`) [(reddit)](https://www.reddit.com/r/scala/comments/afor0h/scalaz_8_timeline/eeac71m/)
+* Apply Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Apply.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/apply.scala) [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Apply.java)
 
-* Derived methods
+* Apply Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ApplyLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala#L203-L208)):
+  1. functor laws
+  2. `apply` composition
+
+```scala
+def compositionLaw[A, B, C](fa: F[A], fab: F[A => B], fbc: F[B => C]): Boolean = {
+
+  //        apply F[A => B]              apply F[B => C]
+  // F[A] =====================> F[B] =====================> F[C]
+  val fb: F[B] = apply(fab)(fa)
+  val left: F[C] = apply(fbc)(fb)
+
+  val expand: (B => C) => ((A => B) => (A => C)) =
+    (bc: B => C) =>
+      (ab: A => B) =>
+        bc compose ab
+
+  //               map( A=>B => B=>C => A=>C )
+  // F[B => C] ======================================> F[A=>B => A=>C]
+  val fabac: F[(A => B) => (A => C)] = map(fbc)(expand)
+
+  //              apply F[A=>B => A=>C]
+  // F[A => B] =================================> F[A => C]
+  val fac: F[A => C] = apply(fabac)(fab)
+
+  //           apply F[A=>C]
+  // F[A] ============================> F[C]
+  val right: F[C] = apply(fac)(fa)
+
+  left == right
+}
+```
+
+* Derived methods (there are version defined from `xyz2` until `xyz22`)
+
 ```scala
 def apply2[A, B, Z]   (fa: F[A], fb: F[B])          (ff: F[(A,B) => Z]): F[Z]
 def apply3[A, B, C, Z](fa: F[A], fb: F[B], fc: F[C])(ff: F[(A,B,C) => Z]): F[Z]
@@ -257,48 +322,58 @@ def tuple3[A, B, C](fa: F[A], fb: F[B], fc: F[C]): F[(A, B, C)]
 def product[A,B](fa: F[A], fb: F[B]): F[(A, B)]
 def flip[A, B](ff: F[A => B]): F[A] => F[B]
 ```
-* Can compose
 
-* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Semigroupal.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/apply.scala) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Apply.java)
+* Apply was extracted from Applicative definition and usually is defined as a weaker version of Applicative that cannot put value inside effect F.
+So, instances for Apply are the same as for Applicative.
 
-* Resources
-  * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) 
+* Apply can compose: [Cats compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Apply.scala#L210-L214) [ComposedApply](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Composed.scala#L28-L37), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala#L52-L57))
+
+* Resources:
+  * herding cats - Apply - @eed3si9n [(blog post)](http://eed3si9n.com/herding-cats/Apply.html)
+  * [Cats docs](https://typelevel.org/cats/typeclasses/applicative.html#apply---a-weakened-applicative)
+  * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala)
+  * John DeGoes explains why `ap` is useful from Haskell perspective, but in Scala better would be to use `product` (named `zip`) [(reddit)](https://www.reddit.com/r/scala/comments/afor0h/scalaz_8_timeline/eeac71m/) 
 
 ### Applicative (Applicative Functor)
 
 Applicative Functor is a Functor that can:
 - apply function already inside container to container of arguments (so it is Apply)
 - put value into container (lift into effect)
+
 ```scala
 trait Applicative[F[_]] extends Apply[F] {
   def pure[A](value: A): F[A]
 }
 ```
+
+* Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
+
 * Applicative Laws:
-1. identify: `xs.apply(pure(identity)) == xs` apply identify function lifted inside effect does nothing
-2. homomorphism: `pure(a).apply(pure(f)) == pure(f(a))` lifting value a and applying lifted function f is the same as apply function to this value and then lift result
-3. interchange: `pure(a).apply(ff) == ff.apply(pure(f => f(a)))` where `ff: F[A => B]`
-4. map: `fa.map(f) == fa.apply(pure(f))`
+  1. identify: `xs.apply(pure(identity)) == xs` apply identify function lifted inside effect does nothing
+  2. homomorphism: `pure(a).apply(pure(f)) == pure(f(a))` lifting value a and applying lifted function f is the same as apply function to this value and then lift result
+  3. interchange: `pure(a).apply(ff) == ff.apply(pure(f => f(a)))` where `ff: F[A => B]`
+  4. map: `fa.map(f) == fa.apply(pure(f))`
+
 * Derived methods - see Apply
-* Applicatives can be composed
+
+* Applicatives can be composed (Cats [compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala#L86-L90) [ComposedApplicative](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Composed.scala#L39-L45), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala#L93-L98))
+
 * Minimal set of methods to implement Applicative (other methods can be derived from them):
   * map2, pure
   * apply, pure
 
-* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
-
 * Resources:
-  * herding cats - Applicative: [blog post](http://eed3si9n.com/herding-cats/Applicative.html)
-  * FSiS 2 - Applicative type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=tD_EyIKqqCk)
-  * FSiS 3 - Monad type class - Michael Pilquist: [video](https://www.youtube.com/watch?v=VWCtLhH815M)
+  * herding cats - Applicative: [(blog post)](http://eed3si9n.com/herding-cats/Applicative.html)
+  * FSiS 2 - Applicative type class - Michael Pilquist: [(video)](https://www.youtube.com/watch?v=tD_EyIKqqCk)
+  * FSiS 3 - Monad type class - Michael Pilquist: [(video)](https://www.youtube.com/watch?v=VWCtLhH815M)
   * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) 
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
-    * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
-    * Lifting - Tony Morris [(blog post)](http://blog.tmorris.net/posts/lifting/index.html)
+  * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
+  * Lifting - Tony Morris [(blog post)](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
-  * Functional Patterns in C++, 2. Currying, Applicative - Bartosz Milewski [video](https://www.youtube.com/watch?v=Hx9jojeBj6w)
+  * Functional Patterns in C++, 2. Currying, Applicative - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=Hx9jojeBj6w)
 
 ### Selective (Selective applicative functors)
 
@@ -797,7 +872,7 @@ trait Invariant[F[_]] {
 
 ### Distributive
 
-Traverse are composable Distributive it require only Functor (and Traverse require Applicative
+Traverse are composable Distributive it require only Functor (and Traverse require Applicative)
 
 ```scala
 trait Distributive[F[_]] extends Functor[F] {
@@ -2444,6 +2519,26 @@ Resources:
   * (Haskell) Transducers are monoid homomorphisms - Oleksandr Manzyuk [(blog post)](https://oleksandrmanzyuk.wordpress.com/2014/08/09/transducers-are-monoid-homomorphisms/)
   * (Haskell) Transducers, Mappers and Reducers - giuliohome [(blog post)](https://giuliohome.wordpress.com/2017/05/22/transducers-mappers-and-reducers/)
 
+## Commutative
+
+For many standard abstractions we can add restriction to be commutative.
+
+Implementations:
+  Commutative Semigroup [ekmett/abelian](https://github.com/ekmett/abelian/blob/master/src/Data/Semigroup/Commutative.hs)  
+  Commutative Monoid [ekmett/abelian](https://github.com/ekmett/abelian/blob/master/src/Data/Semigroup/Commutative.hs#L50-L51)  
+  Commutative Apply [Cats src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CommutativeApply.scala) [Cats laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CommutativeApplyLaws.scala)   
+  Commutative Applicative [Cats src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CommutativeApplicative.scala) [Cats laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CommutativeApplicativeLaws.scala) [ekmett/abelian](https://github.com/ekmett/abelian/blob/master/src/Control/Commutative.hs#L41)   
+  Commutative FlatMap [Cats src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CommutativeFlatMap.scala) [Cats laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CommutativeFlatMapLaws.scala)   
+  Commutative Monad [Cats src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CommutativeMonad.scala) [Cats laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CommutativeMonadLaws.scala)   
+  Commutative Free Monads [ekmett/abelian](https://github.com/ekmett/abelian/blob/master/src/Control/Commutative/Monad/Free.hs)   
+  Commutative Monad Transformers [ekmett/abelian](https://github.com/ekmett/abelian/blob/master/src/Control/Commutative/Monad/Trans.hs)   
+  Commutative Comonads [ekmett/abelian](https://github.com/ekmett/abelian/blob/master/src/Control/Commutative.hs#L107-L109)
+
+Resources:
+  * (Haskell) Haskell Live-Coding, Session 1, Commutativity - Edward Kmett [(video)](https://www.youtube.com/watch?v=Nv5tf8pvgrY)
+  * Are there any interesting commutative monads in Haskell? [SO](https://stackoverflow.com/questions/24356166/are-there-any-interesting-commutative-monads-in-haskell)
+  * The Commutativity monad [(blog post)](http://gelisam.blogspot.com/2013/07/the-commutative-monad.html) [reddit](https://www.reddit.com/r/haskell/comments/1jegxb/the_commutative_monad/)
+  
 ## Resource About Category Theory
 
 * Resources covering topics about FP and category theory in great details:
