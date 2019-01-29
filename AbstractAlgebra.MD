@@ -64,13 +64,12 @@ def combineAllOption(as: TraversableOnce[A]): Option[A]
 * Examples how to define alternative Semigroup instances [for Option, Int with *](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monoid/AlternativeMonoidInstances.scala) and [usage](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/monoid/AlternativeMonoidInstancesSpec.scala).
 Examples for usage of derived methods and combine [(src)](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/semigroup/SemigroupExamplesSpec.scala)  
 
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semigroup.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Semigroup.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semigroup.scala) [twitter/algebird](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Semigroup.scala) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Semigroup.html) [Java](http://www.functionaljava.org/javadoc/4.8.1/functionaljava/fj/Semigroup.html)
+
 * Resources:
    * herding cats - Semigroup [(blog post)](http://eed3si9n.com/herding-cats/Semigroup.html)
-   * Cats [(docs)](https://typelevel.org/cats/typeclasses/semigroup.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Semigroup.scala)
-   * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala) [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Semigroup.scala)
-   * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Semigroup.scala)
-   * Haskell [base/Data-Semigroup](http://hackage.haskell.org/package/base/docs/Data-Semigroup.html)
-   * Java [(functionaljava/fj/Semigroup )](http://www.functionaljava.org/javadoc/4.8.1/functionaljava/fj/Semigroup.html)
+   * [Cats docs](https://typelevel.org/cats/typeclasses/semigroup.html) 
+   * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala)
    
 ## Commutative Semigroup
 
@@ -116,16 +115,12 @@ in [monoid-subclasses in Haskell](https://hackage.haskell.org/package/monoid-sub
 
 * We can joint two monoids into tuple of monoids.
 
-### Monoid homomorphisms
-Function f between two monoids A, B that preserve the structure of monoid:
-  1. `f(A.empty) == B.empty`
-  2. `f(A.combine(a1,a2)) == B.compine( f(a1), f(a2) )`
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Monoid.scala) [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monoid.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monoid.scala) [Java functionaljava](http://www.functionaljava.org/javadoc/4.8.1/functionaljava/fj/Monoid.html) [Java DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Monoid.java)
 
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 23:02](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=1381)
    * herding cats - Monoid [(blog post)](http://eed3si9n.com/herding-cats/Monoid.html)
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monoid.scala)
-   * Cats [(docs)](https://typelevel.org/cats/typeclasses/monoid.html) [(src)](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/Monoid.scala)
+   * [Cats docs](https://typelevel.org/cats/typeclasses/monoid.html)
    * twitter/algebird [src](https://github.com/twitter/algebird/blob/master/algebird-core/src/main/scala/com/twitter/algebird/Monoid.scala) [docs](https://twitter.github.io/algebird/typeclasses/monoid.html)
    * (Haskell) [base/Data-Monoid](http://hackage.haskell.org/package/base/docs/Data-Monoid.html)
    * (Haskell) Monoids, theme and variations - Brent Yorgey [(video)](https://www.youtube.com/watch?v=X-8NCkD2vOw) [(paper)](http://repository.upenn.edu/cgi/viewcontent.cgi?article=1773&context=cis_papers)
@@ -133,7 +128,6 @@ Function f between two monoids A, B that preserve the structure of monoid:
    * (Haskell) http://blog.sigfpe.com/2009/01/haskell-monoids-and-their-uses.html
    * (Haskell) https://apfelmus.nfshost.com/articles/monoid-fingertree.html
    * On Monoids - Rúnar Bjarnason [(blog post)](https://apocalisp.wordpress.com/2010/06/14/on-monoids/)
-   * Java [functionaljava/fj/Monoid](http://www.functionaljava.org/javadoc/4.8.1/functionaljava/fj/Monoid.html) [Mojang/DataFixerUpper Monoid](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Monoid.java)
 
 ### Monoid homomorphisms
 Function f between two monoids A, B that preserve the structure of monoid:

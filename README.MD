@@ -256,10 +256,11 @@ def product[A,B](fa: F[A], fb: F[B]): F[(A, B)]
 def flip[A, B](ff: F[A => B]): F[A] => F[B]
 ```
 * Can compose
+
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Semigroupal.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/apply.scala) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Apply.java)
+
 * Resources
-  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala)
-  * Semigroupal: Cats [(src)](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Semigroupal.scala)
-  * Java [Mojang/DataFixerUpper Apply](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Apply.java)
+  * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ApplyUsage.scala) 
 
 ### Applicative (Applicative Functor)
 
@@ -282,7 +283,7 @@ trait Applicative[F[_]] extends Apply[F] {
   * map2, pure
   * apply, pure
 
-* Implementations [Cats Applicative](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz Applicative](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Idris Prelude/Applicative](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java Mojang/DataFixerUpper Applicative](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
 * Resources:
   * herding cats - Applicative: [blog post](http://eed3si9n.com/herding-cats/Applicative.html)
@@ -360,7 +361,9 @@ You can use Monad Transformer that know what monad is inside (OptionT, EitherT, 
 and [usage of flatMap to implement functions zip and number](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/helper_implementations/Tree.scala) 
 (using [State Int](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/IntState.scala)).
 
-* Implementations [Scalaz Monad](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala) [Cats Monad](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala) [Idris Prelude/Monad Monad](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr) [purescript-prelude/Control.Monad](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad)
+* Implementations:  
+  FlatMap/Bind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
+  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr) [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad)
 
 * Resources
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
@@ -538,7 +541,7 @@ trait Contravariant[F[_]] {
 * Contravariant is not called Cofunctor (like Monad -> Comonad, Appy -> Coapply) because when we inverse arrows
 in Functor definition we just get Functor definition (with A, B swapped). [More on this on SO](https://stackoverflow.com/questions/34732571/why-there-is-no-cofunctor-typeclass-in-haskell).
 
-* Implementations:  [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala) [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala) [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)
 
 * Resources
   * (Haskell) 24 Days of Hackage: contravariant - Tom Ellis [(blog post)](https://ocharles.org.uk/blog/guest-posts/2013-12-21-24-days-of-hackage-contravariant.html) (all classic examples: Predicate, Op but alos Behaviors of actor, nice laws explanation)
@@ -620,7 +623,7 @@ def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
 def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 ```
 
-* Implementations [Scalaz Bifunctor](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [Cats Bifunctor](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala) [Purescript purescript-bifunctors/Data.Bifunctor](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor) [Idris-Bifunctors/Data.Bifunctor](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bifunctor.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor) [Idris](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr)
 
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 
@@ -781,7 +784,7 @@ trait Invariant[F[_]] {
 }
 ```
 
-* Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala) [Haskell](https://hackage.haskell.org/package/category-extras/docs/Control-Functor-Exponential.html) 
+* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/InvariantFunctor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/invariantfunctor.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Invariant.scala) [Haskell](https://hackage.haskell.org/package/category-extras/docs/Control-Functor-Exponential.html) 
 
 * Resources
   * Explorations in Variance - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VZWLRepyNvo)
@@ -861,7 +864,9 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
 
 * Implementations of comonad can be done for: None empty list, Rose tree, Identity
 
-* Implementations [Cats CoflatMap](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [Cats Comonad](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala) [Scalaz Cobind](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala) [Scalaz Comonad](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala) [Haskell Control.Comonad](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html) [Purescript Control.Comonad](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
+* Implementations:  
+  CoflatMap/Cobind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala)  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/cobind.scala)    
+  Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala) [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html) [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
 
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
@@ -982,7 +987,7 @@ def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
 ```
 * Can be composed
 
-* Implementations: [Cats Foldable](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala) [Scalaz Foldable](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [Idris Prelude/Foldable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Foldable.idr) [Java Mojang/DataFixerUpper Fold](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Fold.java) [Java vavr Foldable](https://github.com/vavr-io/vavr/blob/master/vavr/src/main/java/io/vavr/collection/Foldable.java)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Foldable.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Foldable.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/foldable.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Foldable.idr) [Java DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/functions/Fold.java) [Java vavr](https://github.com/vavr-io/vavr/blob/master/vavr/src/main/java/io/vavr/collection/Foldable.java)
 
 * Resources:
    * FSiS 4 - Semigroup, Monoid, and Foldable type classes - Michael Pilquist [video 55:38](https://www.youtube.com/watch?v=ueo_E2BxMnA&t=3337)
@@ -1015,7 +1020,7 @@ def zipWithIndex[A](fa: F[A]): F[(A, Int)] // indexed
 // ... other helper functions are different for scalaz and cats
 ```
 
-* Implementations: [Scalaz Traverse](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala) [Cats Traverse](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala) [Idris idris-lang/Idris-dev Traversable](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Traversable.idr) [purescript-foldable-traversable/Data.Traversable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Traversable) [Java Mojang/DataFixerUpper Traversable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Traversable.java) [Java vavr-io/Traversable](https://github.com/vavr-io/vavr/blob/master/vavr/src/main/java/io/vavr/collection/Traversable.java)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Traverse.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Traverse.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/traversable.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Traversable.idr) [Purescript](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Traversable) [Java DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Traversable.java) [Java vavr-io](https://github.com/vavr-io/vavr/blob/master/vavr/src/main/java/io/vavr/collection/Traversable.java)
 
 * Resources
    * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/TraverseUsage.scala) 
@@ -1146,6 +1151,8 @@ trait NaturalTransf[F[_], G[_]] {
 
 ### Free Applicative
 
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/FreeAp.scala)
+
 * Resources
   * [Cats docs](https://typelevel.org/cats/datatypes/freeapplicative.html)
   * Move Over Free Monads: Make Way for Free Applicatives! - John deGoes: https://www.youtube.com/watch?v=H28QqxO7Ihc
@@ -1243,7 +1250,7 @@ Adjunction can be defined between Reader monad and Coreader comonad.
 * Resources:
   * Adjunctions And Battleship - Chris Penner [(blog post)](https://chrispenner.ca/posts/adjunction-battleship)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
-  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [( video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
+  * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [(video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
   * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
   * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
   * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
@@ -1744,7 +1751,7 @@ When we have Category `C` and `D` and `D'` the opposite category to D,
 then a Profunctor `P` is a Functor  `D' x C -> Set` We write `D -> C`
 In category of types and functions we use only one category, so Profunctor P is `C' x C => C`
   
-* Laws:
+* Laws [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45) [Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala):
 - if we define Profunctor using dimap:
   * `dimap id id == id`
   * `dimap (f . g) (h . i) == dimap g h . dimap f i`
@@ -1761,11 +1768,9 @@ Last two laws we get for free by parametricity.
 - if specify both (in addition to law for dimap and laws for lmap:
   * `dimap f g == lmap f . rmap g`
 
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)  [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java) [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs) 
+
 * Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala)
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala) [laws](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45)
-   * (Java) [Mojang/DataFixerUpper Profunctor](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
-   * (Purescript) [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs)
    * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
    * I love profunctors. They're so easy - Liyang HU [(post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/profunctors)
    * [Haskell libraries using Profunctors](https://packdeps.haskellers.com/reverse/profunctors)
@@ -1830,7 +1835,7 @@ trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
 }
 ```
 
-* Laws in [Haskell implementation of Strong Profunctor](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
+* Laws [Haskell](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html) [Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
   1) `first == dimap(swap, swap) andThen second`
   2) `lmap(_.1) == rmap(_.1) andThen first`
   3) `lmap(second f) andThen first == rmap(second f) andThen first`
@@ -1868,11 +1873,9 @@ val Function1Strong = new Strong[Function1] with Function1Profunctor {
 
 it is possible to define instance for Kleisli arrow
 
-* Resources
-   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala)
-   * Haskell [Data.Profunctor.Strong](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html)
-   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Strong.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/strong.scala) [Haskell](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html) [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Strong.purs)
+
+* Resources:
    * usage of Strong in [paf31/purescript-sdom](https://github.com/paf31/purescript-sdom/blob/master/src/SDOM.purs#L197-L205)
 
 ### Tambara
@@ -1942,10 +1945,7 @@ trait ProChoice[P[_, _]] extends Profunctor[P] {
 def right[A,B,C](pab: P[A, B]): P[Either[C, A], Either[C, B]]
 ```
 
-* Resources
-   * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)
-   * Haskell [src](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html)
-   * Purescript [src](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/choice.scala) [Haskell](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Choice.html) [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor/Choice.purs)
 
 ### Extranatural Transformation
 
@@ -2092,17 +2092,16 @@ trait Category[F[_, _]] extends Compose[F] {
 }
 ```
 
-* Category laws
+* Category laws [Cats Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala), [Cats Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala):
  * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`
  * left `f.compose(id) == id.compose(f) == f`
 
+* Implementations:  
+  Compose/Semicategory [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala)  
+  Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala) [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html)
+
 * Resources
   * (Category Theory) Category Theory 1.2: What is a category? - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
-  * Cats [src Category](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala)
-  * Cats [src Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala)
-  * Cats [src Compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala)
-  * Cats [src Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala)
-  * (Haskell) [base/Control-Category](https://hackage.haskell.org/package/base/docs/Control-Category.html)
 
 ### Arrow
 
