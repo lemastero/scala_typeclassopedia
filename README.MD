@@ -112,6 +112,8 @@
   * [Profunctor Yoneda](#profunctor-yoneda)
   * [Profunctor CoYoneda](#profunctor-coyoneda)
   * [Procompose](#procompose)
+  * [ProductProfunctor](#roductprofunctor)
+  * [SumProfunctor](#sumprofunctor)
 
 * [Arrows](#arrows)
   * [Category](#category)
@@ -2073,6 +2075,57 @@ trait Procompose[P[_,_],Q[_,_],D,C] {
   val q: Q[D,X]
 }
 ```
+
+### ProductProfunctor
+
+A generalization of Profunctor by adding Applicative superpowers to output.
+Documentation of [tomjaguarpaw/product-profunctors on Hackage](http://hackage.haskell.org/package/product-profunctors/docs/Data-Profunctor-Product.html) is excelent.
+
+```haskell
+class Profunctor p => ProductProfunctor p where
+  purePP :: b -> p a b
+  (****) :: p a (b -> c) -> p a b -> p a c
+  empty  :: p () ()
+  (***!) :: p a b -> p a' b' -> p (a, a') (b, b')
+
+(***$) :: ProductProfunctor p => (b -> c) -> p a b -> p a c
+```
+
+* utility methods
+from `p0` to `p62`
+```haskell
+p3 :: forall p a0 a1 a2 b0 b1 b2. ProductProfunctor p => (p a0 b0, p a1 b1, p a2 b2) -> p (a0, a1, a2) (b0, b1, b2)
+```
+
+from to `pT1` to `pT62` 
+```haskell
+pT3 :: forall p a0 a1 a2 b0 b1 b2. ProductProfunctor p => T3 (p a0 b0) (p a1 b1) (p a2 b2) -> p (T3 a0 a1 a2) (T3 b0 b1 b2)
+```
+
+* Implementation: [tomjaguarpaw/product-profunctors](http://hackage.haskell.org/package/product-profunctors/docs/Data-Profunctor-Product.html)
+
+### SumProfunctor
+
+```haskell
+class Profunctor p => SumProfunctor p where
+  (+++!) :: p a b -> p a' b' -> p (Either a a') (Either b b')
+
+list :: (ProductProfunctor p, SumProfunctor p) => p a b -> p [a] [b]
+```
+
+* Implementation: [tomjaguarpaw/product-profunctors](http://hackage.haskell.org/package/product-profunctors/docs/Data-Profunctor-Product.html#t:SumProfunctor)
+
+### ProfunctorEnd
+
+```haskell
+class Profunctor p => ProfunctorEnd p where
+  end :: p a a
+
+instance ProfunctorEnd (->) where
+  end = id
+```
+
+* (Haskell) [sjoerdvisscher/product-profunctors](https://github.com/sjoerdvisscher/product-profunctors/blob/master/Data/Profunctor/Product.hs#L171-L197)
 
 ## Arrows
 
