@@ -2346,7 +2346,12 @@ case class Those[A,B](a: A, b: B) extends These[A,B]
 Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/These.scala) [Haskell](https://hackage.haskell.org/package/these/docs/Data-These.html)
 
 ### Chronicle Monad
-  * [these/Control-Monad-Chronicle](https://hackage.haskell.org/package/these/docs/Control-Monad-Chronicle.html)
+
+Implementations: [Cats MTL](https://github.com/typelevel/cats-mtl/blob/master/core/src/main/scala/cats/mtl/MonadChronicle.scala) Haskell](https://hackage.haskell.org/package/these/docs/Control-Monad-Chronicle.html)  
+
+Resources:
+  * [Cats MTL docs](https://typelevel.org/cats-mtl/mtl-classes/monadchronicle.html)
+  * (Haskell) These, Align, and Crosswalk - Tim Humphries [(blog post)](https://teh.id.au/posts/2017/03/29/these-align-crosswalk/index.html) [(reddit)](https://www.reddit.com/r/haskell/comments/634owv/these_align_and_crosswalk/)
 
 ### Unfoldable
 
