@@ -58,7 +58,6 @@
   * [Bifoldable](#bifoldable)
 
 * Comonads
-  * [Distributive](#distributive)
   * [Comonad](#comonad)
     * [Coreader (Env comonad, Product comonad)](#coreader-env-comonad-product-comonad)
     * [Cowriter](#cowriter)
@@ -75,6 +74,7 @@
   * [Bifoldable](#bifoldable)
   * [FunctorFilter](#functorfilter)
   * [TraverseFilter](#traversefilter)
+  * [Distributive](#distributive)
 
 * Monads not compose - solutions
   * [Monad Transformers](#monad-transformers-optiont-eithert-readert)
@@ -88,6 +88,7 @@
   * [Cofree](#cofree)
   * [Free Alternative](#free-alternative)
   * [Free Arrow](#free-arrow)
+  * [Free Monad transformers](#free-monad-transformers)
  
 * [Representable & Adjunctions](#representable--adjunctions)
   * [Representable](#representable)
@@ -130,6 +131,8 @@
   * [Free Arrow](#free-arrow)
   * [Kleisli](#kleisli)
   * [Cokleisli](#cokleisli)
+  * [BiArrow](#biarrow)
+  * [BiKleisli](#bikleisli)
 
 * [Cayley representations](#cayley-representations)
   * [Difference Lists](#difference-lists)
@@ -156,6 +159,14 @@
   * [Align](#align)
   * [Task](#andrey-mokhov-task)
   * [Transducers](#transducers)
+
+* Limits
+  * [Cone](#cone)
+  * [Cocone](#cocone)
+  * [Diagonal Functor](#diagonal-functor)
+  * [Limit](#limit)
+  * [Colimit](#colimit)
+  * [Ends & Coends](#ends-coends)
 
 * [Recursion schemas](RecursionSchemas.MD)
   * [Unfoldable](#unfoldable)
@@ -265,7 +276,7 @@ Apply is a Functor with superpower to apply function already inside container to
 
 ```scala
 trait Apply[F[_]] extends Functor[F] {
-  def ap[A, B](ff: F[A => B])(fa: F[A]): F[B]
+  def ap[A, B](ff: F[A => B])(fa: F[A]): F[B] // apply
 }
 ```
 
@@ -342,13 +353,13 @@ Applicative Functor is a Functor that can:
 
 ```scala
 trait Applicative[F[_]] extends Apply[F] {
-  def pure[A](value: A): F[A]
+  def pure[A](value: A): F[A] // point
 }
 ```
 
 * Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
-* Applicative Laws:
+* Applicative Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ApplicativeLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala#L118-L134)):
   1. identify: `xs.apply(pure(identity)) == xs` apply identify function lifted inside effect does nothing
   2. homomorphism: `pure(a).apply(pure(f)) == pure(f(a))` lifting value a and applying lifted function f is the same as apply function to this value and then lift result
   3. interchange: `pure(a).apply(ff) == ff.apply(pure(f => f(a)))` where `ff: F[A => B]`
@@ -1228,11 +1239,12 @@ trait NaturalTransf[F[_], G[_]] {
 
 ### Free Applicative
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/FreeAp.scala)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/FreeAp.scala) [Haskell](http://hackage.haskell.org/package/free/docs/Control-Applicative-Free.html)
 
 * Resources
   * [Cats docs](https://typelevel.org/cats/datatypes/freeapplicative.html)
-  * Move Over Free Monads: Make Way for Free Applicatives! - John deGoes: https://www.youtube.com/watch?v=H28QqxO7Ihc
+  * Free Applicative Functors - Paolo Capriotti, Ambrus Kaposi [(paper)](https://arxiv.org/abs/1403.0749)
+  * Move Over Free Monads: Make Way for Free Applicatives! - John deGoes [(video)](https://www.youtube.com/watch?v=H28QqxO7Ihc)
 
 ### Free Monads
 
@@ -1255,6 +1267,13 @@ case class Suspend[F[_],A](s: F[Free[F,A]]) extends Free[F,A]
   * (Haskell) Meta-programming with the Free Monad - John Wiegley [(blog post)](http://newartisans.com/2012/08/meta-programming-with-the-free-monad/)
   * (Haskell) Notes on Free monads - John Wiegley [(blog post)](http://newartisans.com/2013/09/notes-on-free-monads/)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/free+monad)
+
+### Free Monad transformers
+
+* Implementations: [Haskell transformers-free](http://hackage.haskell.org/package/transformers-free/docs/Control-Monad-Trans-Free.html) [Haskell free](http://hackage.haskell.org/package/free/docs/Control-Monad-Trans-Free.html) [Purescript](https://pursuit.purescript.org/packages/purescript-freet/)
+
+* Resources
+  * Free monad transformers - Gabriel Gonzalez [(blog post)](http://www.haskellforall.com/2012/07/free-monad-transformers.html)
 
 ### Cofree
 
@@ -2298,6 +2317,20 @@ trait Category[F[_, _]] extends Compose[F] {
 * Cats
   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Cokleisli.scala)
 
+### BiArrow
+
+* Resources:
+  * There and back again: arrows for invertible programming - Artem Alimarine , Sjaak Smetsers , Arjen Weelden , Marko Eekelen , Rinus Plasmeijer [(paper)](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.153.9383)
+  * (Haskell) [BiArrow](http://hackage.haskell.org/package/invertible/docs/Control-Invertible-BiArrow.html)
+
+### BiKleisli
+
+* Resources:
+  * [Haskell category-extras](http://hackage.haskell.org/package/category-extras-0.53.3/docs/Control-Arrow-BiKleisli.html)
+  * [everpeace/scala-bikleisli](https://github.com/everpeace/scala-bikleisli)
+  * BiKleisli Arrow in Scala using Scalaz - everpeace [blog post](http://everpeace.github.io/scala-bikleisli/)
+
+
 ### Adjoint Triples
 
 * Resources:
@@ -2324,6 +2357,43 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
 * Resources
    * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala#L87-L89)
    * [nlab/Extranatural Transformation](https://ncatlab.org/nlab/show/extranatural+transformation)
+
+
+## Limits
+
+### Cone
+
+* Resources
+   * (Haskell) [category-extras Cone](https://hackage.haskell.org/package/category-extras-0.53.5/docs/Control-Functor-Cone.html#t:Cone)
+   * (Haskell) [data-category Cone](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#t:Cone)
+
+### Cocone
+
+* Resources
+   * (Haskell) [category-extras Cocone](https://hackage.haskell.org/package/category-extras-0.53.5/docs/Control-Functor-Cone.html#t:Cocone)
+   * (Haskell) [data-category Cocone](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Limit.html#t:Cocone)
+
+### Diagonal Functor
+
+* Resources
+   * (Haskell) [category-extras Diagonal Functor](https://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#2)
+
+### Limit
+
+* Resources
+   * Category Theory II 1.2: Limits - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=sx8FELiIPg8)
+   * Category Theory II 2.1: Limits, Higher order functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=9Qt664lfDRE)
+   * Category Theory II 2.2: Limits, Naturality - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=1AOHbF6Ex8E)
+   * Category Theory II 3.1: Examples of Limits and Colimits [(video)](https://www.youtube.com/watch?v=TtvVHokhSoM)
+   * TheCatsters - Limits and colimits [(video playlist)](https://www.youtube.com/playlist?list=PLE337D7DEA972E632)
+   * (Haskell) [category-extras Limit](http://hackage.haskell.org/package/category-extras-0.53.4/docs/Control-Functor-Limit.html#t:Limit)
+   * (Haskell) [data-category Limit](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#g:4)
+
+### Colimit
+
+* Resources
+   * (Haskell) [category-extras Colimit](http://hackage.haskell.org/package/category-extras-0.53.4/docs/Control-Functor-Limit.html#t:Colimit)
+   * (Haskell) [data-category Colimit](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#g:5)
 
 ### Ends & Coends
 
@@ -2433,7 +2503,7 @@ Resources:
 Implementations:  
   * Unfoldable1: [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/unfoldable1.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-unfoldable/docs/Data.Unfoldable1)  
   * Unfoldable: [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/unfoldable.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-unfoldable/docs/Data.Unfoldable) [Haskell](http://hackage.haskell.org/package/unfoldable/docs/Data-Unfoldable.html)  
-  * Bifoldable: [Haskell](http://hackage.haskell.org/package/unfoldable/docs/Data-Biunfoldable.html)
+  * Biunfoldable: [Haskell](http://hackage.haskell.org/package/unfoldable/docs/Data-Biunfoldable.html)
 
 Resources:
   * [PR for Cats](https://github.com/typelevel/cats/pull/1132)
