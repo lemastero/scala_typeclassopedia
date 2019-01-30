@@ -166,7 +166,7 @@
   * [Diagonal Functor](#diagonal-functor)
   * [Limit](#limit)
   * [Colimit](#colimit)
-  * [Ends & Coends](#ends-coends)
+  * [Ends & Coends](#ends--coends)
 
 * [Recursion schemas](RecursionSchemas.MD)
   * [Unfoldable](#unfoldable)
@@ -2385,6 +2385,8 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
    * Category Theory II 2.1: Limits, Higher order functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=9Qt664lfDRE)
    * Category Theory II 2.2: Limits, Naturality - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=1AOHbF6Ex8E)
    * Category Theory II 3.1: Examples of Limits and Colimits [(video)](https://www.youtube.com/watch?v=TtvVHokhSoM)
+   * Limits and Colimits - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/04/15/limits-and-colimits/)
+   * Understanding Limits - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2014/05/08/understanding-limits-2/)
    * TheCatsters - Limits and colimits [(video playlist)](https://www.youtube.com/playlist?list=PLE337D7DEA972E632)
    * (Haskell) [category-extras Limit](http://hackage.haskell.org/package/category-extras-0.53.4/docs/Control-Functor-Limit.html#t:Limit)
    * (Haskell) [data-category Limit](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#g:4)
