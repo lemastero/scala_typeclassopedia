@@ -2494,7 +2494,7 @@ Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core
 
 ### Chronicle Monad
 
-Implementations: [Cats MTL](https://github.com/typelevel/cats-mtl/blob/master/core/src/main/scala/cats/mtl/MonadChronicle.scala) Haskell](https://hackage.haskell.org/package/these/docs/Control-Monad-Chronicle.html)  
+Implementations: [Cats MTL](https://github.com/typelevel/cats-mtl/blob/master/core/src/main/scala/cats/mtl/MonadChronicle.scala) [Haskell](https://hackage.haskell.org/package/these/docs/Control-Monad-Chronicle.html)  
 
 Resources:
   * [Cats MTL docs](https://typelevel.org/cats-mtl/mtl-classes/monadchronicle.html)
