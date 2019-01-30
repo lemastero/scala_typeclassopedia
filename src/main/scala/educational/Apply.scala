@@ -6,11 +6,10 @@ trait Apply[F[_]] extends Functor[F] {
   def apply[A, B](ff: F[A => B])(fa: F[A]): F[B]
 }
 
-trait ApplyLaws[F[_]]
-  extends FunctorLaws[F]
+trait ApplyLaws[F[_]] extends FunctorLaws[F]
   with Apply[F] {
 
-  def composition[A, B, C](fa: F[A], fab: F[A => B], fbc: F[B => C]): Boolean = {
+  def applyComposition[A, B, C](fa: F[A], fab: F[A => B], fbc: F[B => C]): Boolean = {
 
     //        apply F[A => B]              apply F[B => C]
     // F[A] =====================> F[B] =====================> F[C]
@@ -37,4 +36,3 @@ trait ApplyLaws[F[_]]
     left == right
   }
 }
-
