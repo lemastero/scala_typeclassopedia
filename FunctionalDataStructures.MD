@@ -1,5 +1,6 @@
 # [Functional data structures](./FunctionalDataStructures.MD)
 * Resources:
+  * [typelevel/cats-collections](https://github.com/typelevel/cats-collections)
   * [What's new in purely functional data structures since Okasaki?](https://cstheory.stackexchange.com/questions/1539/whats-new-in-purely-functional-data-structures-since-okasaki)
   * [Funds - Functional Data Structures in Common Lisp](https://common-lisp.net/project/funds/)
 
