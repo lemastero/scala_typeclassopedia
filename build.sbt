@@ -6,7 +6,7 @@ scalaVersion := "2.12.6"
 
 mainClass := Some("coyoneda.SimpleImpl")
 
-val catsVersion = "1.5.0"
+val catsVersion = "1.6.0"
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % catsVersion withSources() withJavadoc(),
   "org.typelevel" %% "cats-free" % catsVersion withSources() withJavadoc(),
