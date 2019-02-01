@@ -7,15 +7,21 @@
 
 # Publications
 
+* Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls) [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
 * Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html) [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
+* [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg) [personal page](http://okmij.org/ftp/)
 * [Jeremy Gibbons](https://dblp.uni-trier.de/pers/hd/g/Gibbons:Jeremy?q=Jeremy%20Gibbons)
 * [Ralf Hinze](https://dblp.uni-trier.de/pers/hd/h/Hinze:Ralf)
 * [John Hughes](https://www.researchgate.net/profile/John_Hughes13)
-* [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal)
+* [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal) [personal page](http://conal.net/papers/)
 * [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/)
 * [Exequiel Rivas](https://dblp.org/pers/hd/r/Rivas:Exequiel)
 * [Mauro Jaskelioff](https://dblp.uni-trier.de/pers/hd/j/Jaskelioff:Mauro)
 * [Russell O'Connor](https://dblp.uni-trier.de/pers/hd/o/O=Connor:Russell)
+* [Martin Odersky](https://dblp.org/pers/hd/o/Odersky:Martin)
+* [Philipp Haller](https://dblp.org/pers/hd/a/Amin:Nada)
+* [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
+* [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada)
 
 # HoTT
 
