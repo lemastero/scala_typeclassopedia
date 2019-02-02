@@ -187,7 +187,7 @@
 
 ### Functor (Covariant Functor)
 
-Type constructor `F[_]` that require single type with function `map` - ability to transform it's content, without changing it structure.
+Type constructor `F[_]` that requires single type with function `map` - ability to transform its content, without changing the structure.
 
 You can think of Functor using following intuitions:
 - containers (Id, List, Tree, Option) can apply given function to every element in the collection
@@ -198,7 +198,7 @@ You can think of Functor using following intuitions:
     - Either/ValidatedNel/Try - may contain value or errors 
     - Reader - require some context to be computed
     - Writer - while computing value, generate some description
-    - State - computing change some state
+    - State - computing changes a state
     - Monix Task/Future/Twitter Future/Scalaz Task - needs time to be computed
     - JSON - has given format
     - Map - is indexed with other type (see Controversies about Map)
@@ -211,22 +211,22 @@ trait Functor[F[_]] {
 
 * Functor Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html) [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2) [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
 
-* Functor Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/FunctorLaws.scala), [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L98-L107) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Functor.html#t:Functor)):
+* Functor Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/FunctorLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L98-L107) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Functor.html#t:Functor)):
   1. identify: `xs.map(identity) == xs`
   2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))`
 
 ![](img/functor_laws.svg)
 
-If Functor satisfy fist law then it also satisfy second law: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md)
-if we don't include bottom values - [(Haskell) contrexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243).
+If Functor satisfies first law, then it also satisfies second: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md)
+if we don't include `bottom values` - [(Haskell) contrexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243).
 
-* In Category Theory, functor is mapping of:
-   * objects (`F[_]` maps types e.g. `Int` to `List[Int]`)
-   * morphisms (if `f` is mapping between `A` and `B` then we can think of `map(f)` as mapping between `F[A]` and `F[B]`)
-   * preserve composition and identity - this is ensured by Functor Laws
+* In Category Theory, functor is a mapping of:
+   * objects (`F[_]` maps types e.g. `Int` to `List[Int]`) and
+   * morphisms (if `f` is mapping between `A` and `B` then we can think of `map(f)` as mapping between `F[A]` and `F[B]`) that
+   * preserves composition and identity - this is ensured by the Functor Laws
 
-But in general, functor maps two arbitrary categories. Functor that maps the same category to itself is called `endo functor`.
-So strictly speaking Functor in programming is Endofunctor in Category theory.
+But in general, functor maps two arbitrary categories. Functor, that maps the same category to itself, is called `endo functor`.
+So strictly speaking, Functor in programming is `Endofunctor` in Category theory.
 
 * Derived methods of Functor:
 
@@ -240,26 +240,26 @@ def tupleRight[A, B](fa: F[A], b: B): F[(A, B)]
 def widen[A, B >: A](fa: F[A]): F[B]
 ```
 
-* Functor can compose (Cats [ComposedFunctor](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Composed.scala#L20-L26) [compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala#L147-L151), )
+* Functors can compose: Cats [ComposedFunctor](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Composed.scala#L20-L26) [compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala#L147-L151), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L61-L66)
 
-* Examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
+* An examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
 [function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
 and [custom Tree type](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/TreeFunctor.scala).
-Examples for [usage of map, derived methods, compose](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala).
+An examples for [usage of map, derived methods, compose](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala).
 
-Functor definition does not require any conditions on type constructor `F` or any other operations (like Applicative, Monad do).
+Functor definition does not require any conditions on type constructor `F` or any other operations (unlike Applicative, Monad).
 Therefore pretty much everything is a Functor. Notable exceptions are:
   1. function input arguments (they are in `negative position`) or any input like type - see [Contravariant](#contravariant-contravariant-functor) We can define Functor only for return type - because type is in `positive position`.
   2. abstractions where type can be both input and output, see [Invariant](#invariant-invariant-functor-exponential-functor) and blog post [Rotten Bananas by Edward Kmett](http://comonad.com/reader/2008/rotten-bananas/)
   3. abstractions that behave like a Functor but not there are some controversies:
 
 * Controversies:
-  1. Set: [Twitter discussion](https://twitter.com/MikeMKH/status/1073950622301503488) Explanation by Mark Seemann [Set is not a functor](http://blog.ploeh.dk/2018/12/03/set-is-not-a-functor/). [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/set.scala). [PR in Scalaz explaining why Set is not Functor yet is Foldable](https://github.com/scalaz/scalaz/pull/276)
-  2. Map: [Cats Issue 1831](https://github.com/typelevel/cats/issues/1831)
+  1. Set: [Twitter discussion](https://twitter.com/MikeMKH/status/1073950622301503488) with explanation done by Mark Seemann [Set is not a functor](http://blog.ploeh.dk/2018/12/03/set-is-not-a-functor/). [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/set.scala). [PR in Scalaz explaining why Set is not a Functor but is a Foldable](https://github.com/scalaz/scalaz/pull/276)
+  2. Map: [Cats Issue #1831](https://github.com/typelevel/cats/issues/1831)
   3. Try: [Comments in alleycats](https://github.com/typelevel/cats/blob/master/alleycats-core/src/main/scala/alleycats/std/try.scala)
 
-* Many abstractions have enough structure so we can define `map` that obey the laws - like `Monad` defined using `pure` and `flatMap`.
-Notable is `Coyoneda` that wrap any type constructor and allows to use `map` on it. Functor instance is neccessary only when we want to extract end result.
+* Many abstractions have enough structure, so we can define `map` that obeys the laws. Such as `Monad` defined using `pure` and `flatMap`.
+Another notable example is `Coyoneda` that wraps any type constructor and allows to use `map` on it. Functor instance is neccessary only when we want to extract the end result.
 See [Free constructions](#free-constructions) for `Free functors`. 
 
 * Resources:
