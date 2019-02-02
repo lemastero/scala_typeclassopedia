@@ -3,7 +3,7 @@
 * [Toposes, Triples and Theories - Michael Barr, Charles Wells](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
 * [Coalgebraic Modelling Applications in Automata Theory and Modal Logic - Helle Hvid Hansen](https://www.cs.vu.nl/en/Images/HH_Hansen_14-05-2009_tcm210-259639.pdf)
 * [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
-* Theory and Applications of Categories [Journal](http://138.73.27.39/tac/index.html) [Reprints](ftp://ftp.tac.mta.ca/pub/tac/html/reprints/index.html)
+* Theory and Applications of Categories [Journal](http://138.73.27.39/tac/index.html), [Reprints](http://138.73.27.39/tac/reprints/index.html)
 
 # Publications
 
