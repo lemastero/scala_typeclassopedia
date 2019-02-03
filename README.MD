@@ -381,6 +381,7 @@ trait Applicative[F[_]] extends Apply[F] {
   * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
   * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
   * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
+  * Static analysis with Applicatives - Gergő Érdi [(blog post)](https://gergo.erdi.hu/blog/2012-12-01-static_analysis_with_applicatives/)
   * Lifting - Tony Morris [(blog post)](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
   * (Haskell) Algebras of Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/algebras-of-applicatives/)
@@ -1493,6 +1494,8 @@ trait Ran[G[_], H[_], A] {
 }
 ```
 
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Ran.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs)
+
 * We can create functor for Ran, without any requirements on G, H
 ```scala
 def ranFunctor[G[_], H[_]]: Functor[Ran[G, H, ?]] =
@@ -1516,8 +1519,6 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
 ```
 
 * Resources
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
-  * Purescript implementation of [Kan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs)
   * [Haskell libraries using Kan extensions](https://packdeps.haskellers.com/reverse/kan-extensions)
   * (Haskell, Category Theory) Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
   * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
@@ -1526,7 +1527,12 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
   * (Haskell) Free Monads for Less (Part 1 of 3): Codensity - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less/)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * (Haskell) Free Monads for Less (Part 3 of 3): Yielding IO - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-3/)
-  * (Haskell) [Kan Extensions for Program Optimisation Or: Art and Dan Explain an Old Trick - Ralf Hinze](https://www.cs.ox.ac.uk/ralf.hinze/publications/MPC12.pdf)
+  * (Haskell) List based on right Kan extension [SO](https://stackoverflow.com/questions/27381133/list-based-on-right-kan-extension/27382234)
+  * What is a layman's explanation of "Kan extensions"? [(quora)](https://www.quora.com/What-is-a-laymans-explanation-of-Kan-extensions)
+  * (Theory) [Lecture 49 - Chapter 3: Kan Extensions - John Baez](https://forum.azimuthproject.org/discussion/2266/lecture-49-chapter-3-kan-extensions/p1)
+  * (Theory) [Kan Extensions for Program Optimisation Or: Art and Dan Explain an Old Trick - Ralf Hinze](https://www.cs.ox.ac.uk/ralf.hinze/publications/MPC12.pdf) (adjunctions, kan extensions, string diagrams)
+  * (Hasekll) (Co-)Iteration for Higher-Order Nested Datatypes - Andreas Abel, Ralph Matthes [(paper)](http://www.cse.chalmers.se/~abela/publications.html#types02)
+  * (Theory) Kan Extensions as the Most Universal of the Universal Constructions - Marina Lehner [(thesis)](http://www.math.harvard.edu/theses/senior/lehner/lehner.pdf)
 
 ### Left Kan Extension
 
@@ -1537,6 +1543,8 @@ trait Lan[F[_], H[_], A] {
   def f: F[B] => A
 }
 ```
+
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
 
 * we can define Functor for it
 ```scala
@@ -1552,9 +1560,9 @@ def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, ?]] = new Functor[Lan[F, H, ?]]() 
 ```
 
 * Resources
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala)
-  * Purescript implementation of [Lan in freebroccolo/purescript-kan-extensions](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
   * [Haskell libraries using Kan extensions](https://packdeps.haskellers.com/reverse/kan-extensions)
+  * Constructing Applicative Functors - Ross Paterson [(paper)](http://www.staff.city.ac.uk/~ross/papers/Constructors.html)
+  * (Theory) [Lecture 50 - Chapter 3: Left Kan Extensions - John Baez](https://forum.azimuthproject.org/discussion/2267/lecture-50-chapter-3-left-kan-extensions)
   * (Haskell, Category Theory) Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
 
 ### Density Comonad
@@ -2264,6 +2272,7 @@ trait Category[F[_, _]] extends Compose[F] {
   * Learning Scalaz - Arrow - eed3si9n: http://eed3si9n.com/learning-scalaz/Arrow.html
   * [Tom Ellis: 24 Days of GHC Extensions: Arrows](https://ocharles.org.uk/guest-posts/2014-12-21-arrows.html)
   * (Haskell) FixxBuzz using arrows [(blog post)](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
+  * (Haskell) Arrow's place in the Applicative/Monad hierarchy - Gergő Érdi [(blog post)](https://gergo.erdi.hu/blog/2014-07-12-arrow's_place_in_the_applicative_monad_hierarchy/)
   * Do it with (free?) arrows! – Julien Richard Foy [(video)](https://www.youtube.com/watch?v=PWBTOhMemxQ)
   * Functional programming with arrows [video](https://www.youtube.com/watch?v=ZfAgvAIoUEY)
   * (Haskell) 'Arrow' is spelt 'fizz-buzz' - @geophf [blog post](http://logicaltypes.blogspot.com/2014/02/arrow-is-spelt-fizz-buzz.html)
