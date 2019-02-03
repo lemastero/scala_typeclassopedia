@@ -1,5 +1,6 @@
 # Optics
 * Putting Lenses to Work - John Wiegley [(video)](https://www.youtube.com/watch?v=QZy4Yml3LTY) [slides](https://github.com/jwiegley/putting-lenses-to-work) [(blog post)](http://newartisans.com/2017/04/putting-lenses-to-work/)
+* Taking Updates Seriously - Danel Ahman, Tarmo Uustalu [(paper)](http://ceur-ws.org/Vol-1827/paper11.pdf)
 
 ## Iso
 * Beyond Scala Lenses - Julien Truffaut: [(video)](https://www.youtube.com/watch?v=6nyGVgGEKdA)
