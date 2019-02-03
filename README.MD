@@ -621,16 +621,16 @@ trait Contravariant[F[_]] {
 }
 ```
 
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant)
+
 * Applications:
-  * model function with fixed output type, like [Predicate - function `A => Boolean`](https://github.com/lemastero/scala_typeclassopedia/blob/master/src/main/scala/contravariant/InstancesForContravariantFunctor.scala#L61-L65). Edward Kmett used Contravariant functor hierarchy to [model sorting](https://github.com/ekmett/discrimination/search?q=contramap).
+  * model function with fixed output type, like [Predicate - function `A => Boolean`](https://github.com/lemastero/scala_typeclassopedia/blob/master/src/main/scala/contravariant/InstancesForContravariantFunctor.scala#L61-L65) or [Show](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Show.scala#L51-L53). Edward Kmett used Contravariant functor hierarchy to [model sorting](https://github.com/ekmett/discrimination/search?q=contramap).
   * Encoder in [scodec/scodec-cats](https://github.com/scodec/scodec-cats/blob/master/shared/src/main/scala/scodec/interop/cats/CatsInstances.scala#L121-L123)
   * [jberryman/simple-actors](https://github.com/jberryman/simple-actors/search?q=contramap&unscoped_q=contramap) model [Behavior of actor](https://github.com/jberryman/simple-actors/blob/master/Control/Concurrent/Actors.lhs#L336-L346)
   * [List of Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
 
 * Contravariant is not called Cofunctor (like Monad -> Comonad, Appy -> Coapply) because when we inverse arrows
 in Functor definition, we just get Functor definition back (with A, B swapped). [More on this on SO](https://stackoverflow.com/questions/34732571/why-there-is-no-cofunctor-typeclass-in-haskell).
-
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala) [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala) [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)
 
 * Resources
   * (Haskell) 24 Days of Hackage: contravariant - Tom Ellis [(blog post)](https://ocharles.org.uk/blog/guest-posts/2013-12-21-24-days-of-hackage-contravariant.html) (all classic examples: Predicate, Op but alos Behaviors of actor, nice laws explanation)
@@ -642,13 +642,18 @@ in Functor definition, we just get Functor definition back (with A, B swapped). 
   * [What's up with Contravariant? - r/haskell](https://www.reddit.com/r/haskell/comments/1vc0mp/whats_up_with_contravariant/)
 
 ### Divide (Contravariant Apply)
+
 ```scala
 trait Divide[F[_]] extends Contravariant[F] {
   def divide[A, B, C](fa: F[A], fb: F[B])(f: C => (A, B)): F[C]
 }
 ```
+
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divide)
+
 * Laws: let `def delta[A]: A => (A, A) = a => (a, a)`
    1. composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+
 * Derived methods:
 ```scala
 def divide1[A1, Z]    (a1: F[A1])           (f: Z => A1): F[Z] // contramap
@@ -661,9 +666,9 @@ def deriving2[A1, A2, Z](f: Z => (A1, A2))(implicit a1: F[A1], a2: F[A2]): F[Z]
 def deriving3[A1, A2, A3, Z](f: Z => (A1, A2, A3))(implicit a1: F[A1], a2: F[A2], a3: F[A3]): F[Z]
 // ...
 ```
+
 * Resources
   * Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I)
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala)
   
 ### Divisible (Contravariant Applicative)
 
@@ -672,13 +677,16 @@ trait Divisible[F[_]] extends Divide[F] {
   def conquer[A]: F[A]
 }
 ```
+
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divisible.scala), [Haskell](https://github.com/ekmett/contravariant/blob/master/src/Data/Functor/Contravariant/Divisible.hs), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divisible)
+
 * Laws: let `def delta[A]: A => (A, A) = a => (a, a)`
    1. composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
    2. right identity: `divide(fa, conquer)(delta) == fa`
    3. left identity:  `divide(conquer, fa)(delta) == fa`
+
 * Resources
-  * scalaz [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divisible.scala)
-  * (Haskell) [contravariant Divisible.hs](https://github.com/ekmett/contravariant/blob/master/src/Data/Functor/Contravariant/Divisible.hs)
+  * Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I)
 
 ### Bifunctor
 
