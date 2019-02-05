@@ -8,7 +8,6 @@ trait Functor[F[_]] {
 
 trait FunctorLaws[F[_]] extends Functor[F]{
 
-  // laws
   def covariantIdentity[A](fa: F[A]): Boolean = {
     //           identity
     // F[A] =================> F[A]
