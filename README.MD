@@ -621,7 +621,35 @@ trait Contravariant[F[_]] {
 }
 ```
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant)
+[Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant)
+
+* Contravariant laws ([Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
+
+  i. contramap identity  
+
+```scala
+//         contramap(id)
+// F[A]  ================> F[A]
+contramap(fa)(identity[A]) == fa
+```
+
+  ii. contravariant composite  
+
+```scala
+//        contramap f
+// F[A] ==============> F[B]
+val fb: F[B] = contramap(fa)(f)
+
+//        contramap g
+// F[B] ===============> F[C]
+val l: F[C] = contramap(fb)(g)
+
+//        contramap (g . f)
+// F[A] =====================> F[B]
+val r: F[C] = contramap(fa)(f compose g)
+
+l == r
+```
 
 * Applications:
   * model function with fixed output type, like [Predicate - function `A => Boolean`](https://github.com/lemastero/scala_typeclassopedia/blob/master/src/main/scala/contravariant/InstancesForContravariantFunctor.scala#L61-L65) or [Show](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Show.scala#L51-L53). Edward Kmett used Contravariant functor hierarchy to [model sorting](https://github.com/ekmett/discrimination/search?q=contramap).
