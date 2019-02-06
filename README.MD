@@ -706,7 +706,7 @@ trait Contravariant[F[_]] {
 
 ![](img/contravariant_laws.svg)
 
-1. contramap identity  
+1 contramap identity  
 
 ```scala
 //         contramap(id)
@@ -714,7 +714,7 @@ trait Contravariant[F[_]] {
 contramap(fa)(identity[A]) == fa
 ```
 
-2. contravariant composition
+2 contravariant composition
 
 ```scala
 //        contramap f
