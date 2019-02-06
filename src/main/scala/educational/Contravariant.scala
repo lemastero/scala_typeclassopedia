@@ -6,16 +6,17 @@ import scala.language.higherKinds
   class Contravariant f where
     contramap :: (b -> a) -> f a -> f b
  */
+
 trait Contravariant[F[_]] {
   def contramap[A, B](fa: F[A])(f: B => A): F[B]
 }
+
 
 // contramap id = id
 // contramap f . contramap g = contramap (g . f)
 trait ContravariantLaws[F[_]] extends Contravariant[F]{
 
   def contramapIdentity[A](fa: F[A]): Boolean = {
-
     //         contramap(id)
     // F[A]  ================> F[A]
     contramap(fa)(identity[A]) == fa
