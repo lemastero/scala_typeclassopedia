@@ -100,6 +100,7 @@
  
 * [Representable & Adjunctions](#representable--adjunctions)
   * [Representable](#representable)
+  * [Corepresentable](#corepresentable)
   * [Adjunction](#adjunction)
   * [Adjoint Triples](#adjoint-triples)
 
@@ -127,9 +128,15 @@
   * [ProductProfunctor](#roductprofunctor)
   * [SumProfunctor](#sumprofunctor)
 
+* Profunctor Adjuctions & Representable
+  * [Profunctor Adjunction](#profunctor-adjunction)
+  * [Profunctor Rep](#profunctor-rep)
+
 * Profunctor Kan Extensions
   * [Profunctor Yoneda](#profunctor-yoneda)
   * [Profunctor CoYoneda](#profunctor-coyoneda)
+  * [Profunctor Ran](#profunctor-ran)
+  * [Profunctor Codensity](#profunctor-codensity)
 
 * [Arrows](#arrows)
   * [Category](#category)
@@ -1359,10 +1366,9 @@ trait Representable[F[_], Rep] {
 }
 ```
 
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala), [Haskell](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
+
 * Resources:
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala)
-  * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala)
-  * (Haskell) Data.Functor.Rep: [(src Haskell)](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
   * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
   * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
@@ -1376,6 +1382,9 @@ trait Representable[F[_], Rep] {
   * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
   * Java [Mojang/DataFixerUpper Representable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Representable.java)
   
+### Corepresentable
+
+* Implementations: [Haskell](https://hackage.haskell.org/package/representable-functors/docs/Data-Functor-Corepresentable.html)
 
 ### Adjunction
 
@@ -1523,13 +1532,14 @@ Finally to get back from Coyoneda fantazy land to reality of F, we need a proof 
 def lowerCoyoneda(implicit fun: Functor[F]): F[A]
 ```
 
+* Implementations: [calaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala), [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Coyoneda.html)
+
 * Resources
   * loop/recur Coyoneda [(video)](https://vimeo.com/122708005)
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer [(video)](https://vimeo.com/96639840)
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * scalaz [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
   * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
 
 
@@ -2266,6 +2276,24 @@ ProfunctorCoyoneda is a Profunctor for free:
 def dimap[C, W](l: C => A, r: B => W): ProfunctorCoyoneda[P, C, W] =
   ProfunctorCoyoneda[X, Y, P, C, W](f1 compose l, r compose f2, pxy)
 ```
+
+### Profunctor Ran
+
+* Implementations: [Haskell](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Ran.html)
+
+### Profunctor Codensity
+
+* Implementations: [Haskell](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Ran.html#t:Codensity)
+
+### Profunctor Adjunction
+
+* Implementations: [Haskell](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Adjunction.html)
+
+### Profunctor Rep
+
+* TODO Corepresentable, Corep, Prep, Coprep
+
+* Implementations: [Haskell](http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Rep.html)
 
 ### Procompose
 
