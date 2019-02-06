@@ -39,7 +39,15 @@
   * [Divide (Contravariant Apply)](#divide-contravariant-apply)
   * [Divisible (Contravariant Applicative)](#divisible-contravariant-applicative)
 
-* [Invariant (Invariant Functor, Exponential Functor)](#invariant-invariant-functor-exponential-functor)
+* [Contravariant Kan Extensions](#contravariant-kan-extensions)
+  * [Contravariant Yoneda](#contravariant-yoneda)
+  * [Contravariant Coyoneda](#contravariant-coyoneda)
+  * [Contravariant Day](#contravariant-day)
+  * [Invariant Day](#invariant-day)
+
+* Invariant Functors
+  * [Invariant (Invariant Functor, Exponential Functor)](#invariant-invariant-functor-exponential-functor)
+  * [Invariant Day](#invariant-day)
 
 * [Natural transformation (FunctionK)](#natural-transformation-functionk)
 
@@ -102,6 +110,7 @@
   * [Left Kan Extension](#left-kan-extension)
   * [Density Comonad](#density-comonad)
   * [Codensity](#codensity)
+  * [Day Convolution](#day-convolution)
 
 * Profunctors
   * [Profunctor](#profunctor)
@@ -114,11 +123,13 @@
   * [Profunctor Functor](#profunctor-functor)
   * [Profunctor Monad](#profunctor-monad)
   * [Profunctor Comonad](#profunctor-comonad)
-  * [Profunctor Yoneda](#profunctor-yoneda)
-  * [Profunctor CoYoneda](#profunctor-coyoneda)
   * [Procompose](#procompose)
   * [ProductProfunctor](#roductprofunctor)
   * [SumProfunctor](#sumprofunctor)
+
+* Profunctor Kan Extensions
+  * [Profunctor Yoneda](#profunctor-yoneda)
+  * [Profunctor CoYoneda](#profunctor-coyoneda)
 
 * [Arrows](#arrows)
   * [Category](#category)
@@ -1451,7 +1462,7 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
 * Resources
   * https://vimeo.com/122708005
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
-  * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
+  * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer [(video)](https://vimeo.com/96639840)
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala)
@@ -1515,7 +1526,7 @@ def lowerCoyoneda(implicit fun: Functor[F]): F[A]
 * Resources
   * loop/recur Coyoneda [(video)](https://vimeo.com/122708005)
   * Free Monads and the Yoneda Lemma - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2013/11/01/free-and-yoneda/)
-  * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer: https://vimeo.com/96639840
+  * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer [(video)](https://vimeo.com/96639840)
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * scalaz [(Coyoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala)
@@ -1580,7 +1591,7 @@ trait Lan[F[_], H[_], A] {
 }
 ```
 
-* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
+[Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
 
 * we can define Functor for it
 ```scala
@@ -1628,6 +1639,8 @@ object Density {
 }
 ```
 
+[Scalaz PR](https://github.com/scalaz/scalaz/pull/2029), [Purescript](https://github.com/rightfold/purescript-density-codensity/blob/master/src/Control/Comonad/Density.purs), [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Control-Comonad-Density.html)
+
 Density form a Functor without any conditions on F, so it is a Free Functor. Similar like Lan.
 
 ```scala
@@ -1650,26 +1663,28 @@ def comonadInstance[K[_]]: Comonad[Density[K, ?]] = new Comonad[Density[K, ?]] {
 * Density is also left adjoint to Comonad formed by Adjunction.
 
 * Resources
-  * Partial implementation by Kenji Yoshida [(gist)](https://gist.github.com/xuwei-k/7937745)
   * (Haskell) Kan Extensions - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions/)
   * (Haskell) A Product of an Imperfect Union - Edward Kmett [(blog post)](http://comonad.com/reader/2011/a-product-of-an-imperfect-union/)
   * [Comonads from Monads, and a new way do the reverse - u/King_of_the_Homeless](https://www.reddit.com/r/haskell/comments/8hgub9/comonads_from_monads_and_a_new_way_do_the_reverse/)
   * (Haskell) kan-extensions/Control.Monad.Co [diter](http://hackage.haskell.org/package/kan-extensions-5.2/docs/Control-Monad-Co.html#v:diter) [dctrlM](http://hackage.haskell.org/package/kan-extensions/docs/Control-Monad-Co.html#v:dctrlM)
   * small note in: Adjoint folds and unfolds—An extended study - Ralf Hinze [(paper)](https://www.cs.ox.ac.uk/ralf.hinze/publications/SCP-78-11.pdf)
     and in Generic Programming with Adjunctions - Ralf Hinze [(paper)](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
-  * (Purescript) [rightfold/purescript-density-codensity Density](https://github.com/rightfold/purescript-density-codensity/blob/master/src/Control/Comonad/Density.purs)
-  * (Haskell) [ekmett/kan-extensions Density](https://hackage.haskell.org/package/kan-extensions/docs/Control-Comonad-Density.html)
   * [Edward Kmett mentions it in Origami.hs](https://github.com/ekmett/ekmett.github.com/blob/8d3abab5b66db631e148e1d046d18909bece5893/haskell/Origami.hs#L225-L226)
 
 ### Codensity
 
 Interface with flatMap'ish method:
+
 ```scala
 trait Codensity[F[_], A] {
   def run[B](f: A => F[B]): F[B]
 }
 ```
-that gives us monad (without any requirement on F):
+
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Codensity.scala), [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Control-Monad-Codensity.html), [Purescript](https://github.com/rightfold/purescript-density-codensity/blob/master/src/Control/Monad/Codensity.purs)
+
+It gives us monad (without any requirement on F):
+
 ```scala
 implicit def codensityMonad[G[_]]: Monad[Codensity[G, ?]] =
   new Monad[Codensity[G, ?]] {
@@ -1698,8 +1713,59 @@ implicit def codensityMonad[G[_]]: Monad[Codensity[G, ?]] =
   * (Haskell) Kan Extensions II: Adjunctions, Composition, Lifting - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extensions-ii/)
   * (Haskell) Kan Extensions III: As Ends and Coends - Edward Kmett [blog post](http://comonad.com/reader/2008/kan-extension-iii/)
   * (Haskell) Unnatural Transformations and Quantifiers - Edward Kmett [blog post](http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/)
-  * scalaz [src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Codensity.scala)
   * scalaz [example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/CodensityUsage.scala)
+
+## Contravariant Kan Extensions
+
+### Contravariant Yoneda
+
+* Implementation: [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Contravariant-Yoneda.html)
+
+### Contravariant Coyoneda
+
+Similar a Coyoneda yet, with existenctial function running in opposite direction.
+
+```scala
+trait ContravariantCoyoneda[F[_], A] {
+  type B
+  val fb: F[B]
+  val m: A => B
+
+
+  def lowerCoyoneda(implicit CF: Contravariant[F]): F[A] = CF.contramap(fb)(m) // run
+}
+
+def liftCoyoneda[F[_], AA](fa: F[AA]): ContravariantCoyoneda[F, AA] = new ContravariantCoyoneda[F, AA] {
+  type B = AA
+  val fb: F[B] = fa
+  val m: AA => B = identity[AA]
+}
+```
+
+We can define Contravariant instance for Contravariant Coyoneda:
+
+```scala
+def cotraContraCoyo[F[_]] = new Contravariant[ContravariantCoyoneda[F, ?]] {
+  def contramap[AA, BB](fa: ContravariantCoyoneda[F, AA])(f: BB => AA): ContravariantCoyoneda[F, BB] = new ContravariantCoyoneda[F, BB] {
+    type B = fa.B
+    val fb: F[B] = fa.fb
+    val m: BB => B = fa.m compose f
+  }
+}
+```
+
+* Implementation: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/ContravariantCoyoneda.scala) [Haskll](https://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Contravariant-Coyoneda.html)
+
+* Resources:
+  * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/ContravariantCoyonedaUsage.scala)
+
+### Contravariant Day
+
+* Implementation: [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Contravariant-Day.html)
+
+### Invariant Day
+
+* Implementation: [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Invariant-Day.html)
 
 ### Functor Functor (FFunctor)
 
@@ -1795,6 +1861,8 @@ trait DayConvolution[F[_], G[_], A] {
 }
 ```
 
+* Implementation: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Day.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html), [Purescritp](https://pursuit.purescript.org/packages/purescript-day/10.0.0/docs/Data.Functor.Day)
+
 * There is various ways to create Day Convolution:
 ```scala
 def day[F[_], G[_], A, B](fab: F[A => B], ga: G[A]): Day[F, G, B]
@@ -1840,8 +1908,6 @@ Similarly it is Comonad if both type constructors are Comonads.
   * (Haskell) Notions of Computation as Monoids by Exequiel Rivas, Mauro Jaskelioff [(paper)](https://arxiv.org/abs/1406.4823)
   * (Haskell) Reddit comment by echatav [(comment)](https://www.reddit.com/r/haskell/comments/4wvae2/functorial_blog_comonads_and_day_convolution/d6bem5i/)
   * (Haskell) Comonads and Day Convolution - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-08-Comonad-And-Day-Convolution.html)
-  * (Haskell) implementation [kan-extensions/Data.Functor.Day)](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Day.html)
-  * (Purescritp) implementation [paf31/purescript-day)](https://pursuit.purescript.org/packages/purescript-day/10.0.0/docs/Data.Functor.Day)
   * (Purescript) extensible coeffect system built out of comonads and Day convolution [paf31/purescript-smash](https://github.com/paf31/purescript-smash/blob/master/src/Data/Smash.purs)
   * (Purescript) [paf31/purescript-react-explore](https://github.com/paf31/purescript-react-explore/blob/master/src/React/Explore/List.purs)
   * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
