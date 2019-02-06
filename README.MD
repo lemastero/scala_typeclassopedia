@@ -294,7 +294,7 @@ Apply is a Functor with superpower to apply function already inside container to
 
 ```scala
 trait Apply[F[_]] extends Functor[F] {
-  def ap[A, B](ff: F[A => B])(fa: F[A]): F[B] // apply
+  def ap[A, B](ff: F[A => B])(fa: F[A]): F[B]
 }
 ```
 
@@ -302,15 +302,15 @@ trait Apply[F[_]] extends Functor[F] {
 
 * Apply Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ApplyLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Apply.scala#L203-L208)):
   1. functor laws
-  2. `apply` composition
+  2. `ap` composition
 
 ```scala
-def compositionLaw[A, B, C](fa: F[A], fab: F[A => B], fbc: F[B => C]): Boolean = {
+def apComposition[A, B, C](fa: F[A], fab: F[A => B], fbc: F[B => C]): Boolean = {
 
-  //        apply F[A => B]              apply F[B => C]
-  // F[A] =====================> F[B] =====================> F[C]
-  val fb: F[B] = apply(fab)(fa)
-  val left: F[C] = apply(fbc)(fb)
+  //        ap F[A => B]              ap F[B => C]
+  // F[A] ==================> F[B] =================> F[C]
+  val fb: F[B] = ap(fab)(fa)
+  val left: F[C] = ap(fbc)(fb)
 
   val expand: (B => C) => ((A => B) => (A => C)) =
     (bc: B => C) =>
@@ -321,13 +321,13 @@ def compositionLaw[A, B, C](fa: F[A], fab: F[A => B], fbc: F[B => C]): Boolean =
   // F[B => C] ======================================> F[A=>B => A=>C]
   val fabac: F[(A => B) => (A => C)] = map(fbc)(expand)
 
-  //              apply F[A=>B => A=>C]
-  // F[A => B] =================================> F[A => C]
-  val fac: F[A => C] = apply(fabac)(fab)
+  //              ap F[A=>B => A=>C]
+  // F[A => B] ==============================> F[A => C]
+  val fac: F[A => C] = ap(fabac)(fab)
 
-  //           apply F[A=>C]
-  // F[A] ============================> F[C]
-  val right: F[C] = apply(fac)(fa)
+  //           ap F[A=>C]
+  // F[A] =========================> F[C]
+  val right: F[C] = ap(fac)(fa)
 
   left == right
 }
@@ -378,10 +378,64 @@ trait Applicative[F[_]] extends Apply[F] {
 * Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
 * Applicative Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ApplicativeLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala#L118-L134)):
-  1. identify: `xs.apply(pure(identity)) == xs` apply identify function lifted inside effect does nothing
-  2. homomorphism: `pure(a).apply(pure(f)) == pure(f(a))` lifting value a and applying lifted function f is the same as apply function to this value and then lift result
-  3. interchange: `pure(a).apply(ff) == ff.apply(pure(f => f(a)))` where `ff: F[A => B]`
-  4. map: `fa.map(f) == fa.apply(pure(f))`
+
+1 identify: `xs.ap(pure(identity)) == xs` apply identify function lifted inside effect does nothing
+
+```scala
+def apIdentityLaw[A](fa: F[A]): Boolean = {
+  val l1: F[A => A] = pure(identity[A])
+  val l2: F[A] = ap(l1)(fa)
+
+  //         ap F[identity]
+  //  F[A] ==================> F[A]
+  l2 == fa
+}
+```
+
+2 homomorphism: `pure(a).ap(pure(f)) == pure(f(a))` lifting value a and applying lifted function f is the same as apply function to this value and then lift result
+
+```scala
+def homomorphismLaw[A, B](ab: A => B, a: A): Boolean = {
+  val fab: F[A => B] = pure(ab)
+  val fa: F[A] = pure(a)
+
+  //         F[A => B]
+  // F[A] =============> F[B]
+  val l: F[B] = ap(fab)(fa)
+
+  val r: F[B] = pure(ab(a))
+
+  l == r
+}
+```
+
+3 interchange: `pure(a).ap(ff) == ff.ap(pure(f => f(a)))` where `ff: F[A => B]`
+
+```scala
+def interchangeLaw[A, B](fab: F[A => B], a: A): Boolean = {
+  //       ap F[A => B]
+  // F[A] ==============> F[B]
+  val l: F[B] = ap(fab)(pure(a))
+
+  val fabb: F[(A => B) => B] = pure((f: A => B) => f(a))
+
+  //              ap F[(A => B) => B]
+  // F[A => B] ========================> F[B]
+  val r: F[B] = ap(fabb)(fab)
+
+  l == r
+}
+```
+
+4 map: `fa.map(f) == fa.ap(pure(f))`
+
+```scala
+def mapLikeDerivedLaw[A, B](f: A => B, fa: F[A]): Boolean = {
+  val l: F[B] = map(fa)(f)
+  val r: F[B] = ap(pure(f))(fa)
+  l == r
+}
+```
 
 * Derived methods - see Apply
 
@@ -633,6 +687,13 @@ case class Reader[-In, +R](run: In => R) {
 
 ### Contravariant (Contravariant Functor)
 
+Type constructor that can be `contramap`, so map in opposite direction.
+
+If we imagine Functor, as abstracting over some output,
+then Contravariant abstract over input.
+
+In Category Theory Contravariant Functor is a Functor from opposite category.
+
 ```scala
 trait Contravariant[F[_]] {
   def contramap[A, B](f: B => A): F[A] => F[B]
@@ -641,9 +702,11 @@ trait Contravariant[F[_]] {
 
 [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant)
 
-* Contravariant laws ([Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
+* Contravariant laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ContravariantLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
 
-  i. contramap identity  
+![](img/contravariant_laws.svg)
+
+1. contramap identity  
 
 ```scala
 //         contramap(id)
@@ -651,7 +714,7 @@ trait Contravariant[F[_]] {
 contramap(fa)(identity[A]) == fa
 ```
 
-  ii. contravariant composite  
+2. contravariant composition
 
 ```scala
 //        contramap f
