@@ -155,7 +155,7 @@ trait CommutativeMonoid[A] extends Monoid[A] with CommutativeSemigroup[A] {
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
   2. right identity: `(x |+| empty) == x`
   3. left identity: `(empty |+| x) == x`
-  4. commutativity: `(x |+| y) == (x |+| y)`
+  4. commutativity: `(x |+| y) == (y |+| x)`
 
 * Resources 
   * [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeMonoid.scala) [(laws)](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/CommutativeMonoidLaws.scala)
@@ -251,7 +251,7 @@ trait CommutativeGroup[A] extends Group[A] with CommutativeMonoid[A] {
   2. right identity: `(x |+| empty) == x`
   3. left identity: `(empty |+| x) == x`
   4. inverse: `(x |+| -x) == (-x |+| x) == empty`
-  5. commutativity: `(x |+| y) == (x |+| y)`
+  5. commutativity: `(x |+| y) == (y |+| x)`
 
 * Resources:
    * [Cats src](https://github.com/typelevel/cats/blob/master/kernel/src/main/scala/cats/kernel/CommutativeGroup.scala) [laws](https://github.com/typelevel/cats/blob/master/kernel-laws/src/main/scala/cats/kernel/laws/CommutativeGroupLaws.scala)
@@ -298,7 +298,7 @@ trait Semilattice[A] extends Band[A] with CommutativeSemigroup[A] {
 
 * laws:
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
-  2. commutativity: `(x |+| y) == (x |+| y)`
+  2. commutativity: `(x |+| y) == (y |+| x)`
   3. idempotent: `(x |+| x) == x`
   
 ### MeetSemilattice and JoinSemilattice
@@ -343,7 +343,7 @@ trait BoundedSemilattice[A] extends Semilattice[A] with CommutativeMonoid[A] {
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
   2. right identity: `(x |+| empty) == x`
   3. left identity: `(empty |+| x) == x`
-  4. commutativity: `(x |+| y) == (x |+| y)`
+  4. commutativity: `(x |+| y) == (y |+| x)`
   5. idempotent: `(x |+| x) == x`
   
 ### Bounded Join Semilattice, Bounded Meet Semilattice
@@ -387,7 +387,7 @@ trait Lattice[A] extends JoinSemilattice[A] with MeetSemilattice[A] {
   2. commutativity: `(x join y) == (x join y)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
-  5. commutativity: `(x meet y) == (x meet y)`
+  5. commutativity: `(x meet y) == (y meet x)`
   6. idempotent: `(x meet x) == x`
   7. absorption: `a meet (a join b) == a join (a meet b) == a`
 
@@ -409,7 +409,7 @@ trait DistributiveLattice[A] extends Lattice[A] {
   2. commutativity: `(x join y) == (x join y)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
-  5. commutativity: `(x meet y) == (x meet y)`
+  5. commutativity: `(x meet y) == (y meet x)`
   6. idempotent: `(x meet x) == x`
   7. absorption: `a meet (a join b) == a join (a meet b) == a`
   8. distributive: `a meet (b join c) == (a meet b) join (a meet c)`
@@ -433,7 +433,7 @@ trait BoundedLattice[A] extends Lattice[A] with BoundedMeetSemilattice[A] with B
   2. commutativity: `(x join y) == (x join y)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
-  5. commutativity: `(x meet y) == (x meet y)`
+  5. commutativity: `(x meet y) == (y meet x)`
   6. idempotent: `(x meet x) == x`
   7. absorption: `a meet (a join b) == a join (a meet b) == a`
   8. identity of zero: `a join zero == a`
@@ -455,7 +455,7 @@ trait BoundedDistributiveLattice[A] extends BoundedLattice[A] with DistributiveL
   2. commutativity: `(x join y) == (x join y)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
-  5. commutativity: `(x meet y) == (x meet y)`
+  5. commutativity: `(x meet y) == (y meet x)`
   6. idempotent: `(x meet x) == x`
   7. absorption: `a meet (a join b) == a join (a meet b) == a`
   8. distributive: `a meet (b join c) == (a meet b) join (a meet c)`
@@ -486,7 +486,7 @@ trait Heyting[A] extends BoundedDistributiveLattice[A] {
   2. commutativity: `(x join y) == (x join y)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
-  5. commutativity: `(x meet y) == (x meet y)`
+  5. commutativity: `(x meet y) == (y meet x)`
   6. idempotent: `(x meet x) == x`
   7. absorption: `a meet (a join b) == a join (a meet b) == a`
   8. distributive: `a meet (b join c) == (a meet b) join (a meet c)`
@@ -535,10 +535,10 @@ def without(a: A, b: A): A = and(a, complement(b))
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (x join y)`
+  2. commutativity: `(x join y) == (y join x)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
-  5. commutativity: `(x meet y) == (x meet y)`
+  5. commutativity: `(x meet y) == (y meet x)`
   6. idempotent: `(x meet x) == x`
   7. absorption: `a meet (a join b) == a join (a meet b) == a`
   8. distributive: `a meet (b join c) == (a meet b) join (a meet c)`
@@ -573,7 +573,7 @@ trait Ring[T] extends CommutativeGroup[T] {
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
   2. identity: `(x |+| zero) == x == (zero |+| x)`
   4. inverse: `(x |+| -x) == (-x |+| x) == zero`
-  5. commutativity: `(x |+| y) == (x |+| y)`
+  5. commutativity: `(x |+| y) == (y |+| x)`
   6. associativity: `((x * y) * z) == (x * (y * z))`
   7. right identity: `(x * one) == x`
   8. left identity: `(one * x) == x`
@@ -600,7 +600,7 @@ trait Rng[T] extends CommutativeGroup[T] {
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
   2. identity: `(x |+| zero) == x == (zero |+| x)`
   4. inverse: `(x |+| -x) == (-x |+| x) == zero`
-  5. commutativity: `(x |+| y) == (x |+| y)`
+  5. commutativity: `(x |+| y) == (y |+| x)`
   6. associativity: `((x * y) * z) == (x * (y * z))`
   9. distributive: `a * (b |+| c) == (a * b) |+| (a * c)` 
 
@@ -630,7 +630,7 @@ trait Ring[T] extends CommutativeGroup[T] {
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
   2. identity: `(x |+| zero) == x == (zero |+| x)`
   4. inverse: `(x |+| -x) == (-x |+| x) == zero`
-  5. commutativity: `(x |+| y) == (x |+| y)`
+  5. commutativity: `(x |+| y) == (y |+| x)`
   6. associativity: `((x * y) * z) == (x * (y * z))`
   7. right identity: `(x * one) == x`
   8. left identity: `(one * x) == x`
