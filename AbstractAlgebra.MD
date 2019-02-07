@@ -83,7 +83,7 @@ trait CommutativeSemigroup[A] extends Semigroup[A] {
 
 * laws:
   1. associativity: `((x |+| y) |+| z) == (x |+| (y |+| z))`
-  2. commutativity: `(x |+| y) == (x |+| y)`
+  2. commutativity: `(x |+| y) == (y |+| x)`
 
 ## Monoid
 
@@ -384,7 +384,7 @@ trait Lattice[A] extends JoinSemilattice[A] with MeetSemilattice[A] {
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (x join y)`
+  2. commutativity: `(x join y) == (y join x)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
   5. commutativity: `(x meet y) == (y meet x)`
@@ -406,7 +406,7 @@ trait DistributiveLattice[A] extends Lattice[A] {
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (x join y)`
+  2. commutativity: `(x join y) == (y join x)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
   5. commutativity: `(x meet y) == (y meet x)`
@@ -430,7 +430,7 @@ trait BoundedLattice[A] extends Lattice[A] with BoundedMeetSemilattice[A] with B
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (x join y)`
+  2. commutativity: `(x join y) == (y join x)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
   5. commutativity: `(x meet y) == (y meet x)`
@@ -452,7 +452,7 @@ trait BoundedDistributiveLattice[A] extends BoundedLattice[A] with DistributiveL
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (x join y)`
+  2. commutativity: `(x join y) == (y join x)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
   5. commutativity: `(x meet y) == (y meet x)`
@@ -483,7 +483,7 @@ trait Heyting[A] extends BoundedDistributiveLattice[A] {
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (x join y)`
+  2. commutativity: `(x join y) == (y join x)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
   5. commutativity: `(x meet y) == (y meet x)`
@@ -535,7 +535,7 @@ def without(a: A, b: A): A = and(a, complement(b))
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (y join x)`
+  2. commutativity: `(x join y) == (x join y)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
   5. commutativity: `(x meet y) == (y meet x)`
