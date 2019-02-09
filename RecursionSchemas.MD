@@ -40,11 +40,11 @@ case class Fix[F[_]](unFix: F[Fix[F]])
 
 ## Mu
 
-* Implementations: [matryoshka](https://github.com/slamdata/matryoshka/blob/master/core/shared/src/main/scala/matryoshka/data/Mu.scala) [andyscott/droste](https://github.com/andyscott/droste/blob/master/modules/core/src/main/scala/qq/droste/data/Mu.scala) [ekmett/recursion-schemes](http://hackage.haskell.org/package/recursion-schemes/docs/Data-Functor-Foldable.html#t:Mu)
+* Implementations: [matryoshka](https://github.com/slamdata/matryoshka/blob/master/core/shared/src/main/scala/matryoshka/data/Mu.scala), [andyscott/droste](https://github.com/andyscott/droste/blob/master/modules/core/src/main/scala/qq/droste/data/Mu.scala), [ekmett/recursion-schemes](http://hackage.haskell.org/package/recursion-schemes/docs/Data-Functor-Foldable.html#t:Mu), [purescript-fixed-points](https://pursuit.purescript.org/packages/purescript-fixed-points/docs/Data.Functor.Mu)
 
 ## Nu
 
-* Implementations: [Scala matryoshka](https://github.com/slamdata/matryoshka/blob/master/core/shared/src/main/scala/matryoshka/data/Nu.scala) [andyscott/droste](https://github.com/andyscott/droste/blob/master/modules/core/src/main/scala/qq/droste/data/Nu.scala) [ekmett/recursion-schemes](http://hackage.haskell.org/package/recursion-schemes/docs/Data-Functor-Foldable.html#t:Nu)
+* Implementations: [Scala matryoshka](https://github.com/slamdata/matryoshka/blob/master/core/shared/src/main/scala/matryoshka/data/Nu.scala), [andyscott/droste](https://github.com/andyscott/droste/blob/master/modules/core/src/main/scala/qq/droste/data/Nu.scala), [ekmett/recursion-schemes](http://hackage.haskell.org/package/recursion-schemes/docs/Data-Functor-Foldable.html#t:Nu), [purescript-fixed-points](https://pursuit.purescript.org/packages/purescript-fixed-points/docs/Data.Functor.Nu)
 
 # Recursion schemas - Folds
 
