@@ -1,9 +1,14 @@
 # Advanced Category Theory
 
-* [Toposes, Triples and Theories - Michael Barr, Charles Wells](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
+* [Toposes, Triples and Theories - Michael Barr, Charles Wells][(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
 * [Coalgebraic Modelling Applications in Automata Theory and Modal Logic - Helle Hvid Hansen](https://www.cs.vu.nl/en/Images/HH_Hansen_14-05-2009_tcm210-259639.pdf)
 * [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
 * Theory and Applications of Categories [Journal](http://138.73.27.39/tac/index.html), [Reprints](http://138.73.27.39/tac/reprints/index.html)
+* Applied Category Theory Workshop in Leiden [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
+* Compositional game theory reading list - Jules Hedges [(blog post)](https://julesh.com/2017/11/09/compositional-game-theory-reading-list/)
+* Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316)
+* Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
+* What is Applied Category Theory? - Tai-Danae Bradley [(pdf)](https://arxiv.org/abs/1809.05923)
 
 # Publications
 
