@@ -601,6 +601,7 @@ case class Reader[-In, +R](run: In => R) {
  * indexed RWS monad [iravid/irwst IRWS](https://github.com/iravid/irwst/blob/rws/irwst/src/main/scala/com/iravid/irwst/IRWS.scala)
  * [Monad Factory: Type-Indexed Monads, Mark Snyder, Perry Alexander](https://www.researchgate.net/publication/221335580_Monad_Factory_Type-Indexed_Monads)
  * [Indexed Monads - Kwang's Haskell Blog](https://kseo.github.io/posts/2017-01-12-indexed-monads.html)
+ * [garyb/purescript-indexed-monad](https://github.com/garyb/purescript-indexed-monad)
 
 ### ContT (Continuation Monad)
 
@@ -734,7 +735,7 @@ l == r
 
 * Applications:
   * model function with fixed output type, like [Predicate - function `A => Boolean`](https://github.com/lemastero/scala_typeclassopedia/blob/master/src/main/scala/contravariant/InstancesForContravariantFunctor.scala#L61-L65) or [Show](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Show.scala#L51-L53). Edward Kmett used Contravariant functor hierarchy to [model sorting](https://github.com/ekmett/discrimination/search?q=contramap).
-  * Encoder in [scodec/scodec-cats](https://github.com/scodec/scodec-cats/blob/master/shared/src/main/scala/scodec/interop/cats/CatsInstances.scala#L121-L123)
+  * Encoder in [scodec](https://github.com/scodec/scodec/blob/series/1.11.x/shared/src/main/scala/scodec/Encoder.scala#L40-L47) has Contravariant instance: [scodec/scodec-cats](https://github.com/scodec/scodec-cats/blob/master/shared/src/main/scala/scodec/interop/cats/CatsInstances.scala#L121-L123)
   * [jberryman/simple-actors](https://github.com/jberryman/simple-actors/search?q=contramap&unscoped_q=contramap) model [Behavior of actor](https://github.com/jberryman/simple-actors/blob/master/Control/Concurrent/Actors.lhs#L336-L346)
   * [List of Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
 
@@ -754,14 +755,35 @@ in Functor definition, we just get Functor definition back (with A, B swapped). 
 
 ```scala
 trait Divide[F[_]] extends Contravariant[F] {
-  def divide[A, B, C](fa: F[A], fb: F[B])(f: C => (A, B)): F[C]
+  def divide[A,B,C](f: A => (B,C), fb: F[B], fc: F[C]): F[A]
 }
 ```
 
-* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divide)
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala), [Why not in Haskell](https://github.com/ekmett/contravariant/issues/18), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divide)
 
-* Laws: let `def delta[A]: A => (A, A) = a => (a, a)`
-   1. composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+* Divide Laws ([Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala#L45-L52)):
+let `def delta[A]: A => (A, A) = a => (a, a)`  
+divide composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+
+```scala
+//                divide(delta)
+//  F[A1], F[A2] ===============> F[A12]
+val fa12: F[A] = divide(delta[A], fa1, fa2)
+
+//                 divide(delta)
+// F[A12], F[A3] =================> F[A123]
+val l: F[A] = divide( delta[A], fa12, fa3)
+
+
+//                divide(delta)
+//  F[A2], F[A3] ===============> F[A23]
+val fa23: F[A] = divide(delta[A], fa2, fa3)
+
+//                  divide(delta)
+//  F[A1], F[A23] ===============> F[A123]
+val r: F[A] = divide( delta[A], fa1, fa23 )
+l == r
+```
 
 * Derived methods:
 ```scala
@@ -2822,7 +2844,7 @@ Resources:
   * Series of blog posts by Eugene Yokota (@eed3si9n): [herding cats](http://eed3si9n.com/herding-cats/) and [learning Scalaz](http://eed3si9n.com/learning-scalaz/) Easy to understand examples, clear explanations, many insights from Haskell papers and literature.
   * [Examples in scalaz repository](https://github.com/scalaz/scalaz/tree/series/7.3.x/example/src/main/scala/scalaz/example) Learning Scalaz is probably the best documentation for Scalaz.
   * [Documentation for Cats](https://typelevel.org/cats/) (runnable online version for older Cats version on [ScalaExercises](https://www.scala-exercises.org/cats))
-  * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) implementation of Haskell Typeclassopedia by Channing Walton, [(blog post)](The Road to the Typeclassopedia)
+  * [channingwalton/typeclassopedia](https://github.com/channingwalton/typeclassopedia) implementation of Haskell Typeclassopedia by Channing Walton, [(blog post)](http://channingwalton.github.io/typeclassopedia/)
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   * [Summary of types in Cats documentation](https://typelevel.org/cats/nomenclature.html)
   * (Haskell) [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)

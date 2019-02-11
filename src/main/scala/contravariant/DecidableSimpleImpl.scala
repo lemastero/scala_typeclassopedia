@@ -1,6 +1,6 @@
 package contravariant
 
-import contravariant.DivisibleSimpleImpl.Divisible
+import educational.Divisible
 import simple.Void
 
 import scala.language.higherKinds
