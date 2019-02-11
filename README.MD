@@ -755,7 +755,7 @@ in Functor definition, we just get Functor definition back (with A, B swapped). 
 
 ```scala
 trait Divide[F[_]] extends Contravariant[F] {
-  def divide[A, B, C](fa: F[A], fb: F[B])(f: C => (A, B)): F[C]
+  def divide[A,B,C](f: A => (B,C), fb: F[B], fc: F[C]): F[A]
 }
 ```
 
@@ -763,7 +763,27 @@ trait Divide[F[_]] extends Contravariant[F] {
 
 * Divide Laws ([Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala#L45-L52)):
 let `def delta[A]: A => (A, A) = a => (a, a)`  
-   1. composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+divide composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+
+```scala
+//                divide(delta)
+//  F[A1], F[A2] ===============> F[A12]
+val fa12: F[A] = divide(delta[A], fa1, fa2)
+
+//                 divide(delta)
+// F[A12], F[A3] =================> F[A123]
+val l: F[A] = divide( delta[A], fa12, fa3)
+
+
+//                divide(delta)
+//  F[A2], F[A3] ===============> F[A23]
+val fa23: F[A] = divide(delta[A], fa2, fa3)
+
+//                  divide(delta)
+//  F[A1], F[A23] ===============> F[A123]
+val r: F[A] = divide( delta[A], fa1, fa23 )
+l == r
+```
 
 * Derived methods:
 ```scala
