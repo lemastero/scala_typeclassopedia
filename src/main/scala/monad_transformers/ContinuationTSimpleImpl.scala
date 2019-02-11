@@ -1,6 +1,6 @@
 package monad_transformers
 
-import monad.MonadSimpleImplementation.Monad
+import educational.Monad
 
 import scala.language.higherKinds
 
@@ -16,9 +16,11 @@ object ContinuationTSimpleImpl {
       def run[Z](f: A => M[Z]): M[Z] = f(a)
     }
 
-    def map[A, B](x: Cont[M, A])(f: A => B): Cont[M, B] = new Cont[M, B] {
+    override def map[A, B](x: Cont[M, A])(f: A => B): Cont[M, B] = new Cont[M, B] {
       def run[Z](ff: B => M[Z]): M[Z] = x.run(f andThen ff)
     }
+
+    def flatMap[A, B](ma: Cont[M, A])(f: A => Cont[M, B]): Cont[M, B] = ???
   }
 
   /** Continutation monad transformer */

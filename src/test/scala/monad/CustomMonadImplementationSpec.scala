@@ -1,6 +1,6 @@
 package monad
 
-import monad.MonadSimpleImplementation.Monad
+import educational.Monad
 import org.scalatest.{FunSpec, MustMatchers}
 
 class CustomMonadImplementationSpec
@@ -9,8 +9,7 @@ class CustomMonadImplementationSpec
 
   val listMonad: Monad[List] = new Monad[List] {
     def pure[A](a: A): List[A] = List(a)
-    def map[A, B](x: List[A])(f: A => B): List[B] = x.map(f)
-   override def flatten[A](mma: List[List[A]]): List[A] = mma.flatten
+    def flatMap[A, B](ma: List[A])(f: A => List[B]): List[B] = ma.flatMap(f)
   }
 
   val radiusList: List[Int] = (1 to 3).toList

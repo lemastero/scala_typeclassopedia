@@ -1,7 +1,9 @@
 package selective
 
 import applicative.ApplicativeSimpleImpl.Applicative
-import monad.MonadSimpleImplementation.Monad
+import educational.Monad
+
+import scala.language.higherKinds
 
 /** Selective Applicatie Functors
   *
