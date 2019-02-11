@@ -3,13 +3,14 @@ package educational
 import scala.language.higherKinds
 
 trait Divide[F[_]] extends Contravariant[F] {
-  def divide[A,B,C](f: A => (B,C), fb: F[B], fc: F[C]): F[A]
+  def divide[A,B,C](f: A => (B,C), fb: F[B], fc: F[C]): F[A] // contramap2
 }
 
 trait DivideLaws[F[_]] extends ContravariantLaws[F] with Divide[F] {
 
   def delta[A]: A => (A, A) = a => (a, a)
 
+  // divide delta (divide delta m n) o = divide delta m (divide delta n o)
   def divideComposition[A](fa1: F[A], fa2: F[A], fa3: F[A]): Boolean = {
     //                divide(delta)
     //  F[A1], F[A2] ===============> F[A12]
