@@ -2088,7 +2088,32 @@ In category of types and functions we use only one category, so Profunctor P is 
 * Laws [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala#L39-L45) [Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ProfunctorLaws.scala):
 - if we define Profunctor using dimap:
   * `dimap id id == id`
+```scala
+def dimapIdentity[A, B](p: P[A, B]): Boolean = {
+  //          dimap(id, id)
+  // P[A,B] ================> P[A,B]
+  dimap(identity[A], identity[B])(p) == p
+}
+```
   * `dimap (f . g) (h . i) == dimap g h . dimap f i`
+```scala
+def dimapComposition[A, B, C, D, E, F](pad: P[A,D], fcb: C => B, fba: B => A, fde: D => E, fef: E => F): Boolean = {
+  //          dimap B=>A D=>E     
+  // P[A,D] ===================> F[B,E]
+  val pbe: P[B, E] = dimap(fba, fde)(pad)
+  //          dimap C=>B E=>F
+  // P[B,E] ====================> P[C,F]
+  val l: P[C,F] = dimap(fcb, fef)(pbe)
+
+  val fca: C => A = fba compose fcb
+  val fdf: D => F = fef compose fde
+  //         dimap C=>A D=> F    
+  // P[A,D] ===================> P[C,F]
+  val r: P[C,F] = dimap(fca, fdf)(pad)
+  
+  l == r
+}
+```
 Second law we get for free by parametricity.
 
 - if specify lmap or rmap
