@@ -741,6 +741,7 @@ l == r
 
 * Contravariant is not called Cofunctor (like Monad -> Comonad, Appy -> Coapply) because when we inverse arrows
 in Functor definition, we just get Functor definition back (with A, B swapped). [More on this on SO](https://stackoverflow.com/questions/34732571/why-there-is-no-cofunctor-typeclass-in-haskell).
+There is library that makes fun ot of this fact [acme-cofunctor](http://hackage.haskell.org/package/acme-cofunctor).
 
 * Resources
   * (Haskell) 24 Days of Hackage: contravariant - Tom Ellis [(blog post)](https://ocharles.org.uk/blog/guest-posts/2013-12-21-24-days-of-hackage-contravariant.html) (all classic examples: Predicate, Op but alos Behaviors of actor, nice laws explanation)
@@ -759,31 +760,36 @@ trait Divide[F[_]] extends Contravariant[F] {
 }
 ```
 
-* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala), [Why not in Haskell](https://github.com/ekmett/contravariant/issues/18), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divide)
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/ContravariantSemigroupal.scala), [Why not in Haskell](https://github.com/ekmett/contravariant/issues/18), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divide)
 
-* Divide Laws ([Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala#L45-L52)):
+* Divide Laws ([Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divide.scala#L45-L52), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant-Divisible.html#g:4)):
 let `def delta[A]: A => (A, A) = a => (a, a)`  
 divide composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
 
 ```scala
-//                divide(delta)
-//  F[A1], F[A2] ===============> F[A12]
-val fa12: F[A] = divide(delta[A], fa1, fa2)
+def divideComposition[A](fa1: F[A], fa2: F[A], fa3: F[A]): Boolean = {
+  //                divide(delta)
+  //  F[A1], F[A2] ===============> F[A12]
+  val fa12: F[A] = divide(delta[A], fa1, fa2)
 
-//                 divide(delta)
-// F[A12], F[A3] =================> F[A123]
-val l: F[A] = divide( delta[A], fa12, fa3)
+  //                 divide(delta)
+  // F[A12], F[A3] =================> F[A123]
+  val l: F[A] = divide( delta[A], fa12, fa3)
 
 
-//                divide(delta)
-//  F[A2], F[A3] ===============> F[A23]
-val fa23: F[A] = divide(delta[A], fa2, fa3)
+  //                divide(delta)
+  //  F[A2], F[A3] ===============> F[A23]
+  val fa23: F[A] = divide(delta[A], fa2, fa3)
 
-//                  divide(delta)
-//  F[A1], F[A23] ===============> F[A123]
-val r: F[A] = divide( delta[A], fa1, fa23 )
-l == r
+  //                  divide(delta)
+  //  F[A1], F[A23] ===============> F[A123]
+  val r: F[A] = divide( delta[A], fa1, fa23 )
+  
+  l == r
+}
 ```
+
+This is simplified version. Proper version is shown in Haskell.
 
 * Derived methods:
 ```scala
@@ -799,7 +805,8 @@ def deriving3[A1, A2, A3, Z](f: Z => (A1, A2, A3))(implicit a1: F[A1], a2: F[A2]
 ```
 
 * Resources
-  * Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I)
+  * (Haskell) Contravariant Functors: The Other Side of the Coin - George Wilson [(video)](https://www.youtube.com/watch?v=IJ_bVVsQhvc)
+  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
   
 ### Divisible (Contravariant Applicative)
 
@@ -809,15 +816,41 @@ trait Divisible[F[_]] extends Divide[F] {
 }
 ```
 
-* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divisible.scala), [Haskell](https://github.com/ekmett/contravariant/blob/master/src/Data/Functor/Contravariant/Divisible.hs), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divisible)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divisible.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/ContravariantMonoidal.scala) [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant-Divisible.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Divisible)
 
-* Laws: let `def delta[A]: A => (A, A) = a => (a, a)`
-   1. composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
-   2. right identity: `divide(fa, conquer)(delta) == fa`
-   3. left identity:  `divide(conquer, fa)(delta) == fa`
+* Laws ([Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Divisible.scala#L33-L39), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant-Divisible.html#g:4)): let `def delta[A]: A => (A, A) = a => (a, a)`
+1. all Contravariant and Divide laws including composition `divide(divide(a1, a2)(delta), a3)(delta) == divide(a1, divide(a2, a3),(delta))(delta)`
+(see Divide law)
+
+2. right identity: `divide(fa, conquer)(delta) == fa`
+```scala
+def rightIdentity[A](fa: F[A]): Boolean = {
+  //                 divide(delta)    
+  // F[A], conquer ===============> F[A]
+  val l: F[A] = divide(delta, fa, conquer[A])
+  
+  l == fa
+}
+```
+
+3. left identity:  `divide(conquer, fa)(delta) == fa`
+```scala
+def leftIdentity[A](fa: F[A]): Boolean = {
+  //                 divide(delta)    
+  // conquer, F[A] ===============> F[A]
+  val l: F[A] = divide(delta, conquer[A], fa)
+  
+  l == fa
+}
+```
+
+* Instances: Predicate, Sorting, Serializable, Pritty Printing
 
 * Resources
-  * Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I)
+  * [Cats PR #2034](https://github.com/typelevel/cats/pull/2034) explaining design choices different that in Haskell, Scalaz
+  * (Haskell) Contravariant Functors: The Other Side of the Coin - George Wilson [(video)](https://www.youtube.com/watch?v=IJ_bVVsQhvc)
+  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
+
 
 ### Bifunctor
 
