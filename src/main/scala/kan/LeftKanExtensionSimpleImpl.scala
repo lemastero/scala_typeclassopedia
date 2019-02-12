@@ -8,14 +8,14 @@ object LeftKanExtensionSimpleImpl {
 
   trait Lan[G[_], H[_], A] {
     type I
-    val v: H[I]
+    val fb: H[I]
     def f: G[I] => A
   }
 
   object Lan extends LanInstances {
     def apply[G[_], H[_], A, B](hhb: H[B], ff: G[B] => A): Lan[G,H,A] = new Lan[G,H,A] {
       type I = B
-      val v: H[I] = hhb
+      val fb: H[I] = hhb
       def f: G[I] => A = ff
     }
   }
@@ -25,8 +25,7 @@ object LeftKanExtensionSimpleImpl {
       def map[A, X](x: Lan[F, H, A])(fax: A => X): Lan[F, H, X] = {
         new Lan[F, H, X] {
           type I = x.I
-          val v: H[I] = x.v
-
+          val fb: H[I] = x.fb
           def f: F[I] => X = x.f andThen fax
         }
       }
@@ -37,7 +36,7 @@ object LeftKanExtensionSimpleImpl {
     def map[A, X](x: Lan[G, H, A])(fax: A => X): Lan[G, H, X] = {
       new Lan[G, H, X] {
         type I = x.I
-        val v: H[I] = x.v
+        val fb: H[I] = x.fb
         def f: G[I] => X = x.f andThen fax
       }
     }
