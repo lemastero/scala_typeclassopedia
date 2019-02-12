@@ -30,9 +30,9 @@ object DensitySimpleImpl {
 
   object Density {
     def apply[F[_], A, B](kba: F[B] => A, kb: F[B]): Density[F, A] = new Density[F, A] {
-      type X = B
-      val fb: F[X] = kb
-      def f: F[X] => A = kba
+      type Z = B
+      val fb: F[Z] = kb
+      def f: F[Z] => A = kba
     }
 
     /** Density is a Functor for free */
