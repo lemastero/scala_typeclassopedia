@@ -1,5 +1,7 @@
 package profunctor
 
+import scala.language.higherKinds
+
 /**
   * Profunctor is abstraction from Category Theory that models functions.
   *
@@ -58,6 +60,34 @@ trait Profunctor[P[_, _]] {
   // derived methods
   def lmap[A,B,C](f: A => B): P[B,C] => P[A,C] = dimap[A,B,C,C](f,identity[C])
   def rmap[A,B,C](f: B => C): P[A,B] => P[A,C] = dimap[A,A,B,C](identity[A], f)
+}
+
+trait ProfunctorLaws[P[_, _]] extends Profunctor[P] {
+
+  // dimap id id == id
+  def dimapIdentity[A, B](p: P[A, B]): Boolean = {
+    //          dimap(id, id)
+    // P[A,B] ================> P[A,B]
+    dimap(identity[A], identity[B])(p) == p
+  }
+
+  // dimap (f . g) (h . i) == dimap g h . dimap f i
+  def dimapComposition[A, B, C, D, E, F](pad: P[A,D], fcb: C => B, fba: B => A, fde: D => E, fef: E => F): Boolean = {
+    //          dimap B=>A D=>E
+    // P[A,D] ===================> F[B,E]
+    val pbe: P[B, E] = dimap(fba, fde)(pad)
+    //          dimap C=>B E=>F
+    // P[B,E] ====================> P[C,F]
+    val l: P[C,F] = dimap(fcb, fef)(pbe)
+
+    val fca: C => A = fba compose fcb
+    val fdf: D => F = fef compose fde
+    //         dimap C=>A D=> F
+    // P[A,D] ===================> P[C,F]
+    val r: P[C,F] = dimap(fca, fdf)(pad)
+
+    l == r
+  }
 }
 
 object ProfunctorInstance {
