@@ -535,7 +535,7 @@ def without(a: A, b: A): A = and(a, complement(b))
 
 * laws:
   1. associativity: `(x join y) join z) == (x join (y join z))`
-  2. commutativity: `(x join y) == (x join y)`
+  2. commutativity: `(x join y) == (y join x)`
   3. idempotent: `(x join x) == x`
   4. associativity: `(x meet y) meet z) == (x meet (y meet z))`
   5. commutativity: `(x meet y) == (y meet x)`
