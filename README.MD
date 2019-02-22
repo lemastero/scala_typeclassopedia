@@ -24,6 +24,7 @@
   * [Reverse State Monad](#reverse-state-monad)
   * [Tardis (Bidirectional State Monad)](#tardis-bidirectional-state-monad)
   * [Chronicle Monad](#chronicle-monad)
+  * [Bimonad](#bimonad)
 
 * [IO related monads](#io-related-monads)
   * [IO](#io-monad)
@@ -71,8 +72,7 @@
     * [Cowriter](#cowriter)
     * [Cofree](#cofree)
     * [Cokleisli](#cokleisli)
-
-* [Bimonad](#bimonad)
+  * [Bimonad](#bimonad)
 
 * Traversing Folding Filtering
   * [Monoid](./AbstractAlgebra.MD#monoid)
@@ -166,6 +166,7 @@
 
 * Higher kinded & exotic abstractions
   * [Monoidal Category, Monoid Object](#monoidal-categories-monoid-object)
+  * [Cartesian Closed Category](#cartesian-closed-category)
   * [Day Convolution](#day-convolution)
   * [Functor Functor (FFunctor)](#functor-functor-ffunctor)
   * [Monad morphisms](#monad-morphisms)
@@ -1196,7 +1197,7 @@ trait Bimonad[T] extends Monad[T] with Comonad[T]
 * They simplify resolution of implicits for things that are Monad and Comonad
 
 Resources:
-  * [Bimonads and Hopf monads on categories - Bachuki Mesablishvili, Robert Wisbauer ](https://arxiv.org/pdf/0710.1163v3.pdf)
+  * [Bimonads and Hopf monads on categories - Bachuki Mesablishvili, Robert Wisbauer](https://arxiv.org/pdf/0710.1163v3.pdf)
   * [PR with Bimonad to Cats](https://github.com/typelevel/cats/issues/30)
 
 ### Foldable
@@ -1961,8 +1962,15 @@ In category of Profunctors with Profunctor Product as Bifunctor the Monoid Ojbec
   * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
   * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
   * (Haskell) Monoidal Category [data-category/Data.Category.Monoidal](https://hackage.haskell.org/package/data-category/docs/Data-Category-Monoidal.html), [categories/Control.Category.Monoidal](https://hackage.haskell.org/package/categories/docs/Control-Category-Monoidal.html)
-  * (Haskell) (Cartesian Closed Category) | [data-category/Data.Category.CartesianClosed](https://hackage.haskell.org/package/data-category/docs/Data-Category-CartesianClosed.html)
+ 
+ 
+### Cartesian Closed Category
 
+* Resources
+  * [TomasMikula/LambdaCart](https://github.com/TomasMikula/LambdaCart) (CCC is used to define EDSL in Scala)
+  * [Compiling to categories - Conal Elliott](http://conal.net/papers/compiling-to-categories/) (Encoding of many CT abstractions, applications for automatic derivation of functions, describing hardware, Fast Fourier Transformation)
+  * (Haskell) [Cartesian Closed Category in data-category](https://hackage.haskell.org/package/data-category/docs/Data-Category-CartesianClosed.html)
+  * (Haskell) [Cartesian Closed Category in category-extras](https://hackage.haskell.org/package/category-extras-0.53.0/docs/Control-Category-Cartesian-Closed.html)
 
 ### Day Convolution
 
