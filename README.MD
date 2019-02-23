@@ -25,6 +25,8 @@
   * [Tardis (Bidirectional State Monad)](#tardis-bidirectional-state-monad)
   * [Chronicle Monad](#chronicle-monad)
   * [Bimonad](#bimonad)
+  * [Dijkstra monad](#dijkstra-monad)
+  * [Hoare Monad](#hoare-monad)
 
 * [IO related monads](#io-related-monads)
   * [IO](#io-monad)
@@ -574,6 +576,28 @@ case class Reader[-In, +R](run: In => R) {
 
 ### State
 
+Abstraction over stateful computation.
+
+```scala
+case class State[S,A](runState: S => (A,S))
+```
+
+is a monad:
+
+```scala
+def stateMonad[S]: Monad[State[S, ?]] = new Monad[State[S, ?]] {
+
+  def pure[A](a: A): State[S, A] = State(s => (a, s))
+
+  def flatMap[A, B](ma: State[S, A])(f: A => State[S, B]): State[S, B] = State[S, B](
+    s => {
+      val (a: A, s2: S) = ma.runState(s)
+      f(a).runState(s2)
+    }
+  )
+}
+```
+
 * Resources
   * Towards an Effect System in Scala, Part 1: ST Monad [(blog post)](https://apocalisp.wordpress.com/2011/03/20/towards-an-effect-system-in-scala-part-1/)
   * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
@@ -641,14 +665,72 @@ case class Reader[-In, +R](run: In => R) {
 
 ### Tardis (Bidirectional State Monad)
 
-* https://www.pusher.com/sessions/meetup/london-functional-programmers/interview-pro-tip-travel-through-time
-* https://rosettacode.org/wiki/Water_collected_between_towers
-* http://landcareweb.com/questions/33409/haskellde-ni-xiang-xing-cong-tardisdao-revstate
-* http://hackage.haskell.org/package/tardis/docs/Control-Monad-Tardis.html
-* https://kcsongor.github.io/time-travel-in-haskell-for-dummies/
-* https://www.reddit.com/r/haskell/comments/199po0/can_the_tardis_monad_be_used_in_an_efficient_way/
-* https://repl.it/@Ouroboros2/Haskell-Tardis-1
-* http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
+* Resources
+  * https://www.pusher.com/sessions/meetup/london-functional-programmers/interview-pro-tip-travel-through-time
+  * https://rosettacode.org/wiki/Water_collected_between_towers
+  * http://landcareweb.com/questions/33409/haskellde-ni-xiang-xing-cong-tardisdao-revstate
+  * http://hackage.haskell.org/package/tardis/docs/Control-Monad-Tardis.html
+  * https://kcsongor.github.io/time-travel-in-haskell-for-dummies/
+  * https://www.reddit.com/r/haskell/comments/199po0/can_the_tardis_monad_be_used_in_an_efficient_way/
+  * https://repl.it/@Ouroboros2/Haskell-Tardis-1
+  * http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
+
+### Dijkstra monad
+
+```scala
+trait Dijkstra[S,A] {
+  def wp[Omega](f: (S,A) => Omega): S => Omega
+}
+```
+
+is a Monad:
+
+```scala
+implicit def dijakstraMonad[S]: Monad[Dijkstra[S, ?]] = new Monad[Dijkstra[S, ?]] {
+  def pure[A](a: A): Dijkstra[S,A] = new Dijkstra[S,A] {
+    def wp[Omega](f: (S, A) => Omega): S => Omega =
+      s => f(s,a)
+  }
+
+  def flatMap[A,B](ma: Dijkstra[S,A])(f: A => Dijkstra[S,B]): Dijkstra[S,B] =
+    new Dijkstra[S,B] {
+      def wp[Omega](g: (S, B) => Omega): S => Omega =
+        ma.wp{ case (s,a) => f(a).wp(g)(s) }
+    }
+}
+```
+
+can be created from State:
+
+```scala
+def fromState[S,A](h: State[S,A]): Dijkstra[S,A] =
+  new Dijkstra[S,A] {
+    def wp[Omega](f: (S, A) => Omega): S => Omega =
+      s => {
+        val (a,s2) = h.runState(s)
+        f(s2,a)
+      }
+  }
+```
+
+and converted to State:
+
+```scala
+def fromDijkstra[S,A](k: Dijkstra[S,A]): State[S,A] = State(
+  s => k.wp{ case(s2,a) => (a,s2) }(s)
+)
+```
+
+* Resources
+  * (Haskell) Dijkstra monads - James Cheney [(blgo post)](http://why-lambda.blogspot.com/2014/09/dijkstra-monads.html)
+  * Dijkstra Monads in Monadic Computation - Bart Jacobs [(paper)](http://www.cs.ru.nl/B.Jacobs/PAPERS/Dijkstra-monad.pdf)
+  * Dijkstra Monads for Free - Danel Ahman et. al. [(paper)](https://www.fstar-lang.org/papers/dm4free/)
+  * Verifying Higher order Programs with the Dijkstra Monad - Nikhil Swamy, Juan Chen, Ben Livshits [(paper)](https://www.microsoft.com/en-us/research/publication/verifying-higher-order-programs-with-the-dijkstra-monad/)
+
+### Hoare Monad
+
+* Resources
+  * (Coq) The Hoare State Monad - Wouter Swierstra [(paper)](http://www.staff.science.uu.nl/~swier004/publications/2009-tphols.pdf)
 
 ## IO related monads
 
