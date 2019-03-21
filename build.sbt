@@ -22,7 +22,7 @@ libraryDependencies ++= Seq(
 
   "com.slamdata" %% "matryoshka-core" % "0.21.3" withSources() withJavadoc(),
 
-  "org.scalatest" %% "scalatest" % "3.0.6" % Test
+  "org.scalatest" %% "scalatest" % "3.0.7" % Test
 )
 
 scalacOptions ++= Seq(
