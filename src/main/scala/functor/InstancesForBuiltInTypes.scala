@@ -1,6 +1,7 @@
 package functor
 
 import cats.Functor
+import simple.Id
 
 import scala.concurrent.Future
 
@@ -28,12 +29,27 @@ object InstancesForBuiltInTypes {
    fmap f [] = []
    fmap f (x:xs) = f x : fmap f xs
    */
+val listFunctor1: Functor[List] = new Functor[List]() {
+  def map[A, B](fa: List[A])(ab: A => B): List[B] = fa match {
+    case Nil => Nil
+    case head :: tail => ab(head) :: map(tail)(ab)
+  }
+}
+
   val listFunctor: Functor[List] = new Functor[List]() {
-    override def map[A, B](fa: List[A])(f: (A) => B): List[B] = fa map f // already defined with CanBuildFrom magic
+    def map[A, B](fa: List[A])(f: A => B): List[B] = fa map f
   }
 
-  val optionFunctor: Functor[Option] = new Functor[Option]() {
-    override def map[A, B](fa: Option[A])(f: (A) => B): Option[B] = fa map f
+  val optionFunctor2: Functor[Option] = new Functor[Option]() {
+    def map[A, B](opt: Option[A])(ab: A => B): Option[B] = opt match {
+      case None => None
+      case Some(v) => Some( ab(v) )
+    }
+  }
+
+  val idFunctor: Functor[Id] = new Functor[Id] {
+    def map[A, B](fa: Id[A])(f: A => B): Id[B] =
+      Id( f(fa.value) )
   }
 
   /* Haskell - Functor instance for Pair (Tuple) x with
@@ -44,12 +60,12 @@ object InstancesForBuiltInTypes {
    */
   type TupleRightInt[X] = Tuple2[Int, X]
   val rightTupleFunctor: Functor[TupleRightInt] = new Functor[TupleRightInt] {
-    override def map[A, B](fa: TupleRightInt[A])(f: A => B): TupleRightInt[B] = (fa._1, f(fa._2))
+    def map[A, B](fa: TupleRightInt[A])(f: A => B): TupleRightInt[B] = (fa._1, f(fa._2))
   }
 
   type TupleLeftInt[X] = Tuple2[X, Int]
   val leftTupleFunctor: Functor[TupleLeftInt] = new Functor[TupleLeftInt] {
-    override def map[A, B](fa: TupleLeftInt[A])(f: A => B): TupleLeftInt[B] = (f(fa._1), fa._2)
+    def map[A, B](fa: TupleLeftInt[A])(f: A => B): TupleLeftInt[B] = (f(fa._1), fa._2)
   }
 
   /* Haskell - Functor instance for Either
@@ -59,7 +75,7 @@ object InstancesForBuiltInTypes {
    fmap f (left e) = Left e
    fmap f (Right x) = Right (f x)
    */
-  type EitherRightInt[X] = Either[Int, X]
+  type EitherRightInt[X] = Either[Throwable, X] // map
   val eitherRightIntFunctor: Functor[EitherRightInt] = new Functor[EitherRightInt] {
     override def map[A, B](fa: EitherRightInt[A])(f: A => B): EitherRightInt[B] = fa match {
       case Left(v) => Left(v)
@@ -67,7 +83,7 @@ object InstancesForBuiltInTypes {
     }
   }
 
-  type EitherLeftInt[X] = Either[X, Int]
+  type EitherLeftInt[X] = Either[X, Int] // leftMap
   val eitherLeftIntFunctor: Functor[EitherLeftInt] = new Functor[EitherLeftInt] {
     override def map[A, B](fa: EitherLeftInt[A])(f: A => B): EitherLeftInt[B] = fa match {
       case Left(v) => Left(f(v))
@@ -75,6 +91,7 @@ object InstancesForBuiltInTypes {
     }
   }
 
+  // from typelevel Config
   implicit val oneArgFunctionsFromInt: Functor[Int => ?] =
     new Functor[Int => ?] {
       override def map[A, B](g: Int => A)(h: A => B): Int => B =
@@ -94,5 +111,19 @@ object InstancesForBuiltInTypes {
 
       def map[A, B](future: Future[A])(g: A => B): Future[B] =
         future.map(g)
+    }
+
+
+    case class Const[A,B](a: A)
+
+    def constFunctor[X]: Functor[Const[X, ?]] = new Functor[Const[X,?]] {
+      def map[A, B](fa: Const[X, A])(f: A => B): Const[X, B] = ???
+    }
+
+    type Thunk[A] = () => A
+
+    val thunkFunctor: Functor[Thunk] = new Functor[Thunk] {
+      def map[A, B](fa: Thunk[A])(f: A => B): Thunk[B] =
+        ???
     }
 }
