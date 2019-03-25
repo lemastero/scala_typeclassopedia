@@ -481,7 +481,12 @@ trait Selective[F[_]] extends Applicative[F] {
 ```
 
 * Resources:
-  * Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/)
+  * (Haskell) Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/)
+  * (Haskell) Selective Applicative Functors Declare Your Effects Statically, Select Which to Execute Dynamically - Andrey Mokhov, Georgy Lukyanov, Simon Marlow, Jeremie Dimino [(paper)](https://www.staff.ncl.ac.uk/andrey.mokhov/selective-functors.pdf)
+  * (OCaml) [snowleopard/selective-ocaml](https://github.com/snowleopard/selective-ocaml)
+  * (Coq) [tuura/selective-theory-coq](https://github.com/tuura/selective-theory-coq)
+  * (Haskell) Haskell Cafe: Applicative functors with branch/choice? [(mail archive)](https://mail.haskell.org/pipermail/haskell-cafe/2012-July/102518.html)
+  * [copumpkin/SelectiveSigma.hs](https://gist.github.com/copumpkin/d5bdbc7afda54ff04049b6bdbcffb67e#file-selectivesigma-hs-L38-L39)
 
 ### Monad
 
@@ -495,10 +500,50 @@ trait Monad[F[_]] extends Apply[F] {
 }
 ```
 
-* Monad Laws:
+* Monad Laws ([Cats](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Haskell Wiki](https://wiki.haskell.org/Monad_laws)):
   1. flatmap associativity: `fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))`
   2. left identity: `pure(a).flatMap(f) == f(a)`
   3. right identity: `fa.flatMap(a => pure(a)) == fa`
+
+```scala
+def flatMapAssociativity[A,B,C](fa: M[A], f: A => M[B], g: B => M[C]): Boolean = {
+  //         flatMap(f)
+  //  M[A] =============> M[B]
+  val l1: M[B] = flatMap(fa)(f)
+  //         flatMap(g)
+  //  M[B] =============> M[C]
+  val l2: M[C] = flatMap(l1)(g)
+
+  val r1: A => M[C] = a => flatMap(f(a))(b => g(b))
+  //         flatMap(f flatMap g)
+  //  M[A] ======================> M[C]
+  val r2: M[C] = flatMap(fa)(r1)
+  l2 == r2
+}
+
+def leftIdentity[A,B,C](a: A, f: A => M[B], g: B => M[C]): Boolean = {
+  //    pure
+  // A =======> M[A]
+  val l1: M[A] = pure(a)
+  //        flatMap
+  // M[A] ==========> M[B]
+  val l2: M[B] = flatMap(l1)(f)
+
+  // A =======> M[B]
+  val r: M[B] = f(a)
+  l2 == r
+}
+
+def rightIdentity[A,B,C](a: A, fa: M[A], g: B => M[C]): Boolean = {
+  //        flatMap
+  // M[A] ==========> M[A]
+  val l: M[A] = flatMap(fa)(pure)
+  
+  val r: M[A] = fa
+  l == r
+}
+```
+
 
 * Minimal set of methods to implement Monad (others can be derived using them):
   * pure, flatMap
@@ -1266,8 +1311,6 @@ case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
 
-![](img/traversable_foldable.svg)
-
 ### Bimonad
 
 Combine power of Monad and Comonad with additiona laws that tie together Monad and Comonad methods
@@ -1281,6 +1324,8 @@ trait Bimonad[T] extends Monad[T] with Comonad[T]
 Resources:
   * [Bimonads and Hopf monads on categories - Bachuki Mesablishvili, Robert Wisbauer](https://arxiv.org/pdf/0710.1163v3.pdf)
   * [PR with Bimonad to Cats](https://github.com/typelevel/cats/issues/30)
+
+![](img/traversable_foldable.svg)
 
 ### Foldable
 
@@ -2797,6 +2842,18 @@ data Coend p = forall x. Coend p x x
   * Category Theory III 7.2, Coends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=jQUebw8uac0)
   * Ends - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=mxI9ba6Rexc&list=PLg-WC4aaB3JuUXyuc337P8UYQSQVTjyP6)
 
+### Comma categories, Slice category
+
+* Resources
+  * (Theory) Pointwise Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2018/01/23/pointwise-kan-extensions/)
+  * (Theory) Slice and comma categories 1 - TheCatsters [(video)](https://www.youtube.com/watch?v=f4jpvwwnq_s)
+  * (Theory) Slice and comma categories 2 - TheCatsters [(video)](https://www.youtube.com/watch?v=W6sG5uraex0)
+  * (Theory) Overcategories aka Comma Categories - MathProofsable [(video)](https://www.youtube.com/watch?v=WHwRghUl2Zo)
+  * (Theory) Abstract and Concrete Categories The Joy of Cats - Jiri Adamek, Horst Herrlich, George E. Strecker [(book)](http://katmat.math.uni-bremen.de/acc/acc.pdf)
+  * (Theory) Functorial Semantics of Algebraic Theories and Some Algebraic Problems in the context of Functorial Semantics of Algebraic Theories - F. William Lawvere - TAC Reprints [(book)](http://www.tac.mta.ca/tac/reprints/articles/5/tr5.pdf)
+  * (Theory) Computational Category Theory - D.E. Rydeheard, R.M. Burstall [(book)](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
+  * (Theory) [comma category - nLab](https://ncatlab.org/nlab/show/comma+category#functors_and_comma_categories)
+  
 ### Align
   * [PR for Cats](https://github.com/typelevel/cats/pull/1755)
   * (Haskell) [these/Data.Align](https://hackage.haskell.org/package/these/docs/Data-Align.html)
