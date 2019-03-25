@@ -214,6 +214,7 @@ You can think of Functor using following intuitions:
 - containers (Id, List, Tree, Option) can apply given function to every element in the collection
 - computation effects - `map` applies function to a value inside this effect, without changing the effect
     - Id - no effects
+    - Const - always return the same value (ignore changes)
     - Option - may not have value,
     - List/Vector - may have multiple values,
     - Either/ValidatedNel/Try - may contain value or errors 
@@ -221,7 +222,6 @@ You can think of Functor using following intuitions:
     - Writer - while computing value, generate some description
     - State - computing changes a state
     - Monix Task/Future/Twitter Future/Scalaz Task - needs time to be computed
-    - JSON - has given format
     - Map - is indexed with other type (see Controversies about Map)
 
 ```scala
@@ -290,6 +290,8 @@ See [Free constructions](#free-constructions) for `Free functors`.
   * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala)
   * (Haskell) The Extended Functor Family - George Wilson [(video)](https://www.youtube.com/watch?v=JUVMiRRq6wU)
   * Functional Patterns in C++, 1. Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=ph7qt0pkPkc)
+  * Understanding Data.Functor.Constant constructor and applicative laws
+ - [(SO)](https://stackoverflow.com/questions/21169943/understanding-data-functor-constant-constructor-and-applicative-laws)
 
 ### Apply
 
