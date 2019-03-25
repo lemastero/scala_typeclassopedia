@@ -1258,7 +1258,7 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
   Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala) [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html) [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
 
 * Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * Streams for (Co)Free! - John DeGoes: [(video)](https://www.youtube.com/watch?v=R_nYc4FItcI)
   * Life Is A Comonad - Elias Jordan [(video)](https://www.youtube.com/watch?v=6eiS2QTQKPE) [(blog post)](https://eli-jordan.github.io/2018/02/16/life-is-a-comonad/) [(reddit)](https://www.reddit.com/r/scala/comments/7ydyjr/life_is_a_comonad/)
@@ -1288,7 +1288,7 @@ case class CoReader[R, A](extract: A, ask: R) {
 ```
 
 * Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
   * (Haskell) [(src Control-Comonad-Env)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad-Env.html)
   * (Haskell) CoReader x CoState == Silver Bullet - @geophf [(blog post)](http://logicaltypes.blogspot.com/2012/11/coreader-x-costate-silver-bullet.html)
 
@@ -1309,7 +1309,7 @@ case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
 ```
 
 * Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
 
 ### Bimonad
 
