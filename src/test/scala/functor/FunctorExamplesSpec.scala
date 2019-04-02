@@ -42,12 +42,12 @@ class FunctorExamplesSpec
         Vector(2, 3, 4).fproduct(isOdd) mustBe Vector((2, false), (3, true), (4, false))
       }
 
-      it("for Vector") {
+      it("for Option") {
         import cats.syntax.functor._
         import cats.implicits.catsStdInstancesForOption
 
         Option(42).void mustBe Option(())
-        Option(42).as("foo") mustBe Option("foo", "foo", "foo")
+        Option(42).as("foo") mustBe Option("foo")
         Option(42).fproduct(isOdd) mustBe Option((42, false))
       }
     }

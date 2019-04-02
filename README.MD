@@ -1548,6 +1548,7 @@ trait NaturalTransf[F[_], G[_]] {
   * [Cats docs](https://typelevel.org/cats/datatypes/freeapplicative.html)
   * Free Applicative Functors - Paolo Capriotti, Ambrus Kaposi [(paper)](https://arxiv.org/abs/1403.0749)
   * Move Over Free Monads: Make Way for Free Applicatives! - John deGoes [(video)](https://www.youtube.com/watch?v=H28QqxO7Ihc)
+  * Flavours of free applicative functors - Roman Cheplyaka [(blog post)](https://ro-che.info/articles/2013-03-31-flavours-of-free-applicative-functors)
 
 ### Free Monads
 

@@ -1,42 +1,65 @@
 package educational
 
-import functor.FunctorSimpleImpl.Functor
+import scala.language.higherKinds
 
 /**
   * Simple implementation of Monads shown in:
   * Rúnar Bjarnason
   * A Scala Comonad Tutorial, Part 1
-  * http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/
+  * http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/
   */
 
 /* laws:
 
-1) join associativity -- TODO how
+1) flatten associativity -- TODO how
 
-2) unit must be identity for join
+2) pure must be identity for flatten
 
-            pure
-        A ---------> M[A]
-        |             |
-flatten |             |  pure
-        |             |
-        \/            \/
-   M[A] <--------- M[M[A]]
-         flatten
+              pure
+        A -------------> M[A]
+        |                |
+pure    |                |  pure
+        |                |
+        \/               \/
+       M[A] <-------- M[M[A]]
+             flatten
 
-Monad[M].join( Monad[M].unit( Monad[M].unit(a) ) ) == Monad[M].unit(a)
+Monad[M].flatten( Monad[M].pure( Monad[M].pure(a) ) ) == Monad[M].pure(a)
 
   1. flatmap associativity: `fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))`
   2. left identity: `pure(a).flatMap(f) == f(a)`
   3. right identity: `fa.flatMap(a => pure(a)) == fa`
 */
 
-trait Monad[M[_]] extends Functor[M] {
-  def pure[A](a: A): M[A]
-  def flatMap[A, B](ma: M[A])(f: A => M[B]): M[B] // flatten(map(ma)(f))
 
-  def flatten[A](mma: M[M[A]]): M[A] = flatMap(mma)(identity)
-  def map[A, B](x: M[A])(f: A => B): M[B] = flatMap(x)(a => pure(f(a)))
+trait Monad[F[_]] extends Applicative[F] {
+  def flatMap[A, B](ma: F[A])(f: A => F[B]): F[B] // flatten(map(ma)(f))
+
+  def flatten[A](mma: F[F[A]]): F[A] = flatMap(mma)(identity)
+  override def map[A, B](x: F[A])(f: A => B): F[B] = flatMap(x)(a => pure(f(a)))
+
+  def ap[A, B](ff: F[A => B])(fa: F[A]): F[B] =
+    flatMap(ff)(f => map(fa)(f))
+
+  override def product[A, B](fa: F[A], fb: F[B]): F[(A, B)] =
+    flatMap(fa)(a => map(fb)(b => (a, b)))
+
+  override def ap2[A, B, Z](ff: F[(A, B) => Z])(fa: F[A], fb: F[B]): F[Z] =
+    flatMap(fa)(a => flatMap(fb)(b => map(ff)(_(a, b))))
+}
+
+object MonadInstance {
+  val optionMonad: Monad[Option] = new Monad[Option] {
+
+    def pure[A](a: A): Option[A] = Some(a)
+
+    def flatMap[A, B](ma: Option[A])(f: A => Option[B]): Option[B] = {
+      ma match {
+        case Some(a) => f(a)
+        case None => None
+      }
+    }
+  }
 }
 
 trait MonadLaws[M[_]] extends Monad[M] {

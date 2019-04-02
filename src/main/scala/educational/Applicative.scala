@@ -7,6 +7,9 @@ trait Applicative[F[_]] extends Apply[F] {
 
   // derived methods
   def liftA2[A, B, Z](abc: (A, B) => Z)(fa: F[A], fb: F[B]): F[Z] = ap(map(fa)(abc.curried))(fb)
+
+  override def map[A, B](fa: F[A])(f: A => B): F[B] =
+    ap(pure(f))(fa)
 }
 
 trait ApplicativeLaws[F[_]] extends FunctorLaws[F]

@@ -1,6 +1,8 @@
 package profunctor.traverse
 
-import traverse.TraverseSimpleImpl.Traverse
+import educational.Traverse
+
+import scala.language.higherKinds
 
 // free ProfunctorComonad
 trait CofreeTraversing[P[_,_],A,B]{

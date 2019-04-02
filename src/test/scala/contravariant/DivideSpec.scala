@@ -30,7 +30,8 @@ class DivideSpec
     it("Fragment serializer using Divide") {
 
       implicit val fragmentDivide: Divide[Serializer] = new Divide[Serializer] {
-        def divide2[A1, A2, Z](s1: => Serializer[A1], s2: => Serializer[A2])(f: Z => (A1, A2)): Serializer[Z] = Serializer{ frag =>
+        def divide2[A1, A2, Z](s1: => Serializer[A1], s2: => Serializer[A2])(f: Z => (A1, A2)):
+            Serializer[Z] = Serializer{ frag =>
           val (a1,a2) = f(frag)
           val serialized1 = s1.run(a1)
           val serializedB = s2.run(a2)
@@ -41,7 +42,8 @@ class DivideSpec
       }
 
       val fragAsTuple: Fragment => (String, Int) = frag => (frag.name, frag.size)
-      val fragmentSerial: Serializer[Fragment] = Divide[Serializer].divide(strSerial, intSerial)(fragAsTuple)
+      val fragmentSerial: Serializer[Fragment] = Divide[Serializer].divide(
+        strSerial, intSerial)(fragAsTuple)
 
       val serialized = fragmentSerial.run(Fragment("Area", 52))
       new String(serialized ) mustBe "Area52"
