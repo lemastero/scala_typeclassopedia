@@ -1,7 +1,7 @@
 package day
 
-import applicative.ApplicativeSimpleImpl.Applicative
 import comonad.ComonadSimpleImpl.Comonad
+import educational.Applicative
 import functor.FunctorSimpleImpl.Functor
 import natural_transformation.NaturalTransf.NaturalTransf
 import simple.Id
@@ -153,14 +153,13 @@ object DayConvolutionSimpleImpl {
 
     /** Applicative instance for Day convolution */
     def applicativeDay[F[_], G[_]](implicit AF: Applicative[F], AG: Applicative[G]): Applicative[Day[F, G, ?]] = new Applicative[Day[F, G, ?]] {
-      def map[C, D](d: Day[F, G, C])(f: C => D): Day[F, G, D] = d.map(f)
 
-      def apply[A, B](df: Day[F, G, A => B])(dg: Day[F, G, A]): Day[F, G, B] = {
+      def ap[A, B](df: Day[F, G, A => B])(dg: Day[F, G, A]): Day[F, G, B] = {
         new Day[F, G, B] {
           type X = (df.X, dg.X)
           type Y = (df.Y, dg.Y)
-          val fx: F[X] = AF.apply(AF.map(df.fx)(a => b => (a, b)) : F[dg.X => (df.X, dg.X)])(dg.fx)
-          val gy: G[Y] = AG.apply(AG.map(df.gy)(a => b => (a, b)) : G[dg.Y=> (df.Y, dg.Y)])(dg.gy)
+          val fx: F[X] = AF.ap(AF.map(df.fx)(a => b => (a, b)) : F[dg.X => (df.X, dg.X)])(dg.fx)
+          val gy: G[Y] = AG.ap(AG.map(df.gy)(a => b => (a, b)) : G[dg.Y=> (df.Y, dg.Y)])(dg.gy)
           def xya: (X, Y) => B = (a, b) => df.xya(a._1, b._1)(dg.xya(a._2, b._2))
         }
       }

@@ -25,6 +25,8 @@
   * [Tardis (Bidirectional State Monad)](#tardis-bidirectional-state-monad)
   * [Chronicle Monad](#chronicle-monad)
   * [Bimonad](#bimonad)
+  * [Dijkstra monad](#dijkstra-monad)
+  * [Hoare Monad](#hoare-monad)
 
 * [IO related monads](#io-related-monads)
   * [IO](#io-monad)
@@ -209,16 +211,16 @@
 Type constructor `F[_]` that requires single type with function `map` - ability to transform its content, without changing the structure.
 
 You can think of Functor using following intuitions:
-- containers (Id, List, Tree, Option) can apply given function to every element in the collection
-- computation effects - `map` applies function to a value inside this effect, without changing the effect
+- containers (Id, List, Vector, Tree, Option) can apply given function to every element in the collection
+- computational context - `map` applies function to a value inside this effect, without changing the effect
     - Id - no effects
     - Const - always return the same value (ignore changes)
     - Option - may not have value,
     - List/Vector - may have multiple values,
-    - Either/ValidatedNel/Try - may contain value or errors 
+    - Either/ValidatedNel/Try - may contain value or error(s) 
     - Reader - require some context to be computed
     - Writer - while computing value, generate some description
-    - State - computing changes a state
+    - State, IO - computing changes a state
     - Monix Task/Future/Twitter Future/Scalaz Task - needs time to be computed
     - Map - is indexed with other type (see Controversies about Map)
 
@@ -481,7 +483,12 @@ trait Selective[F[_]] extends Applicative[F] {
 ```
 
 * Resources:
-  * Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/)
+  * (Haskell) Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/)
+  * (Haskell) Selective Applicative Functors Declare Your Effects Statically, Select Which to Execute Dynamically - Andrey Mokhov, Georgy Lukyanov, Simon Marlow, Jeremie Dimino [(paper)](https://www.staff.ncl.ac.uk/andrey.mokhov/selective-functors.pdf)
+  * (OCaml) [snowleopard/selective-ocaml](https://github.com/snowleopard/selective-ocaml)
+  * (Coq) [tuura/selective-theory-coq](https://github.com/tuura/selective-theory-coq)
+  * (Haskell) Haskell Cafe: Applicative functors with branch/choice? [(mail archive)](https://mail.haskell.org/pipermail/haskell-cafe/2012-July/102518.html)
+  * [copumpkin/SelectiveSigma.hs](https://gist.github.com/copumpkin/d5bdbc7afda54ff04049b6bdbcffb67e#file-selectivesigma-hs-L38-L39)
 
 ### Monad
 
@@ -495,10 +502,50 @@ trait Monad[F[_]] extends Apply[F] {
 }
 ```
 
-* Monad Laws:
+* Monad Laws ([Cats](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Haskell Wiki](https://wiki.haskell.org/Monad_laws)):
   1. flatmap associativity: `fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))`
   2. left identity: `pure(a).flatMap(f) == f(a)`
   3. right identity: `fa.flatMap(a => pure(a)) == fa`
+
+```scala
+def flatMapAssociativity[A,B,C](fa: M[A], f: A => M[B], g: B => M[C]): Boolean = {
+  //         flatMap(f)
+  //  M[A] =============> M[B]
+  val l1: M[B] = flatMap(fa)(f)
+  //         flatMap(g)
+  //  M[B] =============> M[C]
+  val l2: M[C] = flatMap(l1)(g)
+
+  val r1: A => M[C] = a => flatMap(f(a))(b => g(b))
+  //         flatMap(f flatMap g)
+  //  M[A] ======================> M[C]
+  val r2: M[C] = flatMap(fa)(r1)
+  l2 == r2
+}
+
+def leftIdentity[A,B,C](a: A, f: A => M[B], g: B => M[C]): Boolean = {
+  //    pure
+  // A =======> M[A]
+  val l1: M[A] = pure(a)
+  //        flatMap
+  // M[A] ==========> M[B]
+  val l2: M[B] = flatMap(l1)(f)
+
+  // A =======> M[B]
+  val r: M[B] = f(a)
+  l2 == r
+}
+
+def rightIdentity[A,B,C](a: A, fa: M[A], g: B => M[C]): Boolean = {
+  //        flatMap
+  // M[A] ==========> M[A]
+  val l: M[A] = flatMap(fa)(pure)
+  
+  val r: M[A] = fa
+  l == r
+}
+```
+
 
 * Minimal set of methods to implement Monad (others can be derived using them):
   * pure, flatMap
@@ -576,6 +623,28 @@ case class Reader[-In, +R](run: In => R) {
 
 ### State
 
+Abstraction over stateful computation.
+
+```scala
+case class State[S,A](runState: S => (A,S))
+```
+
+is a monad:
+
+```scala
+def stateMonad[S]: Monad[State[S, ?]] = new Monad[State[S, ?]] {
+
+  def pure[A](a: A): State[S, A] = State(s => (a, s))
+
+  def flatMap[A, B](ma: State[S, A])(f: A => State[S, B]): State[S, B] = State[S, B](
+    s => {
+      val (a: A, s2: S) = ma.runState(s)
+      f(a).runState(s2)
+    }
+  )
+}
+```
+
 * Resources
   * Towards an Effect System in Scala, Part 1: ST Monad [(blog post)](https://apocalisp.wordpress.com/2011/03/20/towards-an-effect-system-in-scala-part-1/)
   * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
@@ -643,14 +712,72 @@ case class Reader[-In, +R](run: In => R) {
 
 ### Tardis (Bidirectional State Monad)
 
-* https://www.pusher.com/sessions/meetup/london-functional-programmers/interview-pro-tip-travel-through-time
-* https://rosettacode.org/wiki/Water_collected_between_towers
-* http://landcareweb.com/questions/33409/haskellde-ni-xiang-xing-cong-tardisdao-revstate
-* http://hackage.haskell.org/package/tardis/docs/Control-Monad-Tardis.html
-* https://kcsongor.github.io/time-travel-in-haskell-for-dummies/
-* https://www.reddit.com/r/haskell/comments/199po0/can_the_tardis_monad_be_used_in_an_efficient_way/
-* https://repl.it/@Ouroboros2/Haskell-Tardis-1
-* http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
+* Resources
+  * https://www.pusher.com/sessions/meetup/london-functional-programmers/interview-pro-tip-travel-through-time
+  * https://rosettacode.org/wiki/Water_collected_between_towers
+  * http://landcareweb.com/questions/33409/haskellde-ni-xiang-xing-cong-tardisdao-revstate
+  * http://hackage.haskell.org/package/tardis/docs/Control-Monad-Tardis.html
+  * https://kcsongor.github.io/time-travel-in-haskell-for-dummies/
+  * https://www.reddit.com/r/haskell/comments/199po0/can_the_tardis_monad_be_used_in_an_efficient_way/
+  * https://repl.it/@Ouroboros2/Haskell-Tardis-1
+  * http://blog.sigfpe.com/2006/08/you-could-have-invented-monads-and.html
+
+### Dijkstra monad
+
+```scala
+trait Dijkstra[S,A] {
+  def wp[Omega](f: (S,A) => Omega): S => Omega
+}
+```
+
+is a Monad:
+
+```scala
+implicit def dijakstraMonad[S]: Monad[Dijkstra[S, ?]] = new Monad[Dijkstra[S, ?]] {
+  def pure[A](a: A): Dijkstra[S,A] = new Dijkstra[S,A] {
+    def wp[Omega](f: (S, A) => Omega): S => Omega =
+      s => f(s,a)
+  }
+
+  def flatMap[A,B](ma: Dijkstra[S,A])(f: A => Dijkstra[S,B]): Dijkstra[S,B] =
+    new Dijkstra[S,B] {
+      def wp[Omega](g: (S, B) => Omega): S => Omega =
+        ma.wp{ case (s,a) => f(a).wp(g)(s) }
+    }
+}
+```
+
+can be created from State:
+
+```scala
+def fromState[S,A](h: State[S,A]): Dijkstra[S,A] =
+  new Dijkstra[S,A] {
+    def wp[Omega](f: (S, A) => Omega): S => Omega =
+      s => {
+        val (a,s2) = h.runState(s)
+        f(s2,a)
+      }
+  }
+```
+
+and converted to State:
+
+```scala
+def fromDijkstra[S,A](k: Dijkstra[S,A]): State[S,A] = State(
+  s => k.wp{ case(s2,a) => (a,s2) }(s)
+)
+```
+
+* Resources
+  * (Haskell) Dijkstra monads - James Cheney [(blgo post)](http://why-lambda.blogspot.com/2014/09/dijkstra-monads.html)
+  * Dijkstra Monads in Monadic Computation - Bart Jacobs [(paper)](http://www.cs.ru.nl/B.Jacobs/PAPERS/Dijkstra-monad.pdf)
+  * Dijkstra Monads for Free - Danel Ahman et. al. [(paper)](https://www.fstar-lang.org/papers/dm4free/)
+  * Verifying Higher order Programs with the Dijkstra Monad - Nikhil Swamy, Juan Chen, Ben Livshits [(paper)](https://www.microsoft.com/en-us/research/publication/verifying-higher-order-programs-with-the-dijkstra-monad/)
+
+### Hoare Monad
+
+* Resources
+  * (Coq) The Hoare State Monad - Wouter Swierstra [(paper)](http://www.staff.science.uu.nl/~swier004/publications/2009-tphols.pdf)
 
 ## IO related monads
 
@@ -1133,7 +1260,7 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
   Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala) [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html) [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
 
 * Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * Streams for (Co)Free! - John DeGoes: [(video)](https://www.youtube.com/watch?v=R_nYc4FItcI)
   * Life Is A Comonad - Elias Jordan [(video)](https://www.youtube.com/watch?v=6eiS2QTQKPE) [(blog post)](https://eli-jordan.github.io/2018/02/16/life-is-a-comonad/) [(reddit)](https://www.reddit.com/r/scala/comments/7ydyjr/life_is_a_comonad/)
@@ -1163,7 +1290,7 @@ case class CoReader[R, A](extract: A, ask: R) {
 ```
 
 * Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
   * (Haskell) [(src Control-Comonad-Env)](https://hackage.haskell.org/package/comonad/docs/Control-Comonad-Env.html)
   * (Haskell) CoReader x CoState == Silver Bullet - @geophf [(blog post)](http://logicaltypes.blogspot.com/2012/11/coreader-x-costate-silver-bullet.html)
 
@@ -1184,9 +1311,7 @@ case class Cowriter[W, A](tell: W => A)(implicit m: Monoid[W]) {
 ```
 
 * Resources
-  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/22/a-scala-comonad-tutorial/)
-
-![](img/traversable_foldable.svg)
+  * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
 
 ### Bimonad
 
@@ -1201,6 +1326,8 @@ trait Bimonad[T] extends Monad[T] with Comonad[T]
 Resources:
   * [Bimonads and Hopf monads on categories - Bachuki Mesablishvili, Robert Wisbauer](https://arxiv.org/pdf/0710.1163v3.pdf)
   * [PR with Bimonad to Cats](https://github.com/typelevel/cats/issues/30)
+
+![](img/traversable_foldable.svg)
 
 ### Foldable
 
@@ -1421,6 +1548,7 @@ trait NaturalTransf[F[_], G[_]] {
   * [Cats docs](https://typelevel.org/cats/datatypes/freeapplicative.html)
   * Free Applicative Functors - Paolo Capriotti, Ambrus Kaposi [(paper)](https://arxiv.org/abs/1403.0749)
   * Move Over Free Monads: Make Way for Free Applicatives! - John deGoes [(video)](https://www.youtube.com/watch?v=H28QqxO7Ihc)
+  * Flavours of free applicative functors - Roman Cheplyaka [(blog post)](https://ro-che.info/articles/2013-03-31-flavours-of-free-applicative-functors)
 
 ### Free Monads
 
@@ -2717,6 +2845,18 @@ data Coend p = forall x. Coend p x x
   * Category Theory III 7.2, Coends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=jQUebw8uac0)
   * Ends - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=mxI9ba6Rexc&list=PLg-WC4aaB3JuUXyuc337P8UYQSQVTjyP6)
 
+### Comma categories, Slice category
+
+* Resources
+  * (Theory) Pointwise Kan Extensions - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2018/01/23/pointwise-kan-extensions/)
+  * (Theory) Slice and comma categories 1 - TheCatsters [(video)](https://www.youtube.com/watch?v=f4jpvwwnq_s)
+  * (Theory) Slice and comma categories 2 - TheCatsters [(video)](https://www.youtube.com/watch?v=W6sG5uraex0)
+  * (Theory) Overcategories aka Comma Categories - MathProofsable [(video)](https://www.youtube.com/watch?v=WHwRghUl2Zo)
+  * (Theory) Abstract and Concrete Categories The Joy of Cats - Jiri Adamek, Horst Herrlich, George E. Strecker [(book)](http://katmat.math.uni-bremen.de/acc/acc.pdf)
+  * (Theory) Functorial Semantics of Algebraic Theories and Some Algebraic Problems in the context of Functorial Semantics of Algebraic Theories - F. William Lawvere - TAC Reprints [(book)](http://www.tac.mta.ca/tac/reprints/articles/5/tr5.pdf)
+  * (Theory) Computational Category Theory - D.E. Rydeheard, R.M. Burstall [(book)](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
+  * (Theory) [comma category - nLab](https://ncatlab.org/nlab/show/comma+category#functors_and_comma_categories)
+  
 ### Align
   * [PR for Cats](https://github.com/typelevel/cats/pull/1755)
   * (Haskell) [these/Data.Align](https://hackage.haskell.org/package/these/docs/Data-Align.html)

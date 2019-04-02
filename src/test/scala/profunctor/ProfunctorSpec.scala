@@ -9,15 +9,15 @@ class ProfunctorSpec
     with MustMatchers {
 
   describe("Profunctor") {
-    it("custoom contramap for Predicate on String and Int") {
-      val f: String => Int = _.length
-
+    it("Profunctor for Function1 is Functor + Contravariant") {
       case class Person(name: String, age: Int)
-      val preF: Person => String = _.name
 
-      val postF: Int => Boolean = _ > 5
+      val len: String => Int = _.length // String => Int
+      val getPersonName: Person => String = _.name // Person => String
+      val above5: Int => Boolean = _ > 5 // Int => Boolean
 
-      Profunctor[Function1].dimap(f)(preF)(postF)(Person("Foo", 100)) mustBe false
+      val personNameAbove5 = Profunctor[Function1].dimap(len)(getPersonName)(above5) // AA => BB
+      personNameAbove5(Person("Foo", 100)) mustBe false
     }
   }
 }

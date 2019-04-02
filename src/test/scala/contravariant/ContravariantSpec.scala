@@ -11,36 +11,40 @@ class ContravariantSpec
 
   describe("Contravariant") {
 
-    it("custoom contramap for Predicate on String and Int") {
-      val pl = Predicate[String](_.length > 5)
-      pl.fun("Contravariant") mustBe true
+    it("split complex Predicate into simpler + function - csutom contramap") {
+      val lenAbove5 = Predicate[String](_.length > 5)
+      lenAbove5.fun("123456") mustBe true
 
-      val pr1 = Predicate[Int](_ > 5)
-      pr1.fun(42) mustBe true
+      // predicate
+      val above5 = Predicate[Int](_ > 5)
+      above5.fun(42) mustBe true
 
+      // function
       val len: String => Int = _.length
 
+      // way to combine them
       def contramap(pred: Predicate[Int], f: String => Int): Predicate[String] =
         Predicate[String](f andThen pred.fun)
 
-      val pr = contramap(pr1, len)
-      pr.fun("Contravariant") mustBe true
+      // yeach !
+      val pr = contramap(above5, len)
+      pr.fun("123456") mustBe true
     }
 
     it("custom contramap for Predicate on Person and Balance") {
       case class Person(name: String)
       case class Balance(amount: Int)
 
-      val balanceOverdrawn = Predicate[Balance](_.amount > 0)
+      val balanceOverdrawnPred = Predicate[Balance](_.amount > 0)
 
-      val getAccountBalance: Person => Balance = p =>
+      val getAccountBalance: Person => Balance = p => // that hows Banks works :)
         if(p.name.startsWith("A")) Balance(-1)
         else Balance(42)
 
       def contramap[A, B](pred: Predicate[A])(f: B => A): Predicate[B] =
         Predicate[B](f andThen pred.fun)
 
-      val hasOverdrawnBalance = contramap(balanceOverdrawn)(getAccountBalance)
+      val hasOverdrawnBalance = contramap(balanceOverdrawnPred)(getAccountBalance)
 
       hasOverdrawnBalance.fun(Person("Alice")) mustBe false
       hasOverdrawnBalance.fun(Person("Bob")) mustBe true
@@ -48,9 +52,11 @@ class ContravariantSpec
 
     it("contramap with Contravariant instance") {
 
-      implicit val predicateContravariantFunctor: Contravariant[Predicate] = new Contravariant[Predicate] {
-        def contramap[A, B](pred: Predicate[A])(fba: B => A): Predicate[B] = Predicate[B](fba andThen pred.fun)
-      }
+      implicit val predicateContravariant: Contravariant[Predicate] =
+        new Contravariant[Predicate] {
+          def contramap[A, B](pred: Predicate[A])(fba: B => A): Predicate[B] =
+            Predicate[B](fba andThen pred.fun)
+        }
 
       case class Person(name: String)
       case class Balance(amount: Int)
@@ -61,7 +67,8 @@ class ContravariantSpec
         if(p.name.startsWith("A")) Balance(-1)
         else Balance(42)
 
-      val hasOverdrawnBalance = Contravariant[Predicate].contramap(balanceOverdrawn)(getAccountBalance)
+      val hasOverdrawnBalance = Contravariant[Predicate]
+        .contramap(balanceOverdrawn)(getAccountBalance)
 
       hasOverdrawnBalance.fun(Person("Alice")) mustBe false
       hasOverdrawnBalance.fun(Person("Bob")) mustBe true

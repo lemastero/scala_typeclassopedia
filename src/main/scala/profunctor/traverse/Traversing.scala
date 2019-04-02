@@ -1,10 +1,8 @@
 package profunctor.traverse
 
-import applicative.ApplicativeSimpleImpl.Applicative
+import educational.{Applicative, Traverse}
 import profunctor.choice.Choice
 import profunctor.strong.Strong
-import traverse.TraverseSimpleImpl.Traverse
-
 
 /** Traversing Profunctor
   * Hasekll impl: // http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Traversing.html

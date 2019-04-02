@@ -4,6 +4,16 @@ import scala.language.higherKinds
 
 trait Apply[F[_]] extends Functor[F] {
   def ap[A, B](ff: F[A => B])(fa: F[A]): F[B]
+
+  def product[A, B](fa: F[A], fb: F[B]): F[(A, B)] = {
+    val abTuple: A => B => (A, B) =
+      a => b => (a, b)
+    val fb2ab: F[B => (A, B)] = map(fa)(abTuple)
+    ap(fb2ab)(fb)
+  }
+
+  def ap2[A, B, Z](ff: F[(A, B) => Z])(fa: F[A], fb: F[B]): F[Z] =
+    map(product(fa, product(fb, ff))) { case (a, (b, f)) => f(a, b) }
 }
 
 trait ApplyLaws[F[_]] extends FunctorLaws[F]
