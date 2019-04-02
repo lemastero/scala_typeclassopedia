@@ -211,16 +211,16 @@
 Type constructor `F[_]` that requires single type with function `map` - ability to transform its content, without changing the structure.
 
 You can think of Functor using following intuitions:
-- containers (Id, List, Tree, Option) can apply given function to every element in the collection
-- computation effects - `map` applies function to a value inside this effect, without changing the effect
+- containers (Id, List, Vector, Tree, Option) can apply given function to every element in the collection
+- computational context - `map` applies function to a value inside this effect, without changing the effect
     - Id - no effects
     - Const - always return the same value (ignore changes)
     - Option - may not have value,
     - List/Vector - may have multiple values,
-    - Either/ValidatedNel/Try - may contain value or errors 
+    - Either/ValidatedNel/Try - may contain value or error(s) 
     - Reader - require some context to be computed
     - Writer - while computing value, generate some description
-    - State - computing changes a state
+    - State, IO - computing changes a state
     - Monix Task/Future/Twitter Future/Scalaz Task - needs time to be computed
     - Map - is indexed with other type (see Controversies about Map)
 
