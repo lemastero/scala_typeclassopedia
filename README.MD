@@ -189,16 +189,17 @@
   * [Colimit](#colimit)
   * [Ends & Coends](#ends--coends)
 
+* [Other Encodings of Category Theory](./OtherEncodingsOfCT.MD)
+
 * [Recursion schemas](RecursionSchemas.MD)
   * [Unfoldable](#unfoldable)
 
 * [Optics](./Optics.MD)
 
-* [Functor Oriented Programming](#functor-oriented-programming)
-
-* [Advanced Category Theory](./AdvancedCategoryTheory.MD)
-
 * [Resource About Category Theory](#resource-about-category-theory)
+  * [Mathematical resources about Category Theory](./AdvancedCategoryTheory.MD)
+
+* [Functor Oriented Programming](#functor-oriented-programming)
 
 * [Functional data structures](./FunctionalDataStructures.MD)
 
@@ -3042,7 +3043,7 @@ Resources:
   * (Haskell) Haskell Live-Coding, Session 1, Commutativity - Edward Kmett [(video)](https://www.youtube.com/watch?v=Nv5tf8pvgrY)
   * Are there any interesting commutative monads in Haskell? [SO](https://stackoverflow.com/questions/24356166/are-there-any-interesting-commutative-monads-in-haskell)
   * The Commutativity monad [(blog post)](http://gelisam.blogspot.com/2013/07/the-commutative-monad.html) [reddit](https://www.reddit.com/r/haskell/comments/1jegxb/the_commutative_monad/)
-  
+
 ## Resource About Category Theory
 
 * Resources covering topics about FP and category theory in great details:
