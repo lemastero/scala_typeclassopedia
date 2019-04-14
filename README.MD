@@ -190,6 +190,8 @@
   * [Ends & Coends](#ends--coends)
 
 * [Other Encodings of Category Theory](./OtherEncodingsOfCT.MD)
+  * [data-category by Sjoerd Visscher](./OtherEncodingsOfCT.MD#encoding-of-category-theory-by-sjoerd-visscher)
+  * [Formalizations of Category Theory in proof assistants (Coq)](./OtherEncodingsOfCT.MD#formalizations-of-category-theory-in-proof-assistants)
 
 * [Recursion schemas](RecursionSchemas.MD)
   * [Unfoldable](#unfoldable)
