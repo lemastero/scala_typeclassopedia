@@ -1,5 +1,8 @@
-# Encoding of Category Theory by Stephen Dhal
-* Monads Made Difficult - Stephen Diehl [(blog post)](http://www.stephendiehl.com/posts/monads.html) Category as first class concept, Functors between them, up to Monads, Kleisli Category, IO and List Monad
+# Formalizations of Category Theory in proof assistants
+* [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
+* Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
+* Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(github)](https://github.com/benediktahrens/rezk_completion)
+* Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
 
 # Encoding of [Category Theory by Sjoerd Visscher](http://hackage.haskell.org/package/data-category)
 
@@ -70,3 +73,6 @@
 * [Free algebra of the Monad](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:FreeAlg)
 * [Forgetful functor algebra](http://hackage.haskell.org/package/data-category-0.7/docs/Data-Category-Dialg.html#t:ForgetAlg)
 * [Eilenberg–Moore](http://hackage.haskell.org/package/data-category/docs/Data-Category-Dialg.html#t:eilenbergMooreAdj)
+
+# Encoding of Category Theory by Stephen Dhal
+* Monads Made Difficult - Stephen Diehl [(blog post)](http://www.stephendiehl.com/posts/monads.html) Category as first class concept, Functors between them, up to Monads, Kleisli Category, IO and List Monad
