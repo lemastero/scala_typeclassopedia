@@ -5,6 +5,7 @@
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
 * Toposes, Triples and Theories - Michael Barr, Charles Wells [(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
+* Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An informal introduction to topos theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1012.5647)
 * Induction, Coinduction, and Fixed Points: A Concise Comparative Survey - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1812.10026)
 * Mutual Coinduction - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1903.06514)
