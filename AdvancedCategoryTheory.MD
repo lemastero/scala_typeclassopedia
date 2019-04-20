@@ -55,12 +55,12 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 # Proof Theory
 
-* DeepSpec Summer School 2017 [(video playlist)](https://www.youtube.com/watch?v=jG61w5pOc2A&list=PLovJjGVqXXf3RgVdCXH96pPwSjFLDhSri) first couple of videos are based on Software Foundations [(book)](https://softwarefoundations.cis.upenn.edu/)
+* DeepSpec Summer School 2017 [(video playlist)](https://www.youtube.com/watch?v=jG61w5pOc2A&list=PLovJjGVqXXf3RgVdCXH96pPwSjFLDhSri) first couple of videos are based on Software Foundations [(book)](https://softwarefoundations.cis.upenn.edu/), [(2018 videos)](https://deepspec.org/event/dsss18/videos.html)
 * The Coq proof assistant and the Mathematical Components library - Enrico Tassi [(course)], slides, based on Mathematical Components [(book)](https://math-comp.github.io/mcb/), part of [EUTypes Summer School 2018](https://sites.google.com/view/2018eutypesschool/)
 * Basic Proof Theory — Frank Pfenning - OPLSS 2015 [(video lectures, notes)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
 * The Coq Proof Assistant and Its Applications to Programming-Language Semantics — Adam Chlipala - OPLSS 2015 [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
 * Program Verification with F* - Danel Ahman [(slides, exercises)](https://danel.ahman.ee/teaching/eutypes2018/)
-* School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [(UniMath)](https://github.com/UniMath)
+* School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
 * Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg [(paper)](https://arxiv.org/abs/1611.02108), implementation: [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt) [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
 * Advanced Topics in Programming Languages CIS 670 - Penn - Stephanie Weirich [(course notes, code)](https://github.com/plclub/cis670-16fa)
 
