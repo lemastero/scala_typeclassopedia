@@ -46,6 +46,7 @@
 * [Philipp Haller](https://dblp.org/pers/hd/a/Amin:Nada)
 * [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
 * [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada)
+* [Simon Peyton Jones](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
 
 # HoTT
 
