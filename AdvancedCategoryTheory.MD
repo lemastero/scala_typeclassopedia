@@ -31,6 +31,8 @@
 
 # Publications
 
+This is very opinionated selection of authors that publish interesting papers about `Category Theory`. Many of those papers are about `Type Theory` (especially `Dependent Types`) or `Functional Programming Languages`. Some of authors publish only about dependent types (like E. Brady) or Haskell (S.P. Jones) and ignore CT topics. But because [computational trinitarianism](https://ncatlab.org/nlab/show/computational+trinitarianism) those qualify as well :) 
+
 * Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls) [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
 * Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html) [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 * [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg) [personal page](http://okmij.org/ftp/)
@@ -46,6 +48,7 @@
 * [Philipp Haller](https://dblp.org/pers/hd/a/Amin:Nada)
 * [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
 * [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada)
+* [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb) [personal page](https://edwinb.wordpress.com/publications/)
 * [Simon Peyton Jones](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
 
 # HoTT
