@@ -10,6 +10,8 @@
 * Induction, Coinduction, and Fixed Points: A Concise Comparative Survey - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1812.10026)
 * Mutual Coinduction - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1903.06514)
 * On terminal coalgebras derived from initial algebras - Jiri Adamek [(arXiv)](https://arxiv.org/abs/cs/0609040)
+* Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/)
+* Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
 
 # Applied Category Theory
 
@@ -51,12 +53,51 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb) [personal page](https://edwinb.wordpress.com/publications/)
 * [Simon Peyton Jones](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
 
-# HoTT
+# Proof Theory
 
+* DeepSpec Summer School 2017 [(video playlist)](https://www.youtube.com/watch?v=jG61w5pOc2A&list=PLovJjGVqXXf3RgVdCXH96pPwSjFLDhSri) first couple of videos are based on Software Foundations [(book)](https://softwarefoundations.cis.upenn.edu/)
+* The Coq proof assistant and the Mathematical Components library - Enrico Tassi [(course)], slides, based on Mathematical Components [(book)](https://math-comp.github.io/mcb/), part of [EUTypes Summer School 2018](https://sites.google.com/view/2018eutypesschool/)
+* Basic Proof Theory — Frank Pfenning - OPLSS 2015 [(video lectures, notes)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
+* The Coq Proof Assistant and Its Applications to Programming-Language Semantics — Adam Chlipala - OPLSS 2015 [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
+* Program Verification with F* - Danel Ahman [(slides, exercises)](https://danel.ahman.ee/teaching/eutypes2018/)
+* School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [(UniMath)](https://github.com/UniMath)
+* Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg [(paper)](https://arxiv.org/abs/1611.02108), implementation: [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt) [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
+* Advanced Topics in Programming Languages CIS 670 - Penn - Stephanie Weirich [(course notes, code)](https://github.com/plclub/cis670-16fa)
+
+# Type Theory, Dependent Types, HoTT, Cubical Type Theory
+
+* On Voevodsky’s Univalence principle - André Joyal [(video, paper)](https://video.ias.edu/VoevodskyMemConf-2018/0911-AndreJoyal) mathematical foundations behind HoTT and Univalence principle
+* Computational Type Theory - OPLSS 2018 - Robert Harper [(course)](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php#Harper), lecture notes, high quality videos, [(video playlist)](https://www.youtube.com/watch?v=LE0SSLizYUI&list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z) - lower quality videos, (course Programming Languages Background by Robert Harper and Dan Licata is recommended before this course - [OPLSS 2017](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php))
+* Homotopy Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/hott/) lecture notes, papers
+* Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/) lecture notes, papers (Martin-Löf, HoTT, Cubical Type Theory)
+* Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
+* Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
 * Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
 * Kerodon (book about categorical homotopy theory)  [(book)](https://kerodon.net/kerodon.pdf) [(links)](https://kerodon.net/bibliography)
+* Dependent Types in the Idris Programming Language - OPLSS 2017 - Edwin Brady [(slides, examples)](https://www.idris-lang.org/documentation/workshops/oplss-2017-course-materials/) [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php)
+* Advanced Functional Programming (in Agda) - University of Strathclyde - Conor McBride [(github 2017)](https://github.com/pigworker/CS410-17), [(github 2018)](https://github.com/pigworker/CS410-18)
+* Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
+* Introduction to programming with dependent types in Scala (2019) - Dmytro Mitin [(course)](https://stepik.org/course/49181/promo)
 
-# PLT
+# Specification of dependent types
+
+* A Specification for Dependent Types in Haskell - Stephanie Weirich, Antoine Voizard, Pedro Henrique Azevedo de Amorim, 
+Richard A. Eisenberg [(video)](https://www.youtube.com/watch?v=0157rUxC4_8) [(paper)](https://dl.acm.org/citation.cfm?id=3110275) [(repo)](https://github.com/sweirich/corespec)
+* Dependent Types in Haskell: Theory and Practice - Richard A. Eisenberg [(arXiv)](https://arxiv.org/abs/1610.07978)
+* DOT: Scala Types from Theory to Practice—Nada Amin [(video)](https://www.youtube.com/watch?v=fjj_fv346lY)
+Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(paper)](https://dl.acm.org/citation.cfm?id=3009866)
+* Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
+
+
+# Other PLT Resources
 
 * [Programming Language Theory - Steven Shaw](https://steshaw.org/plt/)
 * [cohomolo-gy/haskell-resources - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
+
+# Haskell courses
+
+* [FP Course](https://github.com/data61/fp-course)
+* [Let's Lens](https://github.com/data61/lets-lens)
+* [Applied Haskell](https://github.com/fpco/applied-haskell)
+* [FP Complete tutorial for libraries](https://haskell.fpcomplete.com/learn#libraries)
+* Advanced Programming - CIS 552 - [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
