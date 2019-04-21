@@ -113,4 +113,5 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [Let's Lens](https://github.com/data61/lets-lens)
 * [Applied Haskell](https://github.com/fpco/applied-haskell)
 * [FP Complete tutorial for libraries](https://haskell.fpcomplete.com/learn#libraries)
-* Advanced Programming - CIS 552 - [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
+* CIS 552: Advanced Programming (Fall 2017) - Stephanie Weirich [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
+* CIS 194: Introduction to Haskell (Spring 2013) - Brent Yorgey [(course)](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
