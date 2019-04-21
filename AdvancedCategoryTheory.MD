@@ -67,6 +67,8 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Advanced Topics in Programming Languages CIS 670 - Penn - Stephanie Weirich [(course notes, code)](https://github.com/plclub/cis670-16fa)
 * [Coq Winter School 2018](https://team.inria.fr/marelle/en/coq-winter-school-2018/)
 
+* [Formalizing 100 Theorems](http://www.cs.ru.nl/~freek/100/) [Isabelle](http://www.cse.unsw.edu.au/~kleing/top100/) [Coq](https://madiot.fr/coq100/), [Top 100 Mathematical Theorems In Coq](https://github.com/coq/coq/wiki/Top100MathematicalTheoremsInCoq)
+
 # [Dependent Types](https://ncatlab.org/nlab/show/dependent+type+theory), [HoTT](https://ncatlab.org/nlab/show/homotopy+type+theory)
 
 * Introduction to homotopy type theory - EUTypes Summer School 2017 - Thorsten Altenkirch [(paper)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf)
@@ -83,7 +85,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Dependent Types in the Idris Programming Language - OPLSS 2017 - Edwin Brady [(slides, examples)](https://www.idris-lang.org/documentation/workshops/oplss-2017-course-materials/) [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php)
 * Advanced Functional Programming (in Agda) - University of Strathclyde - Conor McBride [(github 2017)](https://github.com/pigworker/CS410-17), [(github 2018)](https://github.com/pigworker/CS410-18)
 * [Dependently typed programming in Agda - EUTypes Summer School 2017 - Conor McBride](https://sites.google.com/view/summerschool2017-eutypes/lectures/dependently-typed-programming-in-agda) [(github)](https://github.com/pigworker/Ohrid-Agda)
-* Introduction to programming with dependent types in Scala (2019) - Dmytro Mitin [(course)](https://stepik.org/course/49181/promo), based on library [ProvingGround](http://siddhartha-gadgil.github.io/ProvingGround/)
+* Introduction to programming with dependent types in Scala (2019) - Dmytro Mitin [(course)](https://stepik.org/course/49181/promo), based on library [ProvingGround](http://siddhartha-gadgil.github.io/ProvingGround/) that was used to [solve Polymath 14 problem](https://polymathprojects.org/2018/01/26/spontaneous-polymath-14-a-success/) resulting in [(paper)](https://arxiv.org/abs/1801.03908)
 
 # [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
