@@ -83,7 +83,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Dependent Types in the Idris Programming Language - OPLSS 2017 - Edwin Brady [(slides, examples)](https://www.idris-lang.org/documentation/workshops/oplss-2017-course-materials/) [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php)
 * Advanced Functional Programming (in Agda) - University of Strathclyde - Conor McBride [(github 2017)](https://github.com/pigworker/CS410-17), [(github 2018)](https://github.com/pigworker/CS410-18)
 * [Dependently typed programming in Agda - EUTypes Summer School 2017 - Conor McBride](https://sites.google.com/view/summerschool2017-eutypes/lectures/dependently-typed-programming-in-agda) [(github)](https://github.com/pigworker/Ohrid-Agda)
-* Introduction to programming with dependent types in Scala (2019) - Dmytro Mitin [(course)](https://stepik.org/course/49181/promo)
+* Introduction to programming with dependent types in Scala (2019) - Dmytro Mitin [(course)](https://stepik.org/course/49181/promo), based on library [ProvingGround](http://siddhartha-gadgil.github.io/ProvingGround/)
 
 # [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
