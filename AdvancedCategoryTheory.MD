@@ -66,14 +66,12 @@ This is very opinionated selection of authors that publish interesting papers ab
 * School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
 * Advanced Topics in Programming Languages CIS 670 - Penn - Stephanie Weirich [(course notes, code)](https://github.com/plclub/cis670-16fa)
 * [Coq Winter School 2018](https://team.inria.fr/marelle/en/coq-winter-school-2018/)
-
 * [Formalizing 100 Theorems](http://www.cs.ru.nl/~freek/100/) [Isabelle](http://www.cse.unsw.edu.au/~kleing/top100/) [Coq](https://madiot.fr/coq100/), [Top 100 Mathematical Theorems In Coq](https://github.com/coq/coq/wiki/Top100MathematicalTheoremsInCoq)
+
 
 # [Dependent Types](https://ncatlab.org/nlab/show/dependent+type+theory), [HoTT](https://ncatlab.org/nlab/show/homotopy+type+theory)
 
-* Introduction to homotopy type theory - EUTypes Summer School 2017 - Thorsten Altenkirch [(paper)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf)
-* Introduction to Homotopy Type Theory (Agda) - EUTypes Summer School 2018 - Fredrik Nordvall Forsberg [(course)](https://personal.cis.strath.ac.uk/fredrik.nordvall-forsberg/ohrid-school-hott2018/)
-* Introduction to Dependent Type Theory - Matthieu Sozeau [(course)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
+* Introduction to Homotopy Type Theory - [EUTypes Summer School 2017](https://sites.google.com/view/summerschool2017-eutypes/home) - Thorsten Altenkirch [(lecture notes)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf)
 * On Voevodsky’s Univalence principle - André Joyal [(video, paper)](https://video.ias.edu/VoevodskyMemConf-2018/0911-AndreJoyal) (mathematical foundations behind HoTT and Univalence principle)
 * Computational Type Theory - OPLSS 2018 - Robert Harper [(course)](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php#Harper), lecture notes, high quality videos, [(video playlist)](https://www.youtube.com/watch?v=LE0SSLizYUI&list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z) - lower quality videos, (course Programming Languages Background by Robert Harper and Dan Licata is recommended before this course - [OPLSS 2017](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php))
 * Homotopy Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/hott/) lecture notes, papers
@@ -86,6 +84,8 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Advanced Functional Programming (in Agda) - University of Strathclyde - Conor McBride [(github 2017)](https://github.com/pigworker/CS410-17), [(github 2018)](https://github.com/pigworker/CS410-18)
 * [Dependently typed programming in Agda - EUTypes Summer School 2017 - Conor McBride](https://sites.google.com/view/summerschool2017-eutypes/lectures/dependently-typed-programming-in-agda) [(github)](https://github.com/pigworker/Ohrid-Agda)
 * Introduction to programming with dependent types in Scala (2019) - Dmytro Mitin [(course)](https://stepik.org/course/49181/promo), based on library [ProvingGround](http://siddhartha-gadgil.github.io/ProvingGround/) that was used to [solve Polymath 14 problem](https://polymathprojects.org/2018/01/26/spontaneous-polymath-14-a-success/) resulting in [(paper)](https://arxiv.org/abs/1801.03908)
+* Introduction to Homotopy Type Theory (Agda) - EUTypes Summer School 2018 - Fredrik Nordvall Forsberg [(slide, exercises src)](https://personal.cis.strath.ac.uk/fredrik.nordvall-forsberg/ohrid-school-hott2018/)
+* Introduction to Dependent Type Theory - EUTypes Summer School 2018 - Matthieu Sozeau [(slides)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
 
 # [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
