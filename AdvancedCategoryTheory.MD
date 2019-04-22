@@ -1,5 +1,8 @@
 # [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
+* Category Theory for Programmers - Bartosz Milewski [(book)](https://www.blurb.com/b/9008339-category-theory-for-programmers) put together by [Igal Tabachnik](https://github.com/hmemcpy) as [(online version)](https://github.com/hmemcpy/milewski-ctfp-pdf); also available as [(video lectures part I)](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_), [(part 2)](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm), [(part 3)](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL) and [(series of blog posts)](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+* Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/)
+* Category Theory for Computing Science - Michael Barr, Charles Wells [(book)](http://tac.mta.ca/tac/reprints/articles/22/tr22abs.html)
 * Basic Category Theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1612.09375)
 * Introduction to Categories and Categorical Logic - Samson Abramsky, Nikos Tzevelekos [(arXiv)](https://arxiv.org/abs/1102.1313)
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
@@ -10,26 +13,31 @@
 * Induction, Coinduction, and Fixed Points: A Concise Comparative Survey - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1812.10026)
 * Mutual Coinduction - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1903.06514)
 * On terminal coalgebras derived from initial algebras - Jiri Adamek [(arXiv)](https://arxiv.org/abs/cs/0609040)
-* Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/)
 * Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
 
 # [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
+* Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316)
+* Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
+* What is Applied Category Theory? - Tai-Danae Bradley [(pdf)](https://arxiv.org/abs/1809.05923)
 * Network Models - John C. Baez, John Foley, Joseph Moeller, Blake S. Pollard [(arXiv)](https://arxiv.org/abs/1711.00037)
 * A coalgebraic model of graphs - Christian Jäkel [(arXiv)](https://arxiv.org/abs/1508.02169)
 * Coalgebraic Modelling Applications in Automata Theory and Modal Logic - Helle Hvid Hansen [(pdf)](https://www.cs.vu.nl/en/Images/HH_Hansen_14-05-2009_tcm210-259639.pdf)
 * [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
 * Applied Category Theory Workshop in Leiden [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
 * Compositional game theory reading list - Jules Hedges [(blog post)](https://julesh.com/2017/11/09/compositional-game-theory-reading-list/)
-* Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316)
-* Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
-* What is Applied Category Theory? - Tai-Danae Bradley [(pdf)](https://arxiv.org/abs/1809.05923)
 
-# Journals
+# Category Theory Journals
 
-* Theory and Applications of Categories [(journal)](http://138.73.27.39/tac/index.html), [Reprints](http://138.73.27.39/tac/reprints/index.html)
+* Theory and Applications of Categories [(journal)](http://tac.mta.ca/tac/index.html), [Reprints](http://tac.mta.ca/tac/reprints/index.html)
 * Categories and General Algebraic Structures with Applications [(journal)](http://www.cgasa.ir/)
 * Journal of Functional Programming [(journal)](https://www.cambridge.org/core/journals/journal-of-functional-programming)
+
+# Blos about Category Theory in software development
+
+* Programming Cafe - Bartosz Milewski [(blog)](https://bartoszmilewski.com/)
+* The Comonad.Reader - Edward Kmett [blog](http://comonad.com/reader/), EdK almost single handed, encoded Category Theory abstractions in Haskell, blog co authored by Gershom Bazerman, Dan Doel
+* Rúnar Bjarnason blogs [Apocalisp](https://apocalisp.wordpress.com/), [Higher Order](https://blog.higher-order.com/)
 
 # Publications
 
