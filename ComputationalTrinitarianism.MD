@@ -53,7 +53,7 @@ Here are resources I found very usefull to learn more about Category theory, Typ
 * Categories and General Algebraic Structures with Applications [(journal)](http://www.cgasa.ir/)
 * Journal of Functional Programming [(journal)](https://www.cambridge.org/core/journals/journal-of-functional-programming)
 
-# Blos about Category Theory in software development
+# Blogs about Category Theory in software development
 
 * Programming Cafe - Bartosz Milewski [(blog)](https://bartoszmilewski.com/)
 * The Comonad.Reader - Edward Kmett [blog](http://comonad.com/reader/), EdK almost single handed, encoded Category Theory abstractions in Haskell, blog co authored by Gershom Bazerman, Dan Doel
