@@ -1,14 +1,22 @@
+# Computational trinitarianism
+
 There are many connections between:
 - Mathematical Logic (Type theory, Dependent types, Homotopy type theory, Cubical type theory, Proof theory)
 - Category Theory (basic category theory, Higher topos theory)
 - Topology (Homotopy theory)
 
 [Computational trinitarianism](https://ncatlab.org/nlab/show/computational+trinitarianism) combines
-ideas of [proofs as programs](https://ncatlab.org/nlab/show/proofs+as+programs) (known also as Curry–Howard isomorphism)
-and [proofs as programs](https://ncatlab.org/nlab/show/proofs+as+programs).
+ideas of [propositions as types](https://ncatlab.org/nlab/show/propositions+as+types) (known also as Curry–Howard isomorphism) and [proofs as programs](https://ncatlab.org/nlab/show/proofs+as+programs).
 
-Type theory (especially Homotopy type theory) is also used as [foundations of mathematics](https://ncatlab.org/nlab/show/foundation+of+mathematics) ([univalent foundations](https://en.wikipedia.org/wiki/Univalent_foundations)).
-It solved paradoxes found in Set theory and provide elegant and formal approach to computerised poofs.
+Proof theory in form of proof assistants is used to verify propertis of type systems, algorithms or compilers.
+It is also used directly in prorammin in form of logic programming languages like [Prolog](https://en.wikibooks.org/wiki/Prolog) and constraint programming libraries [JR 331](https://jcp.org/en/jsr/detail?id=331).
+
+Homotopy type theory is used as [foundations of mathematics](https://ncatlab.org/nlab/show/foundation+of+mathematics) ([univalent foundations](https://en.wikipedia.org/wiki/Univalent_foundations)).
+It avoid paradoxes found in Set theory (type theory in general) and provide elegant and formal approach to computerised poofs. Moreover HoTT itself influence homotopy theory and higher category theory (see: [Dan Licata - A Functional Programmer's Guide to Homotopy Type Theory](https://www.youtube.com/watch?v=caSOTjr1z18) and [introduction in HoTT book](https://homotopytypetheory.org/book/)).
+
+Category theory provides language usefull to talk about physics, is a source of abstractions - widely used in functional programming.
+
+Here are resources I found very usefull to learn more about Category theory, Type theory and Proof theory and different flavours of logic. At the end interesting resources about Haskell - one need to grasp many languages to make sens out of those: Haskell (for almost all the papers), Coq (for proof related stuff) and some language with dependent types: [Idris](http://docs.idris-lang.org/en/latest/tutorial/index.html#tutorial-index) (has [codata](http://docs.idris-lang.org/en/latest/tutorial/typesfuns.html#codata-types) and is probably most industry oriented/non academic) or Agda (has [support for cubical type theory](https://agda.readthedocs.io/en/v2.6.0/language/cubical.html)).
 
 # [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
@@ -115,9 +123,11 @@ This is very opinionated selection of authors that publish interesting papers ab
 * On Voevodsky’s Univalence principle - André Joyal [(video, paper)](https://video.ias.edu/VoevodskyMemConf-2018/0911-AndreJoyal) (mathematical foundations behind HoTT and Univalence principle)
 * Introduction to Homotopy Type Theory (Agda) - EUTypes Summer School 2018 - Fredrik Nordvall Forsberg [(slide, exercises src)](https://personal.cis.strath.ac.uk/fredrik.nordvall-forsberg/ohrid-school-hott2018/)
 * Introduction to Dependent Type Theory - EUTypes Summer School 2018 - Matthieu Sozeau [(slides)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
+* HOTTEST - Homotopy Type Theory Electronic Seminar Talks - research talks about HoTT [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html)
 
 # [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
+* Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martin Escardo [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
 * Cubical type theory for dummies [(gist)](https://gist.github.com/AndyShiue/cfc8c75f8b8655ca7ef2ffeb8cfb1faf/)
 * Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg [(paper)](https://arxiv.org/abs/1611.02108), implementation: [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt) [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
 * Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
