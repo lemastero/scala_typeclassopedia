@@ -35,13 +35,13 @@
 
 This is very opinionated selection of authors that publish interesting papers about `Category Theory`. Many of those papers are about `Type Theory` (especially `Dependent Types`) or `Functional Programming Languages`. Some of authors publish only about dependent types (like E. Brady) or Haskell (S.P. Jones) and ignore CT topics. But because [computational trinitarianism](https://ncatlab.org/nlab/show/computational+trinitarianism) those qualify as well :) 
 
-* Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls) [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
-* Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html) [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
-* [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg) [personal page](http://okmij.org/ftp/)
+* Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls), [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
+* Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
+* [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg), [personal page](http://okmij.org/ftp/)
 * [Jeremy Gibbons](https://dblp.uni-trier.de/pers/hd/g/Gibbons:Jeremy?q=Jeremy%20Gibbons)
 * [Ralf Hinze](https://dblp.uni-trier.de/pers/hd/h/Hinze:Ralf)
 * [John Hughes](https://www.researchgate.net/profile/John_Hughes13)
-* [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal) [personal page](http://conal.net/papers/)
+* [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal), [personal page](http://conal.net/papers/)
 * [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/)
 * [Exequiel Rivas](https://dblp.org/pers/hd/r/Rivas:Exequiel)
 * [Mauro Jaskelioff](https://dblp.uni-trier.de/pers/hd/j/Jaskelioff:Mauro)
@@ -50,15 +50,15 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Philipp Haller](https://dblp.org/pers/hd/a/Amin:Nada)
 * [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
 * [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada)
-* [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter) [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
-* [Ulf Norell](https://dblp.uni-trier.de/pers/hd/n/Norell:Ulf) [Chalmers](http://www.cse.chalmers.se/~ulfn/) [University of Gothenburg](https://www.gu.se/english/about_the_university/staff/?publicationPageNumber=1&selectedTab=2&languageId=100001&userId=xnoreu)
-* [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb) [personal page](https://edwinb.wordpress.com/publications/)
-* [Simon Peyton Jones](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
+* [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter), [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
+* [Ulf Norell](https://dblp.uni-trier.de/pers/hd/n/Norell:Ulf), [University of Gothenburg page](https://www.gu.se/english/about_the_university/staff/?publicationPageNumber=1&selectedTab=2&languageId=100001&userId=xnoreu)
+* [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb), [personal page](https://edwinb.wordpress.com/publications/)
+* [Simon Peyton Jones](https://dblp.uni-trier.de/pers/hd/j/Jones:Simon_L=_Peyton), [MS Reasearch page](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
+* [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
 
 # [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
 * DeepSpec Summer School 2017 [(video playlist)](https://www.youtube.com/watch?v=jG61w5pOc2A&list=PLovJjGVqXXf3RgVdCXH96pPwSjFLDhSri) first couple of videos are based on Software Foundations [(book)](https://softwarefoundations.cis.upenn.edu/), [(2018 videos)](https://deepspec.org/event/dsss18/videos.html)
-* Programming Language Foundations in Agda [(book)](https://plfa.github.io/)
 * The Coq proof assistant and the Mathematical Components library - Enrico Tassi [(course)], slides, based on Mathematical Components [(book)](https://math-comp.github.io/mcb/), part of [EUTypes Summer School 2018](https://sites.google.com/view/2018eutypesschool/)
 * Basic Proof Theory — Frank Pfenning - OPLSS 2015 [(video lectures, notes)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
 * The Coq Proof Assistant and Its Applications to Programming-Language Semantics — Adam Chlipala - OPLSS 2015 [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
@@ -67,23 +67,31 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Advanced Topics in Programming Languages CIS 670 - Penn - Stephanie Weirich [(course notes, code)](https://github.com/plclub/cis670-16fa)
 * [Coq Winter School 2018](https://team.inria.fr/marelle/en/coq-winter-school-2018/)
 * [Formalizing 100 Theorems](http://www.cs.ru.nl/~freek/100/) [Isabelle](http://www.cse.unsw.edu.au/~kleing/top100/) [Coq](https://madiot.fr/coq100/), [Top 100 Mathematical Theorems In Coq](https://github.com/coq/coq/wiki/Top100MathematicalTheoremsInCoq)
+* Iris [(tutorial)](https://iris-project.org/tutorial-material.html), [(publications)](https://iris-project.org/) Higher-Order Concurrent Separation Logic Framework implemented
 
+# Software foundations using [Type Theory](https://ncatlab.org/nlab/show/type+theory)
+
+* Programming Language Foundations in Agda - Philip Wadler, Wen Kokke [(book)](https://plfa.github.io/)
+* Practical Foundations for Programming Languages - Robert Harper [(book)](https://www.cs.cmu.edu/~rwh/pfpl/)
+* Programming Languages Background - OPLSS 2017 - Robert Harper, Dan Licata [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php)
 
 # [Dependent Types](https://ncatlab.org/nlab/show/dependent+type+theory), [HoTT](https://ncatlab.org/nlab/show/homotopy+type+theory)
 
 * Introduction to Homotopy Type Theory - [EUTypes Summer School 2017](https://sites.google.com/view/summerschool2017-eutypes/home) - Thorsten Altenkirch [(lecture notes)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf)
-* On Voevodsky’s Univalence principle - André Joyal [(video, paper)](https://video.ias.edu/VoevodskyMemConf-2018/0911-AndreJoyal) (mathematical foundations behind HoTT and Univalence principle)
-* Computational Type Theory - OPLSS 2018 - Robert Harper [(course)](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php#Harper), lecture notes, high quality videos, [(video playlist)](https://www.youtube.com/watch?v=LE0SSLizYUI&list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z) - lower quality videos, (course Programming Languages Background by Robert Harper and Dan Licata is recommended before this course - [OPLSS 2017](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php))
-* Homotopy Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/hott/) lecture notes, papers
-* Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
+* Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
+* Programming in Martin-Löf's Type Theory An Introduction - Bengt Nordström, Kent Petersson, Jan M. Smith [(book)](http://www.cse.chalmers.se/research/group/logic/book/)
 * Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
 * Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
-* Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
+* Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
+* Computational Type Theory - OPLSS 2018 - Robert Harper [(course)](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php#Harper), lecture notes, high quality videos, [(video playlist)](https://www.youtube.com/watch?v=LE0SSLizYUI&list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z) - lower quality videos
+* Homotopy Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/hott/) lecture notes, papers
+* Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
 * Kerodon (book about categorical homotopy theory)  [(book)](https://kerodon.net/kerodon.pdf) [(links)](https://kerodon.net/bibliography)
 * Dependent Types in the Idris Programming Language - OPLSS 2017 - Edwin Brady [(slides, examples)](https://www.idris-lang.org/documentation/workshops/oplss-2017-course-materials/) [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php)
 * Advanced Functional Programming (in Agda) - University of Strathclyde - Conor McBride [(github 2017)](https://github.com/pigworker/CS410-17), [(github 2018)](https://github.com/pigworker/CS410-18)
 * [Dependently typed programming in Agda - EUTypes Summer School 2017 - Conor McBride](https://sites.google.com/view/summerschool2017-eutypes/lectures/dependently-typed-programming-in-agda) [(github)](https://github.com/pigworker/Ohrid-Agda)
 * Introduction to programming with dependent types in Scala (2019) - Dmytro Mitin [(course)](https://stepik.org/course/49181/promo), based on library [ProvingGround](http://siddhartha-gadgil.github.io/ProvingGround/) that was used to [solve Polymath 14 problem](https://polymathprojects.org/2018/01/26/spontaneous-polymath-14-a-success/) resulting in [(paper)](https://arxiv.org/abs/1801.03908)
+* On Voevodsky’s Univalence principle - André Joyal [(video, paper)](https://video.ias.edu/VoevodskyMemConf-2018/0911-AndreJoyal) (mathematical foundations behind HoTT and Univalence principle)
 * Introduction to Homotopy Type Theory (Agda) - EUTypes Summer School 2018 - Fredrik Nordvall Forsberg [(slide, exercises src)](https://personal.cis.strath.ac.uk/fredrik.nordvall-forsberg/ohrid-school-hott2018/)
 * Introduction to Dependent Type Theory - EUTypes Summer School 2018 - Matthieu Sozeau [(slides)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
 
