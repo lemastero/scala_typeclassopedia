@@ -66,8 +66,8 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 # [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
-* DeepSpec Summer School 2017 [(video playlist)](https://www.youtube.com/watch?v=jG61w5pOc2A&list=PLovJjGVqXXf3RgVdCXH96pPwSjFLDhSri) first couple of videos are based on Software Foundations [(book)](https://softwarefoundations.cis.upenn.edu/), [(2018 videos)](https://deepspec.org/event/dsss18/videos.html)
-* The Coq proof assistant and the Mathematical Components library - Enrico Tassi [(course)], slides, based on Mathematical Components [(book)](https://math-comp.github.io/mcb/), part of [EUTypes Summer School 2018](https://sites.google.com/view/2018eutypesschool/)
+* DeepSpec Summer School [(2018 videos)](https://deepspec.org/event/dsss18/videos.html) [(2017 video playlist)](https://www.youtube.com/watch?v=jG61w5pOc2A&list=PLovJjGVqXXf3RgVdCXH96pPwSjFLDhSri), based on Software Foundations [(book)](https://softwarefoundations.cis.upenn.edu/)
+* The Coq proof assistant and the Mathematical Components library - Enrico Tassi [(course)](https://sites.google.com/view/2018eutypesschool/tassi?authuser=0), based on Mathematical Components [(book)](https://math-comp.github.io/mcb/), part of [EUTypes Summer School 2018](https://sites.google.com/view/2018eutypesschool/)
 * Basic Proof Theory — Frank Pfenning - OPLSS 2015 [(video lectures, notes)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
 * The Coq Proof Assistant and Its Applications to Programming-Language Semantics — Adam Chlipala - OPLSS 2015 [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
 * Program Verification with F* - Danel Ahman [(slides, exercises)](https://danel.ahman.ee/teaching/eutypes2018/)
@@ -81,6 +81,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 * Programming Language Foundations in Agda - Philip Wadler, Wen Kokke [(book)](https://plfa.github.io/)
 * Practical Foundations for Programming Languages - Robert Harper [(book)](https://www.cs.cmu.edu/~rwh/pfpl/)
+* Types and Programming Languages - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/15814-f18/schedule.html)
 * Programming Languages Background - OPLSS 2017 - Robert Harper, Dan Licata [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php)
 
 # [Dependent Types](https://ncatlab.org/nlab/show/dependent+type+theory), [HoTT](https://ncatlab.org/nlab/show/homotopy+type+theory)
