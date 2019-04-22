@@ -1,4 +1,4 @@
-# Computational trinitarianism resources
+# [Computational trinitarianism resources](https://ncatlab.org/nlab/show/computational+trinitarianism)
 
 ## [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
