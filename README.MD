@@ -199,7 +199,7 @@
 * [Optics](./Optics.MD)
 
 * [Resource About Category Theory](#resource-about-category-theory)
-  * [Mathematical resources about Category Theory](./AdvancedCategoryTheory.MD)
+  * [Mathematical resources about Category Theory](ComputationalTrinitarianism.MD)
 
 * [Functor Oriented Programming](#functor-oriented-programming)
 
