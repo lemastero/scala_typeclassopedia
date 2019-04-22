@@ -1,24 +1,6 @@
-# Computational trinitarianism
+# Computational trinitarianism resources
 
-There are many connections between:
-- Mathematical Logic (Type theory, Dependent types, Homotopy type theory, Cubical type theory, Proof theory)
-- Category Theory (basic category theory, Higher topos theory)
-- Topology (Homotopy theory)
-
-[Computational trinitarianism](https://ncatlab.org/nlab/show/computational+trinitarianism) combines
-ideas of [propositions as types](https://ncatlab.org/nlab/show/propositions+as+types) (known also as Curry–Howard isomorphism) and [proofs as programs](https://ncatlab.org/nlab/show/proofs+as+programs).
-
-Proof theory in form of proof assistants is used to verify propertis of type systems, algorithms or compilers.
-It is also used directly in prorammin in form of logic programming languages like [Prolog](https://en.wikibooks.org/wiki/Prolog) and constraint programming libraries [JR 331](https://jcp.org/en/jsr/detail?id=331).
-
-Homotopy type theory is used as [foundations of mathematics](https://ncatlab.org/nlab/show/foundation+of+mathematics) ([univalent foundations](https://en.wikipedia.org/wiki/Univalent_foundations)).
-It avoid paradoxes found in Set theory (type theory in general) and provide elegant and formal approach to computerised poofs. Moreover HoTT itself influence homotopy theory and higher category theory (see: [Dan Licata - A Functional Programmer's Guide to Homotopy Type Theory](https://www.youtube.com/watch?v=caSOTjr1z18) and [introduction in HoTT book](https://homotopytypetheory.org/book/)).
-
-Category theory provides language usefull to talk about physics, is a source of abstractions - widely used in functional programming.
-
-Here are resources I found very usefull to learn more about Category theory, Type theory and Proof theory and different flavours of logic. At the end interesting resources about Haskell - one need to grasp many languages to make sens out of those: Haskell (for almost all the papers), Coq (for proof related stuff) and some language with dependent types: [Idris](http://docs.idris-lang.org/en/latest/tutorial/index.html#tutorial-index) (has [codata](http://docs.idris-lang.org/en/latest/tutorial/typesfuns.html#codata-types) and is probably most industry oriented/non academic) or Agda (has [support for cubical type theory](https://agda.readthedocs.io/en/v2.6.0/language/cubical.html)).
-
-# [Category Theory](https://ncatlab.org/nlab/show/category+theory)
+## [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
 * Category Theory for Programmers - Bartosz Milewski [(book)](https://www.blurb.com/b/9008339-category-theory-for-programmers) put together by [Igal Tabachnik](https://github.com/hmemcpy) as [(online version)](https://github.com/hmemcpy/milewski-ctfp-pdf); also available as [(video lectures part I)](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_), [(part 2)](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm), [(part 3)](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL) and [(series of blog posts)](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 * Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/)
@@ -35,7 +17,7 @@ Here are resources I found very usefull to learn more about Category theory, Typ
 * On terminal coalgebras derived from initial algebras - Jiri Adamek [(arXiv)](https://arxiv.org/abs/cs/0609040)
 * Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
 
-# [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
+## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
 * Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316)
 * Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
@@ -47,19 +29,19 @@ Here are resources I found very usefull to learn more about Category theory, Typ
 * Applied Category Theory Workshop in Leiden [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
 * Compositional game theory reading list - Jules Hedges [(blog post)](https://julesh.com/2017/11/09/compositional-game-theory-reading-list/)
 
-# Category Theory Journals
+## Category Theory Journals
 
 * Theory and Applications of Categories [(journal)](http://tac.mta.ca/tac/index.html), [Reprints](http://tac.mta.ca/tac/reprints/index.html)
 * Categories and General Algebraic Structures with Applications [(journal)](http://www.cgasa.ir/)
 * Journal of Functional Programming [(journal)](https://www.cambridge.org/core/journals/journal-of-functional-programming)
 
-# Blogs about Category Theory in software development
+## Blogs about Category Theory in software development
 
 * Programming Cafe - Bartosz Milewski [(blog)](https://bartoszmilewski.com/)
 * The Comonad.Reader - Edward Kmett [blog](http://comonad.com/reader/), EdK almost single handed, encoded Category Theory abstractions in Haskell, blog co authored by Gershom Bazerman, Dan Doel
 * Rúnar Bjarnason blogs [Apocalisp](https://apocalisp.wordpress.com/), [Higher Order](https://blog.higher-order.com/)
 
-# Publications
+## Publications
 
 This is very opinionated selection of authors that publish interesting papers about `Category Theory`, `Type Theory` and other branches of `Logic`, `Proof Theory`.
 
@@ -84,7 +66,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Simon Peyton Jones](https://dblp.uni-trier.de/pers/hd/j/Jones:Simon_L=_Peyton), [MS Reasearch page](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
 * [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
 
-# [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
+## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
 * DeepSpec Summer School [(2018 videos)](https://deepspec.org/event/dsss18/videos.html) [(2017 video playlist)](https://www.youtube.com/watch?v=jG61w5pOc2A&list=PLovJjGVqXXf3RgVdCXH96pPwSjFLDhSri), based on Software Foundations [(book)](https://softwarefoundations.cis.upenn.edu/)
 * The Coq proof assistant and the Mathematical Components library - Enrico Tassi [(course)](https://sites.google.com/view/2018eutypesschool/tassi?authuser=0), based on Mathematical Components [(book)](https://math-comp.github.io/mcb/), part of [EUTypes Summer School 2018](https://sites.google.com/view/2018eutypesschool/)
@@ -97,14 +79,14 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Formalizing 100 Theorems](http://www.cs.ru.nl/~freek/100/) [Isabelle](http://www.cse.unsw.edu.au/~kleing/top100/) [Coq](https://madiot.fr/coq100/), [Top 100 Mathematical Theorems In Coq](https://github.com/coq/coq/wiki/Top100MathematicalTheoremsInCoq)
 * Iris [(tutorial)](https://iris-project.org/tutorial-material.html), [(publications)](https://iris-project.org/) Higher-Order Concurrent Separation Logic Framework implemented
 
-# Software foundations using [Type Theory](https://ncatlab.org/nlab/show/type+theory)
+## Software foundations using [Type Theory](https://ncatlab.org/nlab/show/type+theory)
 
 * Programming Language Foundations in Agda - Philip Wadler, Wen Kokke [(book)](https://plfa.github.io/)
 * Practical Foundations for Programming Languages - Robert Harper [(book)](https://www.cs.cmu.edu/~rwh/pfpl/)
 * Types and Programming Languages - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/15814-f18/schedule.html)
 * Programming Languages Background - OPLSS 2017 - Robert Harper, Dan Licata [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer17/topics.php)
 
-# [Dependent Types](https://ncatlab.org/nlab/show/dependent+type+theory), [HoTT](https://ncatlab.org/nlab/show/homotopy+type+theory)
+## [Dependent Types](https://ncatlab.org/nlab/show/dependent+type+theory), [HoTT](https://ncatlab.org/nlab/show/homotopy+type+theory)
 
 * Introduction to Homotopy Type Theory - [EUTypes Summer School 2017](https://sites.google.com/view/summerschool2017-eutypes/home) - Thorsten Altenkirch [(lecture notes)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf)
 * Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
@@ -125,7 +107,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Introduction to Dependent Type Theory - EUTypes Summer School 2018 - Matthieu Sozeau [(slides)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
 * HOTTEST - Homotopy Type Theory Electronic Seminar Talks - research talks about HoTT [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html)
 
-# [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
+## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
 * Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martin Escardo [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
 * Cubical type theory for dummies [(gist)](https://gist.github.com/AndyShiue/cfc8c75f8b8655ca7ef2ffeb8cfb1faf/)
@@ -133,7 +115,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
 * Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
 
-# Specification of dependent types
+## Specification of dependent types
 
 * A Specification for Dependent Types in Haskell - Stephanie Weirich, Antoine Voizard, Pedro Henrique Azevedo de Amorim, 
 Richard A. Eisenberg [(video)](https://www.youtube.com/watch?v=0157rUxC4_8) [(paper)](https://dl.acm.org/citation.cfm?id=3110275) [(repo)](https://github.com/sweirich/corespec)
@@ -143,12 +125,12 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
 
 
-# Other PLT Resources
+## Other PLT Resources
 
 * [Programming Language Theory - Steven Shaw](https://steshaw.org/plt/)
 * [cohomolo-gy/haskell-resources - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
 
-# Haskell courses
+## Haskell courses
 
 * [FP Course](https://github.com/data61/fp-course)
 * [Let's Lens](https://github.com/data61/lets-lens)
