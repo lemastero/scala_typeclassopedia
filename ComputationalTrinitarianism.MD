@@ -1,3 +1,15 @@
+There are many connections between:
+- Mathematical Logic (Type theory, Dependent types, Homotopy type theory, Cubical type theory, Proof theory)
+- Category Theory (basic category theory, Higher topos theory)
+- Topology (Homotopy theory)
+
+[Computational trinitarianism](https://ncatlab.org/nlab/show/computational+trinitarianism) combines
+ideas of [proofs as programs](https://ncatlab.org/nlab/show/proofs+as+programs) (known also as Curry–Howard isomorphism)
+and [proofs as programs](https://ncatlab.org/nlab/show/proofs+as+programs).
+
+Type theory (especially Homotopy type theory) is also used as [foundations of mathematics](https://ncatlab.org/nlab/show/foundation+of+mathematics) ([univalent foundations](https://en.wikipedia.org/wiki/Univalent_foundations)).
+It solved paradoxes found in Set theory and provide elegant and formal approach to computerised poofs.
+
 # [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
 * Category Theory for Programmers - Bartosz Milewski [(book)](https://www.blurb.com/b/9008339-category-theory-for-programmers) put together by [Igal Tabachnik](https://github.com/hmemcpy) as [(online version)](https://github.com/hmemcpy/milewski-ctfp-pdf); also available as [(video lectures part I)](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_), [(part 2)](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm), [(part 3)](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL) and [(series of blog posts)](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
@@ -41,7 +53,7 @@
 
 # Publications
 
-This is very opinionated selection of authors that publish interesting papers about `Category Theory`. Many of those papers are about `Type Theory` (especially `Dependent Types`) or `Functional Programming Languages`. Some of authors publish only about dependent types (like E. Brady) or Haskell (S.P. Jones) and ignore CT topics. But because [computational trinitarianism](https://ncatlab.org/nlab/show/computational+trinitarianism) those qualify as well :) 
+This is very opinionated selection of authors that publish interesting papers about `Category Theory`, `Type Theory` and other branches of `Logic`, `Proof Theory`.
 
 * Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls), [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
 * Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
