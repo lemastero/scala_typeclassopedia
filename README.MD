@@ -180,6 +180,7 @@
   * [Align](#align)
   * [Task](#andrey-mokhov-task)
   * [Transducers](#transducers)
+  * [Relative monads](#relative-monads)
 
 * Limits
   * [Cone](#cone)
@@ -589,6 +590,7 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
   * [wiki.haskell - Blow your mind - Monad magic](https://wiki.haskell.org/Blow_your_mind#Monad_magic)
   * https://www.quora.com/What-are-some-crazy-things-one-can-do-with-monads-in-Haskell
   * (Category Theory) Monads - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=9fohXBj2UEI&list=PL0E91279846EC843E)
+  * (Type Theory) The Partiality Monad Achim Jung Fest An Intersection of Neighbourhoods - Thorsten Altenkirch [(slides)](http://www.cs.nott.ac.uk/~psztxa/talks/achimfest.pdf) (partial evaluation modeled using Monads)
   * Tail Call Elimination in Scala Monads [(blog post)](https://apocalisp.wordpress.com/2011/10/26/tail-call-elimination-in-scala-monads/)
   * MonadMask vs MonadBracket - Michael Snoyman [blog post](https://www.fpcomplete.com/blog/2017/02/monadmask-vs-monadbracket)
   * Functional Patterns in C++, 3. Async API, Monoid, Monad - Bartosz Milewski [video](https://www.youtube.com/watch?v=ozN6XxsAF84)
@@ -3027,6 +3029,13 @@ Resources:
   * (Haskell) Understanding Clojure transducers through types - Franklin Chen [(blog post)](https://conscientiousprogrammer.com/blog/2014/08/07/understanding-cloure-transducers-through-types/)
   * (Haskell) Transducers are monoid homomorphisms - Oleksandr Manzyuk [(blog post)](https://oleksandrmanzyuk.wordpress.com/2014/08/09/transducers-are-monoid-homomorphisms/)
   * (Haskell) Transducers, Mappers and Reducers - giuliohome [(blog post)](https://giuliohome.wordpress.com/2017/05/22/transducers-mappers-and-reducers/)
+
+## Relative monads
+
+Monads thats wokrs on different categories.
+
+Resources:
+  * (Type Theory) Monads Need Not Be Endofunctors - Thorsten Altenkirch, James Chapman, Tarmo Uustalu [(paper)](http://www.cs.nott.ac.uk/~psztxa/talks/scotcats-slides.pdf)
 
 ## Commutative
 
