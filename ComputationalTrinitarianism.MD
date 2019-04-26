@@ -3,7 +3,7 @@
 ## [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
 * Category Theory for Programmers - Bartosz Milewski [(book)](https://www.blurb.com/b/9008339-category-theory-for-programmers) put together by [Igal Tabachnik](https://github.com/hmemcpy) as [(online version)](https://github.com/hmemcpy/milewski-ctfp-pdf); also available as [(video lectures part I)](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_), [(part 2)](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm), [(part 3)](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL) and [(series of blog posts)](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
-* Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/)
+* Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/), [(MGS 2009 version - slides, solutions to exercises)](http://www.cs.nott.ac.uk/~psztxa/mgs.2009/)
 * Category Theory for Computing Science - Michael Barr, Charles Wells [(book)](http://tac.mta.ca/tac/reprints/articles/22/tr22abs.html)
 * Basic Category Theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1612.09375)
 * Introduction to Categories and Categorical Logic - Samson Abramsky, Nikos Tzevelekos [(arXiv)](https://arxiv.org/abs/1102.1313)
@@ -88,7 +88,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 ## [Dependent Types](https://ncatlab.org/nlab/show/dependent+type+theory), [HoTT](https://ncatlab.org/nlab/show/homotopy+type+theory)
 
-* Introduction to Homotopy Type Theory - [EUTypes Summer School 2017](https://sites.google.com/view/summerschool2017-eutypes/home) - Thorsten Altenkirch [(lecture notes)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf)
+* Introduction to Homotopy Type Theory - [EUTypes Summer School 2017](https://sites.google.com/view/summerschool2017-eutypes/home) - Thorsten Altenkirch [(lecture notes)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf), [(video with similar scope - Naïve Type Theory by Thorsten)](https://www.youtube.com/watch?v=bNG53SA4n48), [(slides 2017)](http://www.cs.nott.ac.uk/~psztxa/talks/s-repls-17.pdf), [(slides 2018)](http://www.cs.nott.ac.uk/~psztxa/talks/fmv18.pdf)
 * Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
 * Programming in Martin-Löf's Type Theory An Introduction - Bengt Nordström, Kent Petersson, Jan M. Smith [(book)](http://www.cse.chalmers.se/research/group/logic/book/)
 * Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
