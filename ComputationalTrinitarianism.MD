@@ -11,6 +11,8 @@
 * Induction, Coinduction, and Fixed Points: A Concise Comparative Survey - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1812.10026)
 * Mutual Coinduction - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1903.06514)
 * On terminal coalgebras derived from initial algebras - Jiri Adamek [(arXiv)](https://arxiv.org/abs/cs/0609040)
+* Category Theory Study Group [(video playlist)](https://www.youtube.com/channel/UCDXHYyvGJBxbIdmpmnz4cIw/videos)
+* Takt Category Theory - Runar Bjarnason [(video playlist)](https://www.youtube.com/playlist?list=PLq3_mvFPbUXcVETGuvOeLL26mBIMA8Xzt)
 
 ### [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
@@ -114,8 +116,9 @@ This is very opinionated selection of authors that publish interesting papers ab
 * On Voevodsky’s Univalence principle - André Joyal [(video, paper)](https://video.ias.edu/VoevodskyMemConf-2018/0911-AndreJoyal) (mathematical foundations behind HoTT and Univalence principle)
 * Introduction to Homotopy Type Theory (Agda) - EUTypes Summer School 2018 - Fredrik Nordvall Forsberg [(slide, exercises src)](https://personal.cis.strath.ac.uk/fredrik.nordvall-forsberg/ohrid-school-hott2018/)
 * Introduction to Dependent Type Theory - EUTypes Summer School 2018 - Matthieu Sozeau [(slides)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
-* HOTTEST - Homotopy Type Theory Electronic Seminar Talks - research talks about HoTT [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html)
-* Workshop: "Types, Homotopy, Type theory, and Verification" [(video playlist)](https://www.youtube.com/playlist?list=PLul8LCT3AJqQxIaZhaSNCTuLYfIFB1AiI)
+* HOTTEST - Homotopy Type Theory Electronic Seminar Talks - 2018 - present [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html)
+* Workshop: "Types, Homotopy, Type theory, and Verification" 2018 [(video playlist)](https://www.youtube.com/playlist?list=PLul8LCT3AJqQxIaZhaSNCTuLYfIFB1AiI), [(schedule, abstracts, links to videos)](https://www.him.uni-bonn.de/programs/past-programs/past-trimester-programs/types-sets-constructions/workshop-types-homotopy-type-theory-and-verification/schedule/)
+* FAMOUS - Foundations of Mathematics: Univalent foundations and set theory 2016 [(video playlist)](https://www.youtube.com/watch?v=slVcTtwX_Sk&list=PLQRKUSOIMEh1Arz0-WBgD_Pol4S50HATv), [(videos, slides, abstracts)](http://fomus.weebly.com/talks-abstracts--videos.html)
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
