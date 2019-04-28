@@ -115,6 +115,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Introduction to Homotopy Type Theory (Agda) - EUTypes Summer School 2018 - Fredrik Nordvall Forsberg [(slide, exercises src)](https://personal.cis.strath.ac.uk/fredrik.nordvall-forsberg/ohrid-school-hott2018/)
 * Introduction to Dependent Type Theory - EUTypes Summer School 2018 - Matthieu Sozeau [(slides)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
 * HOTTEST - Homotopy Type Theory Electronic Seminar Talks - research talks about HoTT [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html)
+* Workshop: "Types, Homotopy, Type theory, and Verification" [(video playlist)](https://www.youtube.com/playlist?list=PLul8LCT3AJqQxIaZhaSNCTuLYfIFB1AiI)
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
