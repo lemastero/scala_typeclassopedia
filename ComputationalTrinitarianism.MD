@@ -8,14 +8,24 @@
 * Basic Category Theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1612.09375)
 * Introduction to Categories and Categorical Logic - Samson Abramsky, Nikos Tzevelekos [(arXiv)](https://arxiv.org/abs/1102.1313)
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
-* An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
-* Toposes, Triples and Theories - Michael Barr, Charles Wells [(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
-* Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
-* An informal introduction to topos theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1012.5647)
 * Induction, Coinduction, and Fixed Points: A Concise Comparative Survey - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1812.10026)
 * Mutual Coinduction - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1903.06514)
 * On terminal coalgebras derived from initial algebras - Jiri Adamek [(arXiv)](https://arxiv.org/abs/cs/0609040)
+
+### [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
+* Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
+* An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
+* The periodic table of n-categories - Eugenia Cheng [(video)](https://www.youtube.com/watch?v=lJGUMlgCxz8)
 * Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
+
+### [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
+* An informal introduction to topos theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1012.5647)
+* Toposes, Triples and Theories - Michael Barr, Charles Wells [(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
+* Topos theoretic background - Olivia Caramello [(paper)](http://www.oliviacaramello.com/Unification/ToposTheoreticPreliminariesOliviaCaramello.pdf)
+* Introduction to categorical logic, classifying toposes and the bridge technique - Olivia Caramello [(videos with TOC)](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/20151124-caramello)
+* (https://www.youtube.com/playlist?list=PLx5f8IelFRgFjhhrWWl96sRSClcG5YIx6)
+* [Toposes in Como 2018](http://tcsc.lakecomoschool.org/) conference: [(video playlist)](https://www.youtube.com/watch?v=85hAGaFCsD8&index=2&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp), [(slides from talks)](http://tcsc.lakecomoschool.org/program/); There are introductory lectures [Some glances at topos theory - Francis Borceux](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/joyal)
+* [Topos à l’IHES 2015](https://indico.math.cnrs.fr/event/747/) conference: [(video playlist)](https://www.youtube.com/playlist?list=PLx5f8IelFRgFjhhrWWl96sRSClcG5YIx6)
 
 ## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
