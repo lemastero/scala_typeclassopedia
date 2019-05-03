@@ -42,6 +42,10 @@
   * [Divide (Contravariant Apply)](#divide-contravariant-apply)
   * [Divisible (Contravariant Applicative)](#divisible-contravariant-applicative)
 
+* Contravariant Adjuctions & Representable
+  * [Contravariant Adjunction](#contravariant-adjunction)
+  * [Contravariant Rep](#contravariant-rep)
+
 * [Contravariant Kan Extensions](#contravariant-kan-extensions)
   * [Contravariant Yoneda](#contravariant-yoneda)
   * [Contravariant Coyoneda](#contravariant-coyoneda)
@@ -234,7 +238,7 @@ trait Functor[F[_]] {
 }
 ```
 
-* Functor Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html) [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2) [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+* Functor Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html), [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2), [nLab](https://ncatlab.org/nlab/show/functor), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/Functors.v), [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
 
 * Functor Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/FunctorLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L98-L107) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Functor.html#t:Functor)):
   1. identify: `xs.map(identity) == xs`
@@ -578,7 +582,7 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
 
 * Implementations:  
   FlatMap/Bind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
-  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr) [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad)
+  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr) [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
 
 * Resources
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
@@ -836,7 +840,7 @@ trait Contravariant[F[_]] {
 }
 ```
 
-[Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant)
+[Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Presheaf.v), [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
 
 * Contravariant laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ContravariantLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
 
@@ -1515,10 +1519,10 @@ trait NaturalTransf[F[_], G[_]] {
 }
 ```
 
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala), [Haskell](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html), [nLab](https://ncatlab.org/nlab/show/natural+transformation), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/NaturalTransformations.v),
+
 * Resources
-  * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala)
-  * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala)
-  * [Haskell natural-transformation/Control-Natural](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html)
+  * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html)
   * Natural transformations - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=FZSUwqWjHCU&list=PLA28A5C9D19465C92)
 
 ## Free constructions
@@ -1531,11 +1535,11 @@ trait NaturalTransf[F[_], G[_]] {
 | Alternative         | [Free Alternative](#free-alternative)
 | Monad               | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
 | Comonad             | [CoFree](#cofree), [Density](#density-comonad) |
-| Profunctor          | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), Tambara, Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing, Traversing |
-| ProfunctorFunctor   | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), Tambara, Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing |
+| Profunctor          | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), [Tambara](#tambara), Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing, Traversing |
+| ProfunctorFunctor   | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), [Tambara](#tambara), Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing |
 | ProfunctorMonad     |          Pastro,            Copastro,             PastroSum,               CopastroSum,          Environment,                   FreeTraversing |
-| ProfunctorComonad   | Tambara,         Cotambara,           TambaraSum,           CotambaraSum,               Closure,              CofreeTraversing |
-| Strong              | Tambara, Pastro,                                                                       Traversing |
+| ProfunctorComonad   | [Tambara](#tambara),         Cotambara,           TambaraSum,           CotambaraSum,               Closure,              CofreeTraversing |
+| Strong              | [Tambara](#tambara), Pastro,                                                                       Traversing |
 | Costrong            |                  Cotambara, Copastro |
 | Choice              |                                       TambaraSum, PastroSum |
 | Cochoice            |                                                             CotambaraSum, CopastroSum, Traversing |
@@ -1620,7 +1624,7 @@ trait Representable[F[_], Rep] {
 }
 ```
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala), [Haskell](https://hackage.haskell.org/package/adjunctions-4.4/docs/Data-Functor-Rep.html)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala), [Haskell](https://hackage.haskell.org/package/adjunctions/docs/Data-Functor-Rep.html), [UniMath](https://github.com/UniMath/UniMath/tree/master/UniMath/CategoryTheory/RepresentableFunctors), [nLab](https://ncatlab.org/nlab/show/representable+functor)
 
 * Resources:
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
@@ -1629,6 +1633,7 @@ trait Representable[F[_], Rep] {
   * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
   * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
   * (Haskell) Radix Sort, Trie Trees, And Maps From Representable Functors - Chris Penner [(blog post)](https://chrispenner.ca/posts/representable-discrimination)
+  * (Haskell) [Monad.Representable.Reader](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-Reader.html), [Monad.Representable.State](http://hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-State.html), [Comonad.Representable.Store](http://hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Representable-Store.html)
   * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
   * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
   * https://stackoverflow.com/a/46502280
@@ -1652,13 +1657,15 @@ trait Adjunction[F[_], G[_]] {
 }
 ```
 
+* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala), [Haskell](hackage.haskell.org/package/adjunctions/docs/Data-Functor-Adjunction.html), [Purescript](https://github.com/freebroccolo/purescript-adjunctions/blob/master/docs/Data/Functor/Adjunction.md), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Adjunctions/Core.v), [nLab](https://ncatlab.org/nlab/show/adjunction)
+
 Adjunction can be defined between Reader monad and Coreader comonad.
 
 * Resources:
   * Adjunctions And Battleship - Chris Penner [(blog post)](https://chrispenner.ca/posts/adjunction-battleship)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [(video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
-  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala) [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala)
+  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala)
   * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
   * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
   * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
@@ -1669,6 +1676,7 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * [Adjunctions - M.M. Fokkinga, Lambert Meertens](https://research.utwente.nl/en/publications/adjunctions)
   * [Generic Programming with Adjunctions - Ralf Hinze](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
   * [Relational Algebra by Way of Adjunctions - Jeremy Gibbons, Fritz, Henglein, Ralf Hinze, Nicolas Wu](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/reladj.pdf)
+  * (Haskell) [Monad.Trans.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Trans-Adjoint.html), [Comonad.Trans.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Trans-Adjoint.html), [Monad.Trans.Contravariant.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Trans-Contravariant-Adjoint.html)
 
 ## (Co)Yoneda & (Co)Density & Kan Extensions
 
@@ -1720,7 +1728,9 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
   }
 ```
 
-* Yoneda efficiently stack computations. 
+* Yoneda efficiently stack computations.
+
+* Implementations scalaz [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala), [Purescript](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/covyoneda.v), [nlab](https://ncatlab.org/nlab/show/Yoneda+lemma)
 
 * Resources
   * https://vimeo.com/122708005
@@ -1728,10 +1738,6 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer [(video)](https://vimeo.com/96639840)
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * scalaz [(Yoneda src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala)
-  * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
-  * Purescript [](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda)
-  * [nlab Yoneda lemma](https://ncatlab.org/nlab/show/Yoneda+lemma)
   * Category Theory III 7.1, Natural transformations as ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=DseY4qIGZV4)
   
 ### Coyoneda
@@ -1786,7 +1792,7 @@ Finally to get back from Coyoneda fantazy land to reality of F, we need a proof 
 def lowerCoyoneda(implicit fun: Functor[F]): F[A]
 ```
 
-* Implementations: [calaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala), [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Coyoneda.html)
+* Implementations: [calaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Coyoneda.scala), [Haskell](https://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Coyoneda.html), [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
 
 * Resources
   * loop/recur Coyoneda [(video)](https://vimeo.com/122708005)
@@ -1794,8 +1800,6 @@ def lowerCoyoneda(implicit fun: Functor[F]): F[A]
   * (Scala & Haskell) How Haskell is Changing my Brain, Yay Yoneda - Alissa Pajer [(video)](https://vimeo.com/96639840)
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
-  * (Theory) [nLab](https://ncatlab.org/nlab/show/co-Yoneda+lemma)
-
 
 ### Right Kan extension
 
@@ -1805,7 +1809,7 @@ trait Ran[G[_], H[_], A] {
 }
 ```
 
-* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Ran.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs)
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Ran.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/RightKanExtension.v), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
 
 * We can create functor for Ran, without any requirements on G, H
 ```scala
@@ -1855,7 +1859,7 @@ trait Lan[F[_], H[_], A] {
 }
 ```
 
-[Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs)
+[Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
 
 * we can define Functor for it
 ```scala
@@ -1979,6 +1983,17 @@ implicit def codensityMonad[G[_]]: Monad[Codensity[G, ?]] =
   * (Haskell) Unnatural Transformations and Quantifiers - Edward Kmett [blog post](http://comonad.com/reader/2012/unnatural-transformations-and-quantifiers/)
   * scalaz [example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/CodensityUsage.scala)
 
+
+## Contravariant Adjuctions & Representable
+
+### Contravariant Adjunction
+
+* Implementations: [Haskell](hackage.haskell.org/package/adjunctions/docs/Data-Functor-Contravariant-Adjunction.html), [nLab](https://ncatlab.org/nlab/show/dual+adjunction)
+
+### Contravariant Rep
+
+* Implementations: [Haskell](hackage.haskell.org/package/adjunctions/docs/Data-Functor-Contravariant-Rep.html)
+
 ## Contravariant Kan Extensions
 
 ### Contravariant Yoneda
@@ -2083,6 +2098,8 @@ trait MonoidalCategory[M[_, _], I] {
   def alpha_inv[A,B,C](mabc: M[A, M[B,C]]): M[M[A,B], C]
 }
 ```
+
+* Implementations: [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monoidal/MonoidalCategories.v)
 
 We can create monoidal category where product (Tuple) is a bifunctor or an coproduct (Either).
 
@@ -2206,6 +2223,8 @@ trait Profunctor[F[_, _]] {
 }
 ```
 
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala), [Haskell](hackage.haskell.org/package/profunctors/docs/Data-Profunctor.html), [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Profunctors/Core.v), [nLab](https://ncatlab.org/nlab/show/profunctor), [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
+
 * Alternatively we can define functor using:
 ```scala
 def lmap[A, B, C](fab: F[A, B])(f: C => A): F[C, B]
@@ -2241,7 +2260,7 @@ def dimapIdentity[A, B](p: P[A, B]): Boolean = {
   * `dimap (f . g) (h . i) == dimap g h . dimap f i`
 ```scala
 def dimapComposition[A, B, C, D, E, F](pad: P[A,D], fcb: C => B, fba: B => A, fde: D => E, fef: E => F): Boolean = {
-  //          dimap B=>A D=>E     
+  //          dimap B=>A D=>E
   // P[A,D] ===================> F[B,E]
   val pbe: P[B, E] = dimap(fba, fde)(pad)
   //          dimap C=>B E=>F
@@ -2250,7 +2269,7 @@ def dimapComposition[A, B, C, D, E, F](pad: P[A,D], fcb: C => B, fba: B => A, fd
 
   val fca: C => A = fba compose fcb
   val fdf: D => F = fef compose fde
-  //         dimap C=>A D=> F    
+  //         dimap C=>A D=> F
   // P[A,D] ===================> P[C,F]
   val r: P[C,F] = dimap(fca, fdf)(pad)
   
@@ -2269,8 +2288,6 @@ Last two laws we get for free by parametricity.
 
 - if specify both (in addition to law for dimap and laws for lmap:
   * `dimap f g == lmap f . rmap g`
-
-* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala) [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala)  [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java) [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs) 
 
 * Resources
    * (Haskell) Fun with Profunctors - Phil Freeman [video](https://www.youtube.com/watch?v=OJtGECfksds)
@@ -2732,11 +2749,13 @@ trait Category[F[_, _]] extends Compose[F] {
 
 ### Kleisli
 
+* Implementations:  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Kleisli.scala), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/KleisliCategory.v)
+
 * Resources
   * (C++) Category Theory 3.2: Kleisli category - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
   * (Category Theory) Category Theory 4.1: Terminal and initial objects - Bartosz Milewski [(first 10 min of video)](https://www.youtube.com/watch?v=zer1aFgj4aU)
-  * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html) [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Kleisli.scala)
-  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala) [(src)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala)
+  * Cats [docs](http://typelevel.org/cats/datatypes/kleisli.html)
+  * scalaz [(docs)](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/KleisliUsage.scala)
   * (Java) Thoughts on Kleisli Arrows in Java (WIP) - geophf [blog post](http://logicaltypes.blogspot.com/2013/06/thoughts-on-kleisli-arrows-in-java-wip.html)
 
 ### Cokleisli
@@ -2881,7 +2900,7 @@ data Coend p = forall x. Coend p x x
 
 Type that has only one element
 
-* Implementations [scala.Unit](https://www.scala-lang.org/api/2.11.12/#scala.Unit) [purescript-prelude/Data.Unit](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Unit)
+* Implementations [scala.Unit](https://www.scala-lang.org/api/2.11.12/#scala.Unit) [purescript-prelude/Data.Unit](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Unit), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/terminal.v), [nLab](https://ncatlab.org/nlab/show/terminal+object)
 
 * Resources
   * Category Theory 4.1: Terminal and initial objects [video](https://www.youtube.com/watch?v=zer1aFgj4aU&feature=youtu.be&t=615) [Scala translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.2-limits-and-colimits.md)
@@ -2892,7 +2911,7 @@ Type that has only one element
 Type that has no elements.
 In Category Theory - Initial Object
 
-* Implementations [scala.Nothing](https://www.scala-lang.org/api/2.11.12/#scala.Nothing) [purescript-prelude/Data.Void](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Void) [Idris prelude/Prelude/Uninhabited](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Uninhabited.idr)
+* Implementations [scala.Nothing](https://www.scala-lang.org/api/2.11.12/#scala.Nothing) [purescript-prelude/Data.Void](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Void) [Idris prelude/Prelude/Uninhabited](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Uninhabited.idr), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/initial.v), [nLab](https://ncatlab.org/nlab/show/initial+object)
 
 * Resources
   * Category Theory 4.1: Terminal and initial objects [video](https://www.youtube.com/watch?v=zer1aFgj4aU&feature=youtu.be&t=615) [Scala translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.2-limits-and-colimits.md)
@@ -2903,14 +2922,14 @@ In Category Theory - Initial Object
 Type represents either one or another element.
 In set theory: disjoint union in Category theory: coproduct (sum).
 
-* Implementations [scala.util.Either](https://www.scala-lang.org/api/2.11.12/index.html#scala.util.Either) [purescript-either/Data.Either](https://pursuit.purescript.org/packages/purescript-either/docs/Data.Either)
+* Implementations [scala.util.Either](https://www.scala-lang.org/api/2.11.12/index.html#scala.util.Either) [purescript-either/Data.Either](https://pursuit.purescript.org/packages/purescript-either/docs/Data.Either), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/coproducts.v), [nLab](https://ncatlab.org/nlab/show/coproduct)
 
 ## Product
 
 Type represents combination of two types.
 In Set theory cartesian product, in Category Theory product.
 
-* Implementations [scala.Product2](https://www.scala-lang.org/api/2.11.12/index.html#scala.Product2) [scala.Tuple2](https://www.scala-lang.org/api/2.11.12/#scala.Tuple2) [purescript-tuples/Data.Tuple](https://pursuit.purescript.org/packages/purescript-tuples/docs/Data.Tuple)
+* Implementations [scala.Product2](https://www.scala-lang.org/api/2.11.12/index.html#scala.Product2) [scala.Tuple2](https://www.scala-lang.org/api/2.11.12/#scala.Tuple2) [purescript-tuples/Data.Tuple](https://pursuit.purescript.org/packages/purescript-tuples/docs/Data.Tuple), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/products.v), [nLab](https://ncatlab.org/nlab/show/cartesian+product)
 
 ### These
 
@@ -3035,6 +3054,7 @@ Resources:
 Monads thats wokrs on different categories.
 
 Resources:
+  * [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/RelativeMonads.v)
   * (Type Theory) Monads Need Not Be Endofunctors - Thorsten Altenkirch, James Chapman, Tarmo Uustalu [(paper)](http://www.cs.nott.ac.uk/~psztxa/talks/scotcats-slides.pdf)
 
 ## Commutative
