@@ -2099,7 +2099,7 @@ trait MonoidalCategory[M[_, _], I] {
 }
 ```
 
-* Implementations: [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monoidal/MonoidalCategories.v)
+* Implementations: [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monoidal/MonoidalCategories.v), [nlab](https://ncatlab.org/nlab/show/monoidal+category)
 
 We can create monoidal category where product (Tuple) is a bifunctor or an coproduct (Either).
 
@@ -3053,9 +3053,10 @@ Resources:
 
 Monads thats wokrs on different categories.
 
+* Implementations: [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/RelativeMonads.v), [Agda](https://github.com/jmchapman/Relative-Monads) [nlab](https://ncatlab.org/nlab/show/relative+monad)
+
 Resources:
-  * [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/RelativeMonads.v)
-  * (Type Theory) Monads Need Not Be Endofunctors - Thorsten Altenkirch, James Chapman, Tarmo Uustalu [(paper)](http://www.cs.nott.ac.uk/~psztxa/talks/scotcats-slides.pdf)
+  * (Type Theory) Monads Need Not Be Endofunctors - Thorsten Altenkirch, James Chapman, Tarmo Uustalu [(paper)](http://www.cs.nott.ac.uk/~psztxa/talks/scotcats-slides.pdf), [(code)](https://jmchapman.github.io/relmon.html)
 
 ## Commutative
 
