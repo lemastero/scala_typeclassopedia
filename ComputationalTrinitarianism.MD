@@ -145,6 +145,7 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * (Coq) (Agda) [HoTT book](https://homotopytypetheory.org/coq/)
 * (Agda) [jmchapman/categories](https://github.com/jmchapman/categories)
 * School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
+* School and Workshop on Univalent Mathematics [material](https://unimath.github.io/bham2017/), [(github)](https://github.com/andrejbauer/spartan-type-theory), [(video)](https://vimeo.com/286652934) (minimalistic type theory)
 
 
 ## Other PLT Resources
