@@ -673,5 +673,6 @@ We call these monoids united if 0 = 1."
   * (Haskell) A Very General Method of Computing Shortest Paths [(article)](http://r6.ca/blog/20110808T035622Z.html)
 
 # Advanced Algebra Resources
+* [Encoding of algebraic structures and properties in CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/algstruct.ctt)
 * [Algorithms for Lie algebras of algebraic groups - Roozemond, D.A.](https://pure.tue.nl/ws/files/102833998/201010124.pdf)
 * [Graduate algebra - Drew Anderson](http://www.math.miami.edu/~armstrong/oldcourses.php)
