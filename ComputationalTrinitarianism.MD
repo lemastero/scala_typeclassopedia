@@ -84,7 +84,6 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Basic Proof Theory — Frank Pfenning - OPLSS 2015 [(video lectures, notes)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
 * The Coq Proof Assistant and Its Applications to Programming-Language Semantics — Adam Chlipala - OPLSS 2015 [(video lectures)](https://www.cs.uoregon.edu/research/summerschool/summer15/curriculum.html)
 * Program Verification with F* - Danel Ahman [(slides, exercises)](https://danel.ahman.ee/teaching/eutypes2018/)
-* School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
 * Advanced Topics in Programming Languages CIS 670 - Penn - Stephanie Weirich [(course notes, code)](https://github.com/plclub/cis670-16fa)
 * [Coq Winter School 2018](https://team.inria.fr/marelle/en/coq-winter-school-2018/)
 * [Formalizing 100 Theorems](http://www.cs.ru.nl/~freek/100/) [Isabelle](http://www.cse.unsw.edu.au/~kleing/top100/) [Coq](https://madiot.fr/coq100/), [Top 100 Mathematical Theorems In Coq](https://github.com/coq/coq/wiki/Top100MathematicalTheoremsInCoq)
@@ -122,7 +121,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
-* Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martin Escardo [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
+* Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
 * Cubical type theory for dummies [(gist)](https://gist.github.com/AndyShiue/cfc8c75f8b8655ca7ef2ffeb8cfb1faf/)
 * Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg [(paper)](https://arxiv.org/abs/1611.02108), implementation: [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt) [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
 * Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
@@ -136,6 +135,16 @@ Richard A. Eisenberg [(video)](https://www.youtube.com/watch?v=0157rUxC4_8) [(pa
 * DOT: Scala Types from Theory to Practice—Nada Amin [(video)](https://www.youtube.com/watch?v=fjj_fv346lY)
 Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(paper)](https://dl.acm.org/citation.cfm?id=3009866)
 * Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
+
+
+## Formalizations of Category Theory in proof assitants
+
+* (Cubical Agda) Univalent CategoriesA formalization of category theory in Cubical Agda - Frederik Hanghøj Iversen [(paper)](http://publications.lib.chalmers.se/records/fulltext/256404/256404.pdf), [(fredefox/cat)](https://github.com/fredefox/cat)
+* (Agda) Formalisation of Restriction Categories in Agda [jmchapman/restriction-categories
+](https://github.com/jmchapman/restriction-categories) for [Introduction to restriction categories - Robin Cockett](http://cs.ioc.ee/~tarmo/tsem12/cockett.html)
+* (Coq) (Agda) [HoTT book](https://homotopytypetheory.org/coq/)
+* (Agda) [jmchapman/categories](https://github.com/jmchapman/categories)
+* School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
 
 
 ## Other PLT Resources
