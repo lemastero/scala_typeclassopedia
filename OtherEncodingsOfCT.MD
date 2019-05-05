@@ -1,10 +1,4 @@
-# Formalizations of Category Theory in proof assistants
-* [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
-* Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
-* Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(github)](https://github.com/benediktahrens/rezk_completion)
-* Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
-
-# Encoding of [Category Theory by Sjoerd Visscher](http://hackage.haskell.org/package/data-category)
+# Encoding of [Category Theory by Sjoerd Visscher](http://hackage.haskell.org/package/data-category) in Haskell
 
 * [Category](http://hackage.haskell.org/package/data-category/docs/Data-Category.html#t:Category)
 * [Functor](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#t:Functor)
