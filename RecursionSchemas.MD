@@ -16,6 +16,7 @@
   * (Haskell) Rotten Bananas - Edward Kmett: [(blog post)](http://comonad.com/reader/2008/rotten-bananas/)
   * (Haskell) Unnatural Transformations - Edward Kmett [(blog post)](http://comonad.com/reader/2008/unnatural-transformations/)
   * (Haskell) Program Reduction: A Win for Recursion Schemes - John Wiegley [(blog post)](http://newartisans.com/2018/04/win-for-recursion-schemes/)
+  * https://scrapbox.io/haskell-shoen/Recursion_Schemes
 
 # Algebra, Coalgebra, ElgotAlgebra
 

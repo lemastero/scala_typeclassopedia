@@ -115,9 +115,10 @@ This is very opinionated selection of authors that publish interesting papers ab
 * On Voevodsky’s Univalence principle - André Joyal [(video, paper)](https://video.ias.edu/VoevodskyMemConf-2018/0911-AndreJoyal) (mathematical foundations behind HoTT and Univalence principle)
 * Introduction to Homotopy Type Theory (Agda) - EUTypes Summer School 2018 - Fredrik Nordvall Forsberg [(slide, exercises src)](https://personal.cis.strath.ac.uk/fredrik.nordvall-forsberg/ohrid-school-hott2018/)
 * Introduction to Dependent Type Theory - EUTypes Summer School 2018 - Matthieu Sozeau [(slides)](https://www.irif.fr/~sozeau/teaching/TYPES18.en.html)
-* HOTTEST - Homotopy Type Theory Electronic Seminar Talks - 2018 - present [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html)
 * Workshop: "Types, Homotopy, Type theory, and Verification" 2018 [(video playlist)](https://www.youtube.com/playlist?list=PLul8LCT3AJqQxIaZhaSNCTuLYfIFB1AiI), [(schedule, abstracts, links to videos)](https://www.him.uni-bonn.de/programs/past-programs/past-trimester-programs/types-sets-constructions/workshop-types-homotopy-type-theory-and-verification/schedule/)
 * FAMOUS - Foundations of Mathematics: Univalent foundations and set theory 2016 [(video playlist)](https://www.youtube.com/watch?v=slVcTtwX_Sk&list=PLQRKUSOIMEh1Arz0-WBgD_Pol4S50HATv), [(videos, slides, abstracts)](http://fomus.weebly.com/talks-abstracts--videos.html)
+* HOTTEST - Homotopy Type Theory Electronic Seminar Talks - 2018 - present [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html), [(youtube videos)](https://www.youtube.com/user/jdchristensen123/videos)
+* The New York City Category Theory Seminar [(youtube videos)](https://www.youtube.com/channel/UCNOfhimbNwZwJO2ltv1AZOw/videos)
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
