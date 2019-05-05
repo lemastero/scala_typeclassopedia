@@ -58,6 +58,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 * Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls), [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
 * Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
+* [Benedikt Ahrens](https://dblp.org/pers/hd/a/Ahrens:Benedikt), [personal page](https://benediktahrens.net/publications/)
 * [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg), [personal page](http://okmij.org/ftp/)
 * [Jeremy Gibbons](https://dblp.uni-trier.de/pers/hd/g/Gibbons:Jeremy?q=Jeremy%20Gibbons)
 * [Ralf Hinze](https://dblp.uni-trier.de/pers/hd/h/Hinze:Ralf)
@@ -137,17 +138,22 @@ Richard A. Eisenberg [(video)](https://www.youtube.com/watch?v=0157rUxC4_8) [(pa
 Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(paper)](https://dl.acm.org/citation.cfm?id=3009866)
 * Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
 
-
 ## Formalizations of Category Theory in proof assitants
 
-* (Cubical Agda) Univalent CategoriesA formalization of category theory in Cubical Agda - Frederik Hanghøj Iversen [(paper)](http://publications.lib.chalmers.se/records/fulltext/256404/256404.pdf), [(fredefox/cat)](https://github.com/fredefox/cat)
-* (Agda) Formalisation of Restriction Categories in Agda [jmchapman/restriction-categories
-](https://github.com/jmchapman/restriction-categories) for [Introduction to restriction categories - Robin Cockett](http://cs.ioc.ee/~tarmo/tsem12/cockett.html)
-* (Coq) (Agda) [HoTT book](https://homotopytypetheory.org/coq/)
+* [UniMath](https://github.com/UniMath/UniMath) Encoding of Category Theory using UV; combines results from:
+  * Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(original repository - now merged into UniMath)](https://github.com/benediktahrens/rezk_completion)
+  * Displayed Categories - Benedikt Ahrens, Peter LeFanu Lumsdaine [(paper)](https://arxiv.org/abs/1705.04296)
+  * Bicategories in Univalent Foundations - Benedikt Ahrens, Dan Frumin, Marco Maggesi, Niels van der Weide [(paper)](https://arxiv.org/abs/1903.01152)
+* [HoTT book - Coq](https://github.com/HoTT/HoTT) described in [HoTT book](https://homotopytypetheory.org/coq/)
+* [HoTT book - Ada](https://github.com/HoTT/HoTT-Agda)
+* [ncatlab article about encoding of Category Theory in HoTT](https://ncatlab.org/homotopytypetheory/show/Category+theory)
+* [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
+* Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
+* Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
+* (Cubical Agda) Univalent Categories A formalization of category theory in Cubical Agda - Frederik Hanghøj Iversen [(paper)](http://publications.lib.chalmers.se/records/fulltext/256404/256404.pdf), [(fredefox/cat)](https://github.com/fredefox/cat)
+* (Agda) Formalisation of Restriction Categories in Agda [jmchapman/restriction-categories](https://github.com/jmchapman/restriction-categories) for [Introduction to restriction categories - Robin Cockett](http://cs.ioc.ee/~tarmo/tsem12/cockett.html)
 * (Agda) [jmchapman/categories](https://github.com/jmchapman/categories)
 * School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
-* School and Workshop on Univalent Mathematics [material](https://unimath.github.io/bham2017/), [(github)](https://github.com/andrejbauer/spartan-type-theory), [(video)](https://vimeo.com/286652934) (minimalistic type theory)
-
 
 ## Other PLT Resources
 
