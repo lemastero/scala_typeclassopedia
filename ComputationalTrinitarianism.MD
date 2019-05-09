@@ -168,3 +168,16 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [FP Complete tutorial for libraries](https://haskell.fpcomplete.com/learn#libraries)
 * CIS 552: Advanced Programming (Fall 2017) - Stephanie Weirich [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
 * CIS 194: Introduction to Haskell (Spring 2013) - Brent Yorgey [(course)](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
+
+## Haskell [user groups](https://wiki.haskell.org/User_groups), [commmunities](https://wiki.haskell.org/User_groups) videos
+
+* [Boston Haskell](https://www.youtube.com/channel/UCUCpgCWjaniUkX88wZrK_Ig/videos)
+* [Haskell at Work](https://www.youtube.com/channel/UCUgxpaK7ySR-z6AXA5-uDuw/videos)
+* [NYC Haskell User's Group](https://www.youtube.com/channel/UCzNYHE7Kj6pBqq5h8LG9Zcg/videos)
+* [Monadic Warsaw](https://www.youtube.com/channel/UCCeiYYR2fCXarkfSqqFBwuA/videos)
+* [LambdaConf](https://www.youtube.com/channel/UCEtohQeDqMSebi2yvLMUItg/videos)
+* [London Haskell](https://www.youtube.com/user/LondonHaskell/videos)
+* [FooCafe - videos Haskell](https://www.youtube.com/user/FooCafe/search?query=Haskell)
+* [GoogleTechTalks - Haskell](https://www.youtube.com/user/GoogleTechTalks/search?query=Haskell)
+* [Microsoft Research - Haskell](https://www.youtube.com/user/MicrosoftResearch/search?query=haskell)
+* [Functional Tricity](https://www.youtube.com/channel/UCzHyhy7noMcM0_3ttuw96yA/videos)
