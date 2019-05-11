@@ -124,10 +124,12 @@ This is very opinionated selection of authors that publish interesting papers ab
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
 * Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
-* Cubical type theory for dummies [(gist)](https://gist.github.com/AndyShiue/cfc8c75f8b8655ca7ef2ffeb8cfb1faf/)
-* Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg [(paper)](https://arxiv.org/abs/1611.02108), implementation: [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt) [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
 * Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
+* Investigations into cubical type theory - Hugo Herbelin [(video)](https://www.youtube.com/watch?v=zJdwPa_tkSU&list=PLul8LCT3AJqS9FcdKnV4TfiR48Hqcna1I&index=16)
 * Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
+* [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt), [(paper arxiv:1611.02108](https://arxiv.org/abs/1611.02108): Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg, [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
+* [mortberg/yacctt](https://github.com/mortberg/yacctt) [paper arXiv:1712.01800](https://arxiv.org/abs/1712.01800) Computational Higher Type Theory III: Univalent Universes and Exact Equality
+Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
 
 ## Specification of dependent types
 
@@ -140,20 +142,29 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 
 ## Formalizations of Category Theory in proof assitants
 
+### [CT formulated in terms of UF/HoTT](https://ncatlab.org/homotopytypetheory/show/Category+theory)
 * [UniMath](https://github.com/UniMath/UniMath) Encoding of Category Theory using UV; combines results from:
   * Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(original repository - now merged into UniMath)](https://github.com/benediktahrens/rezk_completion)
   * Displayed Categories - Benedikt Ahrens, Peter LeFanu Lumsdaine [(paper)](https://arxiv.org/abs/1705.04296)
   * Bicategories in Univalent Foundations - Benedikt Ahrens, Dan Frumin, Marco Maggesi, Niels van der Weide [(paper)](https://arxiv.org/abs/1903.01152)
 * [HoTT book - Coq](https://github.com/HoTT/HoTT) described in [HoTT book](https://homotopytypetheory.org/coq/)
+
+### CT formulated in Cubical TT
+* (Cubical Agda) Univalent Categories A formalization of category theory in Cubical Agda - Frederik Hanghøj Iversen [(paper)](http://publications.lib.chalmers.se/records/fulltext/256404/256404.pdf), [(fredefox/cat)](https://github.com/fredefox/cat)
+* (Agda) Formalisation of Restriction Categories in Agda [jmchapman/restriction-categories](https://github.com/jmchapman/restriction-categories) for [Introduction to restriction categories - Robin Cockett](http://cs.ioc.ee/~tarmo/tsem12/cockett.html)
+* [jmchapman/categories](https://github.com/jmchapman/categories)
 * [HoTT book - Ada](https://github.com/HoTT/HoTT-Agda)
-* [ncatlab article about encoding of Category Theory in HoTT](https://ncatlab.org/homotopytypetheory/show/Category+theory)
+* School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
+
+### CT formulated in terms of Set Theory
 * [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
 * Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
 * Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
-* (Cubical Agda) Univalent Categories A formalization of category theory in Cubical Agda - Frederik Hanghøj Iversen [(paper)](http://publications.lib.chalmers.se/records/fulltext/256404/256404.pdf), [(fredefox/cat)](https://github.com/fredefox/cat)
-* (Agda) Formalisation of Restriction Categories in Agda [jmchapman/restriction-categories](https://github.com/jmchapman/restriction-categories) for [Introduction to restriction categories - Robin Cockett](http://cs.ioc.ee/~tarmo/tsem12/cockett.html)
-* (Agda) [jmchapman/categories](https://github.com/jmchapman/categories)
-* School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
+
+### Haskell abstractions/constructions from CT encoded in Coq
+* [jwiegley/coq-haskell](https://github.com/jwiegley/coq-haskell)
+* [coq-community/math-classes](https://github.com/coq-community/math-classes)
+* [domdere/haskell-coq](https://github.com/domdere/haskell-coq)
 
 ## Other PLT Resources
 
