@@ -166,6 +166,11 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [coq-community/math-classes](https://github.com/coq-community/math-classes)
 * [domdere/haskell-coq](https://github.com/domdere/haskell-coq)
 
+## [Algebraic Theories](https://ncatlab.org/nlab/show/algebraic+theory)
+
+* Foundations of Algebraic Theories and Higher Dimensional Categories - Soichiro Fujii [(arxiv:1903.07030)](https://arxiv.org/abs/1903.07030)
+* A unified framework for notions of algebraic theory - Soichiro Fujii [(paper)](https://arxiv.org/abs/1904.08541)
+
 ## Other PLT Resources
 
 * [Programming Language Theory - Steven Shaw](https://steshaw.org/plt/)
