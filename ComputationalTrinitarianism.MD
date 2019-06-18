@@ -181,7 +181,7 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [Let's Lens](https://github.com/data61/lets-lens), Tony Morris teaching this course at LambdaConf 2017 [(video)](https://www.youtube.com/watch?v=inyfR3Gb6GE)
 * [Applied Haskell](https://github.com/fpco/applied-haskell)
 * Nikolai Kudasov - Building a Telegram Bot in Haskell - λC 2018 [(video playlist)](https://www.youtube.com/watch?v=dfTTgdlsSzo&list=PL7DZ7q3nEWhw0esa7oaAYw3OHqG0Pyuu6&index=2)
-* Alejandro Serrano Mena - A Hands on Tutorial to Generic Programming in Haskell [()](https://www.youtube.com/watch?v=R3HWy1NCXMs&list=PL7DZ7q3nEWhygKSFNI4MlTL-draJzhRXb&index=2) 
+* Alejandro Serrano Mena - A Hands on Tutorial to Generic Programming in Haskell [(video)](https://www.youtube.com/watch?v=R3HWy1NCXMs&list=PL7DZ7q3nEWhygKSFNI4MlTL-draJzhRXb&index=2) 
 * [FP Complete tutorial for libraries](https://haskell.fpcomplete.com/learn#libraries)
 * CIS 552: Advanced Programming (Fall 2017) - Stephanie Weirich [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
 * CIS 194: Introduction to Haskell (Spring 2013) - Brent Yorgey [(course)](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
