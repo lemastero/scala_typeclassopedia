@@ -194,6 +194,7 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [Monadic Warsaw](https://www.youtube.com/channel/UCCeiYYR2fCXarkfSqqFBwuA/videos)
 * [LambdaConf](https://www.youtube.com/channel/UCEtohQeDqMSebi2yvLMUItg/videos)
 * [London Haskell](https://www.youtube.com/user/LondonHaskell/videos)
+* [FPComplete videos](https://www.youtube.com/user/FPComplete/videos)
 * [FooCafe - videos Haskell](https://www.youtube.com/user/FooCafe/search?query=Haskell)
 * [GoogleTechTalks - Haskell](https://www.youtube.com/user/GoogleTechTalks/search?query=Haskell)
 * [Microsoft Research - Haskell](https://www.youtube.com/user/MicrosoftResearch/search?query=haskell)
