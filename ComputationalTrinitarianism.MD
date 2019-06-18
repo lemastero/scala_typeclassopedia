@@ -148,16 +148,13 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
   * Displayed Categories - Benedikt Ahrens, Peter LeFanu Lumsdaine [(paper)](https://arxiv.org/abs/1705.04296)
   * Bicategories in Univalent Foundations - Benedikt Ahrens, Dan Frumin, Marco Maggesi, Niels van der Weide [(paper)](https://arxiv.org/abs/1903.01152)
 * [HoTT book - Coq](https://github.com/HoTT/HoTT/tree/master/theories/Categories) described in [HoTT book](https://homotopytypetheory.org/coq/)
-
-### CT formulated in Cubical TT
 * (Cubical Agda) Univalent Categories A formalization of category theory in Cubical Agda - Frederik Hanghøj Iversen [(paper)](http://publications.lib.chalmers.se/records/fulltext/256404/256404.pdf), [(fredefox/cat)](https://github.com/fredefox/cat)
 * (Agda) Formalisation of Restriction Categories in Agda [jmchapman/restriction-categories](https://github.com/jmchapman/restriction-categories) for [Introduction to restriction categories - Robin Cockett](http://cs.ioc.ee/~tarmo/tsem12/cockett.html)
 * [jmchapman/categories](https://github.com/jmchapman/categories)
 * [HoTT book - Ada](https://github.com/HoTT/HoTT-Agda)
 * School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
-
-### CT formulated in terms of Set Theory
-* [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
+* (Coq) [ekmett/homotopy](https://github.com/ekmett/homotopy)
+* (Coq) [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
 * Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
 * Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
 
