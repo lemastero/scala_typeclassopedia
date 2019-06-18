@@ -140,24 +140,21 @@ Richard A. Eisenberg [(video)](https://www.youtube.com/watch?v=0157rUxC4_8) [(pa
 Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(paper)](https://dl.acm.org/citation.cfm?id=3009866)
 * Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
 
-## Formalizations of Category Theory in proof assitants
+## [Formalizations of Category Theory in](https://ncatlab.org/homotopytypetheory/show/Category+theory) [proof assistants](https://ncatlab.org/homotopytypetheory/show/Proof+Assistants)
 
 ### [CT formulated in terms of UF/HoTT](https://ncatlab.org/homotopytypetheory/show/Category+theory)
 * [UniMath](https://github.com/UniMath/UniMath) Encoding of Category Theory using UV; combines results from:
   * Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(original repository - now merged into UniMath)](https://github.com/benediktahrens/rezk_completion)
   * Displayed Categories - Benedikt Ahrens, Peter LeFanu Lumsdaine [(paper)](https://arxiv.org/abs/1705.04296)
   * Bicategories in Univalent Foundations - Benedikt Ahrens, Dan Frumin, Marco Maggesi, Niels van der Weide [(paper)](https://arxiv.org/abs/1903.01152)
-* [HoTT book - Coq](https://github.com/HoTT/HoTT) described in [HoTT book](https://homotopytypetheory.org/coq/)
-
-### CT formulated in Cubical TT
+* [HoTT book - Coq](https://github.com/HoTT/HoTT/tree/master/theories/Categories) described in [HoTT book](https://homotopytypetheory.org/coq/)
 * (Cubical Agda) Univalent Categories A formalization of category theory in Cubical Agda - Frederik Hanghøj Iversen [(paper)](http://publications.lib.chalmers.se/records/fulltext/256404/256404.pdf), [(fredefox/cat)](https://github.com/fredefox/cat)
 * (Agda) Formalisation of Restriction Categories in Agda [jmchapman/restriction-categories](https://github.com/jmchapman/restriction-categories) for [Introduction to restriction categories - Robin Cockett](http://cs.ioc.ee/~tarmo/tsem12/cockett.html)
 * [jmchapman/categories](https://github.com/jmchapman/categories)
 * [HoTT book - Ada](https://github.com/HoTT/HoTT-Agda)
 * School and Workshop on Univalent Mathematics 2017 [(notes)](https://unimath.github.io/bham2017/) [(github 2017)](https://github.com/UniMath/Schools/tree/master/2017-12-Birmingham) [(github 2019)](https://github.com/UniMath/Schools/tree/master/2019-04-Birmingham) based on library [UniMath](https://github.com/UniMath)
-
-### CT formulated in terms of Set Theory
-* [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
+* (Coq) [ekmett/homotopy](https://github.com/ekmett/homotopy)
+* (Coq) [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
 * Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
 * Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
 
@@ -166,16 +163,22 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [coq-community/math-classes](https://github.com/coq-community/math-classes)
 * [domdere/haskell-coq](https://github.com/domdere/haskell-coq)
 
+## [Algebraic Theories](https://ncatlab.org/nlab/show/algebraic+theory)
+
+* Foundations of Algebraic Theories and Higher Dimensional Categories - Soichiro Fujii [(arxiv:1903.07030)](https://arxiv.org/abs/1903.07030)
+* A unified framework for notions of algebraic theory - Soichiro Fujii [(paper)](https://arxiv.org/abs/1904.08541)
+
 ## Other PLT Resources
 
 * [Programming Language Theory - Steven Shaw](https://steshaw.org/plt/)
-* [cohomolo-gy/haskell-resources - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
 
 ## Haskell courses
 
-* [FP Course](https://github.com/data61/fp-course)
-* [Let's Lens](https://github.com/data61/lets-lens)
+* [FP Course](https://github.com/data61/fp-course), Brian McKenna teaching this course [(video playlist)](https://www.youtube.com/watch?v=NzIZzvbplSM&list=PLly9WMAVMrayYo2c-1E_rIRwBXG_FbLBW)
+* [Let's Lens](https://github.com/data61/lets-lens), Tony Morris teaching this course at LambdaConf 2017 [(video)](https://www.youtube.com/watch?v=inyfR3Gb6GE)
 * [Applied Haskell](https://github.com/fpco/applied-haskell)
+* Nikolai Kudasov - Building a Telegram Bot in Haskell - λC 2018 [(video playlist)](https://www.youtube.com/watch?v=dfTTgdlsSzo&list=PL7DZ7q3nEWhw0esa7oaAYw3OHqG0Pyuu6&index=2)
+* Alejandro Serrano Mena - A Hands on Tutorial to Generic Programming in Haskell [(video)](https://www.youtube.com/watch?v=R3HWy1NCXMs&list=PL7DZ7q3nEWhygKSFNI4MlTL-draJzhRXb&index=2) 
 * [FP Complete tutorial for libraries](https://haskell.fpcomplete.com/learn#libraries)
 * CIS 552: Advanced Programming (Fall 2017) - Stephanie Weirich [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
 * CIS 194: Introduction to Haskell (Spring 2013) - Brent Yorgey [(course)](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
@@ -188,7 +191,16 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [Monadic Warsaw](https://www.youtube.com/channel/UCCeiYYR2fCXarkfSqqFBwuA/videos)
 * [LambdaConf](https://www.youtube.com/channel/UCEtohQeDqMSebi2yvLMUItg/videos)
 * [London Haskell](https://www.youtube.com/user/LondonHaskell/videos)
+* [FPComplete videos](https://www.youtube.com/user/FPComplete/videos)
 * [FooCafe - videos Haskell](https://www.youtube.com/user/FooCafe/search?query=Haskell)
 * [GoogleTechTalks - Haskell](https://www.youtube.com/user/GoogleTechTalks/search?query=Haskell)
 * [Microsoft Research - Haskell](https://www.youtube.com/user/MicrosoftResearch/search?query=haskell)
 * [Functional Tricity](https://www.youtube.com/channel/UCzHyhy7noMcM0_3ttuw96yA/videos)
+
+## Haskell papers
+
+* [wiki.haskell.org Research papers](https://wiki.haskell.org/Research_papers)
+* [Haskell papers - Ben Lynn](https://crypto.stanford.edu/~blynn/haskell/papers.html)
+* [A List of Foundational Haskell Papers - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
+* [A Haskell Reading List - Stephen Diehl](http://www.stephendiehl.com/posts/essential_haskell.html)
+* [797 Haskell Papers](https://mitchellwrosen.github.io/haskell-papers/)

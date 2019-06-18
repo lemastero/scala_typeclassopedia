@@ -490,6 +490,8 @@ trait Selective[F[_]] extends Applicative[F] {
 }
 ```
 
+* Implementations: [Haskell](http://hackage.haskell.org/package/selective/docs/Control-Selective.html) [cb372/cats-selective](https://github.com/cb372/cats-selective/blob/master/core/src/main/scala/cats/Selective.scala)
+
 * Resources:
   * (Haskell) Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/)
   * (Haskell) Selective Applicative Functors Declare Your Effects Statically, Select Which to Execute Dynamically - Andrey Mokhov, Georgy Lukyanov, Simon Marlow, Jeremie Dimino [(paper)](https://www.staff.ncl.ac.uk/andrey.mokhov/selective-functors.pdf)
@@ -2781,7 +2783,7 @@ trait Category[F[_, _]] extends Compose[F] {
 
 * Resources:
   * (Haskell) Adjoint Triples - Dan Doel [(blog post)](http://comonad.com/reader/2016/adjoint-triples/)
-  * (Haskell) [adjunctions/Control.Comonad.Trans.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Trans-Adjoint.html#t:AdjointT)
+  * (Haskell) [adjunctions/Control.Comonad.Trans.Adjoint](http://hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Trans-Adjoint.html#t:AdjointT)
   * [Adjoint functors and triples - Samuel Eilenberg and John C. Moore](https://projecteuclid.org/euclid.ijm/1256068141)
   * [Fancy Algebra (Graduate Topics Course) - Drew Armstrong](http://www.math.miami.edu/~armstrong/FA.php)
   * [nLab adjoint triple](https://ncatlab.org/nlab/show/adjoint+triple)
@@ -3098,3 +3100,7 @@ Resources:
 
 Resources:
   * Functor-Oriented Programming - Russell O’Connor [blog post](http://r6.ca/blog/20171010T001746Z.html) [hacker news](https://news.ycombinator.com/item?id=15440108) [reddit](https://www.reddit.com/r/haskell/comments/75fo8k/functor_oriented_programming/)
+
+## Abstractions for abstractions
+
+  * (Haskell) Functor-Of - Vladimir Ciobanu [(blog post)](https://cvlad.info/functor-of/) 
