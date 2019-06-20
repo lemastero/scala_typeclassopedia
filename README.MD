@@ -1848,6 +1848,7 @@ def codensityMonad[F[_], A](ran: Ran[F, F, A]): Codensity[F, A] =
   * What is a layman's explanation of "Kan extensions"? [(quora)](https://www.quora.com/What-is-a-laymans-explanation-of-Kan-extensions)
   * (Theory) [Lecture 49 - Chapter 3: Kan Extensions - John Baez](https://forum.azimuthproject.org/discussion/2266/lecture-49-chapter-3-kan-extensions/p1)
   * (Theory) [Kan Extensions for Program Optimisation Or: Art and Dan Explain an Old Trick - Ralf Hinze](https://www.cs.ox.ac.uk/ralf.hinze/publications/MPC12.pdf) (adjunctions, kan extensions, string diagrams)
+  * (Haskell) Combinatorial Species and Labelled Structures (PhD thesis) - Brent A. Yorgey [(pdf)](http://ozark.hendrix.edu/~yorgey/pub/thesis.pdf), [(repo)](https://github.com/byorgey/thesis)
   * (Hasekll) (Co-)Iteration for Higher-Order Nested Datatypes - Andreas Abel, Ralph Matthes [(paper)](http://www.cse.chalmers.se/~abela/publications.html#types02)
   * (Theory) Kan Extensions as the Most Universal of the Universal Constructions - Marina Lehner [(thesis)](http://www.math.harvard.edu/theses/senior/lehner/lehner.pdf)
 
