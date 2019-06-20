@@ -39,6 +39,7 @@
 * [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
 * Applied Category Theory Workshop in Leiden [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
 * Compositional game theory reading list - Jules Hedges [(blog post)](https://julesh.com/2017/11/09/compositional-game-theory-reading-list/)
+* UCR Applied Category Theory Seminar [(video playlist)](https://www.youtube.com/channel/UCUQlS-R4O094jP0sGHDnrjA/videos)
 
 ## Category Theory Journals
 
