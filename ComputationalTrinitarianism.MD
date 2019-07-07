@@ -78,6 +78,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb), [personal page](https://edwinb.wordpress.com/publications/)
 * [Simon Peyton Jones](https://dblp.uni-trier.de/pers/hd/j/Jones:Simon_L=_Peyton), [MS Reasearch page](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
 * [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
+* [Samson Abramsky](https://dblp.uni-trier.de/pers/hd/a/Abramsky:Samson)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
