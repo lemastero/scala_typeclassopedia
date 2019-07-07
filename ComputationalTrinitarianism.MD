@@ -93,6 +93,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 ## Software foundations using [Type Theory](https://ncatlab.org/nlab/show/type+theory)
 
+* Software Foundations (Coq) [(book)](https://softwarefoundations.cis.upenn.edu/), [Idris version](https://github.com/idris-hackers/software-foundations)
 * Programming Language Foundations in Agda - Philip Wadler, Wen Kokke [(book)](https://plfa.github.io/)
 * Practical Foundations for Programming Languages - Robert Harper [(book)](https://www.cs.cmu.edu/~rwh/pfpl/)
 * Types and Programming Languages - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/15814-f18/schedule.html)
