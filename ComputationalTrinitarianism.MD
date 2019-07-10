@@ -40,6 +40,17 @@
 * Applied Category Theory Workshop in Leiden [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
 * Compositional game theory reading list - Jules Hedges [(blog post)](https://julesh.com/2017/11/09/compositional-game-theory-reading-list/)
 * UCR Applied Category Theory Seminar [(video playlist)](https://www.youtube.com/channel/UCUQlS-R4O094jP0sGHDnrjA/videos)
+* A mathematical theory of resources - Bob Coecke, Tobias Fritz, Robert W. Spekkens [arXiv:1409.5531](https://arxiv.org/abs/1409.5531) (application of CT for resource management)
+* The Mathematical Specification of the [Statebox](https://statebox.org/) Language - Statebox Team: Fabrizio Genovese, Jelle Herold [arXiv:1906.07629](https://arxiv.org/abs/1906.07629) (programming language based on CT and petri nets)
+* Abstraction, Composition and Contracts: A Sheaf Theoretic Approach, Alberto Speranzon, David I. Spivak, Srivatsan Varadarajan [arXiv:1802.03080](https://arxiv.org/abs/1802.03080)
+* A Mathematical Theory of Co-Design - Andrea Censi [arXiv:1512.08055](https://arxiv.org/abs/1512.08055)
+* Categorical Foundations for System Engineering - Spencer Breiner, Eswaran Subrahmanian, Albert Jones [(paper)](https://www.researchgate.net/publication/321302956_Categorical_Foundations_for_System_Engineering)
+* Behavioral Mereology - Brendan Fong, David Jaz Myers, David I. Spivak [arXiv:1811.00420](https://arxiv.org/abs/1811.00420)
+* [CQL](https://github.com/CategoricalData/CQL) language for RDBMS, [related papers](https://www.categoricaldata.net/papers)
+
+## Programming languages inspired by Category Theory
+* [coda](https://github.com/ekmett/coda)
+* [CPL](https://github.com/msakai/cpl)
 
 ## Category Theory Journals
 
@@ -78,6 +89,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb), [personal page](https://edwinb.wordpress.com/publications/)
 * [Simon Peyton Jones](https://dblp.uni-trier.de/pers/hd/j/Jones:Simon_L=_Peyton), [MS Reasearch page](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
 * [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
+* [Samson Abramsky](https://dblp.uni-trier.de/pers/hd/a/Abramsky:Samson)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
@@ -93,6 +105,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 ## Software foundations using [Type Theory](https://ncatlab.org/nlab/show/type+theory)
 
+* Software Foundations (Coq) [(book)](https://softwarefoundations.cis.upenn.edu/), [Idris version](https://github.com/idris-hackers/software-foundations)
 * Programming Language Foundations in Agda - Philip Wadler, Wen Kokke [(book)](https://plfa.github.io/)
 * Practical Foundations for Programming Languages - Robert Harper [(book)](https://www.cs.cmu.edu/~rwh/pfpl/)
 * Types and Programming Languages - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/15814-f18/schedule.html)
