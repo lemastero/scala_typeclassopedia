@@ -13,8 +13,8 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-laws" % catsVersion withSources() withJavadoc(),
   "org.typelevel" %% "alleycats-core" % catsVersion withSources() withJavadoc(),
 
-  "org.typelevel" %% "cats-mtl-core" % "0.5.0" withSources() withJavadoc(),
-  "org.typelevel" %% "cats-mtl-laws" % "0.5.0" withSources() withJavadoc(),
+  "org.typelevel" %% "cats-mtl-core" % "0.6.0" withSources() withJavadoc(),
+  "org.typelevel" %% "cats-mtl-laws" % "0.6.0" withSources() withJavadoc(),
 
   "org.typelevel" %% "cats-effect" % "1.4.0" withSources() withJavadoc(),
 
