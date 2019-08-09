@@ -15,12 +15,14 @@
 * Takt Category Theory - Runar Bjarnason [(video playlist)](https://www.youtube.com/playlist?list=PLq3_mvFPbUXcVETGuvOeLL26mBIMA8Xzt)
 
 ### [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
+
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
 * The periodic table of n-categories - Eugenia Cheng [(video)](https://www.youtube.com/watch?v=lJGUMlgCxz8)
 * Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
 
 ### [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
+
 * An informal introduction to topos theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1012.5647)
 * Toposes, Triples and Theories - Michael Barr, Charles Wells [(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
 * Topos theoretic background - Olivia Caramello [(paper)](http://www.oliviacaramello.com/Unification/ToposTheoreticPreliminariesOliviaCaramello.pdf)
@@ -49,6 +51,7 @@
 * [CQL](https://github.com/CategoricalData/CQL) language for RDBMS, [related papers](https://www.categoricaldata.net/papers)
 
 ## Programming languages inspired by Category Theory
+
 * [coda](https://github.com/ekmett/coda)
 * [CPL](https://github.com/msakai/cpl)
 
@@ -80,16 +83,18 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Exequiel Rivas](https://dblp.org/pers/hd/r/Rivas:Exequiel)
 * [Mauro Jaskelioff](https://dblp.uni-trier.de/pers/hd/j/Jaskelioff:Mauro)
 * [Russell O'Connor](https://dblp.uni-trier.de/pers/hd/o/O=Connor:Russell)
-* [Martin Odersky](https://dblp.org/pers/hd/o/Odersky:Martin)
-* [Philipp Haller](https://dblp.org/pers/hd/a/Amin:Nada)
-* [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
-* [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada)
 * [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter), [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
 * [Ulf Norell](https://dblp.uni-trier.de/pers/hd/n/Norell:Ulf), [University of Gothenburg page](https://www.gu.se/english/about_the_university/staff/?publicationPageNumber=1&selectedTab=2&languageId=100001&userId=xnoreu)
 * [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb), [personal page](https://edwinb.wordpress.com/publications/)
 * [Simon Peyton Jones](https://dblp.uni-trier.de/pers/hd/j/Jones:Simon_L=_Peyton), [MS Reasearch page](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
-* [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
 * [Samson Abramsky](https://dblp.uni-trier.de/pers/hd/a/Abramsky:Samson)
+* [Neil Ghani](https://personal.cis.strath.ac.uk/neil.ghani/pub.html)
+* [Murdoch James Gabbay](http://www.gabbay.org.uk/)
+* [Robert Atkey](https://www.strath.ac.uk/staff/atkeyrobertdr/)
+* [Conor McBride](http://strictlypositive.org/publications.html)
+* [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
+* [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
+* [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
@@ -134,6 +139,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * FAMOUS - Foundations of Mathematics: Univalent foundations and set theory 2016 [(video playlist)](https://www.youtube.com/watch?v=slVcTtwX_Sk&list=PLQRKUSOIMEh1Arz0-WBgD_Pol4S50HATv), [(videos, slides, abstracts)](http://fomus.weebly.com/talks-abstracts--videos.html)
 * HOTTEST - Homotopy Type Theory Electronic Seminar Talks - 2018 - present [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html), [(youtube videos)](https://www.youtube.com/user/jdchristensen123/videos)
 * The New York City Category Theory Seminar [(youtube videos)](https://www.youtube.com/channel/UCNOfhimbNwZwJO2ltv1AZOw/videos)
+* [(Zwanziger) - Natural Model Semantics for Comonadic and Adjoint Modal Type Theory](https://www.youtube.com/watch?v=bLBNg9Q4oIc)
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
@@ -144,6 +150,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt), [(paper arxiv:1611.02108](https://arxiv.org/abs/1611.02108): Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg, [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
 * [mortberg/yacctt](https://github.com/mortberg/yacctt) [paper arXiv:1712.01800](https://arxiv.org/abs/1712.01800) Computational Higher Type Theory III: Univalent Universes and Exact Equality
 Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
+* Axioms for Modelling Cubical Type Theory in a Topos - Ian Orton, Andrew M. Pitts [(arXiv:1712.04864)](https://arxiv.org/abs/1712.04864)
 
 ## Specification of dependent types
 
@@ -157,6 +164,7 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 ## [Formalizations of Category Theory in](https://ncatlab.org/homotopytypetheory/show/Category+theory) [proof assistants](https://ncatlab.org/homotopytypetheory/show/Proof+Assistants)
 
 ### [CT formulated in terms of UF/HoTT](https://ncatlab.org/homotopytypetheory/show/Category+theory)
+
 * [UniMath](https://github.com/UniMath/UniMath) Encoding of Category Theory using UV; combines results from:
   * Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(original repository - now merged into UniMath)](https://github.com/benediktahrens/rezk_completion)
   * Displayed Categories - Benedikt Ahrens, Peter LeFanu Lumsdaine [(paper)](https://arxiv.org/abs/1705.04296)
@@ -172,6 +180,25 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
 * Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
 
+## Nominal logic
+
+* overwiev Nominal Techniques - Andrew Pitts [(pdf)](https://www.cl.cam.ac.uk/~amp12/papers/nomt/nomt.pdf)
+* Constructive Representation of Nominal Sets in Agda - Pritam Choudhury [(pdf)](https://www.cl.cam.ac.uk/~amp12/agda/choudhury/choudhury-dissertation.pdf)
+* [ekmett/name](https://github.com/ekmett/name)
+* Haskell Live-Coding, Session 18, Nominal Sets - Edward Kmett [video](https://www.youtube.com/watch?v=3Zreblm0Ux0)
+* Equivariant ZFA and the foundations of nominal techniques - Murdoch J. Gabbay [(arXiv:1801.09443)](https://arxiv.org/abs/1801.09443)
+* Nominal Henkin Semantics: simply-typed lambda-calculus models in nominal sets - Murdoch J. Gabbay, Dominic P. Mulligan [(arXiv:1111.0089)](https://arxiv.org/abs/1111.0089)
+* Fast Computations on Ordered Nominal Sets - David Venhoek, Joshua Moerman, Jurriaan Rot [(arXiv:1902.08414)](https://arxiv.org/abs/0805.0845)
+* Automata theory in nominal sets - Mikołaj Bojańczyk, Bartek Klin, Sławomir Lasota [(arXiv:1402.0897)](https://arxiv.org/abs/1402.0897)
+* Algebraic Theories over Nominal Sets - Alexander Kurz, Daniela Petrişan, Jiří Velebil [(arXiv:1006.3027)](https://arxiv.org/abs/1006.3027)
+* Atompress [blog](http://atoms.mimuw.edu.pl/), [book](http://atoms.mimuw.edu.pl/wp-content/uploads/2014/03/main.pdf), [WIP book](https://www.mimuw.edu.pl/~bojan/paper/atom-book)
+* Nominal Sets and Their Applications [course - lectures, exercises](https://www.cl.cam.ac.uk/teaching/1213/L23/materials.html)
+
+## Petri nets
+
+* http://petrinet.org/
+* Topics in Concurrency - Cambridge 2018–19 [Course materials](https://www.cl.cam.ac.uk/teaching/1819/L301/materials.html)
+
 ### Haskell abstractions/constructions from CT encoded in Coq
 * [jwiegley/coq-haskell](https://github.com/jwiegley/coq-haskell)
 * [coq-community/math-classes](https://github.com/coq-community/math-classes)
@@ -181,6 +208,13 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 
 * Foundations of Algebraic Theories and Higher Dimensional Categories - Soichiro Fujii [(arxiv:1903.07030)](https://arxiv.org/abs/1903.07030)
 * A unified framework for notions of algebraic theory - Soichiro Fujii [(paper)](https://arxiv.org/abs/1904.08541)
+
+
+## Bialgebras
+
+* https://github.com/statebox/tbpt
+* Bialgebraic Semantics for String Diagrams - Filippo Bonchi, Robin Piedeleu, Pawel Sobocinski, Fabio Zanasi [(arXiv:1906.01519)](https://arxiv.org/abs/1906.01519)
+* Bialgebraic Semantics for Logic Programming - Filippo Bonchi, Fabio Zanasi [(arXiv:1502.06095)](https://arxiv.org/abs/1502.06095)
 
 ## Other PLT Resources
 
@@ -196,6 +230,7 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * [FP Complete tutorial for libraries](https://haskell.fpcomplete.com/learn#libraries)
 * CIS 552: Advanced Programming (Fall 2017) - Stephanie Weirich [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
 * CIS 194: Introduction to Haskell (Spring 2013) - Brent Yorgey [(course)](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
+* [Haskell ITMO course at CTD](https://github.com/jagajaga/FP-Course-ITMO)
 
 ## Haskell [user groups](https://wiki.haskell.org/User_groups), [commmunities](https://wiki.haskell.org/User_groups) videos
 
