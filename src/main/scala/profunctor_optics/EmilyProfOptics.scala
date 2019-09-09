@@ -56,12 +56,14 @@ trait Profunctor[P[_,_]] {
 
 trait Choice[P[_,_]] extends Profunctor[P] {
   def left[A,B,C]:  P[A,B] => P[Either[A, C], Either[B, C]]
-  def right[A,B,C]: P[A,B] => P[Either[C, A], Either[C ,B]] // TODO derive
+  def right[A,B,C]: P[A,B] => P[Either[C, A], Either[C ,B]] =
+    dimap[Either[C,A], Either[C ,B], Either[A, C], Either[B,C]](_.swap, _.swap) compose left[A,B,C]
 }
 
 trait Strong[P[_,_]] extends Profunctor[P] {
   def first[A,B,C]:  P[A,B] => P[(A, C), (B, C)]
-  def second[A,B,C]: P[A,B] => P[(C, A), (C, B)] // TODO derive
+  def second[A,B,C]: P[A,B] => P[(C, A), (C, B)] =
+    dimap[(C,A), (C ,B), (A, C), (B,C)](_.swap, _.swap) compose first[A,B,C]
 }
 
 trait Closed[P[_,_]] extends Profunctor[P] {
