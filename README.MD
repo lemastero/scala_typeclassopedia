@@ -2693,6 +2693,7 @@ trait Category[F[_, _]] extends Compose[F] {
 
 * Resources
   * (Category Theory) Category Theory 1.2: What is a category? - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
+  * Hask is not a category - Andrej Bauer [(blog)](http://math.andrej.com/2016/08/06/hask-is-not-a-category/)
 
 ### Arrow
 
