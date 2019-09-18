@@ -1613,6 +1613,7 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
   * [Haskell free/Control.Alternative.Free](http://hackage.haskell.org/package/free/docs/Control-Alternative-Free.html)
   * [Structurally enforced Free Alternative, without left distributivity - SO](https://stackoverflow.com/questions/45647253/structurally-enforced-free-alternative-without-left-distributivity)
   * Routing With Cofree Comonad - Marcin Szamotulski [(video)](https://www.youtube.com/watch?v=O78UOsKAXsc) [(slides)](https://coot.github.io/routing-with-cofree-comonad/#/) [(repo)](https://github.com/coot/routing-with-cofree-comonad)
+  * Applicative Regular Expressions using the Free Alternative - Justin Le [(blog pos)](https://blog.jle.im/entry/free-alternative-regexp.html)
 
 ## Representable & Adjunctions
 
@@ -1741,6 +1742,7 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
   * (Haskell) Reverse Engineering Machines with the Yoneda Lemma - Dan Piponi: [(blog post)](http://blog.sigfpe.com/2006/11/yoneda-lemma.html)
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * Category Theory III 7.1, Natural transformations as ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=DseY4qIGZV4)
+  * [Type Arithmetic and the Yoneda Perspective - Emily Pillmore](https://github.com/cohomolo-gy/Type-Arithmetic-and-the-Yoneda-Perspective)
   
 ### Coyoneda
 
