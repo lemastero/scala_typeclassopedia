@@ -88,3 +88,5 @@ trait Grates[S, T, A, B] { // https://r6research.livejournal.com/28050.html
   * Mainline Profunctor Heirarchy for Optics [(blog post)](https://r6research.livejournal.com/27476.html)
   * Jeremy Gibbons - Profunctor Optics Modular Data Accessors [(video)](https://www.youtube.com/watch?v=sfWzUMViP0M)
   * Grate: A new kind of Optic: [(blog post)](https://r6research.livejournal.com/28050.html)
+  * Tambara Modules - Brendan Fong [(video)](https://www.youtube.com/watch?v=67hJW6J4Mic)
+  * Profunctor optics, a categorical update - Mario Román, Bryce Clarke, Fosco Loregian, Emily Pillmore, Derek Elkins, Bartosz Milewski [(video)](https://www.youtube.com/watch?v=ceCwD7L0t3w), [(slides)](http://events.cs.bham.ac.uk/syco/strings3-syco5/slides/roman.pdf), [(gist)](https://gist.github.com/emilypi/407838d9c321d5b21ebc1828ad2bedcb)
