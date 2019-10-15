@@ -1,2 +1,2 @@
 // sbt dependencyUpdates
-addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.4.3")
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.5.0")
