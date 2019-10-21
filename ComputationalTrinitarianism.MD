@@ -204,6 +204,8 @@ Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(
 * Algebraic Theories over Nominal Sets - Alexander Kurz, Daniela Petrişan, Jiří Velebil [(arXiv:1006.3027)](https://arxiv.org/abs/1006.3027)
 * Atompress [blog](http://atoms.mimuw.edu.pl/), [book](http://atoms.mimuw.edu.pl/wp-content/uploads/2014/03/main.pdf), [WIP book](https://www.mimuw.edu.pl/~bojan/paper/atom-book)
 * Nominal Sets and Their Applications [course - lectures, exercises](https://www.cl.cam.ac.uk/teaching/1213/L23/materials.html)
+* FoPSS 2019 - Nominal Techniques [(slides from talks)](https://www.mimuw.edu.pl/~fopss19/programme.html)
+
 
 ## Petri nets
 
