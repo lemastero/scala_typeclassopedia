@@ -183,9 +183,13 @@ Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/w
 * A Specification for Dependent Types in Haskell - Stephanie Weirich, Antoine Voizard, Pedro Henrique Azevedo de Amorim, 
 Richard A. Eisenberg [(video)](https://www.youtube.com/watch?v=0157rUxC4_8) [(paper)](https://dl.acm.org/citation.cfm?id=3110275) [(repo)](https://github.com/sweirich/corespec)
 * Dependent Types in Haskell: Theory and Practice - Richard A. Eisenberg [(arXiv)](https://arxiv.org/abs/1610.07978)
-* DOT: Scala Types from Theory to Practice—Nada Amin [(video)](https://www.youtube.com/watch?v=fjj_fv346lY)
-Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(paper)](https://dl.acm.org/citation.cfm?id=3009866)
+* DOT: Scala Types from Theory to Practice—Nada Amin [(video)](https://www.youtube.com/watch?v=fjj_fv346lY),
+Type soundness proofs with definitional interpreters - Nada Amin, Tiark Rompf [(paper)](https://dl.acm.org/citation.cfm?id=3009866),
+Dependent Object Types - Nada Amin, Martin Odersky [(Ph.D. Thesis)](https://infoscience.epfl.ch/record/223518),
+THE ESSENCE OF SCALA - Martin Odersky [(blog post)](https://www.scala-lang.org/blog/2016/02/03/essence-of-scala.html)
+SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scala-lang.org/blog/2016/02/17/scaling-dot-soundness.html)
 * Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
+* System F in Agda, for fun and profit - James Chapman, Roman Kireev, Chad Nester, Philip Wadler [(paper)](https://iohk.io/research/papers/#system-f-in-agda-for-fun-and-profit)
 
 ## [Formalizations of Category Theory in](https://ncatlab.org/homotopytypetheory/show/Category+theory) [proof assistants](https://ncatlab.org/homotopytypetheory/show/Proof+Assistants)
 
