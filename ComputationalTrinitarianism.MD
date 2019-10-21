@@ -24,6 +24,7 @@
 ### [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
 
 * An informal introduction to topos theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1012.5647)
+* Category Theory, Toposes - MathProofsable [(video playlist)](https://www.youtube.com/playlist?list=PL4FD0wu2mjWM3ZSxXBj4LRNsNKWZYaT7k)
 * Toposes, Triples and Theories - Michael Barr, Charles Wells [(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
 * Topos theoretic background - Olivia Caramello [(paper)](http://www.oliviacaramello.com/Unification/ToposTheoreticPreliminariesOliviaCaramello.pdf)
 * Introduction to categorical logic, classifying toposes and the bridge technique - Olivia Caramello [(videos with toc)](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/20151124-caramello)
