@@ -146,6 +146,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 
 * Introduction to Homotopy Type Theory - [EUTypes Summer School 2017](https://sites.google.com/view/summerschool2017-eutypes/home) - Thorsten Altenkirch [(lecture notes)](http://www.cs.nott.ac.uk/~psztxa/ss-types-17/notes-summer17.pdf), [(video with similar scope - Naïve Type Theory by Thorsten)](https://www.youtube.com/watch?v=bNG53SA4n48), [(slides 2017)](http://www.cs.nott.ac.uk/~psztxa/talks/s-repls-17.pdf), [(slides 2018)](http://www.cs.nott.ac.uk/~psztxa/talks/fmv18.pdf)
 * Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
+* Homotopy (type) theory - Andrej Bauer, University of Ljubljana course [(github repo, videos)](https://github.com/andrejbauer/homotopy-type-theory-course)
 * Programming in Martin-Löf's Type Theory An Introduction - Bengt Nordström, Kent Petersson, Jan M. Smith [(book)](http://www.cse.chalmers.se/research/group/logic/book/)
 * Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
 * Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
@@ -177,6 +178,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [mortberg/yacctt](https://github.com/mortberg/yacctt) [paper arXiv:1712.01800](https://arxiv.org/abs/1712.01800) Computational Higher Type Theory III: Univalent Universes and Exact Equality
 Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
 * Axioms for Modelling Cubical Type Theory in a Topos - Ian Orton, Andrew M. Pitts [(arXiv:1712.04864)](https://arxiv.org/abs/1712.04864)
+* Cubical informal type theory: The higher groupoid structure - Bruno Bentzen [(arXiv:1806.08490)](https://arxiv.org/pdf/1806.08490.pdf)
 
 ## Specification of dependent types
 
