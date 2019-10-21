@@ -9,11 +9,6 @@ import scala.language.higherKinds
 
 // TODO https://github.com/mroman42/vitrea/blob/master/Vitrea.hs
 
-// TODO Statabox Summit fiboncacci using Optics & Moore machines
-//  https://gist.github.com/sjoerdvisscher/239175c3258a288a489d82848a84358a
-
-// TODO specify monad instance
-// TODO replace List => Traversable
 trait FreeTambara[P[_,_],A,B] {
   type U
   type V
