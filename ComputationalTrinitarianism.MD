@@ -68,6 +68,13 @@
 * Programming Cafe - Bartosz Milewski [(blog)](https://bartoszmilewski.com/)
 * The Comonad.Reader - Edward Kmett [blog](http://comonad.com/reader/), EdK almost single handed, encoded Category Theory abstractions in Haskell, blog co authored by Gershom Bazerman, Dan Doel
 * Rúnar Bjarnason blogs [Apocalisp](https://apocalisp.wordpress.com/), [Higher Order](https://blog.higher-order.com/)
+* Jules Hedges [blog](https://julesh.com/blog/)
+* A Neighborhood of Infinity - sigfpe [(blog)](http://blog.sigfpe.com/)
+* Marcin Szamotulski [(blog)](https://coot.me/)
+
+# Math blogs about (Category Theory, Type Theory, etc)
+* Tai-Danae Bradley [(blog)](https://www.math3ma.com/categories/category-theory)
+
 
 ## Publications
 
