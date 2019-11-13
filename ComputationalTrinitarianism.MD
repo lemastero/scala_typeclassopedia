@@ -30,6 +30,7 @@
 * Introduction to categorical logic, classifying toposes and the bridge technique - Olivia Caramello [(videos with toc)](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/20151124-caramello)
 * [Toposes in Como 2018](http://tcsc.lakecomoschool.org/) conference: [(video playlist)](https://www.youtube.com/watch?v=85hAGaFCsD8&index=2&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp), [(slides from talks)](http://tcsc.lakecomoschool.org/program/); There are introductory lectures [Some glances at topos theory - Francis Borceux](https://www.youtube.com/watch?v=s_fN9euuVAY&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp&index=10)
 * [Topos à l’IHES 2015](https://indico.math.cnrs.fr/event/747/) conference: [(video playlist)](https://www.youtube.com/playlist?list=PLx5f8IelFRgFjhhrWWl96sRSClcG5YIx6), includes introductory: [A crash course in topos theory: the big picture - André Joyal](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/joyal)
+* Higher Topos Theory - Jacob Lurie [(arXiv:math/0608040)](https://arxiv.org/abs/math/0608040)
 
 ## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
@@ -84,6 +85,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 * [Eugenia Cheng](http://eugeniacheng.com/math/research/)
 * [Emily Riehl](http://www.math.jhu.edu/~eriehl/#research)
+* [Jacob Lurie](https://www.math.ias.edu/~lurie/)
 * [Benedikt Ahrens](https://dblp.org/pers/hd/a/Ahrens:Benedikt), [personal page](https://benediktahrens.net/publications/)
 * [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg), [personal page](http://okmij.org/ftp/)
 * [Jeremy Gibbons](https://dblp.uni-trier.de/pers/hd/g/Gibbons:Jeremy?q=Jeremy%20Gibbons)
