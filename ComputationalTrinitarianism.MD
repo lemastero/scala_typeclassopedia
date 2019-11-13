@@ -254,6 +254,8 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 ## Other PLT Resources
 
 * [Programming Language Theory - Steven Shaw](https://steshaw.org/plt/)
+* [LIPICS Leibniz International Proceedings in Informatics](http://drops.dagstuhl.de/opus/institut_lipics.php)
+* [statebox/awesome-applied-ct](https://github.com/statebox/awesome-applied-ct)
 
 ## Haskell courses
 
