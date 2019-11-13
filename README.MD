@@ -3091,9 +3091,13 @@ Resources:
 ## Topos
 
 Resources:
-  * [vpatryshev/Categories topos](https://github.com/vpatryshev/Categories/tree/master/src/main/scala/math/cat/topos)
+  * vpatryshev/Categories [Topos](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/topos/Topos.scala) [Grothendieck Topos, Subobject Classifier](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/topos/GrothendieckTopos.scala)
+  * (Agda) agda/agda-categories [Topos](https://github.com/agda/agda-categories/blob/master/Categories/Category/Topos.agda) [Subobject Classifier](https://github.com/agda/agda-categories/blob/master/Categories/Diagram/SubobjectClassifier.agda)
+  * (Coq) UniMath/UniMath [Grothendieck Topos](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/GrothendieckTopos.v) [Subobject Classifier](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/SubobjectClassifier.v)
   * (Haskell) [brunjlar/protop](https://github.com/brunjlar/protop)
   * (Category Theory, Haskell) Topoi - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/07/22/topoi/)
+  * Computational Quadrinitarianism (Curious Correspondences go Cubical) - Gershom Bazerman [(blog post)](http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/)
+  * [fdilke/bewl](https://github.com/fdilke/bewl) (A DSL for the internal language of a topos)
   * [resources about topos theory](./ComputationalTrinitarianism.MD#topos-theory)
 
 ## Resource About Category Theory
