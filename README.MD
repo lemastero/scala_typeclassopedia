@@ -3093,7 +3093,8 @@ Resources:
 Resources:
   * [vpatryshev/Categories topos](https://github.com/vpatryshev/Categories/tree/master/src/main/scala/math/cat/topos)
   * (Haskell) [brunjlar/protop](https://github.com/brunjlar/protop)
-  * (Category Theory, Haskell) Topoi - Bartosz Milewski (https://bartoszmilewski.com/2017/07/22/topoi/)
+  * (Category Theory, Haskell) Topoi - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/07/22/topoi/)
+  * [resources about topos theory](./ComputationalTrinitarianism.MD#topos-theory)
 
 ## Resource About Category Theory
 
