@@ -194,6 +194,9 @@
   * [Colimit](#colimit)
   * [Ends & Coends](#ends--coends)
 
+* Topoi
+  * [Topos](#topos)
+
 * [Other Encodings of Category Theory](./OtherEncodingsOfCT.MD)
   * [data-category by Sjoerd Visscher](./OtherEncodingsOfCT.MD#encoding-of-category-theory-by-sjoerd-visscher)
   * [Formalizations of Category Theory in proof assistants (Coq)](./OtherEncodingsOfCT.MD#formalizations-of-category-theory-in-proof-assistants)
@@ -1525,6 +1528,7 @@ trait NaturalTransf[F[_], G[_]] {
 
 * Resources
   * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html)
+  * [tpolecat/doobie KleisliInterpreter](https://github.com/tpolecat/doobie/blob/master/modules/free/src/main/scala/doobie/free/kleisliinterpreter.scala) uses natural transformations
   * Natural transformations - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=FZSUwqWjHCU&list=PLA28A5C9D19465C92)
 
 ## Free constructions
@@ -3083,6 +3087,14 @@ Resources:
   * (Haskell) Haskell Live-Coding, Session 1, Commutativity - Edward Kmett [(video)](https://www.youtube.com/watch?v=Nv5tf8pvgrY)
   * Are there any interesting commutative monads in Haskell? [SO](https://stackoverflow.com/questions/24356166/are-there-any-interesting-commutative-monads-in-haskell)
   * The Commutativity monad [(blog post)](http://gelisam.blogspot.com/2013/07/the-commutative-monad.html) [reddit](https://www.reddit.com/r/haskell/comments/1jegxb/the_commutative_monad/)
+
+## Topos
+
+Resources:
+  * [vpatryshev/Categories topos](https://github.com/vpatryshev/Categories/tree/master/src/main/scala/math/cat/topos)
+  * (Haskell) [brunjlar/protop](https://github.com/brunjlar/protop)
+  * (Category Theory, Haskell) Topoi - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/07/22/topoi/)
+  * [resources about topos theory](./ComputationalTrinitarianism.MD#topos-theory)
 
 ## Resource About Category Theory
 
