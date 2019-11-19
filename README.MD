@@ -185,6 +185,7 @@
   * [Task](#andrey-mokhov-task)
   * [Transducers](#transducers)
   * [Relative monads](#relative-monads)
+  * [Disintegrate](#disintegrate)
 
 * Limits
   * [Cone](#cone)
@@ -3067,6 +3068,12 @@ Monads thats wokrs on different categories.
 
 Resources:
   * (Type Theory) Monads Need Not Be Endofunctors - Thorsten Altenkirch, James Chapman, Tarmo Uustalu [(paper)](http://www.cs.nott.ac.uk/~psztxa/talks/scotcats-slides.pdf), [(code)](https://jmchapman.github.io/relmon.html)
+
+## Disintegrate
+
+Resources:
+  * [Twitter @sigfpe](https://twitter.com/sigfpe/status/1195783717655986176)
+  * [Attempt at implementation in Scala](./src/main/scala/disintegrate/Disintegrate.scala)
 
 ## Commutative
 
