@@ -20,14 +20,9 @@ trait Disintegrate[M[_]] {
   def disintegrate2[A,B](mab: M[(A,B)]): A => M[B]
 
   // https://twitter.com/Iceland_jack/status/1195787833203658752
-  def law[A,B](pairs: M[(A,B)])(implicit FM: Monad[M]): Boolean = {
-    val lhs: (M[A], A => M[B]) = disintegrate(pairs)
-    val (as,bs) = lhs
-    val rhs = for {
-      a <- as
-      b <- bs(a)
-    } yield (a,b)
-    lhs == rhs
+  def law[A, B](pairs: M[(A, B)])(implicit FM: Monad[M]): Boolean = {
+    val (a, amb): (M[A], A => M[B]) = disintegrate(pairs)
+    pairs == a.mproduct(amb)
   }
 }
 
