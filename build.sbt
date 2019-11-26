@@ -1,27 +1,28 @@
+import sbt.librarymanagement
+
 name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-scalaVersion := "2.12.6"
+lazy val scala212 = "2.12.10"
+lazy val scala213 = "2.13.1"
 
-mainClass := Some("coyoneda.SimpleImpl")
+scalaVersion := scala213
 
-val catsVersion = "2.0.0"
+crossScalaVersions := List(scala212, scala213)
+
+lazy val catsVersion = "2.0.0"
+lazy val catsMtlVersion = "0.7.0"
 libraryDependencies ++= Seq(
-  "org.typelevel" %% "cats-core" % catsVersion withSources() withJavadoc(),
-  "org.typelevel" %% "cats-free" % catsVersion withSources() withJavadoc(),
-  "org.typelevel" %% "cats-laws" % catsVersion withSources() withJavadoc(),
-  "org.typelevel" %% "alleycats-core" % catsVersion withSources() withJavadoc(),
-
-  "org.typelevel" %% "cats-mtl-core" % "0.7.0" withSources() withJavadoc(),
-  "org.typelevel" %% "cats-mtl-laws" % "0.7.0" withSources() withJavadoc(),
-
-  "org.typelevel" %% "cats-effect" % "2.0.0" withSources() withJavadoc(),
-
-  "org.scalaz"    %% "scalaz-core" % "7.3.0-M31" withSources() withJavadoc(),
-
-  "com.slamdata" %% "matryoshka-core" % "0.21.3" withSources() withJavadoc(),
-
+  "org.typelevel" %% "cats-core" % catsVersion withSources(),
+  "org.typelevel" %% "cats-free" % catsVersion withSources(),
+  "org.typelevel" %% "cats-laws" % catsVersion withSources(),
+  "org.typelevel" %% "alleycats-core" % catsVersion withSources(),
+  "org.typelevel" %% "cats-mtl-core" % catsMtlVersion withSources(),
+  "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
+  "org.typelevel" %% "cats-effect" % "2.0.0" withSources(),
+  "org.scalaz"    %% "scalaz-core" % "7.3.0-M31" withSources(),
+  "com.codecommit" %% "skolems" % "0.1.2",
   "org.scalatest" %% "scalatest" % "3.0.8" % Test
 )
 
@@ -29,5 +30,4 @@ scalacOptions ++= Seq(
   "-encoding", "UTF-8"
 )
 
-addCompilerPlugin("org.scalamacros" %% "paradise" % "2.1.1" cross CrossVersion.full)
-addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
