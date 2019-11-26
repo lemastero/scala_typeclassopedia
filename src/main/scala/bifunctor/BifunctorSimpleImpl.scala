@@ -2,8 +2,7 @@ package bifunctor
 
 import const.Const
 
-import scala.language.{higherKinds, implicitConversions}
-
+import scala.language.higherKinds
 
 
 object BifunctorSimpleImpl extends App {
@@ -74,5 +73,4 @@ object BifunctorSimpleImpl extends App {
   println( tupleBifunctor.second(add1)( (3, 'j') ) ) // (42, 'j')
   println( eitherBifunctor.second(add1)(Left('j')) )
   println( eitherBifunctor.second(add1)(Right(42)) )
-
 }

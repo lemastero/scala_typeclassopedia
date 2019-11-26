@@ -47,7 +47,7 @@ object Representable {
   }
 
   val repFunction0: Representable[Function0, Unit] = new Representable[Function0, Unit] {
-    def tabulate[X](f: Unit => X): Function0[X] = () => f()
+    def tabulate[X](f: Unit => X): Function0[X] = () => f(())
     def index[X](fa: Function0[X]): Unit => X = _ => fa()
   }
 

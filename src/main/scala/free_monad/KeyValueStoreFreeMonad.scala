@@ -25,7 +25,7 @@ object KeyValueStoreFreeMonad extends App {
   def update[T](key: String, f: T => T): KVStore[Unit] =
     for {
       vMaybe <- get[T](key)
-      _ <- vMaybe.map(v => put[T](key, f(v))).getOrElse(Free.pure())
+      _ <- vMaybe.map(v => put[T](key, f(v))).getOrElse(Free.pure(()))
     } yield ()
 
   // 3 program
@@ -40,9 +40,9 @@ object KeyValueStoreFreeMonad extends App {
 
   // 4 compiler, using natural transformation (~> or FunctionK)
   // compiler could use Future, Option, Either etc instead of Id
-  import cats.arrow.FunctionK
-  import cats.{Id, ~>}
-  import scala.collection.mutable
+//  import cats.arrow.FunctionK
+//  import cats.{Id, ~>}
+//  import scala.collection.mutable
 
   /* TODO it does not compile for me :(
   def impureCompiler: KVStoreA ~> Id =

@@ -1,7 +1,6 @@
 package disintegrate
 
 import cats.Monad
-import cats.syntax.functor._
 import cats.syntax.flatMap._
 import contravariant.InstancesForContravariantFunctor.Predicate
 import educational.{Contravariant, Functor, State}

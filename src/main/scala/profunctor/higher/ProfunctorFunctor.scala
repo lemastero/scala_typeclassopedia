@@ -2,7 +2,7 @@ package profunctor.higher
 
 import profunctor.Profunctor
 
-import scala.language.{higherKinds, reflectiveCalls}
+import scala.language.higherKinds
 
 /**
   * Laws:
