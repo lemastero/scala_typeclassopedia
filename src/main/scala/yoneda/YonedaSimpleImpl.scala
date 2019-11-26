@@ -2,7 +2,7 @@ package yoneda
 
 import functor.FunctorSimpleImpl.Functor
 import kan.Ran
-import natural_transformation.NaturalTransf.{NaturalTransf, ~>}
+import natural_transformation.NaturalTransf.NaturalTransf
 import simple.Id
 
 import scala.language.higherKinds

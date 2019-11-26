@@ -93,8 +93,8 @@ trait ProfunctorLaws[P[_, _]] extends Profunctor[P] {
 object ProfunctorInstance {
   trait Function1Profunctor extends Profunctor[Function1] {
     def dimap[X, Y, Z, W](f: X => Y, g: Z => W): (Y => Z) => (X => W) = h => f andThen (g compose h)
-    override def lmap[A,B,C](f: A => B): (B => C) => (A => C) = f andThen
-    override def rmap[A,B,C](f: B => C): (A => B) => (A => C) = f compose
+    override def lmap[A,B,C](f: A => B): (B => C) => (A => C) = f.andThen
+    override def rmap[A,B,C](f: B => C): (A => B) => (A => C) = f.compose
   }
 
   val function1: Profunctor[Function1] = new Profunctor[Function1] with Function1Profunctor {}

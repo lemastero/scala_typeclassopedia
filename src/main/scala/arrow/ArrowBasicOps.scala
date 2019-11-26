@@ -24,7 +24,7 @@ object ArrowBasicOps
     val r4 = a1.split(inc)((50,60)) // ***
     val r5 = Arrow[Function1].split(times10, inc)((50,60))
 
-    println( r1, r2, r3, r4, r5 )
+    println(List( r1, r2, r3, r4, r5 ).mkString(", "))
     println( (a1 >>> a2)(5) )
     println( (a1 <<< a2)(5) )
     println( a1.second((1,2)) )
