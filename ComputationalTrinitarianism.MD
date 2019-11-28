@@ -69,12 +69,17 @@
 * Programming Cafe - Bartosz Milewski [(blog)](https://bartoszmilewski.com/)
 * The Comonad.Reader - Edward Kmett [blog](http://comonad.com/reader/), EdK almost single handed, encoded Category Theory abstractions in Haskell, blog co authored by Gershom Bazerman, Dan Doel
 * Rúnar Bjarnason blogs [Apocalisp](https://apocalisp.wordpress.com/), [Higher Order](https://blog.higher-order.com/)
-* Jules Hedges [blog](https://julesh.com/blog/)
 * A Neighborhood of Infinity - sigfpe [(blog)](http://blog.sigfpe.com/)
 * Marcin Szamotulski [(blog)](https://coot.me/)
+* Jules Hedges [blog](https://julesh.com/blog/)
 
 # Math blogs about (Category Theory, Type Theory, etc)
+* Existential Type - Robert Harper [(blog)](https://existentialtype.wordpress.com/)
+* Mathematics and Computation - Andrej Bauer [(blog)](http://math.andrej.com/)
 * Tai-Danae Bradley [(blog)](https://www.math3ma.com/categories/category-theory)
+* Azimuth Project - [(blog)](https://johncarlosbaez.wordpress.com/)
+* The n-Category Cafe [(blog)](https://golem.ph.utexas.edu/category/)
+* PL Perspectives - SIGPLAN [(blog)](https://blog.sigplan.org/blog/)
 
 
 ## Publications
@@ -247,7 +252,6 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 
 ## Bialgebras
 
-* https://github.com/statebox/tbpt
 * Bialgebraic Semantics for String Diagrams - Filippo Bonchi, Robin Piedeleu, Pawel Sobocinski, Fabio Zanasi [(arXiv:1906.01519)](https://arxiv.org/abs/1906.01519)
 * Bialgebraic Semantics for Logic Programming - Filippo Bonchi, Fabio Zanasi [(arXiv:1502.06095)](https://arxiv.org/abs/1502.06095)
 
