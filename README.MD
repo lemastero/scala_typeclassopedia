@@ -89,6 +89,7 @@
   * [FunctorFilter](#functorfilter)
   * [TraverseFilter](#traversefilter)
   * [Distributive](#distributive)
+  * [Cofree Traverse](#cofree-traverse)
 
 * Monads not compose - solutions
   * [Monad Transformers](#monad-transformers-optiont-eithert-readert)
@@ -103,6 +104,7 @@
   * [Free Alternative](#free-alternative)
   * [Free Arrow](#free-arrow)
   * [Free Monad transformers](#free-monad-transformers)
+  * [Cofree Traverse](#cofree-traverse)
  
 * [Representable & Adjunctions](#representable--adjunctions)
   * [Representable](#representable)
@@ -1539,7 +1541,8 @@ trait NaturalTransf[F[_], G[_]] {
 | Monoid              | List, Vector | 
 | Functor             | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
 | Applicative         | [FreeApplicative](#free-applicative) |
-| Alternative         | [Free Alternative](#free-alternative)
+| Alternative         | [Free Alternative](#free-alternative) |
+| Traversable         | [CoFree Traverse](#cofree-traverse) |
 | Monad               | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
 | Comonad             | [CoFree](#cofree), [Density](#density-comonad) |
 | Profunctor          | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), [Tambara](#tambara), Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing, Traversing |
@@ -1612,6 +1615,14 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
   * Cofree Comonads and their Uses - λC 2018 - Nihil Shah [(video)](https://www.youtube.com/watch?v=ydZ_fLwo9yI)
+
+### Cofree Traverse
+
+* Resources
+  * Cofree Traversable Functors - Love Waern [(paper)](https://uu.diva-portal.org/smash/get/diva2:1369180/FULLTEXT01.pdf)
+  * [KingoftheHomeless/Cofree-Traversable-Functors](https://github.com/KingoftheHomeless/Cofree-Traversable-Functors)
+  * The Cofree Traversable [(Reddit)](https://www.reddit.com/r/haskell/comments/ajamc0/the_cofree_traversable/)
+  * [Twitter discussion](https://twitter.com/Iceland_jack/status/1199524789523828738)
 
 ### Free Alternative
 
