@@ -1,6 +1,6 @@
 package profunctor.higher
 
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 import profunctor.Profunctor
 
 trait ProfunctorYoneda[P[_,_],A,B] { self =>

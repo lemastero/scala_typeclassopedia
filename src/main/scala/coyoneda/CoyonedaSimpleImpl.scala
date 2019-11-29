@@ -1,6 +1,6 @@
 package coyoneda
 
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 import kan.LeftKanExtensionSimpleImpl.Lan
 import natural_transformation.NaturalTransf.NaturalTransf
 import simple.Id
