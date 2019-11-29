@@ -1,8 +1,7 @@
 package day
 
 import comonad.ComonadSimpleImpl.Comonad
-import educational.Applicative
-import functor.FunctorSimpleImpl.Functor
+import educational.{Applicative, Functor}
 import natural_transformation.NaturalTransf.NaturalTransf
 import simple.Id
 

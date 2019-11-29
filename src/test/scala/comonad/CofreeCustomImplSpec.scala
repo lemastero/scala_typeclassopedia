@@ -1,7 +1,7 @@
 package comonad
 
 import comonad.ComonadSimpleImpl.Comonad
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 import org.scalatest.{FunSpec, MustMatchers}
 
 import scala.language.higherKinds

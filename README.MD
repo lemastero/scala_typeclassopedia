@@ -89,6 +89,7 @@
   * [FunctorFilter](#functorfilter)
   * [TraverseFilter](#traversefilter)
   * [Distributive](#distributive)
+  * [Cofree Traverse](#cofree-traverse)
 
 * Monads not compose - solutions
   * [Monad Transformers](#monad-transformers-optiont-eithert-readert)
@@ -103,6 +104,7 @@
   * [Free Alternative](#free-alternative)
   * [Free Arrow](#free-arrow)
   * [Free Monad transformers](#free-monad-transformers)
+  * [Cofree Traverse](#cofree-traverse)
  
 * [Representable & Adjunctions](#representable--adjunctions)
   * [Representable](#representable)
@@ -1539,7 +1541,8 @@ trait NaturalTransf[F[_], G[_]] {
 | Monoid              | List, Vector | 
 | Functor             | [Yoneda](#yoneda), [Coyoneda](#coyoneda), [Density](#density-comonad), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension), [Left Kan Extension](#left-kan-extension), [Day Convolution](#day-convolution) |
 | Applicative         | [FreeApplicative](#free-applicative) |
-| Alternative         | [Free Alternative](#free-alternative)
+| Alternative         | [Free Alternative](#free-alternative) |
+| Traversable         | [CoFree Traverse](#cofree-traverse) |
 | Monad               | [Free Monads](#free-monads), [Codensity](#codensity), [Right Kan Extension](#right-kan-extension) |
 | Comonad             | [CoFree](#cofree), [Density](#density-comonad) |
 | Profunctor          | [Profunctor CoYoneda](#profunctor-coyoneda), [Profunctor Yoneda](#profunctor-yoneda), [Tambara](#tambara), Pastro, Cotambara, Copastro, TambaraSum, PastroSum, CotambaraSum, CopastroSum, Closure, Environment, CofreeTraversing, FreeTraversing, Traversing |
@@ -1613,6 +1616,14 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
   * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
   * Cofree Comonads and their Uses - λC 2018 - Nihil Shah [(video)](https://www.youtube.com/watch?v=ydZ_fLwo9yI)
 
+### Cofree Traverse
+
+* Resources
+  * Cofree Traversable Functors - Love Waern [(paper)](https://uu.diva-portal.org/smash/get/diva2:1369180/FULLTEXT01.pdf)
+  * [KingoftheHomeless/Cofree-Traversable-Functors](https://github.com/KingoftheHomeless/Cofree-Traversable-Functors)
+  * The Cofree Traversable [(Reddit)](https://www.reddit.com/r/haskell/comments/ajamc0/the_cofree_traversable/)
+  * [Twitter discussion](https://twitter.com/Iceland_jack/status/1199524789523828738)
+
 ### Free Alternative
 
 * Resources
@@ -1643,10 +1654,11 @@ trait Representable[F[_], Rep] {
   * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
   * (Haskell) Radix Sort, Trie Trees, And Maps From Representable Functors - Chris Penner [(blog post)](https://chrispenner.ca/posts/representable-discrimination)
   * (Haskell) [Monad.Representable.Reader](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-Reader.html), [Monad.Representable.State](http://hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-State.html), [Comonad.Representable.Store](http://hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Representable-Store.html)
-  * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
-  * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
-  * https://stackoverflow.com/a/46502280
-  * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
+  * Moore for Less - Edward Kmett [(blog post)](https://www.schoolofhaskell.com/user/edwardk/moore/for-less)
+  * Representable Functors - Danny Gratzer [(blog post)](https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html)
+  * Which Haskell Functors are equivalent to the Reader functor - pigworker [SO](https://stackoverflow.com/a/46502280)
+  * Representable Functor isomorphic to (Bool -> a) [SO](https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a)
+  * [masaeedu/representable](https://github.com/masaeedu/representable/blob/master/index.hs) (different formulation of Representable functors that carries the domain around)
   * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
   * Java [Mojang/DataFixerUpper Representable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Representable.java)
   

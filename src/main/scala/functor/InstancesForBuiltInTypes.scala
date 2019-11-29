@@ -29,12 +29,12 @@ object InstancesForBuiltInTypes {
    fmap f [] = []
    fmap f (x:xs) = f x : fmap f xs
    */
-val listFunctor1: Functor[List] = new Functor[List]() {
-  def map[A, B](fa: List[A])(ab: A => B): List[B] = fa match {
-    case Nil => Nil
-    case head :: tail => ab(head) :: map(tail)(ab)
+  val listFunctor1: Functor[List] = new Functor[List]() {
+    def map[A, B](fa: List[A])(ab: A => B): List[B] = fa match {
+      case Nil => Nil
+      case head :: tail => ab(head) :: map(tail)(ab)
+    }
   }
-}
 
   val listFunctor: Functor[List] = new Functor[List]() {
     def map[A, B](fa: List[A])(f: A => B): List[B] = fa map f

@@ -1,6 +1,6 @@
 package comonad
 
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 
 import scala.language.higherKinds
 

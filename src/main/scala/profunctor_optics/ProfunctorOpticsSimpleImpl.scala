@@ -1,7 +1,6 @@
 package profunctor_optics
 
-import educational.Traverse
-import functor.FunctorSimpleImpl.Functor
+import educational.{Functor, Traverse}
 
 import scala.language.higherKinds
 
