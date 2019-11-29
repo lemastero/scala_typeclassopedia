@@ -1654,10 +1654,11 @@ trait Representable[F[_], Rep] {
   * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
   * (Haskell) Radix Sort, Trie Trees, And Maps From Representable Functors - Chris Penner [(blog post)](https://chrispenner.ca/posts/representable-discrimination)
   * (Haskell) [Monad.Representable.Reader](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-Reader.html), [Monad.Representable.State](http://hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-State.html), [Comonad.Representable.Store](http://hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Representable-Store.html)
-  * https://www.schoolofhaskell.com/user/edwardk/moore/for-less
-  * https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html
-  * https://stackoverflow.com/a/46502280
-  * https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a
+  * Moore for Less - Edward Kmett [(blog post)](https://www.schoolofhaskell.com/user/edwardk/moore/for-less)
+  * Representable Functors - Danny Gratzer [(blog post)](https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html)
+  * Which Haskell Functors are equivalent to the Reader functor - pigworker [SO](https://stackoverflow.com/a/46502280)
+  * Representable Functor isomorphic to (Bool -> a) [SO](https://stackoverflow.com/questions/6177950/representable-functor-isomorphic-to-bool-a)
+  * [masaeedu/representable](https://github.com/masaeedu/representable/blob/master/index.hs) (different formulation of Representable functors that carries the domain around)
   * usage of Representable in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
   * Java [Mojang/DataFixerUpper Representable](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Representable.java)
   
