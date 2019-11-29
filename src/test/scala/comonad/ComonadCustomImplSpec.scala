@@ -1,6 +1,6 @@
 package comonad
 
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 import simple.Id
 import org.scalatest.{FunSpec, MustMatchers}
 import semigroup.MonoidSimpleImpl.Monoid
