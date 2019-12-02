@@ -1,7 +1,8 @@
 package profunctor
 
-import org.scalatest.{FunSpec, MustMatchers}
 import profunctor.strong.Strong
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 case class DoubleFun[X,Y](fun: (X,X) => (Y,Y))
 
@@ -11,8 +12,8 @@ trait DoubleFunPro extends Profunctor[DoubleFun] {
 }
 
 class StrongSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   it("Functions from A to B are Strong Profunctors") {
     trait Function1Profunctor extends Profunctor[Function1] {
