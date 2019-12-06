@@ -4,7 +4,7 @@ case class State[S,A](runState: S => (A,S))
 
 object State {
 
-  implicit def stateMonad[S]: Monad[State[S, ?]] = new Monad[State[S, ?]] {
+  implicit def stateMonad[S]: Monad[State[S, *]] = new Monad[State[S, *]] {
 
     def pure[A](a: A): State[S, A] = State(s => (a, s))
 
