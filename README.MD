@@ -821,7 +821,7 @@ def fromDijkstra[S,A](k: Dijkstra[S,A]): State[S,A] = State(
 
 * Resources
   * The RIO Monad - Michael Snoyman [(blog post)](https://www.fpcomplete.com/blog/2017/07/the-rio-monad), [snoyberg/rio](https://github.com/snoyberg/rio), [reddit](https://www.reddit.com/r/haskell/comments/6p6p4b/the_rio_monad/)
-  * [http4s-tracer motivation](https://gvolpe.github.io/http4s-tracer/motivations.html)
+  * [http4s-tracer motivation](https://http4s-tracer.profunktor.dev/motivations.html)
 
 
 ### TRIO (RIO Monad + Bifunctor IO)
