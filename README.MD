@@ -807,7 +807,55 @@ def fromDijkstra[S,A](k: Dijkstra[S,A]): State[S,A] = State(
 
 ### Bifunctor IO (BIO)
 
+IO that abstract over input, output and potential error. Below implementation based on simplified ZIO from John A De Goes tweet:
+
+```scala
+case class BIO[R, E, A](run: R => Either[E, A]) {
+  def map[B](f: A => B): BIO[R, E, B] =
+    BIO(r => run(r).map(f))
+
+  def flatMap[R1 <: R, E1 >: E, B](f: A => BIO[R1, E1, B]): BIO[R1, E1, B] =
+    BIO(r => run(r).flatMap(a => f(a).run(r)))
+}
+```
+
+Classic IO is a Profunctor, for Bifunctor IO one can define also instance of Bifunctor
+
+```scala
+def zioFunctor[R,E]: Functor[BIO[R,E,*]] = new Functor[BIO[R,E,*]] {
+  def map[A, B](fa: BIO[R, E, A])(f: A => B): BIO[R, E, B] = fa.map(f)
+}
+
+trait BIOMonad[R,E] extends Monad[BIO[R,E,*]] {
+  def pure[A](a: A): BIO[R, E, A] = BIO(_ => Right(a))
+  def flatMap[A, B](fa: BIO[R, E, A])(f: A => BIO[R, E, B]): BIO[R, E, B] = fa.flatMap(f)
+}
+
+def bioMonad[R,E]: Monad[BIO[R,E,*]] = new BIOMonad[R,E] {}
+
+def bioContravariant[E,A]: Contravariant[BIO[*, E, A]] = new Contravariant[BIO[*,E,A]] {
+  def contramap[R, RR](fa: BIO[R, E, A])(f: RR => R): BIO[RR, E, A] =
+    BIO{ rr => fa.run(f(rr)) }
+}
+
+def bioProfunctor[E]: Profunctor[BIO[*,E,*]] = new Profunctor[BIO[*, E, *]] {
+  def dimap[RR, R, A, AA](f: RR => R, g: A => AA): BIO[R, E, A] => BIO[RR, E, AA] = fa =>
+    BIO{ rr => fa.map(g).run(f(rr)) }
+}
+
+def bioBifunctor[R]: Bifunctor[BIO[R, *, *]] = new Bifunctor[BIO[R,*,*]] {
+  def bimap[E, EE, A, AA](f: E => EE, g: A => AA): BIO[R, E, A] => BIO[R, EE, AA] = fa =>
+    BIO{ rr =>
+      fa.run(rr) match {
+        case Right(a) => Right(g(a))
+        case Left(b) => Left(f(b))
+      }
+    }
+}
+```
+
 * Resources
+  * [John A De Goes tweet with simplified ZIO implementation](https://twitter.com/jdegoes/status/1196536274909323271)
   * Bifunctor IO: A Step Away from Dynamically-Typed Error Handling - John A De Goes [(blog post)](http://degoes.net/articles/bifunctor-io), [reddit](https://www.reddit.com/r/scala/comments/8ifwkl/bifunctor_io_a_step_away_from_dynamicallytyped/)
   * On Bifunctor IO and Java's Checked Exceptions - @alexelcu [(blog post)](https://alexn.org/blog/2018/05/06/bifunctor-io.html), [twitter](https://twitter.com/alexelcu/status/993154465518837760)
   * [LukaJCB/cats-bio](https://github.com/LukaJCB/cats-bio), [PR to move into cats-effect](https://github.com/typelevel/cats-effect/issues/189)
