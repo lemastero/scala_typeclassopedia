@@ -46,7 +46,7 @@ object BIOInstances {
   }
 
   def bioBifunctor[R]: Bifunctor[BIO[R, *, *]] = new Bifunctor[BIO[R,*,*]] {
-    def bimap[E, EE, A, AA](f: E => EE, g: A => AA): BIO[R, E, A] => BIO[R, EE, AA] = fa =>
+    override def bimap[E, EE, A, AA](f: E => EE, g: A => AA): BIO[R, E, A] => BIO[R, EE, AA] = fa =>
       BIO{ rr =>
         fa.run(rr) match {
           case Right(a) => Right(g(a))
