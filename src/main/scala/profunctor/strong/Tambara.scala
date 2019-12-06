@@ -78,12 +78,12 @@ object TablaraInstances {
 //      }
 //    }
 
-    def promap2[P[_, _], Q[_, _]](f: DinaturalTransformation[P, Q])(implicit PP: Profunctor[P]): DinaturalTransformation[Lambda[(A, B) => Tambara[P, A, B]], Lambda[(A, B) => Tambara[Q, A, B]]] = {
+    def promap2[P[_, _], Q[_, _]](f: DinaturalTransformation[P, Q]): DinaturalTransformation[Lambda[(A, B) => Tambara[P, A, B]], Lambda[(A, B) => Tambara[Q, A, B]]] = {
       new DinaturalTransformation[Lambda[(A, B) => Tambara[P, A, B]], Lambda[(A, B) => Tambara[Q, A, B]]] {
         def dinat[X, Y](ppp: Tambara[P, X, Y]): Tambara[Q, X, Y] = new Tambara[Q, X, Y] {
           def runTambara[C]: Q[(X, C), (Y, C)] = {
             val p: P[(X, C), (Y, C)] = ppp.runTambara
-            f.dinat[(X, C), (Y, C)](ppp.runTambara)
+            f.dinat[(X, C), (Y, C)](p)
           }
         }
       }

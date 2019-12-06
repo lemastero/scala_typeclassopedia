@@ -1,9 +1,10 @@
 package monad
 
-import org.scalatest.{FunSpec, MustMatchers}
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.duration._
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 case class Reader[A, B](run: A => B) { // B is changing and A is constant
 
@@ -35,8 +36,8 @@ object Reader {
 }
 
 class ReaderMonadSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   describe("Reader") {
     case class DbConfig(maxTimeout: Duration, jdbc: String, user: String, pass: String)

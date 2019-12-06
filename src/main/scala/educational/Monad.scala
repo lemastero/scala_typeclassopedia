@@ -81,7 +81,7 @@ trait MonadLaws[M[_]] extends Monad[M] {
   }
 
   // pure(a).flatMap(f) == f(a)
-  def leftIdentity[A,B,C](a: A, f: A => M[B], g: B => M[C]): Boolean = {
+  def leftIdentity[A,B,C](a: A, f: A => M[B]): Boolean = {
     //    pure
     // A =======> M[A]
     val l1: M[A] = pure(a)
@@ -95,7 +95,7 @@ trait MonadLaws[M[_]] extends Monad[M] {
   }
 
   // fa.flatMap(pure) == fa
-  def rightIdentity[A,B,C](a: A, fa: M[A], g: B => M[C]): Boolean = {
+  def rightIdentity[A,B,C](fa: M[A]): Boolean = {
     //        flatMap
     // M[A] ==========> M[A]
     val l: M[A] = flatMap(fa)(pure)

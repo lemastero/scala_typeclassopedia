@@ -1,15 +1,16 @@
 package comonad
 
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 import simple.Id
-import org.scalatest.{FunSpec, MustMatchers}
 import semigroup.MonoidSimpleImpl.Monoid
 
 import scala.language.higherKinds
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class ComonadCustomImplSpec
-  extends FunSpec
-    with MustMatchers {
+  extends AnyFunSpec
+    with Matchers {
 
   /* Comonads are dual to Monads
    ------------------------------------------

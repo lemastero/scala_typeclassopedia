@@ -1,6 +1,6 @@
 package profunctor
 
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 
 /** Lift backward Functor into Profunctor */
 case class Costar[F[_],D,C](runCostar: F[D] => C)

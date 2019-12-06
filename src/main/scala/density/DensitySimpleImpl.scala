@@ -2,7 +2,7 @@ package density
 
 import comonad.ComonadSimpleImpl.Comonad
 import coyoneda.Coyoneda
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 import kan.LeftKanExtensionSimpleImpl.Lan
 
 import scala.language.higherKinds

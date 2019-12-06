@@ -2,7 +2,7 @@ package kan
 
 import scala.language.higherKinds
 import codensity.CodensitySimpleImpl.Codensity
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 
 /**
   * Right Kan Extension (Ran G H) of h along g

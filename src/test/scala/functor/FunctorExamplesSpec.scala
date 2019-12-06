@@ -1,11 +1,12 @@
 package functor
 
 import cats.Id
-import org.scalatest.{FunSpec, MustMatchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class FunctorExamplesSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   private def isOdd(i: Int): Boolean = i % 2 == 1
 

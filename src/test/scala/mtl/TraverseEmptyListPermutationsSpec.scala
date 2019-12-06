@@ -1,6 +1,7 @@
 package mtl
 
-import org.scalatest.{FunSpec, MustMatchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 /**
   * Generate all permutations of the list using filterM
@@ -12,8 +13,8 @@ import org.scalatest.{FunSpec, MustMatchers}
   *   (Brent Yorgey in Haskell) https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/
   */
 class TraverseEmptyListPermutationsSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   describe("filterA") {
     it("compute all permutations of the lit if given List(true, false)") {

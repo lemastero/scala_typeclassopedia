@@ -1,6 +1,6 @@
 package profunctor
 
-import functor.FunctorSimpleImpl.Functor
+import educational.Functor
 
 /** Lift Functor F: C -> D into Profunctor ProF: C -> D */
 case class Star[F[_],D,C](runStar: D => F[C])
