@@ -31,6 +31,9 @@
 * [Toposes in Como 2018](http://tcsc.lakecomoschool.org/) conference: [(video playlist)](https://www.youtube.com/watch?v=85hAGaFCsD8&index=2&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp), [(slides from talks)](http://tcsc.lakecomoschool.org/program/); There are introductory lectures [Some glances at topos theory - Francis Borceux](https://www.youtube.com/watch?v=s_fN9euuVAY&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp&index=10)
 * [Topos à l’IHES 2015](https://indico.math.cnrs.fr/event/747/) conference: [(video playlist)](https://www.youtube.com/playlist?list=PLx5f8IelFRgFjhhrWWl96sRSClcG5YIx6), includes introductory: [A crash course in topos theory: the big picture - André Joyal](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/joyal)
 * Higher Topos Theory - Jacob Lurie [(arXiv:math/0608040)](https://arxiv.org/abs/math/0608040)
+* [Basics in category and topos theory - David Janin](https://www.labri.fr/perso/janin/Enseignement/EDMI/full.html)
+* An Introduction to Topos Theory - Ryszard Paweł Kostecki [(lecture notes)](https://www.fuw.edu.pl/~kostecki/ittt.pdf)
+
 
 ## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
@@ -214,9 +217,13 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
 * Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
 
-## Nominal logic
+## Logic
 
-* overwiev Nominal Techniques - Andrew Pitts [(pdf)](https://www.cl.cam.ac.uk/~amp12/papers/nomt/nomt.pdf)
+* [Logical_Graphs](https://oeis.org/wiki/Logical_Graphs#Peirce.27s_law)
+
+## Nominal Techniques
+
+* Overwiev Nominal Techniques - Andrew Pitts [(pdf)](https://www.cl.cam.ac.uk/~amp12/papers/nomt/nomt.pdf)
 * Constructive Representation of Nominal Sets in Agda - Pritam Choudhury [(pdf)](https://www.cl.cam.ac.uk/~amp12/agda/choudhury/choudhury-dissertation.pdf)
 * [ekmett/name](https://github.com/ekmett/name) nominal sets in Haskell, - Edward Kmett, live coding: Haskell Live-Coding, Session 18[(video)](https://www.youtube.com/watch?v=3Zreblm0Ux0)
 * Equivariant ZFA and the foundations of nominal techniques - Murdoch J. Gabbay [(arXiv:1801.09443)](https://arxiv.org/abs/1801.09443)
@@ -255,6 +262,7 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 
 * [Programming Language Theory - Steven Shaw](https://steshaw.org/plt/)
 * [LIPICS Leibniz International Proceedings in Informatics](http://drops.dagstuhl.de/opus/institut_lipics.php)
+* Evan Patterson Wiki [Logic and PLT](https://www.epatters.org/wiki/logic-plt/), [Algebra and Category Theory](https://www.epatters.org/wiki/algebra/), [Sheafs, cubical, simplical stuff](https://www.epatters.org/wiki/geometry/)
 * [statebox/awesome-applied-ct](https://github.com/statebox/awesome-applied-ct)
 
 ## Haskell courses
