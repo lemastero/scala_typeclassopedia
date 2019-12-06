@@ -22,7 +22,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
   "org.typelevel" %% "cats-effect" % "2.0.0" withSources(),
   "org.scalaz"    %% "scalaz-core" % "7.3.0-M31" withSources(),
-  "com.codecommit" %% "skolems" % "0.1.2",
+  "com.codecommit" %% "skolems" % "0.2.0",
   "org.scalatest" %% "scalatest" % "3.1.0" % Test
 )
 
