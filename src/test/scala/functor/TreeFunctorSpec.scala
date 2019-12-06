@@ -2,11 +2,12 @@ package functor
 
 import functor.TreeFunctor.treeFunctor.map
 import helper_implementations.{Branch, Leaf}
-import org.scalatest.{FunSpec, MustMatchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class TreeFunctorSpec
-  extends FunSpec
-    with MustMatchers {
+  extends AnyFunSpec
+    with Matchers {
 
   describe("map over Tree") {
     it("execute function for value stored inside Left") {

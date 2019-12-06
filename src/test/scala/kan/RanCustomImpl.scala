@@ -1,13 +1,14 @@
 package kan
 
 import cats.{Functor, Monad}
-import org.scalatest.{FunSpec, MustMatchers}
 
 import scala.language.higherKinds
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class RanCustomImpl
-  extends FunSpec
-    with MustMatchers {
+  extends AnyFunSpec
+    with Matchers {
 
   describe("Right Kan extension implemented from Haskell definition") {
     /**

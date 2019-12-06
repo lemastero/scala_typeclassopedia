@@ -1,10 +1,11 @@
 package monoid
 
-import org.scalatest.{FunSpec, MustMatchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class AlternativeMonoidInstancesSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   describe("custom Monoid for multiply Int") {
     it("can use |+| syntax and combineAll method") {

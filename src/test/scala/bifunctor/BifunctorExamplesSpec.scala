@@ -1,10 +1,11 @@
 package bifunctor
 
-import org.scalatest.{FunSpec, MustMatchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class BifunctorExamplesSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   describe("Bifunctor") {
     describe("bimap") {

@@ -1,12 +1,13 @@
 package profunctor
 
-import org.scalatest.{FunSpec, MustMatchers}
 import scalaz._
 import Scalaz._
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class ProfunctorSpec
-  extends FunSpec
-    with MustMatchers {
+  extends AnyFunSpec
+    with Matchers {
 
   describe("Profunctor") {
     it("Profunctor for Function1 is Functor + Contravariant") {
