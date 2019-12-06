@@ -1,6 +1,6 @@
 package disintegrate
 
-import cats.Monad
+import cats.FlatMap
 import cats.syntax.flatMap._
 import contravariant.InstancesForContravariantFunctor.Predicate
 import educational.{Contravariant, Functor, State}
@@ -19,7 +19,7 @@ trait Disintegrate[M[_]] {
   def disintegrate2[A,B](mab: M[(A,B)]): A => M[B]
 
   // https://twitter.com/Iceland_jack/status/1195787833203658752
-  def law[A, B](pairs: M[(A, B)])(implicit FM: Monad[M]): Boolean = {
+  def law[A, B](pairs: M[(A, B)])(implicit FM: FlatMap[M]): Boolean = {
     val (a, amb): (M[A], A => M[B]) = disintegrate(pairs)
     pairs == a.mproduct(amb)
   }
