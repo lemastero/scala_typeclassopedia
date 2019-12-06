@@ -1,10 +1,11 @@
 package helper_implementations
 
-import org.scalatest.{FunSpec, MustMatchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class TreeSpec
-  extends FunSpec
-    with MustMatchers {
+  extends AnyFunSpec
+    with Matchers {
 
   describe("Tree.number1") {
 

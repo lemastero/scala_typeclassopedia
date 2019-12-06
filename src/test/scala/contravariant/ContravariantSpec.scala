@@ -1,11 +1,12 @@
 package contravariant
 
-import org.scalatest.{FunSpec, MustMatchers}
 import scalaz.Contravariant
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class ContravariantSpec
-  extends FunSpec
-    with MustMatchers {
+  extends AnyFunSpec
+    with Matchers {
 
   case class Predicate[A](fun: A => Boolean)
 

@@ -1,11 +1,12 @@
 package monad
 
 import educational.Monad
-import org.scalatest.{FunSpec, MustMatchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class CustomMonadImplementationSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   val listMonad: Monad[List] = new Monad[List] {
     def pure[A](a: A): List[A] = List(a)

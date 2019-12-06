@@ -2,13 +2,14 @@ package comonad
 
 import comonad.ComonadSimpleImpl.Comonad
 import educational.Functor
-import org.scalatest.{FunSpec, MustMatchers}
 
 import scala.language.higherKinds
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
 class CofreeCustomImplSpec
-  extends FunSpec
-  with MustMatchers {
+  extends AnyFunSpec
+  with Matchers {
 
   case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: Functor[F]) {
     def map[B](f: A => B): Cofree[B, F] = Cofree(f(extract), functor.map(sub)(_.map(f)))
