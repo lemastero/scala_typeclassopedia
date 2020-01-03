@@ -11,7 +11,7 @@ object ContinuationTSimpleImpl {
     def run[Z](f: A => M[Z]): M[Z]
   }
 
-  def contInstance[M[_]]: Monad[Cont[M, ?]] = new Monad[Cont[M, ?]] {
+  def contInstance[M[_]]: Monad[Cont[M, *]] = new Monad[Cont[M, *]] {
     def pure[A](a: A): Cont[M, A] = new Cont[M,A] {
       def run[Z](f: A => M[Z]): M[Z] = f(a)
     }
