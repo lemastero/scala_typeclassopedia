@@ -7,7 +7,6 @@
 * Category Theory for Computing Science - Michael Barr, Charles Wells [(book)](http://tac.mta.ca/tac/reprints/articles/22/tr22abs.html)
 * Basic Category Theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1612.09375)
 * Introduction to Categories and Categorical Logic - Samson Abramsky, Nikos Tzevelekos [(arXiv)](https://arxiv.org/abs/1102.1313)
-* Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
 * Induction, Coinduction, and Fixed Points: A Concise Comparative Survey - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1812.10026)
 * Mutual Coinduction - Moez A. AbdelGawad [(arXiv)](https://arxiv.org/abs/1903.06514)
 * On terminal coalgebras derived from initial algebras - Jiri Adamek [(arXiv)](https://arxiv.org/abs/cs/0609040)
@@ -18,8 +17,11 @@
 
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
+* Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
 * The periodic table of n-categories - Eugenia Cheng [(video)](https://www.youtube.com/watch?v=lJGUMlgCxz8)
 * Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
+* Associative n-categories - Christoph Dorn [(arXiv:1812.10586)](https://arxiv.org/pdf/1812.10586.pdf)
+* Strictly associative and unital higher category theory - Jamie Vicary [(slides)](https://www.cs.bham.ac.uk/~axj/files/mgs-xmas-2018-Jamie.pdf)
 
 ### [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
 
@@ -69,12 +71,15 @@
 
 ## Blogs about Category Theory in software development
 
-* Programming Cafe - Bartosz Milewski [(blog)](https://bartoszmilewski.com/)
-* The Comonad.Reader - Edward Kmett [blog](http://comonad.com/reader/), EdK almost single handed, encoded Category Theory abstractions in Haskell, blog co authored by Gershom Bazerman, Dan Doel
-* Rúnar Bjarnason blogs [Apocalisp](https://apocalisp.wordpress.com/), [Higher Order](https://blog.higher-order.com/)
-* A Neighborhood of Infinity - sigfpe [(blog)](http://blog.sigfpe.com/)
-* Marcin Szamotulski [(blog)](https://coot.me/)
-* Jules Hedges [blog](https://julesh.com/blog/)
+* Programming Cafe - Bartosz Milewski [bartoszmilewski.com](https://bartoszmilewski.com/)
+* The Comonad.Reader - Edward Kmett [Comonad.Reader](http://comonad.com/reader/), EdK almost single handed, encoded Category Theory abstractions in Haskell, blog co authored by Gershom Bazerman, Dan Doel
+* Rúnar Bjarnason blogs: Apocalisp [apocalisp.wordpress.com](https://apocalisp.wordpress.com/), Higher Order [blog.higher-order.com](https://blog.higher-order.com/)
+* A Neighborhood of Infinity - sigfpe [blog.sigfpe.com](http://blog.sigfpe.com/)
+* Phil Freeman - @paf31 [blog.functorial.com](https://blog.functorial.com/)
+* Marcin Szamotulski [coot.me](https://coot.me/)
+* Jules Hedges [julesh.com](https://julesh.com/blog/)
+* Bob Atkey [bentnib.org](https://bentnib.org/)
+* Mathematics and Computation - Andrej Bauer [http://math.andrej.com/](http://math.andrej.com/)
 
 # Math blogs about (Category Theory, Type Theory, etc)
 * Existential Type - Robert Harper [(blog)](https://existentialtype.wordpress.com/)
@@ -84,6 +89,18 @@
 * The n-Category Cafe [(blog)](https://golem.ph.utexas.edu/category/)
 * PL Perspectives - SIGPLAN [(blog)](https://blog.sigplan.org/blog/)
 
+## Other
+
+* [Stack project](https://stacks.math.columbia.edu/browse) online book ~7k pages about algebraic geometry:
+[Part 1: Preliminaries](https://stacks.math.columbia.edu/tag/0ELQ) covers category theory (including sheaves, sites, simplical sets, fibrations), algebra, topology, cohomology
+[Part 2: Schemes](https://stacks.math.columbia.edu/tag/0ELV)  
+[Part 3: Topics in Scheme Theory](https://stacks.math.columbia.edu/tag/0ELV)  
+[Part 4: Algebraic Spaces](https://stacks.math.columbia.edu/tag/0ELT)  
+[Part 5: Topics in Geometry](https://stacks.math.columbia.edu/tag/0ELN)  
+[Part 6: Deformation Theory](https://stacks.math.columbia.edu/tag/0ELW)  
+[Part 7: Algebraic Stacks](https://stacks.math.columbia.edu/tag/0ELS)  
+[Part 8: Topics in Moduli Theory](https://stacks.math.columbia.edu/tag/0ELR)
+* [Quantum Gravity Seminar - John Baez](http://math.ucr.edu/home/baez/QG.html) interesting notes around type theory (in classical versus quantum computation) and [(cohomology and computation)](http://math.ucr.edu/home/baez/qg-spring2007/index.html#computation)
 
 ## Publications
 
@@ -131,6 +148,12 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada), [Cambridge University page](https://www.cl.cam.ac.uk/~na482/cv/)
 * [Valery Isaev](https://dblp.uni-trier.de/pers/hd/i/Isaev:Valery),[JET Brains Research page](https://research.jetbrains.org/researchers/valis)
 * [Jon Sterling](http://www.jonmsterling.com/)
+* [Ross Street](http://web.science.mq.edu.au/~street/Publications.htm), [wikipedia has links to publications](https://en.wikipedia.org/wiki/Ross_Street), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Street%2C+R)
+* [Brian Day](http://web.science.mq.edu.au/~street/Day.pub.html), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Day%2C+B+J)
+* [Craig A. Pastro](https://dblp.uni-trier.de/pers/hd/p/Pastro:Craig_A=), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Pastro%2C+C+A)
+* [J. R. B. Cockett](https://arxiv.org/search/math?searchtype=author&query=Cockett%2C+J+R+B)
+* [Michael Barr](http://www.math.mcgill.ca/barr/)
+* [Peter Selinger](https://dblp.org/pers/hd/s/Selinger:Peter), [Dalhousie University page](https://www.mscs.dal.ca/~selinger/papers.html)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
@@ -143,6 +166,8 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Coq Winter School 2018](https://team.inria.fr/marelle/en/coq-winter-school-2018/)
 * [Formalizing 100 Theorems](http://www.cs.ru.nl/~freek/100/) [Isabelle](http://www.cse.unsw.edu.au/~kleing/top100/) [Coq](https://madiot.fr/coq100/), [Top 100 Mathematical Theorems In Coq](https://github.com/coq/coq/wiki/Top100MathematicalTheoremsInCoq)
 * Iris [(tutorial)](https://iris-project.org/tutorial-material.html), [(publications)](https://iris-project.org/) Higher-Order Concurrent Separation Logic Framework implemented
+* State of formalization of mathematics in Lean [(blog post)](https://xenaproject.wordpress.com/what-maths-is-in-lean/)
+* [Archive of Formal Proofs in Isabelle](https://www.isa-afp.org/)
 
 ## Software foundations using [Type Theory](https://ncatlab.org/nlab/show/type+theory)
 
@@ -181,6 +206,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
 * Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
+* Cubical Tutorial. Introduction Course - Maxim Sokhatsky [plan and notes of seminar about HoTT and Cubical TT](https://groupoid.space/course/), [more](https://groupoid.space/)Maxim Sokhatsky [plan and notes of seminar about HoTT and Cubical TT](https://groupoid.space/course/), [more](https://groupoid.space/)
 * Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
 * Investigations into cubical type theory - Hugo Herbelin [(video)](https://www.youtube.com/watch?v=zJdwPa_tkSU&list=PLul8LCT3AJqS9FcdKnV4TfiR48Hqcna1I&index=16)
 * Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
