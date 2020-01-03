@@ -589,8 +589,8 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
 (using [State Int](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/IntState.scala)).
 
 * Implementations:  
-  FlatMap/Bind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
-  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr) [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
+  FlatMap/Bind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
+  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr), [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
 
 * Resources
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
@@ -1079,7 +1079,7 @@ def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
 def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 ```
 
-* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bifunctor.scala) [Purescript](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor) [Idris](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bifunctor.scala), [Purescript](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor), [Idris](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Bifunctor.agda)
 
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 
@@ -1321,8 +1321,8 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
 * Implementations of comonad can be done for: None empty list, Rose tree, Identity
 
 * Implementations:  
-  CoflatMap/Cobind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala)  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/cobind.scala)    
-  Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala) [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html) [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
+  CoflatMap/Cobind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala),  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/cobind.scala)    
+  Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala), [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html), [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Comonad.agda)
 
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
@@ -1575,7 +1575,7 @@ trait NaturalTransf[F[_], G[_]] {
 }
 ```
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala), [Haskell](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html), [nLab](https://ncatlab.org/nlab/show/natural+transformation), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/NaturalTransformations.v), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/univprop.ctt)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala), [Haskell](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/NaturalTransformation/Core.agda) [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/NaturalTransformations.v), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/univprop.ctt), [nLab](https://ncatlab.org/nlab/show/natural+transformation)
 
 * Resources
   * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html)
@@ -1692,7 +1692,7 @@ trait Representable[F[_], Rep] {
 }
 ```
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala), [Haskell](https://hackage.haskell.org/package/adjunctions/docs/Data-Functor-Rep.html), [UniMath](https://github.com/UniMath/UniMath/tree/master/UniMath/CategoryTheory/RepresentableFunctors), [nLab](https://ncatlab.org/nlab/show/representable+functor)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala), [Haskell](https://hackage.haskell.org/package/adjunctions/docs/Data-Functor-Rep.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Representable.agda), [UniMath](https://github.com/UniMath/UniMath/tree/master/UniMath/CategoryTheory/RepresentableFunctors), [nLab](https://ncatlab.org/nlab/show/representable+functor)
 
 * Resources:
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)
@@ -1799,7 +1799,7 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
 
 * Yoneda efficiently stack computations.
 
-* Implementations scalaz [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala), [Purescript](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/covyoneda.v), [HoTT](https://github.com/HoTT/HoTT/tree/master/theories/Categories/KanExtensions), [nlab](https://ncatlab.org/nlab/show/Yoneda+lemma)
+* Implementations scalaz [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala), [Purescript](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/covyoneda.v), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Yoneda.agda), [HoTT](https://github.com/HoTT/HoTT/blob/master/theories/Categories/Yoneda.v), [nlab](https://ncatlab.org/nlab/show/Yoneda+lemma)
 
 * Resources
   * https://vimeo.com/122708005
@@ -1879,7 +1879,7 @@ trait Ran[G[_], H[_], A] {
 }
 ```
 
-* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Ran.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/RightKanExtension.v), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Ran.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Kan.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/RightKanExtension.v), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
 
 * We can create functor for Ran, without any requirements on G, H
 ```scala
@@ -1930,7 +1930,7 @@ trait Lan[F[_], H[_], A] {
 }
 ```
 
-[Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
+[Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Kan.agda), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
 
 * we can define Functor for it
 ```scala
@@ -2152,7 +2152,7 @@ trait FFunctor[FF[_]] {
 
 ### Monoidal Categories, Monoid Object
 
-In Category Theory a Monoidal Category is a Category with a Bifuctor and morphisms that satisfy some laws (see gist for details).
+In Category Theory a Monoidal Category is a Category with a Bifuctor and morphisms
 
 ```scala
 trait MonoidalCategory[M[_, _], I] {
@@ -2170,30 +2170,83 @@ trait MonoidalCategory[M[_, _], I] {
 }
 ```
 
-* Implementations: [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monoidal/MonoidalCategories.v), [nlab](https://ncatlab.org/nlab/show/monoidal+category)
+that satisfy triangular equations:
+
+![](img/mon_cat_triangle.svg)
+
+and pentagon equations:
+
+TODO
+
+```scala
+trait MonoidalCategoryLaws[M[_, _], I] extends MonoidalCategory[M,I] {
+
+  def triangleEquations[A, B](fa: M[M[A, I], B]): Boolean = {
+    //               ro[A] * id[B]
+    // (A * I) * C ----------------> A * B
+    val v1: M[A, B] = mcBif.bimap(rho[A], identity[B])(fa)
+
+    //              alpha[A,I,B]                  id[A] * lambda[B]
+    // (A * I) * C -------------->  A * (I * C) --------------------> A * B
+    val w1: M[A, M[I, B]] = alpha[A,I,B](fa)
+    val w2: M[A, B] = mcBif.bimap[A,A, M[I,B],B](identity[A],lambda[B])(w1)
+
+    v1 == w2
+  }
+
+  def pentagonEquations[A,B,C,D](fa: M[M[M[A,B],C],D]): Boolean = {
+    //                    alpha[A,B,C] * 1D                      alpha[A,B*C,D]
+    // ((A * B) * C) * D -------------------> (A * (B * C)) * D ------------------> A * ((B * C) * D)
+    //                    1A * alpha[B,C,D]
+    // A * ((B * C) * D) ------------------> A * (B * (C * D))
+    val v1: M[M[A, M[B, C]], D] = mcBif.bimap(alpha[A,B,C],identity[D])(fa)
+    val v2: M[A, M[M[B,C], D]] = alpha[A,M[B,C],D](v1)
+    val v3: M[A, M[B, M[C,D]]] = mcBif.bimap(identity[A],alpha[B,C,D])(v2)
+
+    //                     alpha[A*B,C,D]                       alpha[A,B,C*D]
+    // ((A * B) * C) * D -----------------> (A * B) * (C * D) -----------------> A * (B * (C * D))
+    val w1: M[M[A,B], M[C,D]] = alpha[M[A,B],C,D](fa)
+    val w2: M[A,M[B,M[C,D]]] = alpha[A,B,M[C,D]](w1)
+
+    v3 == w2
+  }
+}
+```
+
+* Implementations: [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Monoidal.html#t:Monoidal), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Monoidal.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monoidal/MonoidalCategories.v), [nlab](https://ncatlab.org/nlab/show/monoidal+category)
 
 We can create monoidal category where product (Tuple) is a bifunctor or an coproduct (Either).
 
-Monoidal Categories are usefull if we consider category of endofunctors. If we develop concept of Monoid Object then it is possible to define
-Monads as Monoid Object in Monoidal Category of Endofunctors with Product as Bifunctor
-Applicative as Monoid Object in Monoidal Category of Endofunctors with Day convolution as Bifunctor
+Monoidal Categories are useful if we consider category of endofunctors. If we develop concept of Monoid Object then it is possible to define
+* Monads as Monoid Object in Monoidal Category of Endofunctors with Product as Bifunctor
+* Applicative as Monoid Object in Monoidal Category of Endofunctors with Day convolution as Bifunctor
 
-In category of Profunctors with Profunctor Product as Bifunctor the Monoid Ojbect is Arrow.
+In category of Profunctors with Profunctor Product as Bifunctor the Monoid Object is Arrow.
 
 * Resources
   * lemastero/MonoidalCategories.scala [(Gist)](https://gist.github.com/lemastero/cb50818fc40361ffb309701cffa651c9)
   * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
   * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
   * (Haskell) Monoidal Category [data-category/Data.Category.Monoidal](https://hackage.haskell.org/package/data-category/docs/Data-Category-Monoidal.html), [categories/Control.Category.Monoidal](https://hackage.haskell.org/package/categories/docs/Control-Category-Monoidal.html)
+  * (Haskell) [categories Cartesian Monoidal Category](https://hackage.haskell.org/package/categories/docs/Control-Category-Cartesian.html#t:Cartesian)
+  * (Haskell) [categories CoCartesian Monoidal Category](https://hackage.haskell.org/package/categories/docs/Control-Category-Cartesian.html#t:CoCartesian)
  
- 
+### Braided Monoidal Category
+
+* Implementations: [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Braided.html#t:Braided), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Monoidal/Braided.agda)
+
+### Symmetric Monoidal Category
+
+* Implementations [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Braided.html#t:Symmetric), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Monoidal/Symmetric.agda)
+
 ### Cartesian Closed Category
+
+* Implementations [Haskell](https://hackage.haskell.org/package/category-extras-0.53.0/docs/Control-Category-Cartesian-Closed.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/CartesianClosed.agda)
 
 * Resources
   * [TomasMikula/LambdaCart](https://github.com/TomasMikula/LambdaCart) (CCC is used to define EDSL in Scala)
   * [Compiling to categories - Conal Elliott](http://conal.net/papers/compiling-to-categories/) (Encoding of many CT abstractions, applications for automatic derivation of functions, describing hardware, Fast Fourier Transformation)
   * (Haskell) [Cartesian Closed Category in data-category](https://hackage.haskell.org/package/data-category/docs/Data-Category-CartesianClosed.html)
-  * (Haskell) [Cartesian Closed Category in category-extras](https://hackage.haskell.org/package/category-extras-0.53.0/docs/Control-Category-Cartesian-Closed.html)
 
 ### Day Convolution
 
@@ -2270,6 +2323,7 @@ Similarly it is Comonad if both type constructors are Comonads.
   * (Purescript) extensible coeffect system built out of comonads and Day convolution [paf31/purescript-smash](https://github.com/paf31/purescript-smash/blob/master/src/Data/Smash.purs)
   * (Purescript) [paf31/purescript-react-explore](https://github.com/paf31/purescript-react-explore/blob/master/src/React/Explore/List.purs)
   * (Haskell) usage examples with Free CoFree [jwiegley/notes Day](https://github.com/jwiegley/notes/blob/0d8720a38221fdface5e766a66423c1b14e89484/haskell/Day.hs)
+  * (Theory) [The convolution of comonads is a comonad](https://mathoverflow.net/questions/346529/the-convolution-of-comonads-is-a-comonad)
 
 
 ### Profunctor
@@ -2294,7 +2348,7 @@ trait Profunctor[F[_, _]] {
 }
 ```
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala), [Haskell](hackage.haskell.org/package/profunctors/docs/Data-Profunctor.html), [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Profunctors/Core.v), [nLab](https://ncatlab.org/nlab/show/profunctor), [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala), [Haskell](hackage.haskell.org/package/profunctors/docs/Data-Profunctor.html), [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Profunctor.agda),[UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Profunctors/Core.v), [nLab](https://ncatlab.org/nlab/show/profunctor), [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
 
 * Alternatively we can define functor using:
 ```scala
@@ -2752,8 +2806,8 @@ trait Category[F[_, _]] extends Compose[F] {
 ```
 
 * Implementations:  
-  Compose/Semicategory [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala)  
-  Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala) [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt), [nlab](https://ncatlab.org/nlab/show/category)
+  Compose/Semicategory [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala)  
+  Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Core.agda), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt), [nlab](https://ncatlab.org/nlab/show/category)
 
 * Category laws [Cats Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala), [Cats Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala):
  * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`
@@ -2875,6 +2929,7 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
 * Resources
    * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala#L87-L89)
    * [nlab/Extranatural Transformation](https://ncatlab.org/nlab/show/extranatural+transformation)
+   * [Agda](https://github.com/agda/agda-categories/blob/master/Categories/NaturalTransformation/Dinatural.agda)
 
 
 ## Limits
@@ -3158,15 +3213,31 @@ Resources:
 
 ## Topos
 
+Topos is a category with some properties such that it behaves like sets.
+So we can do mathematics in such category.
+
+Definitions:
+* `Elementatry topos` is more general, used in logic
+* `Grothendieck topos (sheaf topos)` more specialized for application in geometry - it has natural number object. Adding natural number object to definition of elementary topos gives `W-topos`
+
+Elementary topos is a category that:
+* has finite limits
+* is cartesian closed
+* has subobject classifier
+
 Resources:
   * vpatryshev/Categories [Topos](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/topos/Topos.scala) [Grothendieck Topos, Subobject Classifier](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/topos/GrothendieckTopos.scala)
   * (Agda) agda/agda-categories [Topos](https://github.com/agda/agda-categories/blob/master/Categories/Category/Topos.agda) [Subobject Classifier](https://github.com/agda/agda-categories/blob/master/Categories/Diagram/SubobjectClassifier.agda)
   * (Coq) UniMath/UniMath [Grothendieck Topos](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/GrothendieckTopos.v) [Subobject Classifier](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/SubobjectClassifier.v)
   * (Haskell) [brunjlar/protop](https://github.com/brunjlar/protop)
+  * Category Theory for Computing Science - Michael Barr Charles Wells [(pdf)](http://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf) Chapter 15 Toposes
+  * 7Sketches Chapter 7 Logic of behavior: Sheaves, toposes, and internal languages [(pdf)](http://math.mit.edu/~dspivak/teaching/sp18/7Sketches.pdf), [(video 1)](https://www.youtube.com/watch?v=Cf3tsAeGhBg), [(video 2)](https://www.youtube.com/watch?v=wF-khda2i4c)
   * (Category Theory, Haskell) Topoi - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/07/22/topoi/)
+  * Category Theory: Toposes - MathProofsable [(video playlist)](https://www.youtube.com/watch?v=gKYpvyQPhZo&list=PL4FD0wu2mjWM3ZSxXBj4LRNsNKWZYaT7k)
   * Computational Quadrinitarianism (Curious Correspondences go Cubical) - Gershom Bazerman [(blog post)](http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/)
   * [fdilke/bewl](https://github.com/fdilke/bewl) (A DSL for the internal language of a topos)
   * [resources about topos theory](./ComputationalTrinitarianism.MD#topos-theory)
+  * [Topos - nLab](https://ncatlab.org/nlab/show/topos)
 
 ## Resource About Category Theory
 
