@@ -1,6 +1,7 @@
 package applicative
 
-import educational.Applicative
+import educational.category_theory.Applicative
+import educational.collections.HeadNel
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
@@ -11,28 +12,24 @@ class ApplicativeExamplesSpec
   describe("derived methods") {
     it("option instance") {
       val optionApplicative: Applicative[Option] = new Applicative[Option] {
-        def pure[A](a: A): Option[A] = Some(a)
-        def ap[A, B](ff: Option[A => B])(fa: Option[A]): Option[B] = (ff,fa) match {
-          case (Some(fab), Some(faa)) => Some(fab(faa))
-          case (_,_) => None
-        }
+        def pure[A](a: A): Option[A] = ???
+        def ap[A, B](ff: Option[A => B])(fa: Option[A]): Option[B] = ???
       }
+
+      // TODO
     }
 
     it("ValidatedNel instance") {
-      case class Nel[A](head: A, tail: Nel[A])
-
       sealed trait ValidatedNel[A]
       case class SuccessVN[A](value: A) extends ValidatedNel[A]
-      case class Errors[A](errors: Nel[Throwable]) extends ValidatedNel[A]
+      case class Errors[A](errors: HeadNel[Throwable]) extends ValidatedNel[A]
 
-      val optionApplicative: Applicative[Option] = new Applicative[Option] {
-        def pure[A](a: A): Option[A] = Some(a)
-        def ap[A, B](ff: Option[A => B])(fa: Option[A]): Option[B] = (ff,fa) match {
-          case (Some(fab), Some(faa)) => Some(fab(faa))
-          case (_,_) => None
-        }
+      val optionApplicative: Applicative[ValidatedNel] = new Applicative[ValidatedNel] {
+        override def pure[A](value: A): ValidatedNel[A] = ???
+        override def ap[A, B](ff: ValidatedNel[A => B])(fa: ValidatedNel[A]): ValidatedNel[B] = ???
       }
+
+      // TODO
     }
 
     it("examples for Option") {

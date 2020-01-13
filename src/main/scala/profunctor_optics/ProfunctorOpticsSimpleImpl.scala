@@ -1,8 +1,6 @@
 package profunctor_optics
 
-import educational.{Functor, Traverse}
-
-import scala.language.higherKinds
+import educational.category_theory.{Functor, Traverse}
 
 /*
 Mainline Profunctor Heirarchy for Optics

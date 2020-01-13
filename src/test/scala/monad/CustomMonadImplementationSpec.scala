@@ -1,6 +1,6 @@
 package monad
 
-import educational.Monad
+import educational.category_theory.Monad
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 

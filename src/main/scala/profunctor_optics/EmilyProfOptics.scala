@@ -1,8 +1,6 @@
 package profunctor_optics
 
-import educational.Applicative
-
-import scala.language.higherKinds
+import educational.category_theory.Applicative
 
 // translation from @emilypi Haskell snippet
 // https://gist.github.com/emilypi/407838d9c321d5b21ebc1828ad2bedcb

@@ -1,8 +1,6 @@
 package selective
 
-import educational.{Applicative, Monad}
-
-import scala.language.higherKinds
+import educational.category_theory.{Applicative, Monad}
 
 // TODO WIP
 /** Selective Applicatie Functors

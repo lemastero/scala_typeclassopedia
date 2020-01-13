@@ -1,6 +1,6 @@
 package filterable
 
-import educational.Functor
+import educational.category_theory.Functor
 
 // https://github.com/masaeedu/filterable/blob/master/src/Data/Filterable.hs
 class Filterable {

@@ -2,11 +2,10 @@ package disintegrate
 
 import cats.FlatMap
 import cats.syntax.flatMap._
-import contravariant.InstancesForContravariantFunctor.Predicate
-import educational.{Contravariant, Functor, State}
-import semigroup.MonoidSimpleImpl.Monoid
-
-import scala.language.higherKinds
+import educational.abstract_algebra.Monoid
+import educational.data.{Predicate, State}
+import educational.category_theory.Functor
+import educational.category_theory.contra.Contravariant
 
 // https://twitter.com/sigfpe/status/1195783717655986176
 // https://en.wikipedia.org/wiki/Disintegration_theorem
@@ -113,5 +112,16 @@ object DisintegrateMonoid {
 
     def disintegrate2[A, B](fab: F[(A, B)]): A => F[B] =
       a => C.contramap(fab)(b => (a,b))
+  }
+}
+
+// TODO what if
+trait DisintegrateE[F[_]] {
+  def disintegrate[X,Y](fab: F[Either[X,Y]])(implicit MB: Monoid[Y]): Either[F[X], X => F[Y]]
+}
+
+object DisintegrateE {
+  def disEither[C]: DisintegrateE[* => C] = new DisintegrateE[Function[?, C]] {
+    def disintegrate[X, Y](fab: Function[Either[X, Y], C])(implicit MB: Monoid[Y]): Either[Function[X, C], X => Function[Y, C]] = ???
   }
 }
