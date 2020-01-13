@@ -13,11 +13,14 @@ Monoidal category theory add idea of parallelism: composition + other concept (p
   * (`left unitor`) `λ: I ⊗ A ~ A`
   * (`right unitor`) `ρ: A ⊗ I ~ A`
 * that satisfy `triangle equations`
-![](../img/mon_cat_triangle.svg)
-* and `pentagon equations`
-TODO
 
-Implementation in Scala 2:
+![](../img/mon_cat_triangle.svg)
+
+* and `pentagon equations`
+
+![](../img/monoidal_pentagon.svg)
+
+Following implementation in Scala 2 allows to reason about categories
 
 ```scala
 trait MonoidalCategory[M[_, _], I] {
@@ -72,12 +75,12 @@ trait MonoidalCategoryLaws[M[_, _], I] extends MonoidalCategory[M,I] {
 
 A cartesian monoidal category is a monoidal category whose monoidal product is a cartesian product and unit is a terminal object.
 
-Example
-category:
-  objects: Scala types
-  morphisms: pure functions A => B
-tensor product: Tuple2
-tensor unit: ()
+Example  
+category:  
+  objects: Scala types  
+  morphisms: pure functions A => B  
+tensor product: Tuple2  
+tensor unit: ()  
 
 Implementation:
 
@@ -103,13 +106,15 @@ val productMonoidalCategory: MonoidalCategory[Tuple2, Unit] = new MonoidalCatego
 A `cocartesian monoidal category` is a monoidal category whose monoidal product is a coproduct and unit is an initial object.
 It is dual to cartesian monoidal category.
 
-Example: Scala types, pure functions, Either
+Examples:
 
-category:
-  objects: Scala types
-  morphisms: pure functions A => B
-tensor product: Either
-tensor unit: Nothing
+1) Scala types, pure functions, Either
+
+category:  
+  objects: Scala types  
+  morphisms: pure functions A => B  
+tensor product: Either  
+tensor unit: Nothing  
 
 ```scala
 type Void <: Nothing
@@ -142,15 +147,72 @@ val coproductMonoidalCategory: MonoidalCategory[Either, Void] = new MonoidalCate
 }
 ```
 
+2) natural numbers, +, min
+
+category:  
+  objects: natural numbers (Nat)  
+  morphisms: +  
+tensor product: min  
+tensor unit: 0  
+
+3) natural numbers, *, min
+
+category:
+  objects: natural numbers (Nat)  
+  morphisms: *  
+tensor product: max  
+tensor unit: 0  
+
+Here monoidal category is defined on value level so we cannot use our definition of MonoidalCategory to express this.
+
+
+3)
+category:  
+  objects: functors: List, Vector, Option, Eiter[Throwable, *], Function1[A, *], monix.Task, ZIO[A,E,*], ZIO[A,*,R]  
+  morphisms: natural transformation =>  
+    list.headOption, list.lastOption,  
+    list.reverse,  
+    option.toList  
+tensor product: functor composition  
+tensor unit: Identity functor  
+
+3) TODO does it work ?  
+category:  
+  objects: ZIO[A,R,E]  
+  morphisms: ZIO[A,R,E] => ZIO[B,R,E]  
+tensor product: andThen  
+tensor unit: TODO ZIO[A,A,Nothing](identity)  
+
+4) TODO Monix and Parallel composition
+
+5) you can construct monoidal category from category C that have products, sums, terminal, initial objects by:  
+(C, sum, initial)  
+(C, product, terminal)  
+
+TODO do we get interesting monoidal category if we use one of common Kleisli category  
+Id[*]  
+Option[*]  
+Either[*,E]  
+Thunk[*]  
+Task[*]  
+ZIO[A,E,*]  
+ZIO[A,*,R]  
+Reader[*]  
+Const[*]  
+Cont[*]  
+List[*]  
+?
+
 # Strict monoidal category
+
 A monoidal category is strict if associator, left unitor and right unitors are all identity morphisms.
 
 # Interchange law
 
-Any morphisms f: A -> B, g: B -> C, h: D -> E, j: E -> F
-in a monoidal category, satisfy:
+Any morphisms f: A -> B, g: B -> C, h: D -> E, j: E -> F  
+in a monoidal category, satisfy:  
 
-`(g compose f) ⊗ (j compose h) = (g ⊗ j) compose (f ⊗ h)`
+`(g compose f) ⊗ (j compose h) = (g ⊗ j) compose (f ⊗ h)`  
 
 
 # Properties of Monoidal categories
@@ -173,8 +235,10 @@ TODO hexagon identities
 
 # [Symmetric monoidal category](https://ncatlab.org/nlab/show/symmetric+monoidal+category)
 
-A symmetric monoidal category is a braided monoidal category for which the braiding
-`B(x,y): x ⊗ y -> y ⊗ x` satisfies condition `B(y,x) . B(x,y) = 1`
+A symmetric monoidal category is a braided monoidal category for which the braiding  
+`B(x,y): x ⊗ y -> y ⊗ x`   
+satisfies condition  
+`B(y,x) . B(x,y) = 1`  
 
 # References
   * Some Definitions Everyone Should Know - John C. Baez [(pdf)](http://math.ucr.edu/home/baez/qg-fall2004/definitions.pdf)
