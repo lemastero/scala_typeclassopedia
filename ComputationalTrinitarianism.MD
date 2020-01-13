@@ -306,6 +306,7 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * CIS 552: Advanced Programming (Fall 2017) - Stephanie Weirich [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
 * CIS 194: Introduction to Haskell (Spring 2013) - Brent Yorgey [(course)](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [Haskell ITMO course at CTD](https://github.com/jagajaga/FP-Course-ITMO)
+* Haskell from Scratch - [Chris Forno](http://jekor.com/) [@jekor](https://twitter.com/jekor) [(video playlist)](https://www.youtube.com/playlist?list=PLxj9UAX4Em-Ij4TKwKvo-SLp-Zbv-hB4B)
 
 ## Haskell [user groups](https://wiki.haskell.org/User_groups), [commmunities](https://wiki.haskell.org/User_groups) videos
 
