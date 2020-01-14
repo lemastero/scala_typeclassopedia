@@ -11,16 +11,17 @@ There are deep connections, (known as Curry-Howard-Lambek correspondence) betwee
 
 ## Logic for computation
 
-Frank Pfenning in his 
+Frank Pfenning in his lecture Frank Pfenning lectures [Constructive Logic](https://www.cs.cmu.edu/~fp/courses/15317-f17/) presents
+following correspondence between different flavours of logic and computation:
 
 | judgement      | logic       | interpretation in computing |
 |----------------|-------------|---|
-| A true | [Classic Logic](https://plato.stanford.edu/entries/logic-classical/) | constructive part know also as [Intuitionistic Logic](https://plato.stanford.edu/entries/logic-intuitionistic/) can be interpreted as functional programming |
+| A true | [Intuitionistic Logic](https://plato.stanford.edu/entries/logic-intuitionistic/) | functional programming |
 | K knows A | [Epistemic Logic](https://plato.stanford.edu/entries/logic-epistemic/) | distributed computing |
-| A is true a time t | [Temporal Logic](https://plato.stanford.edu/entries/logic-temporal/) | classic in model checking, constructive - partial evaluation |
-| A is a resource | [Linear Logic](https://plato.stanford.edu/entries/logic-linear/) | concurrent computation, pi-calculus |
+| A is true a time t | [Temporal Logic](https://plato.stanford.edu/entries/logic-temporal/) | model checking, partial eval |
+| A is a resource | [Linear Logic](https://plato.stanford.edu/entries/logic-linear/) | concurrency, pi-calculus |
 | A is possible | [Lax logic](http://twelf.org/wiki/Lax_logic) | generic effects, monad |
-| A is valid | [Modal Logic](https://plato.stanford.edu/entries/logic-modal/) S5 | runtime code generation |
+| A is valid | [Modal Logic](https://plato.stanford.edu/entries/logic-modal/) | runtime code generation |
 
 Article on nLab summarize [relation between type theory and category theory](https://ncatlab.org/nlab/show/relation+between+type+theory+and+category+theory):
 
