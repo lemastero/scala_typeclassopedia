@@ -21,7 +21,5 @@ class BifunctorExamplesSpec
         (List("foo", "bar"), 42).leftMap(_.headOption) mustBe (Some("foo"), 42)
       }
     }
-
-    // why there is no fightMap in cats :(
   }
 }

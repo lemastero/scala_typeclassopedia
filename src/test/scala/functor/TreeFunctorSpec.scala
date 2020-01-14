@@ -1,7 +1,7 @@
 package functor
 
-import functor.TreeFunctor.treeFunctor.map
-import helper_implementations.{Branch, Leaf}
+import educational.collections.{Branch, Leaf}
+import educational.collections.TreeInstances.treeFunctor.map
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 

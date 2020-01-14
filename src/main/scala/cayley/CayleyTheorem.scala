@@ -2,8 +2,6 @@ package cayley
 
 import cats.MonoidK
 
-import scala.language.higherKinds
-
 object CayleyTheorem {
 
   /* law: abs compose rep == id */

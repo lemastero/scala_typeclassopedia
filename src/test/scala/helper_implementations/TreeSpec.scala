@@ -1,5 +1,7 @@
 package helper_implementations
 
+import educational.collections.{Branch, Leaf, Tree}
+import examples.Tree
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
