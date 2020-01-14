@@ -174,7 +174,7 @@ val tupleBifunctor: Bifunctor[Tuple2] = new Bifunctor[Tuple2] {
     extends BraidedMonoidalCategory[:=>,⊗, I]
       with BraidedMonoidalCategoryLaws[:=>,⊗, I] {
 
-    def hexagonEquations[A,B](fa: A⊗B): Boolean = {
+    def symmetry[A,B](fa: A⊗B): Boolean = {
       braiding(braiding(fa)) == fa
     }
   }
