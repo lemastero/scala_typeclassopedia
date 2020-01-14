@@ -1,9 +1,22 @@
-# Notes on Monoidal Categories
+# Notes on Monoidal Categories in context of Scala
 
-Category theory models: composition
-Monoidal category theory add idea of parallelism: composition + other concept (product, sum, parallelism)
+Basic category theory models composition abstracting over details of objects that are composed.
+Monoidal category theory add orthogonal operation - tensor product that can model parallelism.
 
-# [Monoidal category](https://ncatlab.org/nlab/show/monoidal+category)
+Following notes combine definitions, from category theory, related to monoidal categories
+as well as implementations in Scala 2 that provide examples for them.
+
+Categorical definitions use often conditions presented as equations.
+In Scala, the usual approach, is to provide abstract interface with
+functions in form suitable to write property tests.
+If those fail we have an counterexample.
+
+Later we will come back to this approach and propose alternative,
+that can be more useful for functional programming.
+
+# Monoidal categories
+
+## Definition of [monoidal category](https://ncatlab.org/nlab/show/monoidal+category) in category theory
 
 `Monoidal category` `(C,I,α,λ,ρ)` is a category `C` with:
 * a bifunctor (`tensor product`) `⊗: (C,C) -> C`
@@ -20,99 +33,124 @@ Monoidal category theory add idea of parallelism: composition + other concept (p
 
 ![](../img/monoidal_pentagon.svg)
 
-Following implementation in Scala 2 allows to reason about categories
+
+## Category of Scala types and functions in Scala
+
+If we represent category signature in following way:
+```scala
+trait Category[Morphism[_,_]] {
+  def id[Object]: Morphism[Object,Object]
+  def compose[A,B,C](f: Morphism[B,C])(g: Morphism[A,B]): Morphism[A,C]
+}
+```
+
+then standard category of where objects are proper types
+and morphisms are pure functions with one argument (curried) would be:
 
 ```scala
-trait MonoidalCategory[M[_, _], I] {
-  val mcBif: Bifunctor[M]
-  val mcId: I
-
-  def rho[A]    (mai: M[A,I]): A
-  def rho_inv[A](a:   A):      M[A, I]
-
-  def lambda[A]      (mia: M[I,A]): A
-  def lambda_inv[A,B](a: A):        M[I, A]
-
-  def alpha[A,B,C](    mabc: M[M[A,B], C]): M[A, M[B,C]]
-  def alpha_inv[A,B,C](mabc: M[A, M[B,C]]): M[M[A,B], C]
+trait Function1Cat extends Category[Function1] {
+  def id[A]: A => A = identity[A]
+  def compose[A, B, C](f: B => C)(g: A => B): A => C = g andThen f
 }
+```
 
-trait MonoidalCategoryLaws[M[_, _], I] extends MonoidalCategory[M,I] {
+## Monoidal categories in Scala
 
-  def triangleEquations[A, B](mai: M[M[A, I], B]): Boolean = {
-    //               ro[A] * id[B]
-    // (A * I) * C ----------------> A * B
-    val v1: M[A, B] = mcBif.bimap(rho[A], identity[B])(mai)
+```scala
+trait MonoidalCategory[:=>[_,_],⊗[_, _], I]
+  extends Category[:=>] {
 
-    //              alpha[A,I,B]                  id[A] * lambda[B]
-    // (A * I) * C -------------->  A * (I * C) --------------------> A * B
-    val w1: M[A, M[I, B]] = alpha[A,I,B](mai)
-    val w2: M[A, B] = mcBif.bimap[A,A, M[I,B],B](identity[A],lambda[B])(w1)
+  def tensor: Bifunctor[⊗]
+  def ρ[A]    (fa: A⊗I): A
+  def ρ_inv[A](a:  A):   A⊗I
+
+  def λ[A]      (fa: I⊗A): A
+  def λ_inv[A,B](a:  A):   I⊗A
+
+  def α[A,B,C](    fa: (A⊗B)⊗C): A⊗(B⊗C)
+  def α_inv[A,B,C](fa: A⊗(B⊗C)): (A⊗B)⊗C
+}
+```
+
+laws based on triangle and pentagon equations:
+
+```scala
+trait MonoidalCategoryLaws[:=>[_,_],⊗[_, _], I]
+  extends MonoidalCategory[:=>,⊗, I] {
+
+  def triangleEquations[A, B](fa: (A⊗I)⊗B): Boolean = {
+    //               ρ[A] ⊗ id[B]
+    // (A ⊗ I) ⊗ B ----------------> A ⊗ B
+    val v1: A⊗B = tensor.bimap(ρ[A],identity[B])(fa)
+
+    //              α[A,I,B]
+    // (A ⊗ I) ⊗ B ---------->  A ⊗ (I ⊗ B)
+    val w1: A⊗(I⊗B) = α[A,I,B](fa)
+
+    //               id[A] ⊗ λ[B]
+    // A ⊗ (I ⊗ B) ---------------> A ⊗ B
+    val w2: A⊗B = tensor.bimap(identity[A],λ[B])(w1)
 
     v1 == w2
   }
 
-  def pentagonEquations[A,B,C,D](fa: M[M[M[A,B],C],D]): Boolean = {
-    //                    alpha[A,B,C] * 1D                      alpha[A,B*C,D]
-    // ((A * B) * C) * D -------------------> (A * (B * C)) * D ------------------> A * ((B * C) * D)
-    //                    1A * alpha[B,C,D]
-    // A * ((B * C) * D) ------------------> A * (B * (C * D))
-    val v1: M[M[A, M[B, C]], D] = mcBif.bimap(alpha[A,B,C],identity[D])(fa)
-    val v2: M[A, M[M[B,C], D]] = alpha[A,M[B,C],D](v1)
-    val v3: M[A, M[B, M[C,D]]] = mcBif.bimap(identity[A],alpha[B,C,D])(v2)
+  def pentagonEquations[A,B,C,D](fa: ((A⊗B)⊗C)⊗D): Boolean = {
+    //                    α[A,B,C] ⊗ 1D
+    // ((A ⊗ B) ⊗ C) ⊗ D ---------------> (A ⊗ (B ⊗ C)) ⊗ D
+    val v1: (A⊗(B⊗C))⊗D = tensor.bimap(α[A,B,C],identity[D])(fa)
 
-    //                     alpha[A*B,C,D]                       alpha[A,B,C*D]
-    // ((A * B) * C) * D -----------------> (A * B) * (C * D) -----------------> A * (B * (C * D))
-    val w1: M[M[A,B], M[C,D]] = alpha[M[A,B],C,D](fa)
-    val w2: M[A,M[B,M[C,D]]] = alpha[A,B,M[C,D]](w1)
+    //                    α[A,B⊗C,D]
+    // (A ⊗ (B ⊗ C)) ⊗ D ------------> A ⊗ ((B ⊗ C) ⊗ D)
+    val v2: A⊗((B⊗C)⊗D) = α[A,B⊗C,D](v1)
+
+    //                    1A ⊗ α[B,C,D]
+    // A ⊗ ((B ⊗ C) ⊗ D) ---------------> A ⊗ (B ⊗ (C ⊗ D))
+    val v3: A⊗(B⊗(C⊗D)) = tensor.bimap(identity[A],α[B,C,D])(v2)
+
+    //                     α[A⊗B,C,D]
+    // ((A ⊗ B) ⊗ C) ⊗ D -------------> (A ⊗ B) ⊗ (C ⊗ D)
+    val w1: (A⊗B)⊗(C⊗D) = α[A⊗B,C,D](fa)
+
+    //                      α[A,B,C⊗D]
+    // (A ⊗ B) ⊗ (C ⊗ D) -------------> A ⊗ (B ⊗ (C ⊗ D))
+    val w2: A⊗(B⊗(C⊗D)) = α[A,B,C⊗D](w1)
 
     v3 == w2
   }
 }
 ```
 
-# [Cartesian monoidal category](https://ncatlab.org/nlab/show/cartesian+monoidal+category)
+If a given category has limits then it is easy to show that it is monoidal in at least two ways.
 
-A cartesian monoidal category is a monoidal category whose monoidal product is a cartesian product and unit is a terminal object.
+## [Cartesian monoidal category](https://ncatlab.org/nlab/show/cartesian+monoidal+category)
 
-Example  
-category:  
-  objects: Scala types  
-  morphisms: pure functions A => B  
+A cartesian monoidal category is a monoidal category whose tensor product is a `cartesian product` and tensor unit is a `terminal object`.
+
+Category of Scala types and pure, functions with:  
 tensor product: Tuple2  
 tensor unit: ()  
 
-Implementation:
-
 ```scala
-val tupleBifunctor: Bifunctor[Tuple2] = new Bifunctor[Tuple2] {
-  override def bimap[A, B, C, D](f: A => B, g: C => D): Tuple2[A, C] => Tuple2[B, D] = { case (a,c) => (f(a), g(c)) }
-}
+trait TupleMc
+  extends MonoidalCategory[Function1,Tuple2,Unit]
+  with Function1Cat {
 
-val productMonoidalCategory: MonoidalCategory[Tuple2, Unit] = new MonoidalCategory[Tuple2, Unit] {
-  val mcBif: Bifunctor[Tuple2] = tupleBifunctor
-  val mcId: Unit = ()
-  def rho[A](pair: (A, Unit)): A = pair._1
-  def rho_inv[A](a: A): (A, Unit) = (a, mcId)
-  def lambda[A](pair: (Unit, A)): A = pair._2
-  def lambda_inv[A, B](a: A): (Unit, A) = (mcId, a)
-  def alpha[A, B, C](pair: ((A, B), C)): (A, (B, C)) = pair match {case ((a,b),c) => (a, (b, c)) }
-  def alpha_inv[A, B, C](pair: (A, (B, C))): ((A, B), C) = pair match {case (a,(b,c)) => ((a, b), c) }
+  val tensor: Bifunctor[Tuple2] = tupleBifunctor
+  def ρ[A](fa: (A, Unit)): A = fa._1
+  def ρ_inv[A](a: A): (A, Unit) = (a, ())
+  def λ[A](fa: (Unit, A)): A = fa._2
+  def λ_inv[A, B](a: A): (Unit, A) = ((), a)
+  def α[A, B, C](fa: ((A, B), C)): (A, (B, C)) = fa match {case ((a,b),c) => (a, (b, c)) }
+  def α_inv[A, B, C](fa: (A, (B, C))): ((A, B), C) = fa match {case (a,(b,c)) => ((a, b), c) }
 }
 ```
 
-# [Cocartesian monoidal category]((https://ncatlab.org/nlab/show/cocartesian+monoidal+category))
+## [Cocartesian monoidal category]((https://ncatlab.org/nlab/show/cocartesian+monoidal+category))
 
-A `cocartesian monoidal category` is a monoidal category whose monoidal product is a coproduct and unit is an initial object.
+A `cocartesian monoidal category` is a monoidal category whose tensor product is a `coproduct` and tensor unit is an `initial object`.
 It is dual to cartesian monoidal category.
 
-Examples:
-
-1) Scala types, pure functions, Either
-
-category:  
-  objects: Scala types  
-  morphisms: pure functions A => B  
+Category of Scala types and pure, functions with:  
 tensor product: Either  
 tensor unit: Nothing  
 
@@ -126,20 +164,22 @@ val eitherBifunctor: Bifunctor[Either] = new Bifunctor[Either] {
   }
 }
 
-val coproductMonoidalCategory: MonoidalCategory[Either, Void] = new MonoidalCategory[Either, Void] {
-  val mcBif: Bifunctor[Either] = eitherBifunctor
-  val mcId: Void = throw new RuntimeException("This exception was not thrown!")
-  def rho[A](mai: Either[A, Void]): A = mai match { case Left(a) => a }
-  def rho_inv[A](a: A): Either[A, Void] = Left(a)
-  def lambda[A](mia: Either[Void, A]): A = mia match { case Right(a) => a }
-  def lambda_inv[A, B](a: A): Either[Void, A] = Right(a)
-  def alpha[A, B, C](mabc: Either[Either[A, B], C]): Either[A, Either[B, C]] =
-    mabc match {
+trait Function1EitherMc
+  extends MonoidalCategory[Function1,Either,Void]
+    with Function1Cat {
+
+  val tensor: Bifunctor[Either] = eitherBifunctor
+  def ρ[A](fa: Either[A, Void]): A = fa match { case Left(a) => a }
+  def ρ_inv[A](a: A): Either[A, Void] = Left(a)
+  def λ[A](fa: Either[Void, A]): A = fa match { case Right(a) => a }
+  def λ_inv[A, B](a: A): Either[Void, A] = Right(a)
+  def α[A, B, C](fa: Either[Either[A, B], C]): Either[A, Either[B, C]] =
+    fa match {
       case Left(Left(a)) => Left(a)
       case Left(Right(b)) => Right(Left(b))
       case Right(c) => Right(Right(c))
     }
-  def alpha_inv[A, B, C](mabc: Either[A, Either[B, C]]): Either[Either[A, B], C] = mabc match {
+  def α_inv[A, B, C](fa: Either[A, Either[B, C]]): Either[Either[A, B], C] = fa match {
     case Left(a) => Left(Left(a))
     case Right(Left(b)) => Left(Right(b))
     case Right(Right(c)) => Right(c)
@@ -147,91 +187,124 @@ val coproductMonoidalCategory: MonoidalCategory[Either, Void] = new MonoidalCate
 }
 ```
 
-2) natural numbers, +, min
-
-category:  
-  objects: natural numbers (Nat)  
-  morphisms: +  
-tensor product: min  
-tensor unit: 0  
-
-3) natural numbers, *, min
-
-category:
-  objects: natural numbers (Nat)  
-  morphisms: *  
-tensor product: max  
-tensor unit: 0  
-
-Here monoidal category is defined on value level so we cannot use our definition of MonoidalCategory to express this.
+Our definition of category do not allow us express situation when objects are values like numbers (unless we use peano encoding TODO do it).
+In such case we could use as tensor product min (TODO draw diagrams).
 
 
-3)
-category:  
-  objects: functors: List, Vector, Option, Eiter[Throwable, *], Function1[A, *], monix.Task, ZIO[A,E,*], ZIO[A,*,R]  
-  morphisms: natural transformation =>  
-    list.headOption, list.lastOption,  
-    list.reverse,  
-    option.toList  
+TODO explore:  
+category:    
+*  objects: functors: List, Vector, Option, Eiter[Throwable, *], Function1[A, *], monix.Task, ZIO[A,E,*], ZIO[A,*,R]  
+*  morphisms: natural transformations (list.headOption, list.lastOption, list.reverse, option.toList, etc)
 tensor product: functor composition  
 tensor unit: Identity functor  
 
-3) TODO does it work ?  
+TODO explore:
 category:  
   objects: ZIO[A,R,E]  
   morphisms: ZIO[A,R,E] => ZIO[B,R,E]  
 tensor product: andThen  
-tensor unit: TODO ZIO[A,A,Nothing](identity)  
+tensor unit: ZIO[A,A,Nothing](identity)  
 
-4) TODO Monix and Parallel composition
+TODO explore
+Monix Task and Parallel execution
 
-5) you can construct monoidal category from category C that have products, sums, terminal, initial objects by:  
-(C, sum, initial)  
-(C, product, terminal)  
+TODO explore Kleisli categories (Id[*], Option[*], Either[*,E], Thunk[*], Task[*], ZIO[A,E,*], ZIO[A,*,R]  
+Reader[*], Const[*], Cont[*], List[*]) what about tensor product and unit?
 
-TODO do we get interesting monoidal category if we use one of common Kleisli category  
-Id[*]  
-Option[*]  
-Either[*,E]  
-Thunk[*]  
-Task[*]  
-ZIO[A,E,*]  
-ZIO[A,*,R]  
-Reader[*]  
-Const[*]  
-Cont[*]  
-List[*]  
-?
-
-# Strict monoidal category
+## Strict monoidal category
 
 A monoidal category is strict if associator, left unitor and right unitors are all identity morphisms.
 
-# Interchange law
+## Interchange law
 
-Any morphisms f: A -> B, g: B -> C, h: D -> E, j: E -> F  
+Any morphisms `f: A -> B`, `g: B -> C`, `h: D -> E`, `j: E -> F`  
 in a monoidal category, satisfy:  
-
 `(g compose f) ⊗ (j compose h) = (g ⊗ j) compose (f ⊗ h)`  
 
+## Properties of Monoidal categories
 
-# Properties of Monoidal categories
+### [Coherence for Monoidal categories](https://ncatlab.org/nlab/show/coherence+theorem+for+monoidal+categories)
 
-## [Coherence for Monoidal categories](https://ncatlab.org/nlab/show/coherence+theorem+for+monoidal+categories)
+TODO definition of coherence.
+Application in programming: what if we express laws as helper functions operaing of Either or Tuple?
 
-## [Closure for Monoidal categories](https://ncatlab.org/nlab/show/monoidal+category#closure)
+### [Closure for Monoidal categories](https://ncatlab.org/nlab/show/monoidal+category#closure)
 
 ## Additional structure generated by objects of monoidal category
 
-Every small monoidal category C embeds as a full subcategory C -> D into a closed monoidal category,
+Every small monoidal category `C` embeds as a full subcategory `C -> D` into a closed monoidal category,
 where the embedding functor is a strong monoidal functor.
+
+TODO
+  Supplying bells and whistles in symmetric monoidal categories - Brendan Fong, David I Spivak  
+    [arxiv.org/abs/1908.02633](https://arxiv.org/pdf/1908.02633.pdf),  
+    [(video part 1)](https://www.youtube.com/watch?v=5p_tB_MXFrk), [(video part 2)](https://www.youtube.com/watch?v=ecfl4DCXFPQ)  
+
 
 # Braided monoidal category
 
 A `braided monoidal category` is a monoidal category C equipped with a natural isomorphism
 `x ⊗ y ~ y ⊗ x` called `braiding`, such that following diagrams (called `hexagon identitties`) commute
 
-TODO hexagon identities 
+TODO hexagon identities
+
+Implementation in Scala
+
+```scala
+trait BraidedMonoidalCategory[:=>[_,_],⊗[_, _], I]
+  extends MonoidalCategory[:=>,⊗, I] {
+
+  def braiding[A,B](a: A⊗B): B⊗A
+}
+
+trait BraidedMonoidalCategoryLaws[:=>[_,_],⊗[_, _], I]
+  extends BraidedMonoidalCategory[:=>,⊗, I]
+    with MonoidalCategoryLaws[:=>,⊗, I] {
+
+  def hexagonEquations[A,B,C,D](fa: ((A⊗B)⊗C)⊗D): Boolean = {
+    //                      α[A,B,C] ⊗ 1D
+    // ((A ⊗ B) ⊗ C) ⊗ D -----------------> (A ⊗ (B ⊗ C)) ⊗ D
+    val v1: (A⊗(B⊗C))⊗D = tensor.bimap(α[A,B,C],identity[D])(fa)
+    //                     α[A,B⊗C,D]
+    // (A ⊗ (B ⊗ C)) ⊗ D ------------> A ⊗ ((B ⊗ C) ⊗ D)
+    val v2: A⊗((B⊗C)⊗D) = α[A,B⊗C,D](v1)
+    //                    1A ⊗ α[B,C,D]
+    // A ⊗ ((B ⊗ C) ⊗ D) ------------------> A ⊗ (B ⊗ (C ⊗ D))
+    val v3: A⊗(B⊗(C⊗D)) = tensor.bimap(identity[A],α[B,C,D])(v2)
+
+    //                     α[A⊗B,C,D]
+    // ((A ⊗ B) ⊗ C) ⊗ D -------------> (A ⊗ B) ⊗ (C ⊗ D)
+    val w1: ((A⊗B)⊗(C⊗D)) = α[A⊗B,C,D](fa)
+    //                     α[A,B,C⊗D]
+    // (A ⊗ B) ⊗ (C ⊗ D) ------------> A ⊗ (B ⊗ (C ⊗ D))
+    val w2: A⊗(B⊗(C⊗D)) = α[A,B,C⊗D](w1)
+
+    v3 == w2
+  }
+}
+```
+
+Monoidal category of types, pure functions with Either as tensor product and Void as unit is braided
+and he braiding is swap 
+
+```scala
+new BraidedMonoidalCategory[Function1,Either,Void]
+  with Function1EitherMc {
+
+  def braiding[A,B](a: Either[A,B]): Either[B,A] = a.swap
+}
+```
+
+similar for tuple and unit:
+
+```scala
+new BraidedMonoidalCategory[Function1,Tuple2,Unit]
+  with TupleMc {
+
+  def braiding[A,B](a: (A,B)): (B,A) = a.swap
+}
+```
+
 
 # [Symmetric monoidal category](https://ncatlab.org/nlab/show/symmetric+monoidal+category)
 
@@ -239,6 +312,25 @@ A symmetric monoidal category is a braided monoidal category for which the braid
 `B(x,y): x ⊗ y -> y ⊗ x`   
 satisfies condition  
 `B(y,x) . B(x,y) = 1`  
+
+Additional condition can be implemented as:
+
+```scala
+trait SymmetricMonoidalCategoryLaws[:=>[_,_],⊗[_, _], I]
+  extends BraidedMonoidalCategory[:=>,⊗, I]
+    with BraidedMonoidalCategoryLaws[:=>,⊗, I] {
+
+  def hexagonEquations[A,B](fa: A⊗B): Boolean = {
+    braiding(braiding(fa)) == fa
+  }
+}
+```
+
+Since swap on tuple and either applied twice are identity, both monoidal categories are symmetric.
+
+# Monoids in monoidal categories
+
+TODO
 
 # References
   * Some Definitions Everyone Should Know - John C. Baez [(pdf)](http://math.ucr.edu/home/baez/qg-fall2004/definitions.pdf)
