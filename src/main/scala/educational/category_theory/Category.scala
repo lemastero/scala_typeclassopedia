@@ -1,13 +1,21 @@
 package educational.category_theory
 
-trait Category[K[_,_]] {
-  def id[A]: K[A,A]
-  def compose[A,B,C](f: K[B,C])(g: K[A,B]): K[A,C]
+trait Category[Morphism[_,_]] {
+  def id[Object]: Morphism[Object,Object]
+  def compose[A,B,C](f: Morphism[B,C])(g: Morphism[A,B]): Morphism[A,C]
+}
+
+trait CategoryLaws[Morphism[_,_]] extends Category[Morphism] {
+  def leftIdentityLaw = ??? // TODO
+  def rightIdentityLaw = ??? // TODO
+  def compositivityLaw = ??? // TODO
 }
 
 object CategoryInstances {
-  val scalaProperTypesAndPureFunction1: Category[Function1] = new Category[Function1] {
+  trait Function1Cat extends Category[Function1] {
     def id[A]: A => A = identity[A]
     def compose[A, B, C](f: B => C)(g: A => B): A => C = g andThen f
   }
+
+  val scalaProperTypesAndPureFunction1: Category[Function1] = new Function1Cat {}
 }
