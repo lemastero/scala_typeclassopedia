@@ -14,9 +14,66 @@ If those fail we have an counterexample.
 Later we will come back to this approach and propose alternative,
 that can be more useful for functional programming.
 
+# Algebraic Data Types form commutative semiring
+
+We have been tought that Curry-Howard-Lambek isomorphism we know that:
+
+| Type Theory   | Logic                | Category Theory       |
+|---------------|----------------------|-----------------------|
+| Void          | false                | initial object        |
+| Unit          | true                 | terminal object       |
+| Eiter[A,B]    | A v B disjunction    | coproduct             |
+| (A,B)         | A ∧ B conjunction    | product               |
+| A => B        | A => B implication   | exponential object    | 
+
+and we can obviously see that tuple with `Unit` form a `commutative monoid`:
+
+```scala
+(a,(b,c)) ~ ((a,b),c) 
+(Unit,a) ~ a ~ (a, Unit)
+(a,b) ~ (a, b)
+``` 
+
+similar `Either` and `Nothing`:
+
+```scala
+Either(Void,a) ~ a ~ Either(a, Void)
+Either(a,Either(b,c)) ~ Either(Either(a,b),c) 
+Either(a,b) ~ Either(a, b)
+```
+
+and combined form `commutative semiring` because:
+
+```scala
+(a,Either(b,c)) ~ Either((a,b),(a,c)) 
+(Either(a,b),c) ~ Either((a,c),(b,c))
+(Void,a) ~ (a,Void) ~ 0
+``` 
+
+That is super cool ... but it is not exactly true. 
+We know that tuple with () can be collapsed:
+
+![](../img/triangle_tuple.svg)
+
+similarly with either
+
+![](../img/triangle_either.svg) 
+
+We know that tuple can be associated however we like:
+
+![](../img/pentagon_tuple.svg) 
+
+similar Either.
+
+
+Writing functions marked as blue arrows is trivial, yet if we pass `Either(Void,a)` to function expecting `a` compiler will complain.
+
+
+This problem of equality up to isomorphism for those monoids can be solved by ... monoidal category.
+
 # Monoidal categories
 
-## Definition of [monoidal category](https://ncatlab.org/nlab/show/monoidal+category) in category theory
+## [Monoidal category](https://ncatlab.org/nlab/show/monoidal+category) in category theory
 
 `Monoidal category` `(C,I,α,λ,ρ)` is a category `C` with:
 * a bifunctor (`tensor product`) `⊗: (C,C) -> C`
@@ -242,6 +299,9 @@ TODO
 
 
 # Braided monoidal category
+
+Using monoidal category we solved identity and associativity properties but we did not modelled symmetry.
+Symmetry is very strong condition, intermediate step is having isomorphism `(x,y) ~ (y,x)` with nice properties.
 
 A `braided monoidal category` is a monoidal category C equipped with a natural isomorphism
 `x ⊗ y ~ y ⊗ x` called `braiding`, such that following diagrams (called `hexagon identitties`) commute:
