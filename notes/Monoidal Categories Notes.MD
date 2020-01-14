@@ -244,9 +244,13 @@ TODO
 # Braided monoidal category
 
 A `braided monoidal category` is a monoidal category C equipped with a natural isomorphism
-`x ⊗ y ~ y ⊗ x` called `braiding`, such that following diagrams (called `hexagon identitties`) commute
+`x ⊗ y ~ y ⊗ x` called `braiding`, such that following diagrams (called `hexagon identitties`) commute:
 
-TODO hexagon identities
+![](../img/braided_hexagon1.svg)
+
+and
+
+![](../img/braided_hexagon2.svg)
 
 Implementation in Scala
 
