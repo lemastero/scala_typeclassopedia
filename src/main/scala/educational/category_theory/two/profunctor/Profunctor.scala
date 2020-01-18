@@ -52,37 +52,37 @@ package educational.category_theory.two.profunctor
   * - if specify both (in addition to law for dimap and laws for lmap:
   *  dimap f g ≡ lmap f . rmap g
   */
-trait Profunctor[P[_, _]] {
-  def dimap[X,Y,Z,W](ab: X => Y, cd: Z => W): P[Y, Z] => P[X, W]
+trait Profunctor[=>:[_, _]] {
+  def dimap[S,T,A,B](ab: S => A, cd: B => T): A=>:B => S=>:T
 
   // derived methods
-  def lmap[A,B,C](f: A => B): P[B,C] => P[A,C] = dimap[A,B,C,C](f,identity[C])
-  def rmap[A,B,C](f: B => C): P[A,B] => P[A,C] = dimap[A,A,B,C](identity[A], f)
+  def lmap[A,B,C](f: A => B): B=>:C => A=>:C = dimap[A,C,B,C](f,identity[C])
+  def rmap[A,B,C](f: B => C): A=>:B => A=>:C = dimap[A,C,A,B](identity[A], f)
 }
 
-trait ProfunctorLaws[P[_, _]] extends Profunctor[P] {
+trait ProfunctorLaws[=>:[_, _]] extends Profunctor[=>:] {
 
   // dimap id id == id
-  def dimapIdentity[A, B](p: P[A, B]): Boolean = {
+  def dimapIdentity[A,B](p: A =>: B): Boolean = {
     //          dimap(id, id)
     // P[A,B] ================> P[A,B]
     dimap(identity[A], identity[B])(p) == p
   }
 
   // dimap (f . g) (h . i) == dimap g h . dimap f i
-  def dimapComposition[A, B, C, D, E, F](pad: P[A,D], fcb: C => B, fba: B => A, fde: D => E, fef: E => F): Boolean = {
+  def dimapComposition[A,B,C,D,E,F](pad: A=>:D, fcb: C => B, fba: B => A, fde: D => E, fef: E => F): Boolean = {
     //          dimap B=>A D=>E
     // P[A,D] ===================> F[B,E]
-    val pbe: P[B, E] = dimap(fba, fde)(pad)
+    val pbe: B =>: E = dimap(fba, fde)(pad)
     //          dimap C=>B E=>F
     // P[B,E] ====================> P[C,F]
-    val l: P[C,F] = dimap(fcb, fef)(pbe)
+    val l: C =>: F = dimap(fcb, fef)(pbe)
 
     val fca: C => A = fba compose fcb
     val fdf: D => F = fef compose fde
     //         dimap C=>A D=> F
     // P[A,D] ===================> P[C,F]
-    val r: P[C,F] = dimap(fca, fdf)(pad)
+    val r: C =>: F = dimap(fca, fdf)(pad)
 
     l == r
   }
@@ -90,7 +90,7 @@ trait ProfunctorLaws[P[_, _]] extends Profunctor[P] {
 
 object ProfunctorInstance {
   trait Function1Profunctor extends Profunctor[Function1] {
-    def dimap[X, Y, Z, W](f: X => Y, g: Z => W): (Y => Z) => (X => W) = h => f andThen (g compose h)
+    def dimap[X,W,Y,Z](f: X => Y, g: Z => W): (Y => Z) => (X => W) = h => f andThen (g compose h)
     override def lmap[A,B,C](f: A => B): (B => C) => (A => C) = f.andThen
     override def rmap[A,B,C](f: B => C): (A => B) => (A => C) = f.compose
   }

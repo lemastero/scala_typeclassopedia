@@ -12,8 +12,8 @@ trait Tambara[P[_,_],A,B]{
   * untambara (tambara f) == f
   */
 object Tambara {
-  def tambara[P[_,_],Q[_,_]](pq: DinaturalTransformation[P,Q])(implicit SP: Strong[P]): DinaturalTransformation[P,Tambara[Q, ?, ?]] = ???
-  def untambara[P[_,_], Q[_,_]](pq: DinaturalTransformation[P, Tambara[Q, ?, ?]])(implicit PQ: Profunctor[P]): DinaturalTransformation[P,Q] = ???
+  def tambara[P[_,_],Q[_,_]](pq: DinaturalTransformation[P,Q])(implicit SP: Strong[P]): DinaturalTransformation[P,Tambara[Q,*,*]] = ???
+  def untambara[P[_,_], Q[_,_]](pq: DinaturalTransformation[P, Tambara[Q,*,*]])(implicit PQ: Profunctor[P]): DinaturalTransformation[P,Q] = ???
 }
 
 object TablaraInstances {
@@ -34,14 +34,14 @@ object TablaraInstances {
   trait ProfunctorTambara[P[_, _]] extends Profunctor[Tambara[P, ?, ?]] {
     def PP: Profunctor[P]
 
-    def dimap[X, Y, Z, W](f: X => Y, g: Z => W): Tambara[P, Y, Z] => Tambara[P, X, W] = (tp: Tambara[P, Y, Z]) => new Tambara[P, X, W] {
+    def dimap[X,W,Y,Z](f: X => Y, g: Z => W): Tambara[P,Y,Z] => Tambara[P,X,W] = (tp: Tambara[P,Y,Z]) => new Tambara[P,X,W] {
 
       import StrongInstances.Function1Strong
 
-      def runTambara[C]: P[(X, C), (W, C)] = {
-        val fp: P[(Y, C), (Z, C)] => P[(X, C), (W, C)] = PP.dimap(
-          Function1Strong.first[X, Y, C](f),
-          Function1Strong.first[Z, W, C](g)
+      def runTambara[C]: P[(X,C), (W,C)] = {
+        val fp: P[(Y,C), (Z,C)] => P[(X,C), (W,C)] = PP.dimap(
+          Function1Strong.first[X,Y,C](f),
+          Function1Strong.first[Z,W,C](g)
         )
         val p: P[(Y, C), (Z, C)] = tp.runTambara[C]
         fp(p)
@@ -78,12 +78,12 @@ object TablaraInstances {
 //      }
 //    }
 
-    def promap2[P[_, _], Q[_, _]](f: DinaturalTransformation[P, Q]): DinaturalTransformation[Lambda[(A, B) => Tambara[P, A, B]], Lambda[(A, B) => Tambara[Q, A, B]]] = {
-      new DinaturalTransformation[Lambda[(A, B) => Tambara[P, A, B]], Lambda[(A, B) => Tambara[Q, A, B]]] {
-        def dinat[X, Y](ppp: Tambara[P, X, Y]): Tambara[Q, X, Y] = new Tambara[Q, X, Y] {
-          def runTambara[C]: Q[(X, C), (Y, C)] = {
-            val p: P[(X, C), (Y, C)] = ppp.runTambara
-            f.dinat[(X, C), (Y, C)](p)
+    def promap2[P[_, _], Q[_, _]](f: DinaturalTransformation[P,Q]): DinaturalTransformation[Lambda[(A,B) => Tambara[P,A,B]], Lambda[(A,B) => Tambara[Q,A,B]]] = {
+      new DinaturalTransformation[Lambda[(A,B) => Tambara[P,A,B]], Lambda[(A,B) => Tambara[Q,A,B]]] {
+        def dinat[X, Y](ppp: Tambara[P,X,Y]): Tambara[Q,X,Y] = new Tambara[Q,X,Y] {
+          def runTambara[C]: Q[(X,C), (Y,C)] = {
+            val p: P[(X,C), (Y,C)] = ppp.runTambara
+            f.dinat[(X,C), (Y,C)](p)
           }
         }
       }
@@ -91,7 +91,7 @@ object TablaraInstances {
 //  }
 }
 
-  def strongTambara[P[_,_]](implicit PPro: Profunctor[P]): Strong[Tambara[P, ?, ?]] = new Strong[Tambara[P, ?, ?]] with ProfunctorTambara[P] {
+  def strongTambara[P[_,_]](implicit PPro: Profunctor[P]): Strong[Tambara[P,*,*]] = new Strong[Tambara[P,*,*]] with ProfunctorTambara[P] {
     def PP: Profunctor[P] = PPro
 
     // instance Profunctor p => Strong (Tambara p) where

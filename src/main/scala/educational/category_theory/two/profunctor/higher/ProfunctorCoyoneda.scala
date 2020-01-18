@@ -36,12 +36,12 @@ object ProfunctorCoyoneda {
     * produplicate . joinCoyoneda ≡ id
     * joinCoyoneda ≡ proextract
     */
-  def joinCoyoneda[P[_,_],A,B](p: ProfunctorCoyoneda[ProfunctorCoyoneda[P, ?, ?],A,B]): ProfunctorCoyoneda[P,A,B] = ???
+  def joinCoyoneda[P[_,_],A,B](p: ProfunctorCoyoneda[ProfunctorCoyoneda[P, *, *],A,B]): ProfunctorCoyoneda[P,A,B] = ???
 }
 
 object ProfunctorCoyonedaInstances {
-  def profunctor[P[_,_]]: Profunctor[ProfunctorCoyoneda[P,?,?]] = new Profunctor[ProfunctorCoyoneda[P,?,?]] {
-    def dimap[X, Y, Z, W](l: X => Y, r: Z => W): ProfunctorCoyoneda[P, Y, Z] => ProfunctorCoyoneda[P, X, W] =
+  def profunctor[P[_,_]]: Profunctor[ProfunctorCoyoneda[P,*,*]] = new Profunctor[ProfunctorCoyoneda[P,*,*]] {
+    def dimap[X,W,Y,Z](l: X => Y, r: Z => W): ProfunctorCoyoneda[P,Y,Z] => ProfunctorCoyoneda[P,X,W] =
       p => p.dimap(l,r)
   }
 }

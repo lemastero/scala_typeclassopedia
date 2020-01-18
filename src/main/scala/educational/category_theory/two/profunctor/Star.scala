@@ -6,9 +6,9 @@ import educational.category_theory.Functor
 case class Star[F[_],D,C](runStar: D => F[C])
 
 object StarInstances {
-  def profunctor[F[_]](implicit FF: Functor[F]): Profunctor[Star[F, ?,?]] = new Profunctor[Star[F, ?, ?]] {
-    def dimap[X, Y, Z, W](ab: X => Y, cd: Z => W): Star[F, Y, Z] => Star[F, X, W] = bfc =>
-      Star[F,X, W]{ x =>
+  def profunctor[F[_]](implicit FF: Functor[F]): Profunctor[Star[F,*,*]] = new Profunctor[Star[F,*,*]] {
+    def dimap[X,W,Y,Z](ab: X => Y, cd: Z => W): Star[F,Y,Z] => Star[F,X,W] = bfc =>
+      Star[F,X,W]{ x =>
         val f: Y => F[Z] = bfc.runStar
         val fz: F[Z] = f(ab(x))
         FF.map(fz)(cd)
