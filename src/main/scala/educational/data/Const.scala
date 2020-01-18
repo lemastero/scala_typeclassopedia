@@ -1,7 +1,7 @@
 package educational.data
 
 import educational.category_theory.Functor
-import educational.category_theory.two.Bifunctor
+import educational.category_theory.two.bifunctors.Bifunctor
 
 final case class Const[A, B](a: A)
 
@@ -15,7 +15,7 @@ object ConstInstances {
   }
 
   val constBifunctor: Bifunctor[Const] = new Bifunctor[Const] {
-    override def bimap[A, B, C, D](f: A => B, g: C => D): Const[A,C] => Const[B,D] =
-      ac => Const[B,D](f(ac.a))
+    override def bimap[A, B, C, D](fa: Const[A,C])(f: A => B, g: C => D): Const[B,D] =
+      Const[B,D](f(fa.a))
   }
 }
