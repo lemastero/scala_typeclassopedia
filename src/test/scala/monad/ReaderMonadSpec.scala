@@ -1,6 +1,5 @@
 package monad
 
-
 import scala.concurrent.duration.Duration
 import scala.concurrent.duration._
 import org.scalatest.funspec.AnyFunSpec

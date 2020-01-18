@@ -1,8 +1,9 @@
 package educational.category_theory.higher.monoidal
 
+import educational.category_theory.two.bifunctors.BifunctorInstances
 import educational.category_theory.Category
 import educational.category_theory.CategoryInstances.Function1Cat
-import educational.category_theory.two.Bifunctor
+import educational.category_theory.two.bifunctors.Bifunctor
 
 /**
   * Monoidal Categories based on Category of Scala types and functions
@@ -32,7 +33,7 @@ object MonoidalCategory {
     def triangleEquations[A, B](fa: (A⊗I)⊗B): Boolean = {
       //               ρ[A] ⊗ id[B]
       // (A ⊗ I) ⊗ B ----------------> A ⊗ B
-      val v1: A⊗B = tensor.bimap(ρ[A],identity[B])(fa)
+      val v1: A⊗B = tensor.bimap(fa)(ρ[A],identity[B])
 
       //              α[A,I,B]
       // (A ⊗ I) ⊗ B ---------->  A ⊗ (I ⊗ B)
@@ -40,7 +41,7 @@ object MonoidalCategory {
 
       //               id[A] ⊗ λ[B]
       // A ⊗ (I ⊗ B) ---------------> A ⊗ B
-      val w2: A⊗B = tensor.bimap(identity[A],λ[B])(w1)
+      val w2: A⊗B = tensor.bimap(w1)(identity[A],λ[B])
 
       v1 == w2
     }
@@ -48,7 +49,7 @@ object MonoidalCategory {
     def pentagonEquations[A,B,C,D](fa: ((A⊗B)⊗C)⊗D): Boolean = {
       //                    α[A,B,C] ⊗ 1D
       // ((A ⊗ B) ⊗ C) ⊗ D ---------------> (A ⊗ (B ⊗ C)) ⊗ D
-      val v1: (A⊗(B⊗C))⊗D = tensor.bimap(α[A,B,C],identity[D])(fa)
+      val v1: (A⊗(B⊗C))⊗D = tensor.bimap(fa)(α[A,B,C],identity[D])
 
       //                    α[A,B⊗C,D]
       // (A ⊗ (B ⊗ C)) ⊗ D ------------> A ⊗ ((B ⊗ C) ⊗ D)
@@ -56,7 +57,7 @@ object MonoidalCategory {
 
       //                    1A ⊗ α[B,C,D]
       // A ⊗ ((B ⊗ C) ⊗ D) ---------------> A ⊗ (B ⊗ (C ⊗ D))
-      val v3: A⊗(B⊗(C⊗D)) = tensor.bimap(identity[A],α[B,C,D])(v2)
+      val v3: A⊗(B⊗(C⊗D)) = tensor.bimap(v2)(identity[A],α[B,C,D])
 
       //                     α[A⊗B,C,D]
       // ((A ⊗ B) ⊗ C) ⊗ D -------------> (A ⊗ B) ⊗ (C ⊗ D)
@@ -70,16 +71,11 @@ object MonoidalCategory {
     }
   }
 
-val tupleBifunctor: Bifunctor[Tuple2] = new Bifunctor[Tuple2] {
-  override def bimap[A,B,C,D](f: A => B, g: C => D): Tuple2[A,C] => Tuple2[B,D] =
-    { case (a,c) => (f(a), g(c)) }
-}
-
   trait TupleMc
     extends MonoidalCategory[Function1,Tuple2,Unit]
     with Function1Cat {
 
-    val tensor: Bifunctor[Tuple2] = tupleBifunctor
+    val tensor: Bifunctor[Tuple2] = BifunctorInstances.tupleBifunctor
     def ρ[A](fa: (A, Unit)): A = fa._1
     def ρ_inv[A](a: A): (A, Unit) = (a, ())
     def λ[A](fa: (Unit, A)): A = fa._2
@@ -90,20 +86,11 @@ val tupleBifunctor: Bifunctor[Tuple2] = new Bifunctor[Tuple2] {
 
   val productMonoidalCategory: MonoidalCategory[Function1,Tuple2,Unit] = new TupleMc{}
 
-  type Void <: Nothing
-
-  val eitherBifunctor: Bifunctor[Either] = new Bifunctor[Either] {
-    override def bimap[A, B, C, D](f: A => B, g: C => D): Either[A, C] => Either[B, D] = {
-      case Left(a) => Left(f(a))
-      case Right(c) => Right(g(c))
-    }
-  }
-
   trait Function1EitherMc
     extends MonoidalCategory[Function1,Either,Void]
       with Function1Cat {
 
-    val tensor: Bifunctor[Either] = eitherBifunctor
+    val tensor: Bifunctor[Either] = BifunctorInstances.eitherBifunctor
     def ρ[A](fa: Either[A, Void]): A = fa match { case Left(a) => a }
     def ρ_inv[A](a: A): Either[A, Void] = Left(a)
     def λ[A](fa: Either[Void, A]): A = fa match { case Right(a) => a }
@@ -136,13 +123,13 @@ val tupleBifunctor: Bifunctor[Tuple2] = new Bifunctor[Tuple2] {
     def hexagonEquations[A,B,C,D](fa: ((A⊗B)⊗C)⊗D): Boolean = {
       //                      α[A,B,C] ⊗ 1D
       // ((A ⊗ B) ⊗ C) ⊗ D -----------------> (A ⊗ (B ⊗ C)) ⊗ D
-      val v1: (A⊗(B⊗C))⊗D = tensor.bimap(α[A,B,C],identity[D])(fa)
+      val v1: (A⊗(B⊗C))⊗D = tensor.bimap(fa)(α[A,B,C],identity[D])
       //                     α[A,B⊗C,D]
       // (A ⊗ (B ⊗ C)) ⊗ D ------------> A ⊗ ((B ⊗ C) ⊗ D)
       val v2: A⊗((B⊗C)⊗D) = α[A,B⊗C,D](v1)
       //                    1A ⊗ α[B,C,D]
       // A ⊗ ((B ⊗ C) ⊗ D) ------------------> A ⊗ (B ⊗ (C ⊗ D))
-      val v3: A⊗(B⊗(C⊗D)) = tensor.bimap(identity[A],α[B,C,D])(v2)
+      val v3: A⊗(B⊗(C⊗D)) = tensor.bimap(v2)(identity[A],α[B,C,D])
 
       //                     α[A⊗B,C,D]
       // ((A ⊗ B) ⊗ C) ⊗ D -------------> (A ⊗ B) ⊗ (C ⊗ D)
