@@ -1619,12 +1619,28 @@ trait NaturalTransf[F[_], G[_]] {
 
 ### Free Monads
 
-ADT (sometimes implemented using Fix point data type) that form a Monad, without any other conditions:
+ADT (sometimes implemented using Fix point data type)
 
 ```scala
-sealed trait Free[F[_],A]
-case class Return[F[_],A](a: A) extends Free[F,A]
-case class Suspend[F[_],A](s: F[Free[F,A]]) extends Free[F,A]
+sealed trait FreeMonad[F[_], A]
+final case class Return[F[_], A](a: A) extends FreeMonad[F, A]
+final case class Suspend[F[_], A](s: F[FreeMonad[F,A]]) extends FreeMonad[F,A]
+```
+
+that form a Monad, if F is a functor
+
+```scala
+def freeMonad[F[_]](implicit FF: Functor[F]): Monad[FreeMonad[F, *]] = new Monad[FreeMonad[F, *]] {
+  def flatMap[A, B](ma: FreeMonad[F, A])(f: A => FreeMonad[F, B]): FreeMonad[F, B] =
+    ma match {
+      case Return(a) => f(a)
+      case Suspend(m) => Suspend{
+        def ff: FreeMonad[F, A] => FreeMonad[F, B] = x => flatMap(x)(f)
+        FF.map(m)(ff)
+      }
+  }
+  def pure[A](a: A): FreeMonad[F, A] = Return(a)
+}
 ```
 
 * Resources
@@ -2176,7 +2192,7 @@ that satisfy triangular equations:
 
 and pentagon equations:
 
-TODO
+![](../img/monoidal_pentagon.svg)
 
 ```scala
 trait MonoidalCategoryLaws[M[_, _], I] extends MonoidalCategory[M,I] {
@@ -2873,6 +2889,11 @@ trait Category[F[_, _]] extends Compose[F] {
 
 ### Free Arrow
 
+* Implementations: [Purescript](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html)
+
+* Resources
+  * Building free arrows from components [(blog post)](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html) 
+  
 ### Kleisli
 
 * Implementations:  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Kleisli.scala), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/KleisliCategory.v)
