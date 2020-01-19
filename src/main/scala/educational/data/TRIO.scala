@@ -2,7 +2,7 @@ package educational.data
 
 import educational.abstract_algebra.Monoid
 import educational.category_theory.contra.{Contravariant, Divide}
-import educational.category_theory.two.Bifunctor
+import educational.category_theory.two.bifunctors.Bifunctor
 import educational.category_theory.{Functor, Monad}
 import educational.category_theory.two.profunctor.Profunctor
 
@@ -71,7 +71,7 @@ object TRIOInstances {
   }
 
   def trioBifunctor[R]: Bifunctor[TRIO[R, *, *]] = new Bifunctor[TRIO[R,*,*]] {
-    override def bimap[E, EE, A, AA](f: E => EE, g: A => AA): TRIO[R, E, A] => TRIO[R, EE, AA] = fa =>
+    override def bimap[E, EE, A, AA](fa: TRIO[R, E, A])(f: E => EE, g: A => AA): TRIO[R, EE, AA] =
       TRIO{ rr =>
         fa.run(rr) match {
           case Right(a) => Right(g(a))
