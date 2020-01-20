@@ -1,6 +1,6 @@
 package functorfunctor
 
-import educational.category_theory.~>
+import educational.category_theory.higher.~>
 
 /**
   * Functor Functor
