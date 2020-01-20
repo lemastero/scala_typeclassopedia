@@ -169,19 +169,4 @@ object Optics {
   type Log[A,B] = Grate[B,A,B,A]
   type Logg[A,B] = Glass[B,A,B,A]
   type AutExp[B,A] = Window[B,A,B,A]
-
-  /*
-  type Z = ()
-  type S a = Either a Z
-  type One = S Z
-  type Two = S One
-  type Three = S Two
-  type Four = S Three
-  */
-  type Zero = Unit
-  type Succ[A] = Either[A,Zero]
-  type One = Succ[Zero]
-  type Two = Succ[One]
-  type Three = Succ[Two]
-  type Four = Succ[Three]
 }

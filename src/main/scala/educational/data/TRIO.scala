@@ -17,11 +17,11 @@ import educational.category_theory.two.profunctor.Profunctor
   * John A De Goes @jdegoes tweet
   * https://twitter.com/jdegoes/status/1196536274909323271
   */
-final case class TRIO[-R,+E,+A](run: R => Either[E,A]) {
+case class TRIO[R,E,A](run: R => Either[E,A]) {
   def map[B](f: A => B): TRIO[R, E, B] =
     TRIO(r => run(r).map(f))
 
-  def flatMap[R1 <: R, E1 >: E, B](f: A => TRIO[R1, E1, B]): TRIO[R1, E1, B] =
+  def flatMap[B](f: A => TRIO[R,E,B]): TRIO[R,E,B] =
     TRIO(r => run(r).flatMap(a => f(a).run(r)))
 }
 
@@ -66,7 +66,7 @@ object TRIOInstances {
   }
 
   def trioProfunctor[E]: Profunctor[TRIO[*,E,*]] = new Profunctor[TRIO[*,E,*]] {
-    def dimap[RR,AA,R,A](f: RR => R, g: A => AA): TRIO[R,E,A] => TRIO[RR,E,AA] = fa =>
+    def dimap[RR,AA,R,A](fa: TRIO[R,E,A])(f: RR => R, g: A => AA): TRIO[RR,E,AA] =
       TRIO{ rr => fa.map(g).run(f(rr)) }
   }
 
