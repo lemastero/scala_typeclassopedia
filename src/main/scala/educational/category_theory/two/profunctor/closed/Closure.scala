@@ -19,7 +19,7 @@ object ClousreInstances {
 
   def closedProfunctor[P[_,_]]: Closed[Closure[P,*,*]] = new Closed[Closure[P,*,*]] {
     def closed[A,B,X](pab: Closure[P, A, B]): Closure[P, X => A, X => B] = ???
-    def dimap[X,W,Y,Z](ab: X => Y, cd: Z => W): Closure[P,Y,Z] => Closure[P,X,W] = ???
+    def dimap[X,W,Y,Z](pab: Closure[P,Y,Z])(ab: X => Y, cd: Z => W): Closure[P,X,W] = ???
   }
 
   // TODO more instances

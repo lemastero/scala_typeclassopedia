@@ -31,20 +31,17 @@ object TablaraInstances {
 
   //}
 
-  trait ProfunctorTambara[P[_, _]] extends Profunctor[Tambara[P, ?, ?]] {
+  trait ProfunctorTambara[P[_, _]] extends Profunctor[Tambara[P,*,*]] {
     def PP: Profunctor[P]
 
-    def dimap[X,W,Y,Z](f: X => Y, g: Z => W): Tambara[P,Y,Z] => Tambara[P,X,W] = (tp: Tambara[P,Y,Z]) => new Tambara[P,X,W] {
-
+    override def dimap[S,T,A,B](tp: Tambara[P,A,B])(f: S => A, g: B => T): Tambara[P,S,T] = new Tambara[P,S,T] {
       import StrongInstances.Function1Strong
-
-      def runTambara[C]: P[(X,C), (W,C)] = {
-        val fp: P[(Y,C), (Z,C)] => P[(X,C), (W,C)] = PP.dimap(
-          Function1Strong.first[X,Y,C](f),
-          Function1Strong.first[Z,W,C](g)
+      def runTambara[C]: P[(S,C), (T,C)] = {
+        val p: P[(A,C), (B,C)] = tp.runTambara[C]
+        PP.dimap(p)(
+          Function1Strong.first[S,A,C](f),
+          Function1Strong.first[B,T,C](g)
         )
-        val p: P[(Y, C), (Z, C)] = tp.runTambara[C]
-        fp(p)
       }
     }
   }

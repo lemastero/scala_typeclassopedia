@@ -23,18 +23,18 @@ import educational.category_theory.two.profunctor.{Profunctor, ProfunctorInstanc
   * assoc ((a,b),c) = (a,(b,c))
   * unassoc (a,(b,c)) = ((a,b),c)
   */
-trait Strong[P[_, _]] extends Profunctor[P] {
-  def first[X,Y,Z](pab: P[X, Y]): P[(X, Z), (Y, Z)]
+trait Strong[=>:[_, _]] extends Profunctor[=>:] {
+  def first[X,Y,Z](pab: X =>: Y): (X,Z) =>: (Y,Z)
 
-  def second[X,Y,Z](pab: P[X, Y]): P[(Z, X), (Z, Y)] = {
-    val ds: P[(X, Z), (Y, Z)] => P[(Z, X), (Z, Y)] = dimap(_.swap, _.swap)
-    ds(first(pab): P[(X, Z), (Y, Z)])
+  def second[X,Y,Z](pab: X =>: Y): (Z,X) =>: (Z,Y) = {
+    val v1: (X, Z) =>: (Y, Z) = first(pab)
+    dimap(v1)(_.swap, _.swap)
   }
 }
 
 object Strong {
   def uncurry[P[_,_],A,B,C](pa: P[A, B => C])(implicit S: Strong[P]): P[(A,B),C] = {
-    S.rmap{bc:(B => C, B) => bc._1(bc._2)}(S.first(pa))
+    S.rmap(S.first[A,B=>C,B](pa)){ case (bc, b) => bc(b) }
   }
 }
 

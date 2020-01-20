@@ -33,7 +33,7 @@ trait ProfunctorYoneda[P[_,_],A,B] { self =>
 
 object ProfunctorYonedaInstances {
   def profunctor[P[_,_]]: Profunctor[ProfunctorYoneda[P,*,*]] = new Profunctor[ProfunctorYoneda[P,*,*]] {
-    def dimap[A,D,B,C](l: A => B, r: C => D): ProfunctorYoneda[P, B, C] => ProfunctorYoneda[P, A, D] = _.dimap(l,r)
+    def dimap[A,D,B,C](pab: ProfunctorYoneda[P, B, C])(l: A => B, r: C => D): ProfunctorYoneda[P, A, D] = pab.dimap(l,r)
   }
 
   def functor[P[_,_],A]: Functor[ProfunctorYoneda[P,A,*]] = new Functor[ProfunctorYoneda[P,A,*]] {

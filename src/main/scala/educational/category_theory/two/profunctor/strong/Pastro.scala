@@ -31,6 +31,6 @@ object PastroInstances {
   // TODO Profunctor Adjunction
 
   def profuntorPastro[P[_,_]]: Profunctor[Pastro[P,*,*]] = new Profunctor[Pastro[P,*,*]] {
-    def dimap[X,W,Y,Z](ab: X => Y, cd: Z => W): Pastro[P,Y,Z] => Pastro[P,X,W] = ???
+    def dimap[X,W,Y,Z](pab: Pastro[P,Y,Z])(ab: X => Y, cd: Z => W):Pastro[P,X,W] = ???
   }
 }

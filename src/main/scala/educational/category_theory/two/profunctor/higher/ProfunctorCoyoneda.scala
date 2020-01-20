@@ -41,7 +41,7 @@ object ProfunctorCoyoneda {
 
 object ProfunctorCoyonedaInstances {
   def profunctor[P[_,_]]: Profunctor[ProfunctorCoyoneda[P,*,*]] = new Profunctor[ProfunctorCoyoneda[P,*,*]] {
-    def dimap[X,W,Y,Z](l: X => Y, r: Z => W): ProfunctorCoyoneda[P,Y,Z] => ProfunctorCoyoneda[P,X,W] =
-      p => p.dimap(l,r)
+    def dimap[X,W,Y,Z](p: ProfunctorCoyoneda[P,Y,Z])(l: X => Y, r: Z => W): ProfunctorCoyoneda[P,X,W] =
+      p.dimap(l,r)
   }
 }

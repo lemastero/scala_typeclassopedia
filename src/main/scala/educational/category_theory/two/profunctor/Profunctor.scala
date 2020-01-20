@@ -1,5 +1,8 @@
 package educational.category_theory.two.profunctor
 
+import educational.category_theory.Functor
+import educational.data.{CoKleisli, Kleisli}
+
 /**
   * Profunctor is abstraction from Category Theory that models functions.
   *
@@ -53,11 +56,11 @@ package educational.category_theory.two.profunctor
   *  dimap f g ≡ lmap f . rmap g
   */
 trait Profunctor[=>:[_, _]] {
-  def dimap[S,T,A,B](ab: S => A, cd: B => T): A=>:B => S=>:T
+  def dimap[S,T,A,B](pab: A=>:B)(ab: S => A, cd: B => T): S=>:T
 
   // derived methods
-  def lmap[A,B,C](f: A => B): B=>:C => A=>:C = dimap[A,C,B,C](f,identity[C])
-  def rmap[A,B,C](f: B => C): A=>:B => A=>:C = dimap[A,C,A,B](identity[A], f)
+  def lmap[S,A,B](pab: A =>: B)(f: S => A): S =>: B = dimap[S,B,A,B](pab)(f,identity[B])
+  def rmap[A,B,T](pab: A =>: B)(f: B => T): A =>: T = dimap[A,T,A,B](pab)(identity[A],f)
 }
 
 trait ProfunctorLaws[=>:[_, _]] extends Profunctor[=>:] {
@@ -66,23 +69,23 @@ trait ProfunctorLaws[=>:[_, _]] extends Profunctor[=>:] {
   def dimapIdentity[A,B](p: A =>: B): Boolean = {
     //          dimap(id, id)
     // P[A,B] ================> P[A,B]
-    dimap(identity[A], identity[B])(p) == p
+    dimap(p)(identity[A], identity[B]) == p
   }
 
   // dimap (f . g) (h . i) == dimap g h . dimap f i
   def dimapComposition[A,B,C,D,E,F](pad: A=>:D, fcb: C => B, fba: B => A, fde: D => E, fef: E => F): Boolean = {
     //          dimap B=>A D=>E
     // P[A,D] ===================> F[B,E]
-    val pbe: B =>: E = dimap(fba, fde)(pad)
+    val pbe: B =>: E = dimap(pad)(fba,fde)
     //          dimap C=>B E=>F
     // P[B,E] ====================> P[C,F]
-    val l: C =>: F = dimap(fcb, fef)(pbe)
+    val l: C =>: F = dimap(pbe)(fcb,fef)
 
     val fca: C => A = fba compose fcb
     val fdf: D => F = fef compose fde
     //         dimap C=>A D=> F
     // P[A,D] ===================> P[C,F]
-    val r: C =>: F = dimap(fca, fdf)(pad)
+    val r: C =>: F = dimap(pad)(fca, fdf)
 
     l == r
   }
@@ -90,10 +93,14 @@ trait ProfunctorLaws[=>:[_, _]] extends Profunctor[=>:] {
 
 object ProfunctorInstance {
   trait Function1Profunctor extends Profunctor[Function1] {
-    def dimap[X,W,Y,Z](f: X => Y, g: Z => W): (Y => Z) => (X => W) = h => f andThen (g compose h)
-    override def lmap[A,B,C](f: A => B): (B => C) => (A => C) = f.andThen
-    override def rmap[A,B,C](f: B => C): (A => B) => (A => C) = f.compose
+    override def dimap[S,T,A,B](pab: A => B)(f: S => A, g: B => T): S => T = g compose (f andThen pab)
+    override def lmap[S,A,B](pab: A => B)(f: S => A): S => B = f andThen pab
+    override def rmap[A,B,T](pab: A => B)(g: B => T): A => T = g compose pab
   }
 
   val function1: Profunctor[Function1] = new Profunctor[Function1] with Function1Profunctor {}
+
+  def cokleisliProfunctor[M[_]]: Profunctor[CoKleisli[M,*,*]] = new Profunctor[CoKleisli[M,*,*]] {
+    def dimap[S,T,A,B](pab: CoKleisli[M,A,B])(ab: S => A, cd: B => T): CoKleisli[M,S,T] = ???
+  }
 }
