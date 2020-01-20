@@ -56,7 +56,7 @@
   * [Invariant (Invariant Functor, Exponential Functor)](#invariant-invariant-functor-exponential-functor)
   * [Invariant Day](./HigherKinded.MD#invariant-day)
 
-* [Natural transformation (FunctionK)](#natural-transformation-functionk)
+* [Natural transformation (FunctionK)](./HigherKinded.MD#natural-transformation-functionk)
 
 * Bifunctors
   * [Bifunctor](./Bifunctors.MD#bifunctor)
