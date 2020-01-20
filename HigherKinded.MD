@@ -1,18 +1,43 @@
 ## Natural transformation (FunctionK)
 
-Represent mappings between two functors.
+Represent polymorphic function between two functors `F`, `G`
 
 ```scala
-trait NaturalTransf[F[_], G[_]] {
-  def apply[A](fa: F[A]): G[A]
+trait ~>[F[_], G[_]] {
+  def apply[X](fa: F[X]): G[X]
 }
 ```
+
+that satisfy naturality square:
+
+```scala
+def naturalitySquare[A,B](fa: F[A], ff: ~>[F,G], g: A => B)(implicit FF: Functor[F], FG: Functor[G]): Boolean = {
+  val v1: G[A] = ff(fa)
+  val v2: G[B] = FG.map(v1)(g)
+
+  val w1: F[B] = FF.map(fa)(g)
+  val w2: G[B] = ff(w1)
+
+  v2 == w2
+}
+```
+
+for example:
+
+```scala
+val headOption: List ~> Option = new ~>[List,Option] {
+  def apply[A](fa: List[A]): Option[A] = fa.headOption
+}
+```
+
+Every polymorphic function (that do the same thing - do not change behavior for a specific type of X) have some nice properties. More in paper by [Philip Wadler - Theorems for free](http://homepages.inf.ed.ac.uk/wadler/topics/blame.html#parablame).
 
 * Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala), [Haskell](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/NaturalTransformation/Core.agda) [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/NaturalTransformations.v), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/univprop.ctt), [nLab](https://ncatlab.org/nlab/show/natural+transformation)
 
 * Resources
   * Cats [docs](https://typelevel.org/cats/datatypes/functionk.html)
   * [tpolecat/doobie KleisliInterpreter](https://github.com/tpolecat/doobie/blob/master/modules/free/src/main/scala/doobie/free/kleisliinterpreter.scala) uses natural transformations
+  * Parametricity: Money for Nothing and Theorems for Free - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/)
   * Natural transformations - TheCatsters [(video playlist)](https://www.youtube.com/watch?v=FZSUwqWjHCU&list=PLA28A5C9D19465C92)
 
 

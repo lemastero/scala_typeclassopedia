@@ -22,7 +22,7 @@ trait Pastro[P[_,_],A,B] {
   * unpastro (pastro f) ≡ f
   */
 object Pastro {
-  def pastro[P[_,_],Q[_,_]](pq: DinaturalTransformation[P,Q])(implicit SQ: Strong[Q]): DinaturalTransformation[Pastro[P, ?, ?],Q] = ???
+  def pastro[P[_,_],Q[_,_]](pq: DinaturalTransformation[P,Q])(implicit SQ: Strong[Q]): DinaturalTransformation[Pastro[P,*,*],Q] = ???
   def unpastro[P[_,_],Q[_,_]](pq: DinaturalTransformation[Pastro[P, ?, ?],Q]): DinaturalTransformation[P,Q] = ???
 }
 
@@ -30,7 +30,7 @@ object PastroInstances {
   // TODO Profunctor Monad
   // TODO Profunctor Adjunction
 
-  def profuntorPastro[P[_,_]]: Profunctor[Pastro[P, ?, ?]] = new Profunctor[Pastro[P,?,?]] {
-    def dimap[X, Y, Z, W](ab: X => Y, cd: Z => W): Pastro[P, Y, Z] => Pastro[P, X, W] = ???
+  def profuntorPastro[P[_,_]]: Profunctor[Pastro[P,*,*]] = new Profunctor[Pastro[P,*,*]] {
+    def dimap[X,W,Y,Z](pab: Pastro[P,Y,Z])(ab: X => Y, cd: Z => W):Pastro[P,X,W] = ???
   }
 }

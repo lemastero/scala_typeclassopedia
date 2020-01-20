@@ -1,6 +1,7 @@
 package educational.category_theory.kan
 
-import educational.category_theory.{Functor, ~>}
+import educational.category_theory.Functor
+import educational.category_theory.higher.~>
 import educational.types.Id.Id
 
 object Yoneda {

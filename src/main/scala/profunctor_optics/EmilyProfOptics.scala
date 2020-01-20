@@ -7,115 +7,77 @@ import educational.category_theory.Applicative
 
 // TODO https://github.com/mroman42/vitrea/blob/master/Vitrea.hs
 
-trait FreeTambara[P[_,_],A,B] {
-  type U
-  type V
-  type C
-  type D
-  def _x1: A => (List[U], C)
-  def _x2: P[U,V]
-  def _x3: B => (List[V], D)
+trait Profunctor[=>:[_,_]] {
+  def dimap[S,T,A,B](sa: S => A, bt: B => T): A=>:B => S=>:T
 }
 
-object FreeTambara {
-  def apply[A, B, CC, DD, UU, VV, P[_, _]](
-    x1: A => (List[UU], CC),
-    x2: P[UU,VV],
-    x3: B => (List[VV], DD)): FreeTambara[P, A, B] =
-    new FreeTambara[P, A, B] {
-      type U = UU
-      type V = VV
-      type C = CC
-      type D = DD
-      def _x1: A => (List[UU], CC) = x1
-      def _x2: P[UU,VV] = x2
-      def _x3: B => (List[VV], DD) = x3
-    }
+trait Choice[=>:[_,_]] extends Profunctor[=>:] {
+  def left[A,B,C]: A =>: B => (Either[A,C] =>: Either[B,C])
+  def right[A,B,C]: A =>: B => (Either[C,A] =>: Either[C,B]) =
+    dimap[Either[C,A], Either[C,B], Either[A,C], Either[B,C]](_.swap, _.swap) compose left[A,B,C]
 }
 
-trait CofreeTambara[P,A,B] {
-  type C
-  def x1: (List[A],C)
-  def x2: (List[B],C)
-}
-
-object CofreeTambara {
-  def apply[P,A,AA,B,BB, C](t1: (List[AA], C), t2: (List[BB], C)): CofreeTambara[P,A,B] = ???
-}
-
-
-trait Profunctor[P[_,_]] {
-  def dimap[S,T,A,B](sa: S => A, bt: B => T): P[A,B] => P[S,T]
-}
-
-trait Choice[P[_,_]] extends Profunctor[P] {
-  def left[A,B,C]:  P[A,B] => P[Either[A, C], Either[B, C]]
-  def right[A,B,C]: P[A,B] => P[Either[C, A], Either[C ,B]] =
-    dimap[Either[C,A], Either[C ,B], Either[A, C], Either[B,C]](_.swap, _.swap) compose left[A,B,C]
-}
-
-trait Strong[P[_,_]] extends Profunctor[P] {
-  def first[A,B,C]:  P[A,B] => P[(A, C), (B, C)]
-  def second[A,B,C]: P[A,B] => P[(C, A), (C, B)] =
+trait Strong[=>:[_,_]] extends Profunctor[=>:] {
+  def first[A,B,C]:  (A =>: B) => ((A,C) =>: (B,C))
+  def second[A,B,C]: (A =>: B) => ((C,A) =>: (C,B)) =
     dimap[(C,A), (C ,B), (A, C), (B,C)](_.swap, _.swap) compose first[A,B,C]
 }
 
-trait Closed[P[_,_]] extends Profunctor[P] {
-  def closed[A,B,C]: P[A,B] => P[C => A,C => B]
+trait Closed[=>:[_,_]] extends Profunctor[=>:] {
+  def closed[A,B,C]: A=>:B => (C=>A) =>: (C => B)
 }
 
-trait Traversing[P[_,_]] extends Profunctor[P] {
-  def strechL[A, B, C]: P[A, B] => P[(List[A], C), (List[B], C)]
-  def strechR[A, B, C]: P[A, B] => P[(C, List[A]), (C, List[B])]
+trait Traversing[=>:[_,_]] extends Profunctor[=>:] {
+  def strechL[A,B,C]: (A =>: B) => (List[A],C) =>: (List[B],C) // TODO replace List by Traverse
+  def strechR[A,B,C]: (A =>: B) => (C, List[A]) =>: (C,List[B])
 }
 
-trait Polynodal[P[_,_]] extends Closed[P] with Traversing[P] {
-  def griddedL[A,B,C,D]: P[A,B] => P[D => (List[A],C), D => (List[B],C)] =
+trait Polynodal[=>:[_,_]] extends Closed[=>:] with Traversing[=>:] {
+  def griddedL[A,B,C,D]: A=>:B => (D => (List[A],C)) =>: (D => (List[B],C)) =
     closed compose strechL
-  def griddedR[A,B,C,D]: P[A,B] => P[D => (C,List[A]), D => (C,List[B])] =
+  def griddedR[A,B,C,D]: A=>:B => (D => (C,List[A])) =>: (D => (C,List[B])) =
     closed compose strechR
 }
 
-trait Glassed[P[_,_]] extends Strong[P] with Closed[P] {
-  def glassedL[A,B,U,T]: P[A,B] => P[(T, U => A), (T, U => B)] =
+trait Glassed[=>:[_,_]] extends Strong[=>:] with Closed[=>:] {
+  def glassedL[A,B,U,T]: (A =>: B) => ((T, U => A) =>: (T, U => B)) =
     second compose closed
-  def glassedR[A,B,U,T]: P[A,B] => P[(U => A,T), (U => B,T)] =
+  def glassedR[A,B,U,T]: (A =>: B) => ((U => A,T) =>: (U => B,T)) =
     first compose closed
 }
 
-trait Magnified[P[_,_]] extends Strong[P] with Choice[P] {
-  def maginfyLS[A,B,C,D]: P[A,B] => P[(C, Either[A,D]),(C, Either[B,D])] =
+trait Magnified[=>:[_,_]] extends Strong[=>:] with Choice[=>:] {
+  def maginfyLS[A,B,C,D]: (A =>: B) => ((C, Either[A,D]) =>: (C, Either[B,D])) =
     second compose left
-  def maginfyRS[A,B,C,D]: P[A,B] => P[(C, Either[D,A]),(C, Either[D,B])] =
+  def maginfyRS[A,B,C,D]: (A =>: B) => ((C, Either[D,A]) =>: (C, Either[D,B])) =
     second compose right
-  def maginfyLF[A,B,C,D]: P[A,B] => P[(Either[A,D],C),(Either[B,D],C)] =
+  def maginfyLF[A,B,C,D]: (A =>: B) => ((Either[A,D],C) =>: (Either[B,D],C)) =
     first compose left
-  def maginfyRF[A,B,C,D]: P[A,B] => P[(Either[D,A],C),(Either[D,B],C)] =
+  def maginfyRF[A,B,C,D]: (A =>: B) => ((Either[D,A],C) =>: (Either[D,B],C)) =
     first compose right
 }
 
-trait Telescoped[P[_,_]] extends Closed[P] with Choice[P] {
-  def telescopeL[A,B,C,D]: P[A,B] => P[Either[C => A, D],Either[C => B, D]] =
+trait Telescoped[=>:[_,_]] extends Closed[=>:] with Choice[=>:] {
+  def telescopeL[A,B,C,D]: (A =>: B) => (Either[C => A, D] =>: Either[C => B, D]) =
     left compose closed
-  def telescopeR[A,B,C,D]: P[A,B] => P[Either[D, C => A],Either[D, C => B]] =
+  def telescopeR[A,B,C,D]: (A =>: B) => (Either[D, C => A] =>: Either[D, C => B]) =
     right compose closed
 }
 
-trait Windowed[P[_,_]] extends Choice[P] with Glassed[P] {
-  def windowedRGL[A,B,U,V,T]: P[A,B] => P[Either[V, (T,U=>A)], Either[V, (T,U=>B)]] =
+trait Windowed[=>:[_,_]] extends Choice[=>:] with Glassed[=>:] {
+  def windowedRGL[A,B,U,V,T]: (A =>: B) => (Either[V, (T,U=>A)] =>: Either[V, (T,U=>B)]) =
     right compose glassedL
-  def windowedRGR[A,B,U,V,T]: P[A,B] => P[Either[V, (U=>A,T)], Either[V, (U=>B,T)]] =
+  def windowedRGR[A,B,U,V,T]: (A =>: B) => (Either[V, (U=>A,T)] =>: Either[V, (U=>B,T)]) =
     right compose glassedR
-  def windowedLGL[A,B,U,V,T]: P[A,B] => P[Either[(U=>A,T), V], Either[(U=>B,T), V]] =
+  def windowedLGL[A,B,U,V,T]: (A =>: B) => (Either[(U=>A,T), V] =>: Either[(U=>B,T), V]) =
     left compose glassedR
-  def windowedLGR[A,B,U,V,T]: P[A,B] => P[Either[(U=>A,T),V], Either[(U=>B,T),V]] =
+  def windowedLGR[A,B,U,V,T]: (A =>: B) => (Either[(U=>A,T),V] =>: Either[(U=>B,T),V]) =
     left compose glassedR
 }
 
-trait Polyp[P[_,_]] extends Profunctor[P] {
-  def polyper[A,B,F[_]](implicit A: Applicative[F]): P[A,B] => P[F[A],F[B]]
+trait Polyp[=>:[_,_]] extends Profunctor[=>:] {
+  def polyper[A,B,F[_]](implicit A: Applicative[F]): A =>: B => F[A] =>: F[B]
 }
-
 
 object Optics {
   /*
@@ -207,19 +169,4 @@ object Optics {
   type Log[A,B] = Grate[B,A,B,A]
   type Logg[A,B] = Glass[B,A,B,A]
   type AutExp[B,A] = Window[B,A,B,A]
-
-  /*
-  type Z = ()
-  type S a = Either a Z
-  type One = S Z
-  type Two = S One
-  type Three = S Two
-  type Four = S Three
-  */
-  type Zero = Unit
-  type Succ[A] = Either[A,Zero]
-  type One = Succ[Zero]
-  type Two = Succ[One]
-  type Three = Succ[Two]
-  type Four = Succ[Three]
 }

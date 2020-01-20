@@ -1,8 +1,8 @@
 package educational.category_theory.higher.monoidal
 
 import educational.category_theory.two.bifunctors.BifunctorInstances
-import educational.category_theory.Category
-import educational.category_theory.CategoryInstances.Function1Cat
+import educational.category_theory.two.CategoryInstances.Function1Cat
+import educational.category_theory.two.Category
 import educational.category_theory.two.bifunctors.Bifunctor
 
 /**

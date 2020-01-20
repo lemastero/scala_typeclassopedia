@@ -465,25 +465,48 @@ instance ProfunctorEnd (->) where
 
 ### Category
 
-Abstraction for operations that can be composed and that provide no-op (id).
+Abstraction for operations that can be composed and that provide no-op (id)
 
 ```scala
-trait Compose[F[_, _]] {
-  def compose[A, B, C](f: F[B, C], g: F[A, B]): F[A, C] // alias <<<
-}
-
-trait Category[F[_, _]] extends Compose[F] {
+trait Category[F[_, _]] {
   def id[A]: F[A, A]
+  def compose[A, B, C](f: F[B, C], g: F[A, B]): F[A, C]
 }
 ```
+that satisfy certain conditions - law:
 
 * Implementations:  
   Compose/Semicategory [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala)  
   Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Core.agda), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt), [nlab](https://ncatlab.org/nlab/show/category)
+and identity laws:
 
 * Category laws [Cats Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala), [Cats Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala):
- * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`
- * left `f.compose(id) == id.compose(f) == f`
+
+  * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`  
+
+```scala
+def compositivityLaw[A,B,C,D](g: M[B,C], f: M[A,B], h:M[C,D]): Boolean = {
+  val gf: M[A, C] = compose(g)(f)
+  val v2: M[A, D] = compose(h)(gf)
+
+  val hg: M[B, D] = compose(h)(g)
+  val w2: M[A, D] = compose(hg)(f)
+
+  v2 == w2
+}
+```
+    
+  * identity `f.compose(id) == id.compose(f) == f`  
+
+```scala
+def leftIdentityLaw[A,B](fa: M[A,B]): Boolean = {
+  compose(id[B])(fa) == fa
+}
+
+def rightIdentityLaw[A,B](fa: M[A,B]): Boolean = {
+  compose(fa)(id[A]) == fa
+}
+```
 
 * Resources
   * (Category Theory) Category Theory 1.2: What is a category? - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
@@ -545,6 +568,10 @@ trait Category[F[_, _]] extends Compose[F] {
 
 ### Kleisli
 
+```scala
+case class Kleisli[F[_],A,B](run: A => F[B])
+```
+
 * Implementations:  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kleisli.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Kleisli.scala), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/KleisliCategory.v)
 
 * Resources
@@ -555,6 +582,10 @@ trait Category[F[_, _]] extends Compose[F] {
   * (Java) Thoughts on Kleisli Arrows in Java (WIP) - geophf [blog post](http://logicaltypes.blogspot.com/2013/06/thoughts-on-kleisli-arrows-in-java-wip.html)
 
 ### Cokleisli
+
+```scala
+case class CoKleisli[F[_],A,B](run: F[A] => B)
+```
 
 * Cats
   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/data/Cokleisli.scala)

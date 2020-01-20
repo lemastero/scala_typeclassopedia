@@ -1,6 +1,7 @@
 package educational.category_theory.kan
 
-import educational.category_theory.{Applicative, Comonad, Functor, ~>}
+import educational.category_theory.higher.~>
+import educational.category_theory.{Applicative, Comonad, Functor}
 import educational.types.Id.Id
 
 object DayConvolution {

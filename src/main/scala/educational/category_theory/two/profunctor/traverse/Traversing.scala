@@ -22,6 +22,13 @@ trait Traversing[P[_,_]] extends Choice[P] with Strong[P] {
     ??? // TODO implement using walk
 }
 
+/*
+trait Traversing[=>:[_,_]] extends Profunctor[=>:] {
+  def strechL[A,B,C](pab: A =>: B): (List[A],C) =>: (List[B],C) // TODO replace List by Traverse
+  def strechR[A,B,C](pab: A =>: B): (C, List[A]) =>: (C,List[B])
+}
+ */
+
 object TraversingInstances {
   // TODO Traversing Profunctor instances https://hackage.haskell.org/package/profunctors-5.3/docs/Data-Profunctor-Traversing.html#i:Traversing
 }

@@ -9,8 +9,8 @@ import educational.category_theory.two.profunctor.Profunctor
   * closed . closed == dimap uncurry curry . closed
   * dimap const ($()) . closed == id
   */
-trait Closed[P[_,_]] extends Profunctor[P] {
-  def closed[A,B,X](pab: P[A,B]): P[X=>A, X=>B]
+trait Closed[=>:[_,_]] extends Profunctor[=>:] {
+  def closed[A,B,C](pab: A =>: B): (C => A) =>: (C => B)
 }
 
 object ClosedInstances { // https://hackage.haskell.org/package/profunctors-5.3/docs/Data-Profunctor-Closed.html#i:Closed

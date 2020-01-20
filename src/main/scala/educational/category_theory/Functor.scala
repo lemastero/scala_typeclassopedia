@@ -1,7 +1,8 @@
 package educational.category_theory
 
 trait Functor[F[_]] {
-  def map[A, B](fa: F[A])(f: A => B): F[B]
+  def map[A,B](fa: F[A])(f: A => B): F[B]
+  def lift[A,B](f: A => B): F[A] => F[B] = map(_)(f)
 }
 
 trait FunctorLaws[F[_]] extends Functor[F]{
