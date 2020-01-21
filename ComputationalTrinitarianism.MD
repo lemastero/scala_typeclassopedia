@@ -187,6 +187,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
 * Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
 * Computational Type Theory - OPLSS 2018 - Robert Harper [(course)](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php#Harper), lecture notes, high quality videos, [(video playlist)](https://www.youtube.com/watch?v=LE0SSLizYUI&list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z) - lower quality videos
+* Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
 * Homotopy Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/hott/) lecture notes, papers
 * Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
 * Kerodon (book about categorical homotopy theory)  [(book)](https://kerodon.net/kerodon.pdf) [(links)](https://kerodon.net/bibliography)

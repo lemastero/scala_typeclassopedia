@@ -1,3 +1,40 @@
+## Opposite category
+
+Opposite category ([nLab](https://ncatlab.org/nlab/show/opposite+category)) is a category where all arrows are reversed.
+
+```scala
+case class Op[K[_,_],A,B](unOp: K[B,A])
+```
+
+or using type alias and specializing to category of Scala types and pure functions:
+
+```scala
+object Op {
+  type Op[A,B] = B => A
+}
+```
+
+* Implementations: [idris-ct Dual Category](https://github.com/statebox/idris-ct/blob/master/src/Dual/DualCategory.lidr)
+
+Constructions in category C have dual constructions in category Op. Properties in given category holds also for dual construction in opposite category.
+
+Examples of duality [nLab](https://ncatlab.org/nlab/show/duality)
+
+| definition | dual (opposite) definition  |
+|---|---|
+| initial object | terminal object |
+| product | coproduct |
+| limits | colimits |
+| monads | comonads |
+| flatmap | coflatmap |
+| functor | functor |
+| free | cofree |
+| monoid | comonoid |
+| end | coend |
+| initial F-algebra | terminal co-algebra |
+
+Contravariance is different concept than duality.
+
 ### Contravariant (Contravariant Functor)
 
 Type constructor that can be `contramap`, so map in opposite direction.

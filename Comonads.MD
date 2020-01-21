@@ -17,6 +17,12 @@ trait Comonad[C[_]] extends CoflatMap[C] {
   def extend[A, B](ca: C[A])(f: C[A] => B): C[B] = map(duplicate(ca))(f) // coflatMap, cobind
 }
 ```
+
+* Implementations:  
+  CoflatMap/Cobind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala),  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/cobind.scala)    
+  Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala), [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html), [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
+* Verified implementations: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Comonad/Comonad.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/Categories/Comonad.agda)
+
  
 If we define extract and extend:
 1. `fa.extend(_.extract) == fa`
@@ -45,10 +51,6 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
 
 * Implementations of comonad can be done for: None empty list, Rose tree, Identity
 
-* Implementations:  
-  CoflatMap/Cobind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala),  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/cobind.scala)    
-  Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala), [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html), [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Comonad.agda)
-
 * Resources
   * Scala Comonad Tutorial, Part 1 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
@@ -63,6 +65,7 @@ Method extend can be use to chain oparations on comonads - this is called coKlei
   * (Haskell) The Cofree Comonad and the Expression Problem - Edward Kmett [(blog post)](http://comonad.com/reader/2008/the-cofree-comonad-and-the-expression-problem/)
   * (Haskell) Comonads as Spaces - Phil Freeman [(blog post)](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
   * (Purescript) PS Unscripted - Comonads for UIs - Phil Freeman [(video)](https://www.youtube.com/watch?v=EoJ9xnzG76M)
+  * A Real-World Application with a Comonadic User Interface - Arthur Xavier[pdf](https://pdfs.semanticscholar.org/31b9/1969215a46f5d44298e1c1e67872edd7ae77.pdf)
   * (Haskell) Cofun with cofree comonads - Dave Laing [(slides, video, code)](http://dlaing.org/cofun/)
   * (Haskell) matchingSub is Comonadic (obviously!) - geophf [blog post](http://logicaltypes.blogspot.com/2014/06/matchingsub-is-comonadic-obviously.html)
   * (Haskell) Realized Constants are Comonadic - geophf [blog post](http://logicaltypes.blogspot.com/2009/06/realized-constants-are-comonadic.html)

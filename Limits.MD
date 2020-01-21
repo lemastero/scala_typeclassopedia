@@ -92,9 +92,11 @@ Implementations [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core
    * TheCatsters - Limits and colimits [(video playlist)](https://www.youtube.com/playlist?list=PLE337D7DEA972E632)
    * (Haskell) [category-extras Limit](http://hackage.haskell.org/package/category-extras-0.53.4/docs/Control-Functor-Limit.html#t:Limit)
    * (Haskell) [data-category Limit](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#g:4)
+   * [Boolean Limits statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Booleans/BooleanLimits.lidr)
 
 ### Colimit
 
 * Resources
    * (Haskell) [category-extras Colimit](http://hackage.haskell.org/package/category-extras-0.53.4/docs/Control-Functor-Limit.html#t:Colimit)
    * (Haskell) [data-category Colimit](http://hackage.haskell.org/package/data-category/docs/Data-Category-Limit.html#g:5)
+   * [Boolean CoLimits statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Booleans/BooleanCoLimits.lidr)
