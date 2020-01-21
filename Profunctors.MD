@@ -20,7 +20,9 @@ trait Profunctor[F[_, _]] {
 }
 ```
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala), [Haskell](hackage.haskell.org/package/profunctors/docs/Data-Profunctor.html), [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Profunctor.agda),[UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Profunctors/Core.v), [nLab](https://ncatlab.org/nlab/show/profunctor), [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala), [Haskell](hackage.haskell.org/package/profunctors/docs/Data-Profunctor.html), [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs), [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
+* Verified implementations: [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Profunctor.agda),[UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Profunctors/Core.v), [idris-ct Profunctors](https://github.com/statebox/idris-ct/blob/master/src/Profunctors/Profunctor.lidr)
+* Definition in Category Theory: [nLab](https://ncatlab.org/nlab/show/profunctor)
 
 * Alternatively we can define functor using:
 ```scala
@@ -39,7 +41,7 @@ trait Profunctor[Function1] {
 
 Becasue Profunctors can be used as base to define Arrows therefore there are instances for Arrow like constructions like `Kleisli`
 
-* In Category Theroy:
+* In Category Theory:
 When we have Category `C` and `D` and `D'` the opposite category to D,
 then a Profunctor `P` is a Functor  `D' x C -> Set` We write `D -> C`
 In category of types and functions we use only one category, so Profunctor P is `C' x C => C`
@@ -473,12 +475,12 @@ trait Category[F[_, _]] {
   def compose[A, B, C](f: F[B, C], g: F[A, B]): F[A, C]
 }
 ```
-that satisfy certain conditions - law:
+that satisfy certain conditions.
 
 * Implementations:  
   Compose/Semicategory [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala)  
-  Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Core.agda), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt), [nlab](https://ncatlab.org/nlab/show/category)
-and identity laws:
+  Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html), [nlab](https://ncatlab.org/nlab/show/category)
+* Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Category.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/Categories/Category/Core.agda), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
 * Category laws [Cats Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala), [Cats Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala):
 
@@ -511,6 +513,52 @@ def rightIdentityLaw[A,B](fa: M[A,B]): Boolean = {
 * Resources
   * (Category Theory) Category Theory 1.2: What is a category? - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=i9CU4CuHADQ)
   * Hask is not a category - Andrej Bauer [(blog)](http://math.andrej.com/2016/08/06/hask-is-not-a-category/)
+
+#### Category of types and functions
+
+Types in given programming language like Scala or Haskell with one argument pure functions form a category - called `Scala` or `Hask` respectively.
+(Because in Haskell functions are automatically curried - there is no requirements for 1 argument.)
+
+```scala
+trait Function1Cat extends Category[Function1] {
+  def id[A]: A => A = identity[A]
+  def compose[A, B, C](f: B => C)(g: A => B): A => C = g andThen f
+}
+```
+
+#### Functor category
+
+Functor category is a category where objects are functors and morphisms are natural transformations. Provided definition of category
+does not allow to express this. We could encode this in following way:
+
+```scala
+object CategoryKInstances {
+  val functorCategory: CategoryK[~>] = new CategoryK[~>] {
+    def id[F[_]]: F~>F = new IdNat[F]
+    def compose[A[_], B[_], C[_]](f: B ~> C)(g: A ~> B): A ~> C = VerticalCompositionNat(g,f)
+  }
+}
+
+trait CategoryK[Morphism[ _[_], _[_] ]] {
+  def id[A[_]]: Morphism[A,A]
+  def compose[A[_],B[_],C[_]](f: Morphism[B,C])(g: Morphism[A,B]): Morphism[A,C]
+}
+
+trait ~>[F[_], G[_]] {
+  def apply[A](fa: F[A]): G[A]
+}
+
+case class VerticalCompositionNat[F[_],G[_],H[_]](f: F~>G, g: G~>H) extends ~>[F,H] {
+  def apply[A](fa: F[A]): H[A] = g(f(fa))
+}
+
+case class IdNat[F[_]]() extends ~>[F,F] {
+  def apply[A](fa: F[A]): F[A] = fa
+}
+```
+
+Implementation in [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Cats/FunctorsAsCategory.lidr)
+
 
 ### Arrow
 
