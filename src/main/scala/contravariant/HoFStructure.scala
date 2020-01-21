@@ -68,6 +68,7 @@ import educational.category_theory.contra.Contravariant
   * - formalize in Idris/Agda/Coq
   */
 class HoFStructure {
+
   type LambdaAB[-B,+A] = B => A
   implicit def funB[B]: Functor[B => *] = new Functor[B => *] {
     def map[A, AA](fa: B => A)(f: A => AA): B => AA =
