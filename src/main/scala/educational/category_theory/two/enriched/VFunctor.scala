@@ -1,12 +1,16 @@
 package educational.category_theory.two.enriched
 
 /*
-class ( Category objc c, Category objd d,
-    forall x . objc x => objd (f x) )
-    => VFunctor objc c objd d f where
+V-enriched functor
+
+nLab: https://ncatlab.org/nlab/show/enriched+functor
+
+Haskell
+class ( Category objc c, Category objd d
+      , forall x . objc x => objd (f x)
+      ) => VFunctor objc c objd d f where
   map :: (objc x, objc y) => c x y -> d (f x) (f y)
 */
-
 trait VFunctor[OBJC[_],C[_,_],OBJD[_],D[_,_],F[_]] {
   type C1 = VCategory[OBJC,C]
   type C2 = VCategory[OBJD,D]
