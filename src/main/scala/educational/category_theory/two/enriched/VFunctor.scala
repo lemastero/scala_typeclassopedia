@@ -12,8 +12,8 @@ class ( Category objc c, Category objd d
   map :: (objc x, objc y) => c x y -> d (f x) (f y)
 */
 trait VFunctor[OBJC[_],C[_,_],OBJD[_],D[_,_],F[_]] {
-  type C1 = VCategory[OBJC,C]
-  type C2 = VCategory[OBJD,D]
+  def c1: VCategory[OBJC,C]
+  def c2: VCategory[OBJD,D]
   def f[X]: OBJC[X] => OBJD[F[X]]
 
   def map[X,Y](implicit x: OBJC[X], y: OBJD[Y]): C[X,Y] => D[F[X],F[Y]]
