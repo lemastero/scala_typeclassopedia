@@ -50,7 +50,9 @@ trait Contravariant[F[_]] {
 }
 ```
 
-[Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Presheaf.v), [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
+[Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [Haskell](https://downloads.haskell.org/~ghc/latest/docs/html/libraries/base-4.13.0.0/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant)
+Proofs [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Presheaf.v)
+Category Theory [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
 
 * Contravariant laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ContravariantLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
 
