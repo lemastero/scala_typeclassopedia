@@ -20,7 +20,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion withSources(),
   "org.typelevel" %% "cats-mtl-core" % catsMtlVersion withSources(),
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
-  "org.typelevel" %% "cats-effect" % "2.0.0" withSources(),
+  "org.typelevel" %% "cats-effect" % "2.1.0" withSources(),
   "org.scalaz"    %% "scalaz-core" % "7.3.0-M32" withSources(),
   "com.codecommit" %% "skolems" % "0.2.0",
   "dev.zio" %% "zio" % "1.0.0-RC17" withSources(),
