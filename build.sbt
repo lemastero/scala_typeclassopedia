@@ -11,7 +11,7 @@ scalaVersion := scala213
 
 crossScalaVersions := List(scala212, scala213)
 
-lazy val catsVersion = "2.1.0"
+lazy val catsVersion = "2.1.1"
 lazy val catsMtlVersion = "0.7.0"
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % catsVersion withSources(),
