@@ -76,7 +76,7 @@
   * [Comonad](./Comonads.MD#comonad)
     * [Coreader (Env comonad, Product comonad)](./Comonads.MD#coreader-env-comonad-product-comonad)
     * [Cowriter](./Comonads.MD#cowriter)
-    * [Cofree](./Comonads.MD#cofree)
+    * [Cofree](./Free.MD#cofree)
     * [Cokleisli](./Comonads.MD#cokleisli)
   * [Bimonad](./Comonads.MD#bimonad)
 
@@ -919,7 +919,7 @@ trait Distributive[F[_]] extends Functor[F] {
 
 * Resources
    * Scalaz issue about difference between Haskell/Purescript vs Scala impl [issue](https://github.com/scalaz/scalaz/issues/2034)
-   * The essence of dataflow programming - 	Tarmo Uustalu, 	Varmo Vene [paper short][http://cs.ioc.ee/~tarmo/papers/aplas05.pdf] [long](http://cs.ioc.ee/~tarmo/papers/cefp05.pdf) [slides](http://www.cs.ox.ac.uk/ralf.hinze/WG2.8/22/slides/varmo.pdf)) (parsing using Monads, Distributive, Comonads) 
+   * The essence of dataflow programming - 	Tarmo Uustalu, 	Varmo Vene [paper short](http://cs.ioc.ee/~tarmo/papers/aplas05.pdf) [long](http://cs.ioc.ee/~tarmo/papers/cefp05.pdf) [slides](http://www.cs.ox.ac.uk/ralf.hinze/WG2.8/22/slides/varmo.pdf)) (parsing using Monads, Distributive, Comonads) 
    * (Haskell) Moore for Less - Edward Kmett [(blog post)](https://www.schoolofhaskell.com/user/edwardk/moore/for-less)
    * (Haskell) Zippers Using Representable And Cofree - Chris Penner (https://chrispenner.ca/posts/representable-cofree-zippers)
    * (Haskell) A law for Distributive? [(reddit)](https://www.reddit.com/r/haskell/comments/4cmjeg/a_law_for_distributive/)
