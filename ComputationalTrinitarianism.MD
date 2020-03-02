@@ -15,6 +15,7 @@
 
 ### [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 
+* 2-Dimensional Categories - Niles Johnson, Donald Yau [(arXiv:2002.06055)](https://arxiv.org/pdf/2002.06055.pdf)
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
@@ -40,6 +41,7 @@
 ## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
 * Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316)
+* Functorial Data Migration - David I. Spivak [(arXiv:1009.1166)](https://arxiv.org/abs/1009.1166), Categorical Databases [(video)](https://www.youtube.com/watch?v=bk36__qkhrk)
 * Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
 * What is Applied Category Theory? - Tai-Danae Bradley [(pdf)](https://arxiv.org/abs/1809.05923)
 * Network Models - John C. Baez, John Foley, Joseph Moeller, Blake S. Pollard [(arXiv)](https://arxiv.org/abs/1711.00037)
@@ -154,6 +156,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [J. R. B. Cockett](https://arxiv.org/search/math?searchtype=author&query=Cockett%2C+J+R+B)
 * [Michael Barr](http://www.math.mcgill.ca/barr/)
 * [Peter Selinger](https://dblp.org/pers/hd/s/Selinger:Peter), [Dalhousie University page](https://www.mscs.dal.ca/~selinger/papers.html)
+* [Carlo Angiuli](https://dblp.org/pers/hd/a/Angiuli:Carlo), [Carnegie Mellon University page](https://www.cs.cmu.edu/~cangiuli/), [arxiv](https://arxiv.org/search/cs?query=Carlo+Angiuli&searchtype=author&abstracts=show)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
