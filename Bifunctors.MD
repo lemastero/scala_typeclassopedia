@@ -42,6 +42,7 @@ def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
   * [Haskell libraries using Bifunctors](https://packdeps.haskellers.com/reverse/bifunctors)
   * (Haskell) The Extended Functor Family - George Wilson: [video](https://www.youtube.com/watch?v=JUVMiRRq6wU&t=303)
   * (Haskell) Parametricity for Bifunctor - Brent Yorgey [(blog post)](https://byorgey.wordpress.com/2018/03/30/parametricity-for-bifunctor/)
+  * https://twitter.com/xgrommx/status/1234493383126769665
 
 ### Bifunctor Join
 

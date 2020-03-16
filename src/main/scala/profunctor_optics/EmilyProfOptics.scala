@@ -24,7 +24,7 @@ trait Strong[=>:[_,_]] extends Profunctor[=>:] {
 }
 
 trait Closed[=>:[_,_]] extends Profunctor[=>:] {
-  def closed[A,B,C]: A=>:B => (C=>A) =>: (C => B)
+  def closed[A,B,C]: A=>:B => (C=>A) =>: (C=>B)
 }
 
 trait Traversing[=>:[_,_]] extends Profunctor[=>:] {

@@ -205,7 +205,6 @@ This is very opinionated selection of authors that publish interesting papers ab
 * FAMOUS - Foundations of Mathematics: Univalent foundations and set theory 2016 [(video playlist)](https://www.youtube.com/watch?v=slVcTtwX_Sk&list=PLQRKUSOIMEh1Arz0-WBgD_Pol4S50HATv), [(videos, slides, abstracts)](http://fomus.weebly.com/talks-abstracts--videos.html)
 * HOTTEST - Homotopy Type Theory Electronic Seminar Talks - 2018 - present [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html), [(youtube videos)](https://www.youtube.com/user/jdchristensen123/videos)
 * The New York City Category Theory Seminar [(youtube videos)](https://www.youtube.com/channel/UCNOfhimbNwZwJO2ltv1AZOw/videos)
-* [(Zwanziger) - Natural Model Semantics for Comonadic and Adjoint Modal Type Theory](https://www.youtube.com/watch?v=bLBNg9Q4oIc)
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
@@ -219,6 +218,10 @@ This is very opinionated selection of authors that publish interesting papers ab
 Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
 * Axioms for Modelling Cubical Type Theory in a Topos - Ian Orton, Andrew M. Pitts [(arXiv:1712.04864)](https://arxiv.org/abs/1712.04864)
 * Cubical informal type theory: The higher groupoid structure - Bruno Bentzen [(arXiv:1806.08490)](https://arxiv.org/pdf/1806.08490.pdf)
+
+## Modal Type Theory
+
+* [(Zwanziger) - Natural Model Semantics for Comonadic and Adjoint Modal Type Theory](https://www.youtube.com/watch?v=bLBNg9Q4oIc)
 
 ## Specification of dependent types
 
