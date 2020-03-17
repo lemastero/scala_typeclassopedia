@@ -3,6 +3,9 @@ package educational.category_theory.two.profunctor.closed
 import educational.category_theory.two.profunctor.Profunctor
 import educational.category_theory.two.profunctor.ProfunctorLaws
 import educational.category_theory.two.profunctor.ProfunctorInstance.Function1Profunctor
+import Function.const
+import Function.uncurried
+import Function.untupled
 
 // class Profunctor p => Closed p where
 //    closed :: p a b -> p (x -> a) (x -> b)
@@ -28,33 +31,22 @@ trait ClosedLaws[=:>[_,_]] extends Closed[=:>] with ProfunctorLaws[=:>] {
   }
 
   // closed . closed ≡ dimap uncurry curry . closed
-  def closedClosedEqDimapClosed[A, B, C, D](p: A =:> B): Boolean = {
-    val l1: (C => A) =:> (C => B) = closed(p)
-    val l2: (D => C => A) =:> (D => C => B) = closed(l1)
-
-    def uncurry[X, Y, Z]: (X => Y => Z) => Tuple2[X, Y] => Z = Function.uncurried(_).tupled
-    def curry[X, Y, Z]: (Tuple2[X, Y] => Z) => X => Y => Z = Function.untupled(_).curried
-
-    val r1: (((D, C)) => A) =:> (((D, C)) => B) = closed[A, B, (D, C)](p)
-    val r2: (D => C => A) =:> (D => C => B) = dimap(r1)(uncurry[D, C, A], curry[D, C, B])
+  def closedClosedEqDimapClosed[A, B](p: A =:> B): Boolean = {
+    val l1: (B => A) =:> (B => B) = closed(p)
+    val l2: (A => B => A) =:> (A => B => B) = closed(l1)
+    val r1: (((A, B)) => A) =:> (((A, B)) => B) = closed[A, B, (A, B)](p)
+    val r2: (A => B => A) =:> (A => B => B) = dimap(r1)(uncurry[A, B, A], curry[A, B, B])
     l2 == r2
   }
 
   // dimap const ($()) . closed ≡ id
-  def dimapCloseIsIdentity[A, B, C, D](p: A =:> B): Boolean = {
-    val l1: (C => A) =:> (C => B) = closed(p)
-    def const[X,Y]: X => (Y => X) = a => _ => a
-    def dolar[X,Y]: (X => Y) => Y = f => f(dolar(identity[X])) // TODO this seems impossible
-    val l2: A =:> B = dimap(l1)(const[A,C],dolar)
+  def dimapCloseIsIdentity2[A,B](p: A =:> B): Boolean = {
+    val l1: (Unit => A) =:> (Unit => B) = closed(p)
+    def foo[YY]: (Unit => YY) => YY = f => f(())
+    val l2: A =:> B = dimap(l1)(const[A,Unit],foo)
     l2 == p
   }
 
-  // dimap const ($()) . closed ≡ id
-  def dimapCloseIsIdentity2[A, B, C, D](p: A =:> B): Boolean = {
-    val l1: (C => A) =:> (C => B) = closed(p)
-    def const[X,Y]: X => (Y => X) = a => _ => a
-    def dolar[X,Y]: (X => Y) => Y = f => f(dolar(identity[X])) // TODO this seems impossible
-    val l2: A =:> B = dimap(l1)(const[A,C],dolar)
-    l2 == p
-  }
+  def uncurry[X, Y, Z]: (X => Y => Z) => Tuple2[X, Y] => Z = uncurried(_).tupled
+  def curry[X, Y, Z]: (Tuple2[X, Y] => Z) => X => Y => Z = untupled(_).curried
 }
