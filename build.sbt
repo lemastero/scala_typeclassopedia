@@ -24,7 +24,7 @@ libraryDependencies ++= Seq(
   "org.scalaz"    %% "scalaz-core" % "7.3.0" withSources(),
   "com.codecommit" %% "skolems" % "0.2.1",
   "dev.zio" %% "zio" % "1.0.0-RC18-2" withSources(),
-  "org.scalatest" %% "scalatest" % "3.1.1" % Test
+  "org.scalatest" %% "scalatest" % "3.1.2" % Test
 )
 
 scalacOptions ++= Seq(
