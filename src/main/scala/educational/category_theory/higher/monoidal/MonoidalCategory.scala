@@ -17,13 +17,13 @@ object MonoidalCategory {
     extends Category[:=>] {
 
     def tensor: Bifunctor[⊗]
-    def ρ[A]    (fa: A⊗I): A
+    def ρ[A]    (fa: A⊗I): A    // right unitor
     def ρ_inv[A](a:  A):   A⊗I
 
-    def λ[A]      (fa: I⊗A): A
+    def λ[A]      (fa: I⊗A): A  // left unitor
     def λ_inv[A,B](a:  A):   I⊗A
 
-    def α[A,B,C](    fa: (A⊗B)⊗C): A⊗(B⊗C)
+    def α[A,B,C](    fa: (A⊗B)⊗C): A⊗(B⊗C) // associator
     def α_inv[A,B,C](fa: A⊗(B⊗C)): (A⊗B)⊗C
   }
 
@@ -113,7 +113,7 @@ object MonoidalCategory {
   trait BraidedMonoidalCategory[:=>[_,_],⊗[_, _], I]
     extends MonoidalCategory[:=>,⊗, I] {
 
-    def braiding[A,B](a: A⊗B): B⊗A
+    def braiding[A,B](a: A⊗B): B⊗A // swap
   }
 
   trait BraidedMonoidalCategoryLaws[:=>[_,_],⊗[_, _], I]
