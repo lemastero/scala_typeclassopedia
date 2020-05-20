@@ -53,4 +53,3 @@ scalacOptions ++= Seq(
 )
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
-addCompilerPlugin("com.github.tomasmikula" % "pascal" % "0.4.0" cross CrossVersion.full)
