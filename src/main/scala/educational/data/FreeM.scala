@@ -27,3 +27,9 @@ object free2 {
   case class Return[F[_], A](a: A) extends Free[F,A]
   case class Bind[F[_],I,A](i: F[I], k: I => Free[F,A]) extends Free[F,A]
 }
+
+object free3 {
+  // https://www.youtube.com/watch?v=7xSfLPD6tiQ
+  // Pure Functional Database Programming with Fixpoint Types — Rob Norris
+  case class Free[F[_], A](resume: Either[A,F[Free[F,A]]])
+}

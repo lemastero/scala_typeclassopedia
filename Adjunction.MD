@@ -64,6 +64,10 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * [Generic Programming with Adjunctions - Ralf Hinze](http://www.cs.ox.ac.uk/ralf.hinze/LN.pdf)
   * [Relational Algebra by Way of Adjunctions - Jeremy Gibbons, Fritz, Henglein, Ralf Hinze, Nicolas Wu](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/reladj.pdf)
   * (Haskell) [Monad.Trans.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Trans-Adjoint.html), [Comonad.Trans.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Trans-Adjoint.html), [Monad.Trans.Contravariant.Adjoint](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Trans-Contravariant-Adjoint.html)
+  * (Haskell) [SO - Monads as adjunctions](https://stackoverflow.com/questions/4697320/monads-as-adjunctions)
+  * (Haskell) [SO - Which common monads arise from adjunctions in Hask?](https://stackoverflow.com/questions/46878106/which-common-monads-arise-from-adjunctions-in-hask)
+  * (Haskell) [SO - How to Factorize Continuation Monad into Left & Right Adjoints?](https://stackoverflow.com/questions/61267827/how-to-factorize-continuation-monad-into-left-right-adjoints)
+  * (Haskell) [SO - What are the adjoint functor pairs corresponding to common monads in Haskell?](https://stackoverflow.com/questions/13937289/what-are-the-adjoint-functor-pairs-corresponding-to-common-monads-in-haskell)
 
 ### Adjoint Triples
 
