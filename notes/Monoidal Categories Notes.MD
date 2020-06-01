@@ -6,17 +6,17 @@ Monoidal category theory add orthogonal operation - tensor product that can mode
 Following notes combine definitions, from category theory, related to monoidal categories
 as well as implementations in Scala 2 that provide examples for them.
 
-Categorical definitions use often conditions presented as equations.
+Categorical definitions often use conditions presented as equations.
 In Scala, the usual approach, is to provide abstract interface with
 functions in form suitable to write property tests.
-If those fail we have an counterexample.
+If those fail we have a counterexample.
 
 Later we will come back to this approach and propose alternative,
 that can be more useful for functional programming.
 
 # Algebraic Data Types form commutative semiring
 
-We have been tought that Curry-Howard-Lambek isomorphism we know that:
+It is common knowledge among FP programmers that Curry-Howard-Lambek isomorphism we know that:
 
 | Type Theory   | Logic                | Category Theory       |
 |---------------|----------------------|-----------------------|
