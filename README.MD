@@ -396,7 +396,7 @@ trait Applicative[F[_]] extends Apply[F] {
 }
 ```
 
-* Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
+* Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Haskell](https://hackage.haskell.org/package/base/docs/Control-Applicative.html) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
 * Applicative Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ApplicativeLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala#L118-L134)):
 
@@ -467,13 +467,15 @@ def mapLikeDerivedLaw[A, B](f: A => B, fa: F[A]): Boolean = {
   * apply, pure
 
 * Resources:
-  * herding cats - Applicative: [(blog post)](http://eed3si9n.com/herding-cats/Applicative.html)
-  * FSiS 2 - Applicative type class - Michael Pilquist: [(video)](https://www.youtube.com/watch?v=tD_EyIKqqCk)
-  * FSiS 3 - Monad type class - Michael Pilquist: [(video)](https://www.youtube.com/watch?v=VWCtLhH815M)
+  * (Haskell) [Typeclassopedia - Applicative](https://wiki.haskell.org/Typeclassopedia#Applicative)
+  * (Haskell) Applicative Functors - Łukasz Marchewka [(video)](https://www.youtube.com/watch?v=7y4Vf0klsUw)
+  * FSiS 2 - Applicative type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=tD_EyIKqqCk)
+  * FSiS 3 - Monad type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VWCtLhH815M)
   * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) 
-  * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
-  * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
+  * (Haskell) Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
+  * (Haskell) The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
   * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
+  * herding cats - Applicative: [(blog post)](http://eed3si9n.com/herding-cats/Applicative.html)
   * Static analysis with Applicatives - Gergő Érdi [(blog post)](https://gergo.erdi.hu/blog/2012-12-01-static_analysis_with_applicatives/)
   * Lifting - Tony Morris [(blog post)](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
