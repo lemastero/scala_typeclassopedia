@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
   "org.scalaz"    %% "scalaz-core" % "7.3.1" withSources(),
 
   // ZIO
-  "dev.zio" %% "zio" % "1.0.0-RC21" withSources(),
+  "dev.zio" %% "zio" % "1.0.0-RC21-1" withSources(),
 
   // algebra
   "org.typelevel" %% "algebra" % "2.0.1" withSources(),
