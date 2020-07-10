@@ -13,7 +13,7 @@
 * Category Theory Study Group [(video playlist)](https://www.youtube.com/channel/UCDXHYyvGJBxbIdmpmnz4cIw/videos)
 * Takt Category Theory - Runar Bjarnason [(video playlist)](https://www.youtube.com/playlist?list=PLq3_mvFPbUXcVETGuvOeLL26mBIMA8Xzt)
 
-### [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
+## [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
@@ -23,7 +23,7 @@
 * Associative n-categories - Christoph Dorn [(arXiv:1812.10586)](https://arxiv.org/pdf/1812.10586.pdf)
 * Strictly associative and unital higher category theory - Jamie Vicary [(slides)](https://www.cs.bham.ac.uk/~axj/files/mgs-xmas-2018-Jamie.pdf)
 
-### [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
+## [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
 
 * An informal introduction to topos theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1012.5647)
 * Category Theory, Toposes - MathProofsable [(video playlist)](https://www.youtube.com/playlist?list=PL4FD0wu2mjWM3ZSxXBj4LRNsNKWZYaT7k)
@@ -36,27 +36,28 @@
 * [Basics in category and topos theory - David Janin](https://www.labri.fr/perso/janin/Enseignement/EDMI/full.html)
 * An Introduction to Topos Theory - Ryszard Paweł Kostecki [(lecture notes)](https://www.fuw.edu.pl/~kostecki/ittt.pdf)
 
-
 ## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
-* Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316)
-* Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
+* Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316), Azimuth Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
 * What is Applied Category Theory? - Tai-Danae Bradley [(pdf)](https://arxiv.org/abs/1809.05923)
+* Topos Institute [(videos)](https://www.youtube.com/user/youdsp/videos)  
+* UCR Applied Category Theory Seminar [(video playlist)](https://www.youtube.com/channel/UCUQlS-R4O094jP0sGHDnrjA/videos)
+* Applied Category Theory conference
+  * ACT 2018 [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
+  * ACT 2019 [(videos & summaries)](https://johncarlosbaez.wordpress.com/2019/07/20/applied-category-theory-2019-talks/)
+  * ACT 2020 [(videos)](https://www.youtube.com/channel/UC1Kxtc6DOexi4JT-t57Ey9g/videos) 
+
 * Network Models - John C. Baez, John Foley, Joseph Moeller, Blake S. Pollard [(arXiv)](https://arxiv.org/abs/1711.00037)
 * A coalgebraic model of graphs - Christian Jäkel [(arXiv)](https://arxiv.org/abs/1508.02169)
 * Coalgebraic Modelling Applications in Automata Theory and Modal Logic - Helle Hvid Hansen [(pdf)](https://www.cs.vu.nl/en/Images/HH_Hansen_14-05-2009_tcm210-259639.pdf)
-* [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
-* Applied Category Theory 2018 Workshop in Leiden (ACT 2018) [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
-* Applied Category Theory 2019 (ACT 2019) [(videos & summaries)](https://johncarlosbaez.wordpress.com/2019/07/20/applied-category-theory-2019-talks/)
 * Compositional game theory reading list - Jules Hedges [(blog post)](https://julesh.com/2017/11/09/compositional-game-theory-reading-list/)
-* UCR Applied Category Theory Seminar [(video playlist)](https://www.youtube.com/channel/UCUQlS-R4O094jP0sGHDnrjA/videos)
 * A mathematical theory of resources - Bob Coecke, Tobias Fritz, Robert W. Spekkens [arXiv:1409.5531](https://arxiv.org/abs/1409.5531) (application of CT for resource management)
 * The Mathematical Specification of the [Statebox](https://statebox.org/) Language - Statebox Team: Fabrizio Genovese, Jelle Herold [arXiv:1906.07629](https://arxiv.org/abs/1906.07629) (programming language based on CT and petri nets)
 * Abstraction, Composition and Contracts: A Sheaf Theoretic Approach, Alberto Speranzon, David I. Spivak, Srivatsan Varadarajan [arXiv:1802.03080](https://arxiv.org/abs/1802.03080)
 * A Mathematical Theory of Co-Design - Andrea Censi [arXiv:1512.08055](https://arxiv.org/abs/1512.08055)
 * Categorical Foundations for System Engineering - Spencer Breiner, Eswaran Subrahmanian, Albert Jones [(paper)](https://www.researchgate.net/publication/321302956_Categorical_Foundations_for_System_Engineering)
 * Behavioral Mereology - Brendan Fong, David Jaz Myers, David I. Spivak [arXiv:1811.00420](https://arxiv.org/abs/1811.00420)
-* [CQL](https://github.com/CategoricalData/CQL) language for RDBMS, [related papers](https://www.categoricaldata.net/papers)
+* [CQL](https://github.com/CategoricalData/CQL) language for RDBMS, [related papers](https://www.categoricaldata.net/papers) 
 
 ## Programming languages inspired by Category Theory
 
@@ -101,6 +102,7 @@
 [Part 7: Algebraic Stacks](https://stacks.math.columbia.edu/tag/0ELS)  
 [Part 8: Topics in Moduli Theory](https://stacks.math.columbia.edu/tag/0ELR)
 * [Quantum Gravity Seminar - John Baez](http://math.ucr.edu/home/baez/QG.html) interesting notes around type theory (in classical versus quantum computation) and [(cohomology and computation)](http://math.ucr.edu/home/baez/qg-spring2007/index.html#computation)
+* [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
 
 ## Publications
 
@@ -146,7 +148,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
 * [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
 * [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada), [Cambridge University page](https://www.cl.cam.ac.uk/~na482/cv/)
-* [Valery Isaev](https://dblp.uni-trier.de/pers/hd/i/Isaev:Valery),[JET Brains Research page](https://research.jetbrains.org/researchers/valis)
+* [Valery Isaev](https://dblp.uni-trier.de/pers/hd/i/Isaev:Valery), [JET Brains Research page](https://research.jetbrains.org/researchers/valis)
 * [Jon Sterling](http://www.jonmsterling.com/)
 * [Ross Street](http://web.science.mq.edu.au/~street/Publications.htm), [wikipedia has links to publications](https://en.wikipedia.org/wiki/Ross_Street), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Street%2C+R)
 * [Brian Day](http://web.science.mq.edu.au/~street/Day.pub.html), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Day%2C+B+J)
