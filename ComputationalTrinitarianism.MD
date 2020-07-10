@@ -185,9 +185,6 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
 * Homotopy (type) theory - Andrej Bauer, University of Ljubljana course [(github repo, videos)](https://github.com/andrejbauer/homotopy-type-theory-course)
 * Programming in Martin-Löf's Type Theory An Introduction - Bengt Nordström, Kent Petersson, Jan M. Smith [(book)](http://www.cse.chalmers.se/research/group/logic/book/)
-* Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
-* Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
-* Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
 * Computational Type Theory - OPLSS 2018 - Robert Harper [(course)](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php#Harper), lecture notes, high quality videos, [(video playlist)](https://www.youtube.com/watch?v=LE0SSLizYUI&list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z) - lower quality videos
 * Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
 * Homotopy Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/hott/) lecture notes, papers
@@ -232,9 +229,7 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
 * System F in Agda, for fun and profit - James Chapman, Roman Kireev, Chad Nester, Philip Wadler [(paper)](https://iohk.io/research/papers/#system-f-in-agda-for-fun-and-profit)
 
-## [Formalizations of Category Theory in](https://ncatlab.org/homotopytypetheory/show/Category+theory) [proof assistants](https://ncatlab.org/homotopytypetheory/show/Proof+Assistants)
-
-### [CT formulated in terms of UF/HoTT](https://ncatlab.org/homotopytypetheory/show/Category+theory)
+## [Formalizations of Category Theory](https://ncatlab.org/homotopytypetheory/show/Category+theory) in [proof assistants](https://ncatlab.org/homotopytypetheory/show/Proof+Assistants)
 
 * [UniMath](https://github.com/UniMath/UniMath) Encoding of Category Theory using UV; combines results from:
   * Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(original repository - now merged into UniMath)](https://github.com/benediktahrens/rezk_completion)
@@ -250,9 +245,21 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * (Coq) [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
 * Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
 * Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
+* CT formulated in terms of UF/HoTT [nLab](https://ncatlab.org/homotopytypetheory/show/Category+theory)
+
+## Encodings of category theory (Applied-Applied Category Theory)
+
+* Category Theory in Idris [statebox/idris-ct](https://github.com/statebox/idris-ct)
+* Category Theory in Haskell by Sjoerd Visscher [data-category](http://hackage.haskell.org/package/data-category)
+* Category Theory and Topos Theory in Scala by Vlad Patryshev [vpatryshev/Categories](https://github.com/vpatryshev/Categories)
+* Monoidal categories in Python [oxford-quantum-group/discopy](https://github.com/oxford-quantum-group/discopy), paper: DisCoPy: Monoidal Categories in Python Giovanni de Felice, Alexis Toumi, Bob Coecke [arxiv 2005.02975](https://arxiv.org/abs/2005.02975)
+* Evan Patterson: Realizing Applied Category Theory in Julia [(video)](https://www.youtube.com/watch?v=7dmrDYQh4rc)
 
 ## Logic
 
+* Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
+* Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
+* Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
 * [Logical_Graphs](https://oeis.org/wiki/Logical_Graphs#Peirce.27s_law)
 
 ## Nominal Techniques
