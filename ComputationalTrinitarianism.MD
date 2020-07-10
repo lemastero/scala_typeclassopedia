@@ -45,7 +45,7 @@
 * Applied Category Theory conference
   * ACT 2018 [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
   * ACT 2019 [(videos & summaries)](https://johncarlosbaez.wordpress.com/2019/07/20/applied-category-theory-2019-talks/)
-  * ACT 2020 [(videos)](https://www.youtube.com/channel/UC1Kxtc6DOexi4JT-t57Ey9g/videos) 
+  * ACT 2020 [conference page](nLab), [(videos)](https://www.youtube.com/channel/UC1Kxtc6DOexi4JT-t57Ey9g/videos) 
 
 * Network Models - John C. Baez, John Foley, Joseph Moeller, Blake S. Pollard [(arXiv)](https://arxiv.org/abs/1711.00037)
 * A coalgebraic model of graphs - Christian Jäkel [(arXiv)](https://arxiv.org/abs/1508.02169)
@@ -56,7 +56,7 @@
 * Abstraction, Composition and Contracts: A Sheaf Theoretic Approach, Alberto Speranzon, David I. Spivak, Srivatsan Varadarajan [arXiv:1802.03080](https://arxiv.org/abs/1802.03080)
 * A Mathematical Theory of Co-Design - Andrea Censi [arXiv:1512.08055](https://arxiv.org/abs/1512.08055)
 * Categorical Foundations for System Engineering - Spencer Breiner, Eswaran Subrahmanian, Albert Jones [(paper)](https://www.researchgate.net/publication/321302956_Categorical_Foundations_for_System_Engineering)
-* Behavioral Mereology - Brendan Fong, David Jaz Myers, David I. Spivak [arXiv:1811.00420](https://arxiv.org/abs/1811.00420)
+* Behavioral Mereology - Brendan Fong, David Jaz Myers, David I. Spivak [arXiv:1811.00420](https://arxiv.org/abs/1811.00420), [n-Category Cafe Blog post - John Baez](https://golem.ph.utexas.edu/category/2019/06/behavioral_mereology.html)
 * [CQL](https://github.com/CategoricalData/CQL) language for RDBMS, [related papers](https://www.categoricaldata.net/papers) 
 
 ## Programming languages inspired by Category Theory
@@ -287,14 +287,13 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * [coq-community/math-classes](https://github.com/coq-community/math-classes)
 * [domdere/haskell-coq](https://github.com/domdere/haskell-coq)
 
-## [Algebraic Theories](https://ncatlab.org/nlab/show/algebraic+theory)
 
+## [Categorical Algebra](https://ncatlab.org/nlab/show/categorical+algebra)
+
+* Higher Algebra - Jacob Lurie [(pdf)](https://www.math.ias.edu/~lurie/papers/HA.pdf)
+* [Algebraic Operads - Jean-Louis Loday and Bruno Vallette](http://irma.math.unistra.fr/~loday/AO%28JLL-BV%29.html) [(pdf v 0.99)](http://irma.math.unistra.fr/~loday/PAPERS/LodayVallette.pdf)
 * Foundations of Algebraic Theories and Higher Dimensional Categories - Soichiro Fujii [(arxiv:1903.07030)](https://arxiv.org/abs/1903.07030)
 * A unified framework for notions of algebraic theory - Soichiro Fujii [(paper)](https://arxiv.org/abs/1904.08541)
-
-
-## Bialgebras
-
 * Bialgebraic Semantics for String Diagrams - Filippo Bonchi, Robin Piedeleu, Pawel Sobocinski, Fabio Zanasi [(arXiv:1906.01519)](https://arxiv.org/abs/1906.01519)
 * Bialgebraic Semantics for Logic Programming - Filippo Bonchi, Fabio Zanasi [(arXiv:1502.06095)](https://arxiv.org/abs/1502.06095)
 
