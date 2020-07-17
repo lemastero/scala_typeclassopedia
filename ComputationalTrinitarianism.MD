@@ -15,6 +15,7 @@
 
 ## [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 
+* 2-Dimensional Categories - Niles Johnson, Donald Yau [(arxiv:2002.06055)](https://arxiv.org/abs/2002.06055), [(pdf)](https://arxiv.org/pdf/2002.06055.pdf)
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
@@ -109,7 +110,7 @@
 This is very opinionated selection of authors that publish interesting papers about `Category Theory`, `Type Theory` and other branches of `Logic`, `Proof Theory`.
 
 * Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls), [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
-* Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
+* [Philip Wadler](https://iohk.io/en/research/library/authors/philip-wadler/), [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 * [Eugenia Cheng](http://eugeniacheng.com/math/research/)
 * [Emily Riehl](http://www.math.jhu.edu/~eriehl/#research)
 * [Jacob Lurie](https://www.math.ias.edu/~lurie/)
@@ -255,12 +256,13 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Monoidal categories in Python [oxford-quantum-group/discopy](https://github.com/oxford-quantum-group/discopy), paper: DisCoPy: Monoidal Categories in Python Giovanni de Felice, Alexis Toumi, Bob Coecke [arxiv 2005.02975](https://arxiv.org/abs/2005.02975)
 * Evan Patterson: Realizing Applied Category Theory in Julia [(video)](https://www.youtube.com/watch?v=7dmrDYQh4rc)
 
-## Logic
+## (Constructive) Logic
 
 * Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
 * Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
 * Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
 * [Logical_Graphs](https://oeis.org/wiki/Logical_Graphs#Peirce.27s_law)
+* [Applied Logic course - Erik Palmgren](http://www2.math.uu.se/~palmgren/tillog/) (contains nice lecture notes, exercises in Coq)
 
 ## Nominal Techniques
 
