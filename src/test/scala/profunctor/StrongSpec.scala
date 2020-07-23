@@ -1,5 +1,6 @@
-package educational.category_theory.two.profunctor
+package profunctor
 
+import educational.category_theory.two.profunctor.Profunctor
 import educational.category_theory.two.profunctor.strong.Strong
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
