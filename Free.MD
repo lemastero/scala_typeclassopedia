@@ -114,7 +114,9 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
 
 ### Free Arrow
 
-* Implementations: [Purescript](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html)
+* Implementations 
+  * [Purescript](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html)
+  * [Scala](https://github.com/AdrielC/free-arrow)
 
 * Resources
   * Building free arrows from components [(blog post)](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html) 
