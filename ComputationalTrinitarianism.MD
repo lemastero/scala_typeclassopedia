@@ -264,10 +264,8 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 
 ## Nominal Techniques
 
-* Overwiev Nominal Techniques - Andrew Pitts [(pdf)](https://www.cl.cam.ac.uk/~amp12/papers/nomt/nomt.pdf)
-* Constructive Representation of Nominal Sets in Agda - Pritam Choudhury [(pdf)](https://www.cl.cam.ac.uk/~amp12/agda/choudhury/choudhury-dissertation.pdf)
-* [ekmett/name](https://github.com/ekmett/name) nominal sets in Haskell, - Edward Kmett, live coding: Haskell Live-Coding, Session 18[(video)](https://www.youtube.com/watch?v=3Zreblm0Ux0)
 * Equivariant ZFA and the foundations of nominal techniques - Murdoch J. Gabbay [(arXiv:1801.09443)](https://arxiv.org/abs/1801.09443)
+* Overwiev Nominal Techniques - Andrew Pitts [(pdf)](https://www.cl.cam.ac.uk/~amp12/papers/nomt/nomt.pdf)
 * Nominal Henkin Semantics: simply-typed lambda-calculus models in nominal sets - Murdoch J. Gabbay, Dominic P. Mulligan [(arXiv:1111.0089)](https://arxiv.org/abs/1111.0089)
 * Fast Computations on Ordered Nominal Sets - David Venhoek, Joshua Moerman, Jurriaan Rot [(arXiv:1902.08414)](https://arxiv.org/abs/0805.0845)
 * Automata theory in nominal sets - Mikołaj Bojańczyk, Bartek Klin, Sławomir Lasota [(arXiv:1402.0897)](https://arxiv.org/abs/1402.0897)
@@ -275,7 +273,12 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Atompress [blog](http://atoms.mimuw.edu.pl/), [book](http://atoms.mimuw.edu.pl/wp-content/uploads/2014/03/main.pdf), [WIP book](https://www.mimuw.edu.pl/~bojan/paper/atom-book)
 * Nominal Sets and Their Applications [course - lectures, exercises](https://www.cl.cam.ac.uk/teaching/1213/L23/materials.html)
 * FoPSS 2019 - Nominal Techniques [(slides from talks)](https://www.mimuw.edu.pl/~fopss19/programme.html)
-
+* [SPLV 2020](http://www.macs.hw.ac.uk/splv/splv20/) - Maribel Fernandez - Nominal rewriting and unification, Jamie Gabbay - Nominal datatypes
+* Constructive Representation of Nominal Sets in Agda - Pritam Choudhury [(pdf)](https://www.cl.cam.ac.uk/~amp12/agda/choudhury/choudhury-dissertation.pdf)
+* Libraries:
+  * [ekmett/name](https://github.com/ekmett/name), live coding: Haskell Live-Coding, Session 18 [(video)](https://www.youtube.com/watch?v=3Zreblm0Ux0)
+  * [selinger/nominal](http://hackage.haskell.org/package/nominal)
+  * [bellissimogiorno/nominal](https://hackage.haskell.org/package/nom) discussed at SPLV 2020
 
 ## Petri nets
 
