@@ -9,6 +9,8 @@ scalaVersion := scala213
 
 crossScalaVersions := List(scala212, scala213)
 
+resolvers += Resolver.sonatypeRepo("snapshots")
+
 lazy val catsVersion = "2.1.1"
 lazy val catsMtlVersion = "0.7.1"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
@@ -27,6 +29,7 @@ libraryDependencies ++= Seq(
   "org.scalaz"    %% "scalaz-core" % "7.3.2" withSources(),
 
   // ZIO
+  "dev.zio"     %% "zio-prelude"  % "0.0.0+271-9bbfa4fd-SNAPSHOT" withSources(),
   "dev.zio" %% "zio" % "1.0.0" withSources(),
 
   // algebra
