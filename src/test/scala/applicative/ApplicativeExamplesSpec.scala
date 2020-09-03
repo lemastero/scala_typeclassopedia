@@ -34,7 +34,6 @@ class ApplicativeExamplesSpec
 
     it("examples for Option") {
       import cats.Applicative
-      import cats.implicits.catsStdInstancesForOption
 
       val add3: Int => Int = a => a + 3
 
@@ -44,7 +43,6 @@ class ApplicativeExamplesSpec
 
     it("examples for List") {
       import cats.Applicative
-      import cats.implicits.catsStdInstancesForList
 
 
       val list1 = List(1, 2)
@@ -56,8 +54,6 @@ class ApplicativeExamplesSpec
 
     it("map2 on composed Applicative") {
       import cats.Applicative
-      import cats.implicits.catsStdInstancesForList
-      import cats.implicits.catsStdInstancesForOption
 
       val listOpt = Applicative[List] compose Applicative[Option]
 

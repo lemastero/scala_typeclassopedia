@@ -9,7 +9,7 @@ class MonoidExamplesSpec
 
   describe("combineAll") {
     it("invoke operation for all elements") {
-      import cats.implicits._
+      import cats.syntax.all._
 
       List(1, 2, 3).combineAll mustBe 6
       List[Int]().combineAll mustBe 0

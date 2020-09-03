@@ -16,7 +16,6 @@ class SemigroupExamplesSpec
 
     it("combineN can concatenate strings") {
       import cats.Semigroup
-      import cats.instances.string.catsKernelStdMonoidForString
 
       Semigroup[String].combineN("foo", 3) mustBe "foofoofoo"
     }
@@ -25,7 +24,7 @@ class SemigroupExamplesSpec
   describe("|+|") {
     it("adds Ints using |+| using semigroup syntax and group for Int instance") {
       import cats.syntax.semigroup._
-      import cats.implicits.catsKernelStdGroupForInt
+      import cats.syntax.all._
 
       2 |+| 2 mustBe 4
       1 |+| 41 mustBe 42
@@ -33,8 +32,7 @@ class SemigroupExamplesSpec
 
     it("join maps containint Ints") {
       import cats.syntax.semigroup._
-      import cats.instances.map._
-      import cats.implicits.catsKernelStdGroupForInt
+      import cats.syntax.all._
 
       val map1 = Map("hello" -> 8, "world" -> 1)
       val map2 = Map("hello" -> 2, "cats"  -> 3)
@@ -45,8 +43,8 @@ class SemigroupExamplesSpec
 
     it("join maps containing List of Ints") {
       import cats.syntax.semigroup._
-      import cats.implicits.catsKernelStdMonoidForList
-      import cats.implicits.catsKernelStdMonoidForMap
+      import cats.syntax.all._
+      import cats.syntax.all._
 
       val map1 = Map("even" -> List(2, 4, 6, 8), "odd" -> List(1, 3, 5, 7))
       val map2 = Map("even" -> List(8, 20))
@@ -57,8 +55,7 @@ class SemigroupExamplesSpec
 
     it("combine can add Ints inside Option") {
       import cats.syntax.semigroup._
-      import cats.instances.option._
-      import cats.implicits.catsKernelStdGroupForInt
+      import cats.syntax.all._
 
       val o1: Option[Int] = Some(1)
       val o2: Option[Int] = Some(2)
@@ -68,9 +65,9 @@ class SemigroupExamplesSpec
 
     it("merge tuples with doubles and strings") {
       import cats.syntax.semigroup._
-      import cats.implicits.catsKernelStdMonoidForTuple2
-      import cats.implicits.catsKernelStdGroupForDouble
-      import cats.implicits.catsKernelStdMonoidForString
+      import cats.syntax.all._
+      import cats.syntax.all._
+      import cats.syntax.all._
 
       val s1 = (2.5, "foo")
       val s2 = (2.6, "bar")
@@ -79,7 +76,7 @@ class SemigroupExamplesSpec
 
     it("semigroup |+| can be used in List.fold") {
       import cats.syntax.semigroup._
-      import cats.implicits.catsKernelStdGroupForInt
+      import cats.syntax.all._
 
       List(1, 2, 3).foldLeft(0)(_ |+| _) mustBe 6
     }
@@ -89,8 +86,7 @@ class SemigroupExamplesSpec
     it("invokes combine given number of times") {
       import cats.Semigroup
       import cats.syntax.semigroup._
-      import cats.instances.option._
-      import cats.implicits.catsKernelStdGroupForInt
+      import cats.syntax.all._
 
       val o1: Option[Int] = Some(1)
       o1.combineN(3) mustBe Option(3)
@@ -102,7 +98,6 @@ class SemigroupExamplesSpec
   describe("combineAllOption") {
     it("can wrap Semigroup with Option and combine all elements") {
       import cats.Semigroup
-      import cats.implicits._
 
       Semigroup[Int].combineAllOption(Nil) mustBe None
       Semigroup[Int].combineAllOption(List(1, 2, 3)) mustBe Some(6)
