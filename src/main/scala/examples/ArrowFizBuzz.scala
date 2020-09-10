@@ -1,7 +1,6 @@
 package examples
 
 import cats.arrow.Arrow
-import cats.implicits.catsStdInstancesForFunction1
 
 /**
   * Translated from post by geophf:

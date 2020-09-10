@@ -11,7 +11,7 @@ crossScalaVersions := List(scala212, scala213)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-lazy val catsVersion = "2.1.1"
+lazy val catsVersion = "2.2.0"
 lazy val catsMtlVersion = "1.0.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.14.3"
@@ -21,9 +21,9 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-free" % catsVersion withSources(),
   "org.typelevel" %% "cats-laws" % catsVersion withSources(),
   "org.typelevel" %% "alleycats-core" % catsVersion withSources(),
-  "org.typelevel" %% "cats-mtl-core" % catsMtlVersion withSources(),
+  "org.typelevel" %% "cats-mtl" % catsMtlVersion withSources(),
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
-  "org.typelevel" %% "cats-effect" % "2.1.4" withSources(),
+  "org.typelevel" %% "cats-effect" % "2.2.0" withSources(),
 
   // Scalaz
   "org.scalaz"    %% "scalaz-core" % "7.3.2" withSources(),

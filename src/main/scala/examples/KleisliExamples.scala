@@ -1,7 +1,6 @@
 package examples
 
 import cats.data.Kleisli
-import cats.implicits._
 
 /**
   * First example from cats docs: http://typelevel.org/cats/datatypes/kleisli.html

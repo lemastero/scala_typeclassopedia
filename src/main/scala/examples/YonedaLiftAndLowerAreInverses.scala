@@ -1,7 +1,6 @@
 package examples
 
 import cats.free.Yoneda
-import cats.implicits._
 
 /**
   * Example show that Yoneda.run (in Haskell lowerYoneda) is
