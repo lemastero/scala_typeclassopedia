@@ -26,7 +26,7 @@ class FunctorExamplesSpec
     describe("derived methods") {
       it("can be called directly when Functor syntax is imported") {
         import cats.syntax.functor._
-        import cats.syntax.all._
+        import cats.instances.option._
 
         List(2, 3, 4).void mustBe List((), (), ())
         List(2, 3, 4).as("foo") mustBe List("foo", "foo", "foo")
@@ -35,7 +35,7 @@ class FunctorExamplesSpec
 
       it("for Vector") {
         import cats.syntax.functor._
-        import cats.syntax.all._
+        import cats.instances.option._
 
         Vector(2, 3, 4).void mustBe Vector((), (), ())
         Vector(2, 3, 4).as("foo") mustBe Vector("foo", "foo", "foo")
@@ -44,7 +44,7 @@ class FunctorExamplesSpec
 
       it("for Option") {
         import cats.syntax.functor._
-        import cats.syntax.all._
+        import cats.instances.option._
 
         Option(42).void mustBe Option(())
         Option(42).as("foo") mustBe Option("foo")

@@ -24,7 +24,7 @@ class SemigroupExamplesSpec
   describe("|+|") {
     it("adds Ints using |+| using semigroup syntax and group for Int instance") {
       import cats.syntax.semigroup._
-      import cats.syntax.all._
+      import cats.instances.option._
 
       2 |+| 2 mustBe 4
       1 |+| 41 mustBe 42
@@ -32,7 +32,7 @@ class SemigroupExamplesSpec
 
     it("join maps containint Ints") {
       import cats.syntax.semigroup._
-      import cats.syntax.all._
+      import cats.instances.option._
 
       val map1 = Map("hello" -> 8, "world" -> 1)
       val map2 = Map("hello" -> 2, "cats"  -> 3)
@@ -43,8 +43,7 @@ class SemigroupExamplesSpec
 
     it("join maps containing List of Ints") {
       import cats.syntax.semigroup._
-      import cats.syntax.all._
-      import cats.syntax.all._
+      import cats.instances.option._
 
       val map1 = Map("even" -> List(2, 4, 6, 8), "odd" -> List(1, 3, 5, 7))
       val map2 = Map("even" -> List(8, 20))
@@ -55,7 +54,7 @@ class SemigroupExamplesSpec
 
     it("combine can add Ints inside Option") {
       import cats.syntax.semigroup._
-      import cats.syntax.all._
+      import cats.instances.option._
 
       val o1: Option[Int] = Some(1)
       val o2: Option[Int] = Some(2)
@@ -65,9 +64,7 @@ class SemigroupExamplesSpec
 
     it("merge tuples with doubles and strings") {
       import cats.syntax.semigroup._
-      import cats.syntax.all._
-      import cats.syntax.all._
-      import cats.syntax.all._
+      import cats.instances.option._
 
       val s1 = (2.5, "foo")
       val s2 = (2.6, "bar")
@@ -76,7 +73,7 @@ class SemigroupExamplesSpec
 
     it("semigroup |+| can be used in List.fold") {
       import cats.syntax.semigroup._
-      import cats.syntax.all._
+      import cats.instances.option._
 
       List(1, 2, 3).foldLeft(0)(_ |+| _) mustBe 6
     }
@@ -86,7 +83,7 @@ class SemigroupExamplesSpec
     it("invokes combine given number of times") {
       import cats.Semigroup
       import cats.syntax.semigroup._
-      import cats.syntax.all._
+      import cats.instances.option._
 
       val o1: Option[Int] = Some(1)
       o1.combineN(3) mustBe Option(3)
