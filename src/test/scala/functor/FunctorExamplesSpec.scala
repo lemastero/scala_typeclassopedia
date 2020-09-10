@@ -14,7 +14,6 @@ class FunctorExamplesSpec
     describe("map") {
       it("apply given function for each element of List") {
         import cats.Functor
-        import cats.implicits._
 
         Functor[List].map(List(2, 3, 4))(isOdd) mustBe List(false, true, false)
         Functor[Option].map(Option(42))(isOdd) mustBe Option(false)
@@ -27,7 +26,7 @@ class FunctorExamplesSpec
     describe("derived methods") {
       it("can be called directly when Functor syntax is imported") {
         import cats.syntax.functor._
-        import cats.implicits.catsStdInstancesForList
+        import cats.instances.option._
 
         List(2, 3, 4).void mustBe List((), (), ())
         List(2, 3, 4).as("foo") mustBe List("foo", "foo", "foo")
@@ -36,7 +35,7 @@ class FunctorExamplesSpec
 
       it("for Vector") {
         import cats.syntax.functor._
-        import cats.implicits.catsStdInstancesForVector
+        import cats.instances.option._
 
         Vector(2, 3, 4).void mustBe Vector((), (), ())
         Vector(2, 3, 4).as("foo") mustBe Vector("foo", "foo", "foo")
@@ -45,7 +44,7 @@ class FunctorExamplesSpec
 
       it("for Option") {
         import cats.syntax.functor._
-        import cats.implicits.catsStdInstancesForOption
+        import cats.instances.option._
 
         Option(42).void mustBe Option(())
         Option(42).as("foo") mustBe Option("foo")
@@ -56,8 +55,6 @@ class FunctorExamplesSpec
     describe("compose") {
       it("can chain multiple map") {
         import cats.Functor
-        import cats.implicits.catsStdInstancesForList
-        import cats.implicits.catsStdInstancesForOption
 
         val functor = Functor[List] compose Functor[Option]
         functor.map(List(Some(42), Some(15), None))(isOdd) mustBe List(Some(false), Some(true), None)
@@ -65,8 +62,6 @@ class FunctorExamplesSpec
 
       it("can chain multiple map 2") {
         import cats.Functor
-        import cats.implicits.catsStdInstancesForList
-        import cats.implicits.catsStdInstancesForOption
 
         val listOption = Functor[List] compose Functor[Option]
         import listOption.map

@@ -1,7 +1,7 @@
 package examples
 
 import cats.arrow.Arrow
-import cats.implicits._
+import cats.syntax.all._
 
 /**
   * Examples inspired by Eugene Yokota learning Scalaz

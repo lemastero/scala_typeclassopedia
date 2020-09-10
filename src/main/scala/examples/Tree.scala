@@ -1,7 +1,6 @@
 package examples
 
 import cats.Monad
-import cats.instances.option.catsStdInstancesForOption
 import cats.syntax.option._
 import educational.collections.{Branch, Leaf, Tree}
 import IntState.instance._
