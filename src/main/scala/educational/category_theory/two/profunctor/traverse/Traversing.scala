@@ -6,19 +6,23 @@ import educational.category_theory.two.profunctor.strong.Strong
 
 /** Traversing Profunctor
   * Hasekll impl: // http://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Traversing.html
-  **
-  *TODO is this the same as Walk ? (what about step from superclass ?)
-  **
-  *TODO Laws:
-  *traverse' ≡ wander traverse
-  *traverse' . rmap f ≡ rmap (fmap f) . traverse'
-  *traverse' . traverse' ≡ dimap Compose getCompose . traverse'
-  *dimap Identity runIdentity . traverse' ≡ id
+  * *
+  * TODO is this the same as Walk ? (what about step from superclass ?)
+  * *
+  * TODO Laws:
+  * traverse' ≡ wander traverse
+  * traverse' . rmap f ≡ rmap (fmap f) . traverse'
+  * traverse' . traverse' ≡ dimap Compose getCompose . traverse'
+  * dimap Identity runIdentity . traverse' ≡ id
   */
-trait Traversing[P[_,_]] extends Choice[P] with Strong[P] {
-  def traverse[A,B,F[_]](pab: P[A,B])(implicit FT: Traverse[F]): P[F[A], F[B]] =
+trait Traversing[P[_, _]] extends Choice[P] with Strong[P] {
+  def traverse[A, B, F[_]](
+      pab: P[A, B]
+  )(implicit FT: Traverse[F]): P[F[A], F[B]] =
     ??? // TODO implement using wander
-  def wander[A,B,S,T,F[_]](f: A => F[B], s: S, ft: F[T], pab: P[A,B])(AF: Applicative[F]): P[S,T] =
+  def wander[A, B, S, T, F[_]](f: A => F[B], s: S, ft: F[T], pab: P[A, B])(
+      AF: Applicative[F]
+  ): P[S, T] =
     ??? // TODO implement using walk
 }
 

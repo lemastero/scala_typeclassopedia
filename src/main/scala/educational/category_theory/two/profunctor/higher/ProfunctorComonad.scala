@@ -11,11 +11,17 @@ import educational.category_theory.two.profunctor.Profunctor
   * produplicate . produplicate ≡ promap produplicate . produplicate
   */
 trait ProfunctorComonad[T[_]] extends ProfunctorFunctor[T] {
-  def proextract[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], P]
-  def produplicate[P[_,_]](implicit P: Profunctor[P]): DinaturalTransformation[Lambda[(A,B) => T[P[A,B]]], Lambda[(A,B) => T[T[P[A,B]]]]]
+  def proextract[P[_, _]](implicit
+      P: Profunctor[P]
+  ): DinaturalTransformation[Lambda[(A, B) => T[P[A, B]]], P]
+  def produplicate[P[_, _]](implicit
+      P: Profunctor[P]
+  ): DinaturalTransformation[Lambda[(A, B) => T[P[A, B]]], Lambda[
+    (A, B) => T[T[P[A, B]]]
+  ]]
 }
 
-object ProfunctorComonadInstance{
+object ProfunctorComonadInstance {
   // TODO Cotambara
   // TODO Tambara
   // TODO Closure

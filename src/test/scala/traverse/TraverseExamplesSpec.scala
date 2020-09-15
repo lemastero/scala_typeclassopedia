@@ -3,9 +3,7 @@ package traverse
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class TraverseExamplesSpec
-  extends AnyFunSpec
-  with Matchers {
+class TraverseExamplesSpec extends AnyFunSpec with Matchers {
 
   describe("Traversing List ") {
     it("traverse") {
@@ -21,7 +19,7 @@ class TraverseExamplesSpec
       xs1.sequence mustBe None
 
       val xs2: List[Option[Int]] = List(Some(1), Some(2), Some(42))
-      xs2.sequence mustBe Some(List(1,2,42))
+      xs2.sequence mustBe Some(List(1, 2, 42))
     }
   }
 }

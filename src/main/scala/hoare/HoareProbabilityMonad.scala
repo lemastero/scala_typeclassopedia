@@ -33,6 +33,6 @@ import educational.category_theory.Monad
   */
 trait HoareProbabilityMonad[M[_], Prob] extends Monad[M] {
 
-  /** bahaves like mx with probability of p and like my with probability of my **/
+  /** bahaves like mx with probability of p and like my with probability of my * */
   def choice[A](p: Prob, mx: M[A], my: M[A]): M[A]
 }

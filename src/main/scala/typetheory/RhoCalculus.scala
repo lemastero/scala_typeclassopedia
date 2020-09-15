@@ -8,7 +8,6 @@ package typetheory
   *
   * mathematical model:
   * P[X] =
-  *
   */
 sealed trait RhoCalc[X]
 case object Zero extends RhoCalc[Nothing]

@@ -4,9 +4,7 @@ import cats.Id
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class FunctorExamplesSpec
-  extends AnyFunSpec
-  with Matchers {
+class FunctorExamplesSpec extends AnyFunSpec with Matchers {
 
   private def isOdd(i: Int): Boolean = i % 2 == 1
 
@@ -30,7 +28,8 @@ class FunctorExamplesSpec
 
         List(2, 3, 4).void mustBe List((), (), ())
         List(2, 3, 4).as("foo") mustBe List("foo", "foo", "foo")
-        List(2, 3, 4).fproduct(isOdd) mustBe List((2, false), (3, true), (4, false))
+        List(2, 3, 4)
+          .fproduct(isOdd) mustBe List((2, false), (3, true), (4, false))
       }
 
       it("for Vector") {
@@ -39,7 +38,8 @@ class FunctorExamplesSpec
 
         Vector(2, 3, 4).void mustBe Vector((), (), ())
         Vector(2, 3, 4).as("foo") mustBe Vector("foo", "foo", "foo")
-        Vector(2, 3, 4).fproduct(isOdd) mustBe Vector((2, false), (3, true), (4, false))
+        Vector(2, 3, 4)
+          .fproduct(isOdd) mustBe Vector((2, false), (3, true), (4, false))
       }
 
       it("for Option") {
@@ -57,7 +57,11 @@ class FunctorExamplesSpec
         import cats.Functor
 
         val functor = Functor[List] compose Functor[Option]
-        functor.map(List(Some(42), Some(15), None))(isOdd) mustBe List(Some(false), Some(true), None)
+        functor.map(List(Some(42), Some(15), None))(isOdd) mustBe List(
+          Some(false),
+          Some(true),
+          None
+        )
       }
 
       it("can chain multiple map 2") {
@@ -65,7 +69,11 @@ class FunctorExamplesSpec
 
         val listOption = Functor[List] compose Functor[Option]
         import listOption.map
-        map(List(Some(42), Some(15), None))(isOdd) mustBe List(Some(false), Some(true), None)
+        map(List(Some(42), Some(15), None))(isOdd) mustBe List(
+          Some(false),
+          Some(true),
+          None
+        )
       }
     }
   }

@@ -5,9 +5,7 @@ import educational.collections.HeadNel
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class ApplicativeExamplesSpec
-  extends AnyFunSpec
-  with Matchers {
+class ApplicativeExamplesSpec extends AnyFunSpec with Matchers {
 
   describe("derived methods") {
     it("option instance") {
@@ -24,10 +22,13 @@ class ApplicativeExamplesSpec
       case class SuccessVN[A](value: A) extends ValidatedNel[A]
       case class Errors[A](errors: HeadNel[Throwable]) extends ValidatedNel[A]
 
-      val optionApplicative: Applicative[ValidatedNel] = new Applicative[ValidatedNel] {
-        override def pure[A](value: A): ValidatedNel[A] = ???
-        override def ap[A, B](ff: ValidatedNel[A => B])(fa: ValidatedNel[A]): ValidatedNel[B] = ???
-      }
+      val optionApplicative: Applicative[ValidatedNel] =
+        new Applicative[ValidatedNel] {
+          override def pure[A](value: A): ValidatedNel[A] = ???
+          override def ap[A, B](ff: ValidatedNel[A => B])(
+              fa: ValidatedNel[A]
+          ): ValidatedNel[B] = ???
+        }
 
       // TODO
     }
@@ -44,11 +45,10 @@ class ApplicativeExamplesSpec
     it("examples for List") {
       import cats.Applicative
 
-
       val list1 = List(1, 2)
       val listFns: List[Int => Int] = List(a => a + 3, a => a * a)
 
-      Applicative[List].ap(listFns)(list1) mustBe List(4,5,1,4)
+      Applicative[List].ap(listFns)(list1) mustBe List(4, 5, 1, 4)
       Applicative[List].pure("foo") mustBe List("foo")
     }
 
@@ -59,7 +59,12 @@ class ApplicativeExamplesSpec
 
       val list1 = List(Some(2), None)
       val list2 = List(Some(10), Some(2))
-      listOpt.map2(list1, list2)(_ + _) mustBe List(Some(12), Some(4), None, None)
+      listOpt.map2(list1, list2)(_ + _) mustBe List(
+        Some(12),
+        Some(4),
+        None,
+        None
+      )
     }
   }
 }

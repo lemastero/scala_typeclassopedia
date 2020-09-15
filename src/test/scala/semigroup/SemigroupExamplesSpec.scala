@@ -3,14 +3,13 @@ package semigroup
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class SemigroupExamplesSpec
-  extends AnyFunSpec
-  with Matchers {
+class SemigroupExamplesSpec extends AnyFunSpec with Matchers {
 
   describe("Semigroup methods") {
     it("combine can add BigDecimals") {
       import cats.Semigroup
-      val s: Semigroup[BigDecimal] = cats.instances.bigDecimal.catsKernelStdGroupForBigDecimal
+      val s: Semigroup[BigDecimal] =
+        cats.instances.bigDecimal.catsKernelStdGroupForBigDecimal
       s.combine(BigDecimal(1000), BigDecimal("42.3")) mustBe BigDecimal(1042.3)
     }
 
@@ -22,7 +21,9 @@ class SemigroupExamplesSpec
   }
 
   describe("|+|") {
-    it("adds Ints using |+| using semigroup syntax and group for Int instance") {
+    it(
+      "adds Ints using |+| using semigroup syntax and group for Int instance"
+    ) {
       import cats.syntax.semigroup._
       import cats.instances.option._
 
@@ -35,7 +36,7 @@ class SemigroupExamplesSpec
       import cats.instances.option._
 
       val map1 = Map("hello" -> 8, "world" -> 1)
-      val map2 = Map("hello" -> 2, "cats"  -> 3)
+      val map2 = Map("hello" -> 2, "cats" -> 3)
       val merged = Map("hello" -> (8 + 2), "world" -> 1, "cats" -> 3)
 
       map1 |+| map2 mustBe merged
@@ -47,7 +48,8 @@ class SemigroupExamplesSpec
 
       val map1 = Map("even" -> List(2, 4, 6, 8), "odd" -> List(1, 3, 5, 7))
       val map2 = Map("even" -> List(8, 20))
-      val merged = Map("even" -> List(2, 4, 6, 8, 8, 20), "odd" -> List(1, 3, 5, 7))
+      val merged =
+        Map("even" -> List(2, 4, 6, 8, 8, 20), "odd" -> List(1, 3, 5, 7))
 
       map1 |+| map2 mustBe merged
     }

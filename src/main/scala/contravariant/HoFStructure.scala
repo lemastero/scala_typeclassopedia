@@ -69,34 +69,46 @@ import educational.category_theory.contra.Contravariant
   */
 class HoFStructure {
 
-  type LambdaAB[-B,+A] = B => A
-  implicit def funB[B]: Functor[B => *] = new Functor[B => *] {
-    def map[A, AA](fa: B => A)(f: A => AA): B => AA =
-      fa andThen f
-  }
-  implicit def contraA[A]: Contravariant[* => A] = new Contravariant[* => A] {
-    def contramap[B, BB](fa: B => A)(f: BB => B): BB => A =
-      f andThen fa
-  }
+  type LambdaAB[-B, +A] = B => A
+  implicit def funB[B]: Functor[B => *] =
+    new Functor[B => *] {
+      def map[A, AA](fa: B => A)(f: A => AA): B => AA =
+        fa andThen f
+    }
+  implicit def contraA[A]: Contravariant[* => A] =
+    new Contravariant[* => A] {
+      def contramap[B, BB](fa: B => A)(f: BB => B): BB => A =
+        f andThen fa
+    }
 
-  type LambdaABC[+C,-B,+A] = (C => B) => A
-  def funBA[B,A]: Functor[LambdaABC[*, B, A]] = new Functor[LambdaABC[*,B,A]] {
-    def map[C, CC](fa: (C => B) => A)(f: C => CC): (CC => B) => A =
-      g => fa(f andThen g)
-  }
-  def contraCA[C,A]: Contravariant[LambdaABC[C, *, A]] = new Contravariant[LambdaABC[C,*,A]] {
-    def contramap[B, BB](fa: LambdaABC[C, B, A])(f: BB => B): LambdaABC[C, BB, A] =
-      g => fa(g andThen f)
-  }
+  type LambdaABC[+C, -B, +A] = (C => B) => A
+  def funBA[B, A]: Functor[LambdaABC[*, B, A]] =
+    new Functor[LambdaABC[*, B, A]] {
+      def map[C, CC](fa: (C => B) => A)(f: C => CC): (CC => B) => A =
+        g => fa(f andThen g)
+    }
+  def contraCA[C, A]: Contravariant[LambdaABC[C, *, A]] =
+    new Contravariant[LambdaABC[C, *, A]] {
+      def contramap[B, BB](
+          fa: LambdaABC[C, B, A]
+      )(f: BB => B): LambdaABC[C, BB, A] =
+        g => fa(g andThen f)
+    }
 
-  type LambdaABCD[-D,+C,-B,+A] = ((D => C) => B) => A
-  def contraCBA[C,B,A]: Contravariant[LambdaABCD[*,C,B,A]] = new Contravariant[LambdaABCD[*,C,B,A]] {
-    def contramap[D, DD](fa: LambdaABCD[D, C, B, A])(f: DD => D): LambdaABCD[DD, C, B, A] =
-      h => fa(g => h(f andThen g))
-  }
-  def funDBA[D,B,A]: Functor[LambdaABCD[D,*,B,A]] = new Functor[LambdaABCD[D,*,B,A]] {
-    def map[C, CC](fa: LambdaABCD[D, C, B, A])(f: C => CC): LambdaABCD[D, CC, B, A] =
-      h => fa(g => h(g andThen f))
-  }
+  type LambdaABCD[-D, +C, -B, +A] = ((D => C) => B) => A
+  def contraCBA[C, B, A]: Contravariant[LambdaABCD[*, C, B, A]] =
+    new Contravariant[LambdaABCD[*, C, B, A]] {
+      def contramap[D, DD](
+          fa: LambdaABCD[D, C, B, A]
+      )(f: DD => D): LambdaABCD[DD, C, B, A] =
+        h => fa(g => h(f andThen g))
+    }
+  def funDBA[D, B, A]: Functor[LambdaABCD[D, *, B, A]] =
+    new Functor[LambdaABCD[D, *, B, A]] {
+      def map[C, CC](
+          fa: LambdaABCD[D, C, B, A]
+      )(f: C => CC): LambdaABCD[D, CC, B, A] =
+        h => fa(g => h(g andThen f))
+    }
   // ...
 }

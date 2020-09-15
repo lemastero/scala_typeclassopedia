@@ -11,7 +11,7 @@ import educational.category_theory.Applicative
   * https://en.wikibooks.org/wiki/Haskell/Applicative_functors
   */
 case class ZipList[A](getZipList: List[A]) { // TODO should this be FiniteStream ?
-  def zipWith[B,C](f: (A,B) => C, other: ZipList[B]): ZipList[C] =
+  def zipWith[B, C](f: (A, B) => C, other: ZipList[B]): ZipList[C] =
     ZipList(
       getZipList
         .zip(other.getZipList)
@@ -21,9 +21,10 @@ case class ZipList[A](getZipList: List[A]) { // TODO should this be FiniteStream
 
 object ZipListInstances {
   val applicativeZipList: Applicative[ZipList] = new Applicative[ZipList] {
-    def pure[A](value: A): ZipList[A] = ??? // TODO how to add invinite ZipList ?
+    def pure[A](value: A): ZipList[A] =
+      ??? // TODO how to add invinite ZipList ?
     def ap[A, B](ff: ZipList[A => B])(fa: ZipList[A]): ZipList[B] = {
-      def aply: (A=>B,A) => B = { case(f,a) => f(a) }
+      def aply: (A => B, A) => B = { case (f, a) => f(a) }
       ff.zipWith(aply, fa)
     }
   }

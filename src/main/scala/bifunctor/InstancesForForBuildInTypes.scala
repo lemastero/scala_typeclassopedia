@@ -24,19 +24,25 @@ import cats.Bifunctor
 object InstancesForForBuildInTypes {
 
   val tuple2Bifunctor: Bifunctor[Tuple2] = new Bifunctor[Tuple2] {
-    override def bimap[A, B, C, D](fab: (A, B))(f: A => C, g: B => D): (C, D) = (f(fab._1), g(fab._2))
+    override def bimap[A, B, C, D](fab: (A, B))(f: A => C, g: B => D): (C, D) =
+      (f(fab._1), g(fab._2))
   }
 
   val eitherBifunctor: Bifunctor[Either] = new Bifunctor[Either] {
-    override def bimap[A, B, C, D](fab: Either[A, B])(f: A => C, g: B => D): Either[C, D] = fab match {
-      case Left(v) => Left(f(v))
-      case Right(v) => Right(g(v))
-    }
+    override def bimap[A, B, C, D](
+        fab: Either[A, B]
+    )(f: A => C, g: B => D): Either[C, D] =
+      fab match {
+        case Left(v)  => Left(f(v))
+        case Right(v) => Right(g(v))
+      }
   }
 
   import cats.data.Validated
   val validatedBifunctor: Bifunctor[Validated] = new Bifunctor[Validated] {
-    override def bimap[A, B, C, D](fab: Validated[A, B])(f: A => C, g: B => D): Validated[C, D] = fab.map(g).leftMap(f)
+    override def bimap[A, B, C, D](
+        fab: Validated[A, B]
+    )(f: A => C, g: B => D): Validated[C, D] = fab.map(g).leftMap(f)
   }
 
   // TODO implement property test for laws, if f collapse elements it would change structure of map, combine elements in that case?
