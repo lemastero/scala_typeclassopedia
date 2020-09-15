@@ -2,13 +2,14 @@ package educational.collections
 
 import educational.category_theory.Comonad
 
-sealed trait AbstractNel[+A]{
+sealed trait AbstractNel[+A] {
   def head: A
 
-  def tailOpt: Option[AbstractNel[A]] = this match {
-    case HeadNel(_, tail) => Some(tail)
-    case _ => None
-  }
+  def tailOpt: Option[AbstractNel[A]] =
+    this match {
+      case HeadNel(_, tail) => Some(tail)
+      case _                => None
+    }
 }
 
 case class TailNel[A](head: A) extends AbstractNel[A] {

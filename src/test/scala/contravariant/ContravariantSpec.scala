@@ -4,9 +4,7 @@ import scalaz.Contravariant
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class ContravariantSpec
-  extends AnyFunSpec
-    with Matchers {
+class ContravariantSpec extends AnyFunSpec with Matchers {
 
   case class Predicate[A](fun: A => Boolean)
 
@@ -38,14 +36,16 @@ class ContravariantSpec
 
       val balanceOverdrawnPred = Predicate[Balance](_.amount > 0)
 
-      val getAccountBalance: Person => Balance = p => // that hows Banks works :)
-        if(p.name.startsWith("A")) Balance(-1)
-        else Balance(42)
+      val getAccountBalance: Person => Balance =
+        p => // that hows Banks works :)
+          if (p.name.startsWith("A")) Balance(-1)
+          else Balance(42)
 
       def contramap[A, B](pred: Predicate[A])(f: B => A): Predicate[B] =
         Predicate[B](f andThen pred.fun)
 
-      val hasOverdrawnBalance = contramap(balanceOverdrawnPred)(getAccountBalance)
+      val hasOverdrawnBalance =
+        contramap(balanceOverdrawnPred)(getAccountBalance)
 
       hasOverdrawnBalance.fun(Person("Alice")) mustBe false
       hasOverdrawnBalance.fun(Person("Bob")) mustBe true
@@ -65,7 +65,7 @@ class ContravariantSpec
       val balanceOverdrawn = Predicate[Balance](_.amount > 0)
 
       val getAccountBalance: Person => Balance = p =>
-        if(p.name.startsWith("A")) Balance(-1)
+        if (p.name.startsWith("A")) Balance(-1)
         else Balance(42)
 
       val hasOverdrawnBalance = Contravariant[Predicate]

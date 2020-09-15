@@ -6,18 +6,17 @@ import scala.language.higherKinds
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class RanCustomImpl
-  extends AnyFunSpec
-    with Matchers {
+class RanCustomImpl extends AnyFunSpec with Matchers {
 
   describe("Right Kan extension implemented from Haskell definition") {
+
     /**
-     * Right Kan extension of g along h
-     *
-     * Haskell
-     *   newtype Ran g h a = Ran
-     *     { runRan :: forall b. (a -> g b) -> h b }
-     */
+      * Right Kan extension of g along h
+      *
+      * Haskell
+      *   newtype Ran g h a = Ran
+      *     { runRan :: forall b. (a -> g b) -> h b }
+      */
     trait Ran1[G[_], H[_], A] {
       def runRan[B](f: A => G[B]): H[B]
     }
@@ -72,11 +71,13 @@ class RanCustomImpl
         def runRan[B](f: Int => Option[B]): List[B] = f(-11).toList
       }
 
-      RanInstances.ranFunctor.void(r42).runRan(_ => List(42) ) mustBe Some(42)
+      RanInstances.ranFunctor.void(r42).runRan(_ => List(42)) mustBe Some(42)
     }
   }
 
-  describe("Codensity monad generated from Right Kan Extension of f along itself") {
+  describe(
+    "Codensity monad generated from Right Kan Extension of f along itself"
+  ) {
     trait Ran3[G[_], H[_], A] { thisRan =>
 
       def runRan[B](f: A => G[B]): H[B]
@@ -112,11 +113,16 @@ class RanCustomImpl
         */
       def ranMonad[G[_]]: Monad[Ran3[G, G, ?]] =
         new Monad[Ran3[G, G, ?]] {
-          override def map[A, B](fa: Ran3[G, G, A])(f: A => B): Ran3[G, G, B] = fa.map(f)
+          override def map[A, B](fa: Ran3[G, G, A])(f: A => B): Ran3[G, G, B] =
+            fa.map(f)
 
-          override def flatMap[A, B](fa: Ran3[G, G, A])(f: A => Ran3[G, G, B]): Ran3[G, G, B] = flatten(map(fa)(f))
+          override def flatMap[A, B](fa: Ran3[G, G, A])(
+              f: A => Ran3[G, G, B]
+          ): Ran3[G, G, B] = flatten(map(fa)(f))
 
-          override def tailRecM[A, B](a: A)(f: A => Ran3[G, G, Either[A, B]]): Ran3[G, G, B] = ???
+          override def tailRecM[A, B](a: A)(
+              f: A => Ran3[G, G, Either[A, B]]
+          ): Ran3[G, G, B] = ???
 
           override def pure[A](x: A): Ran3[G, G, A] =
             new Ran3[G, G, A] {

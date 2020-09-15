@@ -18,9 +18,11 @@ object KeyValueStoreFreeMonad extends App {
   type KVStore[A] = Free[KVStoreA, A]
 
   // 2 DSL
-  def put[T](key: String, value: T): KVStore[Unit] = liftF[KVStoreA, Unit](Put[T](key, value))
+  def put[T](key: String, value: T): KVStore[Unit] =
+    liftF[KVStoreA, Unit](Put[T](key, value))
 
-  def get[T](key: String): KVStore[Option[T]] = liftF[KVStoreA, Option[T]](Get[T](key))
+  def get[T](key: String): KVStore[Option[T]] =
+    liftF[KVStoreA, Option[T]](Get[T](key))
 
   def delete(key: String): KVStore[Unit] = liftF(Delete(key))
 
@@ -69,5 +71,5 @@ object KeyValueStoreFreeMonad extends App {
   // 5 run
   val result: Option[Int] = program.foldMap(impureCompiler)
   println(result)
-  */
+   */
 }

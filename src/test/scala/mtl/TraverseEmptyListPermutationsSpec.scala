@@ -12,9 +12,7 @@ import org.scalatest.matchers.must.Matchers
   *   http://stackoverflow.com/questions/28872396/haskells-filterm-with-filterm-x-true-false-1-2-3
   *   (Brent Yorgey in Haskell) https://byorgey.wordpress.com/2007/06/26/deducing-code-from-types-filterm/
   */
-class TraverseEmptyListPermutationsSpec
-  extends AnyFunSpec
-  with Matchers {
+class TraverseEmptyListPermutationsSpec extends AnyFunSpec with Matchers {
 
   describe("filterA") {
     it("compute all permutations of the lit if given List(true, false)") {
@@ -31,8 +29,9 @@ class TraverseEmptyListPermutationsSpec
         List(3),
         Nil
       )
-      val result: List[List[Int]] = List(1, 2, 3).filterA(_ => List(true, false))
-      result contains theSameElementsAs (allPermutations)
+      val result: List[List[Int]] =
+        List(1, 2, 3).filterA(_ => List(true, false))
+      result contains theSameElementsAs(allPermutations)
     }
   }
 }

@@ -2,7 +2,7 @@ package examples
 
 object F_Algebras {
 
-  type Algebra[F[_],A] = F[A] => A
+  type Algebra[F[_], A] = F[A] => A
 
   // F-Algebra for Monoid
   sealed trait MonF[+A]
@@ -11,12 +11,12 @@ object F_Algebras {
 
   // Int is a carrier object
   def monoidAlgebraMulti: MonF[Int] => Int = {
-    case MEmpty => 1
+    case MEmpty            => 1
     case MAppend(lhs, rhs) => lhs * rhs
   }
 
   def monoidAlgebraAdd: MonF[Int] => Int = {
-    case MEmpty => 0
+    case MEmpty            => 0
     case MAppend(lhs, rhs) => lhs + rhs
   }
 
@@ -44,21 +44,21 @@ object F_Algebras {
   case class NSucc[A](a: A) extends NatF[A]
 
   def fibAlgebra: NatF[(Int, Int)] => (Int, Int) = {
-    case NZero => (1, 1)
-    case NSucc((n,m)) => (n, n + m)
+    case NZero         => (1, 1)
+    case NSucc((n, m)) => (n, n + m)
   }
 
   // TODO cata fib ?
 
   // List is initial algebra for following Functor on A, E is element type
 
-  trait ListF[+E,+A]
+  trait ListF[+E, +A]
   case object LNil extends ListF[Nothing, Nothing]
-  case class LCons[E,A](e: E, a: A) extends ListF[E,A]
+  case class LCons[E, A](e: E, a: A) extends ListF[E, A]
 
   def sumAlg: ListF[Int, Int] => Int = {
-    case LNil => 0
-    case LCons(e,a) => e + a
+    case LNil        => 0
+    case LCons(e, a) => e + a
   }
 
   // cata sumAlg is a sum of list
@@ -66,7 +66,10 @@ object F_Algebras {
   // ss fold is a catamorphism for List
   // fold is a catamorphism for a fix point of a Functor
 
-  case class StreamF[E,A](e: E, a: A) // but this is a trivial functor a product type
+  case class StreamF[E, A](
+      e: E,
+      a: A
+  ) // but this is a trivial functor a product type
   // [2..]
   def era: StreamF[Int, List[Int]] => List[Int] = {
     case StreamF(e, a) => List(e) ++ a.filter(_ % e != 0)

@@ -4,9 +4,7 @@ import educational.category_theory.Monad
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class CustomMonadImplementationSpec
-  extends AnyFunSpec
-  with Matchers {
+class CustomMonadImplementationSpec extends AnyFunSpec with Matchers {
 
   val listMonad: Monad[List] = new Monad[List] {
     def pure[A](a: A): List[A] = List(a)
@@ -27,18 +25,19 @@ class CustomMonadImplementationSpec
           M[A] <---------- M[M[A]]
                  flatten                */
 
-      listMonad.flatMap(radiusList)(a => List(a * Math.PI)) mustBe radiusList.map(_ * Math.PI)
+      listMonad.flatMap(radiusList)(a => List(a * Math.PI)) mustBe radiusList
+        .map(_ * Math.PI)
 
-      listMonad.flatten(
-        listMonad.pure(
-          listMonad.pure(42))) mustBe listMonad.pure(42)
+      listMonad.flatten(listMonad.pure(listMonad.pure(42))) mustBe listMonad
+        .pure(42)
     }
   }
 
   describe("Monad laws examples") {
 
     it("for Monad[List]") {
-      def circleSize: Int => List[Double] = x => List(Math.PI * x * x, 2 * Math.PI * x)
+      def circleSize: Int => List[Double] =
+        x => List(Math.PI * x * x, 2 * Math.PI * x)
       def show: Double => List[String] = x => List(x.toString)
 
       /* flatMap associativity:
@@ -53,7 +52,9 @@ class CustomMonadImplementationSpec
 
       listMonad
         .flatMap(radiusList)(circleSize)
-        .flatMap(show) mustBe listMonad.flatMap(radiusList)( e => listMonad.flatMap(circleSize(e))(show) )
+        .flatMap(show) mustBe listMonad.flatMap(radiusList)(e =>
+        listMonad.flatMap(circleSize(e))(show)
+      )
 
       /* left identity:
 
@@ -67,7 +68,7 @@ class CustomMonadImplementationSpec
       |  /
       M[B]                               */
 
-      listMonad.flatMap( listMonad.pure(42) )(circleSize) mustBe circleSize(42)
+      listMonad.flatMap(listMonad.pure(42))(circleSize) mustBe circleSize(42)
 
       /* right identity:
 

@@ -8,7 +8,7 @@ trait Contravariant[F[_]] {
   def contramap[A, B](fa: F[A])(f: B => A): F[B]
 }
 
-trait ContravariantLaws[F[_]] extends Contravariant[F]{
+trait ContravariantLaws[F[_]] extends Contravariant[F] {
 
   // contramap id = id
   def contramapIdentity[A](fa: F[A]): Boolean = {
@@ -18,7 +18,11 @@ trait ContravariantLaws[F[_]] extends Contravariant[F]{
   }
 
   // contramap f . contramap g = contramap (g . f)
-  def contravariantComposite[A, B, C](fa: F[A], f: B => A, g: C => B): Boolean = {
+  def contravariantComposite[A, B, C](
+      fa: F[A],
+      f: B => A,
+      g: C => B
+  ): Boolean = {
 
     //        contramap f
     // F[A] ==============> F[B]
@@ -38,24 +42,30 @@ trait ContravariantLaws[F[_]] extends Contravariant[F]{
 
 object Contravariant {
 
-  def fun1Contravariant[R]: Contravariant[Function1[*, R]] = new Contravariant[* => R] {
-    def contramap[A, AA](fa: A => R)(f: AA => A): AA => R = f andThen fa
-  }
+  def fun1Contravariant[R]: Contravariant[Function1[*, R]] =
+    new Contravariant[* => R] {
+      def contramap[A, AA](fa: A => R)(f: AA => A): AA => R = f andThen fa
+    }
 
   val EquivContravariant: Contravariant[Equiv] = new Contravariant[Equiv] {
     def contramap[A, B](fa: Equiv[A])(f: B => A): Equiv[B] =
       (x: B, y: B) => fa.equiv(f(x), f(y))
   }
 
-  val OrderingContravariant: Contravariant[Ordering] = new Contravariant[Ordering] {
-    def contramap[A, B](fa: Ordering[A])(f: B => A): Ordering[B] =
-      (x: B, y: B) => fa.compare(f(x), f(y))
-  }
-
-  val PartialOrderingContravariant: Contravariant[PartialOrdering] = new Contravariant[PartialOrdering] {
-    override def contramap[A, B](fa: PartialOrdering[A])(f: B => A): PartialOrdering[B] = new PartialOrdering[B] {
-      def tryCompare(x: B, y: B): Option[Int] = fa.tryCompare(f(x),f(y))
-      def lteq(x: B, y: B): Boolean = fa.lteq(f(x),f(y))
+  val OrderingContravariant: Contravariant[Ordering] =
+    new Contravariant[Ordering] {
+      def contramap[A, B](fa: Ordering[A])(f: B => A): Ordering[B] =
+        (x: B, y: B) => fa.compare(f(x), f(y))
     }
-  }
+
+  val PartialOrderingContravariant: Contravariant[PartialOrdering] =
+    new Contravariant[PartialOrdering] {
+      override def contramap[A, B](
+          fa: PartialOrdering[A]
+      )(f: B => A): PartialOrdering[B] =
+        new PartialOrdering[B] {
+          def tryCompare(x: B, y: B): Option[Int] = fa.tryCompare(f(x), f(y))
+          def lteq(x: B, y: B): Boolean = fa.lteq(f(x), f(y))
+        }
+    }
 }

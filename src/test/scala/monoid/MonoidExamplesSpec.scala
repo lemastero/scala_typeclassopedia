@@ -3,9 +3,7 @@ package monoid
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class MonoidExamplesSpec
-  extends AnyFunSpec
-  with Matchers {
+class MonoidExamplesSpec extends AnyFunSpec with Matchers {
 
   describe("combineAll") {
     it("invoke operation for all elements") {

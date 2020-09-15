@@ -5,9 +5,7 @@ import examples.Tree
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
 
-class TreeSpec
-  extends AnyFunSpec
-    with Matchers {
+class TreeSpec extends AnyFunSpec with Matchers {
 
   describe("Tree.number1") {
 
@@ -22,22 +20,15 @@ class TreeSpec
     }
 
     it("replace values in Leave's by numbers - in depth first order") {
-      val tree = Branch(
-        Leaf("a"),
-        Branch(
-          Leaf("b"),
-          Leaf("c")))
+      val tree = Branch(Leaf("a"), Branch(Leaf("b"), Leaf("c")))
 
-      val expected = Branch(
-        Leaf(1),
-        Branch(
-          Leaf(2),
-          Leaf(3)))
+      val expected = Branch(Leaf(1), Branch(Leaf(2), Leaf(3)))
 
       testNumberTree(tree, expected)
     }
 
-    def testNumberTree(tree: Tree[String], expected: Tree[Int]): Unit = Tree.number1(tree, 1)._1 mustBe expected
+    def testNumberTree(tree: Tree[String], expected: Tree[Int]): Unit =
+      Tree.number1(tree, 1)._1 mustBe expected
   }
 
   describe("Tree.number") {
@@ -53,22 +44,15 @@ class TreeSpec
     }
 
     it("replace values in Leave's by numbers - in depth first order") {
-      val tree = Branch(
-        Leaf("a"),
-        Branch(
-          Leaf("b"),
-          Leaf("c")))
+      val tree = Branch(Leaf("a"), Branch(Leaf("b"), Leaf("c")))
 
-      val expected = Branch(
-        Leaf(1),
-        Branch(
-          Leaf(2),
-          Leaf(3)))
+      val expected = Branch(Leaf(1), Branch(Leaf(2), Leaf(3)))
 
       testNumberTree(tree, expected)
     }
 
-    def testNumberTree(tree: Tree[String], expected: Tree[Int]): Unit = Tree.number(tree)(1)._1 mustBe expected
+    def testNumberTree(tree: Tree[String], expected: Tree[Int]): Unit =
+      Tree.number(tree)(1)._1 mustBe expected
   }
 
   describe("Tree.zip1") {
@@ -87,29 +71,23 @@ class TreeSpec
     }
 
     it("combine values in Leave's by numbers - in depth first order") {
-      val tree1 = Branch(
-        Leaf(41),
-        Branch(
-          Leaf(43),
-          Leaf(47)))
+      val tree1 = Branch(Leaf(41), Branch(Leaf(43), Leaf(47)))
 
       val tree2 = Branch(
         Leaf("Euler"),
-        Branch(
-          Leaf("Stanislaw Ulam"),
-          Leaf("Arthur C. Clarke")))
+        Branch(Leaf("Stanislaw Ulam"), Leaf("Arthur C. Clarke"))
+      )
 
       val expected: Option[Tree[(Int, String)]] = Branch(
         Leaf(41, "Euler"),
-        Branch(
-          Leaf(43, "Stanislaw Ulam"),
-          Leaf(47, "Arthur C. Clarke"))).some
+        Branch(Leaf(43, "Stanislaw Ulam"), Leaf(47, "Arthur C. Clarke"))
+      ).some
 
       testZip(tree1, tree2, expected)
     }
 
     it("return None for trees with different structure") {
-      val tree1 = Branch( Leaf(41), Leaf(43) )
+      val tree1 = Branch(Leaf(41), Leaf(43))
       val tree2 = Leaf("Euler")
 
       val expected: Option[Tree[(Int, String)]] = None
@@ -117,7 +95,11 @@ class TreeSpec
       testZip(tree1, tree2, expected)
     }
 
-    def testZip[T1, T2](tree1: Tree[T1], tree2: Tree[T2], expected: Option[Tree[(T1, T2)]]) =
+    def testZip[T1, T2](
+        tree1: Tree[T1],
+        tree2: Tree[T2],
+        expected: Option[Tree[(T1, T2)]]
+    ) =
       Tree.zip1(tree1, tree2) mustBe expected
   }
 
@@ -137,29 +119,23 @@ class TreeSpec
     }
 
     it("combine values in Leave's by numbers - in depth first order") {
-      val tree1 = Branch(
-        Leaf(41),
-        Branch(
-          Leaf(43),
-          Leaf(47)))
+      val tree1 = Branch(Leaf(41), Branch(Leaf(43), Leaf(47)))
 
       val tree2 = Branch(
         Leaf("Euler"),
-        Branch(
-          Leaf("Stanislaw Ulam"),
-          Leaf("Arthur C. Clarke")))
+        Branch(Leaf("Stanislaw Ulam"), Leaf("Arthur C. Clarke"))
+      )
 
       val expected: Option[Tree[(Int, String)]] = Branch(
         Leaf(41, "Euler"),
-        Branch(
-          Leaf(43, "Stanislaw Ulam"),
-          Leaf(47, "Arthur C. Clarke"))).some
+        Branch(Leaf(43, "Stanislaw Ulam"), Leaf(47, "Arthur C. Clarke"))
+      ).some
 
       testZip(tree1, tree2, expected)
     }
 
     it("return None for trees with different structure") {
-      val tree1 = Branch( Leaf(41), Leaf(43) )
+      val tree1 = Branch(Leaf(41), Leaf(43))
       val tree2 = Leaf("Euler")
 
       val expected: Option[Tree[(Int, String)]] = None
@@ -167,7 +143,11 @@ class TreeSpec
       testZip(tree1, tree2, expected)
     }
 
-    def testZip[T1, T2](tree1: Tree[T1], tree2: Tree[T2], expected: Option[Tree[(T1, T2)]]) =
+    def testZip[T1, T2](
+        tree1: Tree[T1],
+        tree2: Tree[T2],
+        expected: Option[Tree[(T1, T2)]]
+    ) =
       Tree.zip(tree1, tree2) mustBe expected
   }
 }

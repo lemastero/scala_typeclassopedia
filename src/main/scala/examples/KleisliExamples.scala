@@ -7,12 +7,15 @@ import cats.data.Kleisli
   */
 object KleisliExamples extends App {
   val twice: Int => Int = _ * 2
-  val countCats: Int => String = x => if(x ==1) "1 cat" else s"$x cats"
+  val countCats: Int => String = x => if (x == 1) "1 cat" else s"$x cats"
   val twiceAsManyCats = twice andThen countCats
   println(twiceAsManyCats(1))
 
-  val parse: String => Option[Int] = s => try { Some(s.toInt) } catch { case _: NumberFormatException => None }
-  val reciprocal: Int => Option[Double] = i => if (i != 0) Some(1.0 / i) else None
+  val parse: String => Option[Int] = s =>
+    try { Some(s.toInt) }
+    catch { case _: NumberFormatException => None }
+  val reciprocal: Int => Option[Double] = i =>
+    if (i != 0) Some(1.0 / i) else None
 
   val parseKleisli = Kleisli(parse)
   val reciprocalKleisli = Kleisli(reciprocal)
