@@ -61,7 +61,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.3" % Test withSources(),
 
   "org.typelevel" %% "discipline-core" % "1.1.2" % Test,
-  "org.typelevel" %% "discipline-scalatest" % "2.0.1" % Test
+  "org.typelevel" %% "discipline-scalatest" % "2.1.0" % Test
 )
 
 scalacOptions ++= Seq(
