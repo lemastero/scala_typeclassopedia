@@ -87,6 +87,8 @@ l == r
   * Encoder in [scodec](https://github.com/scodec/scodec/blob/series/1.11.x/shared/src/main/scala/scodec/Encoder.scala#L40-L47) has Contravariant instance: [scodec/scodec-cats](https://github.com/scodec/scodec-cats/blob/master/shared/src/main/scala/scodec/interop/cats/CatsInstances.scala#L121-L123)
   * [jberryman/simple-actors](https://github.com/jberryman/simple-actors/search?q=contramap&unscoped_q=contramap) model [Behavior of actor](https://github.com/jberryman/simple-actors/blob/master/Control/Concurrent/Actors.lhs#L336-L346)
   * [List of Haskell libraries using Contravariant functors](https://packdeps.haskellers.com/reverse/contravariant)
+  * [Cats docs](https://typelevel.org/cats/typeclasses/contravariant.html)
+  * [examples in scala_typeclassopedia](./blob/master/src/test/scala/contravariant/ContravariantSpec.scala)
 
 * Contravariant is not called Cofunctor (like Monad -> Comonad, Appy -> Coapply) because when we inverse arrows
 in Functor definition, we just get Functor definition back (with A, B swapped). [More on this on SO](https://stackoverflow.com/questions/34732571/why-there-is-no-cofunctor-typeclass-in-haskell).
