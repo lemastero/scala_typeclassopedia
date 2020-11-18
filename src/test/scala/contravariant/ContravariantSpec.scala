@@ -146,8 +146,13 @@ class ContravariantSpec extends AnyFunSpec with Matchers {
       Money(100) < Money(200) mustBe true
     }
 
-    it("narrow") {
-      // TODO
+    it("narrow is not needed thanks to declarative side variance") {
+      class Money(val amount: Int)
+      class Salary(amount: Int) extends Money(amount)
+
+      val moneyOrd: Ord[Money] = Ord.fromScala[Int].contramap(_.amount)
+      val salaryOrd: Ord[Salary] = moneyOrd
+      salaryOrd.compare(new Salary(42), new Salary(41)) mustBe Ordering.GreaterThan
     }
   }
 }
