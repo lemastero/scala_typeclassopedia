@@ -1,17 +1,34 @@
 package monad
 
-import educational.category_theory.Monad
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
+import zio.prelude._
 
 class CustomMonadImplementationSpec extends AnyFunSpec with Matchers {
 
-  val listMonad: Monad[List] = new Monad[List] {
-    def pure[A](a: A): List[A] = List(a)
-    def flatMap[A, B](ma: List[A])(f: A => List[B]): List[B] = ma.flatMap(f)
+  trait Maybe[+A]
+  case object Empty extends Maybe[Nothing]
+  case class Value[+A](a: A) extends Maybe[A]
+
+  implicit val maybeCovariant: Covariant[Maybe] = new Covariant[Maybe] {
+    override def map[A, B](f: A => B): Maybe[A] => Maybe[B] = {
+      case Empty => Empty
+      case Value(a) => Value(f(a))
+    }
   }
 
-  val radiusList: List[Int] = (1 to 3).toList
+  implicit val maybeMonad: IdentityFlatten[Maybe] = new IdentityFlatten[Maybe] {
+    override def any: Maybe[Any] = Value(())
+
+    override def flatten[A](ffa: Maybe[Maybe[A]]): Maybe[A] = ffa match {
+      case Empty => Empty
+      case Value(a) => a
+    }
+  }
+
+  val radiusList: Maybe[Int] = Value(42)
+
+  def pure[A](a: A): Maybe[A] = IdentityFlatten[Maybe].any.map(Function.const(a))
 
   describe("Monad derived methods") {
 
@@ -25,20 +42,18 @@ class CustomMonadImplementationSpec extends AnyFunSpec with Matchers {
           M[A] <---------- M[M[A]]
                  flatten                */
 
-      listMonad.flatMap(radiusList)(a => List(a * Math.PI)) mustBe radiusList
-        .map(_ * Math.PI)
+      radiusList.flatMap(a => Value(a * Math.PI)) mustBe radiusList.map(_ * Math.PI)
 
-      listMonad.flatten(listMonad.pure(listMonad.pure(42))) mustBe listMonad
-        .pure(42)
+      pure(pure(42)).flatten mustBe pure(42)
     }
   }
 
   describe("Monad laws examples") {
 
-    it("for Monad[List]") {
-      def circleSize: Int => List[Double] =
-        x => List(Math.PI * x * x, 2 * Math.PI * x)
-      def show: Double => List[String] = x => List(x.toString)
+    it("tests Monad laws") {
+      def circleArea: Int => Maybe[Double] =
+        x => Value(Math.PI * x * x)
+      def show: Double => Maybe[String] = x => Value(x.toString)
 
       /* flatMap associativity:
 
@@ -50,11 +65,20 @@ class CustomMonadImplementationSpec extends AnyFunSpec with Matchers {
         -----------------------------------------
           flatMap( f andThen flatMap(g) )            */
 
-      listMonad
-        .flatMap(radiusList)(circleSize)
-        .flatMap(show) mustBe listMonad.flatMap(radiusList)(e =>
-        listMonad.flatMap(circleSize(e))(show)
+      val result1 = for {
+        radius <- radiusList
+        result <- circleArea(radius)
+        resultStr <- show(result)
+      } yield resultStr
+
+      val result2 = radiusList.flatMap( e =>
+        for {
+          a <- circleArea(e)
+          r <- show(a)
+        } yield r
       )
+
+      result1 mustBe result2
 
       /* left identity:
 
@@ -68,14 +92,15 @@ class CustomMonadImplementationSpec extends AnyFunSpec with Matchers {
       |  /
       M[B]                               */
 
-      listMonad.flatMap(listMonad.pure(42))(circleSize) mustBe circleSize(42)
+
+      pure(42).flatMap(circleArea) mustBe circleArea(42)
 
       /* right identity:
 
               flatMap( pure )
        F[A] --------------------> F[A]  */
 
-      listMonad.flatMap(radiusList)(listMonad.pure) mustBe radiusList
+      radiusList.flatMap(pure) mustBe radiusList
     }
   }
 }

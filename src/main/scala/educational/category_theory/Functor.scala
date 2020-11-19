@@ -1,5 +1,7 @@
 package educational.category_theory
 
+import monix.eval.Task
+
 trait Functor[F[_]] {
   def map[A, B](fa: F[A])(f: A => B): F[B]
   def lift[A, B](f: A => B): F[A] => F[B] = map(_)(f)
@@ -42,7 +44,11 @@ object FunctorInstances {
     }
 
   val listFunctor: Functor[List] = new Functor[List]() {
-    def map[A, B](fa: List[A])(f: A => B): List[B] = fa map f
+    def map[A, B](fa: List[A])(f: A => B): List[B] = fa.map(f)
+  }
+
+  val monixTaskFunctor: Functor[Task] = new Functor[Task] {
+    override def map[A, B](fa: Task[A])(f: A => B): Task[B] = fa.map(f)
   }
 
   def tupleRFunctor[X]: Functor[(X, *)] =
@@ -87,14 +93,4 @@ object FunctorInstances {
       def map[A, B](fun: Input => A)(g: A => B): Input => B =
         fun andThen g
     }
-
-  // TODO write test showing it does not meet functor laws because it is not lazy
-  /*
-  implicit val futureFunctor: Functor[Future] = new Functor[Future] {
-    import scala.concurrent.ExecutionContext.Implicits.global
-
-    def map[A, B](future: Future[A])(g: A => B): Future[B] =
-      future.map(g)
-  }
-   */
 }
