@@ -307,8 +307,7 @@ See [Free constructions](./Free.MD#free-constructions) for `Free functors`.
   * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala)
   * (Haskell) The Extended Functor Family - George Wilson [(video)](https://www.youtube.com/watch?v=JUVMiRRq6wU)
   * Functional Patterns in C++, 1. Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=ph7qt0pkPkc)
-  * Understanding Data.Functor.Constant constructor and applicative laws
- - [(SO)](https://stackoverflow.com/questions/21169943/understanding-data-functor-constant-constructor-and-applicative-laws)
+  * Understanding Data.Functor.Constant constructor and applicative laws [(SO)](https://stackoverflow.com/questions/21169943/understanding-data-functor-constant-constructor-and-applicative-laws)
 
 ### Apply
 
