@@ -8,14 +8,22 @@ class BicovariantExamplesSpec extends AnyFunSpec with Matchers {
 
   describe("Bicovariant") {
     describe("bimap") {
-      it("apply given functions for first and second element of tuple") {
-        (List("foo", "bar"), 42).bimap(_.headOption, _ - 1) mustBe (Some("foo"), 41)
+      it("bimap can transform both sides of Either or Tuple") {
+        val product: (Int, List[String]) = (42, List("foo", "bar"))
+        product.bimap(_ - 1, _.headOption) mustBe(41, Some("foo"))
+
+        val either: Either[Int, List[String]] = Right(List("foo", "bar"))
+        either.bimap(_ - 1, _.headOption) mustBe Right(Some("foo"))
       }
     }
 
     describe("leftmap") {
       it("apply given functions for first and second element of tuple") {
-        (List("foo", "bar"), 42).leftMap(_.headOption) mustBe (Some("foo"), 42)
+        val product: (Int, List[String]) = (42, List("foo", "bar"))
+        product.bimap(_ - 1, _.headOption) mustBe (41, Some("foo"))
+
+        val either: Either[Int, List[String]] = Right(List("foo", "bar"))
+        either.bimap(_ - 1, _.headOption) mustBe Right(Some("foo"))
       }
     }
   }
