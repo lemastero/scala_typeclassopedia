@@ -84,8 +84,8 @@ object ContravariantInstances {
   val PartialOrderingContravariant: Contravariant[PartialOrdering] =
     new Contravariant[PartialOrdering] {
       override def contramap[A, B](
-                                    fa: PartialOrdering[A]
-                                  )(f: B => A): PartialOrdering[B] =
+        fa: PartialOrdering[A]
+      )(f: B => A): PartialOrdering[B] =
         new PartialOrdering[B] {
           def tryCompare(x: B, y: B): Option[Int] = fa.tryCompare(f(x), f(y))
           def lteq(x: B, y: B): Boolean = fa.lteq(f(x), f(y))
