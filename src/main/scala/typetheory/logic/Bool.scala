@@ -14,6 +14,7 @@ object Bool {
       case False => True
     }
 
+  //@silent
   def inc(n: Bool): Bool = True
 
   def dec(n: Bool): Bool = False
