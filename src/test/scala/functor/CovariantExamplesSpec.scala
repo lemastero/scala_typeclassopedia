@@ -8,11 +8,13 @@ class CovariantExamplesSpec extends AnyFunSpec with Matchers {
   private def isOdd(i: Int): Boolean = i % 2 == 1
 
   describe("Functor") {
-    describe("map") {
+
+    describe("map called directly from Covariant") {
       it("apply given function for each element of List") {
         import zio.prelude.Covariant
         import zio.prelude.Id
 
+        // force using zio version of map
         Covariant[List].map(isOdd)(List(2, 3, 4)) mustBe List(false, true, false)
         Covariant[Option].map(isOdd)(Option(42)) mustBe Option(false)
 
@@ -50,14 +52,14 @@ class CovariantExamplesSpec extends AnyFunSpec with Matchers {
 
     describe("compose") {
       it("can chain multiple map") {
-//        import zio.prelude.Covariant
-//
-//        val listOptionCovariant = Covariant[List] compose Covariant[Option]
-//        listOptionCovariant.map(List(Some(42), Some(15), None))(isOdd) mustBe List(
-//          Some(false),
-//          Some(true),
-//          None
-//        )
+        import cats.Functor
+
+        val listOptionCovariant = Functor[List] compose Functor[Option]
+        listOptionCovariant.map(List(Some(42), Some(15), None))(isOdd) mustBe List(
+          Some(false),
+          Some(true),
+          None
+        )
       }
 
       it("can chain multiple map 2") {
