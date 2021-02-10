@@ -42,7 +42,7 @@ libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.3" withSources(),
 
   // tofu
-  "ru.tinkoff" %% "tofu" % "0.9.0" withSources(),
+  "ru.tinkoff" %% "tofu" % "0.9.1" withSources(),
 
   // izumi
   "io.7mind.izumi" %% "fundamentals-bio" % "1.0.3" withSources(),
