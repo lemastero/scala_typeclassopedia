@@ -154,7 +154,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Ross Street](http://web.science.mq.edu.au/~street/Publications.htm), [wikipedia has links to publications](https://en.wikipedia.org/wiki/Ross_Street), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Street%2C+R)
 * [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter), [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
 * [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
-* [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/)
+* [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/), [arXiv search](https://arxiv.org/search/?query=Tarmo+Uustalu&searchtype=author&source=header)
 * Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
