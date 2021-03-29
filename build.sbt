@@ -45,7 +45,7 @@ libraryDependencies ++= Seq(
   "ru.tinkoff" %% "tofu" % "0.9.2" withSources(),
 
   // izumi
-  "io.7mind.izumi" %% "fundamentals-bio" % "1.0.4" withSources(),
+  "io.7mind.izumi" %% "fundamentals-bio" % "1.0.5" withSources(),
 
   // HoTT in Scala
   "io.github.siddhartha-gadgil" %% "provingground-core-jvm" % "0.1.1" withSources(),
