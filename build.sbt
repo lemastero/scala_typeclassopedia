@@ -12,7 +12,7 @@ crossScalaVersions := List(scala212, scala213)
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 lazy val catsVersion = "2.4.2"
-lazy val catsMtlVersion = "1.1.2"
+lazy val catsMtlVersion = "1.1.3"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.15.3"
 lazy val silencerVersion = "1.7.1"
