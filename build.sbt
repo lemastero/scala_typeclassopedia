@@ -39,7 +39,7 @@ libraryDependencies ++= Seq(
 
   // type level
   "com.codecommit" %% "skolems" % "0.2.1" withSources(),
-  "com.chuusai" %% "shapeless" % "2.3.3" withSources(),
+  "com.chuusai" %% "shapeless" % "2.3.4" withSources(),
 
   // tofu
   "ru.tinkoff" %% "tofu" % "0.9.2" withSources(),
