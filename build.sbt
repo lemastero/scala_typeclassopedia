@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
 
   // ZIO
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC3" withSources(),
-  "dev.zio" %% "zio" % "1.0.6" withSources(),
+  "dev.zio" %% "zio" % "1.0.7" withSources(),
 
   // algebra
   "org.typelevel" %% "algebra" % "2.2.2" withSources(),
