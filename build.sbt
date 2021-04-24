@@ -3,7 +3,7 @@ name := "scala_typeclassopedia"
 version := "0.0.1"
 
 lazy val scala212 = "2.12.13"
-lazy val scala213 = "2.13.3"
+lazy val scala213 = "2.13.5"
 
 scalaVersion := scala213
 
@@ -11,11 +11,10 @@ crossScalaVersions := List(scala212, scala213)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-lazy val catsVersion = "2.5.0"
-lazy val catsMtlVersion = "1.1.3"
+lazy val catsVersion = "2.6.0"
+lazy val catsMtlVersion = "1.2.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.15.3"
-lazy val silencerVersion = "1.7.3"
 libraryDependencies ++= Seq(
   // cats
   "org.typelevel" %% "cats-core" % catsVersion withSources(),
@@ -24,7 +23,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion withSources(),
   "org.typelevel" %% "cats-mtl" % catsMtlVersion withSources(),
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
-  "org.typelevel" %% "cats-effect" % "3.0.2" withSources(),
+  "org.typelevel" %% "cats-effect" % "3.1.0" withSources(),
 
   // Scalaz
   "org.scalaz"    %% "scalaz-core" % "7.3.3" withSources(),
@@ -50,15 +49,12 @@ libraryDependencies ++= Seq(
   // HoTT in Scala
   "io.github.siddhartha-gadgil" %% "provingground-core-jvm" % "0.1.1" withSources(),
 
-  compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
-  "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full,
-
   // test
   "org.scalacheck" %% "scalacheck" % scalacheckVersion % Test withSources(),
   "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestPlusVersion % Test withSources(),
   "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5" % Test withSources(),
 
-  "org.scalatest" %% "scalatest" % "3.2.7" % Test withSources(),
+  "org.scalatest" %% "scalatest" % "3.2.8" % Test withSources(),
 
   "org.typelevel" %% "discipline-core" % "1.1.4" % Test,
   "org.typelevel" %% "discipline-scalatest" % "2.1.3" % Test
