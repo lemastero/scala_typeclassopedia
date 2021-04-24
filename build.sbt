@@ -15,7 +15,6 @@ lazy val catsVersion = "2.6.0"
 lazy val catsMtlVersion = "1.2.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.15.3"
-lazy val silencerVersion = "1.7.1"
 libraryDependencies ++= Seq(
   // cats
   "org.typelevel" %% "cats-core" % catsVersion withSources(),
@@ -49,9 +48,6 @@ libraryDependencies ++= Seq(
 
   // HoTT in Scala
   "io.github.siddhartha-gadgil" %% "provingground-core-jvm" % "0.1.1" withSources(),
-
-  compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
-  "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full,
 
   // test
   "org.scalacheck" %% "scalacheck" % scalacheckVersion % Test withSources(),
