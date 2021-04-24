@@ -24,7 +24,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion withSources(),
   "org.typelevel" %% "cats-mtl" % catsMtlVersion withSources(),
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion withSources(),
-  "org.typelevel" %% "cats-effect" % "3.0.2" withSources(),
+  "org.typelevel" %% "cats-effect" % "3.1.0" withSources(),
 
   // Scalaz
   "org.scalaz"    %% "scalaz-core" % "7.3.3" withSources(),
