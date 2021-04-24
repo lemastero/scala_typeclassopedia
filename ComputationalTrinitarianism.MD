@@ -22,6 +22,7 @@
 * Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
 * Associative n-categories - Christoph Dorn [(arXiv:1812.10586)](https://arxiv.org/pdf/1812.10586.pdf)
 * Strictly associative and unital higher category theory - Jamie Vicary [(slides)](https://www.cs.bham.ac.uk/~axj/files/mgs-xmas-2018-Jamie.pdf)
+* [kerodon.net](https://kerodon.net/) Part I - Higher category theory
 
 ## [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
 
@@ -145,6 +146,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg), [personal page](http://okmij.org/ftp/)
 * [Jacob Lurie](https://www.math.ias.edu/~lurie/)
 * [Conor McBride](http://strictlypositive.org/publications.html)
+* [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
 * [Ulf Norell](https://dblp.uni-trier.de/pers/hd/n/Norell:Ulf), [University of Gothenburg page](https://www.gu.se/english/about_the_university/staff/?publicationPageNumber=1&selectedTab=2&languageId=100001&userId=xnoreu)
 * [Russell O'Connor](https://dblp.uni-trier.de/pers/hd/o/O=Connor:Russell)
 * [Emily Riehl](http://www.math.jhu.edu/~eriehl/#research)
@@ -153,7 +155,6 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Jon Sterling](http://www.jonmsterling.com/)
 * [Ross Street](http://web.science.mq.edu.au/~street/Publications.htm), [wikipedia has links to publications](https://en.wikipedia.org/wiki/Ross_Street), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Street%2C+R)
 * [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter), [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
-* [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
 * [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/), [arXiv search](https://arxiv.org/search/?query=Tarmo+Uustalu&searchtype=author&source=header)
 * Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 
@@ -206,13 +207,14 @@ This is very opinionated selection of authors that publish interesting papers ab
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
 * Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
+* Cubical Agda and its extensions, HoTTEST - Andrea Vezzosi [(code)](https://github.com/Saizan/hottest-talk), [(video)](https://www.youtube.com/watch?v=9RFt1Q2pHE8)
 * Cubical Tutorial. Introduction Course - Maxim Sokhatsky [plan and notes of seminar about HoTT and Cubical TT](https://groupoid.space/course/), [more](https://groupoid.space/)Maxim Sokhatsky [plan and notes of seminar about HoTT and Cubical TT](https://groupoid.space/course/), [more](https://groupoid.space/)
 * Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
 * Investigations into cubical type theory - Hugo Herbelin [(video)](https://www.youtube.com/watch?v=zJdwPa_tkSU&list=PLul8LCT3AJqS9FcdKnV4TfiR48Hqcna1I&index=16)
 * Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
 * [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt), [(paper arxiv:1611.02108](https://arxiv.org/abs/1611.02108): Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg, [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
 * [mortberg/yacctt](https://github.com/mortberg/yacctt) [paper arXiv:1712.01800](https://arxiv.org/abs/1712.01800) Computational Higher Type Theory III: Univalent Universes and Exact Equality
-Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
+* Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
 * Axioms for Modelling Cubical Type Theory in a Topos - Ian Orton, Andrew M. Pitts [(arXiv:1712.04864)](https://arxiv.org/abs/1712.04864)
 * Cubical informal type theory: The higher groupoid structure - Bruno Bentzen [(arXiv:1806.08490)](https://arxiv.org/pdf/1806.08490.pdf)
 
