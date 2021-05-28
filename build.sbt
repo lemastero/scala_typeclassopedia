@@ -2,7 +2,7 @@ name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-lazy val scala212 = "2.12.13"
+lazy val scala212 = "2.12.14"
 lazy val scala213 = "2.13.5"
 
 scalaVersion := scala213
