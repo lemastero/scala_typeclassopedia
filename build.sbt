@@ -2,8 +2,8 @@ name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-lazy val scala212 = "2.12.13"
-lazy val scala213 = "2.13.6"
+lazy val scala212 = "2.12.14"
+lazy val scala213 = "2.13.5"
 
 scalaVersion := scala213
 
@@ -29,12 +29,12 @@ libraryDependencies ++= Seq(
   "org.scalaz"    %% "scalaz-core" % "7.3.3" withSources(),
 
   // ZIO
-  "dev.zio" %% "zio-prelude"  % "1.0.0-RC4" withSources(),
-  "dev.zio" %% "zio" % "1.0.7" withSources(),
+  "dev.zio" %% "zio-prelude"  % "1.0.0-RC5" withSources(),
+  "dev.zio" %% "zio" % "1.0.8" withSources(),
 
   // algebra
   "org.typelevel" %% "algebra" % "2.2.2" withSources(),
-  "com.twitter" %% "algebird-core" % "0.13.7" withSources(),
+  "com.twitter" %% "algebird-core" % "0.13.8" withSources(),
 
   // type level
   "com.codecommit" %% "skolems" % "0.2.1" withSources(),
