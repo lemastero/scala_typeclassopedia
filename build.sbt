@@ -26,7 +26,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-effect" % "3.1.1" withSources(),
 
   // Scalaz
-  "org.scalaz"    %% "scalaz-core" % "7.3.3" withSources(),
+  "org.scalaz"    %% "scalaz-core" % "7.3.4" withSources(),
 
   // ZIO
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC5" withSources(),
