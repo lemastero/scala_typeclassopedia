@@ -34,15 +34,15 @@ object DensitySimpleImpl {
       }
 
     /** Density is a Functor for free */
-    def functorInstance[K[_]]: Functor[Density[K, ?]] =
-      new Functor[Density[K, ?]] {
+    def functorInstance[K[_]]: Functor[Density[K, *]] =
+      new Functor[Density[K, *]] {
         def map[A, B](x: Density[K, A])(fab: A => B): Density[K, B] =
           Density[K, B, x.Z](x.f andThen fab, x.fb)
       }
 
     /** Density is a Comonad for Free */
-    def comonadInstance[K[_]]: Comonad[Density[K, ?]] =
-      new Comonad[Density[K, ?]] {
+    def comonadInstance[K[_]]: Comonad[Density[K, *]] =
+      new Comonad[Density[K, *]] {
         def extract[A](w: Density[K, A]): A = w.f(w.fb)
         def duplicate[A](wa: Density[K, A]): Density[K, Density[K, A]] =
           Density[K, Density[K, A], wa.Z](

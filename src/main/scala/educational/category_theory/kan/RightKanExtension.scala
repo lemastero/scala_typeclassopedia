@@ -46,8 +46,8 @@ object RanInstances {
 
   /* Functor of Ran does not require G, H to be functors, so it is Bifunctor for free ? */
 
-  def ranFunctor[G[_], H[_]]: Functor[Ran[G, H, ?]] =
-    new Functor[Ran[G, H, ?]] {
+  def ranFunctor[G[_], H[_]]: Functor[Ran[G, H, *]] =
+    new Functor[Ran[G, H, *]] {
 
       def map[A, B](fa: Ran[G, H, A])(f: A => B): Ran[G, H, B] =
         new Ran[G, H, B] {

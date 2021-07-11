@@ -24,8 +24,8 @@ object ContravariantCoyoneda {
 
   // instance Contravariant (Coyoneda f) where
   //  contramap f (Coyoneda g m) = Coyoneda (g.f) m
-  def cotraContraCoyo[F[_]]: Contravariant[ContravariantCoyoneda[F, ?]] =
-    new Contravariant[ContravariantCoyoneda[F, ?]] {
+  def cotraContraCoyo[F[_]]: Contravariant[ContravariantCoyoneda[F, *]] =
+    new Contravariant[ContravariantCoyoneda[F, *]] {
       def contramap[AA, BB](
           fa: ContravariantCoyoneda[F, AA]
       )(f: BB => AA): ContravariantCoyoneda[F, BB] =

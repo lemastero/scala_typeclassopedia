@@ -39,8 +39,8 @@ object Coyoneda {
     Coyoneda[F, A, A](identity[A], fa)
 
   /*Instance of Functor for Coyoneda F */
-  implicit def coyoFunctor[F[_]]: Functor[Coyoneda[F, ?]] =
-    new Functor[Coyoneda[F, ?]] {
+  implicit def coyoFunctor[F[_]]: Functor[Coyoneda[F, *]] =
+    new Functor[Coyoneda[F, *]] {
       def map[A, AA](fa: Coyoneda[F, A])(ff: A => AA): Coyoneda[F, AA] =
         new Coyoneda[F, AA] {
           type Z = fa.Z

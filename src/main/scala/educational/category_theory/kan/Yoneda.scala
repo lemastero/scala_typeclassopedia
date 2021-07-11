@@ -49,8 +49,8 @@ object Yoneda {
       * It is kind of Free Functor as we need Functor when we create Yoneda.
       * But we don't use it to define Functor.
       */
-    def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
-      new Functor[Yoneda[F, ?]] {
+    def yonedaFunctor[F[_]]: Functor[Yoneda[F, *]] =
+      new Functor[Yoneda[F, *]] {
         def map[A, B](fa: Yoneda[F, A])(f: A => B): Yoneda[F, B] =
           new Yoneda[F, B] {
             def run[C](f2: B => C): F[C] = fa.run(f andThen f2)

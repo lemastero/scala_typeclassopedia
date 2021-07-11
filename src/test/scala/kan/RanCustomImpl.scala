@@ -56,8 +56,8 @@ class RanCustomImpl extends AnyFunSpec with Matchers {
         * instance Functor (Ran g h) where
         *    fmap f m = Ran (\\k -> runRan m (k . f))
         */
-      def ranFunctor[G[_], H[_]]: Functor[Ran2[G, H, ?]] =
-        new Functor[Ran2[G, H, ?]] {
+      def ranFunctor[G[_], H[_]]: Functor[Ran2[G, H, *]] =
+        new Functor[Ran2[G, H, *]] {
           def map[A, B](fa: Ran2[G, H, A])(f: A => B): Ran2[G, H, B] = fa.map(f)
         }
     }
@@ -98,8 +98,8 @@ class RanCustomImpl extends AnyFunSpec with Matchers {
         * instance Functor (Ran g h) where
         *    fmap f m = Ran (\\k -> runRan m (k . f))
         */
-      def ranFunctor[G[_], H[_]]: Functor[Ran3[G, H, ?]] =
-        new Functor[Ran3[G, H, ?]] {
+      def ranFunctor[G[_], H[_]]: Functor[Ran3[G, H, *]] =
+        new Functor[Ran3[G, H, *]] {
           def map[A, B](fa: Ran3[G, H, A])(f: A => B): Ran3[G, H, B] = fa.map(f)
         }
 
@@ -111,8 +111,8 @@ class RanCustomImpl extends AnyFunSpec with Matchers {
         *   return x = Ran (\\k -> k x)
         *   m >>= k = Ran (\\c -> runRan m (\\a -> runRan (k a) c))
         */
-      def ranMonad[G[_]]: Monad[Ran3[G, G, ?]] =
-        new Monad[Ran3[G, G, ?]] {
+      def ranMonad[G[_]]: Monad[Ran3[G, G, *]] =
+        new Monad[Ran3[G, G, *]] {
           override def map[A, B](fa: Ran3[G, G, A])(f: A => B): Ran3[G, G, B] =
             fa.map(f)
 

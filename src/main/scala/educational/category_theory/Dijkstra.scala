@@ -23,8 +23,8 @@ object Dijkstra {
     State(s => k.runWp { case (s2, a) => (a, s2) }(s))
 
   // Dijkstra is Monad over second argument
-  implicit def dijakstraMonad[S]: Monad[Dijkstra[S, ?]] =
-    new Monad[Dijkstra[S, ?]] {
+  implicit def dijakstraMonad[S]: Monad[Dijkstra[S, *]] =
+    new Monad[Dijkstra[S, *]] {
       def pure[A](a: A): Dijkstra[S, A] =
         new Dijkstra[S, A] {
           def runWp[R](f: (S, A) => R): S => R =
