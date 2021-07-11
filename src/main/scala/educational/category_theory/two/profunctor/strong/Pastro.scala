@@ -26,7 +26,7 @@ object Pastro {
       SQ: Strong[Q]
   ): DinaturalTransformation[Pastro[P, *, *], Q] = ???
   def unpastro[P[_, _], Q[_, _]](
-      pq: DinaturalTransformation[Pastro[P, ?, ?], Q]
+      pq: DinaturalTransformation[Pastro[P, *, *], Q]
   ): DinaturalTransformation[P, Q] = ???
 }
 

@@ -119,9 +119,9 @@ object DayConvolution {
       AF.liftA2(d.xya)(d.fx, d.gy)
 
     def assoc[F[_], G[_], H[_], A, B](
-        d: Day[F, Day[G, H, ?], A]
-    ): Day[Day[F, G, ?], H, A] = {
-      new Day[Day[F, G, ?], H, A] {
+        d: Day[F, Day[G, H, *], A]
+    ): Day[Day[F, G, *], H, A] = {
+      new Day[Day[F, G, *], H, A] {
         type X = (d.X, d.gy.X)
         type Y = d.gy.Y
         val fx: Day[F, G, (d.X, d.gy.X)] = new Day[F, G, (d.X, d.gy.X)] {
@@ -137,9 +137,9 @@ object DayConvolution {
     }
 
     def disassoc[F[_], G[_], H[_], A](
-        d: Day[Day[F, G, ?], H, A]
-    ): Day[F, Day[G, H, ?], A] =
-      new Day[F, Day[G, H, ?], A] {
+        d: Day[Day[F, G, *], H, A]
+    ): Day[F, Day[G, H, *], A] =
+      new Day[F, Day[G, H, *], A] {
         type X = d.fx.X
         type Y = (d.fx.Y, d.Y)
         val fx: F[X] = d.fx.fx
@@ -158,8 +158,8 @@ object DayConvolution {
   object DayInstances {
 
     /** Functor (for free) for Day convolution */
-    def functorDay[F[_], G[_]]: Functor[Day[F, G, ?]] =
-      new Functor[Day[F, G, ?]] {
+    def functorDay[F[_], G[_]]: Functor[Day[F, G, *]] =
+      new Functor[Day[F, G, *]] {
         def map[C, D](d: Day[F, G, C])(f: C => D): Day[F, G, D] = d.map(f)
       }
 
@@ -167,8 +167,8 @@ object DayConvolution {
     def applicativeDay[F[_], G[_]](implicit
         AF: Applicative[F],
         AG: Applicative[G]
-    ): Applicative[Day[F, G, ?]] =
-      new Applicative[Day[F, G, ?]] {
+    ): Applicative[Day[F, G, *]] =
+      new Applicative[Day[F, G, *]] {
 
         def ap[A, B](df: Day[F, G, A => B])(dg: Day[F, G, A]): Day[F, G, B] = {
           new Day[F, G, B] {
@@ -199,8 +199,8 @@ object DayConvolution {
     def comonadDay[F[_], G[_]](implicit
         CF: Comonad[F],
         CG: Comonad[G]
-    ): Comonad[Day[F, G, ?]] =
-      new Comonad[Day[F, G, ?]] {
+    ): Comonad[Day[F, G, *]] =
+      new Comonad[Day[F, G, *]] {
         def extract[C](w: Day[F, G, C]): C =
           w.xya(CF.extract(w.fx), CG.extract(w.gy))
 

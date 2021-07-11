@@ -137,7 +137,7 @@ trait DisintegrateE[F[_]] {
 
 object DisintegrateE {
   def disEither[C]: DisintegrateE[* => C] =
-    new DisintegrateE[Function[?, C]] {
+    new DisintegrateE[Function[*, C]] {
       def disintegrate[X, Y](fab: Function[Either[X, Y], C])(implicit
           MB: Monoid[Y]
       ): Either[Function[X, C], X => Function[Y, C]] = ???

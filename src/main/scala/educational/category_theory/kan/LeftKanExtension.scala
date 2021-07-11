@@ -20,8 +20,8 @@ object LeftKanExtension {
   }
 
   sealed abstract class LanInstances {
-    implicit def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, ?]] =
-      new Functor[Lan[F, H, ?]]() {
+    implicit def lanFunctor[F[_], H[_]]: Functor[Lan[F, H, *]] =
+      new Functor[Lan[F, H, *]]() {
         def map[A, X](x: Lan[F, H, A])(fax: A => X): Lan[F, H, X] = {
           new Lan[F, H, X] {
             type I = x.I
@@ -32,7 +32,7 @@ object LeftKanExtension {
       }
   }
 
-  private trait LanFunctor[G[_], H[_]] extends Functor[Lan[G, H, ?]] {
+  private trait LanFunctor[G[_], H[_]] extends Functor[Lan[G, H, *]] {
     def map[A, X](x: Lan[G, H, A])(fax: A => X): Lan[G, H, X] = {
       new Lan[G, H, X] {
         type I = x.I

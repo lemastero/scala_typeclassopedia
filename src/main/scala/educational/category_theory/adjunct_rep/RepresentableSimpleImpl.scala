@@ -37,8 +37,8 @@ final case class Pair[A](fst: A, snd: A)
 
 object Representable {
 
-  def repReader[In]: Representable[Reader[In, ?], In] =
-    new Representable[Reader[In, ?], In] {
+  def repReader[In]: Representable[Reader[In, *], In] =
+    new Representable[Reader[In, *], In] {
       def tabulate[X](f: In => X): Reader[In, X] = Reader(f)
       def index[X](fa: Reader[In, X]): In => X = fa.run
     }
