@@ -510,6 +510,7 @@ trait Selective[F[_]] extends Applicative[F] {
   * (Coq) [tuura/selective-theory-coq](https://github.com/tuura/selective-theory-coq)
   * (Haskell) Haskell Cafe: Applicative functors with branch/choice? [(mail archive)](https://mail.haskell.org/pipermail/haskell-cafe/2012-July/102518.html)
   * [copumpkin/SelectiveSigma.hs](https://gist.github.com/copumpkin/d5bdbc7afda54ff04049b6bdbcffb67e#file-selectivesigma-hs-L38-L39)
+  * [Twitter discussion in what category Selective are monoids or skew monoids](https://twitter.com/lysxia/status/1410250357704253443)
 
 ### Monad
 

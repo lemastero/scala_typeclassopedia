@@ -68,6 +68,7 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * (Haskell) [SO - Which common monads arise from adjunctions in Hask?](https://stackoverflow.com/questions/46878106/which-common-monads-arise-from-adjunctions-in-hask)
   * (Haskell) [SO - How to Factorize Continuation Monad into Left & Right Adjoints?](https://stackoverflow.com/questions/61267827/how-to-factorize-continuation-monad-into-left-right-adjoints)
   * (Haskell) [SO - What are the adjoint functor pairs corresponding to common monads in Haskell?](https://stackoverflow.com/questions/13937289/what-are-the-adjoint-functor-pairs-corresponding-to-common-monads-in-haskell)
+  * (Unison) [Adjunction used as template of types](https://twitter.com/runarorama/status/1410780265975369732)
 
 ### Adjoint Triples
 
