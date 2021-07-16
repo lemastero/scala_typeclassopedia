@@ -92,14 +92,19 @@ trait ProfunctorLaws[=:>[_,_]] extends Profunctor[=:>] {
 
 object ProfunctorInstance {
   trait Function1Profunctor extends Profunctor[Function1] {
-    override def dimap[S,T,A,B](pab: A => B)(f: S => A, g: B => T): S => T = g compose (f andThen pab)
-    override def lmap[S,A,B](pab: A => B)(f: S => A): S => B = f andThen pab
-    override def rmap[A,B,T](pab: A => B)(g: B => T): A => T = g compose pab
+    override def dimap[S, T, A, B](pab: A => B)(f: S => A, g: B => T): S => T =
+      g compose (f andThen pab)
+    override def lmap[S, A, B](pab: A => B)(f: S => A): S => B = f andThen pab
+    override def rmap[A, B, T](pab: A => B)(g: B => T): A => T = g compose pab
   }
 
-  val function1: Profunctor[Function1] = new Profunctor[Function1] with Function1Profunctor {}
+  val function1: Profunctor[Function1] = new Profunctor[Function1]
+    with Function1Profunctor {}
 
-  def cokleisliProfunctor[M[_]]: Profunctor[CoKleisli[M,*,*]] = new Profunctor[CoKleisli[M,*,*]] {
-    def dimap[S,T,A,B](pab: CoKleisli[M,A,B])(ab: S => A, cd: B => T): CoKleisli[M,S,T] = ???
-  }
+  def cokleisliProfunctor[M[_]]: Profunctor[CoKleisli[M, *, *]] =
+    new Profunctor[CoKleisli[M, *, *]] {
+      def dimap[S, T, A, B](
+          pab: CoKleisli[M, A, B]
+      )(ab: S => A, cd: B => T): CoKleisli[M, S, T] = ???
+    }
 }

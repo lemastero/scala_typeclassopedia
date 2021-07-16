@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/lemastero/scala_typeclassopedia.svg?branch=master)](https://travis-ci.org/lemastero/scala_typeclassopedia)
+[![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-brightgreen.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 
 # Scala typeclassopedia
 
@@ -244,7 +245,8 @@ trait Functor[F[_]] {
 }
 ```
 
-* Functor Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html), [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2), [nLab](https://ncatlab.org/nlab/show/functor), [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+* Functor Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala), [zio-prelude](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/Covariant.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html), [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2), [nLab](https://ncatlab.org/nlab/show/functor), [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/Functor.scala)
 * Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Functor.lidr), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/Functors.v), [HoTT Book](https://github.com/HoTT/HoTT/blob/master/theories/Categories/Functor/Core.v), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
 * Functor Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/FunctorLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L98-L107) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Functor.html#t:Functor)):
@@ -305,8 +307,7 @@ See [Free constructions](./Free.MD#free-constructions) for `Free functors`.
   * [Scalaz example](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/FunctorUsage.scala)
   * (Haskell) The Extended Functor Family - George Wilson [(video)](https://www.youtube.com/watch?v=JUVMiRRq6wU)
   * Functional Patterns in C++, 1. Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=ph7qt0pkPkc)
-  * Understanding Data.Functor.Constant constructor and applicative laws
- - [(SO)](https://stackoverflow.com/questions/21169943/understanding-data-functor-constant-constructor-and-applicative-laws)
+  * Understanding Data.Functor.Constant constructor and applicative laws [(SO)](https://stackoverflow.com/questions/21169943/understanding-data-functor-constant-constructor-and-applicative-laws)
 
 ### Apply
 
@@ -395,7 +396,7 @@ trait Applicative[F[_]] extends Apply[F] {
 }
 ```
 
-* Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
+* Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Haskell](https://hackage.haskell.org/package/base/docs/Control-Applicative.html) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
 * Applicative Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ApplicativeLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala#L118-L134)):
 
@@ -466,13 +467,15 @@ def mapLikeDerivedLaw[A, B](f: A => B, fa: F[A]): Boolean = {
   * apply, pure
 
 * Resources:
-  * herding cats - Applicative: [(blog post)](http://eed3si9n.com/herding-cats/Applicative.html)
-  * FSiS 2 - Applicative type class - Michael Pilquist: [(video)](https://www.youtube.com/watch?v=tD_EyIKqqCk)
-  * FSiS 3 - Monad type class - Michael Pilquist: [(video)](https://www.youtube.com/watch?v=VWCtLhH815M)
+  * (Haskell) [Typeclassopedia - Applicative](https://wiki.haskell.org/Typeclassopedia#Applicative)
+  * (Haskell) Applicative Functors - Łukasz Marchewka [(video)](https://www.youtube.com/watch?v=7y4Vf0klsUw)
+  * FSiS 2 - Applicative type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=tD_EyIKqqCk)
+  * FSiS 3 - Monad type class - Michael Pilquist [(video)](https://www.youtube.com/watch?v=VWCtLhH815M)
   * Cats: [docs](https://typelevel.org/cats/typeclasses/applicative.html) 
-  * Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
-  * The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
+  * (Haskell) Applicative programming with effects - Conor McBride, Ross Paterson [(shorter)](http://strictlypositive.org/IdiomLite.pdf) [longer](http://strictlypositive.org/Idiom.pdf)
+  * (Haskell) The Essence of the Iterator Pattern - Jeremy Gibbons, Bruno C. d. S. Oliveira: [(paper)](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/iterator.pdf)
   * The Essence of the Iterator Pattern - Eric Torreborre [(blog post)](http://etorreborre.blogspot.com/2011/06/essence-of-iterator-pattern.html)
+  * herding cats - Applicative: [(blog post)](http://eed3si9n.com/herding-cats/Applicative.html)
   * Static analysis with Applicatives - Gergő Érdi [(blog post)](https://gergo.erdi.hu/blog/2012-12-01-static_analysis_with_applicatives/)
   * Lifting - Tony Morris [(blog post)](http://blog.tmorris.net/posts/lifting/index.html)
   * (Haskell) Abstracting with Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2012/abstracting-with-applicatives/)
@@ -500,12 +503,14 @@ trait Selective[F[_]] extends Applicative[F] {
 * Implementations: [Haskell](http://hackage.haskell.org/package/selective/docs/Control-Selective.html) [cb372/cats-selective](https://github.com/cb372/cats-selective/blob/master/core/src/main/scala/cats/Selective.scala)
 
 * Resources:
+  * Selective functor in sbt - @eed3si9n [(blog post)](http://eed3si9n.com/selective-functor-in-sbt)
   * (Haskell) Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/), [(video)](https://www.youtube.com/watch?v=7vruj4gj38Q)
   * (Haskell) Selective Applicative Functors Declare Your Effects Statically, Select Which to Execute Dynamically - Andrey Mokhov, Georgy Lukyanov, Simon Marlow, Jeremie Dimino [(paper)](https://www.staff.ncl.ac.uk/andrey.mokhov/selective-functors.pdf)
   * (OCaml) [snowleopard/selective-ocaml](https://github.com/snowleopard/selective-ocaml)
   * (Coq) [tuura/selective-theory-coq](https://github.com/tuura/selective-theory-coq)
   * (Haskell) Haskell Cafe: Applicative functors with branch/choice? [(mail archive)](https://mail.haskell.org/pipermail/haskell-cafe/2012-July/102518.html)
   * [copumpkin/SelectiveSigma.hs](https://gist.github.com/copumpkin/d5bdbc7afda54ff04049b6bdbcffb67e#file-selectivesigma-hs-L38-L39)
+  * [Twitter discussion in what category Selective are monoids or skew monoids](https://twitter.com/lysxia/status/1410250357704253443)
 
 ### Monad
 
@@ -589,8 +594,9 @@ You can use Monad Transformer that know what monad is inside (OptionT, EitherT, 
 and [usage of flatMap to implement functions zip and number](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/helper_implementations/Tree.scala) 
 (using [State Int](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/IntState.scala)).
 
-* Implementations:  
-  FlatMap/Bind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
+* Implementations:
+  [zio-prelude AssociativeFlatten](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/AssociativeFlatten.scala)  
+  [Cats FlatMap](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/FlatMap.scala), [Scalaz 7 Bind](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala), [Scalaz 8 Bind](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
   Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr), [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
 
 * Resources

@@ -7,8 +7,15 @@ import Function.const
 import Function.uncurried
 import Function.untupled
 
-// class Profunctor p => Closed p where
-//    closed :: p a b -> p (x -> a) (x -> b)
+/**
+  * Closed Profunctor
+  *
+  * Laws:
+  *
+  * lmap (. f) . closed == rmap (. f) . closed
+  * closed . closed == dimap uncurry curry . closed
+  * dimap const ($()) . closed == id
+  */
 trait Closed[=:>[_,_]] extends Profunctor[=:>] {
   def closed[A,B,C](pab: A =:> B): (C => A) =:> (C => B)
 }

@@ -65,7 +65,7 @@ object LimitsAndColimits {
     *
     * Product is limit with diagram containing 2 points and no morphisms.
     */
-  trait Prod[A,B] {
+  trait Prod[A, B] {
     type AxB
 
     // projection maps
@@ -75,23 +75,27 @@ object LimitsAndColimits {
     def universalProperty[OAxB](op: OAxB => A, oq: OAxB => B): OAxB => AxB
   }
 
-  def cartesianProduct[A,B]: Prod[A,B] = new Prod[A,B] {
-    type AxB = (A,B)
+  def cartesianProduct[A, B]: Prod[A, B] =
+    new Prod[A, B] {
+      type AxB = (A, B)
 
-    // insertion maps
-    def p: AxB => A = { case(a,_) => a}
-    def q: AxB => B = { case(_,b) => b}
+      // insertion maps
+      def p: AxB => A = { case (a, _) => a }
+      def q: AxB => B = { case (_, b) => b }
 
-    def universalProperty[Other](op: Other => A, oq: Other => B): Other => (A, B) =
-      o => (op(o), oq(o))
-  }
+      def universalProperty[Other](
+          op: Other => A,
+          oq: Other => B
+      ): Other => (A, B) =
+        o => (op(o), oq(o))
+    }
 
   // TODO for Abelian Group product == coproduct
 
   /**
     * Coproduct are unique up to unique isomorphism
     */
-  trait CoProd[A,B] {
+  trait CoProd[A, B] {
     type AxB
     def p: A => AxB
     def q: B => AxB
@@ -99,16 +103,20 @@ object LimitsAndColimits {
     def universalProperty[Other](op: A => Other, oq: B => Other): AxB => Other
   }
 
-  def coProduct[A,B]: CoProd[A,B] = new CoProd[A,B] {
-    type AxB = Either[A,B]
-    def p: A => AxB = x => Left[A,B](x)
-    def q: B => AxB = x => Right[A,B](x)
+  def coProduct[A, B]: CoProd[A, B] =
+    new CoProd[A, B] {
+      type AxB = Either[A, B]
+      def p: A => AxB = x => Left[A, B](x)
+      def q: B => AxB = x => Right[A, B](x)
 
-    def universalProperty[Other](op: A => Other, oq: B => Other): AxB => Other = {
-      case Left(a) => op(a)
-      case Right(b) => oq(b)
+      def universalProperty[Other](
+          op: A => Other,
+          oq: B => Other
+      ): AxB => Other = {
+        case Left(a)  => op(a)
+        case Right(b) => oq(b)
+      }
     }
-  }
 
   /**
     * Given: objectC and morphisms: A => C and B => C
@@ -166,7 +174,7 @@ object LimitsAndColimits {
     *        \/
     * A ---> C
     */
-  abstract class Pullback[A,B,C](f: A => C, g: B => C) {
+  abstract class Pullback[A, B, C](f: A => C, g: B => C) {
     type U
     def p: U => B
     def q: U => A
@@ -179,16 +187,16 @@ object LimitsAndColimits {
   }
 
   // TODO
-  case class RestrictedSet[A,B,C](f: A => C, g: B => C)
+  case class RestrictedSet[A, B, C](f: A => C, g: B => C)
 
+  def setPullback[A, B, C](f: A => C, g: B => C): Pullback[A, B, C] =
+    new Pullback[A, B, C](f, g) {
+      type U = (A, B)
+      def p: U => B = { case (a, b) => b }
+      def q: U => A = { case (a, b) => a }
 
-  def setPullback[A,B,C](f: A => C, g: B => C): Pullback[A,B,C] = new Pullback[A,B,C](f, g) {
-    type U = (A,B)
-    def p: U => B = {case (a,b) => b }
-    def q: U => A = {case (a,b) => a }
-
-    def universalProperty[V](s: V => A, t: V => B): V => U = v => (s(v), t(v))
-   }
+      def universalProperty[V](s: V => A, t: V => B): V => U = v => (s(v), t(v))
+    }
 
   /**
     * Equalizer is a limit where diagram with 2 objects A, B
@@ -197,7 +205,7 @@ object LimitsAndColimits {
     *   --->
     * A ---> B
     */
-  abstract class Equalizer[A,B](f: A => B, g: A => B) {
+  abstract class Equalizer[A, B](f: A => B, g: A => B) {
     type U
     def p: U => A
     def q: U => B

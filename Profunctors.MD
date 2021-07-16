@@ -478,8 +478,9 @@ trait Category[F[_, _]] {
 that satisfy certain conditions.
 
 * Implementations:  
-  Compose/Semicategory [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala)  
+  [Cats Compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala), [Scalaz 8 Semicategory](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala), [zio-prelude AssociativeCompose](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/AssociativeCompose.scala) 
   Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html), [nlab](https://ncatlab.org/nlab/show/category)
+* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/Category.scala)
 * Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Category.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/Categories/Category/Core.agda), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
 * Category laws [Cats Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala), [Cats Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala):

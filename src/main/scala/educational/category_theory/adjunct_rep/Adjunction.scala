@@ -9,8 +9,12 @@ trait Adjunction[F[_], G[_]] {
 
 class Examples {
 
-  def tupleFunctionFromAdjunction[R]: Adjunction[Tuple2[*, R], Function1[R, *]] = new Adjunction[(*, R), R => *] {
-    def left[A, B](f: ((A, R)) => B): A => R => B = Function.untupled(f).curried
-    def right[A, B](f: A => R => B): ((A, R)) => B = Function.uncurried(f).tupled
-  }
+  def tupleFunctionFromAdjunction[R]
+      : Adjunction[Tuple2[*, R], Function1[R, *]] =
+    new Adjunction[(*, R), R => *] {
+      def left[A, B](f: ((A, R)) => B): A => R => B =
+        Function.untupled(f).curried
+      def right[A, B](f: A => R => B): ((A, R)) => B =
+        Function.uncurried(f).tupled
+    }
 }

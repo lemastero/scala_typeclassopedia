@@ -18,7 +18,12 @@ object ValidatedNel {
 object ValidatedUnified {
   sealed trait Validated[+A, +E]
   sealed trait ValidatedNel[+A, +E]
-  case class SuccessV[A](result: A) extends ValidatedNel[A, Nothing] with Validated[A, Nothing]
-  case class ErrorV[E](error: E) extends ValidatedNel[Nothing, E] with Validated[Nothing, E]
-  case class ErrorsV[E](error: E, errors: HeadNel[E]) extends ValidatedNel[Nothing, E]
+  case class SuccessV[A](result: A)
+      extends ValidatedNel[A, Nothing]
+      with Validated[A, Nothing]
+  case class ErrorV[E](error: E)
+      extends ValidatedNel[Nothing, E]
+      with Validated[Nothing, E]
+  case class ErrorsV[E](error: E, errors: HeadNel[E])
+      extends ValidatedNel[Nothing, E]
 }

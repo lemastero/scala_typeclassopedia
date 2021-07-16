@@ -33,6 +33,7 @@ val headOption: List ~> Option = new ~>[List,Option] {
 Every polymorphic function (that do the same thing - do not change behavior for a specific type of X) have some nice properties. More in paper by [Philip Wadler - Theorems for free](http://homepages.inf.ed.ac.uk/wadler/topics/blame.html#parablame).
 
 * Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala), [Haskell](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html)
+* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/NaturalTransformation.scala)
 * Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/NaturalTransformation.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/Categories/NaturalTransformation/Core.agda) [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/NaturalTransformations.v), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/univprop.ctt)
 * Definition in Category Theory: [nLab](https://ncatlab.org/nlab/show/natural+transformation)
 
