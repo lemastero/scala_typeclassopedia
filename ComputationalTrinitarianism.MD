@@ -15,6 +15,7 @@
 
 ## [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 
+* 2-Dimensional Categories - Niles Johnson, Donald Yau [(arXiv:2002.06055)](https://arxiv.org/pdf/2002.06055.pdf)
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
@@ -40,6 +41,7 @@
 ## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
 * Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316), Azimuth Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
+* Functorial Data Migration - David I. Spivak [(arXiv:1009.1166)](https://arxiv.org/abs/1009.1166), Categorical Databases [(video)](https://www.youtube.com/watch?v=bk36__qkhrk)
 * What is Applied Category Theory? - Tai-Danae Bradley [(pdf)](https://arxiv.org/abs/1809.05923)
 * Topos Institute [(videos)](https://www.youtube.com/user/youdsp/videos)  
 * UCR Applied Category Theory Seminar [(video playlist)](https://www.youtube.com/channel/UCUQlS-R4O094jP0sGHDnrjA/videos)
@@ -116,6 +118,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Benedikt Ahrens](https://dblp.org/pers/hd/a/Ahrens:Benedikt), [personal page](https://benediktahrens.net/publications/)
 * [Thorsten Altenkirch](https://dblp.org/pers/hd/a/Altenkirch:Thorsten), [University of Nottingham page](https://www.cs.nott.ac.uk/~psztxa/publ/)
 * [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada), [Cambridge University page](https://www.cl.cam.ac.uk/~na482/cv/)
+* [Carlo Angiuli](https://dblp.org/pers/hd/a/Angiuli:Carlo), [Carnegie Mellon University page](https://www.cs.cmu.edu/~cangiuli/), [arxiv](https://arxiv.org/search/cs?query=Carlo+Angiuli&searchtype=author&abstracts=show)
 * [Robert Atkey](https://www.strath.ac.uk/staff/atkeyrobertdr/)
 * [John Baez](https://dblp.uni-trier.de/pers/hd/b/Baez:John_C=), [University of California page](http://math.ucr.edu/home/baez/papers.html)
 * [Michael Barr](http://www.math.mcgill.ca/barr/)
@@ -209,7 +212,6 @@ This is very opinionated selection of authors that publish interesting papers ab
 * FAMOUS - Foundations of Mathematics: Univalent foundations and set theory 2016 [(video playlist)](https://www.youtube.com/watch?v=slVcTtwX_Sk&list=PLQRKUSOIMEh1Arz0-WBgD_Pol4S50HATv), [(videos, slides, abstracts)](http://fomus.weebly.com/talks-abstracts--videos.html)
 * HOTTEST - Homotopy Type Theory Electronic Seminar Talks - 2018 - present [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html), [(youtube videos)](https://www.youtube.com/user/jdchristensen123/videos)
 * The New York City Category Theory Seminar [(youtube videos)](https://www.youtube.com/channel/UCNOfhimbNwZwJO2ltv1AZOw/videos)
-* [(Zwanziger) - Natural Model Semantics for Comonadic and Adjoint Modal Type Theory](https://www.youtube.com/watch?v=bLBNg9Q4oIc)
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
@@ -224,6 +226,10 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
 * Axioms for Modelling Cubical Type Theory in a Topos - Ian Orton, Andrew M. Pitts [(arXiv:1712.04864)](https://arxiv.org/abs/1712.04864)
 * Cubical informal type theory: The higher groupoid structure - Bruno Bentzen [(arXiv:1806.08490)](https://arxiv.org/pdf/1806.08490.pdf)
+
+## Modal Type Theory
+
+* [(Zwanziger) - Natural Model Semantics for Comonadic and Adjoint Modal Type Theory](https://www.youtube.com/watch?v=bLBNg9Q4oIc)
 
 ## Specification of dependent types
 

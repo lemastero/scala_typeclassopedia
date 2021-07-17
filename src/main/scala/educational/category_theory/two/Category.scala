@@ -22,7 +22,7 @@ trait SemicategoryLaws[M[_, _]] extends Semicategory[M] {
 }
 
 trait Category[Morphism[_, _]] extends Semicategory[Morphism] {
-  def id[Object]: Morphism[Object, Object]
+  def id[Obj]: Morphism[Obj, Obj]
 }
 
 trait CategoryLaws[M[_, _]] extends Category[M] {

@@ -19,7 +19,7 @@ class Filterable {
   // TODO laws
 
   object Filterable {
-    def trivial[F[_]](implicit FF: Filterable[F]): F[Void] => Unit = fv => ()
+    def trivial[F[_]](implicit FF: Filterable[F]): F[Void] => Unit = Function.const(())
 
     val filterableOption: Filterable[Option] = new Filterable[Option] {
       def map[A, B](x: Option[A])(f: A => B): Option[B] = x.map(f)
