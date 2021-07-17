@@ -34,10 +34,9 @@ trait Joker[F[_, _]] {
 // map (f compose g) ≡ map f compose map g - inherited from Joker
 trait Bifunctor[F[_, _]] extends Joker[F] with Clown[F] {
 
-  def bimap[AA, A, B, BB](fa: F[A, B])(f: A => AA, g: B => BB): F[AA, BB] = {
-    val v1: F[A, BB] = map(fa)(g)
-    val v2: F[AA, BB] = mapLeft(v1)(f)
-    v2
+  def bimap[AA, A, B, BB](fab: F[A, B])(fa: A => AA, fb: B => BB): F[AA, BB] = {
+    val fabb: F[A, BB] = map(fab)(fb)
+    mapLeft(fabb)(fa)
   }
 }
 
@@ -186,12 +185,8 @@ object FunTrioInstances {
   type FunctionTuple2[A, L, R] = A => (L, R)
   val funTrioFunctionToTuple: FunTrio[FunctionTuple2] = ???
 
-  type LambdaABC[-B, +A, +C] =
-    (
-        C => B
-    ) => A // more on this on my rant on Twitter https://twitter.com/pparadzinski/status/1205202077238091776
-  val funTrioFunctionABC: FunTrio[LambdaABC] =
-    ??? // TODO is contravariant on second param not first, Scala 3 ?
+  type LambdaABC[-B, +A, +C] = (C => B) => A // more on this on my rant on Twitter https://twitter.com/pparadzinski/status/1205202077238091776
+  val funTrioFunctionABC: FunTrio[LambdaABC] = ??? // TODO is contravariant on second param not first, Scala 3 ?
 
   val funTrioZio: FunTrio[ZIO] = ??? // TODO embedding of ZIO into TRIO
   //val funTrioIO: FunTrio[PrIO] // TODO embedding of profunctor IO

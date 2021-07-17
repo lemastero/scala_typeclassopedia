@@ -16,10 +16,12 @@ import educational.category_theory.two.profunctor.strong.Strong
   * dimap Identity runIdentity . traverse' ≡ id
   */
 trait Traversing[P[_, _]] extends Choice[P] with Strong[P] {
+
   def traverse[A, B, F[_]](
       pab: P[A, B]
   )(implicit FT: Traverse[F]): P[F[A], F[B]] =
     ??? // TODO implement using wander
+
   def wander[A, B, S, T, F[_]](f: A => F[B], s: S, ft: F[T], pab: P[A, B])(
       AF: Applicative[F]
   ): P[S, T] =

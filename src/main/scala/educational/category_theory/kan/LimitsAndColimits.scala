@@ -192,7 +192,7 @@ object LimitsAndColimits {
   def setPullback[A, B, C](f: A => C, g: B => C): Pullback[A, B, C] =
     new Pullback[A, B, C](f, g) {
       type U = (A, B)
-      def p: U => B = { case (a, b) => b }
+      def p: U => B = { case (_, b) => b }
       def q: U => A = { case (a, b) => a }
 
       def universalProperty[V](s: V => A, t: V => B): V => U = v => (s(v), t(v))

@@ -32,7 +32,7 @@ object LeftKanExtension {
       }
   }
 
-  private trait LanFunctor[G[_], H[_]] extends Functor[Lan[G, H, *]] {
+  trait LanFunctor[G[_], H[_]] extends Functor[Lan[G, H, *]] {
     def map[A, X](x: Lan[G, H, A])(fax: A => X): Lan[G, H, X] = {
       new Lan[G, H, X] {
         type I = x.I
