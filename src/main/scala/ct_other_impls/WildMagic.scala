@@ -1,58 +1,51 @@
 package ct_other_impls
 
-import ct_other_impls.Wizard.{ConstUnit, Id}
+import ct_other_impls.FPAbs.{ConstUnit, Id}
+import educational.abstract_algebra.Monoid
 
 /*
 Are there any constructions in Category Theory something like:
 
-Given:
-C category
-F, G : functors in C
-M functor category of category C
+Given: category C, D, E and two mappings F : C -> D and G : C => E
+we will note D as F[C] and E as G[C].
 
-P morphism that map product of any two objects a and b from Category C into object a in M
+  ------- CxC ----------
+  |        |           |
+  |        | Morphism  |
+  |        |           |
+F |        \/          | G
+  |     Morphism[C]    |
+  |        |           |
+  |        | run       |
+  |        |           |
+  \/       \/          \/
+  F[C] --------------> G[C]
+
+
+             G     F
+      G[C] <=== C ===> F[C]
+      run: Morphism[A,B] => (F[A] => F[B])
+
+|----------------|----------------|--------------|-------------------|
+|                | Morphism[C]                                       |
+|----------------|----------------|--------------|-------------------|
+|  abstraction   | Morphism       |   identity   | composition       |
+|----------------|----------------|--------------|-------------------|
+| Functor        | function       | identity     | andThen           |
+| FlatMap        | Kleisli        | pure         | kleisli comp.     |
+| CoflatMap      | CoKleisli      | extract      | cokleisli comp.   |
+| FlatMap op     | Kleisli op     | OK           | OK                | !!! contravariant Monad
+| CpflatMap op   | CoKleisli op   | OK           | OK                | !!! contravariant Comonad
+| Apply          | F[A => B]      | OK           | OK                |
+| Contravariant  | inv. function  | identity     | compose           |
+| Apply op       | F[B => A]      | ?            | ?                 | impossible TODO redefine laws
+| Zip            | F[(A, B)]      | ?            | ?                 | impossible TODO redefine laws
+| Alternative    | F[A \/ B]      | ?            | ?                 | impossible TODO redefine laws
+| Pure           | B              | OK           | second            |
+| Extract        | F[B]           | OK           | first             |
+|----------------|----------------|--------------|-------------------|
+
  */
-
-object Wizard {
-  type Id[A] = A // identity functor - what is it in functor category
-  type ConstUnit[A] = Unit // terminal object in functor category
-
-  type Void[A] = Nothing // initial object in functor category
-}
-
-object WizardData {
-  case class Reader[-A, +B](run: A => B) // Profunctor-ish?
-  case class Op[+A, -B](run: B => A) // Profunctor-ish?
-  case class Ap[+F[+_], -A, +B](run: F[A => B]) // Profunctor-ish?
-  case class ContraAp[+F[-_], +A, -B](run: F[A => B]) // Profunctor-ish?
-  case class ApOp[+F[+_], +A, -B](run: F[B => A]) // Profunctor-ish?
-  case class Kleisli[+F[+_], -A, +B](run: A => F[B]) // Profunctor-ish?
-  case class ContraKleisli[-F[+_], -A, +B](run: F[A] => B) // Profunctor-ish?
-
-  case class Kleisli2[+F[-_], -A, -B](run: A => F[B]) // Nifunctor-ish?
-
-  case class CoKleisli[-F[-_], +A, +B](run: F[A] => B) // Bifunctor-ish?
-  case class Zip[+F[+_], +A, +B](run: F[(A, B)]) // Bifunctor-ish?
-  case class Alt[+F[+_], +A, +B](run: F[Either[A, B]]) // Bifunctor-ish?
-}
-
-object WizardTypes {
-  type Arrow[A, B]           = A => B
-  type Kleisli[F[_],A,B]     = A => F[B]
-  type CoKleisli[F[_],A,B]   = F[A] => B
-  type Ap[F[_], A, B]        = F[A => B]
-
-  type Op[A, B]              = B => A
-//  type OpKleisli[F[_],A,B]   = B => F[A]     there are no contravariant monads
-//  type OpCoKleisli[F[_],A,B] = F[B] => A     there are no contravariant comonads
-  type OpAp[F[_], A, B]      = F[B => A]
-
-  type Zip[F[_], A, B]       = F[(A, B)]
-  type Alt[F[_], A, B]       = F[Either[A, B]]
-
-  type Pure[F[_], B]         = B
-  type Effect[F[_],B]        = F[B]
-}
 
 // F          F    A    => B     S[F[_], G[_], A, B] = A => B       Functor
 // F          F    B    => A     S[F[_], G[_], A, B] = B => A       Contravariant
@@ -69,222 +62,220 @@ object WizardTypes {
 // ConstUnit  F    B             S[F[_], G[_], A, B] = B            Pointed (Pure, Applicative)
 // ConstUnit  Id   F[B]          S[F[_], G[_], A, B] = F[B]         CoPointed (CoApplicative)
 
-trait Wizard[F[_], G[_]] {
-  type Spell[_[_], _[_], _, _] // type level function that transforms 2 type constructors and 2 regular types into type
-  def doMagic[A, B](f: Spell[F, G, A, B]): F[A] => G[B] // function that for every A and B
+object FPAbs {
+  type Id[A] = A // identity functor - what is it in functor category
+  type ConstUnit[A] = Unit // terminal object in functor category
+  type Void[A] = Nothing // initial object in functor category
 }
 
-trait Wizard2[F[_]] extends Wizard[F,F] {
-  type Cat[AA, BB] = Spell[F,F,AA,BB] // type level function that transforms type constructor and 2 regular types into type
-  override def doMagic[A, B](f: Cat[A,B]): F[A] => F[B] // function that for every A and B
+object FPMorphism {
+  type Function[A, B]          = A => B
+  type Kleisli[F[_],A,B]       = A => F[B]
+  type CoKleisli[F[_],A,B]     = F[A] => B
+  type Ap[F[_], A, B]          = F[A => B]
+
+  type Op[A, B]                = B => A
+  type OpAp[F[_], A, B]        = F[B => A]
+
+  type Zip[F[_], A, B]         = F[(A, B)]
+  type Alt[F[_], A, B]         = F[Either[A, B]]
+
+  type Value[B]                = B
+  type Effect[F[_],B]          = F[B]
+
+  type OpKleisli[F[_],A,B]     = B => F[A]
+  type OpCoKleisli[F[_],A,B]   = F[B] => A
 }
 
-trait Category[Cat[_,_]] {
-  def id[A]: Cat[A, A]
-  def compose[A, B, C]: Cat[A, B] => Cat[B, C] => Cat[A, C]
+// TODO does FlatMap and Apply recovers Monad laws?
+// TODO does CoFlatMap and CoApply recovers Comonad laws?
+// TODO how to recover Applicative laws from Apply and Zip?
+// TODO how to recover Alternative laws from Apply and Alt?
+// TODO does Contravariant and Divide recovers Divide (ContravariantSemigroupal) laws?
+
+trait FPAbs[F[_], G[_]] {
+  type Morphism[_, _] // specify some transformation on types A, B possibly using F and G e.g. A => F[B]
+
+  type BiKleisli[A,B] = F[A] => G[B]
+  def run[A, B](f: Morphism[A, B]): BiKleisli[A,B]
 }
 
-trait Wizard2Law[F[_]] extends Wizard2[F] {
-  val cat: Category[Cat]
+trait EndoFPAbs[F[_]] extends FPAbs[F,F]
 
-  def lawId[A](fa: F[A]): Boolean =
-    doMagic[A,A](cat.id[A])(fa) == fa
+trait EndoFPAbsLaw[F[_]] extends FPAbs[F,F] {
+  // define category structure on a Morphism
+  def id[A]: Morphism[A, A]
+  def compose[A, B, C]: Morphism[A, B] => Morphism[B, C] => Morphism[A, C]
 
-  def lawComp[A,B,C](fa: F[A], f: Cat[A,B], g: Cat[B,C]): Boolean =
-    doMagic[B,C](g)( doMagic[A,B](f)(fa) ) == doMagic[A,C]( cat.compose(f)(g) )(fa)
+  // laws for different FP abstractions (Functor, Monad, Comonad, Applicative, Divide) differs
+  // only in the category definition
+
+  def abstractionIdentityLaw[A](fa: F[A]): Boolean =
+    run[A,A](id[A])(fa) == fa
+
+  def abstractionCompositionLaw[A,B,C](fa: F[A], f: Morphism[A,B], g: Morphism[B,C]): Boolean =
+    run[B,C](g)( run[A,B](f)(fa) ) == run[A,C]( compose(f)(g) )(fa)
 }
 
-trait Functor[F[_]] extends Wizard2[F] {
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Arrow[AA,BB] // AA => BB
-  def map[A, B](fa: F[A])(f: A => B): F[B] = doMagic[A, B](f)(fa)
+trait Functor[F[_]] extends EndoFPAbs[F] {
+  type Morphism[AA, BB] = FPMorphism.Function[AA,BB]
+  def map[A, B](fa: F[A])(f: A => B): F[B] = run[A, B](f)(fa)
 }
 
-object FunctorCat extends Category[Function1] {
+trait FunctorLaws[F[_]] extends EndoFPAbsLaw[F] with Functor[F] {
   def id[A]: A => A = identity[A]
   def compose[A, B, C]: (A => B) => (B => C) => (A => C) =
     f => g => f andThen g
 }
 
-trait FunctorLaws[F[_]] extends Wizard2Law[F] with Functor[F] {
-  override val cat: Category[Cat] = FunctorCat
+trait FlatMap[F[_]] extends EndoFPAbs[F] {
+  type Morphism[AA, BB] = FPMorphism.Kleisli[F,AA,BB]
+  def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B] = run[A, B](f)(fa)
 }
 
-trait FlatMap[F[_]] extends Wizard2[F] {
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Kleisli[FF,AA,BB] // AA => FF[BB]
-  def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B] = doMagic[A, B](f)(fa)
-}
+abstract class FlatMapLaws[F[_]: Pure] extends EndoFPAbsLaw[F] with FlatMap[F] {
 
-trait FlatMapLaws[F[_]] extends Wizard2Law[F] with FlatMap[F] {
-
-  // TODO this is pure, looks like specifying law for FlatMap requires to insist Pointed as subclass
-  def id[A]: A => F[A] = ???
+  // FlatMap and Pointed are connected, give raise to Monad
+  def id[A]: A => F[A] = implicitly[Pure[F]].pure[A]
 
   def compose[A,B,C]: (A => F[B]) => (B => F[C]) => (A => F[C]) =
-    f => g => a => doMagic[B,C](g)(f(a))
+    f => g => a => run[B,C](g)(f(a))
 }
 
-trait Zip[F[_]] extends Wizard2[F] {
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Zip[FF,AA,BB] // FF[(AA, BB)]
-  def tuple2[A, B](fa: F[A])(fab: F[(A, B)]): F[B] = doMagic[A, B](fab)(fa)
+trait Zip[F[_]] extends EndoFPAbs[F] {
+  type Morphism[AA, BB] = FPMorphism.Zip[F,AA,BB]
+  def tuple2[A, B](fa: F[A])(fab: F[(A, B)]): F[B] = run[A, B](fab)(fa)
 }
 
-trait ZipLaws[F[_]] extends Wizard2[F] with Zip[F] {
-
-  // TODO
-  def idSpell[A]: F[(A,A)] = ???
-
-  def composeSpell[A,B,C]: Spell[F,F,A,B] => Spell[F,F,B,C] => Spell[F,F,A,C] =
-    (f : F[(A,B)]) =>
-      (g : F[(B,C)]) => ???
-}
-
-trait Alt[F[_]] extends Wizard[F, F] { // Alt
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Alt[FF,AA,BB] // FF[Either[AA, BB]]
-  def either2[A, B](fa: F[A])(fab: F[Either[A, B]]): F[B] = doMagic[A, B](fab)(fa)
-
-  def lawId[A](fa: F[A]): Boolean = {
-    val lhs1: Spell[F,F,A,A] = ??? // F[Either[A,A]]
-    val lhs2: F[A] = doMagic[A,A](lhs1)(fa)
-    lhs2 == fa
-  }
-
-  def lawComp[A,B,C](fa: F[A], f: Spell[F,F,A,B], g: Spell[F,F,B,C]): Boolean = {
-    val lhs1: F[B] = doMagic[A,B](f)(fa)
-    val lhs2: F[C] = doMagic[B,C](g)(lhs1)
-    val fg: Spell[F,F,A,C] = ??? // F[Either[A,B]] F[Either[B,C]] =>  F[Either[A,C]]
-    val rhs: F[C] = doMagic[A,C](fg)(fa)
-    lhs2 == rhs
-  }
-}
-
-trait Ap[F[_]] extends Wizard[F, F] { // Apply
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Ap[FF,AA,BB] // FF[AA => BB]
-  def ap[A, B](fa: F[A])(f: F[A => B]): F[B] = doMagic[A, B](f)(fa)
-
-  def lawId[A](fa: F[A]): Boolean = {
-    val lhs1: Spell[F,F,A,A] = ??? // F[A => A]
-    val lhs2: F[A] = doMagic[A,A](lhs1)(fa)
-    lhs2 == fa
-  }
-
-  def lawComp[A,B,C](fa: F[A], f: Spell[F,F,A,B], g: Spell[F,F,B,C]): Boolean = {
-    val lhs1: F[B] = doMagic[A,B](f)(fa)
-    val lhs2: F[C] = doMagic[B,C](g)(lhs1)
-    val fg: Spell[F,F,A,C] = ??? // F[A => B]  F[B => C] => F[A => C]
-    val rhs: F[C] = doMagic[A,C](fg)(fa)
-    lhs2 == rhs
-  }
-}
-
-trait CoFlatMap[F[_]] extends Wizard[F, F] {
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.CoKleisli[FF,AA,BB] // FF[AA] => BB
-  def extend[A, B](fa: F[A])(f: F[A] => B): F[B] = doMagic[A, B](f)(fa)
-
-  def lawId[A](fa: F[A]): Boolean = {
-    val lhs1: Spell[F,F,A,A] = ??? // F[A] => A
-    val lhs2: F[A] = doMagic[A,A](lhs1)(fa)
-    lhs2 == fa
-  }
-
-  def lawComp[A,B,C](fa: F[A], f: Spell[F,F,A,B], g: Spell[F,F,B,C]): Boolean = {
-    val lhs1: F[B] = doMagic[A,B](f)(fa)
-    val lhs2: F[C] = doMagic[B,C](g)(lhs1)
-    val fg: Spell[F,F,A,C] = ??? // F[A] => B  F[B] => C   F[A] => C
-    val rhs: F[C] = doMagic[A,C](fg)(fa)
-    lhs2 == rhs
-  }
-}
-
-// TODO below 2 do not make any sense
-//trait ContraCoflatMap[F[_]] extends Wizard[F, F] {
-//  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.OpKleisli[FF,AA,BB] // BB => F[AA]
-//  def contraExtend[A, B](fa: F[A])(f: B => F[A]): F[B] = doMagic[A, B](f)(fa)
-//}
-//trait OpCoKleisliWizard[F[_]] extends Wizard[F, F] {
-//  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.OpCoKleisli[FF,AA,BB] // F[BB] => AA
-//  def contraExtend[A, B](fa: F[A])(f: F[B] => A): F[B] = doMagic[A, B](f)(fa)
+//abstract class ZipLaws[F[_] : Pure, A : Monoid] extends EndoFPAbsLaw[F] with Zip[F] {
+//  def pure[X]: X => F[X] = implicitly[Pure[F]].pure
+//  val empty: A = implicitly[Monoid[A]].empty
+//
+//  def id: F[(A,A)] = pure((empty,empty))
+//  def compose[B,C]: F[(A,B)] => F[(B,C)] => F[(A,C)] = fab => fbc => {
+//    val foo = run(fab)
+//    ???
+//  }
 //}
 
-trait Contravariant[F[_]] extends Wizard[F, F] {
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Op[AA,BB] // BB => AA
+trait Alt[F[_]] extends FPAbs[F, F] {
+  type Morphism[AA, BB] = FPMorphism.Alt[F,AA,BB]
+  def either2[A, B](fa: F[A])(fab: F[Either[A, B]]): F[B] = run[A, B](fab)(fa)
+}
 
-  // doMagic(identity)(fa) == fa
-  // contramap( contrampa(fa)(f) )(g) == contramap(fa)(f andThen g)
-  def contramap[A, B](fa: F[A])(f: B => A): F[B] = doMagic[A, B](f)(fa)
+//abstract class AltLaws[F[_]] extends EndoFPAbsLaw[F] with Alt[F] {
+//  def id[A]: F[Either[A,A]] = ???
+//  def compose[A, B, C]: F[Either[A,B]] => F[Either[B,C]] => F[Either[A,C]] = ???
+//}
 
-  def lawId[A](fa: F[A]): Boolean = {
-    val lhs1: Spell[F,F,A,A] = identity[A]
-    val lhs2: F[A] = doMagic[A,A](lhs1)(fa)
-    lhs2 == fa
-  }
+trait Apply[F[_]] extends FPAbs[F, F] {
+  type Morphism[AA, BB] = FPMorphism.Ap[F,AA,BB]
+  def ap[A, B](fa: F[A])(f: F[A => B]): F[B] = run[A, B](f)(fa)
+}
 
-  def lawComp[A,B,C](fa: F[A], f: Spell[F,F,A,B], g: Spell[F,F,B,C]): Boolean = {
-    val lhs1: F[B] = doMagic[A,B](f)(fa)
-    val lhs2: F[C] = doMagic[B,C](g)(lhs1)
-    val fg: Spell[F,F,A,C] = f compose g
-    val rhs: F[C] = doMagic[A,C](fg)(fa)
-    lhs2 == rhs
+abstract class ApplyLaws[F[_] : Pure] extends EndoFPAbsLaw[F] with Apply[F] {
+  def pure[A]: A => F[A] = implicitly[Pure[F]].pure
+  def id[A]: F[A => A] = pure(identity[A])
+  def compose[A, B, C]: F[A => B] => F[B => C] => F[A => C] = fab => {
+    val fabbcac: F[(A => B) => ((B => C) => (A => C))] = pure(ab => bc => ab andThen bc)
+    val fbcac: F[(B => C) => (A => C)] = run[A => B, (B => C) => (A => C)](fabbcac)(fab)
+    run[B => C,A => C](fbcac)
   }
 }
 
-trait Divide[F[_]] extends Wizard[F, F] {
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.OpAp[FF,AA,BB] // FF[BB => AA]
-  def contraAp[A, B](fa: F[A])(f: F[B => A]): F[B] = doMagic[A, B](f)(fa)
-
-  def lawId[A](fa: F[A]): Boolean = {
-    val lhs1: Spell[F,F,A,A] = ??? // F[A => A]
-    val lhs2: F[A] = doMagic[A,A](lhs1)(fa)
-    lhs2 == fa
-  }
-
-  def lawComp[A,B,C](fa: F[A], f: Spell[F,F,A,B], g: Spell[F,F,B,C]): Boolean = {
-    val lhs1: F[B] = doMagic[A,B](f)(fa)
-    val lhs2: F[C] = doMagic[B,C](g)(lhs1)
-    val fg: Spell[F,F,A,C] = ??? // F[B => A]   F[C => B] =>  F[C => A]
-    val rhs: F[C] = doMagic[A,C](fg)(fa)
-    lhs2 == rhs
-  }
+trait CoFlatMap[F[_]] extends FPAbs[F, F] {
+  type Morphism[AA, BB] = FPMorphism.CoKleisli[F,AA,BB]
+  def extend[A, B](fa: F[A])(f: F[A] => B): F[B] = run[A, B](f)(fa)
 }
 
-// TODO Pointed and CoPointed break symmetry
-
-trait Pointed[F[_]] extends Wizard[ConstUnit, F] { // Applicative
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Pure[FF,BB] // BB
-  def pure[B](value: B): F[B] = doMagic(value)(())
-
-  def lawId[A](fa: F[A]): Boolean = {
-    val lhs1: Spell[F,F,A,A] = ??? // A
-    val lhs2: F[A] = doMagic[A,A](lhs1)(fa)
-    lhs2 == fa
-  }
-
-  def lawComp[A,B,C](fa: F[A], f: Spell[F,F,A,B], g: Spell[F,F,B,C]): Boolean = {
-    val lhs1: F[B] = doMagic[A,B](f)(fa)
-    val lhs2: F[C] = doMagic[B,C](g)(lhs1)
-    val fg: Spell[F,F,A,C] = g // f: B  g: C =>  C
-    val rhs: F[C] = doMagic[A,C](fg)(fa)
-    lhs2 == rhs
-  }
+abstract class CoFlatMapLaws[F[_]:Extract] extends EndoFPAbsLaw[F] with CoFlatMap[F] {
+  def id[A]: F[A] => A = implicitly[Extract[F]].extract
+  def compose[A, B, C]: (F[A] => B) => (F[B] => C) => F[A] => C = fab => fbc => fa =>
+    implicitly[Extract[F]].extract(run(fbc)(run(fab)(fa)))
 }
 
-trait CoPointed[F[_]] extends Wizard[ConstUnit, Id] { // CoApplicative
-  type Spell[FF[_], GG[_], AA, BB] = WizardTypes.Effect[FF,BB] // FF[BB]
+trait Contravariant[F[_]] extends EndoFPAbs[F] {
+  type Morphism[AA, BB] = FPMorphism.Op[AA,BB]
 
-  def coPure[B](value: F[B]): Id[B] = doMagic(value)(42)
+  def contramap[A, B](fa: F[A])(f: B => A): F[B] = run[A, B](f)(fa)
+}
 
-  def lawId[A](fa: Id[A]): Boolean = {
-    val lhs1: Id[A] = fa
-    val lhs2: Id[A] = doMagic[A,A](lhs1)(fa)
-    lhs2 == fa
-  }
+trait ContravariantLaws[F[_]] extends EndoFPAbsLaw[F] with Contravariant[F] {
+  def id[A]: A => A = identity[A]
+  def compose[A, B, C]: (B => A) => (C => B) => (C => A) = f => g => f compose g
+}
 
-  def lawComp[A,B,C](fa: F[A], f: Spell[F,F,A,B], g: Spell[F,F,B,C]): Boolean = {
-    val lhs1 = doMagic[A,B](f)(fa)
-    val lhs2 = doMagic[B,C](g)(lhs1)
-    val fg: Spell[F,F,A,C] = g // f: F[B] g: F[C] => F[C]
-    val rhs = doMagic[A,C](fg)(fa)
-    lhs2 == rhs
-  }
+//trait Divide[F[_]] extends EndoFPAbs[F] {
+//  type Morphism[AA, BB] = FPMorphism.OpAp[F,AA,BB]
+//  def contraAp[A, B](fa: F[A])(fba: F[B => A]): F[B] = run[A, B](fba)(fa)
+//}
+//
+//abstract class DivideLaws[F[_] : Pure : Contravariant] extends EndoFPAbsLaw[F] with Divide[F] {
+//  def pure[A]: A => F[A] = implicitly[Pure[F]].pure
+//  def contramap[A,B](fa: F[A], ba: B => A): F[B] = implicitly[Contravariant[F]].contramap(fa)(ba)
+//  def id[A]: F[A => A] = pure[A => A](identity[A])
+//  override def compose[A, B, C]: F[B => A] => F[C => B] => F[C => A] = fba => fcb => {
+//    val fcabacb: ((C => A) => (B => A)) => (C => B) = ???
+//    val fcaba: F[(C => A) => (B => A)] = contramap[C => B, (C => A) => (B => A)](fcb, fcabacb)
+//    run[B => A,C => A](fcaba)(fba)
+//  }
+//}
+
+// Pointed and CoPointed break symmetry
+
+trait Pure[F[_]] extends FPAbs[ConstUnit, F] {
+  type Morphism[AA, BB] = FPMorphism.Value[BB]
+  def pure[B](b: B): F[B] = run(b)(())
+
+  def id[A:Monoid]: Morphism[A, A] = implicitly[Monoid[A]].empty
+  def compose[A, B, C]: Morphism[A, B] => Morphism[B, C] => Morphism[A, C] = _ => identity[C]
+
+  def abstractionIdentityLaw[A:Monoid](fa: F[A]): Boolean =
+    run[A,A](id[A])(fa) == fa
+
+  def abstractionCompositionLaw[A,B,C](fa: F[A], f: Morphism[A,B], g: Morphism[B,C]): Boolean =
+    run[B,C](g)( run[A,B](f)(fa) ) == run[A,C]( compose(f)(g) )(fa)
+}
+
+trait Extract[F[_]] extends FPAbs[ConstUnit, Id] {
+  type Morphism[AA, BB] = FPMorphism.Effect[F,AA]
+
+  def extract[B](value: F[B]): B = run(value)(())
+
+  def id[A]: Morphism[A, A] = ???
+  def compose[A, B, C]: Morphism[A, B] => Morphism[B, C] => Morphism[A, C] = fab => _ => fab
+
+  def abstractionIdentityLaw[A](fa: F[A]): Boolean =
+    run[A,A](id[A])(fa) == fa // TODO
+
+  def abstractionCompositionLaw[A,B,C](fa: F[A], f: Morphism[A,B], g: Morphism[B,C]): Boolean =
+    run[B,C](g)( run[A,B](f)(fa) ) == run[A,C]( compose(f)(g) )(fa)
+}
+
+// There are not contravariant monads ?
+
+trait ContraCoflatMap[F[_]] extends FPAbs[F, F] {
+  type Morphism[AA, BB] = FPMorphism.OpKleisli[F,AA,BB]
+  def contraExtend[A, B](fa: F[A])(f: B => F[A]): F[B] = run[A, B](f)(fa)
+}
+
+abstract class ContraCoflatMapLaws[F[_] : Pure : Extract] extends EndoFPAbsLaw[F] with ContraCoflatMap[F] {
+  def id[A]: A => F[A] = a => implicitly[Pure[F]].pure(a)
+  def compose[A, B, C]: (B => F[A]) => (C => F[B]) => C => F[A] = bfa => cfb => c =>
+    bfa(implicitly[Extract[F]].extract(cfb(c)))
+}
+
+// There are not contravariant comonads ?
+
+trait ContraFlatMap[F[_]] extends FPAbs[F, F] {
+  type Morphism[AA, BB] = FPMorphism.OpCoKleisli[F,AA,BB]
+  def contraExtend[A, B](fa: F[A])(f: F[B] => A): F[B] = run[A, B](f)(fa)
+}
+
+abstract class ContraFlatMapLaws[F[_] : Pure : Extract] extends EndoFPAbsLaw[F] with ContraFlatMap[F] {
+  def id[A]: F[A] => A = implicitly[Extract[F]].extract
+  def compose[A, B, C]: (F[B] => A) => (F[C] => B) => F[C] => A = fba => fcb => fc =>
+    fba(implicitly[Pure[F]].pure(fcb(fc)))
 }
 
 // TODO you could expand on different shapes but they do not make sense ?
@@ -304,19 +295,3 @@ trait CoPointed[F[_]] extends Wizard[ConstUnit, Id] { // CoApplicative
 // Id F  B
 // F Id  F[B]
 // F Id  B
-
-
-// TODO
-//trait Foldable[F[_]] {
-//  def foldLeft[A, B](fa: F[A], b: B)(f: (B, A) => B): B
-//}
-
-// TODO can we express duplicate and flatten somehow ?
-
-// TODO what would happen with when combining different types of F like Id ConstUnit with F[A] => F[B]
-// a lot of different ways to specify identity (if FF == F and GG == G)
-
-// TODO Traversable, Distributive, MonadTrans do not fit this framework
-// what it tells us about them ?
-
-// TODO what about Selective
