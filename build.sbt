@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
 
   "io.monix" %% "monix" % "3.4.0",
 
-  "de.b-studios" %% "effekt" % "0.4-SNAPSHOT",
+//  "de.b-studios" %% "effekt" % "0.4-SNAPSHOT",
 
   // Scalaz
   "org.scalaz"    %% "scalaz-core" % "7.3.4",
