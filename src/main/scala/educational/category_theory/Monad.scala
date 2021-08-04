@@ -50,12 +50,11 @@ object MonadInstance {
 
     def pure[A](a: A): Option[A] = Some(a)
 
-    def flatMap[A, B](ma: Option[A])(f: A => Option[B]): Option[B] = {
+    def flatMap[A, B](ma: Option[A])(f: A => Option[B]): Option[B] =
       ma match {
         case Some(a) => f(a)
         case None    => None
       }
-    }
   }
 }
 

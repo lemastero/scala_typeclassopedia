@@ -36,7 +36,7 @@ W[A]                 W[W[A]]
       \                    |
           \                |  duplicate
               \            |
-extend(duplicate)   \        |
+extend(duplicate)  \       |
                      \|    \/
                      W[W[W[A]]]
 
