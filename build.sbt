@@ -66,4 +66,4 @@ scalacOptions ++= Seq(
   "-encoding", "UTF-8"
 )
 
-addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.1" cross CrossVersion.full)
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full)
