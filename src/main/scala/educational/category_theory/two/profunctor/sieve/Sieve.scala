@@ -2,7 +2,7 @@ package educational.category_theory.two.profunctor.sieve
 
 import educational.category_theory.two.profunctor.Profunctor
 
-trait Sieve[P[_,_],F[_]] extends Profunctor[P] {
+trait Sieve[P[_, _], F[_]] extends Profunctor[P] {
   def sieve[A, B](pab: P[A, B], a: A): F[B]
 }
 

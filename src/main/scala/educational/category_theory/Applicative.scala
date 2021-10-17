@@ -4,14 +4,14 @@ trait Applicative[F[_]] extends Apply[F] {
   def pure[A](value: A): F[A]
 
   // derived methods
-  def liftA2[A, B, Z](abc: (A, B) => Z)(fa: F[A], fb: F[B]): F[Z] = ap(map(fa)(abc.curried))(fb)
+  def liftA2[A, B, Z](abc: (A, B) => Z)(fa: F[A], fb: F[B]): F[Z] =
+    ap(map(fa)(abc.curried))(fb)
 
   override def map[A, B](fa: F[A])(f: A => B): F[B] =
     ap(pure(f))(fa)
 }
 
-trait ApplicativeLaws[F[_]] extends FunctorLaws[F]
-  with Applicative[F] {
+trait ApplicativeLaws[F[_]] extends FunctorLaws[F] with Applicative[F] {
 
   def apIdentityLaw[A](fa: F[A]): Boolean = {
     val l1: F[A => A] = pure(identity[A])

@@ -40,18 +40,22 @@ trait Selective[F[_]] extends Applicative[F] {
     * Handle errors.
     *
     * Apply handler A => B if you provide Left[A] but skip the handler (and Effect) if you provide Right[B]
-   */
+    */
   def handle[A, B](fab: F[Either[A, B]], ff: F[A => B]): F[B]
 
   /**
     * Handle both cases of Either
     *
     * TODO is this correct implementation ???
-   */
-  def select[A, B, C](fab: F[Either[A, B]], fac: F[A => C], fbc: F[B => C]): F[C] = {
-    val v0 : (B => C) => Either[A, B] => Either[A,C] = bc => _.map(bc)
-    val v1: F[Either[A, B] => Either[A,C]] = map(fbc)(v0)
-    val v2: F[Either[A,C]] = ap(v1)(fab)
+    */
+  def select[A, B, C](
+      fab: F[Either[A, B]],
+      fac: F[A => C],
+      fbc: F[B => C]
+  ): F[C] = {
+    val v0: (B => C) => Either[A, B] => Either[A, C] = bc => _.map(bc)
+    val v1: F[Either[A, B] => Either[A, C]] = map(fbc)(v0)
+    val v2: F[Either[A, C]] = ap(v1)(fab)
     handle(v2, fac)
   }
 
@@ -61,8 +65,9 @@ trait Selective[F[_]] extends Applicative[F] {
 }
 
 object SelectiveInstance {
-  def monadSelective[F[_]](implicit MF: Monad[F]): Selective[F] = new Selective[F] {
-    def handle[A, B](fab: F[Either[A, B]], ff: F[A => B]): F[B] = ???
-    def pure[A](value: A): F[A] = MF.pure(value)
-  }
+  def monadSelective[F[_]](implicit MF: Monad[F]): Selective[F] =
+    new Selective[F] {
+      def handle[A, B](fab: F[Either[A, B]], ff: F[A => B]): F[B] = ???
+      def pure[A](value: A): F[A] = MF.pure(value)
+    }
 }

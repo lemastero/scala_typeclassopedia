@@ -21,7 +21,9 @@ object CodensityInstances {
           def run[B](f: A => G[B]): G[B] = f(a)
         }
 
-      def flatMap[A, B](c: Codensity[G, A])(f: A => Codensity[G, B]): Codensity[G, B] =
+      def flatMap[A, B](
+          c: Codensity[G, A]
+      )(f: A => Codensity[G, B]): Codensity[G, B] =
         new Codensity[G, B] {
           def run[C](f2: B => G[C]): G[C] = c.run(a => f(a).run(f2))
         }

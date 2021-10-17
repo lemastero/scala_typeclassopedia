@@ -16,17 +16,38 @@ object FFunctorExample {
   case object Mastercard extends CardType
 
   object V1 {
-    case class Form(email: String, cardType: CardType, cardNumber: String, cardExpiry: LocalDate)
-    case class DraftForm(email: Option[String], cardType: Option[CardType], cardNumber: Option[String], cardExpiry: Option[LocalDate])
+    case class Form(
+        email: String,
+        cardType: CardType,
+        cardNumber: String,
+        cardExpiry: LocalDate
+    )
+    case class DraftForm(
+        email: Option[String],
+        cardType: Option[CardType],
+        cardNumber: Option[String],
+        cardExpiry: Option[LocalDate]
+    )
 
     def toForm: DraftForm => Option[Form] = {
-      case DraftForm(Some(email), Some(cardType), Some(cardNumber), Some(cardExpiry)) => Some(Form(email, cardType, cardNumber, cardExpiry))
+      case DraftForm(
+            Some(email),
+            Some(cardType),
+            Some(cardNumber),
+            Some(cardExpiry)
+          ) =>
+        Some(Form(email, cardType, cardNumber, cardExpiry))
       case _ => None
     }
   }
 
   object V2 {
-    case class FormTemplate[F[_]](email: F[String], cardType: F[CardType], cardNumber: F[String], cardExpiry: F[LocalDate])
+    case class FormTemplate[F[_]](
+        email: F[String],
+        cardType: F[CardType],
+        cardNumber: F[String],
+        cardExpiry: F[LocalDate]
+    )
     type Form = FormTemplate[Id]
     type DraftForm = FormTemplate[Option]
 

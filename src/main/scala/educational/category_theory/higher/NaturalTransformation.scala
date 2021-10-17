@@ -6,9 +6,12 @@ trait ~>[F[_], G[_]] {
   def apply[A](fa: F[A]): G[A]
 }
 
-trait NaturalTransformationLaws[F[_], G[_]] extends ~>[F,G] {
+trait NaturalTransformationLaws[F[_], G[_]] extends ~>[F, G] {
 
-  def naturalitySquare[A,B](fa: F[A], ff: ~>[F,G], g: A => B)(implicit FF: Functor[F], FG: Functor[G]): Boolean = {
+  def naturalitySquare[A, B](fa: F[A], ff: ~>[F, G], g: A => B)(implicit
+      FF: Functor[F],
+      FG: Functor[G]
+  ): Boolean = {
     val v1: G[A] = ff(fa)
     val v2: G[B] = FG.map(v1)(g)
 
@@ -19,17 +22,21 @@ trait NaturalTransformationLaws[F[_], G[_]] extends ~>[F,G] {
   }
 }
 
-case class VerticalComposition[F[_],G[_],H[_]](f: F~>G, g: G~>H) extends ~>[F,H] {
+case class VerticalComposition[F[_], G[_], H[_]](f: F ~> G, g: G ~> H)
+    extends ~>[F, H] {
   def apply[A](fa: F[A]): H[A] = g(f(fa))
 }
 
 // https://github.com/unktomi/stuff/blob/master/containers/AbstractNonsense.scala#L85-L125
-case class HorizontalComposition[F[_], G[_], H[_], I[_]](f: Functor[F], h: Functor[H]) {
+case class HorizontalComposition[F[_], G[_], H[_], I[_]](
+    f: Functor[F],
+    h: Functor[H]
+) {
   type FG[X] = F[G[X]]
   type HI[X] = H[I[X]]
 
   def innerThenOuter(n1: F ~> H, n2: G ~> I): FG ~> HI = {
-    new ~>[FG,HI] {
+    new ~>[FG, HI] {
       override def apply[X](fg: F[G[X]]): H[I[X]] = {
         val gi: G[X] => I[X] = gx => n2(gx)
         val fi: F[I[X]] = f.map(fg)(gi)
@@ -38,7 +45,7 @@ case class HorizontalComposition[F[_], G[_], H[_], I[_]](f: Functor[F], h: Funct
     }
   }
 
-  def outerThenInner(n1: F ~> H, n2: G ~>I): FG ~> HI = {
+  def outerThenInner(n1: F ~> H, n2: G ~> I): FG ~> HI = {
     new ~>[FG, HI] {
       def apply[X](fg: F[G[X]]): H[I[X]] = {
         val gi: G[X] => I[X] = gx => n2(gx)
@@ -49,12 +56,12 @@ case class HorizontalComposition[F[_], G[_], H[_], I[_]](f: Functor[F], h: Funct
   }
 }
 
-case class IdNat[F[_]]() extends ~>[F,F] {
+case class IdNat[F[_]]() extends ~>[F, F] {
   def apply[A](fa: F[A]): F[A] = fa
 }
 
 object NaturalTransformationExamples {
-  val headOption: List ~> Option = new ~>[List,Option] {
+  val headOption: List ~> Option = new ~>[List, Option] {
     def apply[A](fa: List[A]): Option[A] = fa.headOption
   }
 }

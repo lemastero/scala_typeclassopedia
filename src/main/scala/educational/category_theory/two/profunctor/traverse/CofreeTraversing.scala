@@ -3,7 +3,7 @@ package educational.category_theory.two.profunctor.traverse
 import educational.category_theory.Traverse
 
 // free ProfunctorComonad
-trait CofreeTraversing[P[_,_],A,B]{
+trait CofreeTraversing[P[_, _], A, B] {
   def runCofreeTraversing[F[_]](implicit FT: Traverse[F]): P[F[A], F[B]]
 }
 

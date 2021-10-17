@@ -14,11 +14,13 @@ trait Apply[F[_]] extends Functor[F] {
     map(product(fa, product(fb, ff))) { case (a, (b, f)) => f(a, b) }
 }
 
-trait ApplyLaws[F[_]]
-  extends FunctorLaws[F]
-     with Apply[F] {
+trait ApplyLaws[F[_]] extends FunctorLaws[F] with Apply[F] {
 
-  def apComposition[A, B, C](fa: F[A], fab: F[A => B], fbc: F[B => C]): Boolean = {
+  def apComposition[A, B, C](
+      fa: F[A],
+      fab: F[A => B],
+      fbc: F[B => C]
+  ): Boolean = {
 
     //        ap F[A => B]              ap F[B => C]
     // F[A] ==================> F[B] =================> F[C]
@@ -26,9 +28,7 @@ trait ApplyLaws[F[_]]
     val left: F[C] = ap(fbc)(fb)
 
     val expand: (B => C) => ((A => B) => (A => C)) =
-      (bc: B => C) =>
-        (ab: A => B) =>
-          bc compose ab
+      (bc: B => C) => (ab: A => B) => bc compose ab
 
     //               map( A=>B => B=>C => A=>C )
     // F[B => C] ======================================> F[A=>B => A=>C]

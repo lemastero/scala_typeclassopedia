@@ -27,8 +27,7 @@ Monad[M].flatten( Monad[M].pure( Monad[M].pure(a) ) ) == Monad[M].pure(a)
   1. flatmap associativity: `fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))`
   2. left identity: `pure(a).flatMap(f) == f(a)`
   3. right identity: `fa.flatMap(a => pure(a)) == fa`
-*/
-
+ */
 
 trait Monad[F[_]] extends Applicative[F] {
   def flatMap[A, B](ma: F[A])(f: A => F[B]): F[B] // flatten(map(ma)(f))
@@ -54,7 +53,7 @@ object MonadInstance {
     def flatMap[A, B](ma: Option[A])(f: A => Option[B]): Option[B] = {
       ma match {
         case Some(a) => f(a)
-        case None => None
+        case None    => None
       }
     }
   }
@@ -63,7 +62,11 @@ object MonadInstance {
 trait MonadLaws[M[_]] extends Monad[M] {
 
   // fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))
-  def flatMapAssociativity[A,B,C](fa: M[A], f: A => M[B], g: B => M[C]): Boolean = {
+  def flatMapAssociativity[A, B, C](
+      fa: M[A],
+      f: A => M[B],
+      g: B => M[C]
+  ): Boolean = {
     //         flatMap(f)
     //  M[A] =============> M[B]
     val l1: M[B] = flatMap(fa)(f)
@@ -79,7 +82,7 @@ trait MonadLaws[M[_]] extends Monad[M] {
   }
 
   // pure(a).flatMap(f) == f(a)
-  def leftIdentity[A,B,C](a: A, f: A => M[B]): Boolean = {
+  def leftIdentity[A, B, C](a: A, f: A => M[B]): Boolean = {
     //    pure
     // A =======> M[A]
     val l1: M[A] = pure(a)
@@ -93,7 +96,7 @@ trait MonadLaws[M[_]] extends Monad[M] {
   }
 
   // fa.flatMap(pure) == fa
-  def rightIdentity[A,B,C](fa: M[A]): Boolean = {
+  def rightIdentity[A, B, C](fa: M[A]): Boolean = {
     //        flatMap
     // M[A] ==========> M[A]
     val l: M[A] = flatMap(fa)(pure)

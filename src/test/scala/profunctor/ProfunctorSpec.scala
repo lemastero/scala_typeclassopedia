@@ -1,9 +1,9 @@
-package educational.category_theory.two.profunctor
+package profunctor
 
-import scalaz._
-import Scalaz._
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.must.Matchers
+import scalaz.Scalaz._
+import scalaz._
 
 class ProfunctorSpec
   extends AnyFunSpec

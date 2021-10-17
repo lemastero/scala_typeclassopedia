@@ -13,8 +13,9 @@
 * Category Theory Study Group [(video playlist)](https://www.youtube.com/channel/UCDXHYyvGJBxbIdmpmnz4cIw/videos)
 * Takt Category Theory - Runar Bjarnason [(video playlist)](https://www.youtube.com/playlist?list=PLq3_mvFPbUXcVETGuvOeLL26mBIMA8Xzt)
 
-### [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
+## [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 
+* 2-Dimensional Categories - Niles Johnson, Donald Yau [(arxiv:2002.06055)](https://arxiv.org/abs/2002.06055), [(pdf)](https://arxiv.org/pdf/2002.06055.pdf)
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
@@ -22,8 +23,9 @@
 * Monoidal Categories, Higher Categories - Jamie Vicary [(course notes)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
 * Associative n-categories - Christoph Dorn [(arXiv:1812.10586)](https://arxiv.org/pdf/1812.10586.pdf)
 * Strictly associative and unital higher category theory - Jamie Vicary [(slides)](https://www.cs.bham.ac.uk/~axj/files/mgs-xmas-2018-Jamie.pdf)
+* [kerodon.net](https://kerodon.net/) Part I - Higher category theory
 
-### [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
+## [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
 
 * An informal introduction to topos theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1012.5647)
 * Category Theory, Toposes - MathProofsable [(video playlist)](https://www.youtube.com/playlist?list=PL4FD0wu2mjWM3ZSxXBj4LRNsNKWZYaT7k)
@@ -36,27 +38,31 @@
 * [Basics in category and topos theory - David Janin](https://www.labri.fr/perso/janin/Enseignement/EDMI/full.html)
 * An Introduction to Topos Theory - Ryszard Paweł Kostecki [(lecture notes)](https://www.fuw.edu.pl/~kostecki/ittt.pdf)
 
-
 ## [Applied Category Theory](https://ncatlab.org/nlab/show/applied+category+theory)
 
-* Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316)
-* Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
+* Seven Sketches - Brendan Fong, David I Spivak [(book)](https://arxiv.org/abs/1803.05316), Azimuth Applied Category Theory Course [forum](https://forum.azimuthproject.org/discussion/1717/welcome-to-the-applied-category-theory-course), [course material](http://www.azimuthproject.org/azimuth/show/Applied+Category+Theory+Course)
+* Functorial Data Migration - David I. Spivak [(arXiv:1009.1166)](https://arxiv.org/abs/1009.1166), Categorical Databases [(video)](https://www.youtube.com/watch?v=bk36__qkhrk)
 * What is Applied Category Theory? - Tai-Danae Bradley [(pdf)](https://arxiv.org/abs/1809.05923)
+* Topos Institute [(videos)](https://www.youtube.com/user/youdsp/videos)  
+* UCR Applied Category Theory Seminar [(video playlist)](https://www.youtube.com/channel/UCUQlS-R4O094jP0sGHDnrjA/videos)
+* Applied Category Theory conference
+  * ACT 2018 [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
+  * ACT 2019 [(videos & summaries)](https://johncarlosbaez.wordpress.com/2019/07/20/applied-category-theory-2019-talks/)
+  * ACT 2020 [conference page](nLab), [(videos)](https://www.youtube.com/channel/UC1Kxtc6DOexi4JT-t57Ey9g/videos) 
+* Polynomial Functors Course, 2021 [(video playlist)](https://www.youtube.com/watch?v=7ZaL6aQVOZo&list=PLhgq-BqyZ7i6IjU82EDzCqgERKjjIPlmh)
+* Workshop on Polynomial Functors, 2021 [(video playlist)](https://www.youtube.com/watch?v=B8STLcbEGrE&list=PLhgq-BqyZ7i7R-fGcAmNyWmJBQg1wzex-)
+
 * Network Models - John C. Baez, John Foley, Joseph Moeller, Blake S. Pollard [(arXiv)](https://arxiv.org/abs/1711.00037)
 * A coalgebraic model of graphs - Christian Jäkel [(arXiv)](https://arxiv.org/abs/1508.02169)
 * Coalgebraic Modelling Applications in Automata Theory and Modal Logic - Helle Hvid Hansen [(pdf)](https://www.cs.vu.nl/en/Images/HH_Hansen_14-05-2009_tcm210-259639.pdf)
-* [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
-* Applied Category Theory 2018 Workshop in Leiden (ACT 2018) [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
-* Applied Category Theory 2019 (ACT 2019) [(videos & summaries)](https://johncarlosbaez.wordpress.com/2019/07/20/applied-category-theory-2019-talks/)
 * Compositional game theory reading list - Jules Hedges [(blog post)](https://julesh.com/2017/11/09/compositional-game-theory-reading-list/)
-* UCR Applied Category Theory Seminar [(video playlist)](https://www.youtube.com/channel/UCUQlS-R4O094jP0sGHDnrjA/videos)
 * A mathematical theory of resources - Bob Coecke, Tobias Fritz, Robert W. Spekkens [arXiv:1409.5531](https://arxiv.org/abs/1409.5531) (application of CT for resource management)
 * The Mathematical Specification of the [Statebox](https://statebox.org/) Language - Statebox Team: Fabrizio Genovese, Jelle Herold [arXiv:1906.07629](https://arxiv.org/abs/1906.07629) (programming language based on CT and petri nets)
 * Abstraction, Composition and Contracts: A Sheaf Theoretic Approach, Alberto Speranzon, David I. Spivak, Srivatsan Varadarajan [arXiv:1802.03080](https://arxiv.org/abs/1802.03080)
 * A Mathematical Theory of Co-Design - Andrea Censi [arXiv:1512.08055](https://arxiv.org/abs/1512.08055)
 * Categorical Foundations for System Engineering - Spencer Breiner, Eswaran Subrahmanian, Albert Jones [(paper)](https://www.researchgate.net/publication/321302956_Categorical_Foundations_for_System_Engineering)
-* Behavioral Mereology - Brendan Fong, David Jaz Myers, David I. Spivak [arXiv:1811.00420](https://arxiv.org/abs/1811.00420)
-* [CQL](https://github.com/CategoricalData/CQL) language for RDBMS, [related papers](https://www.categoricaldata.net/papers)
+* Behavioral Mereology - Brendan Fong, David Jaz Myers, David I. Spivak [arXiv:1811.00420](https://arxiv.org/abs/1811.00420), [n-Category Cafe Blog post - John Baez](https://golem.ph.utexas.edu/category/2019/06/behavioral_mereology.html)
+* [CQL](https://github.com/CategoricalData/CQL) language for RDBMS, [related papers](https://www.categoricaldata.net/papers) 
 
 ## Programming languages inspired by Category Theory
 
@@ -101,59 +107,67 @@
 [Part 7: Algebraic Stacks](https://stacks.math.columbia.edu/tag/0ELS)  
 [Part 8: Topics in Moduli Theory](https://stacks.math.columbia.edu/tag/0ELR)
 * [Quantum Gravity Seminar - John Baez](http://math.ucr.edu/home/baez/QG.html) interesting notes around type theory (in classical versus quantum computation) and [(cohomology and computation)](http://math.ucr.edu/home/baez/qg-spring2007/index.html#computation)
+* [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
 
 ## Publications
 
 This is very opinionated selection of authors that publish interesting papers about `Category Theory`, `Type Theory` and other branches of `Logic`, `Proof Theory`.
 
 * Haskell Wiki [Functional_pearls](https://wiki.haskell.org/Research_papers/Functional_pearls), [Monads and arrows](https://wiki.haskell.org/Research_papers/Monads_and_arrows)
-* Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
-* [Eugenia Cheng](http://eugeniacheng.com/math/research/)
-* [Emily Riehl](http://www.math.jhu.edu/~eriehl/#research)
-* [Jacob Lurie](https://www.math.ias.edu/~lurie/)
+* [Samson Abramsky](https://dblp.uni-trier.de/pers/hd/a/Abramsky:Samson)
 * [Benedikt Ahrens](https://dblp.org/pers/hd/a/Ahrens:Benedikt), [personal page](https://benediktahrens.net/publications/)
-* [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg), [personal page](http://okmij.org/ftp/)
+* [Thorsten Altenkirch](https://dblp.org/pers/hd/a/Altenkirch:Thorsten), [University of Nottingham page](https://www.cs.nott.ac.uk/~psztxa/publ/)
+* [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada), [Cambridge University page](https://www.cl.cam.ac.uk/~na482/cv/)
+* [Carlo Angiuli](https://dblp.org/pers/hd/a/Angiuli:Carlo), [Carnegie Mellon University page](https://www.cs.cmu.edu/~cangiuli/), [arxiv](https://arxiv.org/search/cs?query=Carlo+Angiuli&searchtype=author&abstracts=show)
+* [Robert Atkey](https://www.strath.ac.uk/staff/atkeyrobertdr/)
+* [John Baez](https://dblp.uni-trier.de/pers/hd/b/Baez:John_C=), [University of California page](http://math.ucr.edu/home/baez/papers.html)
+* [Michael Barr](http://www.math.mcgill.ca/barr/)
+* [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb), [personal page](https://edwinb.wordpress.com/publications/)
+* [Olivia Caramello](https://dblp.uni-trier.de/pers/hd/c/Caramello:Olivia), [1](http://www.oliviacaramello.com/Research/Research.htm), [2](http://www.oliviacaramello.com/Papers/Papers.htm), [3](http://www.oliviacaramello.com/Teaching/Teaching.htm)
+* [Eugenia Cheng](http://eugeniacheng.com/math/research/)
+* [J. R. B. Cockett](https://arxiv.org/search/math?searchtype=author&query=Cockett%2C+J+R+B)
+* [Thierry Coquand](https://dblp.uni-trier.de/pers/hd/c/Coquand:Thierry)
+* [Brian Day](http://web.science.mq.edu.au/~street/Day.pub.html), [arXiv](https://arxiv.org/search/math?searchtype=author&query=Day%2C+B+J)
+* [Peter Dybjer](https://dblp.uni-trier.de/pers/hd/d/Dybjer:Peter), [Chalmers University page](http://www.cse.chalmers.se/~peterd/)
+* [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal), [personal page](http://conal.net/papers/)
+* [Martín Hötzel Escardó](https://dblp.uni-trier.de/pers/hd/e/Escard=oacute=:Mart=iacute=n_H=ouml=tzel), [University of Birmingham page](https://www.cs.bham.ac.uk/~mhe/)
+* [Eric Finster](https://dblp.org/pers/hd/f/Finster:Eric), [personal page](http://ericfinster.github.io/)
+* [Brendan Fong](https://dblp.uni-trier.de/pers/hd/f/Fong:Brendan), [personal page](Brendan Fong)
+* [Murdoch James Gabbay](http://www.gabbay.org.uk/), [arxiv](https://arxiv.org/search/cs?searchtype=author&query=Gabbay%2C+M+J)
+* [Fabrizio Genovese](https://www.cs.ox.ac.uk/people/fabrizio.genovese/), [arxiv](https://arxiv.org/search/math?searchtype=author&query=Genovese%2C+F)
+* [Neil Ghani](https://personal.cis.strath.ac.uk/neil.ghani/pub.html)
 * [Jeremy Gibbons](https://dblp.uni-trier.de/pers/hd/g/Gibbons:Jeremy?q=Jeremy%20Gibbons)
+* [Robert Harper](https://dblp.uni-trier.de/pers/hd/h/Harper_0001:Robert), [Carnegie Mellon University](http://www.cs.cmu.edu/~rwh/papers/index.html)
 * [Ralf Hinze](https://dblp.uni-trier.de/pers/hd/h/Hinze:Ralf)
 * [John Hughes](https://www.researchgate.net/profile/John_Hughes13)
-* [Conal Elliott](http://dblp.org/pers/hd/e/Elliott:Conal), [personal page](http://conal.net/papers/)
-* [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/)
-* [Exequiel Rivas](https://dblp.org/pers/hd/r/Rivas:Exequiel)
-* [Mauro Jaskelioff](https://dblp.uni-trier.de/pers/hd/j/Jaskelioff:Mauro)
-* [Russell O'Connor](https://dblp.uni-trier.de/pers/hd/o/O=Connor:Russell)
 * [Graham Hutton](https://dblp.uni-trier.de/pers/hd/h/Hutton:Graham), [University of Nottingham page](http://www.cs.nott.ac.uk/~pszgmh/#bibliography)
-* [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter), [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
-* [Thorsten Altenkirch](https://dblp.org/pers/hd/a/Altenkirch:Thorsten), [University of Nottingham page](https://www.cs.nott.ac.uk/~psztxa/publ/)
-* [Robert Harper](https://dblp.uni-trier.de/pers/hd/h/Harper_0001:Robert), [Carnegie Mellon University](http://www.cs.cmu.edu/~rwh/papers/index.html)
-* [Ulf Norell](https://dblp.uni-trier.de/pers/hd/n/Norell:Ulf), [University of Gothenburg page](https://www.gu.se/english/about_the_university/staff/?publicationPageNumber=1&selectedTab=2&languageId=100001&userId=xnoreu)
-* [Edwin Brady](https://www.cs.st-andrews.ac.uk/directory/person?id=eb), [personal page](https://edwinb.wordpress.com/publications/)
-* [Simon Peyton Jones](https://dblp.uni-trier.de/pers/hd/j/Jones:Simon_L=_Peyton), [MS Reasearch page](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
-* [Samson Abramsky](https://dblp.uni-trier.de/pers/hd/a/Abramsky:Samson)
-* [Neil Ghani](https://personal.cis.strath.ac.uk/neil.ghani/pub.html)
-* [Murdoch James Gabbay](http://www.gabbay.org.uk/)
-* [Robert Atkey](https://www.strath.ac.uk/staff/atkeyrobertdr/)
-* [Conor McBride](http://strictlypositive.org/publications.html)
-* [Peter Dybjer](https://dblp.uni-trier.de/pers/hd/d/Dybjer:Peter), [Chalmers University page](http://www.cse.chalmers.se/~peterd/)
-* [John Baez](https://dblp.uni-trier.de/pers/hd/b/Baez:John_C=), [University of California page](http://math.ucr.edu/home/baez/papers.html)
-* [Thierry Coquand](https://dblp.uni-trier.de/pers/hd/c/Coquand:Thierry)
-* [Martín Hötzel Escardó](https://dblp.uni-trier.de/pers/hd/e/Escard=oacute=:Mart=iacute=n_H=ouml=tzel), [University of Birmingham page](https://www.cs.bham.ac.uk/~mhe/)
-* [Lucius Gregory Meredith](https://dblp.org/pers/hd/m/Meredith:Lucius_Gregory)
-* [André Joyal](https://dblp.uni-trier.de/pers/hd/j/Joyal:Andr=eacute=), [arxiv search](https://arxiv.org/search/math?query=Andr%C3%A9+Joyal&searchtype=author)
-* [Olivia Caramello](https://dblp.uni-trier.de/pers/hd/c/Caramello:Olivia), [1](http://www.oliviacaramello.com/Research/Research.htm), [2](http://www.oliviacaramello.com/Papers/Papers.htm), [3](http://www.oliviacaramello.com/Teaching/Teaching.htm)
-* [Eric Finster](https://dblp.org/pers/hd/f/Finster:Eric), [personal page](http://ericfinster.github.io/)
-* [Brendan Fong](https://dblp.uni-trier.de/pers/hd/f/Fong:Brendan)
+* [Valery Isaev](https://dblp.uni-trier.de/pers/hd/i/Isaev:Valery), [JET Brains Research page](https://research.jetbrains.org/researchers/valis)
+* [Mauro Jaskelioff](https://dblp.uni-trier.de/pers/hd/j/Jaskelioff:Mauro)
 * [Johan Jeuring](https://dblp.uni-trier.de/pers/hd/j/Jeuring:Johan), [Utrecht University page](http://www.staff.science.uu.nl/~jeuri101/homepage/Publications/index.html)
+* [André Joyal](https://dblp.uni-trier.de/pers/hd/j/Joyal:Andr=eacute=), [arxiv](https://arxiv.org/search/math?query=Andr%C3%A9+Joyal&searchtype=author)
+* [Jacob Lurie](https://www.math.ias.edu/~lurie/)
+* [Jade Master](https://arxiv.org/search/math?searchtype=author&query=Master%2C+J)
+* [Lucius Gregory Meredith](https://dblp.org/pers/hd/m/Meredith:Lucius_Gregory)
+* [David Jaz Myers](http://davidjaz.com/), [arxiv](https://arxiv.org/search/math?searchtype=author&query=Myers%2C+D+J)
 * [Martin Odersky](https://dblp.uni-trier.de/pers/hd/o/Odersky:Martin), [EPFL page](http://lampwww.epfl.ch/~odersky/publications.html)
+* [Craig A. Pastro](https://dblp.uni-trier.de/pers/hd/p/Pastro:Craig_A=), [arXiv](https://arxiv.org/search/math?searchtype=author&query=Pastro%2C+C+A)
+* [Simon Peyton Jones](https://dblp.uni-trier.de/pers/hd/j/Jones:Simon_L=_Peyton), [MS Reasearch page](https://www.microsoft.com/en-us/research/people/simonpj/#!publications)
+* [Oleg Kiselyov](https://dblp.org/pers/hd/k/Kiselyov:Oleg), [personal page](http://okmij.org/ftp/)
+* [Jacob Lurie](https://www.math.ias.edu/~lurie/)
+* [Conor McBride](http://strictlypositive.org/publications.html)
 * [Heather Miller](https://dblp.org/pers/hd/m/Miller:Heather)
-* [Nada Amin](https://dblp.org/pers/hd/a/Amin:Nada), [Cambridge University page](https://www.cl.cam.ac.uk/~na482/cv/)
-* [Valery Isaev](https://dblp.uni-trier.de/pers/hd/i/Isaev:Valery),[JET Brains Research page](https://research.jetbrains.org/researchers/valis)
-* [Jon Sterling](http://www.jonmsterling.com/)
-* [Ross Street](http://web.science.mq.edu.au/~street/Publications.htm), [wikipedia has links to publications](https://en.wikipedia.org/wiki/Ross_Street), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Street%2C+R)
-* [Brian Day](http://web.science.mq.edu.au/~street/Day.pub.html), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Day%2C+B+J)
-* [Craig A. Pastro](https://dblp.uni-trier.de/pers/hd/p/Pastro:Craig_A=), [arXiv search](https://arxiv.org/search/math?searchtype=author&query=Pastro%2C+C+A)
-* [J. R. B. Cockett](https://arxiv.org/search/math?searchtype=author&query=Cockett%2C+J+R+B)
-* [Michael Barr](http://www.math.mcgill.ca/barr/)
+* [Ulf Norell](https://dblp.uni-trier.de/pers/hd/n/Norell:Ulf), [University of Gothenburg page](https://www.gu.se/english/about_the_university/staff/?publicationPageNumber=1&selectedTab=2&languageId=100001&userId=xnoreu)
+* [Russell O'Connor](https://dblp.uni-trier.de/pers/hd/o/O=Connor:Russell)
+* [Emily Riehl](http://www.math.jhu.edu/~eriehl/#research)
+* [Exequiel Rivas](https://dblp.org/pers/hd/r/Rivas:Exequiel)
 * [Peter Selinger](https://dblp.org/pers/hd/s/Selinger:Peter), [Dalhousie University page](https://www.mscs.dal.ca/~selinger/papers.html)
+* [David Spivak](http://math.mit.edu/~dspivak/), [arXiv](https://arxiv.org/search/math?searchtype=author&query=Spivak%2C+D+I)
+* [Jon Sterling](http://www.jonmsterling.com/)
+* [Ross Street](http://web.science.mq.edu.au/~street/Publications.htm), [wikipedia has links to publications](https://en.wikipedia.org/wiki/Ross_Street), [arXiv](https://arxiv.org/search/math?searchtype=author&query=Street%2C+R)
+* [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter), [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
+* [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/), [arXiv](https://arxiv.org/search/?query=Tarmo+Uustalu&searchtype=author&source=header)
+* [Christina Vasilakopoulou](https://thalis.math.upatras.gr/~cvasilak/), [arXiv](https://arxiv.org/search/math?searchtype=author&query=Vasilakopoulou%2C+C)
+* [Philip Wadler](https://iohk.io/en/research/library/authors/philip-wadler/), [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
@@ -183,9 +197,6 @@ This is very opinionated selection of authors that publish interesting papers ab
 * Homotopy Type Theory: Univalent Foundations of Mathematics [(book)](https://homotopytypetheory.org/book/)
 * Homotopy (type) theory - Andrej Bauer, University of Ljubljana course [(github repo, videos)](https://github.com/andrejbauer/homotopy-type-theory-course)
 * Programming in Martin-Löf's Type Theory An Introduction - Bengt Nordström, Kent Petersson, Jan M. Smith [(book)](http://www.cse.chalmers.se/research/group/logic/book/)
-* Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
-* Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
-* Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
 * Computational Type Theory - OPLSS 2018 - Robert Harper [(course)](https://www.cs.uoregon.edu/research/summerschool/summer18/topics.php#Harper), lecture notes, high quality videos, [(video playlist)](https://www.youtube.com/watch?v=LE0SSLizYUI&list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z) - lower quality videos
 * Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
 * Homotopy Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/hott/) lecture notes, papers
@@ -202,20 +213,24 @@ This is very opinionated selection of authors that publish interesting papers ab
 * FAMOUS - Foundations of Mathematics: Univalent foundations and set theory 2016 [(video playlist)](https://www.youtube.com/watch?v=slVcTtwX_Sk&list=PLQRKUSOIMEh1Arz0-WBgD_Pol4S50HATv), [(videos, slides, abstracts)](http://fomus.weebly.com/talks-abstracts--videos.html)
 * HOTTEST - Homotopy Type Theory Electronic Seminar Talks - 2018 - present [(links to videos)](https://www.uwo.ca/math/faculty/kapulkin/seminars/hottest.html), [(youtube videos)](https://www.youtube.com/user/jdchristensen123/videos)
 * The New York City Category Theory Seminar [(youtube videos)](https://www.youtube.com/channel/UCNOfhimbNwZwJO2ltv1AZOw/videos)
-* [(Zwanziger) - Natural Model Semantics for Comonadic and Adjoint Modal Type Theory](https://www.youtube.com/watch?v=bLBNg9Q4oIc)
 
 ## [Cubical Type Theory](https://ncatlab.org/nlab/show/cubical+type+theory)
 
 * Introduction to Univalent Foundations of Mathematics with Agda - MGS 2019 - Martín Hötzel Escardó [(lecture notes)](https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html) [(github)](https://github.com/martinescardo/HoTT-UF-Agda-Lecture-Notes)
+* Cubical Agda and its extensions, HoTTEST - Andrea Vezzosi [(code)](https://github.com/Saizan/hottest-talk), [(video)](https://www.youtube.com/watch?v=9RFt1Q2pHE8)
 * Cubical Tutorial. Introduction Course - Maxim Sokhatsky [plan and notes of seminar about HoTT and Cubical TT](https://groupoid.space/course/), [more](https://groupoid.space/)Maxim Sokhatsky [plan and notes of seminar about HoTT and Cubical TT](https://groupoid.space/course/), [more](https://groupoid.space/)
 * Cubical Adventures (in Agda)  - University of Strathclyde - Conor McBride [(video)](https://www.youtube.com/watch?v=W5-ulP_JzNc)
 * Investigations into cubical type theory - Hugo Herbelin [(video)](https://www.youtube.com/watch?v=zJdwPa_tkSU&list=PLul8LCT3AJqS9FcdKnV4TfiR48Hqcna1I&index=16)
 * Computational Higher Type Theory - Carnegie Mellon University - Robert Harper [(course)](http://www.cs.cmu.edu/~rwh/courses/chtt/)
 * [mortberg/cubicaltt](https://github.com/mortberg/cubicaltt), [(paper arxiv:1611.02108](https://arxiv.org/abs/1611.02108): Cubical Type Theory: a constructive interpretation of the univalence axiom - Cyril Cohen, Thierry Coquand, Simon Huber, Anders Mörtberg, [(examples)](https://github.com/mortberg/cubicaltt/tree/master/examples), [(lectures)](https://github.com/mortberg/cubicaltt/tree/master/lectures)
 * [mortberg/yacctt](https://github.com/mortberg/yacctt) [paper arXiv:1712.01800](https://arxiv.org/abs/1712.01800) Computational Higher Type Theory III: Univalent Universes and Exact Equality
-Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
+* Carlo Angiuli, Kuen-Bang Hou, Robert Harper, [(video)](https://www.youtube.com/watch?v=oc_ChPjL-Rk): Anders Mörtberg: Yet Another Cartesian Cubical Type Theory yacctt
 * Axioms for Modelling Cubical Type Theory in a Topos - Ian Orton, Andrew M. Pitts [(arXiv:1712.04864)](https://arxiv.org/abs/1712.04864)
 * Cubical informal type theory: The higher groupoid structure - Bruno Bentzen [(arXiv:1806.08490)](https://arxiv.org/pdf/1806.08490.pdf)
+
+## Modal Type Theory
+
+* [(Zwanziger) - Natural Model Semantics for Comonadic and Adjoint Modal Type Theory](https://www.youtube.com/watch?v=bLBNg9Q4oIc)
 
 ## Specification of dependent types
 
@@ -230,9 +245,7 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Dotty Internals [(video 1)](https://www.youtube.com/watch?v=yYd-zuDd3S8) [(video 2)](https://www.youtube.com/watch?v=3gmLIYlGbKc) [(video 3)](https://www.youtube.com/watch?v=9iPA7zMRGKY)
 * System F in Agda, for fun and profit - James Chapman, Roman Kireev, Chad Nester, Philip Wadler [(paper)](https://iohk.io/research/papers/#system-f-in-agda-for-fun-and-profit)
 
-## [Formalizations of Category Theory in](https://ncatlab.org/homotopytypetheory/show/Category+theory) [proof assistants](https://ncatlab.org/homotopytypetheory/show/Proof+Assistants)
-
-### [CT formulated in terms of UF/HoTT](https://ncatlab.org/homotopytypetheory/show/Category+theory)
+## [Formalizations of Category Theory](https://ncatlab.org/homotopytypetheory/show/Category+theory) in [proof assistants](https://ncatlab.org/homotopytypetheory/show/Proof+Assistants)
 
 * [UniMath](https://github.com/UniMath/UniMath) Encoding of Category Theory using UV; combines results from:
   * Univalent categories and the Rezk completion - Benedikt Ahrens, Chris Kapulkin, Michael Shulman [(paper)](https://arxiv.org/abs/1303.0584), [(original repository - now merged into UniMath)](https://github.com/benediktahrens/rezk_completion)
@@ -248,17 +261,28 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * (Coq) [jwiegley/category-theory](https://github.com/jwiegley/category-theory)
 * Category Theory in Coq - Aleksandra Carvalho [(pdf)](http://people.csail.mit.edu/jgross/personal-website/papers/academic-papers-local/maintext.pdf)
 * Formalizations of category theory in proof assistants [MathOverflow](https://mathoverflow.net/questions/152497/formalizations-of-category-theory-in-proof-assistants)
+* CT formulated in terms of UF/HoTT [nLab](https://ncatlab.org/homotopytypetheory/show/Category+theory)
 
-## Logic
+## Encodings of category theory (Applied-Applied Category Theory)
 
+* Category Theory in Idris [statebox/idris-ct](https://github.com/statebox/idris-ct)
+* Category Theory in Haskell by Sjoerd Visscher [data-category](http://hackage.haskell.org/package/data-category)
+* Category Theory and Topos Theory in Scala by Vlad Patryshev [vpatryshev/Categories](https://github.com/vpatryshev/Categories)
+* Monoidal categories in Python [oxford-quantum-group/discopy](https://github.com/oxford-quantum-group/discopy), paper: DisCoPy: Monoidal Categories in Python Giovanni de Felice, Alexis Toumi, Bob Coecke [arxiv 2005.02975](https://arxiv.org/abs/2005.02975)
+* Evan Patterson: Realizing Applied Category Theory in Julia [(video)](https://www.youtube.com/watch?v=7dmrDYQh4rc)
+
+## (Constructive) Logic
+
+* Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
+* Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
+* Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
 * [Logical_Graphs](https://oeis.org/wiki/Logical_Graphs#Peirce.27s_law)
+* [Applied Logic course - Erik Palmgren](http://www2.math.uu.se/~palmgren/tillog/) (contains nice lecture notes, exercises in Coq)
 
 ## Nominal Techniques
 
-* Overwiev Nominal Techniques - Andrew Pitts [(pdf)](https://www.cl.cam.ac.uk/~amp12/papers/nomt/nomt.pdf)
-* Constructive Representation of Nominal Sets in Agda - Pritam Choudhury [(pdf)](https://www.cl.cam.ac.uk/~amp12/agda/choudhury/choudhury-dissertation.pdf)
-* [ekmett/name](https://github.com/ekmett/name) nominal sets in Haskell, - Edward Kmett, live coding: Haskell Live-Coding, Session 18[(video)](https://www.youtube.com/watch?v=3Zreblm0Ux0)
 * Equivariant ZFA and the foundations of nominal techniques - Murdoch J. Gabbay [(arXiv:1801.09443)](https://arxiv.org/abs/1801.09443)
+* Overwiev Nominal Techniques - Andrew Pitts [(pdf)](https://www.cl.cam.ac.uk/~amp12/papers/nomt/nomt.pdf)
 * Nominal Henkin Semantics: simply-typed lambda-calculus models in nominal sets - Murdoch J. Gabbay, Dominic P. Mulligan [(arXiv:1111.0089)](https://arxiv.org/abs/1111.0089)
 * Fast Computations on Ordered Nominal Sets - David Venhoek, Joshua Moerman, Jurriaan Rot [(arXiv:1902.08414)](https://arxiv.org/abs/0805.0845)
 * Automata theory in nominal sets - Mikołaj Bojańczyk, Bartek Klin, Sławomir Lasota [(arXiv:1402.0897)](https://arxiv.org/abs/1402.0897)
@@ -266,7 +290,14 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Atompress [blog](http://atoms.mimuw.edu.pl/), [book](http://atoms.mimuw.edu.pl/wp-content/uploads/2014/03/main.pdf), [WIP book](https://www.mimuw.edu.pl/~bojan/paper/atom-book)
 * Nominal Sets and Their Applications [course - lectures, exercises](https://www.cl.cam.ac.uk/teaching/1213/L23/materials.html)
 * FoPSS 2019 - Nominal Techniques [(slides from talks)](https://www.mimuw.edu.pl/~fopss19/programme.html)
-
+* [SPLV 2020](http://www.macs.hw.ac.uk/splv/splv20/) - Maribel Fernandez - Nominal rewriting and unification, Jamie Gabbay - Nominal datatypes
+* Constructive Representation of Nominal Sets in Agda - Pritam Choudhury [(pdf)](https://www.cl.cam.ac.uk/~amp12/agda/choudhury/choudhury-dissertation.pdf)
+* Libraries:
+  * [ekmett/name](https://github.com/ekmett/name), live coding: Haskell Live-Coding, Session 18 [(video)](https://www.youtube.com/watch?v=3Zreblm0Ux0)
+  * [selinger/nominal](http://hackage.haskell.org/package/nominal)
+  * [bellissimogiorno/nominal](https://hackage.haskell.org/package/nom) presented at SPLV 2020[(video playlist)](https://www.youtube.com/playlist?list=PLmYPUe8PWHKpAyfjsrHYoJF7MtyT5W0-D)
+  * [AlphaProlog](https://github.com/aprolog-lang/aprolog)
+  * [AlphaKanren](https://github.com/webyrd/alphaKanren)
 
 ## Petri nets
 
@@ -278,14 +309,13 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * [coq-community/math-classes](https://github.com/coq-community/math-classes)
 * [domdere/haskell-coq](https://github.com/domdere/haskell-coq)
 
-## [Algebraic Theories](https://ncatlab.org/nlab/show/algebraic+theory)
 
+## [Categorical Algebra](https://ncatlab.org/nlab/show/categorical+algebra)
+
+* Higher Algebra - Jacob Lurie [(pdf)](https://www.math.ias.edu/~lurie/papers/HA.pdf)
+* [Algebraic Operads - Jean-Louis Loday and Bruno Vallette](http://irma.math.unistra.fr/~loday/AO%28JLL-BV%29.html) [(pdf v 0.99)](http://irma.math.unistra.fr/~loday/PAPERS/LodayVallette.pdf)
 * Foundations of Algebraic Theories and Higher Dimensional Categories - Soichiro Fujii [(arxiv:1903.07030)](https://arxiv.org/abs/1903.07030)
 * A unified framework for notions of algebraic theory - Soichiro Fujii [(paper)](https://arxiv.org/abs/1904.08541)
-
-
-## Bialgebras
-
 * Bialgebraic Semantics for String Diagrams - Filippo Bonchi, Robin Piedeleu, Pawel Sobocinski, Fabio Zanasi [(arXiv:1906.01519)](https://arxiv.org/abs/1906.01519)
 * Bialgebraic Semantics for Logic Programming - Filippo Bonchi, Fabio Zanasi [(arXiv:1502.06095)](https://arxiv.org/abs/1502.06095)
 
