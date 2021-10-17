@@ -153,7 +153,7 @@ trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
 }
 ```
 
-* Laws [Haskell](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html) [Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
+* Laws [Haskell](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala#L16-L90) [Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
   1) `first == dimap(swap, swap) andThen second`
   2) `lmap(_.1) == rmap(_.1) andThen first`
   3) `lmap(second f) andThen first == rmap(second f) andThen first`

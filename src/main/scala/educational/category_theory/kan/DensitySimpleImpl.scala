@@ -44,7 +44,7 @@ object DensitySimpleImpl {
     def comonadInstance[K[_]]: Comonad[Density[K, *]] =
       new Comonad[Density[K, *]] {
         def extract[A](w: Density[K, A]): A = w.f(w.fb)
-        def duplicate[A](wa: Density[K, A]): Density[K, Density[K, A]] =
+        override def duplicate[A](wa: Density[K, A]): Density[K, Density[K, A]] =
           Density[K, Density[K, A], wa.Z](
             kx => Density[K, A, wa.Z](wa.f, kx),
             wa.fb

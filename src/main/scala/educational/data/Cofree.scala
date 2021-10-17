@@ -13,6 +13,15 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit
     duplicate.map(f) // coKleisi composition
 }
 
+object Cofree {
+
+  implicit def CofreeComonad[F[_]]: Comonad[Cofree[*, F]] = new Comonad[Cofree[*, F]] {
+    override def extract[A](w: Cofree[A, F]): A = w.extract
+    override def duplicate[A](wa: Cofree[A, F]): Cofree[Cofree[A, F], F] = wa.duplicate
+    override def map[A, B](fa: Cofree[A, F])(f: A => B): Cofree[B, F] = fa.map(f)
+  }
+}
+
 case class CofreeList[A](extract: A, sub: List[CofreeList[A]])
 
 object CofreeList {
@@ -22,7 +31,7 @@ object CofreeList {
       def map[A, B](ca: CofreeList[A])(f: A => B): CofreeList[B] =
         CofreeList(f(ca.extract), ca.sub.map(i => map(i)(f)))
       def extract[A](ca: CofreeList[A]): A = ca.extract
-      def duplicate[A](ca: CofreeList[A]): CofreeList[CofreeList[A]] =
+      override def duplicate[A](ca: CofreeList[A]): CofreeList[CofreeList[A]] =
         CofreeList(ca, ca.sub.map(duplicate))
     }
 }
