@@ -7,40 +7,72 @@ Construction that abstract over type constructor and allow to efficiently stack 
 In Category Theory
 
 Yoneda Lemma states that:
-`[C,Set](C(a,-),F) ~ Fa`
-Set of natural transformations from `C` to `Set` of the Hom functor `C(a,-)` to Functor `F: C -> Set`
-is isomorphic to `Fa`
+`[C,Set](C(a,-),F) ~ F a`
+natural transformation between `Hom(a,-)` and functor `F: C -> Set` is isomorphic to value of Functor F on a `F a`.
 
-It is possible to formulate Yoneda Lemma in terms of Ends, and we get Ninja Yoneda Lemma:
-&int; `Set(C(a,x),F(x)) ~ Fa`
+In Haskell this can be expressed as
+```haskell
+f a  ~ forall x. (a -> x) -> f x
+````
 
-That corresponds to:
-
-`def yoneda[R](cax: A => X, fx F[X]) ~ F[A]`
+In Scala we ca define:
 
 ```scala
-trait Yoneda[F[_], A] {
-  def run[R](f: A => R): F[R]
+abstract class Yo[F[+_], A] {
+  def runYo(): Reader[A, *] ~> F[*]
 }
-```
 
-* we need Functor instance for F to create instance of Yoned for F
-```scala
-def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
-  new Yoneda[F, A] {
-    def run[R2](f: A => R2): F[R2] = FunctorF.map(fa)(f)
+type YonedaLemma[F[+_], A] = Yo[F, A] ~ F[A]
+def yonedaLemma[F[+_], A](implicit FF: Functor[F]): YonedaLemma[F, A] =
+  new YonedaLemma[F, A] {
+    def to: F[A] => Yo[F, A] = fa =>
+      new Yo[F, A] {
+        def runYo(): (A => *) ~> F =
+          λ[(A => *) ~> F](atox => FF.map(fa)(atox))
+      }
+
+    def from: Yo[F, A] => F[A] =
+      (fa: Yo[F, A]) => {
+        val raf: Reader[A, *] ~> F = fa.runYo()
+        raf.apply(identity[A])
+      }
   }
 ```
 
-* we don't need the fact that F is a Functor to go back to F
+where:
+
+```scala
+type Reader[-R, +A] = R => A
+
+trait ~[A, B] {
+  def to: B => A
+  def from: A => B
+}
+```
+
+In practice of FP following data structure is used:
+
+```scala
+trait Yoneda[F[_], A] {
+  def run[X](f: A => X): F[X]
+}
+```
+we need Functor instance for F to create instance of Yoneda for F
+```scala
+def liftYoneda[F[_], A](fa: F[A])(implicit FunctorF: Functor[F]): Yoneda[F, A] =
+  new Yoneda[F, A] {
+    def run[X2](f: A => X2): F[X2] = FunctorF.map(fa)(f)
+  }
+```
+yet we don't need the fact that F is a Functor to go back to F
 ```scala
 def lowerYoneda[F[_], A](y: Yoneda[F, A]): F[A] = y.run(identity[A])
 ```
 
-* we can define Functor instance, without any requirement on F:
+We can define Functor instance, without any requirement on F:
 ```scala
-def yonedaFunctor[F[_]]: Functor[Yoneda[F, ?]] =
-  new Functor[Yoneda[F, ?]] {
+def yonedaFunctor[F[_]]: Functor[Yoneda[F, *]] =
+  new Functor[Yoneda[F, *]] {
     def map[A, B](fa: Yoneda[F, A])(f: A => B): Yoneda[F, B] =
       new Yoneda[F, B] {
         def run[C](f2: B => C): F[C] = fa.run(f andThen f2)

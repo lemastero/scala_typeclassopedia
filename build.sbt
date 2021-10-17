@@ -2,7 +2,7 @@ name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-lazy val scala212 = "2.12.14"
+lazy val scala212 = "2.12.15"
 lazy val scala213 = "2.13.6"
 
 scalaVersion := scala213
@@ -23,16 +23,16 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion,
   "org.typelevel" %% "cats-mtl" % catsMtlVersion,
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion,
-  "org.typelevel" %% "cats-effect" % "2.5.3",
+  "org.typelevel" %% "cats-effect" % "2.5.4",
 
   "io.monix" %% "monix" % "3.4.0",
 
   // Scalaz
-  "org.scalaz"    %% "scalaz-core" % "7.3.4",
+  "org.scalaz"    %% "scalaz-core" % "7.3.5",
 
   // ZIO
-  "dev.zio" %% "zio-prelude"  % "1.0.0-RC5",
-  "dev.zio" %% "zio" % "1.0.10",
+  "dev.zio" %% "zio-prelude"  % "1.0.0-RC6",
+  "dev.zio" %% "zio" % "1.0.12",
 
   // algebra
   "org.typelevel" %% "algebra" % "2.2.3",
@@ -56,7 +56,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestPlusVersion % Test,
   "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5" % Test,
 
-  "org.scalatest" %% "scalatest" % "3.2.9" % Test,
+  "org.scalatest" %% "scalatest" % "3.2.10" % Test,
 
   "org.typelevel" %% "discipline-core" % "1.1.5" % Test,
   "org.typelevel" %% "discipline-scalatest" % "2.1.5" % Test
@@ -66,4 +66,4 @@ scalacOptions ++= Seq(
   "-encoding", "UTF-8"
 )
 
-addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.0" cross CrossVersion.full)
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full)
