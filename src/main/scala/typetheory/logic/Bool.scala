@@ -8,10 +8,11 @@ object Bool {
 
   // unary operations
 
-  def not(n: Bool): Bool = n match { // increment with rounding
-    case True => False
-    case False => True
-  }
+  def not(n: Bool): Bool =
+    n match { // increment with rounding
+      case True  => False
+      case False => True
+    }
 
   def inc(n: Bool): Bool = True
 
@@ -38,24 +39,28 @@ object Bool {
 
    */
 
-  def or(lhs: Bool, rhs: Bool): Bool = (lhs, rhs) match {
-    case (False, _) => rhs
-    case (True, _) => True
-  }
+  def or(lhs: Bool, rhs: Bool): Bool =
+    (lhs, rhs) match {
+      case (False, _) => rhs
+      case (True, _)  => True
+    }
 
-  def nimply(lhs: Bool, rhs: Bool): Bool = (lhs, rhs) match {
-    case (True, False) => True
-    case (_, _) => False
-  }
+  def nimply(lhs: Bool, rhs: Bool): Bool =
+    (lhs, rhs) match {
+      case (True, False) => True
+      case (_, _)        => False
+    }
 
-  def and(lhs: Bool, rhs: Bool): Bool = (lhs, rhs) match {
-    case (False, _) => False
-    case (True, _) => rhs
-  }
+  def and(lhs: Bool, rhs: Bool): Bool =
+    (lhs, rhs) match {
+      case (False, _) => False
+      case (True, _)  => rhs
+    }
 
-  def monus(lhs: Bool, rhs: Bool): Bool = (lhs, rhs) match {
-    case (False, _) => False
-    case (True, False) => True
-    case (True, True) => False
-  }
+  def monus(lhs: Bool, rhs: Bool): Bool =
+    (lhs, rhs) match {
+      case (False, _)    => False
+      case (True, False) => True
+      case (True, True)  => False
+    }
 }

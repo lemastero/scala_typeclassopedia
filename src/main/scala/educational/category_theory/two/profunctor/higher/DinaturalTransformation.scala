@@ -11,6 +11,6 @@ package educational.category_theory.two.profunctor.higher
   *
   * Do we get it for free by parametricity?
   */
-trait DinaturalTransformation[P[_,_],Q[_,_]]{
-  def dinat[A,B](p: P[A,B]): Q[A,B]
+trait DinaturalTransformation[P[_, _], Q[_, _]] {
+  def dinat[A, B](p: P[A, B]): Q[A, B]
 }

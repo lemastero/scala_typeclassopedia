@@ -11,7 +11,8 @@ package educational.category_theory
 trait Comonad[W[_]] extends Functor[W] {
   def extract[A](w: W[A]): A
   def duplicate[A](wa: W[A]): W[W[A]]
-  def extend[A, B](w: W[A])(f: W[A] => B): W[B] = map(duplicate(w))(f) // coKleisi composition
+  def extend[A, B](w: W[A])(f: W[A] => B): W[B] =
+    map(duplicate(w))(f) // coKleisi composition
 }
 
 trait ComonadLaws {
@@ -28,7 +29,6 @@ W[A]                 W[W[A]]
                 extend(extract)
         W[A]  ------------------> W[A]         */
 
-
   /* Associativity law: wa.duplicate.duplicate == wa.extend(duplicate)
 
            duplicate
@@ -40,5 +40,5 @@ extend(duplicate)   \        |
                      \|    \/
                      W[W[W[A]]]
 
- */
+   */
 }

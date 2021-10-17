@@ -105,7 +105,7 @@ object Optics {
   type Kaleidescope    s t a b = forall p.        Polyp p => Optic p s t a b
    */
 
-  type Optics[P[_,_],S,T,A,B] = P[A,B] => P[S,T]
+  type Optics[P[_, _], S, T, A, B] = P[A, B] => P[S, T]
 
   case class Iso[S,T,A,B](from: S => A, to: B => T)
   trait AdapterP[S,T,A,B] {

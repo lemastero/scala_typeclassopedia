@@ -15,5 +15,5 @@ import educational.category_theory.higher.~>
   * ffmap (eta . phi) = ffmap eta . ffmap phi
   */
 trait FFunctor[FF[_[_]]] {
-  def ffmap[F[_],G[_]](nat: F~>G): FF[F] => FF[G]
+  def ffmap[F[_], G[_]](nat: F ~> G): FF[F] => FF[G]
 }

@@ -92,6 +92,7 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
 ```
 
 * Resources
+  * Cofree used to process events Kafka [tenable/Kastle](https://github.com/tenable/Kastle/blob/master/src/main/scala/com/tenable/library/kafkaclient/client/standard/consumer/KafkaProcessable.scala)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * scalaz [(src Cofree)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cofree.scala)
   * Cofree Comonads and their Uses - λC 2018 - Nihil Shah [(video)](https://www.youtube.com/watch?v=ydZ_fLwo9yI)
@@ -114,7 +115,9 @@ case class Cofree[A, F[_]](extract: A, sub: F[Cofree[A, F]])(implicit functor: F
 
 ### Free Arrow
 
-* Implementations: [Purescript](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html)
+* Implementations 
+  * [Purescript](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html)
+  * [Scala](https://github.com/AdrielC/free-arrow)
 
 * Resources
   * Building free arrows from components [(blog post)](http://blog.sigfpe.com/2017/01/building-free-arrows-from-components.html) 

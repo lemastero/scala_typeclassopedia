@@ -1,7 +1,6 @@
 package examples
 
 import cats.free.Yoneda
-import cats.implicits._
 
 /**
   * Example show that Yoneda.run (in Haskell lowerYoneda) is
@@ -11,15 +10,13 @@ import cats.implicits._
   * How Haskell is Changing my Brain - Yay Yoneda
   * https://vimeo.com/96639840
   */
-object YonedaLiftAndLowerAreInverses
-  extends App {
+object YonedaLiftAndLowerAreInverses extends App {
 
   val liftYonedaOpt = Yoneda(Option(true))
   val lowerYonedaOpt = liftYonedaOpt.run // Some(true)
   println(lowerYonedaOpt)
 
-
-  val liftYonedaList = Yoneda(List(1,2,3))
+  val liftYonedaList = Yoneda(List(1, 2, 3))
   val lowerYonedaList = liftYonedaList.run // List(1, 2, 3)
   println(lowerYonedaList)
 }
