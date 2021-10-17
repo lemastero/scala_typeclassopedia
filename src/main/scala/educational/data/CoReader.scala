@@ -13,7 +13,7 @@ object CoReaderInstances {
       def map[A, B](x: CoReader[R, A])(f: A => B): CoReader[R, B] =
         CoReader(f(x.extract), x.ask)
       def extract[A](w: CoReader[R, A]): A = w.extract
-      def duplicate[A](wa: CoReader[R, A]): CoReader[R, CoReader[R, A]] =
+      override def duplicate[A](wa: CoReader[R, A]): CoReader[R, CoReader[R, A]] =
         CoReader(wa, wa.ask)
     }
 }
