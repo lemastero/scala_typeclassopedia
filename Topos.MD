@@ -13,7 +13,7 @@ Elementary topos is a category that:
 * has subobject classifier
 
 Resources:
-  * vpatryshev/Categories [Topos](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/topos/Topos.scala) [Grothendieck Topos, Subobject Classifier](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/topos/GrothendieckTopos.scala)
+  * vpatryshev/Categories [Topos](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/Topos.scala) [Grothendieck Topos, Subobject Classifier](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/GrothendieckTopos.scala), [Topology](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/Topology.scala), [Lawvere-Tierney topology](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/LawvereTopology.scala)
   * (Agda) agda/agda-categories [Topos](https://github.com/agda/agda-categories/blob/master/Categories/Category/Topos.agda) [Subobject Classifier](https://github.com/agda/agda-categories/blob/master/Categories/Diagram/SubobjectClassifier.agda)
   * (Coq) UniMath/UniMath [Grothendieck Topos](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/GrothendieckTopos.v) [Subobject Classifier](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/SubobjectClassifier.v)
   * (Haskell) [brunjlar/protop](https://github.com/brunjlar/protop)
@@ -24,4 +24,4 @@ Resources:
   * Computational Quadrinitarianism (Curious Correspondences go Cubical) - Gershom Bazerman [(blog post)](http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/)
   * [fdilke/bewl](https://github.com/fdilke/bewl) (A DSL for the internal language of a topos)
   * [resources about topos theory](./ComputationalTrinitarianism.MD#topos-theory)
-  * [Topos - nLab](https://ncatlab.org/nlab/show/topos)
+  * nLab [Topos](https://ncatlab.org/nlab/show/topos), [Subobject Classifier](https://ncatlab.org/nlab/show/subobject+classifier), [Lawvere-Tierney topology](https://ncatlab.org/nlab/show/Lawvere-Tierney+topology)
