@@ -1,3 +1,22 @@
+```mermaid
+classDiagram
+   Contravariant <|-- Divide
+   Divide <|-- Divisible
+   Divide <|-- Decide
+   Decide <|-- Decidable
+   Divisible <|-- Decidable
+
+   Contravariant : F[B] contramap(F[A], B => A)
+
+   Divide : F[A] divide(A => (B, C), F[B], F[C])
+
+   Decide : F[A] choose[A,B,C](A => Either[B, C], F[B], F[C])
+
+   Divisible : F[A] conquer[A]
+
+   Decidable : F[A] loose[A](A => Void)
+```
+
 ## Opposite category
 
 Opposite category ([nLab](https://ncatlab.org/nlab/show/opposite+category)) is a category where all arrows are reversed.
