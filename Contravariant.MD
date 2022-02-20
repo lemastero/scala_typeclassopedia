@@ -6,15 +6,30 @@ classDiagram
    Decide <|-- Decidable
    Divisible <|-- Decidable
 
-   Contravariant : F[B] contramap(F[A], B => A)
+   class Contravariant {
+     # contravariant Functor  
+     F[B] contramap(F[A], B => A)
+   }
 
-   Divide : F[A] divide(A => (B, C), F[B], F[C])
+   class Divide {
+     # contravariant Apply 
+     F[A] divide(A => Tuple2[B,C], F[B], F[C])
+   }
 
-   Decide : F[A] choose[A,B,C](A => Either[B, C], F[B], F[C])
+   class Decide {
+     # contravariant Alt  
+     F[A] choose[A,B,C](A => Either[B, C], F[B], F[C])
+   }
 
-   Divisible : F[A] conquer[A]
+   class Divisible {
+     # contravariant Applicative
+     F[A] conquer[A]
+   }
 
-   Decidable : F[A] loose[A](A => Void)
+   class Decidable {
+     # contravariant Alternative  
+    F[A] loose[A](A => Void)
+   }
 ```
 
 ## Opposite category
