@@ -1,5 +1,56 @@
 ## (Co)Yoneda & (Co)Density & Kan Extensions
 
+```mermaid
+classDiagram
+   Ran <|-- Yoneda
+   Lan <|-- CoYoneda
+   Ran <|-- Codensity
+   Lan <|-- Density
+
+  class Ran {
+    <<G[_], H[_], A>>
+    # Right Kan Extension
+    H[B] run[B](A => G[B])
+  }
+
+  class Yoneda {
+    <<H[_], A>>
+    H[R] run[B](A => B)
+  }
+
+  class Codensity {
+    <<G[_], A>>
+    G[B] run[B](A => G[B])
+  }
+
+  class Lan {
+    <<G[_], H[_], A>>
+    H[Z] fz()
+    G[Z] => A run()
+    # Left Kan Extension
+  }
+
+  class CoYoneda {
+    <<H[_], A>>
+    H[Z] fz()
+    Z => A run()
+  }
+
+  class Density {
+    <<G[_], A>>
+    G[Z] fz()
+    G[Z] => A run()
+  }
+
+  class Day {
+    <<G[_], H[_], A>>
+    G[Z] gb()
+    H[X] hb()
+    (Z,X) => A run()
+    # Day convolution
+  }
+```
+
 ### Yoneda
 
 Construction that abstract over type constructor and allow to efficiently stack computations.
