@@ -1,54 +1,57 @@
 package educational.category_theory
 
+trait CoflatMap[F[_]] extends Functor[F] {
+  def duplicate[A](fa: F[A]): F[F[A]]
+  def extend[A, B](w: F[A])(f: F[A] => B): F[B] =
+    map(duplicate(w))(f) // coKleisi composition
+}
+
 /* Comonads are dual to Monads
  ------------------------------------------
  |  Monad            |    Comonad         |
  |----------------------------------------|
- | put valus inside  | get out value      |
+ | put value inside  | get out value      |
  | remove one layer  | add one more layer |
  ------------------------------------------
  */
-trait Comonad[W[_]] extends Functor[W] {
-  def extract[A](w: W[A]): A
-  def duplicate[A](wa: W[A]): W[W[A]]
-  def extend[A, B](w: W[A])(f: W[A] => B): W[B] =
-    map(duplicate(w))(f) // coKleisi composition
+trait Comonad[F[_]] extends CoflatMap[F] {
+  def extract[A](w: F[A]): A
 }
 
 trait ComonadLaws {
-  /* Left identity law: wa.duplicate.extract == wa
+  /* Left identity law: fa.duplicate.extract == fa
 
       duplicate
     ------------>
-W[A]                 W[W[A]]
+F[A]                 F[F[A]]
     <------------
        extract                           */
 
-  /* Right identity law: wa.extend(extract) == wa
+  /* Right identity law: fa.extend(extract) == fa
 
                 extend(extract)
-        W[A]  ------------------> W[A]         */
+        F[A]  ------------------> F[A]         */
 
-  /* Associativity law: wa.duplicate.duplicate == wa.extend(duplicate)
+  /* Associativity law: fa.duplicate.duplicate == fa.extend(duplicate)
 
            duplicate
-    W[A] ------------> W[W[A]]
+    F[A] ------------> F[F[A]]
       \                    |
           \                |  duplicate
               \            |
 extend(duplicate)  \       |
                      \|    \/
-                     W[W[W[A]]]
+                     F[F[F[A]]]
 
    */
 }
 
 object Comonad {
   implicit def TupleComonad[T]: Comonad[(T,*)] = new Comonad[(T, *)] {
-    override def extract[A](wa: (T, A)): A = wa._2
+    override def extract[A](fa: (T, A)): A = fa._2
 
-    override def duplicate[A](wa: (T, A)): (T, (T, A)) = (wa._1, wa)
+    override def duplicate[A](fa: (T, A)): (T, (T, A)) = (fa._1, fa)
 
-    override def map[A, B](wa: (T, A))(f: A => B): (T, B) = (wa._1, f(wa._2))
+    override def map[A, B](fa: (T, A))(f: A => B): (T, B) = (fa._1, f(fa._2))
   }
 }

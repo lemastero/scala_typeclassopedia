@@ -219,7 +219,63 @@
 
 ## Category Theory
 
-![](img/covariant_contravariant_functors.svg)
+```mermaid
+classDiagram
+   Functor <|-- Apply
+   Apply <|-- FlatMap
+   Functor <|-- Traverse
+   Foldable <|-- Traverse
+   FlatMap <|-- Monad
+   Apply <|-- Applicative
+   Apply <|-- CoflatMap
+   CoflatMap <|-- Comonad
+   Applicative <|-- Monad
+   Applicative <|-- Alternative
+   MonoidK <|-- Alternative
+   Applicative <|-- ApplicativeError
+   ApplicativeError <|-- MonadError
+   Monad <|-- MonadError
+   Monad <|-- Bimonad
+   Comonad <|-- Bimonad
+
+   Functor : F[B] map(F[A], A => B)
+   class Foldable {
+      B foldLeft(F[A], B, Tuple2[B,A] => B)
+   }
+   class Traverse {
+      G[F[B]] traverse(F[A], A => G[B])
+   }
+   class Apply {
+     F[B] ap(F[A], F[A => B]) 
+     F[C] map2(Tuple2[A,B] => C, F[A], F[B])
+   }
+   class Applicative {
+     F[A] pure(A)
+   }
+   class FlatMap {
+     F[B] flatmap(F[A], A => F[B])
+   }
+   class Monad {
+     F[A] flatten(F[F[A]])
+   }
+   class ApplicativeError {
+      F[A] raiseError(E)
+   }
+   class CoflatMap {
+      F[B] extend(F[A], F[A] => B)
+   }
+   class Comonad {
+      A extract(W[A])
+   }
+   class MonoidK {
+     F[A] empty()
+     F[A] combine(F[A], F[A])
+   }
+   class Alternative {
+     F[NonEmptyList[A]] some(F[A])
+     F[List[A]] many(F[A])
+   }
+```
 
 ### Functor (Covariant Functor)
 
@@ -245,7 +301,9 @@ trait Functor[F[_]] {
 }
 ```
 
-* Functor Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala), [zio-prelude](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/Covariant.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr) [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs) [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html), [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2), [nLab](https://ncatlab.org/nlab/show/functor), [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
+* Functor Implementations:  
+   Scala: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala), [zio-prelude](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/Covariant.scala),  
+   [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr), [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs), [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html), [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2), [Racket algebraic](https://docs.racket-lang.org/algebraic/class_base.html#%28part._class~3abase~3afunctor%29), [Racket functional](https://docs.racket-lang.org/functional/interfaces.html#%28part._functors%29), [nLab](https://ncatlab.org/nlab/show/functor), [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
 * Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/Functor.scala)
 * Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Functor.lidr), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/Functors.v), [HoTT Book](https://github.com/HoTT/HoTT/blob/master/theories/Categories/Functor/Core.v), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
@@ -396,7 +454,7 @@ trait Applicative[F[_]] extends Apply[F] {
 }
 ```
 
-* Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Haskell](https://hackage.haskell.org/package/base/docs/Control-Applicative.html) [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
+* Applicative Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Applicative.scala) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala) [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/applicative.scala) [Haskell](https://hackage.haskell.org/package/base/docs/Control-Applicative.html), [Racket algebraic](https://docs.racket-lang.org/algebraic/class_base.html#%28part._class~3abase~3aapplicative%29), [Racket functional](https://docs.racket-lang.org/functional/interfaces.html#%28part._applicatives%29), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Applicative.idr) [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Applicative.java)
 
 * Applicative Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ApplicativeLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Applicative.scala#L118-L134)):
 
@@ -597,7 +655,7 @@ and [usage of flatMap to implement functions zip and number](https://github.com/
 * Implementations:
   [zio-prelude AssociativeFlatten](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/AssociativeFlatten.scala)  
   [Cats FlatMap](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/FlatMap.scala), [Scalaz 7 Bind](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala), [Scalaz 8 Bind](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
-  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr), [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
+  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr), [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [Racket algebraic](https://docs.racket-lang.org/algebraic/class_base.html#%28part._class~3abase~3amonad%29), [Racket functional](https://docs.racket-lang.org/functional/interfaces.html#%28part._monads%29), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
 
 * Resources
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
@@ -933,9 +991,6 @@ trait Distributive[F[_]] extends Functor[F] {
    * (Haskell) usage of Distributive in [old hanshoglund/music-suite](https://github.com/hanshoglund/music-suite/blob/648354f701ba6806e259a4b79b59bb5699249eea/sketch/old/TT.hs#L1742-L1743)
    * [Is there a concept of something like co-applicative functors sitting between comonads and functors?](https://cstheory.stackexchange.com/questions/16241/is-there-a-concept-of-something-like-co-applicative-functors-sitting-between-com)
 
-
-
-![](img/traversable_foldable.svg)
 
 ### Foldable
 
