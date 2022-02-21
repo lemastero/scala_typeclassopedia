@@ -219,7 +219,63 @@
 
 ## Category Theory
 
-![](img/covariant_contravariant_functors.svg)
+```mermaid
+classDiagram
+   Functor <|-- Apply
+   Apply <|-- FlatMap
+   Functor <|-- Traverse
+   Foldable <|-- Traverse
+   FlatMap <|-- Monad
+   Apply <|-- Applicative
+   Apply <|-- CoflatMap
+   CoflatMap <|-- Comonad
+   Applicative <|-- Monad
+   Applicative <|-- Alternative
+   MonoidK <|-- Alternative
+   Applicative <|-- ApplicativeError
+   ApplicativeError <|-- MonadError
+   Monad <|-- MonadError
+   Monad <|-- Bimonad
+   Comonad <|-- Bimonad
+
+   Functor : F[B] map(F[A], A => B)
+   class Foldable {
+      B foldLeft(F[A], B, Tuple2[B,A] => B)
+   }
+   class Traverse {
+      G[F[B]] traverse(F[A], A => G[B])
+   }
+   class Apply {
+     F[B] ap(F[A], F[A => B]) 
+     F[C] map2(Tuple2[A,B] => C, F[A], F[B])
+   }
+   class Applicative {
+     F[A] pure(A)
+   }
+   class FlatMap {
+     F[B] flatmap(F[A], A => F[B])
+   }
+   class Monad {
+     F[A] flatten(F[F[A]])
+   }
+   class ApplicativeError {
+      F[A] raiseError(E)
+   }
+   class CoflatMap {
+      F[B] extend(F[A], F[A] => B)
+   }
+   class Comonad {
+      A extract(W[A])
+   }
+   class MonoidK {
+     F[A] empty()
+     F[A] combine(F[A], F[A])
+   }
+   class Alternative {
+     F[NonEmptyList[A]] some(F[A])
+     F[List[A]] many(F[A])
+   }
+```
 
 ### Functor (Covariant Functor)
 
