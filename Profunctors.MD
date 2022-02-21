@@ -540,8 +540,6 @@ instance ProfunctorEnd (->) where
 
 ## Arrows
 
-![](img/arrows.svg)
-
 ### Category
 
 Abstraction for operations that can be composed and that provide no-op (id)

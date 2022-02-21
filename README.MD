@@ -992,9 +992,6 @@ trait Distributive[F[_]] extends Functor[F] {
    * [Is there a concept of something like co-applicative functors sitting between comonads and functors?](https://cstheory.stackexchange.com/questions/16241/is-there-a-concept-of-something-like-co-applicative-functors-sitting-between-com)
 
 
-
-![](img/traversable_foldable.svg)
-
 ### Foldable
 
 Given definition of foldLeft (eager, left to right0) and foldRight (lazi, right to left) provide additional way to fold Monoid.
