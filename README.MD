@@ -229,7 +229,8 @@ classDiagram
    Apply <|-- Applicative
    Apply <|-- CoflatMap
    CoflatMap <|-- Comonad
-   Applicative <|-- Monad
+   Applicative <|-- Selective
+   Selective <|-- Monad
    Applicative <|-- Alternative
    MonoidK <|-- Alternative
    Applicative <|-- ApplicativeError
@@ -251,6 +252,9 @@ classDiagram
    }
    class Applicative {
      F[A] pure(A)
+   }
+   class Selective {
+      F[B] select(F[Either[A,B]], F[A=>B])
    }
    class FlatMap {
      F[B] flatmap(F[A], A => F[B])
