@@ -582,6 +582,13 @@ trait Monad[F[_]] extends Apply[F] {
 }
 ```
 
+* Implementations:  
+  [zio-prelude AssociativeFlatten](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/AssociativeFlatten.scala)  
+  [Cats FlatMap](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/FlatMap.scala), [Scalaz 7 Bind](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala), [Scalaz 8 Bind](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
+  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala),  
+  [Haskell](https://hackage.haskell.org/package/base-4.16.0.0/docs/Control-Monad.html#t:Monad), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr), [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [Racket algebraic](https://docs.racket-lang.org/algebraic/class_base.html#%28part._class~3abase~3amonad%29), [Racket functional](https://docs.racket-lang.org/functional/interfaces.html#%28part._monads%29)
+* Formalizations: [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
+
 * Monad Laws ([Cats](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Haskell Wiki](https://wiki.haskell.org/Monad_laws)):
   1. flatmap associativity: `fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))`
   2. left identity: `pure(a).flatMap(f) == f(a)`
@@ -651,11 +658,6 @@ You can use Monad Transformer that know what monad is inside (OptionT, EitherT, 
 * Example (translated from John Huges mind blowing workshop: Monads and all that) [instance for custom Tree](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/TreeMonad.scala) 
 and [usage of flatMap to implement functions zip and number](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/helper_implementations/Tree.scala) 
 (using [State Int](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/monad/IntState.scala)).
-
-* Implementations:
-  [zio-prelude AssociativeFlatten](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/AssociativeFlatten.scala)  
-  [Cats FlatMap](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/FlatMap.scala), [Scalaz 7 Bind](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala), [Scalaz 8 Bind](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
-  Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr), [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [Racket algebraic](https://docs.racket-lang.org/algebraic/class_base.html#%28part._class~3abase~3amonad%29), [Racket functional](https://docs.racket-lang.org/functional/interfaces.html#%28part._monads%29), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
 
 * Resources
   * FSiS 3 - Monad type class - Michael Pilquist [(vido 14:44)](https://www.youtube.com/watch?v=VWCtLhH815M&t=884)
