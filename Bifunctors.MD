@@ -2,6 +2,8 @@
 classDiagram
    Bifoldable <|-- Bitraverse
    Bifunctor <|-- Bitraverse
+   Bifunctor <|-- Biapply
+   Biapply <|-- Biapplicative
    Functor <|-- Bifunctor
    Functor <|-- Bifunctor
    Functor <|-- Profunctor
@@ -27,6 +29,14 @@ classDiagram
   class Bitraverse {
     <<P[+_,+_]>>
     G[F[C,D]] bitraverse[G: Applicative](F[A,B], A=>G[C], B => G[D])
+  }
+  class Biapply {
+    <<P[+_,+_]>>
+    F[AA,BB] biApply(F[A,B], F[A=>AA,B=>BB])
+  }
+  class Biapplicative {
+    <<P[+_,+_]>>
+    F[A,B] bipure(a: A, b: B)
   }
   class Zivariant {
     <<Z[-_,+_,+_]>>
@@ -210,8 +220,12 @@ newtype Biff p f g a b = Biff { runBiff :: p (f a) (g b) }
 
 ### Bitraverse
 
-* Implementations: [Scalaz Bitraverse](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala) [Cats Bitraverse](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bitraverse.scala) [Purescript purescript-foldable-traversable/Data.Bitraversable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bitraversable) [Haskell bifunctors/Data.Biapplicative](https://hackage.haskell.org/package/bifunctors/docs/Data-Biapplicative.html)
+* Implementations: [Scalaz Bitraverse](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala) [Cats Bitraverse](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bitraverse.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Data-Bitraversable.html), [Purescript](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bitraversable)
 
 ### Bifoldable
 
-* Implementations: [(Scalaz Bifoldable)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala) [Cats Bifoldable](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) [Purescript purescript-foldable-traversable/Data.Bifoldable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bifoldable)
+* Implementations: [(Scalaz Bifoldable)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala) [Cats Bifoldable](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) [Purescript ](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bifoldable)
+
+### Biapplicative
+
+* Implementations: [Haskell](https://hackage.haskell.org/package/bifunctors/docs/Data-Biapplicative.html)
