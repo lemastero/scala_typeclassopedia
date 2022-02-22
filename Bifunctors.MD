@@ -1,3 +1,39 @@
+```mermaid
+classDiagram
+   Bifoldable <|-- Bitraverse
+   Bifunctor <|-- Bitraverse
+   Functor <|-- Bifunctor
+   Functor <|-- Bifunctor
+   Functor <|-- Profunctor
+   Bifunctor <|-- Zivariant
+   Profunctor <|-- Zivariant
+
+   class Functor {
+     <<F[+_]>>
+     F[B] map(F[A], A => B)
+   }
+  class Profunctor {
+    <<P[-_,+_]>>
+    P[A,B] => P[AA,BB] dimap(AA => A, B => BB)
+  }
+  class Bifunctor {
+    <<P[+_,+_]>>
+    P[A,B] => P[AA,BB] bimap(A => AA, B => BB)
+  }
+  class Bifoldable {
+    <<P[+_,+_]>>
+    C bifoldLeft(F[A,B], C, Tuple2[C,A] => C, Tuple2[C,B] => C)
+  }
+  class Bitraverse {
+    <<P[+_,+_]>>
+    G[F[C,D]] bitraverse[G: Applicative](F[A,B], A=>G[C], B => G[D])
+  }
+  class Zivariant {
+    <<Z[-_,+_,+_]>>
+    P[A,B,C] => P[AA,BB,CC] zimap(AA => A, B => BB, C => CC)
+  }
+```
+
 ### Bifunctor
 
 Abstracts over type constructor with 2 "holes". Represents two independent functors:
