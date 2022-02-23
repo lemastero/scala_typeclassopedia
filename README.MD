@@ -221,63 +221,65 @@
 
 ```mermaid
 classDiagram
-   Functor <|-- Apply
-   Apply <|-- FlatMap
-   Functor <|-- Traverse
-   Foldable <|-- Traverse
-   FlatMap <|-- Monad
-   Apply <|-- Applicative
-   Apply <|-- CoflatMap
-   CoflatMap <|-- Comonad
-   Applicative <|-- Selective
+   Functor~F~ <|-- Apply~F~
+   Apply <|-- FlatMap~F~
+   Functor <|-- Traverse~F~
+   Foldable~F~ <|-- Traverse
+   FlatMap~F~ <|-- Monad~F~
+   Apply~F~ <|-- Applicative~F~
+   Apply <|-- CoflatMap~F~
+   CoflatMap <|-- Comonad~F~
+   Applicative <|-- Selective~F~
    Selective <|-- Monad
-   Applicative <|-- Alternative
-   MonoidK <|-- Alternative
-   Applicative <|-- ApplicativeError
-   ApplicativeError <|-- MonadError
+   Applicative <|-- Alternative~F~
+   MonoidK~F~ <|-- Alternative
+   Applicative <|-- ApplicativeError~F~
+   ApplicativeError <|-- MonadError~F~
    Monad <|-- MonadError
-   Monad <|-- Bimonad
+   Monad <|-- Bimonad~F~
    Comonad <|-- Bimonad
 
-   Functor : F[B] map(F[A], A => B)
+   class Functor {
+     ) map(F[A], A => B): F[B]
+   }
    class Foldable {
-      B foldLeft(F[A], B, Tuple2[B,A] => B)
+     ) foldLeft(F[A], B, Tuple2[B,A] => B): B
    }
    class Traverse {
-      G[F[B]] traverse(F[A], A => G[B])
+     ) traverse(F[A], A => G[B]): G[F[B]]
    }
    class Apply {
-     F[B] ap(F[A], F[A => B]) 
-     F[C] map2(Tuple2[A,B] => C, F[A], F[B])
+     ) ap(F[A], F[A => B]): F[B]
+     ) map2(Tuple2[A,B] => C, F[A], F[B]): F[C]
    }
    class Applicative {
-     F[A] pure(A)
+     ) pure(A): F[A]
    }
    class Selective {
-      F[B] select(F[Either[A,B]], F[A=>B])
+     ) select(F[Either[A,B]], F[A=>B]): F[B]
    }
    class FlatMap {
-     F[B] flatmap(F[A], A => F[B])
+     ) flatmap(F[A], A => F[B]): F[B]
    }
    class Monad {
-     F[A] flatten(F[F[A]])
+     ) flatten(F[F[A]]): F[A]
    }
    class ApplicativeError {
-      F[A] raiseError(E)
+     ) raiseError(E): F[A]
    }
    class CoflatMap {
-      F[B] extend(F[A], F[A] => B)
+     ) extend(F[A], F[A] => B): F[B]
    }
    class Comonad {
-      A extract(W[A])
+     ) extract(W[A]): A
    }
    class MonoidK {
-     F[A] empty()
-     F[A] combine(F[A], F[A])
+     ) empty(): F[A]
+     ) combine(F[A], F[A]): F[A]
    }
    class Alternative {
-     F[NonEmptyList[A]] some(F[A])
-     F[List[A]] many(F[A])
+     ) some(F[A]): F[NonEmptyList[A]]
+     ) many(F[A]): F[List[A]]
    }
 ```
 

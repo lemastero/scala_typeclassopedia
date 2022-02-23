@@ -1,77 +1,65 @@
 ```mermaid
 classDiagram
+classDiagram
+   Functor~F[+_]~ <|-- Bifunctor~F[+_,+_]~
    Functor <|-- Bifunctor
-   Functor <|-- Bifunctor
-   Functor <|-- Profunctor
-   Contravariant <|-- Profunctor
-   Semicategory <|-- Category
-   Category <|-- Arrow
-   Bifunctor <|-- Zivariant
+   Functor <|-- Profunctor~F[-_,+_]~
+   Contravariant~F[-_]~ <|-- Profunctor
+   Semicategory~F[-_,+_]~ <|-- Category~F[-_,+_]~
+   Category <|-- Arrow~F[-_,+_]~
+   Bifunctor <|-- Zivariant~F[-_,+_,+_]~
    Profunctor <|-- Zivariant
-   Profunctor <|-- Strong
+   Profunctor <|-- Strong~F[-_,+_]~
    Strong -- Arrow
-   Arrow <|-- ArrowApply
-   Arrow <|-- CommutativeArrow
-   Arrow <|-- ArrowLoop
-   Profunctor <|-- Choice
-   Arrow <|-- ArrowZero
-   Arrow <|-- ArrowChoice
+   Arrow <|-- ArrowApply~F[-_,+_]~
+   Arrow <|-- CommutativeArrow~F[-_,+_]~
+   Arrow <|-- ArrowLoop~F[-_,+_]~
+   Profunctor <|-- Choice~F[-_,+_]~
+   Arrow <|-- ArrowZero~F[-_,+_]~
+   Arrow <|-- ArrowChoice~F[-_,+_]~
    Choice <|-- ArrowChoice
 
    class Functor {
-     <<F[+_]>>
-     F[B] map(F[A], A => B)
+     ) map(F[A], A => B): F[B]
    }
    class Contravariant {
-     <<F[-_]>>
-     F[B] contramap(F[A], B => A)
+     ) contramap(F[A], B => A): F[B]
    }
    class Semicategory {
-     <<P[-_,+_]>>
-     F[A,C] compose[A,B,C](F[B,C], F[A,B])
+     ) compose[A,B,C](F[B,C], F[A,B]): F[A,C]
    }
   class Category {
-    <<P[-_,+_]>>
-    F[A,A] id[A]
+    ) id[A]: F[A,A]
   }
   class Profunctor {
-    <<P[-_,+_]>>
-    P[A,B] => P[AA,BB] dimap(AA => A, B => BB)
+    ) dimap(AA => A, B => BB): P[A,B] => P[AA,BB]
   }
   class Bifunctor {
-    <<P[+_,+_]>>
-    P[A,B] => P[AA,BB] bimap(A => AA, B => BB)
+    ) bimap(A => AA, B => BB): P[A,B] => P[AA,BB]
   }
   class Zivariant {
-    <<Z[-_,+_,+_]>>
-    P[A,B,C] => P[AA,BB,CC] zimap(AA => A, B => BB, C => CC)
+    ) zimap(AA => A, B => BB, C => CC): P[A,B,C] => P[AA,BB,CC]
   }
   class Strong {
-    <<P[-_,+_]>>
-    P[Tuple2[A,C], Tuple2[B,C]] first(P[A,B])
+    ) first(P[A,B]): P[(A,C), (B,C)]
   }
   class Choice {
-    <<P[-_,+_]>>
-    P[Either[A, C], Either[B, C]] left(P[A,B])
+    ) left(P[A,B]): P[Either[A, C], Either[B, C]]
   }
   class Arrow {
-     <<P[-_,+_]>>
-     F[A, B] arr(A => B)
+    ) arr(A => B): F[A, B]
   }
   class ArrowZero {
-     <<P[-_,+_]>>
-     P[A,B] zeroArr()
+    ) zeroArr(): P[A,B]
   }
   class ArrowApply {
-     <<P[-_,+_]>>
-     C app(P[P[B,C],B])
+    ) app(P[P[B,C],B]): C
   }
   class ArrowApply {
-     <<P[-_,+_]>>
-     C app(P[P[B,C],B])
+    ) app(P[P[B,C],B]): C
   }
   class ArrowLoop {
-     P[B,C] loop(P[Tuple2[B,D], Tuple2[C,D]]
+    ) loop(P[(B,D), (C,D)]: P[B,C]
   }
 ```
 

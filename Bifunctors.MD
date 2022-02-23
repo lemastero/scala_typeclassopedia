@@ -1,46 +1,38 @@
 ```mermaid
 classDiagram
-   Bifoldable <|-- Bitraverse
-   Bifunctor <|-- Bitraverse
-   Bifunctor <|-- Biapply
-   Biapply <|-- Biapplicative
+   Bifoldable~P[+_,+_]~ <|-- Bitraverse~P[+_,+_]~
+   Bifunctor~P[+_,+_]~ <|-- Bitraverse
+   Bifunctor <|-- Biapply~P[+_,+_]~
+   Biapply <|-- Biapplicative~P[+_,+_]~
+   Functor~F[+_]~ <|-- Bifunctor
    Functor <|-- Bifunctor
-   Functor <|-- Bifunctor
-   Functor <|-- Profunctor
-   Bifunctor <|-- Zivariant
+   Functor <|-- Profunctor~P[-_,+_]~
+   Bifunctor <|-- Zivariant~Z[-_,+_,+_]~
    Profunctor <|-- Zivariant
 
-   class Functor {
-     <<F[+_]>>
-     F[B] map(F[A], A => B)
-   }
+  class Functor {
+    ) map(F[A], A => B): F[B]
+  }
   class Profunctor {
-    <<P[-_,+_]>>
-    P[A,B] => P[AA,BB] dimap(AA => A, B => BB)
+    ) dimap(AA => A, B => BB): P[A,B] => P[AA,BB]
   }
   class Bifunctor {
-    <<P[+_,+_]>>
-    P[A,B] => P[AA,BB] bimap(A => AA, B => BB)
+    ) bimap(A => AA, B => BB): P[A,B] => P[AA,BB]
   }
   class Bifoldable {
-    <<P[+_,+_]>>
-    C bifoldLeft(F[A,B], C, Tuple2[C,A] => C, Tuple2[C,B] => C)
+    ) bifoldLeft(F[A,B], C, (C,A) => C, (C,B) => C): C
   }
   class Bitraverse {
-    <<P[+_,+_]>>
-    G[F[C,D]] bitraverse[G: Applicative](F[A,B], A=>G[C], B => G[D])
+    ) bitraverse[G: Applicative](F[A,B], A=>G[C], B => G[D]): G[F[C,D]]
   }
   class Biapply {
-    <<P[+_,+_]>>
-    F[AA,BB] biApply(F[A,B], F[A=>AA,B=>BB])
+    ) biApply(F[A,B], F[A=>AA,B=>BB]): F[AA,BB]
   }
   class Biapplicative {
-    <<P[+_,+_]>>
-    F[A,B] bipure(a: A, b: B)
+    ) bipure(a: A, b: B): F[A,B]
   }
   class Zivariant {
-    <<Z[-_,+_,+_]>>
-    P[A,B,C] => P[AA,BB,CC] zimap(AA => A, B => BB, C => CC)
+    ) zimap(AA => A, B => BB, C => CC): P[A,B,C] => P[AA,BB,CC]
   }
 ```
 
