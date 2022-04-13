@@ -32,7 +32,7 @@ libraryDependencies ++= Seq(
 
   // ZIO
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC8",
-  "dev.zio" %% "zio" % "1.0.13",
+  "dev.zio" %% "zio" % "1.0.14",
 
   // algebra
   "org.typelevel" %% "algebra" % "2.7.0",
@@ -58,7 +58,7 @@ libraryDependencies ++= Seq(
 
   "org.scalatest" %% "scalatest" % "3.2.11" % Test,
 
-  "org.typelevel" %% "discipline-core" % "1.4.0" % Test,
+  "org.typelevel" %% "discipline-core" % "1.5.0" % Test,
   "org.typelevel" %% "discipline-scalatest" % "2.1.5" % Test
 )
 
