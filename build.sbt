@@ -25,7 +25,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion,
   "org.typelevel" %% "cats-effect" % "2.5.4",
 
-  "io.monix" %% "monix" % "3.4.0",
+  "io.monix" %% "monix" % "3.4.1",
 
   // Scalaz
   "org.scalaz"    %% "scalaz-core" % "7.3.6",
