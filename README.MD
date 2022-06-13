@@ -698,7 +698,7 @@ case class Reader[-In, +R](run: In => R) {
 ```
 
 * Reader can be used to implement dependency injection.
-* Monad instance can be defined for Reaer.
+* Monad instance can be defined for Reader.
 
 * Resources
   * The Reader Monad for Dependency Injection - Json Arhart [(video)](https://www.youtube.com/watch?v=xPlsVVaMoB0)
@@ -719,7 +719,7 @@ Abstraction over stateful computation.
 case class State[S,A](runState: S => (A,S))
 ```
 
-is a monad:
+You can define monad instance for state:
 
 ```scala
 def stateMonad[S]: Monad[State[S, ?]] = new Monad[State[S, ?]] {
@@ -735,12 +735,36 @@ def stateMonad[S]: Monad[State[S, ?]] = new Monad[State[S, ?]] {
 }
 ```
 
+You can define useful operations on state. This could be abstract over in `StateMonad` typeclass:
+```scala
+trait StateMonad[F[_],S] extends Monad[F] {
+  def update: (S => S) => F[S]
+  def set: S => F[S] = s => update( const(s) )
+  def fetch: F[S] = update(identity)
+}
+```
 * Resources
   * Towards an Effect System in Scala, Part 1: ST Monad [(blog post)](https://apocalisp.wordpress.com/2011/03/20/towards-an-effect-system-in-scala-part-1/)
   * Scalaz State Monad - Michael Pilquist [(video)](https://www.youtube.com/watch?v=Jg3Uv_YWJqI)
   * Memoisation with State using Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/memoisation-with-state-using-scala/index.html)
   * Monads to Machine Code - Stephen Diehl [(blog post)](http://www.stephendiehl.com/posts/monads_machine_code.html) explore JIT compilation and LLVM using IO Monad and State Monad
-  * Immutability, Docker, and Haskell's ST type - Michael Snoyman (https://www.fpcomplete.com/blog/2017/02/immutability-docker-haskells-st-type)
+  * [Immutability, Docker, and Haskell's ST type](https://www.fpcomplete.com/blog/2017/02/immutability-docker-haskells-st-type) - Michael Snoyman
+
+
+### State Monad
+
+You can define useful operations on [State](./README.MD#state). This could be abstract over in `StateMonad` typeclass:
+```scala
+trait StateMonad[F[_],S] extends Monad[F] {
+  def update: (S => S) => F[S]
+  def set: S => F[S] = s => update( const(s) )
+  def fetch: F[S] = update(identity)
+}
+```
+* Resources
+  * (Haskell) [Monadic Parser Combinators](http://www.cs.nott.ac.uk/~pszgmh/monparsing.pdf) - Graham Hutton, Erik Meijer (1996)
+  * (Haskell) [parsec](https://hackage.haskell.org/package/parsec) Haskell monadic parser combinator library
+  * Parser combinators library: [izeigerman/parsecat](https://github.com/izeigerman/parsecat)
 
 ### RWS Monad
 
