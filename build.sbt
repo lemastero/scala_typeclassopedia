@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
   "dev.zio" %% "zio" % "1.0.15",
 
   // algebra
-  "org.typelevel" %% "algebra" % "2.7.0",
+  "org.typelevel" %% "algebra" % "2.8.0",
   "com.twitter" %% "algebird-core" % "0.13.9",
 
   // type level
