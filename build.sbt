@@ -2,7 +2,7 @@ name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-lazy val scala212 = "2.12.15"
+lazy val scala212 = "2.12.16"
 lazy val scala213 = "2.13.8"
 
 scalaVersion := scala213
@@ -12,7 +12,7 @@ crossScalaVersions := List(scala212, scala213)
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 lazy val catsVersion = "2.7.0"
-lazy val catsMtlVersion = "1.2.1"
+lazy val catsMtlVersion = "1.3.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.16.0"
 libraryDependencies ++= Seq(
@@ -32,10 +32,10 @@ libraryDependencies ++= Seq(
 
   // ZIO
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC8",
-  "dev.zio" %% "zio" % "1.0.14",
+  "dev.zio" %% "zio" % "1.0.15",
 
   // algebra
-  "org.typelevel" %% "algebra" % "2.7.0",
+  "org.typelevel" %% "algebra" % "2.8.0",
   "com.twitter" %% "algebird-core" % "0.13.9",
 
   // type level
@@ -59,7 +59,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.12" % Test,
 
   "org.typelevel" %% "discipline-core" % "1.5.1" % Test,
-  "org.typelevel" %% "discipline-scalatest" % "2.1.5" % Test
+  "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test
 )
 
 scalacOptions ++= Seq(
