@@ -11,7 +11,7 @@ crossScalaVersions := List(scala212, scala213)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-lazy val catsVersion = "2.7.0"
+lazy val catsVersion = "2.8.0"
 lazy val catsMtlVersion = "1.3.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.16.0"
@@ -32,7 +32,7 @@ libraryDependencies ++= Seq(
 
   // ZIO
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC8",
-  "dev.zio" %% "zio" % "1.0.15",
+  "dev.zio" %% "zio" % "1.0.16",
 
   // algebra
   "org.typelevel" %% "algebra" % "2.8.0",
