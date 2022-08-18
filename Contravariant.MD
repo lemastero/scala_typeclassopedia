@@ -90,9 +90,9 @@ Category Theory [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
 
 ```mermaid
 flowchart RL
-  FA1(("F[A]")) --"map(id)"--> FA2(("F[A]"))
-  FA(("F[A]")) --"map(f andThen g)"--> FC(("F[C]"))
-  FA(("F[A]")) --"map(f)"--> FB(("F[B]"))--"map(g)"--> FC(("F[C]"))
+  FA1(("F[A]")) --"contramap(id)"--> FA2(("F[A]"))
+  FA(("F[A]")) --"contramap(f andThen g)"--> FC(("F[C]"))
+  FA(("F[A]")) --"contramap(f)"--> FB(("F[B]"))--"contramap(g)"--> FC(("F[C]"))
 ```
 
 1 contramap identity  
