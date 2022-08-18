@@ -295,4 +295,4 @@ classDiagram
   * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
   * [Summary of types in Cats documentation](https://typelevel.org/cats/nomenclature.html)
 
-[More resources: about Curry-Howard-Lambek isomorphism](ComputationalTrinitarianism.MD)
+[Computational trinitarianism resources](ComputationalTrinitarianism.MD)
