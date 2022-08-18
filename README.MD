@@ -67,8 +67,6 @@ classDiagram
    }
 ```
 
-Category Theory
-
 * Base abstractions: [Functor](./BasicAbstractions.MD#functor-covariant-functor), [Apply](./BasicAbstractions.MD#apply), [Applicative](./BasicAbstractions.MD#applicative-applicative-functor), [Monad](./BasicAbstractions.MD#monad), [Contravariant](./Contravariant.MD#contravariant-contravariant-functor), [Comonad](./Comonads.MD#comonad), [Foldable](./BasicAbstractions.MD#foldable), [Bifunctor](./Bifunctors.MD#bifunctor), [Arrow](./Profunctors.MD#arrow), [Coyoneda](./KanExtensions.MD#coyoneda)
 
 * Covariant Functors: [Functor](./BasicAbstractions.MD#functor-covariant-functor), [Apply](./BasicAbstractions.MD#apply), [Applicative](./BasicAbstractions.MD#applicative-applicative-functor), [Selective](./BasicAbstractions.MD#selective-selective-applicative-functors)
@@ -249,7 +247,16 @@ classDiagram
 
 * [Cayley representations](./BasicAbstractions.MD#cayley-representations): [Difference Lists](./BasicAbstractions.MD#difference-lists), [Codensity](./KanExtensions.MD#codensity), [Double Cayley Representation](./BasicAbstractions.MD#double-cayley-representation)
 
-* [ADT (Algebra of types)](./Limits.MD#adt-algebra-of-types): [Unit](./Limits.MD#unit), [Void](./Limits.MD#void), [Product](./Limits.MD#product), [Sum (Coproduct)](./Limits.MD#sum-coproduct), [These](./Limits.MD#These)
+* [Curry-Howard Isomorphism](./Limits.MD#adt-algebra-of-types): [These](./Limits.MD#These)
+
+| Types         | Logic                | Category Theory       | Homotopy Theory   |
+|---------------|----------------------|-----------------------|-------------------|
+| [Void](./Limits.MD#void)          | false                | initial object        | empty space       |
+| [Unit](./Limits.MD#unit)          | true                 | terminal object       | singleton         |
+| [Sum (Coproduct)](./Limits.MD#sum-coproduct) Eiter[A,B]    | A v B disjunction    | coproduct             | coproduct space   |
+| [Product](./Limits.MD#product) (A,B)          | A ∧ B conjunction    | product               | product space     |
+| A => B        | A => B implication   | exponential object    | singleton         |
+| A => Void     | negation             | exp. obj. into initial obj. |            |
 
 * Higher kinded & exotic abstractions: [Natural transformation (FunctionK)](./HigherKinded.MD#natural-transformation-functionk), [Monoidal Category, Monoid Object](./HigherKinded.MD#monoidal-categories-monoid-object), [Cartesian Closed Category](./HigherKinded.MD#cartesian-closed-category), [Day Convolution](./HigherKinded.MD#day-convolution), [Functor Functor (FFunctor)](./HigherKinded.MD#functor-functor-ffunctor), [Monad morphisms](./HigherKinded.MD#monad-morphisms), [higher kinded category theory](./HigherKinded.MD#higher-kinded-category-theory), [SemigroupK (Plus)](./BasicAbstractions.MD#semigroupk-plus), [MonoidK (PlusEmpty)](./BasicAbstractions.MD#monoidk-plusempty), [Dinatural Transformation](./Profunctors.MD#dinatural-transformation), [Ends & Coends](./Profunctors.MD#ends--coends), [Align](./BasicAbstractions.MD#align), [Task](./BasicAbstractions.MD#andrey-mokhov-task), [Transducers](./BasicAbstractions.MD#transducers), [Relative monads](./BasicAbstractions.MD#relative-monads), [Disintegrate](./BasicAbstractions.MD#disintegrate)
 
