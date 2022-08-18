@@ -1,6 +1,5 @@
 ```mermaid
 classDiagram
-classDiagram
    Functor~F[+_]~ <|-- Bifunctor~F[+_,+_]~
    Functor <|-- Bifunctor
    Functor <|-- Profunctor~F[-_,+_]~
