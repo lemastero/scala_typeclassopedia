@@ -29,10 +29,15 @@ trait Functor[F[_]] {
 * Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Functor.lidr), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/Functors.v), [HoTT Book](https://github.com/HoTT/HoTT/blob/master/theories/Categories/Functor/Core.v), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
 * Functor Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/FunctorLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L98-L107) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Functor.html#t:Functor)):
-    1. identify: `xs.map(identity) == xs`
+    1. identify: `xs.map(id) == xs`
     2. composition: `xs.map(f).map(g) == xs.map(x => g(f(x))`
 
-![](img/functor_laws.svg)
+```mermaid
+flowchart LR
+  FA1(("F[A]")) --"map(id)"--> FA2(("F[A]"))
+  FA(("F[A]")) --"map(f andThen g)"--> FC(("F[C]"))
+  FA(("F[A]")) --"map(f)"--> FB(("F[B]"))--"map(g)"--> FC(("F[C]"))
+```
 
 If Functor satisfies first law, then it also satisfies second: [(Haskell) The second Functor law is redundant - David Luposchainsky](https://github.com/quchen/articles/blob/master/second_functor_law.md)
 if we don't include `bottom values` - [(Haskell) contrexample using undefined](https://stackoverflow.com/questions/8305949/haskell-functor-implied-law/8323243#8323243).
