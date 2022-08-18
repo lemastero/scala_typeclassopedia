@@ -46,18 +46,41 @@ trait Bifunctor[F[_, _]] {
 ```
 * Bifunctor Laws
 1. identity `xs.bimap(identity, identity) == xs` bimap with two identify function does nothing
+```mermaid
+flowchart LR
+  PAB1(("P[A,B]")) --"bimap(id,id)"--> PAB2(("P[A,B]"))
+```
 2. composition `xs.bimap(f, h).bimap(g,i) == xs.bimap(x => g(f(x), x => h(i(x))`  you can bimap using f and h and then bimap using g and i or bimap once using composition
+
 Second law is automatically fulfilled if the first law holds.
+```mermaid
+flowchart LR
+  PAB(("P[A,B]")) --"bimap(f1 andThen f2, g1 andTHen g2)"--> PAABB(("P[A2,B2]"))
+  PAB(("P[A,B]")) --"bimap(f1,g1)"--> PA1B1(("P[A1,B1]"))--"bimap(f2,g2)"--> PAABB(("P[A2,B2]"))
+```
 * Alternatively can be specified by providing
 ```scala
 def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
 def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
 ```
-In that case identity law must hold for both functions:
-3. identity `xs.leftMap(identity) == xs` leftMap with identify function does nothing
-4. identity `xs.rightMap(identity) == xs` rightMap with identify function does nothing
-If leftMap and rightMap and bimap are specified then additional lwa must be fullfilled:
+In that case identity law must hold for both functions:  
+3. identity `xs.leftMap(identity) == xs` leftMap with identify function does nothing  
+```mermaid
+flowchart LR
+  PABL1(("P[A,B]")) --"leftMap(id)"--> PABL2(("P[A,B]"))
+```
+4. identity `xs.rightMap(identity) == xs` rightMap with identify function does nothing  
+```mermaid
+flowchart LR
+  PABR1(("P[A,B]")) --"rihtMap(id)"--> PABR2(("P[A,B]"))
+```
+If leftMap and rightMap and bimap are specified then additional law must be fullfilled:  
 5. `xs.bimap(f, g) == xs.leftMap(f).rightMap(g)`
+```mermaid
+flowchart LR
+  PAB(("P[A,B]")) --"bimap(f, g)"--> PAABB(("P[A2,B2]"))
+  PAB(("P[A,B]")) --"leftMap(f)"--> PA1B1(("P[A1,B]"))--"rightMap(g)"--> PAABB(("P[A2,B2]"))
+```
 * Derived methods
 ```scala
 def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
