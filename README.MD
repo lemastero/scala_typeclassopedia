@@ -85,7 +85,43 @@ Category Theory
 
 * Invariant Functors: [Invariant (Invariant Functor, Exponential Functor)](./BasicAbstractions.MD#invariant-invariant-functor-exponential-functor), [Invariant Day](./HigherKinded.MD#invariant-day)
 
-* [Natural transformation (FunctionK)](./HigherKinded.MD#natural-transformation-functionk)
+```mermaid
+classDiagram
+   Bifoldable~P[+_,+_]~ <|-- Bitraverse~P[+_,+_]~
+   Bifunctor~P[+_,+_]~ <|-- Bitraverse
+   Bifunctor <|-- Biapply~P[+_,+_]~
+   Biapply <|-- Biapplicative~P[+_,+_]~
+   Functor~F[+_]~ <|-- Bifunctor
+   Functor <|-- Bifunctor
+   Functor <|-- Profunctor~P[-_,+_]~
+   Bifunctor <|-- Zivariant~Z[-_,+_,+_]~
+   Profunctor <|-- Zivariant
+
+  class Functor {
+    ) map(F[A], A => B): F[B]
+  }
+  class Profunctor {
+    ) dimap(AA => A, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Bifunctor {
+    ) bimap(A => AA, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Bifoldable {
+    ) bifoldLeft(F[A,B], C, (C,A) => C, (C,B) => C): C
+  }
+  class Bitraverse {
+    ) bitraverse[G: Applicative](F[A,B], A=>G[C], B => G[D]): G[F[C,D]]
+  }
+  class Biapply {
+    ) biApply(F[A,B], F[A=>AA,B=>BB]): F[AA,BB]
+  }
+  class Biapplicative {
+    ) bipure(a: A, b: B): F[A,B]
+  }
+  class Zivariant {
+    ) zimap(AA => A, B => BB, C => CC): P[A,B,C] => P[AA,BB,CC]
+  }
+```
 
 * Bifunctors: [Bifunctor](./Bifunctors.MD#bifunctor), [Join](./Bifunctors.MD#bifunctor-join), [Wrap](./Bifunctors.MD#bifunctor-wrap), [Flip](./Bifunctors.MD#bifunctor-flip), [Joker](./Bifunctors.MD#bifunctor-joker), [Clown](./Bifunctors.MD#bifunctor-clown), [Product](./Bifunctors.MD#bifunctor-product), [Bifunctor Sum](./Bifunctors.MD#bifunctor-sum), [Bifunctor Tannen](./Bifunctors.MD#bifunctor-tannen), [Bifunctor Biff](./Bifunctors.MD#bifunctor-biff), [Bitraverse](./Bifunctors.MD#bitraverse), [Bifoldable](./Bifunctors.MD#bifoldable),
 
@@ -97,7 +133,47 @@ Category Theory
 
 * [Free constructions](./Free.MD#free-constructions), [Free Applicative](./Free.MD#free-applicative), [Free Monads](./Free.MD#free-monads), [Cofree](./Free.MD#cofree), [Free Alternative](./Free.MD#free-alternative), [Free Arrow](./Free.MD#free-arrow), [Free Monad transformers](./Free.MD#free-monad-transformers), [Cofree Traverse](./Free.MD#cofree-traverse)
  
-* [Representable & Adjunctions](./Adjunction.MD#representable--adjunctions): [Representable](./Adjunction.MD#representable), [Corepresentable](./Adjunction.MD#corepresentable), [Adjunction](./Adjunction.MD#adjunction), [Adjoint Triples](./Adjunction.MD#adjoint-triples), [(Co)Yoneda & (Co)Density & Kan Extensions](./KanExtensions.MD#coyoneda--codensity--kan-extensions), [Yoneda](./KanExtensions.MD#yoneda), [Coyoneda](./KanExtensions.MD#coyoneda), [Right Kan extension](./KanExtensions.MD#right-kan-extension), [Left Kan Extension](./KanExtensions.MD#left-kan-extension), [Density Comonad](./KanExtensions.MD#density-comonad), [Codensity](./KanExtensions.MD#codensity), [Day Convolution](./KanExtensions.MD#day-convolution)
+* [Representable & Adjunctions](./Adjunction.MD#representable--adjunctions): [Representable](./Adjunction.MD#representable), [Corepresentable](./Adjunction.MD#corepresentable), [Adjunction](./Adjunction.MD#adjunction), [Adjoint Triples](./Adjunction.MD#adjoint-triples)
+
+```mermaid
+classDiagram
+   Ran~G[_], H[_], A~ <|-- Yoneda~H[_], A~
+   Lan~G[_], H[_], A~ <|-- CoYoneda~H[_], A~
+   Ran <|-- Codensity~G[_], A~
+   Lan <|-- Density~G[_], A~
+
+  class Ran {
+    // Right Kan Extension
+    ) run[B](A => G[B]): H[B]
+  }
+  class Yoneda {
+    ) run[B](A => B): H[R]
+  }
+  class Codensity {
+    ) run[B](A => G[B]): G[B]
+  }
+  class Lan {
+    // Left Kan Extension
+    fz: H[Z]
+    run: G[Z] => A
+  }
+  class CoYoneda {
+    fz: H[Z]
+    run: Z => A
+  }
+  class Density {
+    fz: G[Z]
+    run: G[Z] => A
+  }
+  class Day~G[_], H[_], A~ {
+    // Day convolution
+    gb: G[Z]
+    hb: H[X]
+    ) run: (Z,X) => A
+  }
+```
+
+* [(Co)Yoneda & (Co)Density & Kan Extensions](./KanExtensions.MD#coyoneda--codensity--kan-extensions), [Yoneda](./KanExtensions.MD#yoneda), [Coyoneda](./KanExtensions.MD#coyoneda), [Right Kan extension](./KanExtensions.MD#right-kan-extension), [Left Kan Extension](./KanExtensions.MD#left-kan-extension), [Density Comonad](./KanExtensions.MD#density-comonad), [Codensity](./KanExtensions.MD#codensity), [Day Convolution](./KanExtensions.MD#day-convolution)
 
 * Profunctors: [Profunctor](./Profunctors.MD#profunctor), [Star](./Profunctors.MD#star), [CoStar](./Profunctors.MD#costar), [Strong Profunctor](./Profunctors.MD#strong-profunctor), [Tambara](./Profunctors.MD#tambara), [Choice Profunctor](./Profunctors.MD#choice-profunctor), [Extranatural Transformation](./Profunctors.MD#extranatural-transformation), [Profunctor Functor](./Profunctors.MD#profunctor-functor), [Profunctor Monad](./Profunctors.MD#profunctor-monad), [Profunctor Comonad](./Profunctors.MD#profunctor-comonad), [Procompose](./Profunctors.MD#procompose),  [ProductProfunctor](./Profunctors.MD#roductprofunctor), [SumProfunctor](./Profunctors.MD#sumprofunctor)
 
@@ -105,13 +181,77 @@ Category Theory
 
 * Profunctor Kan Extensions: [Profunctor Yoneda](./Profunctors.MD#profunctor-yoneda), [Profunctor CoYoneda](./Profunctors.MD#profunctor-coyoneda), [Profunctor Ran](./Profunctors.MD#profunctor-ran), [Profunctor Codensity](./Profunctors.MD#profunctor-codensity)
 
+```mermaid
+classDiagram
+   Functor~F[+_]~ <|-- Bifunctor~F[+_,+_]~
+   Functor <|-- Bifunctor
+   Functor <|-- Profunctor~F[-_,+_]~
+   Contravariant~F[-_]~ <|-- Profunctor
+   Semicategory~F[-_,+_]~ <|-- Category~F[-_,+_]~
+   Category <|-- Arrow~F[-_,+_]~
+   Bifunctor <|-- Zivariant~F[-_,+_,+_]~
+   Profunctor <|-- Zivariant
+   Profunctor <|-- Strong~F[-_,+_]~
+   Strong -- Arrow
+   Arrow <|-- ArrowApply~F[-_,+_]~
+   Arrow <|-- CommutativeArrow~F[-_,+_]~
+   Arrow <|-- ArrowLoop~F[-_,+_]~
+   Profunctor <|-- Choice~F[-_,+_]~
+   Arrow <|-- ArrowZero~F[-_,+_]~
+   Arrow <|-- ArrowChoice~F[-_,+_]~
+   Choice <|-- ArrowChoice
+
+   class Functor {
+     ) map(F[A], A => B): F[B]
+   }
+   class Contravariant {
+     ) contramap(F[A], B => A): F[B]
+   }
+   class Semicategory {
+     ) compose[A,B,C](F[B,C], F[A,B]): F[A,C]
+   }
+  class Category {
+    ) id[A]: F[A,A]
+  }
+  class Profunctor {
+    ) dimap(AA => A, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Bifunctor {
+    ) bimap(A => AA, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Zivariant {
+    ) zimap(AA => A, B => BB, C => CC): P[A,B,C] => P[AA,BB,CC]
+  }
+  class Strong {
+    ) first(P[A,B]): P[(A,C), (B,C)]
+  }
+  class Choice {
+    ) left(P[A,B]): P[Either[A, C], Either[B, C]]
+  }
+  class Arrow {
+    ) arr(A => B): F[A, B]
+  }
+  class ArrowZero {
+    ) zeroArr(): P[A,B]
+  }
+  class ArrowApply {
+    ) app(P[P[B,C],B]): C
+  }
+  class ArrowApply {
+    ) app(P[P[B,C],B]): C
+  }
+  class ArrowLoop {
+    ) loop(P[(B,D), (C,D)]: P[B,C]
+  }
+```
+
 * [Arrows](./Profunctors.MD#arrows): [Category](./Profunctors.MD#category), [Arrow](./Profunctors.MD#arrow), [Commutative Arrow](./Profunctors.MD#commutativearrow), [Arrow Choice](./Profunctors.MD#arrow-choice), [Arrow Apply, Arrow Monad](./Profunctors.MD#arrow-apply-arrow-monad), [Arrow Loop](./Profunctors.MD#arrow-loop), [Arrow Zero](./Profunctors.MD#arrow-zero), [Free Arrow](./Free.MD#free-arrow), [Kleisli](./Profunctors.MD#kleisli), [Cokleisli](./Profunctors.MD#cokleisli), [BiArrow](./Profunctors.MD#biarrow), [BiKleisli](./Profunctors.MD#bikleisli)
 
 * [Cayley representations](./BasicAbstractions.MD#cayley-representations): [Difference Lists](./BasicAbstractions.MD#difference-lists), [Codensity](./KanExtensions.MD#codensity), [Double Cayley Representation](./BasicAbstractions.MD#double-cayley-representation)
 
 * [ADT (Algebra of types)](./Limits.MD#adt-algebra-of-types): [Unit](./Limits.MD#unit), [Void](./Limits.MD#void), [Product](./Limits.MD#product), [Sum (Coproduct)](./Limits.MD#sum-coproduct), [These](./Limits.MD#These)
 
-* Higher kinded & exotic abstractions: [Monoidal Category, Monoid Object](./HigherKinded.MD#monoidal-categories-monoid-object), [Cartesian Closed Category](./HigherKinded.MD#cartesian-closed-category), [Day Convolution](./HigherKinded.MD#day-convolution), [Functor Functor (FFunctor)](./HigherKinded.MD#functor-functor-ffunctor), [Monad morphisms](./HigherKinded.MD#monad-morphisms), [higher kinded category theory](./HigherKinded.MD#higher-kinded-category-theory), [SemigroupK (Plus)](./BasicAbstractions.MD#semigroupk-plus), [MonoidK (PlusEmpty)](./BasicAbstractions.MD#monoidk-plusempty), [Dinatural Transformation](./Profunctors.MD#dinatural-transformation), [Ends & Coends](./Profunctors.MD#ends--coends), [Align](./BasicAbstractions.MD#align), [Task](./BasicAbstractions.MD#andrey-mokhov-task), [Transducers](./BasicAbstractions.MD#transducers), [Relative monads](./BasicAbstractions.MD#relative-monads), [Disintegrate](./BasicAbstractions.MD#disintegrate)
+* Higher kinded & exotic abstractions: [Natural transformation (FunctionK)](./HigherKinded.MD#natural-transformation-functionk), [Monoidal Category, Monoid Object](./HigherKinded.MD#monoidal-categories-monoid-object), [Cartesian Closed Category](./HigherKinded.MD#cartesian-closed-category), [Day Convolution](./HigherKinded.MD#day-convolution), [Functor Functor (FFunctor)](./HigherKinded.MD#functor-functor-ffunctor), [Monad morphisms](./HigherKinded.MD#monad-morphisms), [higher kinded category theory](./HigherKinded.MD#higher-kinded-category-theory), [SemigroupK (Plus)](./BasicAbstractions.MD#semigroupk-plus), [MonoidK (PlusEmpty)](./BasicAbstractions.MD#monoidk-plusempty), [Dinatural Transformation](./Profunctors.MD#dinatural-transformation), [Ends & Coends](./Profunctors.MD#ends--coends), [Align](./BasicAbstractions.MD#align), [Task](./BasicAbstractions.MD#andrey-mokhov-task), [Transducers](./BasicAbstractions.MD#transducers), [Relative monads](./BasicAbstractions.MD#relative-monads), [Disintegrate](./BasicAbstractions.MD#disintegrate)
 
 * Limits: [Cone](./Limits.MD#cone), [Cocone](./Limits.MD#cocone), [Diagonal Functor](./Limits.MD#diagonal-functor), [Limit](./Limits.MD#limit), [Colimit](./Limits.MD#colimit), [Ends & Coends](./Profunctors#ends--coends)
 
