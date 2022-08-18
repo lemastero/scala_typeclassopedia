@@ -88,7 +88,12 @@ Category Theory [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
 
 * Contravariant laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ContravariantLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
 
-![](img/contravariant_laws.svg)
+```mermaid
+flowchart RL
+  FA1(("F[A]")) --"map(id)"--> FA2(("F[A]"))
+  FA(("F[A]")) --"map(f andThen g)"--> FC(("F[C]"))
+  FA(("F[A]")) --"map(f)"--> FB(("F[B]"))--"map(g)"--> FC(("F[C]"))
+```
 
 1 contramap identity  
 
