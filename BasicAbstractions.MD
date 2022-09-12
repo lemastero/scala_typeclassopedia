@@ -502,12 +502,20 @@ trait StateMonad[F[_],S] extends Monad[F] {
 * [Adventures in Three Monads - Edward Z. Yang](http://web.mit.edu/~ezyang/Public/threemonads.pdf)
 * [LogicT - backtracking monad transformer with fair operations and pruning](http://okmij.org/ftp/Computation/monads.html#LogicT)
 
-### Type-Indexed Monads
+### Indexed Monads
 
-* indexed RWS monad [iravid/irwst IRWS](https://github.com/iravid/irwst/blob/rws/irwst/src/main/scala/com/iravid/irwst/IRWS.scala)
+* Implementations: [garyb/purescript-indexed-monad](https://github.com/garyb/purescript-indexed-monad)
+
 * [Monad Factory: Type-Indexed Monads, Mark Snyder, Perry Alexander](https://www.researchgate.net/publication/221335580_Monad_Factory_Type-Indexed_Monads)
 * [Indexed Monads - Kwang's Haskell Blog](https://kseo.github.io/posts/2017-01-12-indexed-monads.html)
-* [garyb/purescript-indexed-monad](https://github.com/garyb/purescript-indexed-monad)
+* indexed RWS monad [iravid/irwst IRWS](https://github.com/iravid/irwst/blob/rws/irwst/src/main/scala/com/iravid/irwst/IRWS.scala) 
+
+### SuperMonads
+
+* Implementations: [Haskell](https://hackage.haskell.org/package/supermonad/),[purescript-supermonad](https://github.com/lemastero/purescript-supermonad), [Agda](https://github.com/jbracker/polymonad-proofs/tree/master/src/Supermonad)
+
+* Resources
+   * (Haskell) Supermonads and superapplicatives - Jan Bracker and Henrik Nilsson ([pdf](https://www.cs.nott.ac.uk/~psxjb5/publications/2017-BrackerNilsson-SupermonadsAndSuperapplicatives-UnderConsideration.pdf)
 
 ### ContT (Continuation Monad)
 
