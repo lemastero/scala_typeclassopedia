@@ -1,7 +1,0 @@
-language: scala
-
-scala:
-  - 2.12.13
-
-script:
-  - sbt clean test
