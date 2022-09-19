@@ -1,4 +1,4 @@
-# [Functional data structures](./FunctionalDataStructures.MD)
+# [Functional data structures](./FunctionalDataStructures.md)
 * Resources:
   * [typelevel/cats-collections](https://github.com/typelevel/cats-collections)
   * [What's new in purely functional data structures since Okasaki?](https://cstheory.stackexchange.com/questions/1539/whats-new-in-purely-functional-data-structures-since-okasaki)
