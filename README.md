@@ -67,23 +67,23 @@ classDiagram
    }
 ```
 
-* Base abstractions: [Functor](./BasicAbstractions.MD#functor-covariant-functor), [Apply](./BasicAbstractions.MD#apply), [Applicative](./BasicAbstractions.MD#applicative-applicative-functor), [Monad](./BasicAbstractions.MD#monad), [Contravariant](./Contravariant.MD#contravariant-contravariant-functor), [Comonad](./Comonads.MD#comonad), [Foldable](./BasicAbstractions.MD#foldable), [Bifunctor](./Bifunctors.MD#bifunctor), [Arrow](./Profunctors.MD#arrow), [Coyoneda](./KanExtensions.MD#coyoneda)
+* Base abstractions: [Functor](./BasicAbstractions.md#functor-covariant-functor), [Apply](./BasicAbstractions.md#apply), [Applicative](./BasicAbstractions.md#applicative-applicative-functor), [Monad](./BasicAbstractions.md#monad), [Contravariant](./Contravariant.md#contravariant-contravariant-functor), [Comonad](./Comonads.md#comonad), [Foldable](./BasicAbstractions.md#foldable), [Bifunctor](./Bifunctors.md#bifunctor), [Arrow](./Profunctors.md#arrow), [Coyoneda](./KanExtensions.md#coyoneda)
 
-* Covariant Functors: [Functor](./BasicAbstractions.MD#functor-covariant-functor), [Apply](./BasicAbstractions.MD#apply), [Applicative](./BasicAbstractions.MD#applicative-applicative-functor), [Selective](./BasicAbstractions.MD#selective-selective-applicative-functors)
+* Covariant Functors: [Functor](./BasicAbstractions.md#functor-covariant-functor), [Apply](./BasicAbstractions.md#apply), [Applicative](./BasicAbstractions.md#applicative-applicative-functor), [Selective](./BasicAbstractions.md#selective-selective-applicative-functors)
 
-* [Monads](./BasicAbstractions.MD#monad): [Reader](./BasicAbstractions.MD#reader), [Writer](./BasicAbstractions.MD#writer), [State](./BasicAbstractions.MD#state), [RWS Monad](./BasicAbstractions.MD#rws-monad), [Update Monad](./BasicAbstractions.MD#update-monad), [Logic Monad, Prompt Monad, Failure Monad](./BasicAbstractions.MD#logic-monad-prompt-monad-failure-monad), [ContT (Continuation Monad)](./BasicAbstractions.MD#contt-continuation-monad), [Reverse State Monad](./BasicAbstractions.MD#reverse-state-monad), [Tardis (Bidirectional State Monad)](./BasicAbstractions.MD#tardis-bidirectional-state-monad), [Chronicle Monad](./BasicAbstractions.MD#chronicle-monad), [Bimonad](./BasicAbstractions.MD#bimonad), [Dijkstra monad](./BasicAbstractions.MD#dijkstra-monad), [Hoare Monad](./BasicAbstractions.MD#hoare-monad)
+* [Monads](./BasicAbstractions.md#monad): [Reader](./BasicAbstractions.md#reader), [Writer](./BasicAbstractions.md#writer), [State](./BasicAbstractions.md#state), [RWS Monad](./BasicAbstractions.md#rws-monad), [Update Monad](./BasicAbstractions.md#update-monad), [Logic Monad, Prompt Monad, Failure Monad](./BasicAbstractions.md#logic-monad-prompt-monad-failure-monad), [ContT (Continuation Monad)](./BasicAbstractions.md#contt-continuation-monad), [Reverse State Monad](./BasicAbstractions.md#reverse-state-monad), [Tardis (Bidirectional State Monad)](./BasicAbstractions.md#tardis-bidirectional-state-monad), [Chronicle Monad](./BasicAbstractions.md#chronicle-monad), [Bimonad](./BasicAbstractions.md#bimonad), [Dijkstra monad](./BasicAbstractions.md#dijkstra-monad), [Hoare Monad](./BasicAbstractions.md#hoare-monad)
 
-* Monads generalizations: [Indexed Monads](./BasicAbstractions.MD#indexed-monads), [SuperMonads](./BasicAbstractions.MD#supermonads)
+* Monads generalizations: [Indexed Monads](./BasicAbstractions.md#indexed-monads), [SuperMonads](./BasicAbstractions.md#supermonads)
 
-* [IO related monads](./BasicAbstractions.MD#io-related-monads): [IO](./BasicAbstractions.MD#io-monad), [Bifunctor IO (BIO)](./BasicAbstractions.MD#bifunctor-io-bio), [RIO Monad (Reader + IO)](./BasicAbstractions.MD#rio-monad-reader--io), [TRIO (RIO Monad + Bifunctor IO)](./BasicAbstractions.MD#trio-rio-monad--bifunctor-io)
+* [IO related monads](./BasicAbstractions.md#io-related-monads): [IO](./BasicAbstractions.md#io-monad), [Bifunctor IO (BIO)](./BasicAbstractions.md#bifunctor-io-bio), [RIO Monad (Reader + IO)](./BasicAbstractions.md#rio-monad-reader--io), [TRIO (RIO Monad + Bifunctor IO)](./BasicAbstractions.md#trio-rio-monad--bifunctor-io)
 
-* Contravariant functors: [Contravariant](./Contravariant.MD#contravariant-contravariant-functor), [Divide (Contravariant Apply)](./Contravariant.MD#divide-contravariant-apply), [Divisible (Contravariant Applicative)](./Contravariant.MD#divisible-contravariant-applicative)
+* Contravariant functors: [Contravariant](./Contravariant.md#contravariant-contravariant-functor), [Divide (Contravariant Apply)](./Contravariant.md#divide-contravariant-apply), [Divisible (Contravariant Applicative)](./Contravariant.md#divisible-contravariant-applicative)
 
-* Contravariant Adjuctions & Representable: [Contravariant Adjunction](./Contravariant.MD#contravariant-adjunction), [Contravariant Rep](./Contravariant.MD#contravariant-rep)
+* Contravariant Adjuctions & Representable: [Contravariant Adjunction](./Contravariant.md#contravariant-adjunction), [Contravariant Rep](./Contravariant.md#contravariant-rep)
 
-* [Contravariant Kan Extensions](./Contravariant.MD#contravariant-kan-extensions): [Contravariant Yoneda](./Contravariant.MD#contravariant-yoneda), [Contravariant Coyoneda](./Contravariant.MD#contravariant-coyoneda), [Contravariant Day](./Contravariant.MD#contravariant-day), [Invariant Day](./Contravariant.MD#invariant-day)
+* [Contravariant Kan Extensions](./Contravariant.md#contravariant-kan-extensions): [Contravariant Yoneda](./Contravariant.md#contravariant-yoneda), [Contravariant Coyoneda](./Contravariant.md#contravariant-coyoneda), [Contravariant Day](./Contravariant.md#contravariant-day), [Invariant Day](./Contravariant.md#invariant-day)
 
-* Invariant Functors: [Invariant (Invariant Functor, Exponential Functor)](./BasicAbstractions.MD#invariant-invariant-functor-exponential-functor), [Invariant Day](./HigherKinded.MD#invariant-day)
+* Invariant Functors: [Invariant (Invariant Functor, Exponential Functor)](./BasicAbstractions.md#invariant-invariant-functor-exponential-functor), [Invariant Day](./HigherKinded.md#invariant-day)
 
 ```mermaid
 classDiagram
@@ -123,17 +123,17 @@ classDiagram
   }
 ```
 
-* Bifunctors: [Bifunctor](./Bifunctors.MD#bifunctor), [Join](./Bifunctors.MD#bifunctor-join), [Wrap](./Bifunctors.MD#bifunctor-wrap), [Flip](./Bifunctors.MD#bifunctor-flip), [Joker](./Bifunctors.MD#bifunctor-joker), [Clown](./Bifunctors.MD#bifunctor-clown), [Product](./Bifunctors.MD#bifunctor-product), [Bifunctor Sum](./Bifunctors.MD#bifunctor-sum), [Bifunctor Tannen](./Bifunctors.MD#bifunctor-tannen), [Bifunctor Biff](./Bifunctors.MD#bifunctor-biff), [Bitraverse](./Bifunctors.MD#bitraverse), [Bifoldable](./Bifunctors.MD#bifoldable),
+* Bifunctors: [Bifunctor](./Bifunctors.md#bifunctor), [Join](./Bifunctors.md#bifunctor-join), [Wrap](./Bifunctors.md#bifunctor-wrap), [Flip](./Bifunctors.md#bifunctor-flip), [Joker](./Bifunctors.md#bifunctor-joker), [Clown](./Bifunctors.md#bifunctor-clown), [Product](./Bifunctors.md#bifunctor-product), [Bifunctor Sum](./Bifunctors.md#bifunctor-sum), [Bifunctor Tannen](./Bifunctors.md#bifunctor-tannen), [Bifunctor Biff](./Bifunctors.md#bifunctor-biff), [Bitraverse](./Bifunctors.md#bitraverse), [Bifoldable](./Bifunctors.md#bifoldable),
 
-* Comonads: [Comonad](./Comonads.MD#comonad), [Coreader (Env comonad, Product comonad)](./Comonads.MD#coreader-env-comonad-product-comonad), [Cowriter](./Comonads.MD#cowriter), [Cofree](./Free.MD#cofree), [Cokleisli](./Comonads.MD#cokleisli), [Bimonad](./Comonads.MD#bimonad)
+* Comonads: [Comonad](./Comonads.md#comonad), [Coreader (Env comonad, Product comonad)](./Comonads.md#coreader-env-comonad-product-comonad), [Cowriter](./Comonads.md#cowriter), [Cofree](./Free.md#cofree), [Cokleisli](./Comonads.md#cokleisli), [Bimonad](./Comonads.md#bimonad)
 
-* Traversing Folding Filtering: [Monoid](./AbstractAlgebra.MD#monoid), [Foldable](./BasicAbstractions.MD#foldable), [Traverse](./BasicAbstractions.MD#traverse), [Bitraverse](./BasicAbstractions.MD#bitraverse), [Bifoldable](./BasicAbstractions.MD#bifoldable), [FunctorFilter](./BasicAbstractions.MD#functorfilter), [TraverseFilter](./BasicAbstractions.MD#traversefilter), [Distributive](./BasicAbstractions.MD#distributive), [Cofree Traverse](./Free.MD#cofree-traverse)
+* Traversing Folding Filtering: [Monoid](./AbstractAlgebra.md#monoid), [Foldable](./BasicAbstractions.md#foldable), [Traverse](./BasicAbstractions.md#traverse), [Bitraverse](./BasicAbstractions.md#bitraverse), [Bifoldable](./BasicAbstractions.md#bifoldable), [FunctorFilter](./BasicAbstractions.md#functorfilter), [TraverseFilter](./BasicAbstractions.md#traversefilter), [Distributive](./BasicAbstractions.md#distributive), [Cofree Traverse](./Free.md#cofree-traverse)
 
-* Monads not compose - solutions: [Monad Transformers](./BasicAbstractions.MD#monad-transformers-optiont-eithert-readert), [Free Monads](./Free.MD#free-monads), Tagless Final, [Extensible effects](./BasicAbstractions.MD#extensible-effects)
+* Monads not compose - solutions: [Monad Transformers](./BasicAbstractions.md#monad-transformers-optiont-eithert-readert), [Free Monads](./Free.md#free-monads), Tagless Final, [Extensible effects](./BasicAbstractions.md#extensible-effects)
 
-* [Free constructions](./Free.MD#free-constructions), [Free Applicative](./Free.MD#free-applicative), [Free Monads](./Free.MD#free-monads), [Cofree](./Free.MD#cofree), [Free Alternative](./Free.MD#free-alternative), [Free Arrow](./Free.MD#free-arrow), [Free Monad transformers](./Free.MD#free-monad-transformers), [Cofree Traverse](./Free.MD#cofree-traverse)
+* [Free constructions](./Free.md#free-constructions), [Free Applicative](./Free.md#free-applicative), [Free Monads](./Free.md#free-monads), [Cofree](./Free.md#cofree), [Free Alternative](./Free.md#free-alternative), [Free Arrow](./Free.md#free-arrow), [Free Monad transformers](./Free.md#free-monad-transformers), [Cofree Traverse](./Free.md#cofree-traverse)
  
-* [Representable & Adjunctions](./Adjunction.MD#representable--adjunctions): [Representable](./Adjunction.MD#representable), [Corepresentable](./Adjunction.MD#corepresentable), [Adjunction](./Adjunction.MD#adjunction), [Adjoint Triples](./Adjunction.MD#adjoint-triples)
+* [Representable & Adjunctions](./Adjunction.md#representable--adjunctions): [Representable](./Adjunction.md#representable), [Corepresentable](./Adjunction.md#corepresentable), [Adjunction](./Adjunction.md#adjunction), [Adjoint Triples](./Adjunction.md#adjoint-triples)
 
 ```mermaid
 classDiagram
@@ -173,13 +173,13 @@ classDiagram
   }
 ```
 
-* [(Co)Yoneda & (Co)Density & Kan Extensions](./KanExtensions.MD#coyoneda--codensity--kan-extensions), [Yoneda](./KanExtensions.MD#yoneda), [Coyoneda](./KanExtensions.MD#coyoneda), [Right Kan extension](./KanExtensions.MD#right-kan-extension), [Left Kan Extension](./KanExtensions.MD#left-kan-extension), [Density Comonad](./KanExtensions.MD#density-comonad), [Codensity](./KanExtensions.MD#codensity), [Day Convolution](./KanExtensions.MD#day-convolution)
+* [(Co)Yoneda & (Co)Density & Kan Extensions](./KanExtensions.md#coyoneda--codensity--kan-extensions), [Yoneda](./KanExtensions.md#yoneda), [Coyoneda](./KanExtensions.md#coyoneda), [Right Kan extension](./KanExtensions.md#right-kan-extension), [Left Kan Extension](./KanExtensions.md#left-kan-extension), [Density Comonad](./KanExtensions.md#density-comonad), [Codensity](./KanExtensions.md#codensity), [Day Convolution](./KanExtensions.md#day-convolution)
 
-* Profunctors: [Profunctor](./Profunctors.MD#profunctor), [Star](./Profunctors.MD#star), [CoStar](./Profunctors.MD#costar), [Strong Profunctor](./Profunctors.MD#strong-profunctor), [Tambara](./Profunctors.MD#tambara), [Choice Profunctor](./Profunctors.MD#choice-profunctor), [Extranatural Transformation](./Profunctors.MD#extranatural-transformation), [Profunctor Functor](./Profunctors.MD#profunctor-functor), [Profunctor Monad](./Profunctors.MD#profunctor-monad), [Profunctor Comonad](./Profunctors.MD#profunctor-comonad), [Procompose](./Profunctors.MD#procompose),  [ProductProfunctor](./Profunctors.MD#roductprofunctor), [SumProfunctor](./Profunctors.MD#sumprofunctor)
+* Profunctors: [Profunctor](./Profunctors.md#profunctor), [Star](./Profunctors.md#star), [CoStar](./Profunctors.md#costar), [Strong Profunctor](./Profunctors.md#strong-profunctor), [Tambara](./Profunctors.md#tambara), [Choice Profunctor](./Profunctors.md#choice-profunctor), [Extranatural Transformation](./Profunctors.md#extranatural-transformation), [Profunctor Functor](./Profunctors.md#profunctor-functor), [Profunctor Monad](./Profunctors.md#profunctor-monad), [Profunctor Comonad](./Profunctors.md#profunctor-comonad), [Procompose](./Profunctors.md#procompose),  [ProductProfunctor](./Profunctors.md#roductprofunctor), [SumProfunctor](./Profunctors.md#sumprofunctor)
 
-* Profunctor Adjuctions & Representable: [Profunctor Adjunction](./Profunctors.MD#profunctor-adjunction), [Profunctor Rep](./Profunctors.MD#profunctor-rep)
+* Profunctor Adjuctions & Representable: [Profunctor Adjunction](./Profunctors.md#profunctor-adjunction), [Profunctor Rep](./Profunctors.md#profunctor-rep)
 
-* Profunctor Kan Extensions: [Profunctor Yoneda](./Profunctors.MD#profunctor-yoneda), [Profunctor CoYoneda](./Profunctors.MD#profunctor-coyoneda), [Profunctor Ran](./Profunctors.MD#profunctor-ran), [Profunctor Codensity](./Profunctors.MD#profunctor-codensity)
+* Profunctor Kan Extensions: [Profunctor Yoneda](./Profunctors.md#profunctor-yoneda), [Profunctor CoYoneda](./Profunctors.md#profunctor-coyoneda), [Profunctor Ran](./Profunctors.md#profunctor-ran), [Profunctor Codensity](./Profunctors.md#profunctor-codensity)
 
 ```mermaid
 classDiagram
@@ -245,34 +245,34 @@ classDiagram
   }
 ```
 
-* [Arrows](./Profunctors.MD#arrows): [Category](./Profunctors.MD#category), [Arrow](./Profunctors.MD#arrow), [Commutative Arrow](./Profunctors.MD#commutativearrow), [Arrow Choice](./Profunctors.MD#arrow-choice), [Arrow Apply, Arrow Monad](./Profunctors.MD#arrow-apply-arrow-monad), [Arrow Loop](./Profunctors.MD#arrow-loop), [Arrow Zero](./Profunctors.MD#arrow-zero), [Free Arrow](./Free.MD#free-arrow), [Kleisli](./Profunctors.MD#kleisli), [Cokleisli](./Profunctors.MD#cokleisli), [BiArrow](./Profunctors.MD#biarrow), [BiKleisli](./Profunctors.MD#bikleisli)
+* [Arrows](./Profunctors.md#arrows): [Category](./Profunctors.md#category), [Arrow](./Profunctors.md#arrow), [Commutative Arrow](./Profunctors.md#commutativearrow), [Arrow Choice](./Profunctors.md#arrow-choice), [Arrow Apply, Arrow Monad](./Profunctors.md#arrow-apply-arrow-monad), [Arrow Loop](./Profunctors.md#arrow-loop), [Arrow Zero](./Profunctors.md#arrow-zero), [Free Arrow](./Free.md#free-arrow), [Kleisli](./Profunctors.md#kleisli), [Cokleisli](./Profunctors.md#cokleisli), [BiArrow](./Profunctors.md#biarrow), [BiKleisli](./Profunctors.md#bikleisli)
 
-* [Cayley representations](./BasicAbstractions.MD#cayley-representations): [Difference Lists](./BasicAbstractions.MD#difference-lists), [Codensity](./KanExtensions.MD#codensity), [Double Cayley Representation](./BasicAbstractions.MD#double-cayley-representation)
+* [Cayley representations](./BasicAbstractions.md#cayley-representations): [Difference Lists](./BasicAbstractions.md#difference-lists), [Codensity](./KanExtensions.md#codensity), [Double Cayley Representation](./BasicAbstractions.md#double-cayley-representation)
 
-* [Curry-Howard Isomorphism](./Limits.MD#adt-algebra-of-types): [These](./Limits.MD#These)
+* [Curry-Howard Isomorphism](./Limits.md#adt-algebra-of-types): [These](./Limits.md#These)
 
 | Types         | Logic                | Category Theory       | Homotopy Theory   |
 |---------------|----------------------|-----------------------|-------------------|
-| [Void](./Limits.MD#void)          | false                | initial object        | empty space       |
-| [Unit](./Limits.MD#unit)          | true                 | terminal object       | singleton         |
-| [Sum (Coproduct)](./Limits.MD#sum-coproduct) Eiter[A,B]    | A v B disjunction    | coproduct             | coproduct space   |
-| [Product](./Limits.MD#product) (A,B)          | A ∧ B conjunction    | product               | product space     |
+| [Void](./Limits.md#void)          | false                | initial object        | empty space       |
+| [Unit](./Limits.md#unit)          | true                 | terminal object       | singleton         |
+| [Sum (Coproduct)](./Limits.md#sum-coproduct) Eiter[A,B]    | A v B disjunction    | coproduct             | coproduct space   |
+| [Product](./Limits.md#product) (A,B)          | A ∧ B conjunction    | product               | product space     |
 | A => B        | A => B implication   | exponential object    | singleton         |
 | A => Void     | negation             | exp. obj. into initial obj. |            |
 
-* Higher kinded & exotic abstractions: [Natural transformation (FunctionK)](./HigherKinded.MD#natural-transformation-functionk), [Monoidal Category, Monoid Object](./HigherKinded.MD#monoidal-categories-monoid-object), [Cartesian Closed Category](./HigherKinded.MD#cartesian-closed-category), [Day Convolution](./HigherKinded.MD#day-convolution), [Functor Functor (FFunctor)](./HigherKinded.MD#functor-functor-ffunctor), [Monad morphisms](./HigherKinded.MD#monad-morphisms), [higher kinded category theory](./HigherKinded.MD#higher-kinded-category-theory), [SemigroupK (Plus)](./BasicAbstractions.MD#semigroupk-plus), [MonoidK (PlusEmpty)](./BasicAbstractions.MD#monoidk-plusempty), [Dinatural Transformation](./Profunctors.MD#dinatural-transformation), [Ends & Coends](./Profunctors.MD#ends--coends), [Align](./BasicAbstractions.MD#align), [Task](./BasicAbstractions.MD#andrey-mokhov-task), [Transducers](./BasicAbstractions.MD#transducers), [Relative monads](./BasicAbstractions.MD#relative-monads), [Disintegrate](./BasicAbstractions.MD#disintegrate)
+* Higher kinded & exotic abstractions: [Natural transformation (FunctionK)](./HigherKinded.md#natural-transformation-functionk), [Monoidal Category, Monoid Object](./HigherKinded.md#monoidal-categories-monoid-object), [Cartesian Closed Category](./HigherKinded.md#cartesian-closed-category), [Day Convolution](./HigherKinded.md#day-convolution), [Functor Functor (FFunctor)](./HigherKinded.md#functor-functor-ffunctor), [Monad morphisms](./HigherKinded.md#monad-morphisms), [higher kinded category theory](./HigherKinded.md#higher-kinded-category-theory), [SemigroupK (Plus)](./BasicAbstractions.md#semigroupk-plus), [MonoidK (PlusEmpty)](./BasicAbstractions.md#monoidk-plusempty), [Dinatural Transformation](./Profunctors.md#dinatural-transformation), [Ends & Coends](./Profunctors.md#ends--coends), [Align](./BasicAbstractions.md#align), [Task](./BasicAbstractions.md#andrey-mokhov-task), [Transducers](./BasicAbstractions.md#transducers), [Relative monads](./BasicAbstractions.md#relative-monads), [Disintegrate](./BasicAbstractions.md#disintegrate)
 
-* Limits: [Cone](./Limits.MD#cone), [Cocone](./Limits.MD#cocone), [Diagonal Functor](./Limits.MD#diagonal-functor), [Limit](./Limits.MD#limit), [Colimit](./Limits.MD#colimit), [Ends & Coends](./Profunctors#ends--coends)
+* Limits: [Cone](./Limits.md#cone), [Cocone](./Limits.md#cocone), [Diagonal Functor](./Limits.md#diagonal-functor), [Limit](./Limits.md#limit), [Colimit](./Limits.md#colimit), [Ends & Coends](./Profunctors#ends--coends)
 
-* Topoi: Subobject classifier, [Topos](./Topos.MD#topos)
+* Topoi: Subobject classifier, [Topos](./Topos.md#topos)
 
-* [Other Encodings of Category Theory](./OtherEncodingsOfCT.MD): [data-category by Sjoerd Visscher](./OtherEncodingsOfCT.MD#encoding-of-category-theory-by-sjoerd-visscher), [Formalizations of Category Theory in proof assistants (Coq)](./OtherEncodingsOfCT.MD#formalizations-of-category-theory-in-proof-assistants)
+* [Other Encodings of Category Theory](./OtherEncodingsOfCT.md): [data-category by Sjoerd Visscher](./OtherEncodingsOfCT.md#encoding-of-category-theory-by-sjoerd-visscher), [Formalizations of Category Theory in proof assistants (Coq)](./OtherEncodingsOfCT.md#formalizations-of-category-theory-in-proof-assistants)
 
-* [Recursion schemas](RecursionSchemas.MD)
+* [Recursion schemas](RecursionSchemas.md)
 
-* [Optics](./Optics.MD)
+* [Optics](./Optics.md)
 
-* [Functor Oriented Programming](/BasicAbstractions.MD#functor-oriented-programming)
+* [Functor Oriented Programming](/BasicAbstractions.md#functor-oriented-programming)
 
 ## Resources covering topics about FP and category theory in great details:
 
@@ -295,4 +295,4 @@ classDiagram
 * Notes on Category Theory in Scala 3 (Dotty) - Juan Pablo Romero Méndez [(blog post)](https://typista.org/categories-in-dotty/#1-categories)
 * Scala Type-class Hierarchy - Tony Morris [(blog post)](http://blog.tmorris.net/posts/scala-type-class-hierarchy/index.html) (traits for all cathegory theory constructions with exotic ones like `ComonadHoist`)
 
-[Computational trinitarianism resources](ComputationalTrinitarianism.MD)
+[Computational trinitarianism resources](ComputationalTrinitarianism.md)
