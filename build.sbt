@@ -14,7 +14,7 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 lazy val catsVersion = "2.8.0"
 lazy val catsMtlVersion = "1.3.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
-lazy val scalacheckVersion = "1.16.0"
+lazy val scalacheckVersion = "1.17.0"
 libraryDependencies ++= Seq(
   // cats
   "org.typelevel" %% "cats-core" % catsVersion,
