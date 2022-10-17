@@ -2,7 +2,7 @@ name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-lazy val scala212 = "2.12.16"
+lazy val scala212 = "2.12.17"
 lazy val scala213 = "2.13.8"
 
 scalaVersion := scala213
@@ -14,7 +14,7 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 lazy val catsVersion = "2.8.0"
 lazy val catsMtlVersion = "1.3.0"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
-lazy val scalacheckVersion = "1.16.0"
+lazy val scalacheckVersion = "1.17.0"
 libraryDependencies ++= Seq(
   // cats
   "org.typelevel" %% "cats-core" % catsVersion,
@@ -32,7 +32,7 @@ libraryDependencies ++= Seq(
 
   // ZIO
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC8",
-  "dev.zio" %% "zio" % "1.0.16",
+  "dev.zio" %% "zio" % "1.0.17",
 
   // algebra
   "org.typelevel" %% "algebra" % "2.8.0",
@@ -56,7 +56,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestPlusVersion % Test,
   "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5" % Test,
 
-  "org.scalatest" %% "scalatest" % "3.2.13" % Test,
+  "org.scalatest" %% "scalatest" % "3.2.14" % Test,
 
   "org.typelevel" %% "discipline-core" % "1.5.1" % Test,
   "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test
