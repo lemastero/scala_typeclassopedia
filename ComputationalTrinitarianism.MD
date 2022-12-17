@@ -361,3 +361,10 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * [A List of Foundational Haskell Papers - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
 * [A Haskell Reading List - Stephen Diehl](http://www.stephendiehl.com/posts/essential_haskell.html)
 * [797 Haskell Papers](https://mitchellwrosen.github.io/haskell-papers/)
+
+## Podcasts
+
+* [The Iowa Type Theory Commute](https://homepage.divms.uiowa.edu/~astump/ittc.html)
+* [The Type Theory Podcast](https://typetheorypodcast.com/)
+* [The Haskell Interlude](https://haskell.foundation/podcast/)
+* [The Haskell Weekly](https://haskellweekly.news/podcast.html)
