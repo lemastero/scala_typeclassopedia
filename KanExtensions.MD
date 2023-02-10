@@ -130,6 +130,7 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, *]] =
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * Category Theory III 7.1, Natural transformations as ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=DseY4qIGZV4)
   * [Type Arithmetic and the Yoneda Perspective - Emily Pillmore](https://github.com/cohomolo-gy/Type-Arithmetic-and-the-Yoneda-Perspective)
+  * [Yoneda Hacking: The Algebra of Attacker Actions](https://arxiv.org/abs/2103.00044) - Georgios Bakirtzis, Fabrizio Genovese, Cody H. Fleming
   
 ### Coyoneda
 

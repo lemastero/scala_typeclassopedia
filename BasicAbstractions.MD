@@ -284,10 +284,11 @@ trait Selective[F[_]] extends Applicative[F] {
 }
 ```
 
-* Implementations: [Haskell](http://hackage.haskell.org/package/selective/docs/Control-Selective.html) [cb372/cats-selective](https://github.com/cb372/cats-selective/blob/master/core/src/main/scala/cats/Selective.scala)
+* Implementations: [Haskell](http://hackage.haskell.org/package/selective/docs/Control-Selective.html), [Scala: cb372/cats-selective](https://github.com/cb372/cats-selective/blob/master/core/src/main/scala/cats/Selective.scala), [Idris](https://github.com/clayrat/idris-selective/blob/master/src/Control/Selective.idr), [Agda: tuura/selective-theory-agda](https://github.com/tuura/selective-theory-agda/blob/master/src/Selective.agda)
 
 * Resources:
     * Selective functor in sbt - @eed3si9n [(blog post)](http://eed3si9n.com/selective-functor-in-sbt)
+    * Staged Selective Parser Combinators - [paper](https://dl.acm.org/doi/10.1145/3409002), [ICFP 2020 talk](https://www.youtube.com/watch?v=lH65PvRgm8M)
     * (Haskell) Selective applicative functors - Andrey Mokhov [(blog post)](https://blogs.ncl.ac.uk/andreymokhov/selective/), [(video)](https://www.youtube.com/watch?v=7vruj4gj38Q)
     * (Haskell) Selective Applicative Functors Declare Your Effects Statically, Select Which to Execute Dynamically - Andrey Mokhov, Georgy Lukyanov, Simon Marlow, Jeremie Dimino [(paper)](https://www.staff.ncl.ac.uk/andrey.mokhov/selective-functors.pdf)
     * (OCaml) [snowleopard/selective-ocaml](https://github.com/snowleopard/selective-ocaml)

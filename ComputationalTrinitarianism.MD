@@ -109,6 +109,7 @@
 [Part 8: Topics in Moduli Theory](https://stacks.math.columbia.edu/tag/0ELR)
 * [Quantum Gravity Seminar - John Baez](http://math.ucr.edu/home/baez/QG.html) interesting notes around type theory (in classical versus quantum computation) and [(cohomology and computation)](http://math.ucr.edu/home/baez/qg-spring2007/index.html#computation)
 * [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
+* [varkor/quiver](https://github.com/varkor/quiver)Tooll for drawing commuate diagrams
 
 ## Publications
 
@@ -361,3 +362,10 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * [A List of Foundational Haskell Papers - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
 * [A Haskell Reading List - Stephen Diehl](http://www.stephendiehl.com/posts/essential_haskell.html)
 * [797 Haskell Papers](https://mitchellwrosen.github.io/haskell-papers/)
+
+## Podcasts
+
+* [The Iowa Type Theory Commute](https://homepage.divms.uiowa.edu/~astump/ittc.html)
+* [The Type Theory Podcast](https://typetheorypodcast.com/)
+* [The Haskell Interlude](https://haskell.foundation/podcast/)
+* [The Haskell Weekly](https://haskellweekly.news/podcast.html)
