@@ -1,3 +1,41 @@
+```mermaid
+classDiagram
+   Bifoldable~P[+_,+_]~ <|-- Bitraverse~P[+_,+_]~
+   Bifunctor~P[+_,+_]~ <|-- Bitraverse
+   Bifunctor <|-- Biapply~P[+_,+_]~
+   Biapply <|-- Biapplicative~P[+_,+_]~
+   Functor~F[+_]~ <|-- Bifunctor
+   Functor <|-- Bifunctor
+   Functor <|-- Profunctor~P[-_,+_]~
+   Bifunctor <|-- Zivariant~Z[-_,+_,+_]~
+   Profunctor <|-- Zivariant
+
+  class Functor {
+    ) map(F[A], A => B): F[B]
+  }
+  class Profunctor {
+    ) dimap(AA => A, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Bifunctor {
+    ) bimap(A => AA, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Bifoldable {
+    ) bifoldLeft(F[A,B], C, (C,A) => C, (C,B) => C): C
+  }
+  class Bitraverse {
+    ) bitraverse[G: Applicative](F[A,B], A=>G[C], B => G[D]): G[F[C,D]]
+  }
+  class Biapply {
+    ) biApply(F[A,B], F[A=>AA,B=>BB]): F[AA,BB]
+  }
+  class Biapplicative {
+    ) bipure(a: A, b: B): F[A,B]
+  }
+  class Zivariant {
+    ) zimap(AA => A, B => BB, C => CC): P[A,B,C] => P[AA,BB,CC]
+  }
+```
+
 ### Bifunctor
 
 Abstracts over type constructor with 2 "holes". Represents two independent functors:
@@ -8,18 +46,41 @@ trait Bifunctor[F[_, _]] {
 ```
 * Bifunctor Laws
 1. identity `xs.bimap(identity, identity) == xs` bimap with two identify function does nothing
+```mermaid
+flowchart LR
+  PAB1(("P[A,B]")) --"bimap(id,id)"--> PAB2(("P[A,B]"))
+```
 2. composition `xs.bimap(f, h).bimap(g,i) == xs.bimap(x => g(f(x), x => h(i(x))`  you can bimap using f and h and then bimap using g and i or bimap once using composition
+
 Second law is automatically fulfilled if the first law holds.
+```mermaid
+flowchart LR
+  PAB(("P[A,B]")) --"bimap(f1 andThen f2, g1 andTHen g2)"--> PAABB(("P[A2,B2]"))
+  PAB(("P[A,B]")) --"bimap(f1,g1)"--> PA1B1(("P[A1,B1]"))--"bimap(f2,g2)"--> PAABB(("P[A2,B2]"))
+```
 * Alternatively can be specified by providing
 ```scala
 def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
 def rightMap[A, B, D](fab: F[A, B])(g: B => D): F[A, D]
 ```
-In that case identity law must hold for both functions:
-3. identity `xs.leftMap(identity) == xs` leftMap with identify function does nothing
-4. identity `xs.rightMap(identity) == xs` rightMap with identify function does nothing
-If leftMap and rightMap and bimap are specified then additional lwa must be fullfilled:
+In that case identity law must hold for both functions:  
+3. identity `xs.leftMap(identity) == xs` leftMap with identify function does nothing  
+```mermaid
+flowchart LR
+  PABL1(("P[A,B]")) --"leftMap(id)"--> PABL2(("P[A,B]"))
+```
+4. identity `xs.rightMap(identity) == xs` rightMap with identify function does nothing  
+```mermaid
+flowchart LR
+  PABR1(("P[A,B]")) --"rihtMap(id)"--> PABR2(("P[A,B]"))
+```
+If leftMap and rightMap and bimap are specified then additional law must be fullfilled:  
 5. `xs.bimap(f, g) == xs.leftMap(f).rightMap(g)`
+```mermaid
+flowchart LR
+  PAB(("P[A,B]")) --"bimap(f, g)"--> PAABB(("P[A2,B2]"))
+  PAB(("P[A,B]")) --"leftMap(f)"--> PA1B1(("P[A1,B]"))--"rightMap(g)"--> PAABB(("P[A2,B2]"))
+```
 * Derived methods
 ```scala
 def leftMap[A, B, C](fab: F[A, B])(f: A => C): F[C, B]
@@ -30,7 +91,7 @@ def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
 def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 ```
 
-* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bifunctor.scala), [Purescript](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor), [Idris](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Bifunctor.agda)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bifunctor.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Data-Bifunctor.html), [Purescript](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor), [Idris](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Bifunctor.agda)
 
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 
@@ -174,8 +235,12 @@ newtype Biff p f g a b = Biff { runBiff :: p (f a) (g b) }
 
 ### Bitraverse
 
-* Implementations: [Scalaz Bitraverse](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala) [Cats Bitraverse](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bitraverse.scala) [Purescript purescript-foldable-traversable/Data.Bitraversable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bitraversable) [Haskell bifunctors/Data.Biapplicative](https://hackage.haskell.org/package/bifunctors/docs/Data-Biapplicative.html)
+* Implementations: [Scalaz Bitraverse](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bitraverse.scala) [Cats Bitraverse](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bitraverse.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Data-Bitraversable.html), [Purescript](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bitraversable)
 
 ### Bifoldable
 
-* Implementations: [(Scalaz Bifoldable)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala) [Cats Bifoldable](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) [Purescript purescript-foldable-traversable/Data.Bifoldable](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bifoldable)
+* Implementations: [(Scalaz Bifoldable)](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifoldable.scala) [Cats Bifoldable](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifoldable.scala) [Purescript ](https://pursuit.purescript.org/packages/purescript-foldable-traversable/docs/Data.Bifoldable)
+
+### Biapplicative
+
+* Implementations: [Haskell](https://hackage.haskell.org/package/bifunctors/docs/Data-Biapplicative.html)

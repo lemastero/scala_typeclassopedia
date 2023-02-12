@@ -2,52 +2,39 @@
 
 ```mermaid
 classDiagram
-   Ran <|-- Yoneda
-   Lan <|-- CoYoneda
-   Ran <|-- Codensity
-   Lan <|-- Density
+   Ran~G[_], H[_], A~ <|-- Yoneda~H[_], A~
+   Lan~G[_], H[_], A~ <|-- CoYoneda~H[_], A~
+   Ran <|-- Codensity~G[_], A~
+   Lan <|-- Density~G[_], A~
 
   class Ran {
-    <<G[_], H[_], A>>
-    # Right Kan Extension
-    H[B] run[B](A => G[B])
+    // Right Kan Extension
+    ) run[B](A => G[B]): H[B]
   }
-
   class Yoneda {
-    <<H[_], A>>
-    H[R] run[B](A => B)
+    ) run[B](A => B): H[R]
   }
-
   class Codensity {
-    <<G[_], A>>
-    G[B] run[B](A => G[B])
+    ) run[B](A => G[B]): G[B]
   }
-
   class Lan {
-    <<G[_], H[_], A>>
-    H[Z] fz()
-    G[Z] => A run()
-    # Left Kan Extension
+    // Left Kan Extension
+    fz: H[Z]
+    run: G[Z] => A
   }
-
   class CoYoneda {
-    <<H[_], A>>
-    H[Z] fz()
-    Z => A run()
+    fz: H[Z]
+    run: Z => A
   }
-
   class Density {
-    <<G[_], A>>
-    G[Z] fz()
-    G[Z] => A run()
+    fz: G[Z]
+    run: G[Z] => A
   }
-
-  class Day {
-    <<G[_], H[_], A>>
-    G[Z] gb()
-    H[X] hb()
-    (Z,X) => A run()
-    # Day convolution
+  class Day~G[_], H[_], A~ {
+    // Day convolution
+    gb: G[Z]
+    hb: H[X]
+    ) run: (Z,X) => A
   }
 ```
 
@@ -143,6 +130,7 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, *]] =
   * (Haskell) Free Monads for Less (Part 2 of 3): Yoneda - Edward Kmett [(blog post)](http://comonad.com/reader/2011/free-monads-for-less-2/)
   * Category Theory III 7.1, Natural transformations as ends - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=DseY4qIGZV4)
   * [Type Arithmetic and the Yoneda Perspective - Emily Pillmore](https://github.com/cohomolo-gy/Type-Arithmetic-and-the-Yoneda-Perspective)
+  * [Yoneda Hacking: The Algebra of Attacker Actions](https://arxiv.org/abs/2103.00044) - Georgios Bakirtzis, Fabrizio Genovese, Cody H. Fleming
   
 ### Coyoneda
 

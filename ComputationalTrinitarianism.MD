@@ -32,6 +32,7 @@
 * Toposes, Triples and Theories - Michael Barr, Charles Wells [(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
 * Topos theoretic background - Olivia Caramello [(paper)](http://www.oliviacaramello.com/Unification/ToposTheoreticPreliminariesOliviaCaramello.pdf)
 * Introduction to categorical logic, classifying toposes and the bridge technique - Olivia Caramello [(videos with toc)](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/20151124-caramello)
+* [Topos online 2021](https://aroundtoposes.com/toposesonline/) conference [(videos)](https://www.youtube.com/playlist?list=PLx5f8IelFRgGuSn4L90j3taAGSzyfw-U1)
 * [Toposes in Como 2018](http://tcsc.lakecomoschool.org/) conference: [(video playlist)](https://www.youtube.com/watch?v=85hAGaFCsD8&index=2&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp), [(slides from talks)](http://tcsc.lakecomoschool.org/program/); There are introductory lectures [Some glances at topos theory - Francis Borceux](https://www.youtube.com/watch?v=s_fN9euuVAY&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp&index=10)
 * [Topos à l’IHES 2015](https://indico.math.cnrs.fr/event/747/) conference: [(video playlist)](https://www.youtube.com/playlist?list=PLx5f8IelFRgFjhhrWWl96sRSClcG5YIx6), includes introductory: [A crash course in topos theory: the big picture - André Joyal](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/joyal)
 * Higher Topos Theory - Jacob Lurie [(arXiv:math/0608040)](https://arxiv.org/abs/math/0608040)
@@ -108,6 +109,7 @@
 [Part 8: Topics in Moduli Theory](https://stacks.math.columbia.edu/tag/0ELR)
 * [Quantum Gravity Seminar - John Baez](http://math.ucr.edu/home/baez/QG.html) interesting notes around type theory (in classical versus quantum computation) and [(cohomology and computation)](http://math.ucr.edu/home/baez/qg-spring2007/index.html#computation)
 * [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
+* [varkor/quiver](https://github.com/varkor/quiver)Tooll for drawing commuate diagrams
 
 ## Publications
 
@@ -360,3 +362,10 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * [A List of Foundational Haskell Papers - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
 * [A Haskell Reading List - Stephen Diehl](http://www.stephendiehl.com/posts/essential_haskell.html)
 * [797 Haskell Papers](https://mitchellwrosen.github.io/haskell-papers/)
+
+## Podcasts
+
+* [The Iowa Type Theory Commute](https://homepage.divms.uiowa.edu/~astump/ittc.html)
+* [The Type Theory Podcast](https://typetheorypodcast.com/)
+* [The Haskell Interlude](https://haskell.foundation/podcast/)
+* [The Haskell Weekly](https://haskellweekly.news/podcast.html)

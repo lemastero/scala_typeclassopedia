@@ -1,34 +1,30 @@
 ```mermaid
 classDiagram
-   Contravariant <|-- Divide
-   Divide <|-- Divisible
-   Divide <|-- Decide
-   Decide <|-- Decidable
+   Contravariant~F[-_]~ <|-- Divide~F[-_]~
+   Divide <|-- Divisible~F[-_]~
+   Divide <|-- Decide~F[-_]~
+   Decide <|-- Decidable~F[-_]~
    Divisible <|-- Decidable
 
    class Contravariant {
-     # contravariant Functor  
-     F[B] contramap(F[A], B => A)
+     // contravariant Functor
+     )  contramap(F[A], B => A): F[B]
    }
-
    class Divide {
-     # contravariant Apply 
-     F[A] divide(A => Tuple2[B,C], F[B], F[C])
+     // contravariant Apply
+     )  divide(A => (B,C), F[B], F[C]): F[A]
    }
-
    class Decide {
-     # contravariant Alt  
-     F[A] choose[A,B,C](A => Either[B, C], F[B], F[C])
+     // contravariant Alt  
+     )  choose[A,B,C](A => Either[B, C], F[B], F[C]): F[A]
    }
-
    class Divisible {
-     # contravariant Applicative
-     F[A] conquer[A]
+     // contravariant Applicative
+     )  conquer[A]: F[A]
    }
-
    class Decidable {
-     # contravariant Alternative  
-    F[A] loose[A](A => Void)
+     // contravariant Alternative  
+     )  loose[A](A => Void): F[A]
    }
 ```
 
@@ -92,7 +88,12 @@ Category Theory [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
 
 * Contravariant laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ContravariantLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
 
-![](img/contravariant_laws.svg)
+```mermaid
+flowchart RL
+  FA1(("F[A]")) --"contramap(id)"--> FA2(("F[A]"))
+  FA(("F[A]")) --"contramap(f andThen g)"--> FC(("F[C]"))
+  FA(("F[A]")) --"contramap(f)"--> FB(("F[B]"))--"contramap(g)"--> FC(("F[C]"))
+```
 
 1 contramap identity  
 
