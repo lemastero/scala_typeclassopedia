@@ -6,4 +6,4 @@ addSbtPlugin("com.timushev.sbt"          % "sbt-updates"   % "0.6.4")
 // sbt scalafmtAll
 addSbtPlugin("org.scalameta"             % "sbt-scalafmt"  % "2.5.0")
 // sbt clean coverage test coverageReport
-addSbtPlugin("org.scoverage"             % "sbt-scoverage" % "2.0.6")
+addSbtPlugin("org.scoverage"             % "sbt-scoverage" % "2.0.7")
