@@ -23,7 +23,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion,
   "org.typelevel" %% "cats-mtl" % catsMtlVersion,
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion,
-  "org.typelevel" %% "cats-effect" % "3.4.6",
+  "org.typelevel" %% "cats-effect" % "3.4.8",
 
   "io.monix" %% "monix" % "3.4.1",
 
@@ -31,8 +31,8 @@ libraryDependencies ++= Seq(
   "org.scalaz"    %% "scalaz-core" % "7.3.7",
 
   // ZIO
-  "dev.zio" %% "zio-prelude"  % "1.0.0-RC8",
   "dev.zio" %% "zio" % "2.0.9",
+  "dev.zio" %% "zio-prelude"  % "1.0.0-RC17",
 
   // algebra
   "org.typelevel" %% "algebra" % "2.9.0",
