@@ -2,19 +2,6 @@ package ct_other_impls
 
 /*
 
-Given a category C (of types and pure curried functions) and mapping between this category and itself
-F: C -> C
-
-Let Morph be a Functor (depending on F):
-Morph: C -> Morph[C]
-
-that maps object of C into C and morphisms are defined by:
-
-def id[A]: Morph[A, A]
-def compose[A, B, C]: Morph[A, B] => Morph[B, C] => Morph[A, C]
-
-then following diagram commute:
-
        Morph[F,A,B]
   A ----------------> B
   |                   |
@@ -24,36 +11,42 @@ F |                   | F
   F[A] -------------> F[B]
       run(Morph[F,A,B])
 
-Examples:
+def id[A]: Morph[A, A]
+def compose[A, B, C]: Morph[A, B] => Morph[B, C] => Morph[A, C]
 
-------------------|------------------------------|---------------
-Morphism          | id               | abstraction
-------------------|------------------------------|----------------
-A    => B         | Morph[F[_], A, B] = A => B     |  Functor
-B    => A         | Morph[F[_], A, B] = B => A     |  Contravariant
-A    => F[B]      | Morph[F[_], A, B] = A => F[B]  |  FlatMap
-F[A] => B         | Morph[F[_], A, B] = F[A] => B  |  CoflatMap
-F[A  => B]        | Morph[F[_], A, B] = F[A => B]  |  Ap (Apply)
-A    => Option[B] | Morph[F[_], A, B] = F[A => B]
+Signatures:
+
+|-------------------|--------------------------------|--------------- |
+| Morphism          | id                             | abstraction    |
+|-------------------|--------------------------------|----------------|
+| A    => B         | Morph[F[_], A, B] = A => B     | Functor        |
+| B    => A         | Morph[F[_], A, B] = B => A     | Contravariant  |
+| A    => F[B]      | Morph[F[_], A, B] = A => F[B]  | FlatMap        |
+| F[A] => B         | Morph[F[_], A, B] = F[A] => B  | CoflatMap      |
+| F[A  => B]        | Morph[F[_], A, B] = F[A => B]  | Apply          |
+| A    => Option[B] | Morph[F[_], A, B] = F[A => B]  | Filter         |
+
+Laws:
+
+//        id[A]
+// F[A] ========> F[A]
+
+//        Morph[A,B] * Morph[C,C]
+// F[A] ========================> F[C]
 
 |-----------------|----------------|--------------|-------------------|
 |  abstraction    | Morph          |   identity   | composition       |
 |-----------------|----------------|--------------|-------------------|
 | Functor         | A => B         | identity     | andThen           |
-| FlatMap         | A => F[B]      | pure         | kleisli comp.     |
+| FlatMap         | A => F[B]      | return       | kleisli comp.     |
 | CoflatMap       | F[A] => B      | extract      | cokleisli comp.   |
-| Apply           | F[A => B]      | OK           | OK                |
+| Apply           | F[A => B]      | F[identity]  | OK                |
 | Contravariant   | B => A         | identity     | compose           |
-| MapFilter       | A => Option[B] | OK           | OK                |
-| ContraMapFilter | F[B]           | OK           | OK                |
+| MapFilter       | A => Maybe[B]  | Just         | OK                |
+| ContraMapFilter | Maybe[B] => A  | OK           | OK                |
 |-----------------|----------------|--------------|-------------------|
 
  */
-
-// In above definition if we replace morphism with twisted morphism we get:
-// F[(A, B)]     Morph[F[_], A, B] = F[(A, B)]    Zip
-// F[A \/ B]     Morph[F[_], A, B] = F[A \/ B]]   Alt
-// F[B => A]     Morph[F[_], A, B] = F[B => A]    Divide
 
 object FPMorphism {
   type Function[A, B]            = A => B
@@ -61,20 +54,13 @@ object FPMorphism {
   type Ap[F[_], A, B]            = F[A => B]
   type CoKleisli[F[_],A,B]       = F[A] => B
   type MapFilter[F[_],A,B]       = A => Option[B]
-
   type Op[A, B]                  = B => A
   type ContraMapFilter[F[_],A,B] = B => Option[A]
-
-  type OpAp[F[_], A, B]        = F[B => A]
-  type Zip[F[_], A, B]         = F[(A, B)]
-  type Alt[F[_], A, B]         = F[Either[A, B]]
 }
 
 trait EndoFPAbs[F[_]] {
   type Morph[_, _] // specify some transformation on types A, B possibly using F and G e.g. A => F[B]
-
-  type BiKleisli[A,B] = F[A] => F[B]
-  def run[A, B](f: Morph[A, B]): BiKleisli[A,B]
+  def run[A, B](f: Morph[A, B]): F[A] => F[B]
 }
 
 trait EndoFPAbsLaw[F[_]] extends EndoFPAbs[F] {
@@ -83,7 +69,7 @@ trait EndoFPAbsLaw[F[_]] extends EndoFPAbs[F] {
   def compose[A, B, C]: Morph[A, B] => Morph[B, C] => Morph[A, C]
 
   //        id[A]
-  // F[A] ========> F[A] == F[A]
+  // F[A] ========> F[A]
   def abstractionIdentityLaw[A](fa: F[A]): Boolean = {
     val lhs: F[A] = run[A, A](id[A])(fa)
     lhs == fa
@@ -101,6 +87,8 @@ trait EndoFPAbsLaw[F[_]] extends EndoFPAbs[F] {
     lhs == rhs
   }
 }
+
+////// Functor  //////////
 
 trait Functor[F[_]] extends EndoFPAbs[F] {
   override def run[A, B](f: A => B): F[A] => F[B]
@@ -145,10 +133,18 @@ trait FunctorLaws[F[_]] extends EndoFPAbsLaw[F] with Functor[F] {
   def compose[A, B, C]: (A => B) => (B => C) => (A => C) = f => f andThen _
 }
 
+////// FlatMap  //////////
+
 trait FlatMap[F[_]] extends EndoFPAbs[F] {
   type Morph[AA, BB] = FPMorphism.Kleisli[F,AA,BB]
   def flatMap[A, B](fa: F[A])(f: A => F[B]): F[B] = run[A, B](f)(fa)
 }
+
+trait Pure[F[_]] {
+  def pure[A](value: A): F[A]
+}
+
+// needs Pure/Return so it is Monad
 
 // flatMap(pure) == id
 // fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(g) )
@@ -156,10 +152,10 @@ abstract class FlatMapLaws[F[_]: Pure] extends EndoFPAbsLaw[F] with FlatMap[F] {
   def pure[A](a:A): F[A] = implicitly[Pure[F]].pure(a)
 
   // FlatMap and Pointed are connected, give raise to Monad
-  def id[A]: A => F[A] = pure[A]
+def id[A]: A => F[A] = pure[A]
 
-  def compose[A,B,C]: (A => F[B]) => (B => F[C]) => (A => F[C]) =
-    f => g => a => run[B,C](g)(f(a))
+def compose[A,B,C]: (A => F[B]) => (B => F[C]) => (A => F[C]) =
+  f => g => a => run[B,C](g)(f(a))
 
   def abstractionIdentityLaw1[A](fa: F[A]): Boolean = {
     val lhs: F[A] = run[A, A](id[A])(fa)
@@ -246,6 +242,10 @@ trait CoFlatMap[F[_]] extends EndoFPAbs[F] {
   type Morph[AA, BB] = FPMorphism.CoKleisli[F,AA,BB]
   def extend[A, B](fa: F[A])(f: F[A] => B): F[B] = run[A, B](f)(fa)
   def duplicate[A](fa: F[A]): F[F[A]] = extend(fa)(identity)
+}
+
+trait Extract[F[_]] {
+  def extract[A](w: F[A]): A
 }
 
 // fa.extend(extract) == fa
@@ -407,41 +407,13 @@ trait ContraMapFilterLaws[F[_]] extends EndoFPAbsLaw[F] with ContraMapFilter[F] 
 // OUTLAWS !!!
 
 trait Alt[F[_]] extends EndoFPAbs[F] {
-  type Morph[AA, BB] = FPMorphism.Alt[F,AA,BB]
+  type Alt[F[_], A, B] = F[Either[A, B]]
+  type Morph[AA, BB] = Alt[F,AA,BB]
   def either2[A, B](fa: F[A])(fab: F[Either[A, B]]): F[B] = run[A, B](fab)(fa)
 }
 
-abstract class AltLaws[F[_]] extends EndoFPAbsLaw[F] with Alt[F] {
-  def id[A]: F[Either[A,A]] = ???
-  def compose[A, B, C]: F[Either[A,B]] => F[Either[B,C]] => F[Either[A,C]] = ???
-}
-
 trait Divide[F[_]] extends EndoFPAbs[F] {
-  type Morph[AA, BB] = FPMorphism.OpAp[F,AA,BB]
+  type OpAp[F[_], A, B] = F[B => A]
+  type Morph[AA, BB] = OpAp[F,AA,BB]
   def contraAp[A, B](fa: F[A])(fba: F[B => A]): F[B] = run[A, B](fba)(fa)
 }
-
-// TODO there is problem wit divide laws
-//abstract class DivideLaws[F[_] : Pure : Contravariant : Extract] extends EndoFPAbsLaw[F] with Divide[F] {
-//  def pure[A]: A => F[A] = implicitly[Pure[F]].pure
-//  def contramap[A,B](fa: F[A], ba: B => A): F[B] = implicitly[Contravariant[F]].contramap(fa)(ba)
-//  def extract[A,B](fa: F[A]): A = implicitly[Extract[F]].extract(fa)
-//
-//  def id[A]: F[A => A] = pure[A => A](identity[A])
-//
-//  override def compose[A, B, C]: F[B => A] => F[C => B] => F[C => A] = fba => fcb => {
-//    type X = Any
-//    type Y = X => (B => A)
-//
-//    val fgg: F[(X => (B => A)) => (C => B)] = ???
-//    val fff: F[X => (B => A)] = run[C=>B,X => (B => A)](fgg)(fcb)
-//
-//    val fg: F[X => (B => A)] = fff
-//    val ff: F[X] = run[B=>A,X](fg)(fba)
-//    ???
-//
-////    val ba: B => A = extract(fba)
-////    val cb: C => B = extract(fcb)
-////    pure(cb andThen ba)
-//  }
-//}
