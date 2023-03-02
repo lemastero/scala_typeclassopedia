@@ -25,7 +25,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion,
   "org.typelevel" %% "cats-effect" % "3.4.6",
 
-  "io.monix" %% "monix" % "3.4.1",
+  //"io.monix" %% "monix" % "3.4.1",
 
   // Scalaz
   "org.scalaz"    %% "scalaz-core" % "7.3.7",
@@ -43,13 +43,13 @@ libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.10",
 
   // tofu
-  "tf.tofu" %% "tofu" % "0.11.1",
+  //"tf.tofu" %% "tofu" % "0.11.1",
 
   // izumi
-  "io.7mind.izumi" %% "fundamentals-bio" % "1.0.10",
+  //"io.7mind.izumi" %% "fundamentals-bio" % "1.0.10",
 
   // HoTT in Scala
-  "io.github.siddhartha-gadgil" %% "provingground-core-jvm" % "0.1.1",
+  //"io.github.siddhartha-gadgil" %% "provingground-core-jvm" % "0.1.1",
 
   // test
   "org.scalacheck" %% "scalacheck" % scalacheckVersion % Test,
