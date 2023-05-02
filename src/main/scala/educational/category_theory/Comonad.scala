@@ -39,7 +39,7 @@ F[A]                 F[F[A]]
       \                    |
           \                |  duplicate
               \            |
-extend(duplicate)   \        |
+extend(duplicate)  \       |
                      \|    \/
                      F[F[F[A]]]
 
