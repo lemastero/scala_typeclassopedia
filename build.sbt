@@ -57,7 +57,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestPlusVersion % Test,
   "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5" % Test,
 
-  "org.scalatest" %% "scalatest" % "3.2.15" % Test,
+  "org.scalatest" %% "scalatest" % "3.2.16" % Test,
 
   "org.typelevel" %% "discipline-core" % "1.5.1" % Test,
   "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test
