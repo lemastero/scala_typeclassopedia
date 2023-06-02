@@ -32,7 +32,7 @@ libraryDependencies ++= Seq(
 
   // ZIO
 
-  "dev.zio" %% "zio" % "2.0.13",
+  "dev.zio" %% "zio" % "2.0.14",
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC19",
 
   // algebra
