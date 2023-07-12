@@ -37,7 +37,7 @@ libraryDependencies ++= Seq(
 
   // algebra
   "org.typelevel" %% "algebra" % "2.9.0",
-  "com.twitter" %% "algebird-core" % "0.13.9",
+  "com.twitter" %% "algebird-core" % "0.13.10",
 
   // type level
   "com.codecommit" %% "skolems" % "0.2.1",
