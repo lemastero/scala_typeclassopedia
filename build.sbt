@@ -3,7 +3,7 @@ name := "scala_typeclassopedia"
 version := "0.0.1"
 
 lazy val scala212 = "2.12.17"
-lazy val scala213 = "2.13.10"
+lazy val scala213 = "2.13.11"
 
 scalaVersion := scala213
 
@@ -11,7 +11,7 @@ crossScalaVersions := List(scala212, scala213)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-lazy val catsVersion = "2.9.0"
+lazy val catsVersion = "2.10.0"
 lazy val catsMtlVersion = "1.3.1"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
 lazy val scalacheckVersion = "1.17.0"
@@ -23,7 +23,7 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion,
   "org.typelevel" %% "cats-mtl" % catsMtlVersion,
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion,
-  "org.typelevel" %% "cats-effect" % "3.4.10",
+  "org.typelevel" %% "cats-effect" % "3.4.11",
 
   "io.monix" %% "monix" % "3.4.1",
 
@@ -33,10 +33,10 @@ libraryDependencies ++= Seq(
   // ZIO
 
   "dev.zio" %% "zio" % "2.0.13",
-  "dev.zio" %% "zio-prelude"  % "1.0.0-RC19",
+  "dev.zio" %% "zio-prelude"  % "1.0.0-RC20",
 
   // algebra
-  "org.typelevel" %% "algebra" % "2.9.0",
+  "org.typelevel" %% "algebra" % "2.10.0",
   "com.twitter" %% "algebird-core" % "0.13.9",
 
   // type level
@@ -55,7 +55,7 @@ libraryDependencies ++= Seq(
   // test
   "org.scalacheck" %% "scalacheck" % scalacheckVersion % Test,
   "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestPlusVersion % Test,
-  "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5" % Test,
+  "com.github.alexarchambault" %% "scalacheck-shapeless_1.15" % "1.3.0" % Test,
 
   "org.scalatest" %% "scalatest" % "3.2.15" % Test,
 
