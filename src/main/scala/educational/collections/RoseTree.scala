@@ -8,7 +8,7 @@ object RoseTreeInstances {
 
   val roseTreeComonad: Comonad[RoseTree] = new Comonad[RoseTree] {
     def extract[A](na: RoseTree[A]): A = na.tip
-    def duplicate[A](na: RoseTree[A]): RoseTree[RoseTree[A]] =
+    override def duplicate[A](na: RoseTree[A]): RoseTree[RoseTree[A]] =
       RoseTree(na, na.subTrees.map(duplicate))
     def map[A, B](na: RoseTree[A])(f: A => B): RoseTree[B] =
       RoseTree(f(na.tip), na.subTrees.map(s => map(s)(f)))

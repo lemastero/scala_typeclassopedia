@@ -1,3 +1,67 @@
+```mermaid
+classDiagram
+   Functor~F[+_]~ <|-- Bifunctor~F[+_,+_]~
+   Functor <|-- Bifunctor
+   Functor <|-- Profunctor~F[-_,+_]~
+   Contravariant~F[-_]~ <|-- Profunctor
+   Semicategory~F[-_,+_]~ <|-- Category~F[-_,+_]~
+   Category <|-- Arrow~F[-_,+_]~
+   Bifunctor <|-- Zivariant~F[-_,+_,+_]~
+   Profunctor <|-- Zivariant
+   Profunctor <|-- Strong~F[-_,+_]~
+   Strong -- Arrow
+   Arrow <|-- ArrowApply~F[-_,+_]~
+   Arrow <|-- CommutativeArrow~F[-_,+_]~
+   Arrow <|-- ArrowLoop~F[-_,+_]~
+   Profunctor <|-- Choice~F[-_,+_]~
+   Arrow <|-- ArrowZero~F[-_,+_]~
+   Arrow <|-- ArrowChoice~F[-_,+_]~
+   Choice <|-- ArrowChoice
+
+   class Functor {
+     ) map(F[A], A => B): F[B]
+   }
+   class Contravariant {
+     ) contramap(F[A], B => A): F[B]
+   }
+   class Semicategory {
+     ) compose[A,B,C](F[B,C], F[A,B]): F[A,C]
+   }
+  class Category {
+    ) id[A]: F[A,A]
+  }
+  class Profunctor {
+    ) dimap(AA => A, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Bifunctor {
+    ) bimap(A => AA, B => BB): P[A,B] => P[AA,BB]
+  }
+  class Zivariant {
+    ) zimap(AA => A, B => BB, C => CC): P[A,B,C] => P[AA,BB,CC]
+  }
+  class Strong {
+    ) first(P[A,B]): P[(A,C), (B,C)]
+  }
+  class Choice {
+    ) left(P[A,B]): P[Either[A, C], Either[B, C]]
+  }
+  class Arrow {
+    ) arr(A => B): F[A, B]
+  }
+  class ArrowZero {
+    ) zeroArr(): P[A,B]
+  }
+  class ArrowApply {
+    ) app(P[P[B,C],B]): C
+  }
+  class ArrowApply {
+    ) app(P[P[B,C],B]): C
+  }
+  class ArrowLoop {
+    ) loop(P[(B,D), (C,D)]: P[B,C]
+  }
+```
+
 ### Profunctor
 
 Profunctor abstract over
@@ -153,7 +217,7 @@ trait StrongProfunctor[P[_, _]] extends Profunctor[P] {
 }
 ```
 
-* Laws [Haskell](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html) [Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
+* Laws [Haskell](https://hackage.haskell.org/package/profunctors/docs/Data-Profunctor-Strong.html) [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Strong.scala#L16-L90) [Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/StrongLaws.scala)
   1) `first == dimap(swap, swap) andThen second`
   2) `lmap(_.1) == rmap(_.1) andThen first`
   3) `lmap(second f) andThen first == rmap(second f) andThen first`
@@ -462,8 +526,6 @@ instance ProfunctorEnd (->) where
 * (Haskell) [sjoerdvisscher/product-profunctors](https://github.com/sjoerdvisscher/product-profunctors/blob/master/Data/Profunctor/Product.hs#L171-L197)
 
 ## Arrows
-
-![](img/arrows.svg)
 
 ### Category
 

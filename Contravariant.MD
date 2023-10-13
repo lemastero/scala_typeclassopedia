@@ -1,3 +1,33 @@
+```mermaid
+classDiagram
+   Contravariant~F[-_]~ <|-- Divide~F[-_]~
+   Divide <|-- Divisible~F[-_]~
+   Divide <|-- Decide~F[-_]~
+   Decide <|-- Decidable~F[-_]~
+   Divisible <|-- Decidable
+
+   class Contravariant {
+     // contravariant Functor
+     )  contramap(F[A], B => A): F[B]
+   }
+   class Divide {
+     // contravariant Apply
+     )  divide(A => (B,C), F[B], F[C]): F[A]
+   }
+   class Decide {
+     // contravariant Alt  
+     )  choose[A,B,C](A => Either[B, C], F[B], F[C]): F[A]
+   }
+   class Divisible {
+     // contravariant Applicative
+     )  conquer[A]: F[A]
+   }
+   class Decidable {
+     // contravariant Alternative  
+     )  loose[A](A => Void): F[A]
+   }
+```
+
 ## Opposite category
 
 Opposite category ([nLab](https://ncatlab.org/nlab/show/opposite+category)) is a category where all arrows are reversed.
@@ -50,11 +80,20 @@ trait Contravariant[F[_]] {
 }
 ```
 
-* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [zio-prelude](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/Contravariant.scala) [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Presheaf.v), [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
+* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/contravariant.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Contravariant.scala), [zio-prelude](https://github.com/zio/zio-prelude/blob/master/src/main/scala/zio/prelude/Contravariant.scala)
+* [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Presheaf.v), [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
+  [Haskell](https://downloads.haskell.org/~ghc/latest/docs/html/libraries/base-4.13.0.0/Data-Functor-Contravariant.html), [Purescript](https://pursuit.purescript.org/packages/purescript-contravariant/docs/Data.Functor.Contravariant)
+Proofs [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Presheaf.v)
+Category Theory [nLab](https://ncatlab.org/nlab/show/contravariant+functor)
 
 * Contravariant laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ContravariantLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Contravariant.scala#L59-L68), [Haskell](http://hackage.haskell.org/package/contravariant/docs/Data-Functor-Contravariant.html)):
 
-![](img/contravariant_laws.svg)
+```mermaid
+flowchart RL
+  FA1(("F[A]")) --"contramap(id)"--> FA2(("F[A]"))
+  FA(("F[A]")) --"contramap(f andThen g)"--> FC(("F[C]"))
+  FA(("F[A]")) --"contramap(f)"--> FB(("F[B]"))--"contramap(g)"--> FC(("F[C]"))
+```
 
 1 contramap identity  
 

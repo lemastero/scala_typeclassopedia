@@ -2,8 +2,8 @@ name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-lazy val scala212 = "2.12.14"
-lazy val scala213 = "2.13.6"
+lazy val scala212 = "2.12.18"
+lazy val scala213 = "2.13.12"
 
 scalaVersion := scala213
 
@@ -11,10 +11,10 @@ crossScalaVersions := List(scala212, scala213)
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
-lazy val catsVersion = "2.6.1"
-lazy val catsMtlVersion = "1.2.1"
+lazy val catsVersion = "2.10.0"
+lazy val catsMtlVersion = "1.3.1"
 lazy val scalaTestPlusVersion = "3.1.0.0-RC2"
-lazy val scalacheckVersion = "1.15.4"
+lazy val scalacheckVersion = "1.17.0"
 libraryDependencies ++= Seq(
   // cats
   "org.typelevel" %% "cats-core" % catsVersion,
@@ -23,30 +23,30 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "alleycats-core" % catsVersion,
   "org.typelevel" %% "cats-mtl" % catsMtlVersion,
   "org.typelevel" %% "cats-mtl-laws" % catsMtlVersion,
-  "org.typelevel" %% "cats-effect" % "3.2.8",
+  "org.typelevel" %% "cats-effect" % "3.5.2",
 
-  "io.monix" %% "monix" % "3.4.0",
+  "io.monix" %% "monix" % "3.4.1",
 
   // Scalaz
-  "org.scalaz"    %% "scalaz-core" % "7.3.5",
+  "org.scalaz"    %% "scalaz-core" % "7.3.7",
 
   // ZIO
-  "dev.zio" %% "zio-prelude"  % "1.0.0-RC6",
-  "dev.zio" %% "zio" % "1.0.11",
+  "dev.zio" %% "zio" % "2.0.18",
+  "dev.zio" %% "zio-prelude"  % "1.0.0-RC21",
 
   // algebra
-  "org.typelevel" %% "algebra" % "2.2.3",
-  "com.twitter" %% "algebird-core" % "0.13.8",
+  "org.typelevel" %% "algebra" % "2.10.0",
+  "com.twitter" %% "algebird-core" % "0.13.10",
 
   // type level
   "com.codecommit" %% "skolems" % "0.2.1",
-  "com.chuusai" %% "shapeless" % "2.3.7",
+  "com.chuusai" %% "shapeless" % "2.3.10",
 
   // tofu
-  "ru.tinkoff" %% "tofu" % "0.9.2",
+  "tf.tofu" %% "tofu" % "0.12.0.1",
 
   // izumi
-  "io.7mind.izumi" %% "fundamentals-bio" % "1.0.8",
+  "io.7mind.izumi" %% "fundamentals-bio" % "1.1.0",
 
   // HoTT in Scala
   "io.github.siddhartha-gadgil" %% "provingground-core-jvm" % "0.1.1",
@@ -54,12 +54,12 @@ libraryDependencies ++= Seq(
   // test
   "org.scalacheck" %% "scalacheck" % scalacheckVersion % Test,
   "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestPlusVersion % Test,
-  "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5" % Test,
+  "com.github.alexarchambault" %% "scalacheck-shapeless_1.15" % "1.3.0" % Test,
 
-  "org.scalatest" %% "scalatest" % "3.2.9" % Test,
+  "org.scalatest" %% "scalatest" % "3.2.17" % Test,
 
-  "org.typelevel" %% "discipline-core" % "1.1.5" % Test,
-  "org.typelevel" %% "discipline-scalatest" % "2.1.5" % Test
+  "org.typelevel" %% "discipline-core" % "1.5.1" % Test,
+  "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test
 )
 
 scalacOptions ++= Seq(

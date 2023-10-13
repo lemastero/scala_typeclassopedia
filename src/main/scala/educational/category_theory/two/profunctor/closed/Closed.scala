@@ -1,11 +1,9 @@
 package educational.category_theory.two.profunctor.closed
 
-import educational.category_theory.two.profunctor.Profunctor
-import educational.category_theory.two.profunctor.ProfunctorLaws
+import educational.category_theory.two.profunctor.{Profunctor, ProfunctorLaws}
 import educational.category_theory.two.profunctor.ProfunctorInstance.Function1Profunctor
-import Function.const
-import Function.uncurried
-import Function.untupled
+
+import scala.Function.{const, uncurried, untupled}
 
 /**
   * Closed Profunctor

@@ -15,7 +15,7 @@
 
 ## [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 
-* 2-Dimensional Categories - Niles Johnson, Donald Yau [(arXiv:2002.06055)](https://arxiv.org/pdf/2002.06055.pdf)
+* 2-Dimensional Categories - Niles Johnson, Donald Yau [(arxiv:2002.06055)](https://arxiv.org/abs/2002.06055), [(pdf)](https://arxiv.org/pdf/2002.06055.pdf)
 * Introduction to higher category theory -  Tobias Dyckerhoff [(Lecture Notes, Problem Sets)](https://www.math.uni-hamburg.de/home/dyckerhoff/higher/index.html)
 * An Introduction to n-Categories - John C. Baez [(arXiv)](https://arxiv.org/abs/q-alg/9705009)
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
@@ -32,6 +32,7 @@
 * Toposes, Triples and Theories - Michael Barr, Charles Wells [(pdf)](http://www.math.mcgill.ca/barr/papers/tttall.pdf)
 * Topos theoretic background - Olivia Caramello [(paper)](http://www.oliviacaramello.com/Unification/ToposTheoreticPreliminariesOliviaCaramello.pdf)
 * Introduction to categorical logic, classifying toposes and the bridge technique - Olivia Caramello [(videos with toc)](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/20151124-caramello)
+* [Topos online 2021](https://aroundtoposes.com/toposesonline/) conference [(videos)](https://www.youtube.com/playlist?list=PLx5f8IelFRgGuSn4L90j3taAGSzyfw-U1)
 * [Toposes in Como 2018](http://tcsc.lakecomoschool.org/) conference: [(video playlist)](https://www.youtube.com/watch?v=85hAGaFCsD8&index=2&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp), [(slides from talks)](http://tcsc.lakecomoschool.org/program/); There are introductory lectures [Some glances at topos theory - Francis Borceux](https://www.youtube.com/watch?v=s_fN9euuVAY&list=PLh_3Q6ZRqWs0LBptMGClJ8OArR0fBT6Pp&index=10)
 * [Topos à l’IHES 2015](https://indico.math.cnrs.fr/event/747/) conference: [(video playlist)](https://www.youtube.com/playlist?list=PLx5f8IelFRgFjhhrWWl96sRSClcG5YIx6), includes introductory: [A crash course in topos theory: the big picture - André Joyal](https://sites.google.com/site/logiquecategorique/autres-seminaires/ihes/ihestopos/cours/joyal)
 * Higher Topos Theory - Jacob Lurie [(arXiv:math/0608040)](https://arxiv.org/abs/math/0608040)
@@ -108,6 +109,7 @@
 [Part 8: Topics in Moduli Theory](https://stacks.math.columbia.edu/tag/0ELR)
 * [Quantum Gravity Seminar - John Baez](http://math.ucr.edu/home/baez/QG.html) interesting notes around type theory (in classical versus quantum computation) and [(cohomology and computation)](http://math.ucr.edu/home/baez/qg-spring2007/index.html#computation)
 * [Fancy Algebra - Part I: Adjoint Functors](http://www.math.miami.edu/~armstrong/FA/FA_part1.pdf)
+* [varkor/quiver](https://github.com/varkor/quiver)Tooll for drawing commuate diagrams
 
 ## Publications
 
@@ -145,6 +147,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Mauro Jaskelioff](https://dblp.uni-trier.de/pers/hd/j/Jaskelioff:Mauro)
 * [Johan Jeuring](https://dblp.uni-trier.de/pers/hd/j/Jeuring:Johan), [Utrecht University page](http://www.staff.science.uu.nl/~jeuri101/homepage/Publications/index.html)
 * [André Joyal](https://dblp.uni-trier.de/pers/hd/j/Joyal:Andr=eacute=), [arxiv](https://arxiv.org/search/math?query=Andr%C3%A9+Joyal&searchtype=author)
+* [Jacob Lurie](https://www.math.ias.edu/~lurie/)
 * [Jade Master](https://arxiv.org/search/math?searchtype=author&query=Master%2C+J)
 * [Lucius Gregory Meredith](https://dblp.org/pers/hd/m/Meredith:Lucius_Gregory)
 * [David Jaz Myers](http://davidjaz.com/), [arxiv](https://arxiv.org/search/math?searchtype=author&query=Myers%2C+D+J)
@@ -166,7 +169,7 @@ This is very opinionated selection of authors that publish interesting papers ab
 * [Wouter Swierstra](https://dblp.org/pers/hd/s/Swierstra:Wouter), [Utrecht University page](http://www.staff.science.uu.nl/~swier004/publications/)
 * [Tarmo Uustalu](http://cs.ioc.ee/~tarmo/papers/), [arXiv](https://arxiv.org/search/?query=Tarmo+Uustalu&searchtype=author&source=header)
 * [Christina Vasilakopoulou](https://thalis.math.upatras.gr/~cvasilak/), [arXiv](https://arxiv.org/search/math?searchtype=author&query=Vasilakopoulou%2C+C)
-* Philip Wadler [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
+* [Philip Wadler](https://iohk.io/en/research/library/authors/philip-wadler/), [Monads, arrows, applicatives](http://homepages.inf.ed.ac.uk/wadler/topics/monads.html), [Parametricity](http://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html)
 
 ## [Proof Theory](https://ncatlab.org/nlab/show/proof+theory)
 
@@ -270,12 +273,13 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Monoidal categories in Python [oxford-quantum-group/discopy](https://github.com/oxford-quantum-group/discopy), paper: DisCoPy: Monoidal Categories in Python Giovanni de Felice, Alexis Toumi, Bob Coecke [arxiv 2005.02975](https://arxiv.org/abs/2005.02975)
 * Evan Patterson: Realizing Applied Category Theory in Julia [(video)](https://www.youtube.com/watch?v=7dmrDYQh4rc)
 
-## Logic
+## (Constructive) Logic
 
 * Substructural Logics - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15816-f16/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15816-f16/assignments.html)
 * Constructive Logic - Carnegie Mellon University - Frank Pfenning [(course notes)](http://www.cs.cmu.edu/~fp/courses/15317-f17/schedule.html) [(assignments)](http://www.cs.cmu.edu/~fp/courses/15317-f17/assignments.html)
 * Linear Logic - Carnegie Mellon University - Frank Pfenning [(course)](http://www.cs.cmu.edu/~fp/courses/linear/schedule.html)
 * [Logical_Graphs](https://oeis.org/wiki/Logical_Graphs#Peirce.27s_law)
+* [Applied Logic course - Erik Palmgren](http://www2.math.uu.se/~palmgren/tillog/) (contains nice lecture notes, exercises in Coq)
 
 ## Nominal Techniques
 
@@ -358,3 +362,10 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * [A List of Foundational Haskell Papers - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
 * [A Haskell Reading List - Stephen Diehl](http://www.stephendiehl.com/posts/essential_haskell.html)
 * [797 Haskell Papers](https://mitchellwrosen.github.io/haskell-papers/)
+
+## Podcasts
+
+* [The Iowa Type Theory Commute](https://homepage.divms.uiowa.edu/~astump/ittc.html)
+* [The Type Theory Podcast](https://typetheorypodcast.com/)
+* [The Haskell Interlude](https://haskell.foundation/podcast/)
+* [The Haskell Weekly](https://haskellweekly.news/podcast.html)

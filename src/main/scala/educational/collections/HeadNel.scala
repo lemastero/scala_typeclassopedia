@@ -23,7 +23,7 @@ case class Nel[+A](head: A, tail: Nel[A])
 object NelInstances {
   val nelComonad: Comonad[Nel] = new Comonad[Nel] {
     def extract[A](w: Nel[A]): A = ???
-    def duplicate[A](wa: Nel[A]): Nel[Nel[A]] = ???
+    override def duplicate[A](wa: Nel[A]): Nel[Nel[A]] = ???
     def map[A, B](fa: Nel[A])(f: A => B): Nel[B] = ???
   }
 }

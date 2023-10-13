@@ -9,7 +9,7 @@ pull_request_rules:
         add: [dependency-update]
   - name: merge Scala Steward's PRs
     conditions:
-      - base=master
+      - base=main
       - author=scala-steward
       - status-success=Travis CI - Pull Request
     actions:
