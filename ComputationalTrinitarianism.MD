@@ -24,6 +24,10 @@
 * Associative n-categories - Christoph Dorn [(arXiv:1812.10586)](https://arxiv.org/pdf/1812.10586.pdf)
 * Strictly associative and unital higher category theory - Jamie Vicary [(slides)](https://www.cs.bham.ac.uk/~axj/files/mgs-xmas-2018-Jamie.pdf)
 * [kerodon.net](https://kerodon.net/) Part I - Higher category theory
+* YouTube playlists:
+   - [2-Categories Bicategories](https://www.youtube.com/playlist?list=PLmB9zOCKwySGiQu19ScW98EEduJswr1dk)
+   - [n-categories](https://www.youtube.com/playlist?list=PLmB9zOCKwySFkj3c--HgwaUPTkFG_z07J)
+   - [Infinity Categories](https://www.youtube.com/playlist?list=PLmB9zOCKwySG7ZPy4a7ojNVRpofoPt1nC)
 
 ## [Topos Theory](https://ncatlab.org/nlab/show/sheaf+and+topos+theory)
 
