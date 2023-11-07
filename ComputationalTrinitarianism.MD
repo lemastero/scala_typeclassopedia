@@ -3,10 +3,10 @@
 ## [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
 * Category Theory for Programmers - Bartosz Milewski [(book)](https://www.blurb.com/b/9008339-category-theory-for-programmers) put together by [Igal Tabachnik](https://github.com/hmemcpy) as [(online version)](https://github.com/hmemcpy/milewski-ctfp-pdf);
-  - [video lectures part I](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_)
-  - [video lectures](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm)
-  - [video lectures](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL)
-  - [(series of blog posts)](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+  - [video lectures I](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_)
+  - [video lectures II](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm)
+  - [video lectures III](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL)
+  - [series of blog posts](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 * Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/), [(MGS 2009 version - slides, solutions to exercises)](http://www.cs.nott.ac.uk/~psztxa/mgs.2009/)
 * Category Theory for Computing Science - Michael Barr, Charles Wells [(book)](http://tac.mta.ca/tac/reprints/articles/22/tr22abs.html)
 * Basic Category Theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1612.09375)
@@ -70,7 +70,10 @@
 * Applied Category Theory conference
   * ACT 2018 [(video playlist)](https://www.youtube.com/watch?v=0HMko_4cL30&list=PLE2y3n8EQ6VywrcixgTKyGHFI4A68FYSk)
   * ACT 2019 [(videos & summaries)](https://johncarlosbaez.wordpress.com/2019/07/20/applied-category-theory-2019-talks/)
-  * ACT 2020 [conference page](nLab), [(videos)](https://www.youtube.com/channel/UC1Kxtc6DOexi4JT-t57Ey9g/videos) 
+  * ACT 2020 [conference page](nLab), [(conference videos)](https://www.youtube.com/watch?v=cJfasciuCIs&list=PLCOXjXDLt3pYot9VNdLlZqGajHyZUywdI), [(tutorials)](https://www.youtube.com/watch?v=cJ46AOEOc14&list=PLCOXjXDLt3pYPE63bVbsVfA41_wa3sZOh)
+  * ACT 2021 [(conference recordings)](https://www.youtube.com/playlist?list=PLCOXjXDLt3pZAujMKmfr5HACeKOcD2G0j)
+  * ACT 2022 [(recordings)](https://www.youtube.com/playlist?list=PLCOXjXDLt3pYEZEKNQP6kqzW4dYxPb3qT)
+  * ACT 2023 [(recordings)](https://www.youtube.com/playlist?list=PLCOXjXDLt3pacrnMymJy88LaWeFyKWpVP)
 * Polynomial Functors Course, 2021 [(video playlist)](https://www.youtube.com/watch?v=7ZaL6aQVOZo&list=PLhgq-BqyZ7i6IjU82EDzCqgERKjjIPlmh)
 * Workshop on Polynomial Functors, 2021 [(video playlist)](https://www.youtube.com/watch?v=B8STLcbEGrE&list=PLhgq-BqyZ7i7R-fGcAmNyWmJBQg1wzex-)
 
