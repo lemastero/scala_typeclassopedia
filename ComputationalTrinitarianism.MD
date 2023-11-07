@@ -2,7 +2,11 @@
 
 ## [Category Theory](https://ncatlab.org/nlab/show/category+theory)
 
-* Category Theory for Programmers - Bartosz Milewski [(book)](https://www.blurb.com/b/9008339-category-theory-for-programmers) put together by [Igal Tabachnik](https://github.com/hmemcpy) as [(online version)](https://github.com/hmemcpy/milewski-ctfp-pdf); also available as [(video lectures part I)](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_), [(part 2)](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm), [(part 3)](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL) and [(series of blog posts)](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+* Category Theory for Programmers - Bartosz Milewski [(book)](https://www.blurb.com/b/9008339-category-theory-for-programmers) put together by [Igal Tabachnik](https://github.com/hmemcpy) as [(online version)](https://github.com/hmemcpy/milewski-ctfp-pdf);
+  - [(video lectures part I)](https://www.youtube.com/watch?v=I8LbkfSSR58&list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_)
+  - [(part 2)](https://www.youtube.com/watch?v=3XTQSx1A3x8&list=PLbgaMIhjbmElia1eCEZNvsVscFef9m0dm)
+  - [(part 3)](https://www.youtube.com/watch?v=F5uEpKwHqdk&list=PLbgaMIhjbmEn64WVX4B08B4h2rOtueWIL)
+  -  [(series of blog posts)](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 * Categories for the lazy functional programmer - MGS 2019 - Thorsten Altenkirch [(course)](http://www.cs.nott.ac.uk/~psztxa/mgs.2019/), [(MGS 2009 version - slides, solutions to exercises)](http://www.cs.nott.ac.uk/~psztxa/mgs.2009/)
 * Category Theory for Computing Science - Michael Barr, Charles Wells [(book)](http://tac.mta.ca/tac/reprints/articles/22/tr22abs.html)
 * Basic Category Theory - Tom Leinster [(arXiv)](https://arxiv.org/abs/1612.09375)
@@ -12,6 +16,19 @@
 * On terminal coalgebras derived from initial algebras - Jiri Adamek [(arXiv)](https://arxiv.org/abs/cs/0609040)
 * Category Theory Study Group [(video playlist)](https://www.youtube.com/channel/UCDXHYyvGJBxbIdmpmnz4cIw/videos)
 * Takt Category Theory - Runar Bjarnason [(video playlist)](https://www.youtube.com/playlist?list=PLq3_mvFPbUXcVETGuvOeLL26mBIMA8Xzt)
+* TheCatsters videos
+  - [Adjunctions]https://www.youtube.com/playlist?list=PL54B49729E5102248
+  - [Monads](https://www.youtube.com/playlist?list=PL0E91279846EC843E)
+  - [Representables and Yoneda](https://www.youtube.com/playlist?list=PLmB9zOCKwySGBC1NiOCOjLG__DrStHM1E)
+  - [Ends](https://www.youtube.com/playlist?list=PLg-WC4aaB3JuUXyuc337P8UYQSQVTjyP6)
+  - [String diagrams](https://www.youtube.com/playlist?list=PL50ABC4792BD0A086)
+  - [Adjunctions from morphisms](https://www.youtube.com/playlist?list=PLmB9zOCKwySGNHp3VDgzgy8ewnX6YV9zn)
+* VisualMath - What is...category theory?[videos](https://www.youtube.com/playlist?list=PLuFcVFHMIfhKFQJsilw-W7dVtPprKU3-f)
+* MathProofsable Category Theory videos
+  - [Chapter 1: Basic Constructions](https://www.youtube.com/playlist?list=PL4FD0wu2mjWOtmhJsiVrCpzOAk42uhdz8)
+  - [Chapter 2: Adjoint Situations](https://www.youtube.com/playlist?list=PL4FD0wu2mjWPNb1qoHy_Nr2IqmJBI9xi9)
+  - [Chapter 3: Monads](https://www.youtube.com/playlist?list=PL4FD0wu2mjWPucXAkNMfWwnQeterLEW2o)
+  - [Chapter 4: Kan Extensions](https://www.youtube.com/playlist?list=PL4FD0wu2mjWNEKkhkhDd7mcLDSMoiMPnN)
 
 ## [Higher Category Theory](https://ncatlab.org/nlab/show/higher+category+theory)
 
