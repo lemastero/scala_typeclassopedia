@@ -28,7 +28,7 @@ libraryDependencies ++= Seq(
   "io.monix" %% "monix" % "3.4.1",
 
   // Scalaz
-  "org.scalaz"    %% "scalaz-core" % "7.3.7",
+  "org.scalaz"    %% "scalaz-core" % "7.3.8",
 
   // ZIO
   "dev.zio" %% "zio" % "2.0.18",
