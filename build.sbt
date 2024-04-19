@@ -58,7 +58,7 @@ libraryDependencies ++= Seq(
 
   "org.scalatest" %% "scalatest" % "3.2.17" % Test,
 
-  "org.typelevel" %% "discipline-core" % "1.5.1" % Test,
+  "org.typelevel" %% "discipline-core" % "1.6.0" % Test,
   "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test
 )
 
