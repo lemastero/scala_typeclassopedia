@@ -2,7 +2,7 @@ name := "scala_typeclassopedia"
 
 version := "0.0.1"
 
-lazy val scala212 = "2.12.18"
+lazy val scala212 = "2.12.19"
 lazy val scala213 = "2.13.13"
 
 scalaVersion := scala213
@@ -28,7 +28,7 @@ libraryDependencies ++= Seq(
   "io.monix" %% "monix" % "3.4.1",
 
   // Scalaz
-  "org.scalaz"    %% "scalaz-core" % "7.3.7",
+  "org.scalaz"    %% "scalaz-core" % "7.3.8",
 
   // ZIO
   "dev.zio" %% "zio" % "2.0.18",
@@ -43,7 +43,7 @@ libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.10",
 
   // tofu
-  "tf.tofu" %% "tofu" % "0.12.0.1",
+  "tf.tofu" %% "tofu" % "0.12.1",
 
   // izumi
   "io.7mind.izumi" %% "fundamentals-bio" % "1.1.0",
@@ -56,7 +56,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus" %% "scalatestplus-scalacheck" % scalaTestPlusVersion % Test,
   "com.github.alexarchambault" %% "scalacheck-shapeless_1.15" % "1.3.0" % Test,
 
-  "org.scalatest" %% "scalatest" % "3.2.17" % Test,
+  "org.scalatest" %% "scalatest" % "3.2.18" % Test,
 
   "org.typelevel" %% "discipline-core" % "1.5.1" % Test,
   "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test
