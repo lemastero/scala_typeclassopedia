@@ -3,7 +3,7 @@ name := "scala_typeclassopedia"
 version := "0.0.1"
 
 lazy val scala212 = "2.12.20"
-lazy val scala213 = "2.13.14"
+lazy val scala213 = "2.13.15"
 
 scalaVersion := scala213
 
@@ -43,7 +43,7 @@ libraryDependencies ++= Seq(
   "com.chuusai" %% "shapeless" % "2.3.10",
 
   // tofu
-  "tf.tofu" %% "tofu" % "0.12.1",
+  "tf.tofu" %% "tofu" % "0.13.6",
 
   // izumi
   "io.7mind.izumi" %% "fundamentals-bio" % "1.2.8",
