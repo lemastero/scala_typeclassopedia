@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "org.scalaz"    %% "scalaz-core" % "7.3.8",
 
   // ZIO
-  "dev.zio" %% "zio" % "2.1.11",
+  "dev.zio" %% "zio" % "2.1.13",
   "dev.zio" %% "zio-prelude"  % "1.0.0-RC35",
 
   // algebra
