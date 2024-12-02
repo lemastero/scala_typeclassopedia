@@ -1,79 +1,80 @@
 # Notes on Monoidal Categories in context of Scala
 
-Basic category theory models composition abstracting over details of objects that are composed.
-Monoidal category theory add orthogonal operation - tensor product that can model parallelism.
-
-Following notes combine definitions, from category theory, related to monoidal categories
-as well as implementations in Scala 2 that provide examples for them.
+`Basic category theory` (C.T.) nicely models composition of operations (morphisms) between objects.  
+`Monoidal category theory` (M.C.T.) add additional way to compose (tensor product). Thanks to additional orthogonal way to compose objects, we can conveniently model processes `composed sequenctially and in parallel`.
 
 Categorical definitions often use conditions presented as equations.
-In Scala, the usual approach, is to provide abstract interface with
-functions in form suitable to write property tests.
-If those fail we have a counterexample.
+In Scala, we provide interface with functions expressing them and test them using random input (property tests).
+If those fail we have an counterexample, and we need to re-think our implementation.
+Haskell provides more precise types (no ad-hoc polymorphism) so usually it is enough to write formal proof (e.g. using Coq or Agda) and express in comment how those works.
 
-Later we will come back to this approach and propose alternative,
-that can be more useful for functional programming.
+## Discovering the abstraction
+
+Lets try to look at some examples of ADT to spot common pattern.
 
 # Algebraic Data Types form commutative semiring
 
-It is common knowledge among FP programmers that Curry-Howard-Lambek isomorphism we know that:
+It is common knowledge in FP that there exists pattern that was rediscovered in many different branches of mathematics (Curry-Howard-Lambek isomorphism, propositions as types).
+With few extra constructions (pi type, sigma type, identity type) it is powerful enough to express everything (univalent foundations of mathematics).
 
-| Type Theory   | Logic                | Category Theory       |
-|---------------|----------------------|-----------------------|
-| Void          | false                | initial object        |
-| Unit          | true                 | terminal object       |
-| Eiter[A,B]    | A v B disjunction    | coproduct             |
-| (A,B)         | A ∧ B conjunction    | product               |
-| A => B        | A => B implication   | exponential object    | 
+| Scala      | Haskell     | Logic              | Arithmetic | Set theory      | Category Theory    |
+|------------|-------------|--------------------|------------|-----------------|--------------------|
+| Void       | Data.Void   | false              | 0          | empty set       | initial object     | 
+| Unit       | ()          | true               | 1          | one element set | terminal object    | 
+| Eiter[A,B] | Data.Either | A v B disjunction  | a + b      | disjoint union  | icoproduct         |
+| (A,B)      | Data.Tuple  | A ∧ B conjunction  | a * b      | intersection    | product            |
 
-and we can obviously see that tuple with `Unit` form a `commutative monoid`:
+It is easy to see that `Tuple` with `Unit` it almost form a `commutative monoid`:
 
 ```scala
+(Unit,a)  ~ a         ~ (a, Unit)
 (a,(b,c)) ~ ((a,b),c) 
-(Unit,a) ~ a ~ (a, Unit)
-(a,b) ~ (a, b)
+(a,b)     ~ (a, b)
 ``` 
 
 similar `Either` and `Nothing`:
 
 ```scala
-Either(Void,a) ~ a ~ Either(a, Void)
+Either(Void,a)        ~ a                     ~ Either(a, Void)
 Either(a,Either(b,c)) ~ Either(Either(a,b),c) 
-Either(a,b) ~ Either(a, b)
+Either(a,b)           ~ Either(a, b)
 ```
 
-and combined form `commutative semiring` because:
+Combined they almost form `commutative semiring`:
 
 ```scala
 (a,Either(b,c)) ~ Either((a,b),(a,c)) 
 (Either(a,b),c) ~ Either((a,c),(b,c))
-(Void,a) ~ (a,Void) ~ 0
+(Void,a)        ~ 0   ~ (a,Void)
 ``` 
 
-That is super cool ... but it is not exactly true. 
-We know that tuple with () can be collapsed:
+Problem lies in the word almost - `Either (Either a b) c)` and `Either a (Either b c)` are isomorphic but not equal. Same for tuple.
+
+There is more things in common with interactions between those pairs of operation and special type.
+
+### Collapsiong triangle
+
+Tuple with () can be collapsed:
 
 ![](../img/triangle_tuple.svg)
 
-similarly with either
+similarly with either and empty type:
 
 ![](../img/triangle_either.svg) 
 
-We know that tuple can be associated however we like:
+### Association pentagon
+
+Tuple can be associated however we like:
 
 ![](../img/pentagon_tuple.svg) 
 
 similar Either.
 
+## Monoidal categories
 
-Writing functions marked as blue arrows is trivial, yet if we pass `Either(Void,a)` to function expecting `a` compiler will complain.
+We combine those observations and solve problem with equality up to isomorphism if we intorduce operations allowing us to transform between different way of using either/tuple (associator) and unite e.g. `Either(Void,a)` with `a`.
 
-
-This problem of equality up to isomorphism for those monoids can be solved by ... monoidal category.
-
-# Monoidal categories
-
-## [Monoidal category](https://ncatlab.org/nlab/show/monoidal+category) in category theory
+### Definition of [Monoidal category](https://ncatlab.org/nlab/show/monoidal+category) in category theory
 
 `Monoidal category` `(C,I,α,λ,ρ)` is a category `C` with:
 * a bifunctor (`tensor product`) `⊗: (C,C) -> C`
@@ -90,8 +91,24 @@ This problem of equality up to isomorphism for those monoids can be solved by ..
 
 ![](../img/monoidal_pentagon.svg)
 
+It turns out this two diagrams are enough to ensure all kind of combinations of association and uniting behaves nicely.
 
-## Category of Scala types and functions in Scala
+
+## Wiring diagrams
+
+Nice thing about modeling things about monoidal categories is that you can draw them and reason about them visually. There is theorem that state that both formal reasoning and drawing diagrams is the same [coherence theorem for monoidal+categories](https://ncatlab.org/nlab/show/coherence+theorem+for+monoidal+categories).
+
+Moreover simple intuitions about diagrams allow us to reason about them easyly.
+
+As an example lets illustrate this for simple monoidal category with objects as numbers, (sequential) composition is <= and parallel composition is addition:
+
+TODO diagrams
+
+
+
+## Monoidal Category in Scala
+
+### Category of Scala types and functions in Scala
 
 If we represent category signature in following way:
 ```scala
@@ -111,7 +128,7 @@ trait Function1Cat extends Category[Function1] {
 }
 ```
 
-## Monoidal categories in Scala
+### Monoidal categories in Scala
 
 ```scala
 trait MonoidalCategory[:=>[_,_],⊗[_, _], I]
