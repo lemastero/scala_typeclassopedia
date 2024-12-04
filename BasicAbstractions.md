@@ -71,7 +71,7 @@ def widen[A, B >: A](fa: F[A]): F[B]
 
 Functor definition does not require any conditions on type constructor `F` or any other operations (unlike Applicative, Monad).
 Therefore pretty much everything is a Functor. Notable exceptions are:
-1. function input arguments (they are in `negative position`) or any input like type - see [Contravariant](./Contravariant.MD#contravariant-contravariant-functor) We can define Functor only for return type - because type is in `positive position`.
+1. function input arguments (they are in `negative position`) or any input like type - see [Contravariant](./Contravariant.md#contravariant-contravariant-functor) We can define Functor only for return type - because type is in `positive position`.
 2. abstractions where type can be both input and output, see [Invariant](#invariant-invariant-functor-exponential-functor) and blog post [Rotten Bananas by Edward Kmett](http://comonad.com/reader/2008/rotten-bananas/)
 3. abstractions that behave like a Functor but not there are some controversies:
 
@@ -82,7 +82,7 @@ Therefore pretty much everything is a Functor. Notable exceptions are:
 
 * Many abstractions have enough structure, so we can define `map` that obeys the laws. Such as `Monad` defined using `pure` and `flatMap`.
   Another notable example is `Coyoneda` that wraps any type constructor and allows to use `map` on it. Functor instance is neccessary only when we want to extract the end result.
-  See [Free constructions](./Free.MD#free-constructions) for `Free functors`.
+  See [Free constructions](./Free.md#free-constructions) for `Free functors`.
 
 * Resources:
     * herding cats - Functor - @eed3si9n [(blog post)](http://eed3si9n.com/herding-cats/Functor.html)
@@ -474,7 +474,7 @@ trait StateMonad[F[_],S] extends Monad[F] {
 
 ### State Monad
 
-You can define useful operations on [State](./README.MD#state). This could be abstract over in `StateMonad` typeclass:
+You can define useful operations on [State](./README.md#state). This could be abstract over in `StateMonad` typeclass:
 ```scala
 trait StateMonad[F[_],S] extends Monad[F] {
   def update: (S => S) => F[S]

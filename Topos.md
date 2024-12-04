@@ -23,5 +23,5 @@ Resources:
   * Category Theory: Toposes - MathProofsable [(video playlist)](https://www.youtube.com/watch?v=gKYpvyQPhZo&list=PL4FD0wu2mjWM3ZSxXBj4LRNsNKWZYaT7k)
   * Computational Quadrinitarianism (Curious Correspondences go Cubical) - Gershom Bazerman [(blog post)](http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/)
   * [fdilke/bewl](https://github.com/fdilke/bewl) (A DSL for the internal language of a topos)
-  * [resources about topos theory](./ComputationalTrinitarianism.MD#topos-theory)
+  * [resources about topos theory](./ComputationalTrinitarianism.md#topos-theory)
   * nLab [Topos](https://ncatlab.org/nlab/show/topos), [Subobject Classifier](https://ncatlab.org/nlab/show/subobject+classifier), [Lawvere-Tierney topology](https://ncatlab.org/nlab/show/Lawvere-Tierney+topology)
