@@ -398,7 +398,6 @@ TODO
 
 # References
   * Some Definitions Everyone Should Know - John C. Baez [(pdf)](http://math.ucr.edu/home/baez/qg-fall2004/definitions.pdf)
-  * Monoidal Categories, Higher Categories - Jamie Vicary [(pdf)](http://events.cs.bham.ac.uk/mgs2019/vicary.pdf)
   * Notions of Computation as Monoids - Exequiel Rivas, Mauro Jaskelioff [(arxiv.org/abs/1406.4823)](https://arxiv.org/pdf/1406.4823.pdf)
   * Discrimination is Wrong: Improving Productivity - Edward Kmett [(video from YOW! Conferences)](https://www.youtube.com/watch?v=eXDJ5Jcbgk8), [(video from ZuriHac 2015)](https://www.youtube.com/watch?v=cB8DapKQz-I), [(slides)](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
   * Braided Monoidal Categories - Andre Joyal, Ross Street [(pdf)](http://maths.mq.edu.au/~street/JS1.pdf)
