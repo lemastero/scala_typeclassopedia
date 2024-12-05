@@ -19,7 +19,6 @@
   * [Combinator Birds - Chris Rathman](http://www.angelfire.com/tx4/cus/combinator/birds.html) Reference of Birds expressed as Combinatory Logic (SKI calculus)
   * [functions from Functor, Applicative, Monad, Comond as combinators](http://hackage.haskell.org/package/data-aviary/docs/Data-Aviary-Functional.html)
   * [Haskell Wiki Combinatory logic](https://wiki.haskell.org/Combinatory_logic)
-  * [Combinatory Logic Tutorial - Chris Barker](http://www.nyu.edu/projects/barker/Lambda/ski.html)
   * The Thrush combinator in Scala - Debasish Ghosh [(blog post)](http://debasishg.blogspot.com/2009/09/thrush-combinator-in-scala.html)
   * (Haskell) Combinators in Haskell - geophf [(blog post)](http://logicaltypes.blogspot.com/2008/08/combinators-in-haskell.html)
   * (Haskell) Combinatory Birds as Types - geophf [(blog post)](http://logicaltypes.blogspot.com/2008/08/combinatory-birds-as-types.html)

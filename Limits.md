@@ -4,13 +4,12 @@
   * [Haskell wiki ADT](https://wiki.haskell.org/Algebraic_data_type)
   * Simple Algebraic Data Types - Bartosz Milewski [blog post](https://bartoszmilewski.com/2015/01/13/simple-algebraic-data-types/)
   * Category Theory 5.2: Algebraic data types - Bartosz Milewski [video](https://www.youtube.com/watch?v=w1WMykh7AxA)
-  * Counting type inhabitants - Alexander Konovalov [blog post](https://alexknvl.com/posts/counting-type-inhabitants.html)
 
 ### Unit
 
 Type that has only one element
 
-* Implementations [scala.Unit](https://www.scala-lang.org/api/2.11.12/#scala.Unit) [purescript-prelude/Data.Unit](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Unit), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/terminal.v), [nLab](https://ncatlab.org/nlab/show/terminal+object)
+* Implementations [scala.Unit](https://www.scala-lang.org/api/2.11.12/#scala.Unit) [purescript-prelude/Data.Unit](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Unit), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Limits/Terminal.v), [nLab](https://ncatlab.org/nlab/show/terminal+object)
 
 * Resources
   * Category Theory 4.1: Terminal and initial objects [video](https://www.youtube.com/watch?v=zer1aFgj4aU&feature=youtu.be&t=615) [Scala translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.2-limits-and-colimits.md)
@@ -21,7 +20,7 @@ Type that has only one element
 Type that has no elements.
 In Category Theory - Initial Object
 
-* Implementations [scala.Nothing](https://www.scala-lang.org/api/2.11.12/#scala.Nothing) [purescript-prelude/Data.Void](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Void) [Idris prelude/Prelude/Uninhabited](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Uninhabited.idr), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/initial.v), [nLab](https://ncatlab.org/nlab/show/initial+object)
+* Implementations [scala.Nothing](https://www.scala-lang.org/api/2.11.12/#scala.Nothing) [purescript-prelude/Data.Void](https://pursuit.purescript.org/packages/purescript-prelude/docs/Data.Void) [Idris prelude/Prelude/Uninhabited](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Uninhabited.idr), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Limits/Initial.v), [nLab](https://ncatlab.org/nlab/show/initial+object)
 
 * Resources
   * Category Theory 4.1: Terminal and initial objects [video](https://www.youtube.com/watch?v=zer1aFgj4aU&feature=youtu.be&t=615) [Scala translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.2-limits-and-colimits.md)
@@ -32,14 +31,14 @@ In Category Theory - Initial Object
 Type represents either one or another element.
 In set theory: disjoint union in Category theory: coproduct (sum).
 
-* Implementations [scala.util.Either](https://www.scala-lang.org/api/2.11.12/index.html#scala.util.Either) [purescript-either/Data.Either](https://pursuit.purescript.org/packages/purescript-either/docs/Data.Either), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/coproducts.v), [nLab](https://ncatlab.org/nlab/show/coproduct)
+* Implementations [scala.util.Either](https://www.scala-lang.org/api/2.11.12/index.html#scala.util.Either) [purescript-either/Data.Either](https://pursuit.purescript.org/packages/purescript-either/docs/Data.Either), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Limits/Coproducts.v), [nLab](https://ncatlab.org/nlab/show/coproduct)
 
 ## Product
 
 Type represents combination of two types.
 In Set theory cartesian product, in Category Theory product.
 
-* Implementations [scala.Product2](https://www.scala-lang.org/api/2.11.12/index.html#scala.Product2) [scala.Tuple2](https://www.scala-lang.org/api/2.11.12/#scala.Tuple2) [purescript-tuples/Data.Tuple](https://pursuit.purescript.org/packages/purescript-tuples/docs/Data.Tuple), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/limits/products.v), [nLab](https://ncatlab.org/nlab/show/cartesian+product)
+* Implementations [scala.Product2](https://www.scala-lang.org/api/2.11.12/index.html#scala.Product2) [scala.Tuple2](https://www.scala-lang.org/api/2.11.12/#scala.Tuple2) [purescript-tuples/Data.Tuple](https://pursuit.purescript.org/packages/purescript-tuples/docs/Data.Tuple), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Limits/Products.v), [nLab](https://ncatlab.org/nlab/show/cartesian+product)
 
 ### These
 
