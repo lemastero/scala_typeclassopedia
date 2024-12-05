@@ -38,7 +38,6 @@
 * Basic Bicategories - Tom Leinster [(arXiv)](https://arxiv.org/abs/math/9810017)
 * The periodic table of n-categories - Eugenia Cheng [(video)](https://www.youtube.com/watch?v=lJGUMlgCxz8)
 * Associative n-categories - Christoph Dorn [(arXiv:1812.10586)](https://arxiv.org/pdf/1812.10586.pdf)
-* Strictly associative and unital higher category theory - Jamie Vicary [(slides)](https://www.cs.bham.ac.uk/~axj/files/mgs-xmas-2018-Jamie.pdf)
 * [kerodon.net](https://kerodon.net/) Part I - Higher category theory
 * YouTube playlists:
    - [2-Categories Bicategories](https://www.youtube.com/playlist?list=PLmB9zOCKwySGiQu19ScW98EEduJswr1dk)
@@ -250,7 +249,7 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Fast Computations on Ordered Nominal Sets - David Venhoek, Joshua Moerman, Jurriaan Rot [(arXiv:1902.08414)](https://arxiv.org/abs/0805.0845)
 * Automata theory in nominal sets - Mikołaj Bojańczyk, Bartek Klin, Sławomir Lasota [(arXiv:1402.0897)](https://arxiv.org/abs/1402.0897)
 * Algebraic Theories over Nominal Sets - Alexander Kurz, Daniela Petrişan, Jiří Velebil [(arXiv:1006.3027)](https://arxiv.org/abs/1006.3027)
-* Atompress [blog](http://atoms.mimuw.edu.pl/), [book](http://atoms.mimuw.edu.pl/wp-content/uploads/2014/03/main.pdf), [WIP book](https://www.mimuw.edu.pl/~bojan/paper/atom-book)
+* [Atom book](https://www.mimuw.edu.pl/~bojan/paper/atom-book)
 * Nominal Sets and Their Applications [course - lectures, exercises](https://www.cl.cam.ac.uk/teaching/1213/L23/materials.html)
 * FoPSS 2019 - Nominal Techniques [(slides from talks)](https://www.mimuw.edu.pl/~fopss19/programme.html)
 * [SPLV 2020](http://www.macs.hw.ac.uk/splv/splv20/) - Maribel Fernandez - Nominal rewriting and unification, Jamie Gabbay - Nominal datatypes
@@ -276,7 +275,7 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 ## [Categorical Algebra](https://ncatlab.org/nlab/show/categorical+algebra)
 
 * Higher Algebra - Jacob Lurie [(pdf)](https://www.math.ias.edu/~lurie/papers/HA.pdf)
-* [Algebraic Operads - Jean-Louis Loday and Bruno Vallette](http://irma.math.unistra.fr/~loday/AO%28JLL-BV%29.html) [(pdf v 0.99)](http://irma.math.unistra.fr/~loday/PAPERS/LodayVallette.pdf)
+* [Algebraic Operads - Jean-Louis Loday and Bruno Vallette](https://www.math.univ-paris13.fr/~vallette/Operads.pdf)
 * Foundations of Algebraic Theories and Higher Dimensional Categories - Soichiro Fujii [(arxiv:1903.07030)](https://arxiv.org/abs/1903.07030)
 * A unified framework for notions of algebraic theory - Soichiro Fujii [(paper)](https://arxiv.org/abs/1904.08541)
 * Bialgebraic Semantics for String Diagrams - Filippo Bonchi, Robin Piedeleu, Pawel Sobocinski, Fabio Zanasi [(arXiv:1906.01519)](https://arxiv.org/abs/1906.01519)
@@ -297,10 +296,9 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * Nikolai Kudasov - Building a Telegram Bot in Haskell - λC 2018 [(video playlist)](https://www.youtube.com/watch?v=dfTTgdlsSzo&list=PL7DZ7q3nEWhw0esa7oaAYw3OHqG0Pyuu6&index=2)
 * Alejandro Serrano Mena - A Hands on Tutorial to Generic Programming in Haskell [(video)](https://www.youtube.com/watch?v=R3HWy1NCXMs&list=PL7DZ7q3nEWhygKSFNI4MlTL-draJzhRXb&index=2) 
 * [FP Complete tutorial for libraries](https://haskell.fpcomplete.com/learn#libraries)
-* CIS 552: Advanced Programming (Fall 2017) - Stephanie Weirich [(lecture notes)](https://www.seas.upenn.edu/~cis552/current/schedule.html) [(assignments)](https://www.seas.upenn.edu/~cis552/current/homework.html)
 * CIS 194: Introduction to Haskell (Spring 2013) - Brent Yorgey [(course)](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [Haskell ITMO course at CTD](https://github.com/jagajaga/FP-Course-ITMO)
-* Haskell from Scratch - [Chris Forno](http://jekor.com/) [@jekor](https://twitter.com/jekor) [(video playlist)](https://www.youtube.com/playlist?list=PLxj9UAX4Em-Ij4TKwKvo-SLp-Zbv-hB4B)
+* Haskell from Scratch - Chris Forno [(video playlist)](https://www.youtube.com/playlist?list=PLxj9UAX4Em-Ij4TKwKvo-SLp-Zbv-hB4B)
 
 ## Haskell [user groups](https://wiki.haskell.org/User_groups), [commmunities](https://wiki.haskell.org/User_groups) videos
 
@@ -321,7 +319,6 @@ SCALING DOT TO SCALA - SOUNDNESS - Martin Odersky [(blog post)](https://www.scal
 * [wiki.haskell.org Research papers](https://wiki.haskell.org/Research_papers)
 * [Haskell papers - Ben Lynn](https://crypto.stanford.edu/~blynn/haskell/papers.html)
 * [A List of Foundational Haskell Papers - Emily Pillmore](https://github.com/cohomolo-gy/haskell-resources)
-* [A Haskell Reading List - Stephen Diehl](http://www.stephendiehl.com/posts/essential_haskell.html)
 * [797 Haskell Papers](https://mitchellwrosen.github.io/haskell-papers/)
 
 ## Podcasts

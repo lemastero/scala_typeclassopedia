@@ -69,4 +69,4 @@
 * [Eilenberg–Moore](http://hackage.haskell.org/package/data-category/docs/Data-Category-Dialg.html#t:eilenbergMooreAdj)
 
 # Encoding of Category Theory by Stephen Dhal
-* Monads Made Difficult - Stephen Diehl [(blog post)](http://www.stephendiehl.com/posts/monads.html) Category as first class concept, Functors between them, up to Monads, Kleisli Category, IO and List Monad
+* Monads Made Difficult - Stephen Diehl [(blog post)](https://www.stephendiehl.com/posts/monads/) Category as first class concept, Functors between them, up to Monads, Kleisli Category, IO and List Monad
