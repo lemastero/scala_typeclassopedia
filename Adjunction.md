@@ -10,7 +10,7 @@ trait Representable[F[_], Rep] {
 }
 ```
 
-* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala), [Haskell](https://hackage.haskell.org/package/adjunctions/docs/Data-Functor-Rep.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Representable.agda), [UniMath](https://github.com/UniMath/UniMath/tree/master/UniMath/CategoryTheory/RepresentableFunctors), [nLab](https://ncatlab.org/nlab/show/representable+functor)
+* Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Representable.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Representable.scala), [Haskell](https://hackage.haskell.org/package/adjunctions/docs/Data-Functor-Rep.html), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Functor/Representable.agda), [UniMath](https://github.com/UniMath/UniMath/tree/master/UniMath/CategoryTheory/RepresentableFunctors), [nLab](https://ncatlab.org/nlab/show/representable+functor)
 
 * Resources:
   * (Haskell) Representing Applicatives - Gershom Bazerman [(blog post)](http://comonad.com/reader/2013/representing-applicatives/)

@@ -21,7 +21,7 @@ trait Comonad[C[_]] extends CoflatMap[C] {
 * Implementations:  
   CoflatMap/Cobind: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/CoflatMap.scala),  [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Cobind.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/cobind.scala)    
   Comonad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Comonad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Comonad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/comonad.scala), [Haskell](https://hackage.haskell.org/package/comonad/docs/Control-Comonad.html), [Purescript](https://pursuit.purescript.org/packages/purescript-control/docs/Control.Comonad)
-* Verified implementations: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Comonad/Comonad.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/Categories/Comonad.agda)
+* Verified implementations: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Comonad/Comonad.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/src/Categories/Comonad.agda)
 
  
 If we define extract and extend:
