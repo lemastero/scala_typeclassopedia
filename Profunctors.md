@@ -85,7 +85,7 @@ trait Profunctor[F[_, _]] {
 ```
 
 * Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Profunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/profunctor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Profunctor.scala), [Haskell](hackage.haskell.org/package/profunctors/docs/Data-Profunctor.html), [Purescript](https://github.com/purescript/purescript-profunctor/blob/master/src/Data/Profunctor.purs), [Java](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/optics/profunctors/Profunctor.java)
-* Verified implementations: [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Profunctor.agda),[UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Profunctors/Core.v), [idris-ct Profunctors](https://github.com/statebox/idris-ct/blob/master/src/Profunctors/Profunctor.lidr)
+* Verified implementations: [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Functor/Profunctor.agda),[UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Profunctors/Core.v), [idris-ct Profunctors](https://github.com/statebox/idris-ct/blob/master/src/Profunctors/Profunctor.lidr)
 * Definition in Category Theory: [nLab](https://ncatlab.org/nlab/show/profunctor)
 
 * Alternatively we can define functor using:
@@ -542,8 +542,8 @@ that satisfy certain conditions.
 * Implementations:  
   [Cats Compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala), [Scalaz 8 Semicategory](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala), [zio-prelude AssociativeCompose](https://github.com/zio/zio-prelude/blob/series/2.x/core/shared/src/main/scala/zio/prelude/AssociativeCompose.scala) 
   Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html), [nlab](https://ncatlab.org/nlab/show/category)
-* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/Category.scala)
-* Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Category.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/Categories/Category/Core.agda), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
+* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/Category.scala)
+* Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Category.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/src/Categories/Category/Core.agda), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
 * Category laws [Cats Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala), [Cats Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala):
 
@@ -653,7 +653,7 @@ Implementation in [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/
 
 * Resources
   * Cats [src](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/ArrowChoice.scala)
-  * [channingwalton/typeclassopedia ArrowChoice](https://github.com/channingwalton/typeclassopedia/blob/master/src/main/scala/org/typeclassopedia/ArrowChoice.scala)
+  * [channingwalton/typeclassopedia ArrowChoice](https://github.com/channingwalton/typeclassopedia/blob/scala-2/src/main/scala/org/typeclassopedia/ArrowChoice.scala)
   * (Haskell) [Typeclassopedia ArrowChoice](https://wiki.haskell.org/Typeclassopedia#ArrowChoice)
 
 ### Arrow Apply, Arrow Monad
@@ -732,7 +732,7 @@ trait DinaturalTransformation[P[_,_],Q[_,_]]{
 * Resources
    * [Scalaz src](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala#L87-L89)
    * [nlab/Extranatural Transformation](https://ncatlab.org/nlab/show/extranatural+transformation)
-   * [Agda](https://github.com/agda/agda-categories/blob/master/Categories/NaturalTransformation/Dinatural.agda)
+   * [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/NaturalTransformation/Dinatural.agda)
 
 ### Ends & Coends
 

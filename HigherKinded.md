@@ -33,8 +33,8 @@ val headOption: List ~> Option = new ~>[List,Option] {
 Every polymorphic function (that do the same thing - do not change behavior for a specific type of X) have some nice properties. More in paper by [Philip Wadler - Theorems for free](http://homepages.inf.ed.ac.uk/wadler/topics/blame.html#parablame).
 
 * Implementations: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/NaturalTransformation.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/FunctionK.scala), [Haskell](http://hackage.haskell.org/package/natural-transformation/docs/Control-Natural.html)
-* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/NaturalTransformation.scala)
-* Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/NaturalTransformation.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/Categories/NaturalTransformation/Core.agda) [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/NaturalTransformations.v), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/univprop.ctt)
+* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/NaturalTransformation.scala)
+* Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/NaturalTransformation.lidr), [agda-categories](https://github.com/agda/agda-categories/blob/master/src/Categories/NaturalTransformation/Core.agda) [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/NaturalTransformations.v), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/univprop.ctt)
 * Definition in Category Theory: [nLab](https://ncatlab.org/nlab/show/natural+transformation)
 
 * Resources
@@ -73,8 +73,8 @@ trait FFunctor[FF[_]] {
   * (Haskell) Q: What is not an MFunctor? [reddit](https://www.reddit.com/r/haskell/comments/2c87m8/q_what_is_not_an_mfunctor/)
   * (Haskell) [MMonad](https://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html#t:MMonad)
   * (Haskell) [Github issue with code with MCoyoneda](https://github.com/Gabriel439/Haskell-MMorph-Library/issues/33)
-  * (Haskell) [Tutorial - Gabriel Gonzalez](http://hackage.haskell.org/package/mmorp-1.1.2/docs/Control-Monad-Morph.html#g:3)
-  * (Haskell) mmorph-1.0.0: Monad morphisms - Gabriel Gonzalez [blog post](http://www.haskellforall.com/2013/03/mmorph-100-monad-morphisms.html)
+  * (Haskell) [Tutorial - Gabriella Gonzalez](https://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html#g:3)
+  * (Haskell) mmorph-1.0.0: Monad morphisms - Gabriella Gonzalez [blog post](http://www.haskellforall.com/2013/03/mmorph-100-monad-morphisms.html)
 
 ### higher kinded category theory
   * [hask](https://github.com/ekmett/hask)
@@ -144,7 +144,7 @@ trait MonoidalCategoryLaws[M[_, _], I] extends MonoidalCategory[M,I] {
 }
 ```
 
-* Implementations: [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Monoidal.html#t:Monoidal), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Monoidal.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monoidal/MonoidalCategories.v), [nlab](https://ncatlab.org/nlab/show/monoidal+category)
+* Implementations: [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Monoidal.html#t:Monoidal), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Category/Monoidal/Core.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monoidal/Categories.v), [nlab](https://ncatlab.org/nlab/show/monoidal+category)
 
 We can create monoidal category where product (Tuple) is a bifunctor or an coproduct (Either).
 
@@ -164,15 +164,15 @@ In category of Profunctors with Profunctor Product as Bifunctor the Monoid Objec
  
 ### Braided Monoidal Category
 
-* Implementations: [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Braided.html#t:Braided), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Monoidal/Braided.agda)
+* Implementations: [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Braided.html#t:Braided), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Category/Monoidal/Braided.agda)
 
 ### Symmetric Monoidal Category
 
-* Implementations [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Braided.html#t:Symmetric), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Monoidal/Symmetric.agda)
+* Implementations [Haskell](https://hackage.haskell.org/package/categories/docs/Control-Category-Braided.html#t:Symmetric), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Category/Monoidal/Symmetric.agda)
 
 ### Cartesian Closed Category
 
-* Implementations [Haskell](https://hackage.haskell.org/package/category-extras-0.53.0/docs/Control-Category-Cartesian-Closed.html), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/CartesianClosed.agda)
+* Implementations [Haskell](https://hackage.haskell.org/package/category-extras-0.53.0/docs/Control-Category-Cartesian-Closed.html), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Category/CartesianClosed.agda)
 
 * Resources
   * [TomasMikula/LambdaCart](https://github.com/TomasMikula/LambdaCart) (CCC is used to define EDSL in Scala)
