@@ -9,7 +9,6 @@ import educational.category_theory.two.bifunctors.Bifunctor
   * Monoidal Categories based on Category of Scala types and functions
   *
   * Edward Kmett Discrimination is Wrong: Improving Productivity
-  * http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf
   */
 object MonoidalCategory {
 

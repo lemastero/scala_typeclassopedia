@@ -68,10 +68,10 @@ trait FFunctor[FF[_]] {
 ### Monad morphisms
 
 * Resources
-  * (Haskell) [monad morphisms](http://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html)
-  * (Haskell) [MFunctor](http://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html#t:MFunctor) [used to be in pipes](https://hackage.haskell.org/package/pipes-3.1.0/docs/Control-MFunctor.html)
+  * (Haskell) [monad morphisms](https://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html)
+  * (Haskell) [MFunctor](https://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html#t:MFunctor) [used to be in pipes](https://hackage.haskell.org/package/pipes-3.1.0/docs/Control-MFunctor.html)
   * (Haskell) Q: What is not an MFunctor? [reddit](https://www.reddit.com/r/haskell/comments/2c87m8/q_what_is_not_an_mfunctor/)
-  * (Haskell) [MMonad](http://hackage.haskell.org/package/mmorph-1.1.2/docs/Control-Monad-Morph.html#t:MMonad)
+  * (Haskell) [MMonad](https://hackage.haskell.org/package/mmorph/docs/Control-Monad-Morph.html#t:MMonad)
   * (Haskell) [Github issue with code with MCoyoneda](https://github.com/Gabriel439/Haskell-MMorph-Library/issues/33)
   * (Haskell) [Tutorial - Gabriel Gonzalez](http://hackage.haskell.org/package/mmorp-1.1.2/docs/Control-Monad-Morph.html#g:3)
   * (Haskell) mmorph-1.0.0: Monad morphisms - Gabriel Gonzalez [blog post](http://www.haskellforall.com/2013/03/mmorph-100-monad-morphisms.html)
@@ -156,7 +156,7 @@ In category of Profunctors with Profunctor Product as Bifunctor the Monoid Objec
 
 * Resources
   * lemastero/MonoidalCategories.scala [(Gist)](https://gist.github.com/lemastero/cb50818fc40361ffb309701cffa651c9)
-  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373) [slides pdf](http://yowconference.com.au/slides/yowlambdajam2015/Kmett-DiscriminationIsWrong.pdf)
+  * (Haskell, Category Theory) Discrimination is Wrong: Improving Productivity - Edward Kmett [(video)](https://www.youtube.com/watch?v=cB8DapKQz-I&feature=youtu.be&t=373)
   * (Haskell, Category  Theory) Notions of Computation as Monoids (extended version) - Exequiel Rivas, Mauro Jaskelioff [(paper)](http://www.fceia.unr.edu.ar/~mauro/pubs/Notions_of_Computation_as_Monoids_ext.pdf)
   * (Haskell) Monoidal Category [data-category/Data.Category.Monoidal](https://hackage.haskell.org/package/data-category/docs/Data-Category-Monoidal.html), [categories/Control.Category.Monoidal](https://hackage.haskell.org/package/categories/docs/Control-Category-Monoidal.html)
   * (Haskell) [categories Cartesian Monoidal Category](https://hackage.haskell.org/package/categories/docs/Control-Category-Cartesian.html#t:Cartesian)
