@@ -25,7 +25,7 @@ trait Functor[F[_]] {
 * Functor Implementations:  
   Scala: [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/functor.scala), [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala), [zio-prelude](https://github.com/zio/zio-prelude/blob/series/2.x/core/shared/src/main/scala/zio/prelude/Covariant.scala),  
   [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Functor.idr), [Purescript](https://github.com/purescript/purescript-prelude/blob/master/src/Data/Functor.purs), [Haskell base](http://hackage.haskell.org/package/base/docs/Data-Functor.html), [Haskell data-category](http://hackage.haskell.org/package/data-category/docs/Data-Category-Functor.html#g:2), [Racket algebraic](https://docs.racket-lang.org/algebraic/class_base.html#%28part._class~3abase~3afunctor%29), [Racket functional](https://docs.racket-lang.org/functional/interfaces.html#%28part._functors%29), [nLab](https://ncatlab.org/nlab/show/functor), [Java Mojang/DataFixerUpper](https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/datafixers/kinds/Functor.java)
-* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/src/main/scala/math/cat/Functor.scala)
+* Encoding close to mathematics: [vpatryshev/Categories](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/Functor.scala)
 * Formalization in proof assistants: [statebox/idris-ct](https://github.com/statebox/idris-ct/blob/master/src/Basic/Functor.lidr), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Core/Functors.v), [HoTT Book](https://github.com/HoTT/HoTT/blob/master/theories/Categories/Functor/Core.v), [cubicaltt](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
 * Functor Laws ([Cats](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/FunctorLaws.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L98-L107) [Haskell](http://hackage.haskell.org/package/base/docs/Data-Functor.html#t:Functor)):
@@ -314,7 +314,7 @@ trait Monad[F[_]] extends Apply[F] {
   [Cats FlatMap](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/FlatMap.scala), [Scalaz 7 Bind](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bind.scala), [Scalaz 8 Bind](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bind.scala)  
   Monad: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Monad.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/monad.scala),  
   [Haskell](https://hackage.haskell.org/package/base-4.16.0.0/docs/Control-Monad.html#t:Monad), [Idris](https://github.com/idris-lang/Idris-dev/blob/master/libs/prelude/Prelude/Monad.idr), [Purescript](https://pursuit.purescript.org/packages/purescript-prelude/docs/Control.Monad), [Racket algebraic](https://docs.racket-lang.org/algebraic/class_base.html#%28part._class~3abase~3amonad%29), [Racket functional](https://docs.racket-lang.org/functional/interfaces.html#%28part._monads%29)
-* Formalizations: [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
+* Formalizations: [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Monad.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Monads/Monads.v), [nLab](https://ncatlab.org/nlab/show/monad)
 
 * Monad Laws ([Cats](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Monad.scala#L76-L85), [Haskell Wiki](https://wiki.haskell.org/Monad_laws)):
     1. flatmap associativity: `fa.flatMap(f).flatMap(g) == fa.flatMap(a => f(a).flatMap(b => g(b))`
@@ -543,7 +543,7 @@ trait StateMonad[F[_],S] extends Monad[F] {
     * gist by xuwei-k (https://gist.github.com/xuwei-k/19c9bb8c3afd08175762957880c57500)
     * Continuation monad in Scala - Tony Morris [(blog post)](http://blog.tmorris.net/posts/continuation-monad-in-scala/index.html)
     * (Haskell) School of Haskell - The Mother of all Monads - Dan Piponi [(blog post)](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/the-mother-of-all-monads)
-    * (Haskell) Haskell for all - The Continuation Monad - Gabriel Gonzalez [(blog post)](http://www.haskellforall.com/2012/12/the-continuation-monad.html)
+    * (Haskell) Haskell for all - The Continuation Monad - Gabriella Gonzalez [(blog post)](http://www.haskellforall.com/2012/12/the-continuation-monad.html)
 
 ### Reverse State Monad
 
@@ -814,7 +814,7 @@ def distinct[A](fa: F[A])(implicit A: Order[A]): IList[A]
     * A tutorial on the universality and expressiveness of fold - Graham Hutton [(paper)](http://www.cs.nott.ac.uk/~pszgmh/fold.pdf)
     * (Haskell) Conquering Folds - Edward Kmett [blog post](https://www.schoolofhaskell.com/user/edwardk/conquering-folds)
     * (Haskell) Monoidal Sorting - Chris Penner [(blog post)](https://chrispenner.ca/posts/monoid-sort) (`Monoids` and `foldMap` used for sorting)
-    * Beautiful folds are practical, too - Gabriel Gonzalez [(video)](https://www.youtube.com/watch?v=6a5Ti0r8Q2s) [slides repo](https://github.com/Gabriel439/slides/blob/master/munihac/foldmap.md) [Hacker News](https://news.ycombinator.com/item?id=16478744)
+    * Beautiful folds are practical, too - Gabriella Gonzalez [(video)](https://www.youtube.com/watch?v=6a5Ti0r8Q2s) [slides repo](https://github.com/Gabriel439/slides/blob/master/munihac/foldmap.md) [Hacker News](https://news.ycombinator.com/item?id=16478744)
     * Beautiful folds in Scala - Adam Warski [(blog post)](https://softwaremill.com/beautiful-folds-in-scala/)
 
 ### Traverse

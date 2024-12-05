@@ -76,7 +76,7 @@ def freeMonad[F[_]](implicit FF: Functor[F]): Monad[FreeMonad[F, *]] = new Monad
 * Implementations: [Haskell transformers-free](http://hackage.haskell.org/package/transformers-free/docs/Control-Monad-Trans-Free.html) [Haskell free](http://hackage.haskell.org/package/free/docs/Control-Monad-Trans-Free.html) [Purescript](https://pursuit.purescript.org/packages/purescript-freet/)
 
 * Resources
-  * Free monad transformers - Gabriel Gonzalez [(blog post)](http://www.haskellforall.com/2012/07/free-monad-transformers.html)
+  * Free monad transformers - Gabriella Gonzalez [(blog post)](http://www.haskellforall.com/2012/07/free-monad-transformers.html)
 
 ### Cofree
 

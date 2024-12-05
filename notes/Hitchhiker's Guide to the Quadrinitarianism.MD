@@ -83,7 +83,7 @@ trait Category[F[_, _]] {
 Implementations in libraries:  
 *  Compose/Semicategory [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Compose.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/semicategory.scala)  
   Category: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/arrow/Category.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/category.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Control-Category.html)
-* Implementations in proof assistants: [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Category/Core.agda), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
+* Implementations in proof assistants: [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Category/Core.agda), [CubicalTT](https://github.com/mortberg/cubicaltt/blob/master/examples/category.ctt)
 
 [Cats Category laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/CategoryLaws.scala), [Cats Compose laws](https://github.com/typelevel/cats/blob/master/laws/src/main/scala/cats/laws/ComposeLaws.scala):
  * associativity `f.compose(g.compose(h)) == f.compose(g).compose(h)`

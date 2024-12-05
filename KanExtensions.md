@@ -120,7 +120,7 @@ def yonedaFunctor[F[_]]: Functor[Yoneda[F, *]] =
 
 * Yoneda efficiently stack computations.
 
-* Implementations scalaz [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala), [Purescript](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/covyoneda.v), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Yoneda.agda), [HoTT](https://github.com/HoTT/HoTT/blob/master/theories/Categories/Yoneda.v), [nlab](https://ncatlab.org/nlab/show/Yoneda+lemma)
+* Implementations scalaz [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Yoneda.scala), [Purescript](https://pursuit.purescript.org/packages/purescript-free/docs/Data.Yoneda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/covyoneda.v), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Yoneda.agda), [HoTT](https://github.com/HoTT/HoTT/blob/master/theories/Categories/Yoneda.v), [nlab](https://ncatlab.org/nlab/show/Yoneda+lemma)
 
 * Resources
   * https://vimeo.com/122708005
@@ -201,7 +201,7 @@ trait Ran[G[_], H[_], A] {
 }
 ```
 
-* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Ran.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Kan.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/RightKanExtension.v), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
+* Implementations: [Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Ran.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Ran.purs), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Kan.agda), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/RightKanExtension.v), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
 
 * We can create functor for Ran, without any requirements on G, H
 ```scala
@@ -252,7 +252,7 @@ trait Lan[F[_], H[_], A] {
 }
 ```
 
-[Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Kan.agda), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
+[Scalaz](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Kan.scala), [Haskell](http://hackage.haskell.org/package/kan-extensions/docs/Data-Functor-Kan-Lan.html), [Purescript](https://github.com/freebroccolo/purescript-kan-extensions/blob/master/src/Data/Functor/Kan/Lan.purs), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Kan.agda), [nLab](https://ncatlab.org/nlab/show/Kan+extension)
 
 * we can define Functor for it
 ```scala
