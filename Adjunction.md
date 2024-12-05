@@ -17,9 +17,8 @@ trait Representable[F[_], Rep] {
   * (Category Theory, Haskell) Representable Functors - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2015/07/29/representable-functors/)
   * (Category Theory, Haskell) Category Theory II 4.1: Representable Functors - Bartosz Milewski [(video)](https://www.youtube.com/watch?v=KaBz45nZEZw) [Scala code translation](https://github.com/typelevel/CT_from_Programmers.scala/blob/master/src/main/tut/2.4-representable-functors.md)
   * (Haskell) Zippers Using Representable And Cofree - Chris Penner [(blog post)](http://chrispenner.ca/posts/representable-cofree-zippers):
-  * Reasoning with representable functors - Adelbert Chang [(blog post)](https://adelbertc.github.io/posts/2017-08-09-representable-functors.html)
   * (Haskell) Radix Sort, Trie Trees, And Maps From Representable Functors - Chris Penner [(blog post)](https://chrispenner.ca/posts/representable-discrimination)
-  * (Haskell) [Monad.Representable.Reader](hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-Reader.html), [Monad.Representable.State](http://hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-State.html), [Comonad.Representable.Store](http://hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Representable-Store.html)
+  * (Haskell) [Monad.Representable.Reader](http://hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-Reader.html), [Monad.Representable.State](http://hackage.haskell.org/package/adjunctions/docs/Control-Monad-Representable-State.html), [Comonad.Representable.Store](http://hackage.haskell.org/package/adjunctions/docs/Control-Comonad-Representable-Store.html)
   * Moore for Less - Edward Kmett [(blog post)](https://www.schoolofhaskell.com/user/edwardk/moore/for-less)
   * Representable Functors - Danny Gratzer [(blog post)](https://jozefg.bitbucket.io/posts/2013-10-21-representable-functors.html)
   * Which Haskell Functors are equivalent to the Reader functor - pigworker [SO](https://stackoverflow.com/a/46502280)
@@ -44,7 +43,7 @@ trait Adjunction[F[_], G[_]] {
 }
 ```
 
-* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala), [Haskell](hackage.haskell.org/package/adjunctions/docs/Data-Functor-Adjunction.html), [Purescript](https://github.com/freebroccolo/purescript-adjunctions/blob/master/docs/Data/Functor/Adjunction.md), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Adjunctions/Core.v), [nLab](https://ncatlab.org/nlab/show/adjunction)
+* Implementations [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Adjunction.scala), [Haskell](http://hackage.haskell.org/package/adjunctions/docs/Data-Functor-Adjunction.html), [UniMath](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/Adjunctions/Core.v), [nLab](https://ncatlab.org/nlab/show/adjunction)
 
 Adjunction can be defined between Reader monad and Coreader comonad.
 
@@ -52,7 +51,7 @@ Adjunction can be defined between Reader monad and Coreader comonad.
   * Adjunctions And Battleship - Chris Penner [(blog post)](https://chrispenner.ca/posts/adjunction-battleship)
   * Scala Comonad Tutorial, Part 2 - Rúnar Bjarnason [(blog post)](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
   * Adjunctions in Everyday Life - Rúnar Bjarnason [(video Scala)](https://www.youtube.com/watch?v=BLk4DlNZkL8) [(video Haskell)](https://www.youtube.com/watch?v=f-kdpR0BPqo)
-  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala/scalaz/example/AdjunctUsage.scala)
+  * [Scalaz docs](https://github.com/scalaz/scalaz/blob/series/7.3.x/example/src/main/scala-2/scalaz/example/AdjunctUsage.scala)
   * [Haskell libraries using Adjunctions](https://packdeps.haskellers.com/reverse/adjunctions)
   * usage in [ekmett/representable-tries](https://github.com/ekmett/representable-tries/blob/master/src/Data/Functor/Representable/Trie.hs#L155-L157)
   * (Haskell) Representing Adjunctions - Edward Kmett [(blog post)](http://comonad.com/reader/2008/representing-adjunctions/)
