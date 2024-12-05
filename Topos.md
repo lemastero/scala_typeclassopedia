@@ -14,11 +14,11 @@ Elementary topos is a category that:
 
 Resources:
   * vpatryshev/Categories [Topos](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/Topos.scala) [Grothendieck Topos, Subobject Classifier](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/GrothendieckTopos.scala), [Topology](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/Topology.scala), [Lawvere-Tierney topology](https://github.com/vpatryshev/Categories/blob/master/scala2/src/main/scala/math/cat/topos/LawvereTopology.scala)
-  * (Agda) agda/agda-categories [Topos](https://github.com/agda/agda-categories/blob/master/Categories/Category/Topos.agda) [Subobject Classifier](https://github.com/agda/agda-categories/blob/master/Categories/Diagram/SubobjectClassifier.agda)
-  * (Coq) UniMath/UniMath [Grothendieck Topos](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/GrothendieckTopos.v) [Subobject Classifier](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/SubobjectClassifier.v)
+  * (Agda) agda/agda-categories [Topos](https://github.com/agda/agda-categories/blob/master/src/Categories/Category/Topos.agda) [Subobject Classifier](https://github.com/agda/agda-categories/blob/master/src/Categories/Diagram/SubobjectClassifier.agda)
+  * (Coq) UniMath/UniMath [Grothendieck Topos](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/GrothendieckToposes/Toposes.v) [Subobject Classifier](https://github.com/UniMath/UniMath/blob/master/UniMath/CategoryTheory/SubobjectClassifier/SubobjectClassifier.v)
   * (Haskell) [brunjlar/protop](https://github.com/brunjlar/protop)
   * Category Theory for Computing Science - Michael Barr Charles Wells [(pdf)](http://www.math.mcgill.ca/triples/Barr-Wells-ctcs.pdf) Chapter 15 Toposes
-  * 7Sketches Chapter 7 Logic of behavior: Sheaves, toposes, and internal languages [(pdf)](http://math.mit.edu/~dspivak/teaching/sp18/7Sketches.pdf), [(video 1)](https://www.youtube.com/watch?v=Cf3tsAeGhBg), [(video 2)](https://www.youtube.com/watch?v=wF-khda2i4c)
+  * 7Sketches Chapter 7 Logic of behavior: Sheaves, toposes, and internal languages [(arxiv)](https://arxiv.org/abs/1803.05316), [(video 1)](https://www.youtube.com/watch?v=Cf3tsAeGhBg), [(video 2)](https://www.youtube.com/watch?v=wF-khda2i4c)
   * (Category Theory, Haskell) Topoi - Bartosz Milewski [(blog post)](https://bartoszmilewski.com/2017/07/22/topoi/)
   * Category Theory: Toposes - MathProofsable [(video playlist)](https://www.youtube.com/watch?v=gKYpvyQPhZo&list=PL4FD0wu2mjWM3ZSxXBj4LRNsNKWZYaT7k)
   * Computational Quadrinitarianism (Curious Correspondences go Cubical) - Gershom Bazerman [(blog post)](http://comonad.com/reader/2018/computational-quadrinitarianism-curious-correspondences-go-cubical/)

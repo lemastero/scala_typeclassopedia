@@ -91,7 +91,7 @@ def umap[A, B](faa: F[A, A])(f: A => B): F[B, B]
 def widen[A, B, C >: A, D >: B](fab: F[A, B]): F[C, D]
 ```
 
-* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bifunctor.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Data-Bifunctor.html), [Purescript](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor), [Idris](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr), [Agda](https://github.com/agda/agda-categories/blob/master/Categories/Functor/Bifunctor.agda)
+* Implementations: [Cats](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Bifunctor.scala), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Bifunctor.scala), [Scalaz 8](https://github.com/scalaz/scalaz/blob/series/8.0.x/base/shared/src/main/scala/scalaz/tc/bifunctor.scala), [Haskell](https://hackage.haskell.org/package/base/docs/Data-Bifunctor.html), [Purescript](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor), [Idris](https://github.com/japesinator/Idris-Bifunctors/blob/master/src/Data/Bifunctor.idr), [Agda](https://github.com/agda/agda-categories/blob/master/src/Categories/Functor/Bifunctor.agda)
 
 * Instances [can be defined](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/bifunctor/InstancesForForBuildInTypes.scala) for: Tuple2, Either, Validated. For Function1 not - functions are contravariant for input type.
 
@@ -129,7 +129,7 @@ newtype WrappedBifunctor p a b = WrapBifunctor { unwrapBifunctor :: p a b }
 -- Bifunctor p => Functor (WrappedBifunctor p a)
 ```
 
-* Implementations [Haskell bifunctors/Data.Bifunctor.Wrapped](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Wrapped.html) [purescript-bifunctors/Data.Bifunctor.Wrap](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor.Wrap)
+* Implementations [Haskell bifunctors/Data.Bifunctor.Wrapped](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Wrapped.html) [purescript-bifunctors/Data.Bifunctor.Wrap](https://pursuit.purescript.org/packages/purescript-bifunctors/4.0.0/docs/Data.Bifunctor.Wrap)
 
 ### Bifunctor Flip
 
@@ -142,7 +142,7 @@ newtype Flip p a b = Flip { runFlip :: p b a }
 -- Bifunctor p => Bifunctor (Flip p)
 ```
 
-* Implementations [Haskell bifunctors/Data.Bifunctor.Flip](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Flip.html) [purescript-bifunctors/Data.Bifunctor.Flip](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor.Flip)
+* Implementations [Haskell bifunctors/Data.Bifunctor.Flip](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Flip.html) [purescript-bifunctors/Data.Bifunctor.Flip](https://pursuit.purescript.org/packages/purescript-bifunctors/4.0.0/docs/Data.Bifunctor.Flip)
 
 ### Bifunctor Joker
 
@@ -190,7 +190,7 @@ data Product f g a b = Pair (f a b) (g a b)
 -- (Bifunctor f, Bifunctor g) => Bifunctor (Product f g)
 ```
 
-* Implementations  [Haskell bifunctors/Data.Bifunctor.Product](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Product.html) [purescript-bifunctors/Data.Bifunctor.Product](https://pursuit.purescript.org/packages/purescript-bifunctors/docs/Data.Bifunctor.Product)
+* Implementations  [Haskell bifunctors/Data.Bifunctor.Product](https://hackage.haskell.org/package/bifunctors/docs/Data-Bifunctor-Product.html) [purescript-bifunctors/Data.Bifunctor.Product](https://pursuit.purescript.org/packages/purescript-bifunctors/4.0.0/docs/Data.Bifunctor.Product)
 
 ### Bifunctor Sum
 

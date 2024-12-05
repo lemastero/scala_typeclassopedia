@@ -64,7 +64,7 @@ def widen[A, B >: A](fa: F[A]): F[B]
 
 * Functors can compose: Cats [ComposedFunctor](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Composed.scala#L20-L26) [compose](https://github.com/typelevel/cats/blob/master/core/src/main/scala/cats/Functor.scala#L147-L151), [Scalaz 7](https://github.com/scalaz/scalaz/blob/series/7.3.x/core/src/main/scala/scalaz/Functor.scala#L61-L66)
 
-* An examples for [instances for built in types](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/InstancesForBuiltInTypes.scala),
+* An examples for [instances for built in types](https://github.com/lemastero/scala_typeclassopedia/blob/main/src/test/scala/bifunctor/BicovariantExamplesSpec.scala),
   [function1](https://www.youtube.com/watch?v=Dsd4pc99FSY&t=1075),
   and [custom Tree type](https://github.com/lemastero/learn_scala_cats/blob/master/src/main/scala/functor/TreeFunctor.scala).
   An examples for [usage of map, derived methods, compose](https://github.com/lemastero/learn_scala_cats/blob/master/src/test/scala/functor/FunctorExamplesSpec.scala).
